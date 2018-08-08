@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -7,55 +7,53 @@ const styles = {
     mainContainer: {
         padding: deviceHeight * 0.05,
         justifyContent: 'center',
-        
-        flex:1
+        flex: 1
     },
     headerContainer: {
-        marginLeft:16
+        alignItems: 'center'
     },
-    headerText: {
-        fontSize: 40,
-        letterSpacing: 20,
-        color: '#172067'
+    headerImage: {
+        height: deviceHeight * 0.2,
+        width: deviceWidth * 0.8
     },
     subHeaderContainer: {
         alignItems: 'center'
     },
     subHeaderText1: {
-        fontWeight:'bold',
+        fontWeight: 'bold',
         fontSize: 25,
-        marginTop: 20
+        marginTop: deviceHeight * 0.05
     },
     subHeaderText2: {
-        marginTop: 25
+        marginTop: deviceHeight * 0.05
     },
-    createWallet : {
+    createWallet: {
         alignItems: 'center',
-        marginTop: 150,
+        marginTop: deviceHeight * 0.1,
         borderWidth: 1,
         borderColor: '#e5e0ed',
-        backgroundColor:'#e5e0ed',
+        backgroundColor: '#e5e0ed',
     },
-    createWalletText : {
+    createWalletText: {
         fontSize: 20,
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: deviceHeight * 0.05,
+        marginBottom: deviceHeight * 0.05,
     },
     footer: {
         position: 'absolute',
-        bottom:20,
-        flexDirection:'row',
-
+        bottom: deviceHeight * 0.05,
+        flexDirection: 'row',
+        // justifyContent: 'space-around'
     },
     footerText1: {
-        marginLeft:60,
-        textDecorationLine:'underline',
-        color:'#8064a2'
+        marginLeft: deviceWidth * 0.2,
+        textDecorationLine: 'underline',
+        color: '#8064a2'
     },
     footerText2: {
-        marginLeft:50,
-        textDecorationLine:'underline',
-        color:'#8064a2'
+        marginLeft: deviceWidth * 0.1,
+        textDecorationLine: 'underline',
+        color: '#8064a2'
     },
 
 }

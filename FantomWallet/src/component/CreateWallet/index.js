@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import Styles from './styles';
 
 class CreateWallet extends Component {
@@ -7,7 +7,8 @@ class CreateWallet extends Component {
         return (
             <View style={ Styles.mainContainer}>
                 <View style={ Styles.headerContainer}>
-                    <Text style={ Styles.headerText}>FANTOM</Text>
+                <Image source={require('../../images/fantom-logo.png')} style={ Styles.headerImage }
+                resizeMode='contain'/>
                 </View>
                 <View style={ Styles.subHeaderContainer}>
                     <Text style={ Styles.subHeaderText1}>Beyond Blockchain</Text>
