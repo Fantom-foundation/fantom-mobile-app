@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import Styles from './styles';
 
 class CreateWallet extends Component {
@@ -14,9 +14,9 @@ class CreateWallet extends Component {
                     <Text style={ Styles.subHeaderText1}>Beyond Blockchain</Text>
                     <Text style={ Styles.subHeaderText2}>The Future of Decentralized Ecosystem</Text>
                 </View>
-                <View style={ Styles.createWallet}>
+                <TouchableOpacity style={ Styles.createWallet} onPress={() => { this.props.navigation.navigate('Terms') }}>
                     <Text style={ Styles.createWalletText}>Create Wallet</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={ Styles.footer }>
                     <Text style={ Styles.footerText1 }>Terms of Service</Text>
                     <Text style={ Styles.footerText2 }>Privacy Policy</Text>
