@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import CreateWallet from './src/component/CreateWallet/';
+import CreateWallet from './src/component/createWallet/';
 import PrivacyPolicy from './src/component/privacyPolicy/';
 import TermsConditions from './src/component/termsConditions/';
 
