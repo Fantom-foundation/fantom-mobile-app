@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import Styles from './styles';
+import style from './style';
 
 class CreateWallet extends Component {
     render() {
         return (
-            <View style={ Styles.mainContainer}>
-                <View style={ Styles.headerContainer}>
-                <Image source={require('../../images/fantom-logo.png')} style={ Styles.headerImage }
-                resizeMode='contain'/>
+            <View style={style.mainContainer}>
+                <View style={style.headerContainer}>
+                    <Image source={require('../../images/fantom-logo.png')} style={style.headerImage}
+                        resizeMode='contain' />
                 </View>
-                <View style={ Styles.subHeaderContainer}>
-                    <Text style={ Styles.subHeaderText1}>Beyond Blockchain</Text>
-                    <Text style={ Styles.subHeaderText2}>The Future of Decentralized Ecosystem</Text>
+                <View style={style.subHeaderContainer}>
+                    <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
+                    <Text style={style.subHeaderText2}>The Future of Decentralized Ecosystem</Text>
                 </View>
-                <TouchableOpacity style={ Styles.createWallet} onPress={() => { this.props.navigation.navigate('Terms') }}>
-                    <Text style={ Styles.createWalletText}>Create Wallet</Text>
+                <TouchableOpacity style={style.createWallet} /*onPress={() => { this.props.navigation.navigate('Terms') }}*/ >
+                    <Text style={style.createWalletText}>Create Wallet</Text>
                 </TouchableOpacity>
-                <View style={ Styles.footer }>
-                    <Text style={ Styles.footerText1 }>Terms of Service</Text>
-                    <Text style={ Styles.footerText2 }>Privacy Policy</Text>
+                <View style={style.footer}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Terms')} >
+                        <Text style={style.footerText1}>Terms of Service</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PrivacyPolicy')} >
+                        <Text style={style.footerText2}>Privacy Policy</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
