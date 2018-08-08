@@ -8,9 +8,11 @@ const style = {
         alignItems: 'center',
           
     },
-    labelTextStyle: {
+    textStyle: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 20,
+        fontFamily: 'Times New Roman',
+        fontWeight: 'bold',
     }
 }
 export default style;
