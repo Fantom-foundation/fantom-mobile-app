@@ -39,7 +39,7 @@ class Header extends Component {
         return (
             <View style={headerStyle} >
                 <Text style={textStyle}>{text}</Text>
-                {((!isShowRightButtonIcon) && rightIcon) && <Image source={rightIcon} style={rightButtonStyle} />}
+                {((!isShowRightButtonIcon) && rightIcon === 1) && <Image source={rightIcon} style={rightButtonStyle} />}
 
                 {((!isShowLeftButtonIcon) && leftIcon === 1) && <Image source={leftIcon} style={leftButtonStyle} />}
             </View>
