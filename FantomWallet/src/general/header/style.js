@@ -1,15 +1,31 @@
 const style = {
-    headerStyle:{
+    headerStyle: {
         backgroundColor: '#000',
         marginTop: 25,
         padding: 20,
         height: 60,
         alignItems: 'center',
-        justifyContent: 'center',   
+        justifyContent: 'center',
     },
-    titleTextStyle: {
+    textStyle: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 20,
+        fontFamily: 'Times New Roman',
+        fontWeight: 'bold',
+    },
+    rightButtonStyle: {
+        backgroundColor: 'white',
+        width: 20,
+        height: 20,
+        position: 'absolute',
+        right: 5,
+    },
+    leftButtonStyle: {
+        backgroundColor: 'white',
+        width: 20,
+        height: 20,
+        position: 'absolute',
+        left: 5,
     }
 }
 export default style;

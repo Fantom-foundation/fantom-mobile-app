@@ -5,15 +5,16 @@ import Header from '../../general/header/';
 import Button from '../../general/button/';
 
 import style from './style';
+import iconUri from '../../images/crossButton.png';
 
 export default class TermsConditions extends Component {
     render() {
         return (
             <View style={style.mainContainerStyle}>
-                <Header title={'Terms of Service'} />
+                <Header text={'Terms of Service'} rightButtonIcon={iconUri} />
                 <Text> Terms and Conditions here</Text>
                 <View style={style.footerStyle} >
-                    <Button label={'Confirm'} />
+                    <Button text={'Confirm'} />
                 </View>
             </View>
         )
