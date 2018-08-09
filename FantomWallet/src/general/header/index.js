@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import style from './style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Header extends Component {
 
+    onRightIconPress(){
+        if(this.props.onRightIconPress){
+            this.props.onRightIconPress();
+        }
+    }
+    onLeftIconPress(){
+        if(this.props.onLeftIconPress){
+            this.props.onLeftIconPress();
+        }
+    }
     render() {
-        let { text, rightButtonIcon, isShowRightButtonIcon, leftButtonIcon, isShowLeftButtonIcon, headerStyle, textStyle, rightButtonStyle, leftButtonStyle, rightIconSize, rightIconColor, leftIconSize, leftIconColor } = this.props;
+        let { text, rightButtonIcon, isShowRightButtonIcon, leftButtonIcon, isShowLeftButtonIcon, headerStyle, textStyle, rightButtonStyle, leftButtonStyle, rightIconSize, rightIconColor, leftIconSize, leftIconColor, activeOpacity } = this.props;
 
         const headerStyleProps = headerStyle || {};
         headerStyle = {
@@ -42,8 +52,15 @@ class Header extends Component {
         return (
             <View style={headerStyle} >
                 <Text style={textStyle}>{text}</Text>
-                {((!isShowRightButtonIcon) && rightIcon !== '') && <Icon style={rightButtonStyle} name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />}
-                {((!isShowLeftButtonIcon) && leftIcon !== '') && <Icon style={leftButtonStyle} name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />}
+                {((!isShowRightButtonIcon) && rightIcon !== '') &&
+                    <TouchableOpacity style={rightButtonStyle} activeOpacity={activeOpacity} onPress={this.onRightIconPress.bind(this)}>
+                        <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />
+                    </TouchableOpacity>}
+
+                {((!isShowLeftButtonIcon) && leftIcon !== '') &&
+                    <TouchableOpacity style={leftButtonStyle} activeOpacity={activeOpacity} onPress={this.onLeftIconPress.bind(this)}>
+                        <Icon  name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />
+                    </TouchableOpacity>}
             </View>
         )
     }
@@ -55,6 +72,7 @@ Header.defaultProps = {
     headerStyle: style.headerStyle,
     textStyle: {},
     buttonStyle: {},
+    activeOpacity: 0.2,
 }
 
 export default Header;

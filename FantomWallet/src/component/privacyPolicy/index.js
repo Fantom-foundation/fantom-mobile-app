@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, WebView } from 'react-native';
 
 import Header from '../../general/header/';
 import Button from '../../general/button/';
 
-import style  from './style';
-import iconUri from '../../images/crossButton.png';
+import style from './style';
 
 export default class PrivacyPolicy extends Component {
+    constructor(props) {
+        super(props);
+        this.onRightIconPress = this.onRightIconPress.bind(this);
+        this.onLeftIconPress = this.onLeftIconPress.bind(this);
+    }
+    onRightIconPress() {
+        console.log('onRightIconPressonRightIconPress');
+        this.props.navigation.goBack()
+    }
+    onLeftIconPress() {
+        console.log('onLeftIconPressonLeftIconPress');
+        this.props.navigation.goBack()
+    }
+
     render() {
         return (
             <View style={style.mainContainerStyle}>
-                <Header text={'Privacy Policy'} rightButtonIcon='close' />
-                <Text> Terms and Conditions required</Text>
+                <Header text={'Privacy Policy'} rightButtonIcon='close' onRightIconPress={this.onRightIconPress} />
+                <WebView source={{ uri: 'http://www.innow8apps.com' }} />
                 <View style={style.footerStyle}>
                     <Button text={'Confirm'} />
                 </View>
