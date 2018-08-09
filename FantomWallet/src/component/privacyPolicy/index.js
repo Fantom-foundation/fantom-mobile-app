@@ -7,7 +7,6 @@ import Button from '../../general/button/';
 import style  from './style';
 import iconUri from '../../images/crossButton.png';
 
-
 export default class PrivacyPolicy extends Component {
     render() {
         return (

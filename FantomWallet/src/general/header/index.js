@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 
 import style from './style';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Header extends Component {
 
@@ -39,7 +40,9 @@ class Header extends Component {
         return (
             <View style={headerStyle} >
                 <Text style={textStyle}>{text}</Text>
-                {((!isShowRightButtonIcon) && rightIcon) && <Image source={rightIcon} style={rightButtonStyle} />}
+
+                {((!isShowRightButtonIcon) && rightIcon === 1) && <Icon style={rightButtonStyle} name="times" width="20"/>}
+                {/* {((!isShowRightButtonIcon) && rightIcon) && <Image source={rightIcon} style={rightButtonStyle} />} */}
 
                 {((!isShowLeftButtonIcon) && leftIcon === 1) && <Image source={leftIcon} style={leftButtonStyle} />}
             </View>
