@@ -1,11 +1,18 @@
 import { combineReducers } from 'redux';
 
-import counterReducer from './counter/reducer'
+import counterReducer from './counter/reducer';
+import testApiReducer from './testApi/reducer';
 
-const AppReducers = combineReducers({
+const appReducers = combineReducers({
     counterReducer,
+    testApiReducer,
 });
 
-export const rootReducer = (state, action) => {
-	return AppReducers(state,action);
+function rootReducer(state, action) {
+    if (action.type === 'CLEAR_STORAGE') {
+        state = undefined
+    }
+    return appReducers(state, action);
 }
+
+export default rootReducer;
