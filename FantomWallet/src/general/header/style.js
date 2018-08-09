@@ -14,16 +14,12 @@ const style = {
         fontWeight: 'bold',
     },
     rightButtonStyle: {
-        backgroundColor: 'white',
-        width: 20,
-        height: 20,
+        backgroundColor: 'black',
         position: 'absolute',
         right: 5,
     },
     leftButtonStyle: {
-        backgroundColor: 'white',
-        width: 20,
-        height: 20,
+        backgroundColor: 'black',
         position: 'absolute',
         left: 5,
     }

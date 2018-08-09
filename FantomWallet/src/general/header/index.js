@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import style from './style';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Header extends Component {
 
+    onRightIconPress(){
+        if(this.props.onRightIconPress){
+            this.props.onRightIconPress();
+        }
+    }
+    onLeftIconPress(){
+        if(this.props.onLeftIconPress){
+            this.props.onLeftIconPress();
+        }
+    }
     render() {
-        let { text, rightButtonIcon, isShowRightButtonIcon, leftButtonIcon, isShowLeftButtonIcon, headerStyle, textStyle, rightButtonStyle, leftButtonStyle } = this.props;
+        let { text, rightButtonIcon, isShowRightButtonIcon, leftButtonIcon, isShowLeftButtonIcon, headerStyle, textStyle, rightButtonStyle, leftButtonStyle, rightIconSize, rightIconColor, leftIconSize, leftIconColor, activeOpacity } = this.props;
 
         const headerStyleProps = headerStyle || {};
         headerStyle = {
@@ -21,17 +31,19 @@ class Header extends Component {
             ...textStyleProps
         }
 
-        const rightIcon = rightButtonIcon || {};
+        const rightIcon = rightButtonIcon || '';
+        rightIconSize = rightIconSize || 20;
+        rightIconColor = rightIconColor || '#fff';
         const rightButtonIconStyleProps = rightButtonStyle || {};
         rightButtonStyle = {
             ...style.rightButtonStyle,
             ...rightButtonIconStyleProps
         }
 
-        const leftIcon = leftButtonIcon || {};
-        console.log('leftIcon  :', leftIcon);
-        console.log('rightIcon  :', rightIcon);
-        const leftButtonIconStyleProps = this.props.leftButtonStyle || {};
+        const leftIcon = leftButtonIcon || '';
+        leftIconSize = leftIconSize || 20;
+        leftIconColor = leftIconColor || '#fff';
+        const leftButtonIconStyleProps = leftButtonStyle || {};
         leftButtonStyle = {
             ...style.leftButtonStyle,
             ...leftButtonIconStyleProps
@@ -40,11 +52,15 @@ class Header extends Component {
         return (
             <View style={headerStyle} >
                 <Text style={textStyle}>{text}</Text>
+                {((!isShowRightButtonIcon) && rightIcon !== '') &&
+                    <TouchableOpacity style={rightButtonStyle} activeOpacity={activeOpacity} onPress={this.onRightIconPress.bind(this)}>
+                        <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />
+                    </TouchableOpacity>}
 
-                {((!isShowRightButtonIcon) && rightIcon === 1) && <Icon style={rightButtonStyle} name="times" width="20"/>}
-                {/* {((!isShowRightButtonIcon) && rightIcon) && <Image source={rightIcon} style={rightButtonStyle} />} */}
-
-                {((!isShowLeftButtonIcon) && leftIcon === 1) && <Image source={leftIcon} style={leftButtonStyle} />}
+                {((!isShowLeftButtonIcon) && leftIcon !== '') &&
+                    <TouchableOpacity style={leftButtonStyle} activeOpacity={activeOpacity} onPress={this.onLeftIconPress.bind(this)}>
+                        <Icon  name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />
+                    </TouchableOpacity>}
             </View>
         )
     }
@@ -56,6 +72,7 @@ Header.defaultProps = {
     headerStyle: style.headerStyle,
     textStyle: {},
     buttonStyle: {},
+    activeOpacity: 0.2,
 }
 
 export default Header;
