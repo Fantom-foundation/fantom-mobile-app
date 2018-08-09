@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 class Header extends Component {
 
     render() {
-        let { text, rightButtonIcon, isShowRightButtonIcon, leftButtonIcon, isShowLeftButtonIcon, headerStyle, textStyle, rightButtonStyle, leftButtonStyle } = this.props;
+        let { text, rightButtonIcon, isShowRightButtonIcon, leftButtonIcon, isShowLeftButtonIcon, headerStyle, textStyle, rightButtonStyle, leftButtonStyle, rightIconSize, rightIconColor, leftIconSize, leftIconColor } = this.props;
 
         const headerStyleProps = headerStyle || {};
         headerStyle = {
@@ -22,6 +22,8 @@ class Header extends Component {
         }
 
         const rightIcon = rightButtonIcon || '';
+        rightIconSize = rightIconSize || 20;
+        rightIconColor = rightIconColor || '#fff';
         const rightButtonIconStyleProps = rightButtonStyle || {};
         rightButtonStyle = {
             ...style.rightButtonStyle,
@@ -29,9 +31,9 @@ class Header extends Component {
         }
 
         const leftIcon = leftButtonIcon || '';
-        console.log('leftIcon  :', leftIcon);
-        console.log('rightIcon  :', rightIcon);
-        const leftButtonIconStyleProps = this.props.leftButtonStyle || {};
+        leftIconSize = leftIconSize || 20;
+        leftIconColor = leftIconColor || '#fff';
+        const leftButtonIconStyleProps = leftButtonStyle || {};
         leftButtonStyle = {
             ...style.leftButtonStyle,
             ...leftButtonIconStyleProps
@@ -40,8 +42,8 @@ class Header extends Component {
         return (
             <View style={headerStyle} >
                 <Text style={textStyle}>{text}</Text>
-                {((!isShowRightButtonIcon) && rightIcon !== '') && <Icon style={rightButtonStyle} name={`${rightIcon}`} width="50" />}
-                {((!isShowLeftButtonIcon) && leftIcon !== '') && <Icon style={leftButtonStyle} name={`${leftIcon}`} width="40" />}
+                {((!isShowRightButtonIcon) && rightIcon !== '') && <Icon style={rightButtonStyle} name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />}
+                {((!isShowLeftButtonIcon) && leftIcon !== '') && <Icon style={leftButtonStyle} name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />}
             </View>
         )
     }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import { LinkButton } from 'general/';
 import style from './style';
 
 class CreateWallet extends Component {
@@ -18,7 +17,6 @@ class CreateWallet extends Component {
                 <TouchableOpacity style={style.createWallet} onPress={() => { this.props.navigation.navigate('CaptionOutput') }} >
                     <Text style={style.createWalletText}>Create Wallet</Text>
                 </TouchableOpacity>
-                <LinkButton text="hello"/>
                 <View style={style.footer}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Terms')} >
                         <Text style={style.footerText1}>Terms of Service</Text>
