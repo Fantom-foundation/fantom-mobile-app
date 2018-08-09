@@ -11,7 +11,7 @@ export default class PrivacyPolicy extends Component {
     render() {
         return (
             <View style={style.mainContainerStyle}>
-                <Header text={'Privacy Policy'} rightButtonIcon={iconUri} />
+                <Header text={'Privacy Policy'} rightButtonIcon='close' />
                 <Text> Terms and Conditions required</Text>
                 <View style={style.footerStyle}>
                     <Button text={'Confirm'} />

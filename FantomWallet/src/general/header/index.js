@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 
 import style from './style';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Header extends Component {
 
@@ -21,14 +21,14 @@ class Header extends Component {
             ...textStyleProps
         }
 
-        const rightIcon = rightButtonIcon || {};
+        const rightIcon = rightButtonIcon || '';
         const rightButtonIconStyleProps = rightButtonStyle || {};
         rightButtonStyle = {
             ...style.rightButtonStyle,
             ...rightButtonIconStyleProps
         }
 
-        const leftIcon = leftButtonIcon || {};
+        const leftIcon = leftButtonIcon || '';
         console.log('leftIcon  :', leftIcon);
         console.log('rightIcon  :', rightIcon);
         const leftButtonIconStyleProps = this.props.leftButtonStyle || {};
@@ -40,11 +40,8 @@ class Header extends Component {
         return (
             <View style={headerStyle} >
                 <Text style={textStyle}>{text}</Text>
-
-                {((!isShowRightButtonIcon) && rightIcon === 1) && <Icon style={rightButtonStyle} name="times" width="20"/>}
-                {/* {((!isShowRightButtonIcon) && rightIcon) && <Image source={rightIcon} style={rightButtonStyle} />} */}
-
-                {((!isShowLeftButtonIcon) && leftIcon === 1) && <Image source={leftIcon} style={leftButtonStyle} />}
+                {((!isShowRightButtonIcon) && rightIcon !== '') && <Icon style={rightButtonStyle} name={`${rightIcon}`} width="50" />}
+                {((!isShowLeftButtonIcon) && leftIcon !== '') && <Icon style={leftButtonStyle} name={`${leftIcon}`} width="40" />}
             </View>
         )
     }
