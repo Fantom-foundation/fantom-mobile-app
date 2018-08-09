@@ -8,22 +8,14 @@ const style = {
     mainContainerStyle: {
         flex: 1,
     },
-    generateText: {
+    textBox: {
         marginTop: deviceHeight * 0.05
     },
     mid : {
         padding: deviceHeight * 0.03
     },
-    mapText:{
-        marginRight:20,
-        marginBottom:10,
-        fontSize:20
-    },
-    text : {
-        marginTop: deviceHeight * 0.05,
-        flexDirection:'row',
-        flexWrap:'wrap',
-        backgroundColor:'#f2f2f2'
+    generateText: {
+        marginTop: deviceHeight * 0.05
     },
     footerStyle: {
         position: 'absolute',
