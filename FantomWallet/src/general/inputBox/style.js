@@ -10,9 +10,14 @@ const style = {
         width:deviceWidth*0.9,height:44,borderWidth:1
     },
     phraseNumber:{
-        marginBottom: deviceHeight* 0.02,
+        marginBottom: deviceHeight* 0.01,
         color:'#0270c0'
         
+    },
+    error:{
+        color:'#f7965e',
+        alignSelf:'flex-end',
+        fontSize:12
     }
 }
 

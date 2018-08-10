@@ -7,9 +7,10 @@ const deviceHeight = Dimensions.get('window').height;
 const style = {
     mainContainerStyle: {
         flex: 1,
+        backgroundColor:'white'
     },
     textBox: {
-        marginTop: deviceHeight * 0.05
+        marginTop: deviceHeight * 0.025
     },
     mid : {
         padding: deviceHeight * 0.03

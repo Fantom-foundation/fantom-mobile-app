@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import style from './style';
 
+//CaptchaVerification
+//CaptionOutput
 class CreateWallet extends Component {
     render() {
         return (
@@ -14,7 +16,7 @@ class CreateWallet extends Component {
                     <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
                     <Text style={style.subHeaderText2}>The Future of Decentralized Ecosystem</Text>
                 </View>
-                <TouchableOpacity style={style.createWallet} onPress={() => { this.props.navigation.navigate('CaptchaVerification') }} >
+                <TouchableOpacity style={style.createWallet} onPress={() => { this.props.navigation.navigate('CaptionOutput') }} >
                     <Text style={style.createWalletText}>Create Wallet</Text>
                 </TouchableOpacity>
                 <View style={style.footer}>
