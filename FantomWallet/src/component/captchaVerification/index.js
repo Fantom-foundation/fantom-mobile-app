@@ -6,6 +6,7 @@ import style from './style';
 import Button from '../../general/button/index';
 import InputBox from '../../general/inputBox/index';
 import ProgressBar from '../../general/progressBar/index';
+import { StatusBar } from 'react-native';
 
 class CaptchaVerification extends Component {
 
@@ -17,6 +18,7 @@ class CaptchaVerification extends Component {
     render() {
         return (
             <View style={style.mainContainerStyle}>
+            <StatusBar barStyle="light-content" />
                 <Header text='Captcha Verification' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
                 <View style={style.mid}>
                     <ProgressBar completed='3' remaining='2' />

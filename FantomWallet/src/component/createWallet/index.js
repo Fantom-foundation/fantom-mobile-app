@@ -16,7 +16,7 @@ class CreateWallet extends Component {
                     <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
                     <Text style={style.subHeaderText2}>The Future of Decentralized Ecosystem</Text>
                 </View>
-                <TouchableOpacity style={style.createWallet} onPress={() => { this.props.navigation.navigate('CaptionOutput') }} >
+                <TouchableOpacity style={style.createWallet} onPress={() => { this.props.navigation.navigate('AddressBook') }} >
                     <Text style={style.createWalletText}>Create Wallet</Text>
                 </TouchableOpacity>
                 <View style={style.footer}>

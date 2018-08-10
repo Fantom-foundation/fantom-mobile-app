@@ -5,6 +5,7 @@ import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
 import ProgressBar from '../../general/progressBar/index';
+import { StatusBar } from 'react-native';
 
 class CaptionOutput extends Component {
     state = {
@@ -17,6 +18,7 @@ class CaptionOutput extends Component {
     render() {
         return (
             <View style={style.mainContainerStyle}>
+            <StatusBar barStyle="light-content" />
                 <Header text='Caption Output' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
                 <View style={style.mid}>
                 <ProgressBar completed='2' remaining='3'/>
