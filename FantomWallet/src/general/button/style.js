@@ -11,7 +11,7 @@ const style = {
     textStyle: {
         color: '#fff',
         fontSize: 20,
-        fontFamily: 'Times New Roman',
+        // fontFamily: 'Times New Roman',
         fontWeight: 'bold',
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
 import { LinkButton } from 'general/';
 import Header from '../../general/header/index';
 import style from './style';
@@ -11,6 +11,8 @@ class CaptionOutput extends Component {
     render() {
         return (
             <View>
+                <StatusBar
+                    barStyle="light-content" />
                 <Header text='Caption Output' />
             </View>
         );
