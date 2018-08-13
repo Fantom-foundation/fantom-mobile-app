@@ -6,6 +6,7 @@ import TermsConditions from './src/component/termsConditions/';
 import CaptionOutput from './src/component/captionOutput/index';
 import CaptchaVerification from './src/component/captchaVerification/index';
 import QRScanner from './src/component/qr/scanner/view';
+import QRGenerator from './src/component/qr/generator/';
 
 const Routing = StackNavigator({
     CreateWallet: { screen: CreateWallet },
@@ -14,6 +15,7 @@ const Routing = StackNavigator({
     CaptionOutput: { screen: CaptionOutput },
     CaptchaVerification: { screen: CaptchaVerification },
     QRScanner: { screen: QRScanner },
+    QRGenerator: { screen: QRGenerator },
 },
 {
     headerMode: 'none',
