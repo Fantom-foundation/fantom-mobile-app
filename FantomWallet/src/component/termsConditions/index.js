@@ -11,7 +11,6 @@ export default class TermsConditions extends Component {
         super(props);
         this.onRightIconPress = this.onRightIconPress.bind(this);
         this.onLeftIconPress = this.onLeftIconPress.bind(this);
-        this.navigateScreen = this.navigateScreen.bind(this)
     }
     onRightIconPress() {
         console.log('onRightIconPressonRightIconPress');
@@ -20,9 +19,6 @@ export default class TermsConditions extends Component {
     onLeftIconPress() {
         console.log('onLeftIconPressonLeftIconPress');
         this.props.navigation.goBack()
-    }
-    navigateScreen() {
-        this.props.navigation.navigate('HomeScreen');
     }
     render() {
         return (
@@ -33,7 +29,6 @@ export default class TermsConditions extends Component {
                 <WebView source={{ uri: 'http://www.innow8apps.com' }} />
                 <View style={style.footerStyle}>
                     <Button text={'Confirm'}
-                        onPress={this.navigateScreen}
                     />
                 </View>
             </View>

@@ -1,9 +1,7 @@
 const style = {
-    walletViewStyle: {
+    fantomViewStyle: {
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: '#f8f8f8',
+        backgroundColor: 'white',
     },
     textViewStyle: {
         // fontFamily: 'Times New Roman',
