@@ -1,23 +1,5 @@
-// import React,{Component} from 'react';
-// import {View, Text} from 'react-native';
-
-// import style from './style';
-
-// class WalletPointScreen extends Component {
-//      render(){
-//          return(
-//              <View style={style.pointViewStyle}>
-//                  <Text> Point </Text>
-//             </View>
-//          )
-//      }
-// }
-
-// export default WalletPointScreen;
-
-
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import style from './style';
 
@@ -34,7 +16,7 @@ const pointTransactionArr = [
 class WalletPointScreen extends Component {
     render() {
         return (
-            <View style={style.fantomViewStyle}>
+            <View style={style.pointViewStyle}>
                 <PointBalanceView pointTransactionArr={pointTransactionArr} />
                 <PointTransactionView pointTransactionArr={pointTransactionArr} />
             </View>

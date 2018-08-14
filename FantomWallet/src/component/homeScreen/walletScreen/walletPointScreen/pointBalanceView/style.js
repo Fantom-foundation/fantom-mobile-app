@@ -1,5 +1,5 @@
 const style = {
-    fantomBalanceView: {
+    pointBalanceView: {
         margin: 1,
         backgroundColor: 'rgb(255,234,218)',
         borderWidth: 2,

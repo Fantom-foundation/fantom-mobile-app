@@ -7,7 +7,6 @@ class PointBalanceView extends Component {
     render() {
         const { pointTransactionArr } = this.props;
 
-        // let balanceTextOne = '(1,000\\ = 1.00002312FTM)';
         let balanceTextOne = '8,230,000';
         let balanceTextTwo = 'FTP';
         let balanceTextThree = '8,230,000';
@@ -19,7 +18,7 @@ class PointBalanceView extends Component {
         }
 
         return (
-            <View style={style.fantomBalanceView}>
+            <View style={style.pointBalanceView}>
                 <View style={style.balanceViewText}>
                     <Text style={style.balanceViewTextOne}> {balanceTextOne} </Text>
                     <Text> {balanceTextTwo} </Text>
