@@ -4,6 +4,8 @@ import style from './style';
 
 //CaptchaVerification
 //CaptionOutput
+
+
 class CreateWallet extends Component {
     render() {
         return (
