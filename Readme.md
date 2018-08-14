@@ -5,9 +5,10 @@
 This is the repository for the Fantom Wallet mobile application.
 
 ## Technology Stack
-React v16.4.1
-React-Native v0.56.0
-Redux v4.0.0
+* React v16.4.1
+* React-Native v0.56.0
+* Redux v4.0.0
+* react-navigation v2.11.2
 
 ## Installation
 
