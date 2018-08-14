@@ -11,13 +11,15 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 import Router from './router';
 import store from './src/redux/store';
-
+import './global';
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
     'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+
+const Web3 = require('web3');
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -29,4 +31,3 @@ export default class App extends Component<Props> {
     );
   }
 }
-
