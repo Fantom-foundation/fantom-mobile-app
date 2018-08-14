@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
-import { LinkButton } from 'general/';
+// import { LinkButton } from 'general/';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
 import ProgressBar from '../../general/progressBar/index';
-import { StatusBar } from 'react-native';
 
 class CaptionOutput extends Component {
     state = {
