@@ -2,7 +2,8 @@ import { Platform } from 'react-native'
 const style = {
     headerStyle: {
         backgroundColor: '#000',
-        height: (Platform.OS === 'ios') ? 64 : 44,
+        // marginTop: 25,
+        height: 64,
         alignItems: 'center',
         justifyContent: 'center',
     },

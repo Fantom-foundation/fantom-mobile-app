@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import style from './style';
 
+//CaptchaVerification
+//CaptionOutput
 class CreateWallet extends Component {
     render() {
         return (

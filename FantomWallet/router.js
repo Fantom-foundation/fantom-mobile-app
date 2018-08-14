@@ -6,13 +6,17 @@ import TermsConditions from './src/component/termsConditions/';
 import CaptionOutput from './src/component/captionOutput/index';
 import HomeScreen from './src/component/homeScreen/';
 
+import CaptchaVerification from './src/component/captchaVerification/index';
+import AddressBook from './src/component/addressBook/index';
 
 const Routing = StackNavigator({
     CreateWallet: { screen: CreateWallet },
     Terms: { screen: TermsConditions },
     PrivacyPolicy: { screen: PrivacyPolicy },
     CaptionOutput: { screen: CaptionOutput },
-    HomeScreen: { screen: HomeScreen }
+    HomeScreen: { screen: HomeScreen },
+    CaptchaVerification: { screen: CaptchaVerification },
+    AddressBook: { screen: AddressBook}
 },
     {
         headerMode: 'none',
