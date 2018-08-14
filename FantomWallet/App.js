@@ -12,6 +12,8 @@ import { Provider } from 'react-redux';
 import Router from './router';
 import store from './src/redux/store';
 import './global';
+import bip39 from 'react-native-bip39';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -20,6 +22,8 @@ const instructions = Platform.select({
 });
 
 const Web3 = require('web3');
+var hdkey = require('ethereumjs-wallet/hdkey')
+
 
 type Props = {};
 export default class App extends Component<Props> {
