@@ -12,7 +12,11 @@ import { Provider } from 'react-redux';
 import Router from './router';
 import store from './src/redux/store';
 import './global';
-import bip39 from 'react-native-bip39';
+var bip39 = require('bip39')
+
+// console.log('bip39');
+// console.log(bip39);
+// console.log(bip39.generateMnemonic());
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
