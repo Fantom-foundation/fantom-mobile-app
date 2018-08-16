@@ -12,10 +12,9 @@ import WalletNavigationTab from '../../../general/navigationTab/walletNavigation
 export default class WalletScreen extends Component {
 
   render() {
-    debugger;
     return (
       <View style={style.walletViewStyle} >
-        <Header text='FANTOM' rightButtonIcon='settings' />
+        <Header text='FANTOM' rightButtonIcon='settings' headerStyle={{backgroundColor: '#EEBD12',}} />
         <ScrollView style={{ flex: 1, backgroundColor: 'white'}}>
           <WalletNavigationTab />
         </ScrollView>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcons from 'react-native-vector-icons/Feather';
@@ -11,6 +12,12 @@ import WalletTab from '../../component/homeScreen/walletScreen/';
 import WithdrawTab from '../../component/homeScreen/withdrawScreen/';
 import DepositTab from '../../component/homeScreen/depositScreen/';
 import ActivityTab from '../../component/homeScreen/activityScreen/';
+
+/**
+ * NavigationIcons
+ */
+
+import activityIcon from '../../images/menBlack.svg';
 
 
 export default TabNavigator({
@@ -35,16 +42,17 @@ export default TabNavigator({
           return <FeatherIcons name={iconName} size={20} color={tintColor} />;
         } else if (routeName === 'Activity') {
           iconName = `directions-run`;
-          return <MaterialIcons name={iconName} size={20} color={tintColor} />;
+          return <Image source={activityIcon} style={{backgroundColor: 'yellow', width: 20, height: 20}} />
+          // return <MaterialIcons name={iconName} size={20} color={tintColor} />;
         }
       },
     }),
-    
+
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#EEBD12',
+      inactiveTintColor: '#000',
       labelStyle: {
         fontSize: 12,
         // fontFamily: 'Times New Roman'
