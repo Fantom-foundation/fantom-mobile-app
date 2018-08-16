@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
 import style from './style';
+
+//CaptchaVerification
+//CaptionOutput
+
 
 class CreateWallet extends Component {
     render() {
-        return (
+        return (<ImageBackground
+            style={style.imageBackground}
+            source={require('../../images/background.png')}
+            imageStyle={{ resizeMode: 'cover' }}
+        >
+            <StatusBar barStyle="light-content" />
             <View style={style.mainContainer}>
                 <View style={style.headerContainer}>
                     <Image source={require('../../images/fantom-logo.png')} style={style.headerImage}
@@ -12,7 +21,8 @@ class CreateWallet extends Component {
                 </View>
                 <View style={style.subHeaderContainer}>
                     <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
-                    <Text style={style.subHeaderText2}>The Future of Decentralized Ecosystem</Text>
+                    <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
+                    <Text style={style.subHeaderText3}>Ecosystem</Text>
                 </View>
                 <TouchableOpacity style={style.createWallet} onPress={() => { this.props.navigation.navigate('CaptionOutput') }} >
                     <Text style={style.createWalletText}>Create Wallet</Text>
@@ -21,11 +31,14 @@ class CreateWallet extends Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Terms')} >
                         <Text style={style.footerText1}>Terms of Service</Text>
                     </TouchableOpacity>
+                    <View style={style.division}/>
+
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('PrivacyPolicy')} >
                         <Text style={style.footerText2}>Privacy Policy</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+        </ImageBackground >
         );
     }
 }

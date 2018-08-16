@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, View, Text } from 'react-native';
 import style from './style';
-export default class inputBox extends Component {
+export default class InputBox extends Component {
     constructor(props) {
         super(props);
     }

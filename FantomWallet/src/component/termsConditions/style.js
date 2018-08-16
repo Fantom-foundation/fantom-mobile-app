@@ -2,6 +2,9 @@ const style = {
     mainContainerStyle: {
         flex: 1,
     },
+    statusBarStyle: {
+        height: 20,
+    },
     footerStyle: {
         position: 'absolute',
         bottom: 0,

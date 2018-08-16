@@ -98,6 +98,11 @@ class CaptchaVerification extends Component {
       console.log(masterKeyTest);
     }
 
+    onLeftIconPress = () => {
+        console.log('onLeftIconPressonLeftIconPress');
+        this.props.navigation.goBack()
+    }
+   
     render() {
 
         return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, WebView } from 'react-native';
+import { View, WebView, StatusBar } from 'react-native';
 
 import Header from '../../general/header/';
 import Button from '../../general/button/';
@@ -24,6 +24,8 @@ export default class PrivacyPolicy extends Component {
     render() {
         return (
             <View style={style.mainContainerStyle}>
+                <StatusBar
+                    barStyle="light-content" />
                 <Header text={'Privacy Policy'} rightButtonIcon='close' onRightIconPress={this.onRightIconPress} />
                 <WebView source={{ uri: 'http://www.innow8apps.com' }} />
                 <View style={style.footerStyle}>
