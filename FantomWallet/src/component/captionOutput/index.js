@@ -11,9 +11,11 @@ class CaptionOutput extends Component {
   constructor(props) {
       super(props);
       this.state= {mnemonicWords: []};
-      var mnemonic = Bip39.generateMnemonic();
+      const mnemonic = Bip39.generateMnemonic();
+      const seed = bip39.mnemonicToSeed(mnemonic); //creates seed buffer
       const mnemonicWords = mnemonic.split(' ');
       this.state.mnemonicWords = mnemonicWords;
+      this.state.seed = seed;
   };
 
     render() {
@@ -32,7 +34,8 @@ class CaptionOutput extends Component {
                 </View>
                 <View style={style.footerStyle}>
                     <Button text='Next' onPress={() => { this.props.navigation.navigate('CaptchaVerification', {
-                      mnemonicWords: this.state.mnemonicWords
+                      mnemonicWords: this.state.mnemonicWords,
+                      seed: this.state.seed
                       })
                     }}
                     />

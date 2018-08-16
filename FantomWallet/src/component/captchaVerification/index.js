@@ -7,6 +7,7 @@ import Button from '../../general/button/index';
 import InputBox from '../../general/inputBox/index';
 import '../../../global';
 import Web3 from 'web3';
+import EthereumJSWallet from 'ethereumjs-wallet';
 
 class CaptchaVerification extends Component {
     constructor(props) {
