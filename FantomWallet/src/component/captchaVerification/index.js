@@ -17,12 +17,13 @@ class CaptchaVerification extends Component {
     render() {
         return (
             <View style={style.mainContainerStyle}>
+
                 <Header text='Caption Output' leftButtonIcon='arrow-left' />
                   <View style={style.mid}>
                   <View style={style.generateText}>
                           <Text>Please enter the corresponding phrase out of the 12 back up phrases.</Text>
                       </View>
-                        <View style={style.textBox}><InputBox phraseNumber='5' /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='5'  /></View>
                         <View style={style.textBox}><InputBox phraseNumber='9' /></View>
                         <View style={style.textBox}><InputBox phraseNumber='12' /></View>
                   </View>

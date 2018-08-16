@@ -27,7 +27,7 @@ const instructions = Platform.select({
 const Web3 = require('web3');
 var hdkey = require('ethereumjs-wallet/hdkey')
 const web3 = new Web3(
-  new Web3.providers.HttpProvider('https://mainnet.infura.io/'),
+  new Web3.providers.HttpProvider('https://ropstein.infura.io/'),
 );
 
 type Props = {};
