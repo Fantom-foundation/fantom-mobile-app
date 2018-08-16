@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { LinkButton } from 'general/';
+import { AsyncStorage } from "react-native"
+
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
@@ -53,6 +55,8 @@ class CaptchaVerification extends Component {
         'addr' : addr,
         'address' : address
       };
+      // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
+      this.saveMasterKey(masterPrivateKey);
       console.log(key);
 /*
    If using ethereumjs-wallet instead do after line 1:
@@ -61,11 +65,28 @@ class CaptchaVerification extends Component {
       console.log('phraseOne', phraseOne);
     };
 
+    saveMasterKey = async (masterPrivateKey) => {
+      try {
+        await AsyncStorage.setItem('masterPrivateKey', masterPrivateKey);
+      } catch (error) {
+        if (error){
+          console.log(error);
+        }
+        // Error saving data
+      }
+    };
+
     changePhrase (text, phrase){
       const state = this.state;
       state[phrase] = text;
       this.setState(state);
     };
+
+    getMasterKey (){
+      const masterKeyTest = AsyncStorage.getItem('masterPrivateKey');
+      console.log('getMasterKey');
+      console.log(masterKeyTest);
+    }
 
     render() {
 
@@ -80,6 +101,7 @@ class CaptchaVerification extends Component {
                         <View style={style.textBox}><InputBox phraseNumber='5' text={this.state.phraseOne} onChangeText={(text) => this.changePhrase(text, 'phraseOne')} /></View>
                         <View style={style.textBox}><InputBox phraseNumber='9' text={this.state.phraseTwo} onChangeText={(text) => this.changePhrase(text, 'phraseTwo')} /></View>
                         <View style={style.textBox}><InputBox phraseNumber='12' text={this.state.phraseThree} onChangeText={(text) => this.changePhrase(text, 'phraseThree')} /></View>
+                        <Text onPress={this.getMasterKey}>Get Master Key</Text>
                   </View>
                   <View style={style.footerStyle}>
                       <Button text='Confirm' onPress={this.createWallet} />
