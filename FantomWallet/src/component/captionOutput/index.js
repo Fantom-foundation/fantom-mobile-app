@@ -11,10 +11,10 @@ import Bip39 from 'bip39';
 class CaptionOutput extends Component {
   constructor(props) {
       super(props);
-      this.mnemonicWords = [];
+      this.state= {mnemonicWords: []};
       var mnemonic = Bip39.generateMnemonic();
       const mnemonicWords = mnemonic.split(' ');
-      this.mnemonicWords = mnemonicWords
+      this.state.mnemonicWords = mnemonicWords;
   };
 
     render() {
@@ -26,13 +26,17 @@ class CaptionOutput extends Component {
                         <Text>Generate 12 characters for wallet creation.Be sure to keep the following words.</Text>
                     </View>
                     <View style={style.text}>
-                        {this.mnemonicWords.map((val, i) => {
+                        {this.state.mnemonicWords.map((val, i) => {
                             return (<Text style={style.mapText} >{i + 1}.{val}</Text>);
                         })}
                     </View>
                 </View>
                 <View style={style.footerStyle}>
-                    <Button text='Next' />
+                    <Button text='Next' onPress={() => { this.props.navigation.navigate('CaptchaVerification', {
+                      mnemonicWords: this.state.mnemonicWords
+                      })
+                    }}
+                    />
                 </View>
             </View>
         );

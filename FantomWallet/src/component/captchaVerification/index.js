@@ -7,23 +7,29 @@ import Button from '../../general/button/index';
 import InputBox from '../../general/inputBox/index';
 
 class CaptchaVerification extends Component {
-
+  constructor(props) {
+      super(props);
+      const { navigation } = this.props;
+      const mnemonicWords = navigation.getParam('mnemonicWords', 'NO-ID');
+      console.log('mnemonicWords');
+      console.log(mnemonicWords);
+  };
     render() {
         return (
             <View style={style.mainContainerStyle}>
                 <Header text='Caption Output' leftButtonIcon='arrow-left' />
-                <View style={style.mid}>
-                <View style={style.generateText}>
-                        <Text>Please enter the corresponding phrase out of the 12 back up phrases.</Text>
-                    </View>
-                    <View style={style.textBox}><InputBox phraseNumber='5' /></View>
-                    <View style={style.textBox}><InputBox phraseNumber='9' /></View>
-                    <View style={style.textBox}><InputBox phraseNumber='12' /></View>
-                </View>
-                <View style={style.footerStyle}>
-                    <Button text='Confirm' buttonStyle={{backgroundColor : '#d9d8d9'}} />
-                </View>
-            </View>
+                  <View style={style.mid}>
+                  <View style={style.generateText}>
+                          <Text>Please enter the corresponding phrase out of the 12 back up phrases.</Text>
+                      </View>
+                        <View style={style.textBox}><InputBox phraseNumber='5' /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='9' /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='12' /></View>
+                  </View>
+                  <View style={style.footerStyle}>
+                      <Button text='Confirm' buttonStyle={{backgroundColor : '#d9d8d9'}} />
+                  </View>
+              </View>
         );
     }
 }
