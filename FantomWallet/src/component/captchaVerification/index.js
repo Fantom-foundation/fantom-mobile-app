@@ -21,7 +21,7 @@ class CaptchaVerification extends Component {
         this.state = {
           phraseFive: '',
           phraseNine: '',
-          phraseThree: '',
+          phreaseTwelve: '',
           'seed' : navigation.getParam('seed', 'NO-ID'),
           'error' : '',
           'mnemonicWords' : navigation.getParam('mnemonicWords', 'NO-ID')
@@ -33,17 +33,17 @@ class CaptchaVerification extends Component {
     createWallet() {
       const phraseFive = this.state.phraseFive;
       const phraseNine = this.state.phraseNine;
-      const phraseTwelve= this.state.phraseThree;
+      const phraseTwelve= this.state.phreaseTwelve;
       // check to make sure entered phrases match up.
       if (phraseFive !== this.state.mnemonicWords[4]){
         this.state.error = 'Phrase five does not match up.';
         console.log(this.state.error);
         return;
-      } else if (phraseFive !== this.state.mnemonicWords[8]){
+      } else if (phraseNine !== this.state.mnemonicWords[8]){
         this.state.error = 'Phrase nine does not match up.';
         console.log(this.state.error);
         return;
-      } else if (phraseFive !== this.state.mnemonicWords[11]){
+      } else if (phraseTwelve !== this.state.mnemonicWords[11]){
         this.state.error = 'Phrase twelve does not match up.';
         console.log(this.state.error);
         return;
@@ -110,7 +110,7 @@ class CaptchaVerification extends Component {
                       </View>
                         <View style={style.textBox}><InputBox phraseNumber='5' text={this.state.phraseFive} onChangeText={(text) => this.changePhrase(text, 'phraseFive')} /></View>
                         <View style={style.textBox}><InputBox phraseNumber='9' text={this.state.phraseNine} onChangeText={(text) => this.changePhrase(text, 'phraseNine')} /></View>
-                        <View style={style.textBox}><InputBox phraseNumber='12' text={this.state.phraseThree} onChangeText={(text) => this.changePhrase(text, 'phraseThree')} /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='12' text={this.state.phreaseTwelve} onChangeText={(text) => this.changePhrase(text, 'phreaseTwelve')} /></View>
                         <Text onPress={this.getMasterKey}>Get Master Key</Text>
                   </View>
                   <View style={style.footerStyle}>
