@@ -2,6 +2,8 @@
 global.Buffer = require('buffer').Buffer;
 global.process = require('process');
 
+
+
 if (typeof btoa === 'undefined') {
   global.btoa = function (str) {
     return new Buffer(str, 'binary').toString('base64');

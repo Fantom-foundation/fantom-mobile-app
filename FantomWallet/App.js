@@ -12,8 +12,7 @@ import { Provider } from 'react-redux';
 import Router from './router';
 import store from './src/redux/store';
 import './global';
-var bip39 = require('bip39')
-
+const Bip39 = require('bip39');
 // console.log('bip39');
 // console.log(bip39);
 // console.log(bip39.generateMnemonic());
@@ -27,11 +26,14 @@ const instructions = Platform.select({
 
 const Web3 = require('web3');
 var hdkey = require('ethereumjs-wallet/hdkey')
-
+const web3 = new Web3(
+  new Web3.providers.HttpProvider('https://mainnet.infura.io/'),
+);
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
+
     return (
       <Provider store={store}>
         <Router />

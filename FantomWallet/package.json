@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "Base64": "^1.0.1",
     "bip39": "^2.5.0",
+    "buffer": "^5.2.0",
     "ethereumjs-wallet": "^0.6.2",
     "expo": "^26.0.0",
     "lodash": "^4.17.10",
