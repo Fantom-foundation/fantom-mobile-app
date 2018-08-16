@@ -5,16 +5,41 @@ import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
 import InputBox from '../../general/inputBox/index';
+import '../../../global';
+import Web3 from 'web3';
 
 class CaptchaVerification extends Component {
-  constructor(props) {
-      super(props);
-      const { navigation } = this.props;
-      const mnemonicWords = navigation.getParam('mnemonicWords', 'NO-ID');
-      console.log('mnemonicWords');
-      console.log(mnemonicWords);
-  };
+    constructor(props) {
+        super(props);
+        const { navigation } = this.props;
+        const mnemonicWords = navigation.getParam('mnemonicWords', 'NO-ID');
+        console.log('mnemonicWords');
+        console.log(mnemonicWords);
+        this.state = {
+          phraseOne: '',
+          phraseTwo: '',
+          phraseThree: ''
+        };
+        this.createWallet = this.createWallet.bind(this);
+        this.changePhrase= this.changePhrase.bind(this);
+    };
+
+    createWallet() {
+      console.log('test');
+    };
+
+    changePhrase (text, phrase){
+      if (text === 1 ) {
+        this.state.phraseOne = phrase;
+      } else if (text === 2) {
+        this.state.phraseTwo = phrase;
+      } else if (text === 3) {
+        this.state.phraseThree = phrase;
+      }
+    };
+
     render() {
+
         return (
             <View style={style.mainContainerStyle}>
 
@@ -23,12 +48,12 @@ class CaptchaVerification extends Component {
                   <View style={style.generateText}>
                           <Text>Please enter the corresponding phrase out of the 12 back up phrases.</Text>
                       </View>
-                        <View style={style.textBox}><InputBox phraseNumber='5'  /></View>
-                        <View style={style.textBox}><InputBox phraseNumber='9' /></View>
-                        <View style={style.textBox}><InputBox phraseNumber='12' /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='5' text={this.state.phraseOne}  /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='9' text={this.state.phraseTwo}  /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='12' text={this.state.phraseThree}  /></View>
                   </View>
                   <View style={style.footerStyle}>
-                      <Button text='Confirm' buttonStyle={{backgroundColor : '#d9d8d9'}} />
+                      <Button text='Confirm' onPress={this.createWallet} />
                   </View>
               </View>
         );

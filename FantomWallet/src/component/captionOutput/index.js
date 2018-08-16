@@ -5,7 +5,6 @@ import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
 import '../../../global';
-import Web3 from 'web3';
 import Bip39 from 'bip39';
 
 class CaptionOutput extends Component {
