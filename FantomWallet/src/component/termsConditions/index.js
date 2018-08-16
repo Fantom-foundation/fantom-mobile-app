@@ -13,11 +13,11 @@ export default class TermsConditions extends Component {
         this.onLeftIconPress = this.onLeftIconPress.bind(this);
     }
     onRightIconPress() {
-        console.log('onRightIconPressonRightIconPress');
+        console.log('onRightIconPressonRightIconPress', this.props.navigation);
         this.props.navigation.goBack()
     }
     onLeftIconPress() {
-        console.log('onLeftIconPressonLeftIconPress');
+        console.log('onLeftIconPressonLeftIconPress', this.props.navigation);
         this.props.navigation.goBack()
     }
     render() {

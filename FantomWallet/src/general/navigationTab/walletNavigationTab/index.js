@@ -32,6 +32,7 @@ export default TabNavigator({
             },
             tabStyle: {
                 height: 45,
+                // fontFamily: 'Segoe UI semibold'
               },
         },
         animationEnabled: false,

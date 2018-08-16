@@ -13,14 +13,12 @@ const style = {
         fontWeight: 'bold',
     },
     rightButtonStyle: {
-        backgroundColor: 'black',
         position: 'absolute',
         right: 5,
         padding: 8,
 
     },
     leftButtonStyle: {
-        backgroundColor: 'black',
         position: 'absolute',
         left: 5,
         padding: 8,

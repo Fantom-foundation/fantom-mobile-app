@@ -17,8 +17,6 @@ import ActivityTab from '../../component/homeScreen/activityScreen/';
  * NavigationIcons
  */
 
-import activityIcon from '../../images/menBlack.svg';
-
 
 export default TabNavigator({
   Wallet: { screen: WalletTab },
@@ -42,8 +40,8 @@ export default TabNavigator({
           return <FeatherIcons name={iconName} size={20} color={tintColor} />;
         } else if (routeName === 'Activity') {
           iconName = `directions-run`;
-          return <Image source={activityIcon} style={{backgroundColor: 'yellow', width: 20, height: 20}} />
-          // return <MaterialIcons name={iconName} size={20} color={tintColor} />;
+          // return <Image source={activityIcon} style={{backgroundColor: 'yellow', width: 20, height: 20}} />
+          return <MaterialIcons name={iconName} size={20} color={tintColor} />;
         }
       },
     }),
@@ -51,12 +49,10 @@ export default TabNavigator({
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: '#EEBD12',
+      activeTintColor: '#fff',
+      activeBackgroundColor: '#EEBD12',
       inactiveTintColor: '#000',
-      labelStyle: {
-        fontSize: 12,
-        // fontFamily: 'Times New Roman'
-      },
+      showLabel: false,
     },
     animationEnabled: false,
     swipeEnabled: false,
