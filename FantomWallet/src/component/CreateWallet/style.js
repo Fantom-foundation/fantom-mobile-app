@@ -6,54 +6,73 @@ const deviceHeight = Dimensions.get('window').height;
 const styles = {
     mainContainer: {
         padding: deviceHeight * 0.05,
-        justifyContent: 'center',
-        flex: 1
+        flex: 1, 
+    },
+    imageBackground:{
+        width:deviceWidth,
+        height:deviceHeight,
+        backgroundColor:'black'
     },
     headerContainer: {
-        alignItems: 'center'
-    },
-    headerImage: {
-        height: deviceHeight * 0.2,
-        width: deviceWidth * 0.8
+        alignItems: 'center',
     },
     subHeaderContainer: {
-        alignItems: 'center'
+        marginTop:deviceHeight*0.25,
+        alignItems: 'center',
     },
     subHeaderText1: {
+        color:'white',
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: deviceWidth*0.08,
         marginTop: deviceHeight * 0.05
     },
     subHeaderText2: {
-        marginTop: deviceHeight * 0.05
+        marginTop: deviceHeight * 0.02,
+        fontSize: deviceWidth*0.04,
+        color:'white'
+    },
+    subHeaderText3: {
+        fontSize: deviceWidth*0.04,
+        color:'white'
     },
     createWallet: {
+        position:'absolute',
+        bottom:deviceHeight * 0.13,
         alignItems: 'center',
+        alignSelf:'center',
         marginTop: deviceHeight * 0.1,
         borderWidth: 1,
-        borderColor: '#e5e0ed',
-        backgroundColor: '#e5e0ed',
+        backgroundColor: 'rgb(235,187,17)',
+        width: deviceWidth * 0.7,
+        alignSelf:'center'
     },
     createWalletText: {
-        fontSize: 20,
-        marginTop: deviceHeight * 0.05,
-        marginBottom: deviceHeight * 0.05,
+        fontSize: deviceWidth*0.05,
+        marginTop: deviceHeight * 0.02,
+        marginBottom: deviceHeight * 0.02,
     },
     footer: {
         position: 'absolute',
         bottom: deviceHeight * 0.05,
         flexDirection: 'row',
-        // justifyContent: 'space-around'
+        width:deviceWidth-40,
+        justifyContent: 'space-between',
+        alignSelf:'center'
     },
     footerText1: {
-        marginLeft: deviceWidth * 0.2,
-        textDecorationLine: 'underline',
-        color: '#8064a2'
+        // marginLeft: deviceWidth * 0.2,
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    division:{
+        
+        width:1,
+        backgroundColor:'white'
     },
     footerText2: {
-        marginLeft: deviceWidth * 0.1,
-        textDecorationLine: 'underline',
-        color: '#8064a2'
+        // marginLeft: deviceWidth * 0.1,
+        color: 'white',
+        fontWeight: 'bold',
     },
 
 }

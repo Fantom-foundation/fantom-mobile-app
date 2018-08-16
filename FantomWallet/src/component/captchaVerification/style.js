@@ -9,14 +9,33 @@ const style = {
         flex: 1,
         backgroundColor:'white'
     },
+    backArrow:{
+        marginTop: deviceHeight * 0.04
+    },
+    header:{
+        marginTop: deviceHeight * 0.05,
+        alignSelf:'center'
+    },
+    headerText:{
+        fontSize: deviceWidth * 0.06,
+        fontWeight:'bold'
+    },
+    subHeader: {
+        
+    },
+    subHeaderText1: {
+        marginTop: deviceHeight * 0.05,
+        alignSelf:'center'
+    },
+    subHeaderText2: {
+        
+        alignSelf:'center'
+    },
     textBox: {
         marginTop: deviceHeight * 0.025
     },
     mid : {
         padding: deviceHeight * 0.03
-    },
-    generateText: {
-        marginTop: deviceHeight * 0.05
     },
     footerStyle: {
         position: 'absolute',
