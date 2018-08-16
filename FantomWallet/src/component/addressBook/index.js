@@ -49,11 +49,11 @@ class AddressBook extends Component {
         let addressListView = null;
         let favListView = null;
         if (this.state.addOrFavorite === 'add') {
-            addColor = { ...style.add, backgroundColor: 'rgb(178,178,178)' };
+            addColor = { ...style.add, backgroundColor: 'rgb(63,62,63)' };
             addColorText = { color: 'white' };
             favColor = style.favorites;
         } else if (this.state.addOrFavorite === 'favorite') {
-            favColor = { ...style.favorites, backgroundColor: 'rgb(178,178,178)' };
+            favColor = { ...style.favorites, backgroundColor: 'rgb(63,62,63)' };
             favColorText = { color: 'white' }
             addColor = style.add;
         }
@@ -67,11 +67,11 @@ class AddressBook extends Component {
         return (
             <View style={style.mainContainerStyle}>
                 <StatusBar barStyle="light-content" />
-                <Header text='Address Book' leftButtonIcon='arrow-back' rightButtonIcon='add' onLeftIconPress={this.onLeftIconPress} leftIconSize={30} rightIconSize={30} />
-                <View style={{ flex: 1, margin: 10 }} >
+                <Header text='Address Book' leftButtonIcon='arrow-back' rightButtonIcon='add' onLeftIconPress={this.onLeftIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{backgroundColor:'rgb(233,177,18)'}} rightButtonStyle={{backgroundColor:'rgb(233,177,18)'}} leftButtonStyle={{backgroundColor:'rgb(233,177,18)'}}/>
+                <View style={{ flex: 1,}} >
                     <View style={{ flexDirection: 'row', }}>
                         <TouchableOpacity style={addColor} onPress={() => this.setState({ addOrFavorite: 'add' })}>
-                            <Text style={addColorText}>Add</Text>
+                            <Text style={addColorText}>Recent</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={favColor} onPress={() => this.setState({ addOrFavorite: 'favorite' })}>
                             <Text style={favColorText}>Favorites</Text>
