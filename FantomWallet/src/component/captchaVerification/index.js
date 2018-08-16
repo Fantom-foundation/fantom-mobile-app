@@ -8,18 +8,25 @@ import InputBox from '../../general/inputBox/index';
 import '../../../global';
 import Web3 from 'web3';
 import EthereumJSWallet from 'ethereumjs-wallet';
+import Hdkey from 'hdkey';
+import EthUtil from 'ethereumjs-util';
+// Method of generation taken from: https://medium.com/bitcraft/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998;
 
 class CaptchaVerification extends Component {
     constructor(props) {
         super(props);
         const { navigation } = this.props;
         const mnemonicWords = navigation.getParam('mnemonicWords', 'NO-ID');
+        const seed = navigation.getParam('seed', 'NO-ID');
         console.log('mnemonicWords');
         console.log(mnemonicWords);
+        console.log('seed is real');
+        console.log(seed);
         this.state = {
           phraseOne: '',
           phraseTwo: '',
-          phraseThree: ''
+          phraseThree: '',
+          'seed' : seed
         };
         this.createWallet = this.createWallet.bind(this);
         this.changePhrase= this.changePhrase.bind(this);
@@ -29,6 +36,28 @@ class CaptchaVerification extends Component {
       const phraseOne = this.state.phraseOne;
       const phraseTwo = this.state.phraseTwo;
       const phraseThree = this.state.phraseThree;
+      console.log('seed');
+      console.log(this.state.seed);
+      const root = Hdkey.fromMasterSeed(this.state.seed);
+      console.log(root);
+      const masterPrivateKey = root.privateKey.toString('hex');
+      const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
+      const pubKey = EthUtil.privateToPublic(addrNode._privateKey);
+      const addr = EthUtil.publicToAddress(pubKey).toString('hex');
+      const address = EthUtil.toChecksumAddress(addr);
+      const key = {
+        'root' : root,
+        'masterPrivateKey' : masterPrivateKey,
+        'addrNode' : addrNode,
+        'pubKey' : pubKey,
+        'addr' : addr,
+        'address' : address
+      };
+      console.log(key);
+/*
+   If using ethereumjs-wallet instead do after line 1:
+   const address = addrNode.getWallet().getChecksumAddressString();
+*/
       console.log('phraseOne', phraseOne);
     };
 

@@ -12,7 +12,7 @@ class CaptionOutput extends Component {
       super(props);
       this.state= {mnemonicWords: []};
       const mnemonic = Bip39.generateMnemonic();
-      const seed = bip39.mnemonicToSeed(mnemonic); //creates seed buffer
+      const seed = Bip39.mnemonicToSeed(mnemonic); //creates seed buffer
       const mnemonicWords = mnemonic.split(' ');
       this.state.mnemonicWords = mnemonicWords;
       this.state.seed = seed;

@@ -13,6 +13,9 @@ import Router from './router';
 import store from './src/redux/store';
 import './global';
 const Bip39 = require('bip39');
+const Hdkey = require('hdkey');
+const EthUtils = require('ethereumjs-util');
+
 // console.log('bip39');
 // console.log(bip39);
 // console.log(bip39.generateMnemonic());
