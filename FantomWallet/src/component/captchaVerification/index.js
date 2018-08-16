@@ -25,17 +25,16 @@ class CaptchaVerification extends Component {
     };
 
     createWallet() {
-      console.log('test');
+      const phraseOne = this.state.phraseOne;
+      const phraseTwo = this.state.phraseTwo;
+      const phraseThree = this.state.phraseThree;
+      console.log('phraseOne', phraseOne);
     };
 
     changePhrase (text, phrase){
-      if (text === 1 ) {
-        this.state.phraseOne = phrase;
-      } else if (text === 2) {
-        this.state.phraseTwo = phrase;
-      } else if (text === 3) {
-        this.state.phraseThree = phrase;
-      }
+      const state = this.state;
+      state[phrase] = text;
+      this.setState(state);
     };
 
     render() {
@@ -48,9 +47,9 @@ class CaptchaVerification extends Component {
                   <View style={style.generateText}>
                           <Text>Please enter the corresponding phrase out of the 12 back up phrases.</Text>
                       </View>
-                        <View style={style.textBox}><InputBox phraseNumber='5' text={this.state.phraseOne}  /></View>
-                        <View style={style.textBox}><InputBox phraseNumber='9' text={this.state.phraseTwo}  /></View>
-                        <View style={style.textBox}><InputBox phraseNumber='12' text={this.state.phraseThree}  /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='5' text={this.state.phraseOne} onChangeText={(text) => this.changePhrase(text, 'phraseOne')} /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='9' text={this.state.phraseTwo} onChangeText={(text) => this.changePhrase(text, 'phraseTwo')} /></View>
+                        <View style={style.textBox}><InputBox phraseNumber='12' text={this.state.phraseThree} onChangeText={(text) => this.changePhrase(text, 'phraseThree')} /></View>
                   </View>
                   <View style={style.footerStyle}>
                       <Button text='Confirm' onPress={this.createWallet} />
