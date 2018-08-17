@@ -11,6 +11,14 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 import Router from './router';
 import store from './src/redux/store';
+import './global';
+const Bip39 = require('bip39');
+const Hdkey = require('hdkey');
+const EthUtils = require('ethereumjs-util');
+
+// console.log('bip39');
+// console.log(bip39);
+// console.log(bip39.generateMnemonic());
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,9 +27,16 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const Web3 = require('web3');
+var hdkey = require('ethereumjs-wallet/hdkey')
+const web3 = new Web3(
+  new Web3.providers.HttpProvider('https://ropstein.infura.io/'),
+);
+
 type Props = {};
 export default class App extends Component<Props> {
   render() {
+
     return (
       <Provider store={store}>
         <Router />
@@ -29,4 +44,3 @@ export default class App extends Component<Props> {
     );
   }
 }
-

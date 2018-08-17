@@ -4,16 +4,22 @@ import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
+import '../../../global';
+import Bip39 from 'bip39';
 import ProgressBar from '../../general/progressBar/index';
 
+
 class CaptionOutput extends Component {
-    state = {
-        characters: ['course', 'invest', 'nuclear', 'odor', 'dance', 'cousin', 'purity', 'quarter', 'record', 'stove', 'park', 'photo']
-    }
-    onLeftIconPress = () => {
-        console.log('onLeftIconPressonLeftIconPress');
-        this.props.navigation.goBack()
-    }
+  constructor(props) {
+      super(props);
+      this.state= {mnemonicWords: []};
+      const mnemonic = Bip39.generateMnemonic();
+      const seed = Bip39.mnemonicToSeed(mnemonic); //creates seed buffer
+      const mnemonicWords = mnemonic.split(' ');
+      this.state.mnemonicWords = mnemonicWords;
+      this.state.seed = seed;
+  };
+
     render() {
         return (
             <View style={style.mainContainerStyle}>
@@ -25,13 +31,18 @@ class CaptionOutput extends Component {
                         <Text style={style.generateText}>Generate 12 characters for wallet creation. Be sure to keep the following words.</Text>
                     </View>
                     <View style={style.text}>
-                        {this.state.characters.map((val, i) => {
+                        {this.state.mnemonicWords.map((val, i) => {
                             return (<Text style={style.mapText} >{i + 1}.{val}</Text>);
                         })}
                     </View>
                 </View>
                 <View style={style.footerStyle}>
-                    <Button style={style.footerText} text='Next' onPress={() => { this.props.navigation.navigate('CaptchaVerification') }} />
+                    <Button text='Next' onPress={() => { this.props.navigation.navigate('CaptchaVerification', {
+                      mnemonicWords: this.state.mnemonicWords,
+                      seed: this.state.seed
+                      })
+                    }}
+                    />
                 </View>
             </View>
         );
