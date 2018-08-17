@@ -2,11 +2,14 @@
 const style = {
     mainViewStyle: {
         flex: 1,
+
     },
     headingCardViewStyle: {
-        backgroundColor: 'rgb(242,242,242)',
-        height: 25,
-        flexDirection: 'row'
+        backgroundColor: 'rgb(232,232,232)',
+        // backgroundColor: 'green',
+        height: 45,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     headingCardTextStyle: {
         fontSize: 20,

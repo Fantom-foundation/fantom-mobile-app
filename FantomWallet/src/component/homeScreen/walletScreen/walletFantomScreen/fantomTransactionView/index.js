@@ -13,7 +13,7 @@ class FantomTransactionView extends Component {
             <View>
                 {fantomTransactionArr.length > 0 &&
                     <View style={style.headingCardViewStyle}>
-                        <Text style={style.headingCardTextStyle}> Transaction </Text>
+                        <Text style={style.headingCardTextStyle}> Transactions </Text>
                         <View style={style.transactionSortIconStyle}>
                             <TouchableOpacity>
                                 <FontAwesome name='sort-amount-desc' size={20} />
@@ -21,8 +21,8 @@ class FantomTransactionView extends Component {
                         </View>
                     </View>}
                 <View >
-                    {fantomTransactionArr.length > 0 &&
-                        <View><Text style={style.dateViewStyle}> 2018-06-03 </Text></View>}
+                    {/* {fantomTransactionArr.length > 0 &&
+                        <View><Text style={style.dateViewStyle}> 2018-06-03 </Text></View>} */}
 
                     {fantomTransactionArr.length > 0 && fantomTransactionArr.map((transaction, index) => (
                         <TransactionEntity transaction={transaction} />
