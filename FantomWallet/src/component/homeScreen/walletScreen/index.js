@@ -4,7 +4,6 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import style from './style';
 
-import Header from '../../../general/header/';
 import WalletNavigationTab from '../../../general/navigationTab/walletNavigationTab/';
 
 /**
@@ -12,21 +11,21 @@ import WalletNavigationTab from '../../../general/navigationTab/walletNavigation
  */
 export default class WalletScreen extends Component {
 
-  handleGoBack = () => {
-    console.log('sdjfghaskdfagsj', this.props.navigation);
+  // handleGoBack = () => {
+  //   console.log('sdjfghaskdfagsj', this.props.navigation);
 
-    this.props.navigation.goBack();
-  }
+  //   this.props.navigation.goBack();
+  // }
+
 
   render() {
     return (
       <View style={style.walletViewStyle} >
-        <Header text='FANTOM' rightButtonIcon='settings' headerStyle={{ backgroundColor: '#EEBD12', }} />
-        <View style={style.arrowNavigationStyle}>
+        {/* <View style={style.arrowNavigationStyle}>
           <TouchableOpacity onPress={this.handleGoBack}>
             <MaterialIcon name="arrow-back" size={25} />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={style.walletScreenStyle}>
           <WalletNavigationTab />
         </View>

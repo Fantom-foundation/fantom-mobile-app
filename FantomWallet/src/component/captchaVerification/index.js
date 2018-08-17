@@ -14,6 +14,9 @@ class CaptchaVerification extends Component {
         console.log('onLeftIconPressonLeftIconPress');
         this.props.navigation.goBack()
     }
+    onNavigation(){
+        this.props.navigation.navigate('HomeScreen');
+    }
    
     render() {
         return (
@@ -41,7 +44,7 @@ class CaptchaVerification extends Component {
                     <View style={style.textBox}><InputBox phraseNumber='12' error={true}/></View>
                 </View>
                 <View style={style.footerStyle}>
-                    <Button text='Verify' buttonStyle={{ backgroundColor: 'black' }} textStyle={{ color: 'white' }} />
+                    <Button text='Verify' buttonStyle={{ backgroundColor: 'black' }} textStyle={{ color: 'white' }} onPress={this.onNavigation.bind(this)}/>
                 </View>
             </View>
         );
