@@ -51,6 +51,7 @@ class Header extends Component {
 
         return (
             <View style={headerStyle} >
+          
                 <Text style={textStyle}>{text}</Text>
                 {((!isShowRightButtonIcon) && rightIcon !== '') &&
                     <TouchableOpacity style={rightButtonStyle} activeOpacity={activeOpacity} onPress={this.onRightIconPress.bind(this)}>
@@ -61,6 +62,7 @@ class Header extends Component {
                     <TouchableOpacity style={leftButtonStyle} activeOpacity={activeOpacity} onPress={this.onLeftIconPress.bind(this)}>
                         <Icon  name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />
                     </TouchableOpacity>}
+                    
             </View>
         )
     }
