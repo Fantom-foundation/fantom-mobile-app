@@ -20,6 +20,11 @@ class CaptionOutput extends Component {
       this.state.seed = seed;
   };
 
+  onLeftIconPress = () => {
+    console.log('onLeftIconPressonLeftIconPress');
+    this.props.navigation.goBack()
+}
+
     render() {
         return (
             <View style={style.mainContainerStyle}>
