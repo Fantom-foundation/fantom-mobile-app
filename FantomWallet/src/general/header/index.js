@@ -51,7 +51,6 @@ class Header extends Component {
 
         return (
             <View style={headerStyle} >
-
                 <View style={style.mainViewStyle}>
                     <Text style={textStyle}>{text}</Text>
                     {((!isShowRightButtonIcon) && rightIcon !== '') &&
@@ -64,8 +63,6 @@ class Header extends Component {
                             <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />
                         </TouchableOpacity>}
                 </View>
-
-
             </View>
         )
     }
