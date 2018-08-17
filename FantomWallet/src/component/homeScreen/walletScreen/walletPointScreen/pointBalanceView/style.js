@@ -1,10 +1,11 @@
 const style = {
     pointBalanceView: {
         margin: 1,
-        backgroundColor: 'rgb(255,234,218)',
-        borderWidth: 2,
-        borderColor: 'black',
+        backgroundColor: '#fff',
         height: 150,
+        shadowOffset: { width: 0, height: 10, },
+        shadowColor: 'rgb(243,240,250)',
+        shadowOpacity: 0.8,
     },
     balanceTextOne: {
         padding: 8,
@@ -15,14 +16,13 @@ const style = {
         padding: 4,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems:'center'
+        alignItems:'center',
     },
     balanceViewTextOne: {
         fontWeight: 'bold',
         fontSize: 32,
     },
     balanceTextRowStyle: {
-        flex: 1,
         flexDirection: 'row',
         padding: 8,
         justifyContent: 'center',

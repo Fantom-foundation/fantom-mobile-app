@@ -1,4 +1,7 @@
-import { Platform } from 'react-native'
+import { Dimensions } from 'react-native'
+
+const deviceWidth = Dimensions.get('window').width;
+
 const style = {
     headerStyle: {
         backgroundColor: '#000',
@@ -22,6 +25,13 @@ const style = {
         position: 'absolute',
         left: 5,
         padding: 8,
+    },
+    mainViewStyle: {
+        width: deviceWidth,
+        position: 'absolute',
+        bottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 }
 export default style;

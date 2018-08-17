@@ -1,16 +1,23 @@
 
+import { Dimensions } from 'react-native';
+
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 const style = {
 
     transactionCardStyle: {
-        // borderWidth: 2,
-        // bordercolor: 'black',
-        // borderRadius: 3,
-        margin: 2,
-        height: 70,
+        marginTop: deviceHeight * 0.01,
+        marginBottom: deviceHeight * 0.01,
+        // marginBottom: 8,
+        // height: 56,
+        height: deviceHeight * 0.07,
         backgroundColor: '#fff',
-        shadowColor: 'blue',
-        shadowOffset: {width: 0, height: 2},
-        shadowOpacity: 0.06
+        shadowColor: 'rgb(237,231,246)',
+        shadowOffset: { width: 0, height: 10 },
+        // shadowOpacity: 0.04
+        shadowOpacity: 1
+
     },
     rowOneStyle: {
         flexDirection: 'row',
@@ -23,7 +30,7 @@ const style = {
         alignItems: 'flex-end',
     },
     rowOneTextStyle: {
-        // fontWeight: 'bold'
+        fontWeight: 'bold'
     },
     rowTwoStyle: {
         flexDirection: 'row',
@@ -35,11 +42,13 @@ const style = {
         justifyContent: 'flex-end',
         alignItems: 'flex-end'
     },
-    successTextStyle:{
+    successTextStyle: {
         color: 'rgb(0,206,91)',
+        fontWeight: 'bold',
     },
-    failureTextStyle:{
+    failureTextStyle: {
         color: 'red',
+        fontWeight: 'bold',
     }
 }
 

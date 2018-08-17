@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import style from './style';
@@ -22,14 +22,15 @@ export default class WalletScreen extends Component {
     return (
       <View style={style.walletViewStyle} >
         <Header text='FANTOM' rightButtonIcon='settings' headerStyle={{ backgroundColor: '#EEBD12', }} />
-        <View style={{ backgroundColor: '#fff' }}>
+        <View style={style.arrowNavigationStyle}>
           <TouchableOpacity onPress={this.handleGoBack}>
             <MaterialIcon name="arrow-back" size={25} />
           </TouchableOpacity>
         </View>
-        <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={style.walletScreenStyle}>
           <WalletNavigationTab />
-        </ScrollView>
+        </View>
+
       </View>
     );
   }

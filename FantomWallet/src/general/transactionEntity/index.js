@@ -22,7 +22,6 @@ class TransacationEntity extends Component {
                     </View>
                 </View>
                 <View style={style.rowTwoStyle}>
-                    {/* <Text> {(transaction.type === sent ? 'To' : 'From')}</Text> */}
                     <Text> {transaction.transactionId}</Text>
                     <View style={style.rowTwoViewStyle}>
                         <Text style={(transaction.transactionStatus === SUCCESS) ? style.successTextStyle : style.failureTextStyle}> {transaction.transactionStatus} </Text>

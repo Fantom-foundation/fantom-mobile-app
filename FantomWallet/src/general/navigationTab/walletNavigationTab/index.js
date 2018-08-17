@@ -25,15 +25,17 @@ export default TabNavigator({
             },
             style: {
                 backgroundColor: 'white',
+                shadowOffset: {width: 0, height: 0},
             },
             indicatorStyle: {
                 backgroundColor: 'red', 
-                fontWeight: 'bold',
+                borderBottomWidth: 3,
+                borderBottomColor: 'red'
             },
             tabStyle: {
                 height: 45,
-                // fontFamily: 'Segoe UI semibold'
               },
+
         },
         animationEnabled: false,
         swipeEnabled: false,

@@ -6,13 +6,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Header extends Component {
 
-    onRightIconPress(){
-        if(this.props.onRightIconPress){
+    onRightIconPress() {
+        if (this.props.onRightIconPress) {
             this.props.onRightIconPress();
         }
     }
-    onLeftIconPress(){
-        if(this.props.onLeftIconPress){
+    onLeftIconPress() {
+        if (this.props.onLeftIconPress) {
             this.props.onLeftIconPress();
         }
     }
@@ -51,16 +51,21 @@ class Header extends Component {
 
         return (
             <View style={headerStyle} >
-                <Text style={textStyle}>{text}</Text>
-                {((!isShowRightButtonIcon) && rightIcon !== '') &&
-                    <TouchableOpacity style={rightButtonStyle} activeOpacity={activeOpacity} onPress={this.onRightIconPress.bind(this)}>
-                        <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />
-                    </TouchableOpacity>}
 
-                {((!isShowLeftButtonIcon) && leftIcon !== '') &&
-                    <TouchableOpacity style={leftButtonStyle} activeOpacity={activeOpacity} onPress={this.onLeftIconPress.bind(this)}>
-                        <Icon  name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />
-                    </TouchableOpacity>}
+                <View style={style.mainViewStyle}>
+                    <Text style={textStyle}>{text}</Text>
+                    {((!isShowRightButtonIcon) && rightIcon !== '') &&
+                        <TouchableOpacity style={rightButtonStyle} activeOpacity={activeOpacity} onPress={this.onRightIconPress.bind(this)}>
+                            <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />
+                        </TouchableOpacity>}
+
+                    {((!isShowLeftButtonIcon) && leftIcon !== '') &&
+                        <TouchableOpacity style={leftButtonStyle} activeOpacity={activeOpacity} onPress={this.onLeftIconPress.bind(this)}>
+                            <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} />
+                        </TouchableOpacity>}
+                </View>
+
+
             </View>
         )
     }

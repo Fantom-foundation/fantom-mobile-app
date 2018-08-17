@@ -9,9 +9,9 @@ class EmptyTransactionEntity extends Component {
     render() {
         return (
             <View style={style.mainViewStyle}>
-                <Text style={style.headingInfoStyle}> No Transaction </Text>
                 <MaterialIcons name='account-balance-wallet' size={65} color='black' />
-                <Text >The wallet will show your recent transaction. </Text>
+                <Text style={style.headingInfoStyle}> No Transactions </Text>
+                <Text style={style.textInfoStyle}>(The wallet will show you recent transactions) </Text>
             </View>
         );
     }

@@ -20,13 +20,10 @@ class FantomBalanceView extends Component {
 
         return (
             <View style={style.fantomBalanceView}>
-                <View style={style.balanceTextOne}>
-                    <Text > {balanceTextOne} </Text>
-                </View>
                 <View style={style.balanceContainer}>
                     <View style={style.balanceViewText}>
                         <Text style={style.balanceViewTextOne}> {balanceTextTwo} </Text>
-                        <Text> {balanceTextThree} </Text>
+                        <Text style={style.balanceUnitText}> {balanceTextThree} </Text>
                     </View>
                     <View style={style.balanceTextTwo}>
                         <Text style={style.balanceTextStyle}> {balanceTextFour} </Text>
