@@ -20,11 +20,15 @@ class CaptionOutput extends Component {
       this.state.seed = seed;
   };
 
+  onLeftIconPress() {
+      this.props.navigation.goBack()
+  }
+
     render() {
         return (
             <View style={style.mainContainerStyle}>
             <StatusBar barStyle="light-content" />
-                <Header text='Caption Output' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
+                <Header text='Caption Output' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress.bind(this)} />
                 <View style={style.mid}>
                 <ProgressBar completed='2' remaining='3'/>
                     <View style={style.generateView}>

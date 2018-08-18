@@ -28,7 +28,7 @@ class CreateWallet extends Component {
                     <Text style={style.createWalletText}>Create Wallet</Text>
                 </TouchableOpacity>
                 <View style={style.footer}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Terms')} >
+                    <TouchableOpacity onPress={() => { this.props.navigation.navigate('QRGenerator') }} >
                         <Text style={style.footerText1}>Terms of Service</Text>
                     </TouchableOpacity>
                     <View style={style.division}/>

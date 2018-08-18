@@ -68,6 +68,8 @@ class CaptchaVerification extends Component {
       // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
       this.saveMasterKey(masterPrivateKey);
       console.log(key);
+      this.props.navigation.navigate('HomeScreen');
+
 /*
    If using ethereumjs-wallet instead do after line 1:
    const address = addrNode.getWallet().getChecksumAddressString();
@@ -108,7 +110,7 @@ class CaptchaVerification extends Component {
         return (
             <View style={style.mainContainerStyle}>
 
-                <Header text='Caption Output' leftButtonIcon='arrow-left' />
+                <Header text='Caption Output' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress}/>
                   <View style={style.mid}>
                   <View style={style.generateText}>
                           <Text>Please enter the corresponding phrase out of the 12 back up phrases.</Text>
