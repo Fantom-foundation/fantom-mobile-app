@@ -5,18 +5,21 @@ const style = {
     },
     headingCardViewStyle: {
         backgroundColor: 'rgb(242,242,242)',
-        height: 25,
-        flexDirection: 'row'
+        height: 45,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     headingCardTextStyle: {
         fontSize: 20,
+        fontWeight: 'bold',
     },
     dateViewStyle: {
         margin: 4,
     },
     transactionSortIconStyle: {
         flex: 1,
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        paddingRight: 16,
     }
 }
 

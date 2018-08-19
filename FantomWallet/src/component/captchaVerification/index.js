@@ -69,7 +69,6 @@ class CaptchaVerification extends Component {
       this.saveMasterKey(masterPrivateKey);
       console.log(key);
       this.props.navigation.navigate('HomeScreen');
-
 /*
    If using ethereumjs-wallet instead do after line 1:
    const address = addrNode.getWallet().getChecksumAddressString();
@@ -103,6 +102,9 @@ class CaptchaVerification extends Component {
     onLeftIconPress = () => {
         console.log('onLeftIconPressonLeftIconPress');
         this.props.navigation.goBack()
+    }
+    onNavigation(){
+        this.props.navigation.navigate('HomeScreen');
     }
    
     render() {

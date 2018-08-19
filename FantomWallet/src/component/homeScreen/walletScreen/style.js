@@ -1,12 +1,16 @@
 const style = {
     walletViewStyle: {
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: '#f8f8f8',
     },
     textViewStyle: {
         // fontFamily: 'Times New Roman',
+    },
+    arrowNavigationStyle: {
+        backgroundColor: '#fff',
+    },
+    walletScreenStyle: {
+        flex: 1,
+        backgroundColor: 'white'
     }
 }
 export default style;

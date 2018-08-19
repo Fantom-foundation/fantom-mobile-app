@@ -17,6 +17,8 @@ import ActivityTab from '../../component/homeScreen/activityScreen/';
  * NavigationIcons
  */
 
+import walletIcon from '../../images/wallet_white.png';
+
 
 export default TabNavigator({
   Wallet: { screen: WalletTab },

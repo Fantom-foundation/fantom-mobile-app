@@ -1,32 +1,41 @@
 const style = {
     fantomBalanceView: {
         margin: 1,
-        backgroundColor: 'rgb(255,234,218)',
-        borderWidth: 2,
-        borderColor: 'black',
+        backgroundColor: '#fff',
         height: 150,
+
+        shadowOffset: { width: 0, height: 10, },
+        shadowColor: 'rgb(243,240,250)',
+        shadowOpacity: 1,
+
     },
-    balanceTextOne: {
-        padding: 8,
-        alignItems: 'flex-end',
+    balanceContainer: {
+        // backgroundColor: '#fff',
+        // shadowOffset: { width: 0, height: 12, },
+        // shadowColor: 'rgb(232,231,234)',
+        // shadowOpacity: 0.5,
     },
     balanceViewText: {
         marginTop: 8,
-        padding: 4,
+        paddingTop: 20,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems:'center'
+        alignItems: 'flex-end',
     },
     balanceViewTextOne: {
         fontWeight: 'bold',
         fontSize: 32
     },
     balanceTextTwo: {
-        padding: 8,
+        padding: 4,
         alignItems: 'center',
     },
     balanceTextStyle: {
-        fontSize: 20
+        fontSize: 16
     },
+    balanceUnitText: {
+        fontWeight: 'bold',
+        fontSize: 20
+    }
 }
 export default style;

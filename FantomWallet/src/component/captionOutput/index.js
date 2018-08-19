@@ -21,8 +21,9 @@ class CaptionOutput extends Component {
   };
 
   onLeftIconPress() {
-      this.props.navigation.goBack()
-  }
+    console.log('onLeftIconPressonLeftIconPress');
+    this.props.navigation.goBack()
+}
 
     render() {
         return (

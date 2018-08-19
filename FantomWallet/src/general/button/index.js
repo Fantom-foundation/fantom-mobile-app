@@ -5,12 +5,14 @@ import style from './style';
 class Button extends Component {
 
     onPress() {
-        if (this.props.onPress) {
+        debugger;
+       
             this.props.onPress();
         }
-    }
+    
 
     render() {
+        console.log(this.props,'log data')
         const buttonStyleProp = this.props.buttonStyle || {};
         const buttonStyle = {
             ...style.buttonStyle,

@@ -12,7 +12,7 @@ class FantomBalanceView extends Component {
         let balanceTextThree = 'FTM';
         let balanceTextFour = '122,000\\';
 
-        if(fantomTransactionArr.length  === 0){
+        if (fantomTransactionArr.length === 0) {
             balanceTextOne = '(1,000\\ = 2312FTM)';
             balanceTextTwo = '00.00000000';
             balanceTextFour = '0,000\\';
@@ -20,15 +20,14 @@ class FantomBalanceView extends Component {
 
         return (
             <View style={style.fantomBalanceView}>
-                <View style={style.balanceTextOne}>
-                    <Text > {balanceTextOne} </Text>
-                </View>
-                <View style={style.balanceViewText}>
-                    <Text style={style.balanceViewTextOne}> {balanceTextTwo} </Text>
-                    <Text> {balanceTextThree} </Text>
-                </View>
-                <View style={style.balanceTextTwo}>
-                    <Text style={style.balanceTextStyle}> {balanceTextFour} </Text>
+                <View style={style.balanceContainer}>
+                    <View style={style.balanceViewText}>
+                        <Text style={style.balanceViewTextOne}> {balanceTextTwo} </Text>
+                        <Text style={style.balanceUnitText}> {balanceTextThree} </Text>
+                    </View>
+                    <View style={style.balanceTextTwo}>
+                        <Text style={style.balanceTextStyle}> {balanceTextFour} </Text>
+                    </View>
                 </View>
             </View>
         )

@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 
 import style from './style';
 
 //CaptchaVerification
-//CaptionOutput
+//CaptionOutput,EditContact
 
 
 class CreateWallet extends Component {
@@ -31,7 +31,7 @@ class CreateWallet extends Component {
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate('QRGenerator') }} >
                         <Text style={style.footerText1}>Terms of Service</Text>
                     </TouchableOpacity>
-                    <View style={style.division}/>
+                    <View style={style.division} />
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('PrivacyPolicy')} >
                         <Text style={style.footerText2}>Privacy Policy</Text>

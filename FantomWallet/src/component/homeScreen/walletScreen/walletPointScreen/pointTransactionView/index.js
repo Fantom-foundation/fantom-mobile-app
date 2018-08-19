@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import style from './style';
 import TransactionEntity from '../../../../../general/transactionEntity/';
 import EmptyTransactionEntity from '../../../../../general/transactionEntity/emptyTransactionEntity/';
 import SortMenuCard from '../../../../../general/sortMenuCard/';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import sortMenuIcon from '../../../../../images/arrow_With_bar.png'
 
 class PointTransactionView extends Component {
     constructor(props) {
@@ -27,23 +28,21 @@ class PointTransactionView extends Component {
             <View >
                 {pointTransactionArr.length > 0 &&
                     <View style={style.headingCardViewStyle}>
-                        <Text style={style.headingCardTextStyle}> Transaction </Text>
+                        <Text style={style.headingCardTextStyle}> Transactions </Text>
                         <View style={style.transactionSortIconStyle}>
                             <TouchableOpacity onPress={this.handleSortMenu.bind(this)}>
-                                <FontAwesome name='sort-amount-desc' size={20} />
+                                <Image source={sortMenuIcon} style={{ width: 33, height: 30 }} />
                             </TouchableOpacity>
                         </View>
                     </View>}
-                <View>
-                    {pointTransactionArr.length > 0 &&
-                        <View><Text style={style.dateViewStyle}> Today </Text></View>}
+                <View style={this.state.openSortMenu ? { opacity: 0.2, } : ''}>
                     {pointTransactionArr.length > 0 && pointTransactionArr.map((transaction, index) => (
                         <TransactionEntity transaction={transaction} />
                     ))}
                     {pointTransactionArr.length === 0 && <EmptyTransactionEntity />}
                 </View>
                 {
-                   this.state.openSortMenu && <SortMenuCard />
+                    this.state.openSortMenu && <SortMenuCard />
                 }
             </View>
         )
