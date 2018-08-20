@@ -1,9 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FeatherIcons from 'react-native-vector-icons/Feather';
-import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 
 /**
  * HomeScreen Tabs
@@ -14,10 +11,23 @@ import DepositTab from '../../component/homeScreen/depositScreen/';
 import ActivityTab from '../../component/homeScreen/activityScreen/';
 
 /**
- * NavigationIcons
+ * InActive NavigationIcons
  */
 
-import walletIcon from '../../images/wallet_white.png';
+import walletIcon from '../../images/walletBlack.png';
+import sendIcon from '../../images/sendIcon.png';
+import depositIcon from '../../images/downloading_Black.png';
+import activityIcon from '../../images/running_menBlack.png';
+
+/**
+ * Active NavigationIcons
+ */
+import walletWhiteIcon from '../../images/wallet_white.png';
+import sendWhiteIcon from '../../images/sendWhite.png';
+import depositWhiteIcon from '../../images/downloading_white.png';
+import activityWhiteIcon from '../../images/running_men_White.png';
+
+const ACTIVE_TINT_COLOR = '#fff';
 
 
 export default TabNavigator({
@@ -30,20 +40,15 @@ export default TabNavigator({
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
-        let iconName;
+
         if (routeName === 'Wallet') {
-          iconName = `account-balance-wallet`;
-          return <MaterialIcons name={iconName} size={20} color={tintColor} />;
+          return <Image source={tintColor === ACTIVE_TINT_COLOR ? walletWhiteIcon : walletIcon} style={{ width: 30, height: 30 }} />
         } else if (routeName === 'Withdraw') {
-          iconName = `send`;
-          return <FontAwesomeIcons name={iconName} size={15} color={tintColor} />;
+          return <Image source={tintColor === ACTIVE_TINT_COLOR ? sendWhiteIcon : sendIcon} style={{ width: 30, height: 30 }} />
         } else if (routeName === 'Deposit') {
-          iconName = `download`;
-          return <FeatherIcons name={iconName} size={20} color={tintColor} />;
+          return <Image source={tintColor === ACTIVE_TINT_COLOR ? depositWhiteIcon : depositIcon} style={{ width: 30, height: 30 }} />
         } else if (routeName === 'Activity') {
-          iconName = `directions-run`;
-          // return <Image source={activityIcon} style={{backgroundColor: 'yellow', width: 20, height: 20}} />
-          return <MaterialIcons name={iconName} size={20} color={tintColor} />;
+          return <Image source={tintColor === ACTIVE_TINT_COLOR ? activityWhiteIcon : activityIcon} style={{ width: 30, height: 30 }} />
         }
       },
     }),
@@ -51,10 +56,13 @@ export default TabNavigator({
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: '#fff',
+      activeTintColor: ACTIVE_TINT_COLOR,
       activeBackgroundColor: '#EEBD12',
       inactiveTintColor: '#000',
       showLabel: false,
+    },
+    tabStyle: {
+      height: 70,
     },
     animationEnabled: false,
     swipeEnabled: false,

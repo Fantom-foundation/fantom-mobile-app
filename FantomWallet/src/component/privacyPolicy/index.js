@@ -6,6 +6,8 @@ import Button from '../../general/button/';
 
 import style from './style';
 
+import crossButton from '../../images/crossButtonWhite.png';
+
 export default class PrivacyPolicy extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,7 @@ export default class PrivacyPolicy extends Component {
             <View style={style.mainContainerStyle}>
                 <StatusBar
                     barStyle="light-content" />
-                <Header text={'Privacy Policy'} rightButtonIcon='close' onRightIconPress={this.onRightIconPress} />
+                <Header text={'Privacy Policy'} rightButtonIcon={crossButton} onRightIconPress={this.onRightIconPress} />
                 <WebView source={{ uri: 'http://www.innow8apps.com' }} />
                 <View style={style.footerStyle}>
                     <Button text={'Confirm'} />

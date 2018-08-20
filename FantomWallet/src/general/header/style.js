@@ -32,6 +32,31 @@ const style = {
         bottom: 10,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    leftImageStyle: {
+        width: 20,
+        height: 20,
+    },
+    rightImageStyle: {
+        width: 20,
+        height: 20,
+    },
+    secondaryImageStyle: {
+        width: 20,
+        height: 20,
+    },
+    secondaryButtonStyle: {
+        position: 'absolute',
+        right: 5,
+        padding: 38,
+    },
+    fantomIconStyle: {
+        width: 20,
+        height: 25,
+        paddingRight: 30,
+    },
+    headerIconTextStyle: {
+        flexDirection: 'row'
     }
 }
 export default style;
