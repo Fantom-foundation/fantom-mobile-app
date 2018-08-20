@@ -11,6 +11,7 @@ import AddressBook from './src/component/addressBook/index';
 import QRScanner from './src/component/qr/scanner/view';
 import QRGenerator from './src/component/qr/generator/';
 import EditContact from './src/component/editContact/index';
+import SendMoney from './src/component/sendMoney/index';
 
 const Routing = StackNavigator({
     CreateWallet: { screen: CreateWallet },
@@ -23,6 +24,7 @@ const Routing = StackNavigator({
     QRScanner: { screen: QRScanner },
     QRGenerator: { screen: QRGenerator },
     EditContact: { screen: EditContact },
+    SendMoney: { screen: SendMoney }
 },
     {
         headerMode: 'none',

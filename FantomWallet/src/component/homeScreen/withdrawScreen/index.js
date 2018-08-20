@@ -38,9 +38,7 @@ export default class WithdrawScreen extends Component {
   render() {
     return (
       <View style={style.withdrawViewStyle}>
-        <View>
-          <Icon name='arrow-back' size={24} color='black' />
-        </View>
+        
         <View style={{ alignItems: 'center' }}>
           <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Send</Text>
         </View>
