@@ -1,9 +1,14 @@
+
+import { Dimensions } from 'react-native';
+
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 const style = {
     withdrawViewStyle: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f8f8f8',
+        padding:15,
+        backgroundColor:'#fff'
     },
     textViewStyle: {
         // fontFamily: 'Times New Roman',

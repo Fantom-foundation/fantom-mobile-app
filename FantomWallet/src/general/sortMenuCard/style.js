@@ -5,20 +5,27 @@ const deviceWidth = Dimensions.get('window').width;
 const style = {
     listContainerStyle: {
         backgroundColor: '#fff',
+        position: 'absolute',
+        top: deviceHeight*0.34,
+        right:15,
+        width: deviceWidth * 0.7,
+        shadowColor: 'blue',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+    },
+  
+    altListContainerStyle: {
+        backgroundColor: '#fff',
         marginLeft: deviceWidth * 0.27,
         position: 'absolute',
         top: 45,
-
+ 
         // top: deviceHeight * 0.061,
         width: deviceWidth * 0.7,
         shadowColor: 'blue',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
     },
-    // listTitleStyle: {
-    //     paddingTop: 10,
-    //     paddingLeft: 10,
-    // },
     listStyle: {
         paddingLeft: deviceHeight * 0.03,
         paddingRight: deviceHeight * 0.03,

@@ -4,9 +4,7 @@ import style from './style';
 
 class Button extends Component {
 
-    onPress() {
-        debugger;
-       
+    onPress() {       
             this.props.onPress();
         }
     

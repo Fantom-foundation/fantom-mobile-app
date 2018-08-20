@@ -7,11 +7,12 @@ const deviceHeight = Dimensions.get('window').height;
 
 const style = {
     textBox:{
-        width:deviceWidth*0.9,height:44,borderWidth:1
+        width:deviceWidth*0.9,height:44,borderWidth:1,
+        padding:10
     },
     phraseNumber:{
         marginBottom: deviceHeight* 0.01,
-        color:'#0270c0'
+        color:'black'
         
     },
     error:{
