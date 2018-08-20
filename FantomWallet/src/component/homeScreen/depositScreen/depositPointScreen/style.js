@@ -1,17 +1,13 @@
 const style = {
-    depositViewStyle: {
+    pointViewStyle: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f8f8f8',
+        // backgroundColor: '#f8f8f8',
+        backgroundColor: 'orange'
     },
     textViewStyle: {
-        // backgroundColor: 'red'
         // fontFamily: 'Times New Roman',
-    },
-    depositScreenStyle: {
-        // flex: 1,
-        backgroundColor: 'yellow'
     }
 }
 export default style;

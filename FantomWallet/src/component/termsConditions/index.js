@@ -5,6 +5,7 @@ import Header from '../../general/header/';
 import Button from '../../general/button/';
 
 import style from './style';
+import crossButton from '../../images/crossButtonWhite.png';
 
 export default class TermsConditions extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class TermsConditions extends Component {
             <View style={style.mainContainerStyle}>
                 <StatusBar  
                     barStyle="light-content" />
-                <Header text={'Terms of Service'} rightButtonIcon='close' onRightIconPress={this.onRightIconPress} />
+                <Header text={'Terms of Service'} rightButtonIcon={crossButton} onRightIconPress={this.onRightIconPress} />
                 <WebView source={{ uri: 'http://www.innow8apps.com' }} />
                 <View style={style.footerStyle}>
                     <Button text={'Confirm'}
