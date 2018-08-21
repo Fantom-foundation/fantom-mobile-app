@@ -120,7 +120,7 @@ export default class WithdrawScreen extends Component {
           </View>
         </View>
         <View style={{ alignItems: 'center', width: deviceWidth * 0.7, backgroundColor: 'rgb(233,177,18)', alignSelf: 'center', position: 'absolute', bottom: deviceHeight * 0.02, padding: 15 }}>
-          <TouchableOpacity onPress={() => console.log('pressed')}><Text style={{ fontSize: 24 }}>Send</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Text style={{ fontSize: 24 }}>Send</Text></TouchableOpacity>
         </View>
         {
                     this.state.openSortMenu && <SortMenuCard handleSortMenu={(itemSc) => this.handleSortMenu(itemSc)} data={this.state.data} type={'withDraw'} />

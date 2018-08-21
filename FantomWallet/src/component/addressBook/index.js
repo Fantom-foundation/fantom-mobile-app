@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, ScrollView, Share } from 'react-native';
+import { Text, View, TouchableOpacity,Image, ScrollView, TextInput } from 'react-native';
 import { LinkButton } from 'general/';
 import Header from '../../general/header/index';
 import style from './style';
@@ -8,7 +8,7 @@ import ProgressBar from '../../general/progressBar/index';
 import { StatusBar } from 'react-native';
 import Address from './address/index';
 import QRCode from 'react-native-qrcode';
-
+import searchIcon from '../../images/search.png'
 import { Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
@@ -26,7 +26,8 @@ class AddressBook extends Component {
         { id: 8, name: 'John Doe', line1Text: '3GWQCH37uJEvDzQkd', rate: false },
         { id: 9, name: 'John Doe', line1Text: '4GWQCH37uJEvDzQkd', rate: false },
         { id: 10, name: 'John Doe', line1Text: '5GWQCH37uJEvDzQkd', rate: false }
-        ]
+        ],
+        displaySearch: true
     }
     onLeftIconPress = () => {
         console.log('onLeftIconPressonLeftIconPress');
@@ -47,7 +48,7 @@ class AddressBook extends Component {
         newAddressLst[index].rate = !newAddressLst[index].rate;
         this.setState({ addressList: newAddressLst });
     }
-    
+
     render() {
         let addColor = style.add;
         let favColor = style.favorites;
@@ -74,8 +75,8 @@ class AddressBook extends Component {
         return (
             <View style={style.mainContainerStyle}>
                 <StatusBar barStyle="light-content" />
-                <Header text='Address Book' leftButtonIcon='arrow-back' rightButtonIcon='add' onLeftIconPress={this.onLeftIconPress} onRightIconPress={this.onRightIconPress}leftIconSize={30} rightIconSize={30} headerStyle={{backgroundColor:'rgb(233,177,18)'}} rightButtonStyle={{backgroundColor:'rgb(233,177,18)'}} leftButtonStyle={{backgroundColor:'rgb(233,177,18)'}}/>
-                <View style={{ flex: 1,}} >
+                <Header text='Address Book' leftButtonIcon='arrow-back' rightButtonIcon='add' onLeftIconPress={this.onLeftIconPress} onRightIconPress={this.onRightIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
+                <View style={{ flex: 1, }} >
                     <View style={{ flexDirection: 'row', }}>
                         <TouchableOpacity style={addColor} onPress={() => this.setState({ addOrFavorite: 'add' })}>
                             <Text style={addColorText}>Recent</Text>
@@ -85,13 +86,18 @@ class AddressBook extends Component {
                         </TouchableOpacity>
                         {/* {this.state.addOrFavorite === 'fa'} */}
                     </View>
-                    <View style={{paddingLeft:10,paddingRight:10}} >
+                    <View style={{ paddingLeft: 10, paddingRight: 10 }} >
+                        {this.state.displaySearch && this.state.addOrFavorite === 'add'? 
+                        (<View style={{ borderWidth: 1, borderColor: 'rgb(110,110,110)', padding: 15, marginTop: 15,flexDirection:'row' }}>
+                            <TextInput placeholder='Search'style={{flex:3}}></TextInput>
+                            <Image source={searchIcon} style={{width:20,height:20}}/>
+                        </View>) : null}
                         {this.state.addOrFavorite === 'add' ? <ScrollView
-                        showsVerticalScrollIndicator={false}
-                        >{addressListView}<View style={{height:50}}/></ScrollView> : null}
+                            showsVerticalScrollIndicator={false}
+                        >{addressListView}<View style={{ height: 50 }} /></ScrollView> : null}
                     </View>
                     {this.state.addOrFavorite === 'favorite' ? <ScrollView showsVerticalScrollIndicator={false} >{favoriteListView}</ScrollView> : null}
-                    
+
                 </View>
             </View>
         );
