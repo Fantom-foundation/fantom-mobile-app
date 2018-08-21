@@ -8,5 +8,5 @@ const style = {
     textViewStyle: {
         // fontFamily: 'Times New Roman',
     }
-}
-export default style;
+ }
+ export default style;

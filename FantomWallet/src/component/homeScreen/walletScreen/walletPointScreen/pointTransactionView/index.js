@@ -14,13 +14,26 @@ class PointTransactionView extends Component {
         super(props);
         this.state = {
             openSortMenu: false,
+            data:[{ key: 'All Payments',id:0,sc:'ap' },
+                { key: 'Received Payments',id:1,sc:'rp' },
+                { key: 'Sent Payments',id:2,sc:'sp' }
+            ],
+            index:0
         }
     }
 
-    handleSortMenu() {
-        console.log('hjfgajsfghskfjhsadfk', this.state.openSortMenu);
-        this.setState((previousState) => ({ openSortMenu: !previousState.openSortMenu }));
+    handleSortMenu(item) {
+      
+      this.setState({
+        openSortMenu:!this.state.openSortMenu
+      })
+      if(item && item.sc){
+      this.setState({
+        val:item.sc,
+        index:item.id
+      })
     }
+      }
 
     render() {
         const { pointTransactionArr } = this.props;
@@ -42,7 +55,7 @@ class PointTransactionView extends Component {
                     {pointTransactionArr.length === 0 && <EmptyTransactionEntity />}
                 </View>
                 {
-                    this.state.openSortMenu && <SortMenuCard />
+                    this.state.openSortMenu && <SortMenuCard data={this.state.data} type={'wallet'} index={this.state.index} handleSortMenu={(item) => this.handleSortMenu(item)}/>
                 }
             </View>
         )

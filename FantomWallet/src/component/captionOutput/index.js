@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity,Clipboard } from 'react-native';
+import { Text, View, TouchableOpacity,Clipboard,Image } from 'react-native';
 import style from './style';
 import Button from '../../general/button/index';
 import '../../../global';
 import Bip39 from 'bip39';
 import ProgressBar from '../../general/progressBar/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import dangerIcon from '../../images/warning.png'
+import { Dimensions } from 'react-native';
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 class CaptionOutput extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +20,6 @@ class CaptionOutput extends Component {
         this.state.mnemonicWords = mnemonicWords;
         this.state.seed = seed;
     };
-
     onLeftIconPress() {
         console.log('onLeftIconPressonLeftIconPress');
         this.props.navigation.goBack()
@@ -40,8 +42,9 @@ class CaptionOutput extends Component {
                 </View>
                 <View style={style.mid}>
                     <View style={style.warningContainer}>
-                        <Icon name='warning' size={25} color='rgb(233,177,18)' />
-                        <Text style={style.secretText}>Secret Mnemonic:</Text>
+                        {/* <Icon name='warning' size={25} color='rgb(233,177,18)' /> */}
+                        <Image source={dangerIcon} style={{width:20,height:20}}/>
+                        <Text style={style.secretText}> Secret Mnemonic:</Text>
                     </View>
                     <View style={style.textContainer}>
                         {this.state.mnemonicWords.map((val, i) => {
@@ -49,23 +52,22 @@ class CaptionOutput extends Component {
                         })}
                     </View>
                     <View style={style.messageContainer}>
-                        <Text>Please write down this new Secret Mnemonic</Text>
-                        <Text>All previous mnemonic will become invalid.</Text>
+                        <Text style={{fontSize:deviceWidth*0.035}}>Please write down this new Secret Mnemonic</Text>
+                        <Text style={{fontSize:deviceWidth*0.035}}>All previous mnemonic will become invalid.</Text>
                     </View>
                     <View style={style.clipBoardContainer}>
                         <TouchableOpacity onPress={() => this.copyToClipboard()}>
-                            <Text style={style.clipBoardText}> Copy To clipboard</Text>
+                            <Text style={style.clipBoardText}> Copy to clipboard</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={style.line}>
-
                     </View>
                     <View style={style.lastMessageContainer}>
                         <View style={{ flexDirection: 'row', }}>
                             <Icon name='warning' size={16} color='rgb(233,177,18)' />
-                            <Text style={{ fontWeight: 'bold' }}>You will lose your account if</Text>
+                            <Text style={{ fontWeight: 'bold',fontSize:12 }}>You will lose your account if</Text>
                         </View>
-                        <Text style={{ fontWeight: 'bold' }}>     you lose your Secret PIN Mnemonic</Text>
+                        <Text style={{ fontWeight: 'bold',fontSize:12 }}>      you lose your Secret PIN Mnemonic</Text>
                     </View>
                 </View>
                 <View style={style.footerStyle}>
@@ -84,5 +86,4 @@ class CaptionOutput extends Component {
         );
     }
 }
-
 export default CaptionOutput;
