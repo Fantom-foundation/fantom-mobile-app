@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
 import style from './style';
+import AddressBook from '../../addressBook/';
+ 
 
 /**
  * To Display ActivityTab related tasks
@@ -9,9 +11,7 @@ import style from './style';
 export default class ActivityScreen extends Component {
     render() {
         return (
-            <View style={style.activityViewStyle}>
-                <Text style={style.textViewStyle}>Activity</Text>
-            </View>
+                <AddressBook navigation={this.props.navigation}  />
         );
     }
 }

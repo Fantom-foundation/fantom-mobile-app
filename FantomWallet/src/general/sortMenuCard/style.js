@@ -6,7 +6,7 @@ const style = {
     listContainerStyle: {
         backgroundColor: '#fff',
         position: 'absolute',
-        top: deviceHeight*0.31,
+        top: deviceHeight*0.34,
         right:15,
         width: deviceWidth * 0.7,
         shadowColor: 'blue',

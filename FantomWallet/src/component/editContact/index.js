@@ -7,6 +7,8 @@ import { StatusBar } from 'react-native';
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Dialogbox from './dialogBox/index';
+import arrowLeftButton from '../../images/arrowLeft_White.png'
+import deleteButton from '../../images/deleteWhite.png';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -53,7 +55,7 @@ class EditContact extends Component {
         return (
             <View style={style.mainContainerStyle}>
                 <StatusBar barStyle="light-content" />
-                <Header text='Edit Contact' leftButtonIcon='arrow-back' rightButtonIcon='delete' onLeftIconPress={this.onLeftIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
+                <Header text='Edit Contact' leftButtonIcon={arrowLeftButton} rightButtonIcon={deleteButton} onLeftIconPress={this.onLeftIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
 
                 <ScrollView ref={(scroll) => this.scrollView = scroll}
                     style={{ padding: deviceWidth * 0.05, backgroundColor: 'white', flex: 1 }}

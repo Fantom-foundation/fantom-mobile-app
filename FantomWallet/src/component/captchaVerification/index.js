@@ -57,12 +57,14 @@ class CaptchaVerification extends Component {
     console.log('seed');
     console.log(this.state.seed);
     const root = Hdkey.fromMasterSeed(this.state.seed);
-    console.log(root);
+    console.log('root: ',root);
     const masterPrivateKey = root.privateKey.toString('hex');
     const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
     const pubKey = EthUtil.privateToPublic(addrNode._privateKey);
     const addr = EthUtil.publicToAddress(pubKey).toString('hex');
     const address = EthUtil.toChecksumAddress(addr);
+    
+   
     const key = {
       'root': root,
       'masterPrivateKey': masterPrivateKey,

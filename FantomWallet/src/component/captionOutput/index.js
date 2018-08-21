@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity,Clipboard,Image } from 'react-native';
+import { Text, View, TouchableOpacity,Clipboard } from 'react-native';
 import style from './style';
 import Button from '../../general/button/index';
 import '../../../global';
 import Bip39 from 'bip39';
 import ProgressBar from '../../general/progressBar/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import dangerIcon from '../../images/warning.png'
 
 class CaptionOutput extends Component {
     constructor(props) {
@@ -41,9 +40,8 @@ class CaptionOutput extends Component {
                 </View>
                 <View style={style.mid}>
                     <View style={style.warningContainer}>
-                        {/* <Icon name='warning' size={25} color='rgb(233,177,18)' /> */}
-                        <Image source={dangerIcon} style={{width:20,height:20}}/>
-                        <Text style={style.secretText}> Secret Mnemonic:</Text>
+                        <Icon name='warning' size={25} color='rgb(233,177,18)' />
+                        <Text style={style.secretText}>Secret Mnemonic:</Text>
                     </View>
                     <View style={style.textContainer}>
                         {this.state.mnemonicWords.map((val, i) => {
@@ -51,8 +49,8 @@ class CaptionOutput extends Component {
                         })}
                     </View>
                     <View style={style.messageContainer}>
-                        <Text style={{fontSize:11}}>Please write down this new Secret Mnemonic</Text>
-                        <Text style={{fontSize:11}}>All previous mnemonic will become invalid.</Text>
+                        <Text>Please write down this new Secret Mnemonic</Text>
+                        <Text>All previous mnemonic will become invalid.</Text>
                     </View>
                     <View style={style.clipBoardContainer}>
                         <TouchableOpacity onPress={() => this.copyToClipboard()}>

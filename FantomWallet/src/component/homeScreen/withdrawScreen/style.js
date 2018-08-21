@@ -5,10 +5,14 @@ const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
 const style = {
+    mainViewStyle:{
+        flex:1,
+        backgroundColor:'#fff',
+    },
     withdrawViewStyle: {
-        flex: 1,
         padding:15,
-        backgroundColor:'#fff'
+        backgroundColor:'#fff',
+
     },
     textViewStyle: {
         // fontFamily: 'Times New Roman',

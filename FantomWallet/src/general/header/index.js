@@ -73,25 +73,31 @@ class Header extends Component {
             <View style={headerStyle} >
                 <View style={style.mainViewStyle}>
                     <View style={style.headerIconTextStyle}>
-                        {fantomIcon && <Image source={fantomIcon} style={style.fantomIconStyle} />}
+                        {fantomIcon && <Image source={fantomIcon} style={style.fantomIconStyle}    resizeMode={'contain'} />}
                         <Text style={textStyle}>{text}</Text>
                     </View>
 
                     {((!isShowSecondaryButtonIcon) && secondaryIcon !== '') &&
                         <TouchableOpacity style={style.secondaryButtonStyle} onPress={this.onSecondaryIconPress.bind(this)}>
-                            <Image source={secondaryIcon} style={style.secondaryImageStyle} />
+                            <Image source={secondaryIcon} style={style.secondaryImageStyle}
+                               resizeMode={'contain'}
+                            />
                         </TouchableOpacity>}
 
                     {((!isShowRightButtonIcon) && rightIcon !== '') &&
                         <TouchableOpacity style={rightButtonStyle} activeOpacity={activeOpacity} onPress={this.onRightIconPress.bind(this)}>
                             {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
-                            <Image source={rightIcon} style={style.rightImageStyle} />
+                            <Image source={rightIcon} style={style.rightImageStyle} 
+                               resizeMode={'contain'}
+                            />
                         </TouchableOpacity>}
 
                     {((!isShowLeftButtonIcon) && leftIcon !== '') &&
                         <TouchableOpacity style={leftButtonStyle} activeOpacity={activeOpacity} onPress={this.onLeftIconPress.bind(this)}>
                             {/* <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} /> */}
-                            <Image source={leftIcon} style={style.leftImageStyle} />
+                            <Image source={leftIcon} style={style.leftImageStyle}
+                            resizeMode={'contain'}
+                            />
                         </TouchableOpacity>}
                 </View>
             </View>

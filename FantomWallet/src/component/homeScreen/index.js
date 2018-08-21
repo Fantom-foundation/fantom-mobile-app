@@ -9,23 +9,24 @@ import leftIcon from '../../images/notification_red.png';
 import settingIcon from '../../images/setting.png';
 
 export default class TransactionEntity extends Component {
-    onRightIconPress() {
-        this.props.navigation.navigate('AddressBook');
-    }
+    // onRightIconPress() {
+    //     this.props.navigation.navigate('AddressBook');
+    // }
 
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <StatusBar barStyle="light-content" />
-                <Header text='FANTOM'
+                {/* <Header text='FANTOM'
                     rightButtonIcon={settingIcon}
                     headerStyle={{ backgroundColor: '#EEBD12', }}
                     onRightIconPress={this.onRightIconPress.bind(this)}
                     fantomIcon={fantomIcon}
                     secondaryButtonIcon={secondaryIcon}
                     leftButtonIcon={leftIcon}
-                />
+                /> */}
                 <NavigationTab />
+               
             </View>
         );
     }

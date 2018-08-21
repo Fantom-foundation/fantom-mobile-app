@@ -22,7 +22,7 @@ const fantomTransactionArr = [
 
 class WalletFantomScreen extends Component {
     render() {
-        const balanceText = '(1,000\\ = 1.00002312FTM)'
+        const balanceText = '(1,000\\ = 1.00002312FTM)';
         return (
             <View style={style.mainContainerStyle}>
                 <View style={style.amountDisplayStyle}>

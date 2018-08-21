@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import style from './style';
 
 import DepositNavigationTab from '../../../general/navigationTab/depositNavigationTab/';
-import WalletNavigationTab from '../../../general/navigationTab/walletNavigationTab/';
+import Header from '../../../general/header/';
+
+import fantomIcon from '../../../images/fantomWhiteIcon.png';
+import secondaryIcon from '../../../images/icon.png';
+import leftIcon from '../../../images/notification_red.png';
+import settingIcon from '../../../images/setting.png';
 /**
  * To Display DepositTab related tasks
  */
 export default class DepositScreen extends Component {
+
+    onRightIconPress() {
+        this.props.navigation.navigate('AddressBook');
+    }
     render() {
         return (
             <View style={style.depositViewStyle}>
-                <Text style={style.textViewStyle}>Deposit</Text>
-                {/* <DepositNavigationTab /> */}
-
-                {/* <View style={style.depositScreenStyle}>
+                <Header text='FANTOM'
+                    rightButtonIcon={settingIcon}
+                    headerStyle={{ backgroundColor: '#EEBD12', }}
+                    onRightIconPress={this.onRightIconPress.bind(this)}
+                    fantomIcon={fantomIcon}
+                    secondaryButtonIcon={secondaryIcon}
+                    leftButtonIcon={leftIcon}
+                />
+                <View style={style.depositScreenStyle}>
                     <DepositNavigationTab />
-                </View> */}
-
+                </View>
             </View>
         );
     }

@@ -7,7 +7,6 @@ class DepositPointScreen extends Component {
      render(){
          return(
              <View style={style.pointViewStyle}>
-                 <Text> Point </Text>
             </View>
          )
      }

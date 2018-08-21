@@ -1,17 +1,21 @@
+
+import { Dimensions } from 'react-native';
+
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 const style = {
     depositViewStyle: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#fff'
     },
     textViewStyle: {
         // backgroundColor: 'red'
         // fontFamily: 'Times New Roman',
     },
     depositScreenStyle: {
-        // flex: 1,
-        backgroundColor: 'yellow'
+        width:deviceWidth,
+        height:deviceHeight*0.84,
     }
 }
 export default style;

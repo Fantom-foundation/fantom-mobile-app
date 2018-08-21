@@ -27,7 +27,8 @@ import sendWhiteIcon from '../../images/sendWhite.png';
 import depositWhiteIcon from '../../images/downloading_white.png';
 import activityWhiteIcon from '../../images/running_men_White.png';
 
-const ACTIVE_TINT_COLOR = '#fff';
+const INACTIVE_TINT_COLOR = '#000';
+const ACTIVE_TINT_COLOR= '#fff';
 
 
 export default TabNavigator({
@@ -42,13 +43,13 @@ export default TabNavigator({
         const { routeName } = navigation.state;
 
         if (routeName === 'Wallet') {
-          return <Image source={tintColor === ACTIVE_TINT_COLOR ? walletWhiteIcon : walletIcon} style={{ width: 30, height: 30 }} />
+          return <Image source={tintColor === INACTIVE_TINT_COLOR ? walletIcon : walletWhiteIcon} style={{ width: 30, height: 30 }} />
         } else if (routeName === 'Withdraw') {
-          return <Image source={tintColor === ACTIVE_TINT_COLOR ? sendWhiteIcon : sendIcon} style={{ width: 30, height: 30 }} />
+          return <Image source={tintColor === INACTIVE_TINT_COLOR ? sendIcon : sendWhiteIcon} style={{ width: 30, height: 30 }} />
         } else if (routeName === 'Deposit') {
-          return <Image source={tintColor === ACTIVE_TINT_COLOR ? depositWhiteIcon : depositIcon} style={{ width: 30, height: 30 }} />
+          return <Image source={tintColor === INACTIVE_TINT_COLOR ? depositIcon : depositWhiteIcon} style={{ width: 30, height: 30 }} />
         } else if (routeName === 'Activity') {
-          return <Image source={tintColor === ACTIVE_TINT_COLOR ? activityWhiteIcon : activityIcon} style={{ width: 30, height: 30 }} />
+          return <Image source={tintColor === INACTIVE_TINT_COLOR ? activityIcon : activityWhiteIcon} style={{ width: 30, height: 30 }} />
         }
       },
     }),
@@ -58,7 +59,7 @@ export default TabNavigator({
     tabBarOptions: {
       activeTintColor: ACTIVE_TINT_COLOR,
       activeBackgroundColor: '#EEBD12',
-      inactiveTintColor: '#000',
+      inactiveTintColor: INACTIVE_TINT_COLOR,
       showLabel: false,
     },
     tabStyle: {

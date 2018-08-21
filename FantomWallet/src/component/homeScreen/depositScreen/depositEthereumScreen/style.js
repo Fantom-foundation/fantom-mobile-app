@@ -1,5 +1,5 @@
 const style = {
-    pointViewStyle: {
+    ethereumViewStyle: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

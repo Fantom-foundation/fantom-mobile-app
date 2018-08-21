@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity,Image, ScrollView, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import { LinkButton } from 'general/';
 import Header from '../../general/header/index';
 import style from './style';
@@ -8,6 +8,10 @@ import ProgressBar from '../../general/progressBar/index';
 import { StatusBar } from 'react-native';
 import Address from './address/index';
 import QRCode from 'react-native-qrcode';
+
+import arrowLeftButton from '../../images/arrowLeft_White.png';
+import editRightButton from '../../images/pluswhite.png';
+
 import searchIcon from '../../images/search.png'
 import { Dimensions } from 'react-native';
 
@@ -30,10 +34,10 @@ class AddressBook extends Component {
         displaySearch: true
     }
     onLeftIconPress = () => {
-        console.log('onLeftIconPressonLeftIconPress');
         this.props.navigation.goBack()
     }
-    onRightIconPress = () => {
+    onRightIconPress() {
+        console.log('helo')
         this.props.navigation.navigate('EditContact')
     }
     deleteItem = (id) => {
@@ -75,9 +79,15 @@ class AddressBook extends Component {
         return (
             <View style={style.mainContainerStyle}>
                 <StatusBar barStyle="light-content" />
-                <Header text='Address Book' leftButtonIcon='arrow-back' rightButtonIcon='add' onLeftIconPress={this.onLeftIconPress} onRightIconPress={this.onRightIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
+                <Header text='Address Book'
+                    leftButtonIcon={arrowLeftButton}
+                    rightButtonIcon={editRightButton}
+                    onLeftIconPress={this.onLeftIconPress}
+                    onRightIconPress={() => this.onRightIconPress()}
+                    rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
+                    leftButtonStyle={{ flex: 1, }} />
                 <View style={{ flex: 1, }} >
-                    {!this.state.displaySearch ? <View style={{ flexDirection: 'row', }}>
+                    <View style={{ flexDirection: 'row', }}>
                         <TouchableOpacity style={addColor} onPress={() => this.setState({ addOrFavorite: 'add' })}>
                             <Text style={addColorText}>Recent</Text>
                         </TouchableOpacity>
@@ -85,13 +95,13 @@ class AddressBook extends Component {
                             <Text style={favColorText}>Favorites</Text>
                         </TouchableOpacity>
                         {/* {this.state.addOrFavorite === 'fa'} */}
-                    </View>:null}
+                    </View>
                     <View style={{ paddingLeft: 10, paddingRight: 10 }} >
-                        {this.state.displaySearch && this.state.addOrFavorite === 'add'? 
-                        (<View style={{ borderWidth: 1, borderColor: 'rgb(110,110,110)', padding: 15, marginTop: 15,flexDirection:'row' }}>
-                            <TextInput placeholder='Search'style={{flex:3}}></TextInput>
-                            <Image source={searchIcon} style={{width:20,height:20}}/>
-                        </View>) : null}
+                        {this.state.displaySearch && this.state.addOrFavorite === 'add' ?
+                            (<View style={{ borderWidth: 1, borderColor: 'rgb(110,110,110)', padding: 15, marginTop: 15, flexDirection: 'row' }}>
+                                <TextInput placeholder='Search' style={{ flex: 3 }}></TextInput>
+                                <Image source={searchIcon} style={{ width: 20, height: 20 }} />
+                            </View>) : null}
                         {this.state.addOrFavorite === 'add' ? <ScrollView
                             showsVerticalScrollIndicator={false}
                         >{addressListView}<View style={{ height: 50 }} /></ScrollView> : null}
