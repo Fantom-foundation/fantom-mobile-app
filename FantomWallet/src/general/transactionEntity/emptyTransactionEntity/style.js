@@ -6,7 +6,7 @@ const style = {
         // backgroundColor: '#000'
     },
     headingInfoStyle: {
-        margin: 4,
+        margin: 8,
         fontSize: 20,
         fontWeight: 'bold',
     },

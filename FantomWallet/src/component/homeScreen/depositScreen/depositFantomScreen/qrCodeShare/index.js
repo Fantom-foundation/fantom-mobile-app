@@ -6,11 +6,6 @@ import uploadQR from '../../../../../images/uploading.png';
 import QRGenerator from '../../../../qr/generator/';
 
 
-import { QRCode } from 'react-native-custom-qr-codes';
-import ViewShot from "react-native-view-shot";
-import Share from 'react-native-share';
-import VersionCheck from 'react-native-version-check';
-
 class QRCodeShare extends Component {
 
     onQRShare() {
@@ -25,7 +20,7 @@ class QRCodeShare extends Component {
                 <View style={style.addressTitleViewStyle}>
                     <Text style={style.addressTitleTextStyle}> {titleText} </Text>
                     <TouchableOpacity style={style.addressShareIconStyle} onPress={this.onQRShare.bind(this)}>
-                        <Image source={uploadQR} style={style.addressShareImageIconStyle} />
+                        <Image source={uploadQR} style={style.addressShareImageIconStyle} resizeMode='contain'/>
                     </TouchableOpacity>
                 </View>
                 <View style={style.qrGeneratorstyle}>

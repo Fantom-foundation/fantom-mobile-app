@@ -1,4 +1,5 @@
 import { TabNavigator, TabBarTop } from 'react-navigation';
+import {Dimensions} from 'react-native';
 
 /**
  * WalletScreen Tabs
@@ -8,11 +9,12 @@ import FantomTab from '../../../component/homeScreen/walletScreen/walletFantomSc
 import EthererumTab from '../../../component/homeScreen/walletScreen/walletEthererumScreen/';
 
 
+const deviceWidth = Dimensions.get('window').width;
 
 export default TabNavigator({
     Point: { screen: PointTab },
     Fantom: { screen: FantomTab },
-    Ethererum: { screen: EthererumTab },
+    Ethereum: { screen: EthererumTab },
 },
     {
         tabBarComponent: TabBarTop,
@@ -21,11 +23,12 @@ export default TabNavigator({
             activeTintColor: 'black',
             inactiveTintColor: 'black',
             labelStyle: {
-                fontSize: 14,
+                fontSize: deviceWidth < 320 ? 12 : 14,
             },
             style: {
-                backgroundColor: 'white',
+                backgroundColor: '#fff',
                 shadowOffset: {width: 0, height: 0},
+                
             },
             indicatorStyle: {
                 backgroundColor: 'red', 

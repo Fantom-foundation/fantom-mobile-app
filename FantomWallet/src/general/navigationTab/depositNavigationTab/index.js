@@ -1,4 +1,5 @@
 import { TabNavigator, TabBarTop } from 'react-navigation';
+import {Dimensions} from 'react-native';
 
 /**
  * DepositScreen Tabs
@@ -7,6 +8,7 @@ import PointScreen from '../../../component/homeScreen/depositScreen/depositPoin
 import FantomScreen from '../../../component/homeScreen/depositScreen/depositFantomScreen/';
 import EthereumScreen from '../../../component/homeScreen/depositScreen/depositEthereumScreen/';
 
+const deviceWidth = Dimensions.get('window').width;
 
 
 
@@ -22,7 +24,7 @@ export default TabNavigator({
             activeTintColor: 'black',
             inactiveTintColor: 'black',
             labelStyle: {
-                fontSize: 14,
+                fontSize: deviceWidth < 320 ? 12 : 14,
             },
             style: {
                 backgroundColor: 'white',

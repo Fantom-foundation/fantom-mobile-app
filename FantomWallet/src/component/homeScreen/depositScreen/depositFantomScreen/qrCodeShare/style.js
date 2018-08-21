@@ -30,6 +30,8 @@ const style = {
         alignItems: 'center'
     },
     qrLinkTextStyle: {
+        paddingLeft: 16,
+        paddingRight: 16,
         fontWeight: 'bold'
     },
 }

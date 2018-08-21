@@ -34,15 +34,15 @@ const style = {
         justifyContent: 'center',
     },
     leftImageStyle: {
-        width: 20,
+        width: 30,
         height: 20,
     },
     rightImageStyle: {
-        width: 20,
+        width: 30,
         height: 20,
     },
     secondaryImageStyle: {
-        width: 20,
+        width: 30,
         height: 20,
     },
     secondaryButtonStyle: {
