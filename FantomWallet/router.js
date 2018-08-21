@@ -12,6 +12,9 @@ import QRScanner from './src/component/qr/scanner/view';
 import QRGenerator from './src/component/qr/generator/';
 import EditContact from './src/component/editContact/index';
 import SendMoney from './src/component/sendMoney/index';
+import Settings from './src/component/homeScreen/settings/index';
+import AboutApp from './src/component/homeScreen/settings/aboutApp/index';
+import CustomerSupport from './src/component/homeScreen/settings/customerSupport/index';
 
 const Routing = StackNavigator({
     CreateWallet: { screen: CreateWallet },
@@ -24,7 +27,10 @@ const Routing = StackNavigator({
     QRScanner: { screen: QRScanner },
     QRGenerator: { screen: QRGenerator },
     EditContact: { screen: EditContact },
-    SendMoney: { screen: SendMoney }
+    SendMoney: { screen: SendMoney },
+    Settings: { screen: Settings },
+    AboutApp: { screen : AboutApp},
+    CustomerSupport: { screen: CustomerSupport}
 },
     {
         headerMode: 'none',
