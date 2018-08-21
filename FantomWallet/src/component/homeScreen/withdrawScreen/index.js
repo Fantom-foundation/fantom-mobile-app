@@ -88,21 +88,25 @@ export default class WithdrawScreen extends Component {
         </View>
         <View style={{ marginTop: deviceHeight * 0.04 }}>
           <Text style={{ fontWeight: 'bold' }}>Fees</Text>
-          <View style={{ marginTop: 5 }}>
+          <View style={{ marginTop: 5,flexDirection:'row',fontSize: 16, height: 44, paddingLeft: 10, color: '#a7a7a7', borderWidth: 1, borderColor: 'rgb(93,93,93)' }}>
             <TextInput
               onChangeText={(fees) => this.setState({ fees })}
               value={this.state.fees}
-              style={{ fontSize: 16, height: 44, paddingLeft: 10, color: '#a7a7a7', borderWidth: 1, borderColor: 'rgb(93,93,93)' }}
+              style={{ flex:1}}
               placeholder='Enter Fees'
               placeholderTextColor='#a7a7a7'
               onFocus={() => this.onTextFieldFocus()}
               onBlur={() => this.onTextFieldBlur()}
-            />
+            >
+            </TextInput>
+            <View style={{width:120,justifyContent:'center'}}>
+              <Text style={{fontSize:12}}>0.0000002  FTM</Text>
+            </View>
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
-            <View><View style={{ backgroundColor: 'rgb(165,165,165)', width: deviceWidth * 0.27, height: 10 }}></View><Text>Slow</Text></View>
-            <View><View style={{ backgroundColor: 'rgb(79,79,79)', width: deviceWidth * 0.27, height: 10 }}></View><Text>Normal</Text></View>
-            <View><View style={{ backgroundColor: 'rgb(0,0,0)', width: deviceWidth * 0.27, height: 10 }}></View><Text>Fast</Text></View>
+            <View><View style={{ backgroundColor: 'rgb(165,165,165)', width: deviceWidth * 0.27, height: 10 }}></View><Text style={{textAlign:'center'}}>Slow</Text></View>
+            <View><View style={{ backgroundColor: 'rgb(79,79,79)', width: deviceWidth * 0.27, height: 10 }}></View><Text style={{textAlign:'center'}}>Normal</Text></View>
+            <View><View style={{ backgroundColor: 'rgb(0,0,0)', width: deviceWidth * 0.27, height: 10 }}></View><Text style={{textAlign:'center'}}>Fast</Text></View>
           </View>
         </View>
         <View style={{ marginTop: deviceHeight * 0.02 }}>

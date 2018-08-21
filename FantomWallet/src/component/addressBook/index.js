@@ -77,7 +77,7 @@ class AddressBook extends Component {
                 <StatusBar barStyle="light-content" />
                 <Header text='Address Book' leftButtonIcon='arrow-back' rightButtonIcon='add' onLeftIconPress={this.onLeftIconPress} onRightIconPress={this.onRightIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
                 <View style={{ flex: 1, }} >
-                    <View style={{ flexDirection: 'row', }}>
+                    {!this.state.displaySearch ? <View style={{ flexDirection: 'row', }}>
                         <TouchableOpacity style={addColor} onPress={() => this.setState({ addOrFavorite: 'add' })}>
                             <Text style={addColorText}>Recent</Text>
                         </TouchableOpacity>
@@ -85,7 +85,7 @@ class AddressBook extends Component {
                             <Text style={favColorText}>Favorites</Text>
                         </TouchableOpacity>
                         {/* {this.state.addOrFavorite === 'fa'} */}
-                    </View>
+                    </View>:null}
                     <View style={{ paddingLeft: 10, paddingRight: 10 }} >
                         {this.state.displaySearch && this.state.addOrFavorite === 'add'? 
                         (<View style={{ borderWidth: 1, borderColor: 'rgb(110,110,110)', padding: 15, marginTop: 15,flexDirection:'row' }}>

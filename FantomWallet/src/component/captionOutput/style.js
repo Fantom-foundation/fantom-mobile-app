@@ -7,7 +7,7 @@ const deviceHeight = Dimensions.get('window').height;
 const style = {
     mainContainer: {
         flex: 1,
-        backgroundColor:'white',
+        backgroundColor:'#fff',
     },
     progressContainer:{
         marginTop: deviceHeight * 0.05
@@ -24,10 +24,11 @@ const style = {
     warningContainer:{
         flexDirection:'row',
         justifyContent:'center',
-        
+        alignItems:'center'
     },
     secretText:{
         fontSize:22,
+        fontWeight:'bold',
         color:'rgb(233,177,18)'
     },
 
