@@ -17,7 +17,6 @@ const style = {
         shadowOffset: { width: 0, height: 10 },
         // shadowOpacity: 0.04
         shadowOpacity: 1
-
     },
     rowOneStyle: {
         flexDirection: 'row',
