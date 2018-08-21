@@ -11,7 +11,7 @@ import QRCode from 'react-native-qrcode';
 
 import arrowLeftButton from '../../images/arrowLeft_White.png';
 import editRightButton from '../../images/pluswhite.png';
-
+import whiteSearchIcon from '../../images/searchWhite.png';
 import searchIcon from '../../images/search.png'
 import { Dimensions } from 'react-native';
 
@@ -31,10 +31,15 @@ class AddressBook extends Component {
         { id: 9, name: 'John Doe', line1Text: '4GWQCH37uJEvDzQkd', rate: false },
         { id: 10, name: 'John Doe', line1Text: '5GWQCH37uJEvDzQkd', rate: false }
         ],
-        displaySearch: true
+        displaySearch: false
     }
     onLeftIconPress = () => {
         this.props.navigation.goBack()
+    }
+    onSecondaryIconPress = () => {
+        this.setState({
+            displaySearch: !this.state.displaySearch
+        })
     }
     onRightIconPress() {
         console.log('helo')
@@ -54,6 +59,7 @@ class AddressBook extends Component {
     }
 
     render() {
+        console.log(this.state.displaySearch);
         let addColor = style.add;
         let favColor = style.favorites;
         let addColorText = { color: 'black' };
@@ -85,9 +91,11 @@ class AddressBook extends Component {
                     onLeftIconPress={this.onLeftIconPress}
                     onRightIconPress={() => this.onRightIconPress()}
                     rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
-                    leftButtonStyle={{ flex: 1, }} />
+                    leftButtonStyle={{ flex: 1, }} 
+                    secondaryButtonIcon={whiteSearchIcon}
+                    onSecondaryIconPress={this.onSecondaryIconPress}/>
                 <View style={{ flex: 1, }} >
-                    <View style={{ flexDirection: 'row', }}>
+                    {!this.state.displaySearch ? <View style={{ flexDirection: 'row', }}>
                         <TouchableOpacity style={addColor} onPress={() => this.setState({ addOrFavorite: 'add' })}>
                             <Text style={addColorText}>Recent</Text>
                         </TouchableOpacity>
@@ -95,9 +103,9 @@ class AddressBook extends Component {
                             <Text style={favColorText}>Favorites</Text>
                         </TouchableOpacity>
                         {/* {this.state.addOrFavorite === 'fa'} */}
-                    </View>
+                    </View>:null}
                     <View style={{ paddingLeft: 10, paddingRight: 10 }} >
-                        {this.state.displaySearch && this.state.addOrFavorite === 'add' ?
+                        {this.state.displaySearch ?
                             (<View style={{ borderWidth: 1, borderColor: 'rgb(110,110,110)', padding: 15, marginTop: 15, flexDirection: 'row' }}>
                                 <TextInput placeholder='Search' style={{ flex: 3 }}></TextInput>
                                 <Image source={searchIcon} style={{ width: 20, height: 20 }} />

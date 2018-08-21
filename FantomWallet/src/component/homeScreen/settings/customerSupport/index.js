@@ -21,7 +21,7 @@ class CustomerSupport extends Component {
         const websiteLink = this.state.websiteLink;
         const phoneNumber = this.state.phoneNumber;
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1,backgroundColor:'white' }}>
                 <Header text='Customer Support' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
                 <View style={{ flex: 1 }}>
                     <View style={{ flexDirection: 'row', marginTop: 40, marginLeft: 12 }}>
