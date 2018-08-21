@@ -10,7 +10,7 @@ class CustomerSupport extends Component {
         super(props);
         this.state = {
             websiteLink: 'https://fantom.foundation/',
-            phoneNumber: '1000 - 12345678',
+            phoneNumber: 'tel://100012345678',
         }
     }
 
@@ -33,7 +33,7 @@ class CustomerSupport extends Component {
                     <TouchableOpacity>
                         <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 12 }}>
                             <Text> Help:  </Text>
-                            <Text>{phoneNumber}</Text>
+                            <Text onPress={() => Linking.openURL(`${phoneNumber}`)}>1000-12345678</Text>
                         </View>
                     </TouchableOpacity>
 
