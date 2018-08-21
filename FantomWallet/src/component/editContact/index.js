@@ -28,6 +28,9 @@ class EditContact extends Component {
             dialogBox: true
         })
     }
+    onCancelClick() {
+        this.props.navigation.goBack();
+    }
     closeDialogBox() {
         this.setState({
             dialogBox: false
@@ -111,7 +114,7 @@ class EditContact extends Component {
                 </ScrollView>
 
                 <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0 }}>
-                    <Button buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: 'black' }} text="Cancel" />
+                    <Button buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: 'black' }} text="Cancel" onPress={() => this.onCancelClick()}/>
                     <Button buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: 'rgb(233,177,18)' }} onPress={() => this.onConfirmClick()} text="Confirm" />
                 </View>
                 {
