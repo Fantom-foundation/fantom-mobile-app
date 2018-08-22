@@ -10,7 +10,7 @@ class CustomerSupport extends Component {
         super(props);
         this.state = {
             websiteLink: 'https://fantom.foundation/',
-            phoneNumber: '1000 - 12345678',
+            phoneNumber: 'tel://100012345678',
         }
     }
 
@@ -21,7 +21,7 @@ class CustomerSupport extends Component {
         const websiteLink = this.state.websiteLink;
         const phoneNumber = this.state.phoneNumber;
         return (
-            <View style={{ flex: 1,backgroundColor:'white' }}>
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
                 <Header text='Customer Support' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
                 <View style={{ flex: 1 }}>
                     <View style={{ flexDirection: 'row', marginTop: 40, marginLeft: 12 }}>
@@ -33,15 +33,15 @@ class CustomerSupport extends Component {
                     <TouchableOpacity>
                         <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 12 }}>
                             <Text> Help:  </Text>
-                            <Text>{phoneNumber}</Text>
+                            <Text onPress={() => Linking.openURL(`${phoneNumber}`)}>1000-12345678</Text>
                         </View>
                     </TouchableOpacity>
 
                 </View>
-                <View style={{ flex: 1, alignItems: 'center',justifyContent:'center' }}>
-                    <Image source={fantomIcon} resetMode='contain' />
-                    <Text >Copyright Â© 2018 FANTOM.</Text>
-                    <Text >All Rights Reserved.</Text>
+                <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', }}>
+                    <Image source={fantomIcon} resetMode='contain' style={{width: 30, height: 30, padding: 20}}/>
+                    <Text style={{paddingTop: 10, color: '#494949'}}>Copyright Â© 2018 FANTOM.</Text>
+                    <Text style={{color: '#494949'}}>All Rights Reserved.</Text>
                 </View>
 
             </View>

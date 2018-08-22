@@ -10,7 +10,7 @@ import settingIcon from '../../images/setting.png';
 
 export default class TransactionEntity extends Component {
     onRightIconPress() {
-        this.props.navigation.navigate('AddressBook');
+        this.props.navigation.navigate('Settings');
     }
 
     render() {
