@@ -31,6 +31,8 @@ class CaptionOutput extends Component {
         console.log(clipboardContent);
     }
     render() {
+        console.log('Seed val in caption output : ', this.state.seed);
+        console.log('mnemonicWords val in caption output : ', this.state.mnemonicWords);
         return (
             <View style={style.mainContainer}>
                 <View style={style.progressContainer}>
