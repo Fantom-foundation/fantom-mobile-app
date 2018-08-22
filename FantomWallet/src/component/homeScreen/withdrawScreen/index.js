@@ -111,10 +111,10 @@ export default class WithdrawScreen extends Component {
               <View>
                 <View style={style.slowBar}>
                 </View>
-                <Text style={ style.slowText }>Slow</Text>
+                <Text style={style.slowText}>Slow</Text>
               </View>
               <View>
-                <View style={ style.normalBar}>
+                <View style={style.normalBar}>
                 </View>
                 <Text style={style.normalText}>Normal</Text>
               </View>
@@ -127,7 +127,7 @@ export default class WithdrawScreen extends Component {
           </View>
           <View style={style.memoContainer}>
             <Text style={style.memoText}>Memo</Text>
-            <View style={ style.memoTextInputContainer }>
+            <View style={style.memoTextInputContainer}>
               <TextInput
                 onChangeText={(memo) => this.setState({ memo })}
                 value={this.state.memo}
@@ -143,7 +143,9 @@ export default class WithdrawScreen extends Component {
 
         </ScrollView>
         <View style={style.bottomSendContainer}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Text style={{ fontSize: deviceHeight * 0.03 }}>Send</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <Text style={style.bottomSendText}>Send</Text>
+          </TouchableOpacity>
         </View>
         {
           this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}

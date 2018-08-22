@@ -12,19 +12,25 @@ class Settings extends Component {
     }
     render() {
         return (
-            <View style={{backgroundColor:'white',flex:1}}>
+            <View style={{ backgroundColor: 'white', flex: 1 }}>
                 <View>
-                <Header text='Settings' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
+                    <Header text='Settings' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
                 </View>
-                <View style={{ padding: 20 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('AddressBook')}style={{ borderWidth: 1, borderColor: 'rgb(200,200,200)', padding: 20, backgroundColor: 'rgb(244,244,244)',marginTop:30 }}>
-                        <Text style={{fontWeight:'bold',fontSize:16}}>Address Book</Text>
+                <View style={style.body}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('AddressBook')}
+                        style={style.addressBookContainer}>
+                        <Text style={style.addressBookText}>Address Book</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CustomerSupport')}style={{ borderWidth: 1, borderColor: 'rgb(200,200,200)', padding: 20, backgroundColor: 'rgb(244,244,244)',marginTop:30 }}>
-                        <Text style={{fontWeight:'bold',fontSize:16}}>Customer Support</Text>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('CustomerSupport')}
+                        style={style.customerSupportContainer}>
+                        <Text style={style.customerSupportText}>Customer Support</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('AboutApp')}style={{ borderWidth: 1, borderColor: 'rgb(200,200,200)', padding: 20, backgroundColor: 'rgb(244,244,244)',marginTop:30 }}>
-                        <Text style={{fontWeight:'bold',fontSize:16}}>About App</Text>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('AboutApp')}
+                        style={style.aboutAppContainer}>
+                        <Text style={style.aboutAppText}>About App</Text>
                     </TouchableOpacity>
                 </View>
             </View>

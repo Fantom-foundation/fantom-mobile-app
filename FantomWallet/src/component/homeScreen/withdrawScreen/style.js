@@ -111,6 +111,9 @@ const style = {
     bottomSendContainer:{
         alignItems: 'center', width: deviceWidth * 0.7, backgroundColor: 'rgb(233,177,18)', alignSelf: 'center',
           position: 'absolute', bottom: deviceHeight * 0.02, padding: deviceHeight * 0.015
+    },
+    bottomSendText:{
+        fontSize: deviceHeight * 0.03
     }
 
 }

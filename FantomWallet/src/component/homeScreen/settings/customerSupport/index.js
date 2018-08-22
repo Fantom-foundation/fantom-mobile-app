@@ -4,7 +4,7 @@ import { View, Text, Linking, TouchableOpacity, Image } from 'react-native';
 import Header from '../../../../general/header/';
 import leftArrowIcon from '../../../../images/arrowLeft_White.png';
 import fantomIcon from '../../../../images/fantom_Icon.png';
-
+import style from './style';
 class CustomerSupport extends Component {
     constructor(props) {
         super(props);
@@ -23,27 +23,27 @@ class CustomerSupport extends Component {
         const phoneNumber = this.state.phoneNumber;
         const displayPhoneNumber = this.state.displayPhoneNumber;
         return (
-            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <View style={style.container}>
                 <Header text='Customer Support' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
-                <View style={{ flex: 1 }}>
-                    <View style={{ flexDirection: 'row', marginTop: 40, marginLeft: 12 }}>
+                <View style={style.mid}>
+                    <View style={style.textContainer}>
                         <Text> Fantom Website: </Text>
                         <Text style={{ color: '#EEBD12', textDecorationLine: 'underline' }} onPress={() => Linking.openURL(`${websiteLink}`)}>
                             {websiteLink}
                         </Text>
                     </View>
                     <TouchableOpacity>
-                        <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 12 }}>
+                        <View style={style.helpContainer}>
                             <Text> Help:  </Text>
                             <Text onPress={() => Linking.openURL(`${phoneNumber}`)}>{displayPhoneNumber}</Text>
                         </View>
                     </TouchableOpacity>
 
                 </View>
-                <View style={{ flex: 1, alignItems: 'center',justifyContent:'center', }}>
+                <View style={style.footer}>
                     <Image source={fantomIcon} resetMode='contain' style={{width: 30, height: 30, padding: 20}}/>
-                    <Text style={{paddingTop: 10, color: '#494949'}}>Copyright Â© 2018 FANTOM.</Text>
-                    <Text style={{color: '#494949'}}>All Rights Reserved.</Text>
+                    <Text style={style.copyRight}>Copyright Â© 2018 FANTOM.</Text>
+                    <Text style={style.rights}>All Rights Reserved.</Text>
                 </View>
 
             </View>

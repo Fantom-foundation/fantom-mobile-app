@@ -89,29 +89,33 @@ class AddressBook extends Component {
                     rightButtonIcon={editRightButton}
                     onLeftIconPress={this.onLeftIconPress}
                     onRightIconPress={() => this.onRightIconPress()}
-                    rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
-                    leftButtonStyle={{ flex: 1, }} 
+                    rightIconSize={30} 
+                    headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} 
+                    rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
+                    leftButtonStyle={{ flex: 1, }}
                     secondaryButtonIcon={whiteSearchIcon}
-                    onSecondaryIconPress={this.onSecondaryIconPress}/>
-                <View style={{ flex: 1, }} >
-                    {!this.state.displaySearch ? <View style={{ flexDirection: 'row', }}>
-                        <TouchableOpacity style={addColor} onPress={() => this.setState({ addOrFavorite: 'add' })}>
-                            <Text style={addColorText}>Recent</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={favColor} onPress={() => this.setState({ addOrFavorite: 'favorite' })}>
-                            <Text style={favColorText}>Favorites</Text>
-                        </TouchableOpacity>
-                        {/* {this.state.addOrFavorite === 'fa'} */}
-                    </View>:null}
-                    <View style={{ paddingLeft: 10, paddingRight: 10 }} >
+                    onSecondaryIconPress={this.onSecondaryIconPress} />
+
+                <View style={style.addressList} >
+                    {!this.state.displaySearch ?
+                        (<View style={style.subHeader}>
+                            <TouchableOpacity style={addColor} onPress={() => this.setState({ addOrFavorite: 'add' })}>
+                                <Text style={addColorText}>Recent</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={favColor} onPress={() => this.setState({ addOrFavorite: 'favorite' })}>
+                                <Text style={favColorText}>Favorites</Text>
+                            </TouchableOpacity>
+                        </View>) : null}
+                    <View style={ style.displaySearch} >
                         {this.state.displaySearch ?
-                            (<View style={{ borderWidth: 1, borderColor: 'rgb(110,110,110)', padding: 15, marginTop: 15, flexDirection: 'row' }}>
+                            (<View style={style.textInputContainer}>
                                 <TextInput placeholder='Search' style={{ flex: 3 }}></TextInput>
-                                <Image source={searchIcon} style={{ width: 20, height: 20 }} />
+                                <Image source={searchIcon} style={ style.imageSize} />
                             </View>) : null}
                         {this.state.addOrFavorite === 'add' ? <ScrollView
                             showsVerticalScrollIndicator={false}
-                        >{addressListView}<View style={{ height: 50 }} /></ScrollView> : null}
+                        >{addressListView}<View style={{ height: 50 }} />
+                        </ScrollView> : null}
                     </View>
                     {this.state.addOrFavorite === 'favorite' ? <ScrollView showsVerticalScrollIndicator={false} >{favoriteListView}</ScrollView> : null}
 
