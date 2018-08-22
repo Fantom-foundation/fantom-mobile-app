@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { ImageBackground, Image } from 'react-native';
+
+import style from './style'; 
 
 class SplashScreen extends Component {
     render() {
-        // setTimeout(() => this.props.navigation.navigation('CreateWallet'), 1000)
+        setTimeout(() => this.props.navigation.navigate('CreateWallet'), 5000)
         return (
-            <View >
-                <Image source={require('../../images/fantom-logo.png')} 
+            <ImageBackground
+                style={style.imageBackground}
+                source={require('../../images/background.png')}
+                imageStyle={{ resizeMode: 'cover' }}>
+                <Image  source={require('../../images/fantom-logo.png')}
                     resizeMode='contain' />
-            </View>
+            </ImageBackground >
         );
     }
 }
+
+export default SplashScreen;
+
