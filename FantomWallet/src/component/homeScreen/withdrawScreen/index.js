@@ -42,112 +42,113 @@ export default class WithdrawScreen extends Component {
     }
   }
   render() {
+    const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2, } : '';
     return (
       <View style={style.withdrawViewStyle}>
-        <View style={style.sendContainer}>
-          <Text style={style.sendText}>Send</Text>
-        </View>
-        <ScrollView ref={(scroll) => this.scrollView = scroll}>
+        <View style={[{flex: 1},dynamicStyle]}>
+          <View style={style.sendContainer}>
+            <Text style={style.sendText}>Send</Text>
+          </View>
+          <ScrollView ref={(scroll) => this.scrollView = scroll}>
 
-          <View style={style.addressContainer}>
-            <Text style={style.addressText}>Address to send</Text>
-            <View style={style.addressTextInputContainer}>
-              <TextInput
-                onChangeText={(address) => this.setState({ address })}
-                value={this.state.address}
-                style={style.addressTextInput}
-                placeholder='Enter Address'
-                placeholderTextColor='#a7a7a7'
-                onFocus={() => this.onTextFieldFocus()}
-                onBlur={() => this.onTextFieldBlur()}
-              />
-            </View>
-          </View>
-          <View style={style.priceContainer}>
-            <View style={style.priceTextContainer}>
-              <Text style={style.price}>Price</Text>
-              <Text style={style.currentPrice}>Current price:12,0000 Won</Text>
-            </View>
-            <View style={style.priceTextInputContainer}>
-              <TextInput
-                onChangeText={(amount) => this.setState({ amount })}
-                value={this.state.amount}
-                style={style.priceTextInput}
-                placeholder='Enter Amount'
-                keyboardType='decimal-pad'
-                placeholderTextColor='#a7a7a7'
-                onFocus={() => this.onTextFieldFocus()}
-                onBlur={() => this.onTextFieldBlur()}
-              />
-              <View style={style.sc}>
-                <Text>{this.state.val}</Text>
-              </View>
-              <TouchableOpacity onPress={() => this.handleSortMenu()}><Icon name='arrow-drop-down' size={24} color='black' /></TouchableOpacity>
-            </View>
-            <View style={style.availableContainer}>
-              <Text>Available: 12,000000 FTM </Text>
-              <View style={style.allContainer}>
-                <Text>all</Text>
+            <View style={style.addressContainer}>
+              <Text style={style.addressText}>Address to send</Text>
+              <View style={style.addressTextInputContainer}>
+                <TextInput
+                  onChangeText={(address) => this.setState({ address })}
+                  value={this.state.address}
+                  style={style.addressTextInput}
+                  placeholder='Enter Address'
+                  placeholderTextColor='#a7a7a7'
+                  onFocus={() => this.onTextFieldFocus()}
+                  onBlur={() => this.onTextFieldBlur()}
+                />
               </View>
             </View>
-          </View>
-          <View style={style.feesContainer}>
-            <Text style={style.feesText}>Fees</Text>
-            <View style={style.feesTextInputContainer}>
-              <TextInput
-                onChangeText={(fees) => this.setState({ fees })}
-                value={this.state.fees}
-                style={style.feesTextInput}
-                placeholder='Enter Fees'
-                keyboardType='decimal-pad'
-                placeholderTextColor='#a7a7a7'
-                onFocus={() => this.onTextFieldFocus()}
-                onBlur={() => this.onTextFieldBlur()}
-              >
-              </TextInput>
-              <View style={style.ftmTextContainer}>
-                <Text style={style.ftmText}>0.0000002  FTM</Text>
+            <View style={style.priceContainer}>
+              <View style={style.priceTextContainer}>
+                <Text style={style.price}>Price</Text>
+                <Text style={style.currentPrice}>Current price:12,0000 Won</Text>
               </View>
-            </View>
-            <View style={style.speedContainer}>
-              <View>
-                <View style={style.slowBar}>
+              <View style={style.priceTextInputContainer}>
+                <TextInput
+                  onChangeText={(amount) => this.setState({ amount })}
+                  value={this.state.amount}
+                  style={style.priceTextInput}
+                  placeholder='Enter Amount'
+                  keyboardType='decimal-pad'
+                  placeholderTextColor='#a7a7a7'
+                  onFocus={() => this.onTextFieldFocus()}
+                  onBlur={() => this.onTextFieldBlur()}
+                />
+                <View style={style.sc}>
+                  <Text>{this.state.val}</Text>
                 </View>
-                <Text style={style.slowText}>Slow</Text>
+                <TouchableOpacity onPress={() => this.handleSortMenu()}><Icon name='arrow-drop-down' size={24} color='black' /></TouchableOpacity>
               </View>
-              <View>
-                <View style={style.normalBar}>
+              <View style={style.availableContainer}>
+                <Text>Available: 12,000000 FTM </Text>
+                <View style={style.allContainer}>
+                  <Text>all</Text>
                 </View>
-                <Text style={style.normalText}>Normal</Text>
-              </View>
-              <View>
-                <View style={style.fastBar}>
-                </View>
-                <Text style={style.fastText}>Fast</Text>
               </View>
             </View>
-          </View>
-          <View style={style.memoContainer}>
-            <Text style={style.memoText}>Memo</Text>
-            <View style={style.memoTextInputContainer}>
-              <TextInput
-                onChangeText={(memo) => this.setState({ memo })}
-                value={this.state.memo}
-                style={style.memoTextInput}
-                placeholder='Enter Memo'
-                placeholderTextColor='#a7a7a7'
-                onFocus={() => this.onTextFieldFocus()}
-                onBlur={() => this.onTextFieldBlur()}
-              />
+            <View style={style.feesContainer}>
+              <Text style={style.feesText}>Fees</Text>
+              <View style={style.feesTextInputContainer}>
+                <TextInput
+                  onChangeText={(fees) => this.setState({ fees })}
+                  value={this.state.fees}
+                  style={style.feesTextInput}
+                  placeholder='Enter Fees'
+                  keyboardType='decimal-pad'
+                  placeholderTextColor='#a7a7a7'
+                  onFocus={() => this.onTextFieldFocus()}
+                  onBlur={() => this.onTextFieldBlur()}
+                >
+                </TextInput>
+                <View style={style.ftmTextContainer}>
+                  <Text style={style.ftmText}>0.0000002  FTM</Text>
+                </View>
+              </View>
+              <View style={style.speedContainer}>
+                <View>
+                  <View style={style.slowBar}>
+                  </View>
+                  <Text style={style.slowText}>Slow</Text>
+                </View>
+                <View>
+                  <View style={style.normalBar}>
+                  </View>
+                  <Text style={style.normalText}>Normal</Text>
+                </View>
+                <View>
+                  <View style={style.fastBar}>
+                  </View>
+                  <Text style={style.fastText}>Fast</Text>
+                </View>
+              </View>
             </View>
+            <View style={style.memoContainer}>
+              <Text style={style.memoText}>Memo</Text>
+              <View style={style.memoTextInputContainer}>
+                <TextInput
+                  onChangeText={(memo) => this.setState({ memo })}
+                  value={this.state.memo}
+                  style={style.memoTextInput}
+                  placeholder='Enter Memo'
+                  placeholderTextColor='#a7a7a7'
+                  onFocus={() => this.onTextFieldFocus()}
+                  onBlur={() => this.onTextFieldBlur()}
+                />
+              </View>
+            </View>
+          </ScrollView>
+          <View style={style.bottomSendContainer}>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Text style={style.bottomSendText}>Send</Text>
+            </TouchableOpacity>
           </View>
-
-
-        </ScrollView>
-        <View style={style.bottomSendContainer}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Text style={style.bottomSendText}>Send</Text>
-          </TouchableOpacity>
         </View>
         {
           this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
