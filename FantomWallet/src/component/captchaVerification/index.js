@@ -176,9 +176,9 @@ class CaptchaVerification extends Component {
               </View>
           </View>
           
-          <View style={{ alignSelf: 'center' }}>
+          {/* <View style={{ alignSelf: 'center' }}>
             <Text onPress={this.getMasterKey}>Get Master Key</Text>
-          </View>
+          </View> */}
         </View>
         </ScrollView>
         <View style={style.footerStyle}>
