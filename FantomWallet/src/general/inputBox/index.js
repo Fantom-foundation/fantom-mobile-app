@@ -9,13 +9,15 @@ export default class InputBox extends Component {
     render() {
         return (
             <View>
-                <Text style={style.phraseNumber}> { this.props.phraseNumber }</Text> 
+                <Text style={style.phraseNumber}> {this.props.phraseNumber}</Text>
                 <TextInput
                     onChangeText={(text) => this.props.onChangeText(text)}
                     value={this.props.text}
                     style={style.textBox}
+                    onFocus={() => this.props.onFocus()}
+                    onBlur={() => this.props.onBlur()}
                 />
-                
+
             </View>
         );
     }
