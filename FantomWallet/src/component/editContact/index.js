@@ -61,49 +61,45 @@ class EditContact extends Component {
                 <Header text='Edit Contact' leftButtonIcon={arrowLeftButton} rightButtonIcon={deleteButton} onLeftIconPress={this.onLeftIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
 
                 <ScrollView ref={(scroll) => this.scrollView = scroll}
-                    style={{ padding: deviceWidth * 0.05, backgroundColor: 'white', flex: 1 }}
+                    style={style.scrollView}
                     scrollEnabled={false}
                 >
-                    <View style={{
-                        padding: deviceHeight * 0.025, alignItems: 'center', height: deviceHeight * 0.1, backgroundColor: 'rgb(242,242,242)',
-                        borderColor: 'rgb(200,200,200)', borderRadius: 2, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between'
-                    }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <View style={style.header}>
+                        <View style={style.fantomContainer}>
 
-                            <Icon style={{ color: '#656565', alignSelf: 'flex-end' }} name='check-square' size={30} />
-                            <Text style={{ fontSize: deviceWidth * 0.05, marginLeft: 10,color:'#656565',fontWeight:'bold' }}>FANTOM</Text>
+                            <Icon style={style.fantomIcon} name='check-square' size={30} />
+                            <Text style={style.fantomText}>FANTOM</Text>
                         </View>
-                        <Icon style={{ color: 'black', alignSelf: 'flex-end' }} name='caret-down' size={30} />
+                        <Icon style={style.downArrowIcon} name='caret-down' size={30} />
                     </View>
 
 
-                    <View style={{ marginTop: deviceHeight * 0.08, }}>
-                        <Text style={{ fontSize: deviceWidth * 0.05, fontWeight: 'bold' }}>Address</Text>
-                        <View style={{ height: 44, flexDirection: 'row', marginTop: 10, borderWidth: 1, borderRadius: 2, borderColor: '#afaeaf' }}>
+                    <View style={style.addressContainer}>
+                        <Text style={style.addressText}>Address</Text>
+                        <View style={style.addressInputContainer}>
                             <TextInput
                                 onChangeText={(address) => this.setState({ address })}
                                 value={this.state.address}
-                                style={{ fontSize: 16, width: deviceWidth * 0.7, height: 44, paddingLeft: 10, color: '#a7a7a7' }}
+                                style={style.addressTextInput}
                                 placeholder='Enter Wallet Address'
                                 placeholderTextColor='#a7a7a7'
                                 onFocus={() => this.onTextFieldFocus()}
                                 onBlur={() => this.onTextFieldBlur()}
                             />
-                            <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <View style={style.iconContainer}>
                                 <Icon  name='address-book' size={30} />
-
-                                <Icon style={{ color: 'grey' }} name='qrcode' size={30} />
+                                <Icon style={style.qrCodeIcon} name='qrcode' size={30} />
                             </View>
                         </View>
                     </View>
 
-                    <View style={{ marginTop: 40 }}>
-                        <Text style={{ fontSize: deviceWidth * 0.05, fontWeight: 'bold' }}>Name</Text>
-                        <View style={{ height: 44, flexDirection: 'row', marginTop: 10, borderWidth: 1, borderRadius: 2, borderColor: '#afaeaf' }}>
+                    <View style={style.nameContainer}>
+                        <Text style={style.nameText}>Name</Text>
+                        <View style={style.nameTextInputContainer}>
                             <TextInput
                                 onChangeText={(name) => this.setState({ name })}
                                 value={this.state.name}
-                                style={{ fontSize: 16, flex: 1, height: 44, paddingLeft: 10, color: '#a7a7a7' }}
+                                style={style.nameTextInput}
                                 placeholder='Enter Name'
                                 placeholderTextColor='#a7a7a7'
                                 onFocus={() => this.onTextFieldFocus()}
@@ -115,9 +111,9 @@ class EditContact extends Component {
 
                 </ScrollView>
 
-                <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0 }}>
-                    <Button buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: 'black' }} text="Cancel" onPress={() => this.onCancelClick()}/>
-                    <Button buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: 'rgb(233,177,18)' }} onPress={() => this.onConfirmClick()} text="Confirm" />
+                <View style={style.footer}>
+                    <Button buttonStyle={style.cancelButton} text="Cancel" onPress={() => this.onCancelClick()}/>
+                    <Button buttonStyle={style.confirmButton} onPress={() => this.onConfirmClick()} text="Confirm" />
                 </View>
                 {
                     this.state.dialogBox && <Dialogbox onConfirm={() => this.closeDialogBox()}/>

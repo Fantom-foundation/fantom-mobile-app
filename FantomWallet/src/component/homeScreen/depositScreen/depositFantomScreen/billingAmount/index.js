@@ -46,6 +46,7 @@ class BillingAmountScreen extends Component {
                     style={style.amountInputStyle}
                     placeholder='Enter Amount'
                     placeholderTextColor='#a7a7a7'
+                    keyboardType='decimal-pad'
                     onFocus={this.onTextFieldFocus.bind(this)}
                     onBlur={this.onTextFieldBlur.bind(this)}
                 />
