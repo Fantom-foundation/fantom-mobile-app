@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text,AsyncStorage } from 'react-native';
+import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard, } from 'react-native';
 
 import style from './style';
 
@@ -16,8 +16,8 @@ class DepositFantomScreen extends Component {
             qrAddress: '1E6yOxiEuiBflg/?LKSngL?SNgKLskdhf',
         }
     }
-    componentWillMount(){
-        AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({qrAddress:val}) )
+    componentWillMount() {
+        AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
     }
     onQRShare() {
         console.warn('share QR');
@@ -33,20 +33,38 @@ class DepositFantomScreen extends Component {
         console.warn('copy address');
     }
 
+    onTextFieldFocus() {
+        let scrollValue = (Platform.OS === 'ios') ? 350 : 200
+        setTimeout(() => {
+            this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
+        }, 10);
+    }
+    onTextFieldBlur() {
+        Keyboard.dismiss();
+        let scrollValue = (Platform.OS === 'ios') ? 150 : 0
+        setTimeout(() => {
+            this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
+        }, 10);
+    }
+
     render() {
         const balanceText = '(1,000\\ = 1.00002312FTM)';
         const qrLink = this.state.qrAddress;
 
         return (
-            <ScrollView style={style.fantomViewStyle} showsVerticalScrollIndicator={false}>
+            <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.fantomViewStyle} showsVerticalScrollIndicator={false}>
                 <View style={style.amountDisplayStyle}>
                     <Text>{balanceText} </Text>
                 </View>
-                <QRCodeShare qrLink={qrLink}/>
-                <BillingAmountScreen onAmountChange={this.onAmountChange.bind(this)} />
+                <QRCodeShare qrLink={qrLink} />
+                <BillingAmountScreen
+                    onAmountChange={this.onAmountChange.bind(this)}
+                    onTextFieldFocus={this.onTextFieldFocus.bind(this)}
+                    onTextFieldBlur={this.onTextFieldBlur.bind(this)} />
                 <View style={style.buttonViewStyle}>
                     <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
                 </View>
+                <View style={{height:20}}/>
             </ScrollView>
         )
     }

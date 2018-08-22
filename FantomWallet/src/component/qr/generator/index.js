@@ -12,11 +12,11 @@ import {
   Image,
   TouchableOpacity, Text
 } from 'react-native';
-
+import uploadQR from '../../../images/uploading.png';
 
 export default class QRGenerator extends Component {
-  
-  
+
+
   state = {
     title: "Fantom Wallet",
     message: "Hola mundo",
@@ -52,17 +52,25 @@ export default class QRGenerator extends Component {
       </View>
     )
   }
- 
+
 
   render() {
-  
+
     return (
-      <View style={styles.container}>
+      <View style={style.container}>
         {/* <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({text: text})}
           value={this.state.text}
         /> */}
+
+        <View style={style.addressTitleViewStyle}>
+          <Text style={style.addressTitleTextStyle}> {this.props.titleText} </Text>
+          <TouchableOpacity style={style.addressShareIconStyle} onPress={() => this.onPress()}>
+            <Image source={uploadQR} style={style.addressShareImageIconStyle} resizeMode='contain' />
+          </TouchableOpacity>
+        </View>
+
         <ViewShot ref="viewShot" options={{ format: "jpg" }}>
           <QRCode
             content={this.state.text}
@@ -71,13 +79,13 @@ export default class QRGenerator extends Component {
           />
           {this.renderLogo()}
         </ViewShot>
-        <TouchableOpacity onPress={() => this.onPress()}><Text>Share</Text></TouchableOpacity>
+        {/* <TouchableOpacity onPress={() => this.onPress()}><Text>Share</Text></TouchableOpacity> */}
       </View>
     );
   };
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
@@ -92,5 +100,22 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 5,
     padding: 5,
-  }
+  },
+
+  addressTitleViewStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+},
+addressTitleTextStyle: {
+  fontWeight: 'bold'
+},
+addressShareIconStyle: {
+  flex: 1,
+  alignItems: 'flex-end',
+},
+addressShareImageIconStyle: {
+  width: 45,
+  height: 45
+},
 });

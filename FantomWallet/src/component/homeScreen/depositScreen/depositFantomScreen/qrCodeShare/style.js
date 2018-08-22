@@ -2,26 +2,12 @@ const style = {
 
     containerViewStyle: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         marginTop: 4
     },
-    addressTitleViewStyle: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 20,
-    },
-    addressTitleTextStyle: {
-        fontWeight: 'bold'
-    },
-    addressShareIconStyle: {
-        flex: 1,
-        alignItems: 'flex-end',
-    },
-    addressShareImageIconStyle: {
-        width: 35,
-        height: 35
-    },
     qrGeneratorstyle: {
+        marginTop: 12,
+        marginBottom:24,
         padding: 16,
         backgroundColor: 'white',
         height: 300,
