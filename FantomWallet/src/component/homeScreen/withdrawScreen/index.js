@@ -74,6 +74,7 @@ export default class WithdrawScreen extends Component {
                 value={this.state.amount}
                 style={style.priceTextInput}
                 placeholder='Enter Amount'
+                keyboardType='decimal-pad'
                 placeholderTextColor='#a7a7a7'
                 onFocus={() => this.onTextFieldFocus()}
                 onBlur={() => this.onTextFieldBlur()}
@@ -98,6 +99,7 @@ export default class WithdrawScreen extends Component {
                 value={this.state.fees}
                 style={style.feesTextInput}
                 placeholder='Enter Fees'
+                keyboardType='decimal-pad'
                 placeholderTextColor='#a7a7a7'
                 onFocus={() => this.onTextFieldFocus()}
                 onBlur={() => this.onTextFieldBlur()}

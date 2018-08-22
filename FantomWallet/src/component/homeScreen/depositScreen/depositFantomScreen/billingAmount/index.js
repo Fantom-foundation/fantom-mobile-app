@@ -34,6 +34,7 @@ class BillingAmountScreen extends Component {
                     style={style.amountInputStyle}
                     placeholder='Enter Amount'
                     placeholderTextColor='#a7a7a7'
+                    keyboardType='decimal-pad'
                 />
             </View>
         )
