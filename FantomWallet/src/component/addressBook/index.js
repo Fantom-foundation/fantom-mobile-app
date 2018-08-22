@@ -42,7 +42,6 @@ class AddressBook extends Component {
         })
     }
     onRightIconPress() {
-        console.log('helo')
         this.props.navigation.navigate('EditContact')
     }
     deleteItem = (id) => {

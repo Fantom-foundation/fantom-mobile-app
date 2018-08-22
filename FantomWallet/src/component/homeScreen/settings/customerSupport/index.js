@@ -11,6 +11,7 @@ class CustomerSupport extends Component {
         this.state = {
             websiteLink: 'https://fantom.foundation/',
             phoneNumber: 'tel://100012345678',
+            displayPhoneNumber: '1000-12345678',
         }
     }
 
@@ -20,6 +21,7 @@ class CustomerSupport extends Component {
     render() {
         const websiteLink = this.state.websiteLink;
         const phoneNumber = this.state.phoneNumber;
+        const displayPhoneNumber = this.state.displayPhoneNumber;
         return (
             <View style={{ flex: 1, backgroundColor: '#fff' }}>
                 <Header text='Customer Support' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
@@ -33,7 +35,7 @@ class CustomerSupport extends Component {
                     <TouchableOpacity>
                         <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 12 }}>
                             <Text> Help:  </Text>
-                            <Text onPress={() => Linking.openURL(`${phoneNumber}`)}>1000-12345678</Text>
+                            <Text onPress={() => Linking.openURL(`${phoneNumber}`)}>{displayPhoneNumber}</Text>
                         </View>
                     </TouchableOpacity>
 

@@ -10,7 +10,6 @@ const deviceHeight = Dimensions.get('window').height;
 class Address extends Component {
 
     onLeftIconPress = () => {
-        console.log('onLeftIconPressonLeftIconPress');
         this.props.navigation.goBack()
     }
     render() {
