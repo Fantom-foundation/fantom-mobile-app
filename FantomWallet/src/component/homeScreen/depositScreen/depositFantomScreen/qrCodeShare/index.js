@@ -17,14 +17,8 @@ class QRCodeShare extends Component {
         const titleText = 'Address QR Code';
         return (
             <View style={style.containerViewStyle}>
-                <View style={style.addressTitleViewStyle}>
-                    <Text style={style.addressTitleTextStyle}> {titleText} </Text>
-                    <TouchableOpacity style={style.addressShareIconStyle} onPress={this.onQRShare.bind(this)}>
-                        <Image source={uploadQR} style={style.addressShareImageIconStyle} resizeMode='contain'/>
-                    </TouchableOpacity>
-                </View>
                 <View style={style.qrGeneratorstyle}>
-                    <QRGenerator />
+                    <QRGenerator titleText={titleText} />
                 </View>
                 <TouchableOpacity style={style.qrLinkViewStyle}>
                     <Text style={style.qrLinkTextStyle}> {qrLink}</Text>

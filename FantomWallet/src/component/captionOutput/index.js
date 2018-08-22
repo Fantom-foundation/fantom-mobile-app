@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity,Clipboard,Image } from 'react-native';
 import style from './style';
 import Button from '../../general/button/index';
 import '../../../global';
-import Bip39 from 'bip39';
+import Bip39 from 'react-native-bip39';
 import ProgressBar from '../../general/progressBar/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import dangerIcon from '../../images/warning.png'
@@ -14,12 +14,22 @@ class CaptionOutput extends Component {
     constructor(props) {
         super(props);
         this.state = { mnemonicWords: [] };
-        const mnemonic = Bip39.generateMnemonic();
-        const seed = Bip39.mnemonicToSeed(mnemonic); //creates seed buffer
-        const mnemonicWords = mnemonic.split(' ');
-        this.state.mnemonicWords = mnemonicWords;
-        this.state.seed = seed;
     };
+
+    componentDidMount() {
+        const menmonicPromise = Bip39.generateMnemonic();
+        menmonicPromise.then((mnemonic) => {
+          const seed = Bip39.mnemonicToSeed(mnemonic); //creates seed buffer
+          const mnemonicWords = mnemonic.split(' ');
+          console.warn(mnemonicWords, 'mnemonic');
+          console.warn(seed, 'seed');
+          this.setState({
+              mnemonicWords,
+              seed: seed,
+          })
+        });
+      }
+
     onLeftIconPress() {
         this.props.navigation.goBack()
     }
@@ -31,6 +41,8 @@ class CaptionOutput extends Component {
         console.log(clipboardContent);
     }
     render() {
+        console.log('Seed val in caption output : ', this.state.seed);
+        console.log('mnemonicWords val in caption output : ', this.state.mnemonicWords);
         return (
             <View style={style.mainContainer}>
                 <View style={style.progressContainer}>
