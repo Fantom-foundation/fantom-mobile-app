@@ -31,9 +31,7 @@ const style = {
         color: 'rgb(233,177,18)'
     },
     text: {
-        marginRight: deviceWidth * 0.06,
-        marginBottom: deviceWidth * 0.01,
-        fontSize: 14,
+        fontSize: deviceWidth < 320 ? 12 : 14,
         fontWeight: 'bold'
     },
     textContainer: {

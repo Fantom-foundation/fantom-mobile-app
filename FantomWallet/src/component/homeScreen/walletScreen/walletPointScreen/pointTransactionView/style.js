@@ -15,7 +15,8 @@ const style = {
     },
     transactionSortIconStyle: {
         flex: 1,
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        paddingRight: 16,
     }
 
 }

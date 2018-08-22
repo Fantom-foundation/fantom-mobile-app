@@ -28,7 +28,6 @@ export default TabNavigator({
             style: {
                 backgroundColor: '#fff',
                 shadowOffset: {width: 0, height: 0},
-                
             },
             indicatorStyle: {
                 backgroundColor: 'red', 
