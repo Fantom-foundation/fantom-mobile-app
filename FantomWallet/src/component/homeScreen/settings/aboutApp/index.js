@@ -12,15 +12,25 @@ class AboutApp extends Component {
     }
     render() {
         return (
-            <View style={{backgroundColor:'white',flex:1}}>
+            <View style={style.container}>
                 <View>
-                <Header text='About App' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
+                    <Header text='About App' leftButtonIcon={leftArrowIcon} onLeftIconPress={this.onLeftIconPress} />
                 </View>
-                <View style={{ padding: 20 }}>
-                    <View><Text style={{fontWeight:'bold'}}>Android</Text><Text style={{fontWeight:'bold'}}>ver1.0</Text></View>
-                    <View style={{marginTop:20}}><Text>Data information: 2018120102022</Text><Text>Version information 1.0 (latest version)</Text></View>
-                    <View><Text style={{fontWeight:'bold',marginTop:20}}>iOS ver1.0</Text></View>
-                    <View style={{marginTop:20}}><Text>Data information: 2018120102022</Text><Text>Version information 1.0 (latest version)</Text></View>
+                <View style={style.body}>
+                    <View>
+                        <Text style={style.bold}>Android</Text>
+                        <Text style={style.bold}>ver1.0</Text>
+                    </View>
+                    <View style={style.margin20}>
+                        <Text>Data information: 2018120102022</Text><Text>Version information 1.0 (latest version)</Text>
+                    </View>
+                    <View>
+                        <Text style={{ fontWeight: 'bold', marginTop: 20 }}>iOS ver1.0</Text>
+                    </View>
+                    <View style={style.margin20}>
+                        <Text>Data information: 2018120102022</Text>
+                        <Text>Version information 1.0 (latest version)</Text>
+                    </View>
                 </View>
             </View>
         )
