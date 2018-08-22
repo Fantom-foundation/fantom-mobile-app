@@ -48,7 +48,8 @@ const style = {
         marginBottom: deviceWidth * 0.03,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontFamily:''
     },
     messageContainer: {
         marginTop: deviceHeight * 0.03,

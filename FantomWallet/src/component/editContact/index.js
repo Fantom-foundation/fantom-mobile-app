@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, CheckBox, ScrollView, Platform } from 'react-native';
+import { Text, View, TextInput, CheckBox, ScrollView, Platform,Image,TouchableOpacity} from 'react-native';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
@@ -9,6 +9,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Dialogbox from './dialogBox/index';
 import arrowLeftButton from '../../images/arrowLeft_White.png'
 import deleteButton from '../../images/deleteWhite.png';
+import checkbox from '../../images/checkbox.png';
+import checkedIcon from '../../images/CheckedIcon.png'
+import contact from '../../images/contact.png';
+import qrCode from '../../images/QR_code.png'
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -20,7 +24,8 @@ class EditContact extends Component {
     state = {
         address: '',
         name: '',
-        dialogBox: false
+        dialogBox: false,
+        checked:false
     }
 
 
@@ -38,7 +43,11 @@ class EditContact extends Component {
             dialogBox: false
         })
     }
-
+    checkBoxClicked(){
+        this.setState({
+            checked:!this.state.checked
+        })
+    }
     onTextFieldFocus() {
         let scrollValue = (Platform.OS === 'ios') ? 50 : 200
 
@@ -67,7 +76,10 @@ class EditContact extends Component {
                     <View style={style.header}>
                         <View style={style.fantomContainer}>
 
-                            <Icon style={style.fantomIcon} name='check-square' size={30} />
+                            {/* <Icon style={style.fantomIcon} name='check-square' size={30} /> */}
+                            <TouchableOpacity onPress={() => this.checkBoxClicked()}>
+                            <Image source={this.state.checked ? checkedIcon:checkbox} style={{width:28,height:28}}/>
+                            </TouchableOpacity>
                             <Text style={style.fantomText}>FANTOM</Text>
                         </View>
                         <Icon style={style.downArrowIcon} name='caret-down' size={30} />
@@ -87,12 +99,13 @@ class EditContact extends Component {
                                 onBlur={() => this.onTextFieldBlur()}
                             />
                             <View style={style.iconContainer}>
-                                <Icon  name='address-book' size={30} />
-                                <Icon style={style.qrCodeIcon} name='qrcode' size={30} />
+                                {/* <Icon  name='address-book' size={30} />
+                                <Icon style={style.qrCodeIcon} name='qrcode' size={30} /> */}
+                                <Image source={qrCode} style={{width:32,height:32}} />
+                                <Image source={contact} style={{width:32,height:32}} />
                             </View>
                         </View>
                     </View>
-
                     <View style={style.nameContainer}>
                         <Text style={style.nameText}>Name</Text>
                         <View style={style.nameTextInputContainer}>
