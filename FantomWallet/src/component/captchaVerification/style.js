@@ -18,6 +18,21 @@ const style = {
    headerContainer:{
        alignItems:'center'
    },
+   captchaText:{
+     fontSize: 24, fontWeight: 'bold' 
+   },
+   subHeadContainer:{
+     marginTop: 20, alignItems: 'center' 
+   },
+   pleaseText:{
+    fontSize: deviceWidth * 0.045, fontWeight: 'bold'
+   },
+   phraseText:{
+    fontSize: deviceWidth * 0.045, fontWeight: 'bold'
+   },
+   textBoxContainer:{
+    marginTop: deviceHeight * 0.03
+   },
    mid : {
        padding: deviceHeight * 0.03
    },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, Platform, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Platform, ScrollView, Keyboard } from 'react-native';
 import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
 import ProgressBar from '../../general/progressBar/index';
@@ -107,17 +107,14 @@ class CaptchaVerification extends Component {
     this.props.navigation.navigate('HomeScreen');
   }
   onTextFieldFocus() {
-    console.log('focussed');
-    let scrollValue = (Platform.OS === 'ios') ? 50 : 200
-
+    let scrollValue = (Platform.OS === 'ios') ? 80 : 200
     setTimeout(() => {
       this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
     }, 10);
   }
   onTextFieldBlur() {
-    console.log('blurred');
+    Keyboard.dismiss();
     let scrollValue = (Platform.OS === 'ios') ? 0 : 0
-
     setTimeout(() => {
       this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
     }, 10);
@@ -136,14 +133,14 @@ class CaptchaVerification extends Component {
           <ScrollView ref={(scroll) => this.scrollView = scroll}>
           <View style={style.mid}>
             <View style={style.headerContainer}>
-              <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Captcha Verification</Text>
-              <View style={{ marginTop: 20, alignItems: 'center' }}>
-                <Text style={{ fontSize: deviceWidth * 0.045, fontWeight: 'bold' }}>Please enter the corresponding</Text>
-                <Text style={{ fontSize: deviceWidth * 0.045, fontWeight: 'bold' }}>phrase out of the 12 back-up phrases</Text>
+              <Text style={style.captchaText}>Captcha Verification</Text>
+              <View style={style.subHeadContainer}>
+                <Text style={ style.pleaseText }>Please enter the corresponding</Text>
+                <Text style={ style.phraseText }>phrase out of the 12 back-up phrases</Text>
               </View>
             </View>
             
-            <View style={{ marginTop: deviceHeight * 0.03 }}>
+            <View style={ style.textBoxContainer}>
               <View style={style.textBox}>
                 <InputBox
                   phraseNumber='Enter phrase 5'
