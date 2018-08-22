@@ -7,69 +7,83 @@ const deviceHeight = Dimensions.get('window').height;
 const style = {
     mainContainerStyle: {
         flex: 1,
-        backgroundColor:'white'
+        backgroundColor: 'white'
     },
-    add: { flex: 1, alignItems: 'center', height: 40, justifyContent: 'center',backgroundColor:'rgb(232,232,232)' },
-    favorites: { flex: 1, alignItems: 'center', height: 40, justifyContent: 'center',backgroundColor:'rgb(232,232,232)' },
-    scrollView:{
+    add: { flex: 1, alignItems: 'center', height: 40, justifyContent: 'center', backgroundColor: 'rgb(232,232,232)' },
+    favorites: { flex: 1, alignItems: 'center', height: 40, justifyContent: 'center', backgroundColor: 'rgb(232,232,232)' },
+    scrollView: {
         padding: deviceWidth * 0.05, backgroundColor: 'white', flex: 1
     },
-    header:{
+    header: {
         padding: deviceHeight * 0.025, alignItems: 'center', height: deviceHeight * 0.1, backgroundColor: 'rgb(242,242,242)',
-                        borderColor: 'rgb(200,200,200)', borderRadius: 2, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between'
+        borderColor: 'rgb(200,200,200)', borderRadius: 2, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between'
     },
-    fantomContainer:{
+    fantomContainer: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
     },
-    fantomIcon:{
+    fantomIcon: {
         color: '#656565', alignSelf: 'flex-end'
     },
-    fantomText:{
-        fontSize: deviceWidth * 0.05, marginLeft: 10,color:'#656565',fontWeight:'bold'
+    fantomText: {
+        fontSize: deviceWidth * 0.05, marginLeft: 10, color: '#656565', fontWeight: 'bold'
     },
-    downArrowIcon:{
+    downArrowIcon: {
         color: 'black', alignSelf: 'flex-end'
     },
-    addressContainer:{
+    addressContainer: {
         marginTop: deviceHeight * 0.08,
     },
-    addressText:{
+    addressText: {
         fontSize: deviceWidth * 0.05, fontWeight: 'bold'
     },
-    addressInputContainer:{
-        height: 44, flexDirection: 'row', marginTop: 10, borderWidth: 1, borderRadius: 2, borderColor: '#afaeaf'
+    addressInputContainer: {
+        height: 44,
+        flexDirection: 'row',
+        marginTop: 10,
+        borderWidth: 1,
+        borderRadius: 2,
+        borderColor: '#afaeaf',
+        shadowColor: 'rgb(174,175,174)',
+        shadowOffset:{width:1,height:1},
+        shadowOpacity:0.3
     },
-    addressTextInput:{
-        fontSize: 16, width: deviceWidth * 0.7, height: 44, paddingLeft: 10, color: '#a7a7a7'
+    addressTextInput: {
+        fontSize: 16,
+        width: deviceWidth * 0.7,
+        height: 44,
+        paddingLeft: 10,
+        color: '#a7a7a7'
     },
-    iconContainer:{
+    iconContainer: {
         alignItems: 'center', flex: 1, flexDirection: 'row', justifyContent: 'space-around'
     },
-    qrCodeIcon:{
+    qrCodeIcon: {
         color: 'grey'
     },
-    nameContainer:{
+    nameContainer: {
         marginTop: 40
     },
-    nameText:{
+    nameText: {
         fontSize: deviceWidth * 0.05, fontWeight: 'bold'
     },
-    nameTextInputContainer:{
-        height: 44, flexDirection: 'row', marginTop: 10, borderWidth: 1, borderRadius: 2, borderColor: '#afaeaf'
+    nameTextInputContainer: {
+        height: 44, flexDirection: 'row', marginTop: 10, borderWidth: 1, borderRadius: 2, borderColor: '#afaeaf',shadowColor: 'rgb(174,175,174)',
+        shadowOffset:{width:1,height:1},
+        shadowOpacity:0.3
     },
-    nameTextInput:{
+    nameTextInput: {
         fontSize: 16, flex: 1, height: 44, paddingLeft: 10, color: '#a7a7a7'
     },
-    footer:{
+    footer: {
         flexDirection: 'row', position: 'absolute', bottom: 0
     },
-    cancelButton:{
+    cancelButton: {
         width: deviceWidth * 0.5, backgroundColor: 'black'
     },
-    confirmButton:{
+    confirmButton: {
         width: deviceWidth * 0.5, backgroundColor: 'rgb(233,177,18)'
     }
-    
+
 }
 
 export default style;
