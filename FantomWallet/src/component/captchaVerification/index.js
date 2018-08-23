@@ -34,27 +34,10 @@ class CaptchaVerification extends Component {
     this.changePhrase = this.changePhrase.bind(this);
   };
   createWallet() {
-    const phraseFive = this.state.phraseFive;
-    const phraseNine = this.state.phraseNine;
-    const phraseTwelve = this.state.phraseTwelve;
-    // check to make sure entered phrases match up.
-    if (phraseFive !== this.state.mnemonicWords[4]) {
-      this.state.errorMessage = 'Phrase five does not match up.';
-      console.log(this.state.error);
-      return;
-    } else if (phraseNine !== this.state.mnemonicWords[8]) {
-      this.state.errorMessage = 'Phrase nine does not match up.';
-      console.log(this.state.error);
-      return;
-    } else if (phraseTwelve !== this.state.mnemonicWords[11]) {
-      this.state.errorMessage = 'Phrase twelve does not match up.';
-      console.log(this.state.error);
+    if(!this.checkValidation()){
       return;
     }
-    console.log('seed');
-    console.log(this.state.seed);
     const root = Hdkey.fromMasterSeed(this.state.seed);
-    console.log(root);
     const masterPrivateKey = root.privateKey.toString('hex');
     const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
     const pubKey = EthUtil.privateToPublic(addrNode._privateKey);
@@ -70,14 +53,29 @@ class CaptchaVerification extends Component {
     };
     // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
     this.saveMasterKey(masterPrivateKey);
-    console.log('done');
-    console.log(key);
     this.props.navigation.navigate('HomeScreen');
     /*
        If using ethereumjs-wallet instead do after line 1:
        const address = addrNode.getWallet().getChecksumAddressString();
     */
-    console.log('phraseFive', phraseFive);
+  };
+
+  checkValidation () {
+    const phraseFive = this.state.phraseFive;
+    const phraseNine = this.state.phraseNine;
+    const phraseTwelve = this.state.phraseTwelve;
+    // check to make sure entered phrases match up.
+    if (phraseFive !== this.state.mnemonicWords[4]) {
+      this.state.errorMessage = 'Phrase five does not match up.';
+      return false;
+    } else if (phraseNine !== this.state.mnemonicWords[8]) {
+      this.state.errorMessage = 'Phrase nine does not match up.';
+      return false;
+    } else if (phraseTwelve !== this.state.mnemonicWords[11]) {
+      this.state.errorMessage = 'Phrase twelve does not match up.';
+      return false;
+    }
+    return true;
   };
   saveMasterKey = async (masterPrivateKey) => {
     try {

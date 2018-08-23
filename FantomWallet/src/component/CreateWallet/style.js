@@ -24,16 +24,20 @@ const styles = {
         color:'white',
         fontWeight: 'bold',
         fontSize: deviceWidth*0.08,
-        marginTop: deviceHeight * 0.05
+        marginTop: deviceHeight * 0.05,
+        FontFamily:'Segoe-UI'
     },
     subHeaderText2: {
         marginTop: deviceHeight * 0.02,
         fontSize: deviceWidth*0.04,
-        color:'white'
+        color:'white',
+        FontFamily:'Segoe-UI'
+        
     },
     subHeaderText3: {
         fontSize: deviceWidth*0.04,
-        color:'white'
+        color:'white',
+        FontFamily:'Segoe-UI'
     },
     createWallet: {
         position:'absolute',
@@ -44,12 +48,14 @@ const styles = {
         borderWidth: 1,
         backgroundColor: 'rgb(235,187,17)',
         width: deviceWidth * 0.7,
-        alignSelf:'center'
+        alignSelf:'center',
+        
     },
     createWalletText: {
         fontSize: deviceWidth*0.05,
         marginTop: deviceHeight * 0.02,
         marginBottom: deviceHeight * 0.02,
+        FontFamily:'Segoe-UI-SemiBold'
     },
     footer: {
         position: 'absolute',
@@ -57,7 +63,8 @@ const styles = {
         flexDirection: 'row',
         width:deviceWidth-40,
         justifyContent: 'space-between',
-        alignSelf:'center'
+        alignSelf:'center',
+        
     },
     footerText1: {
         // marginLeft: deviceWidth * 0.2,
