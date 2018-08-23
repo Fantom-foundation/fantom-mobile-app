@@ -11,7 +11,7 @@ const style = {
         // fontFamily: 'Times New Roman',
     },
     amountDisplayStyle: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         padding: 8,
         alignItems: 'flex-end',
         shadowOffset: { width: 0, height: 5, },

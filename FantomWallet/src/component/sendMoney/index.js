@@ -67,7 +67,7 @@ class SendMoney extends Component {
           <View style={{ height: 40 }} />
         </View>
         <View style={style.buttonViewStyle}>
-          <Button text="Cancel" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#000' }} onPress={() => console.warn('cancel')} />
+          <Button text="Cancel" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#000' }} onPress={() => this.props.navigation.goBack()} />
           <Button text="Confirm" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#ECB414' }} onPress={() => console.warn('confirm')} />
         </View>
       </View>

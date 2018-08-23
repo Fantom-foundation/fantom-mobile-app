@@ -1,70 +1,74 @@
-import React from 'react';
-import { Image } from 'react-native';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import React, { Component } from 'react';
+import { View } from 'react-native';
 
-/**
- * HomeScreen Tabs
- */
-import WalletTab from '../../component/homeScreen/walletScreen/';
-import WithdrawTab from '../../component/homeScreen/withdrawScreen/';
-import DepositTab from '../../component/homeScreen/depositScreen/';
-import ActivityTab from '../../component/homeScreen/activityScreen/';
-
-/**
- * InActive NavigationIcons
- */
+/** * InActive NavigationIcons */
 
 import walletIcon from '../../images/walletBlack.png';
 import sendIcon from '../../images/sendIcon.png';
 import depositIcon from '../../images/downloading_Black.png';
 import activityIcon from '../../images/running_menBlack.png';
 
-/**
- * Active NavigationIcons
- */
+/** * Active NavigationIcons */
 import walletWhiteIcon from '../../images/wallet_white.png';
 import sendWhiteIcon from '../../images/sendWhite.png';
 import depositWhiteIcon from '../../images/downloading_white.png';
 import activityWhiteIcon from '../../images/running_men_White.png';
 
-const INACTIVE_TINT_COLOR = '#000';
-const ACTIVE_TINT_COLOR= '#fff';
+/*** Color Constants */
+import { ACTIVE_TAB_COLOR, WHITE_COLOR } from '../../common/constants/';
 
+import style from './style';
+import Tab from './tab/index';
+import TabInfo from './tab/tabInfo/';
 
-export default TabNavigator({
-  Wallet: { screen: WalletTab },
-  Withdraw: { screen: WithdrawTab },
-  Deposit: { screen: DepositTab },
-  Activity: { screen: ActivityTab },
-},
-  {
-    navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ tintColor }) => {
-        const { routeName } = navigation.state;
+class HomeNavigationBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeTabIndex: 0,
+      tabRenderInfo: 'walletIcon',
+      tabIconList: [
+        { inActiveIcon: walletIcon, activeIcon: walletWhiteIcon, tabRenderInfo: 'walletIcon' },
+        { inActiveIcon: sendIcon, activeIcon: sendWhiteIcon, tabRenderInfo: 'sendIcon' },
+        { inActiveIcon: depositIcon, activeIcon: depositWhiteIcon, tabRenderInfo: 'depositIcon' },
+      ]
+    }
+  }
 
-        if (routeName === 'Wallet') {
-          return <Image source={tintColor === INACTIVE_TINT_COLOR ? walletIcon : walletWhiteIcon} style={{ width: 30, height: 30 }} />
-        } else if (routeName === 'Withdraw') {
-          return <Image source={tintColor === INACTIVE_TINT_COLOR ? sendIcon : sendWhiteIcon} style={{ width: 30, height: 30 }} />
-        } else if (routeName === 'Deposit') {
-          return <Image source={tintColor === INACTIVE_TINT_COLOR ? depositIcon : depositWhiteIcon} style={{ width: 30, height: 30 }} />
-        } else if (routeName === 'Activity') {
-          return <Image source={tintColor === INACTIVE_TINT_COLOR ? activityIcon : activityWhiteIcon} style={{ width: 30, height: 30 }} />
-        }
-      },
-    }),
+  handleSelectedTab = (index, tabRenderInfo) => {
+    this.setState({
+      activeTabIndex: index,
+      tabRenderInfo: tabRenderInfo,
+    })
+  }
 
-    tabBarComponent: TabBarBottom,
-    tabBarPosition: 'bottom',
-    tabBarOptions: {
-      activeTintColor: ACTIVE_TINT_COLOR,
-      activeBackgroundColor: '#EEBD12',
-      inactiveTintColor: INACTIVE_TINT_COLOR,
-      showLabel: false,
-    },
-    tabStyle: {
-      height: 70,
-    },
-    animationEnabled: false,
-    swipeEnabled: false,
-  });
+  render() {
+    const { tabIconList, activeTabIndex, tabRenderInfo } = this.state;
+
+    let renderTabIfo = <TabInfo tabRenderInfo={tabRenderInfo} navigation={this.props.navigation} />
+
+    let renderTabNavigation = tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
+      <Tab
+        activeTabIndex={activeTabIndex}
+        index={index}
+        ACTIVE_TAB_COLOR={ACTIVE_TAB_COLOR}
+        WHITE_COLOR={WHITE_COLOR}
+        tabIfo={tabIfo}
+        handleSelectedTab={this.handleSelectedTab.bind(this)} />
+    ))
+
+    return (
+      <View style={style.mainContainerStyle}>
+        <View style={style.tabInfoStyle}>
+          {renderTabIfo}
+        </View>
+        <View
+          style={style.navigationTabStyle}>
+          {renderTabNavigation}
+        </View>
+      </View>
+    )
+  }
+}
+
+export default HomeNavigationBar;

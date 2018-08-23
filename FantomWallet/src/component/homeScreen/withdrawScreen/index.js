@@ -42,6 +42,8 @@ export default class WithdrawScreen extends Component {
     }
   }
   render() {
+
+    console.log('in send this.props  :', this.props)
     const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2, } : '';
     return (
       <View style={style.withdrawViewStyle}>
@@ -145,7 +147,7 @@ export default class WithdrawScreen extends Component {
             </View>
           </ScrollView>
           <View style={style.bottomSendContainer}>
-            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('SendMoney')}>
               <Text style={style.bottomSendText}>Send</Text>
             </TouchableOpacity>
           </View>

@@ -1,3 +1,5 @@
+import {DEVICE_WIDTH} from '../../../../../common/constants/';
+
 const style = {
 
     containerViewStyle: {
@@ -13,12 +15,15 @@ const style = {
         height: 300,
     },
     qrLinkViewStyle: {
-        alignItems: 'center'
+        alignItems: 'center',
+        width:DEVICE_WIDTH-40,
+        alignSelf:'center',
+        
     },
     qrLinkTextStyle: {
-        paddingLeft: 16,
-        paddingRight: 16,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign:'center',
+        
     },
 }
 export default style;
