@@ -1,4 +1,4 @@
-
+import * as FontFamily from '../../common/textFontFamily/';
 import { Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
@@ -28,12 +28,24 @@ const style = {
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
     },
+    transactionTypeStyle: {
+        // fontFamily: FontFamily.SegoeUI
+    },
     rowOneTextStyle: {
-        fontWeight: 'bold'
+        fontFamily: FontFamily.SegoeUI_Semibold
+
+    },
+    unitStyle: {
+        fontSize: 12,
+        fontFamily: FontFamily.SegoeUI
     },
     rowTwoStyle: {
         flexDirection: 'row',
         margin: 4
+    },
+    transactionIdStyle: {
+        fontFamily: FontFamily.SFProDisplay_Regular,
+        letterSpacing: 1
     },
     rowTwoViewStyle: {
         flex: 1,
@@ -42,12 +54,14 @@ const style = {
         alignItems: 'flex-end'
     },
     successTextStyle: {
-        color: 'rgb(0,206,91)',
-        fontWeight: 'bold',
+        color: ' #00CE52',
+        fontFamily: FontFamily.SFProDisplay_Regular,
+        letterSpacing: 1
     },
     failureTextStyle: {
-        color: 'red',
-        fontWeight: 'bold',
+        color: '#FF0000',
+        fontFamily: FontFamily.SFProDisplay_Regular,
+        letterSpacing: 1
     }
 }
 

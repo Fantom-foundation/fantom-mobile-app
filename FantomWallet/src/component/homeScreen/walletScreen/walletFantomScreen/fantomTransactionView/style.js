@@ -1,3 +1,4 @@
+import * as FontFamily from '../../../../../common/textFontFamily/';
 
 const style = {
     mainViewStyle: {
@@ -11,7 +12,8 @@ const style = {
     },
     headingCardTextStyle: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontFamily: FontFamily.SegoeUI_Bold,
+        letterSpacing: 0.5,
     },
     dateViewStyle: {
         margin: 4,

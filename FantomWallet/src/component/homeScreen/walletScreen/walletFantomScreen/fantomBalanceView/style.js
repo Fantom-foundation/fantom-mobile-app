@@ -1,3 +1,5 @@
+import * as FontFamily from '../../../../../common/textFontFamily/';
+
 const style = {
     fantomBalanceView: {
         margin: 1,
@@ -23,19 +25,20 @@ const style = {
         alignItems: 'flex-end',
     },
     balanceViewTextOne: {
-        fontWeight: 'bold',
-        fontSize: 32
+        fontSize: 32,
+        fontFamily: FontFamily.SegoeUI_Bold,
     },
     balanceTextTwo: {
         padding: 4,
         alignItems: 'center',
     },
     balanceTextStyle: {
-        fontSize: 16
+        fontSize: 14,
+        fontFamily: FontFamily.SegoeUI_Light,
     },
     balanceUnitText: {
-        fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: FontFamily.SegoeUI_Bold,
     }
 }
 export default style;

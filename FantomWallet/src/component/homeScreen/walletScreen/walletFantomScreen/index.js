@@ -13,14 +13,14 @@ class WalletFantomScreen extends Component {
         super(props);
         this.state = {
             fantomTransactionArr: [
-                { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
-                { type: RECEIVED, amount: '13.0000000', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
-                { type: RECEIVED, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
-                { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: FAILED },
-                { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
-                { type: RECEIVED, amount: '13.0000000', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: FAILED },
-                { type: RECEIVED, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: FAILED },
-                { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
+                // { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
+                // { type: RECEIVED, amount: '13.0000000', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
+                // { type: RECEIVED, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
+                // { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: FAILED },
+                // { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
+                // { type: RECEIVED, amount: '13.0000000', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: FAILED },
+                // { type: RECEIVED, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: FAILED },
+                // { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
             ],
         }
     }
@@ -30,7 +30,7 @@ class WalletFantomScreen extends Component {
         return (
             <View style={style.mainContainerStyle}>
                 <View style={style.amountDisplayStyle}>
-                    <Text>{balanceText} </Text>
+                    <Text style={style.textViewStyle}>{balanceText} </Text>
                 </View>
                 <ScrollView style={style.fantomViewStyle} showsVerticalScrollIndicator={false}>
                     <FantomBalanceView fantomTransactionArr={fantomTransactionArr} />

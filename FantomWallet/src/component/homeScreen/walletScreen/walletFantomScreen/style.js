@@ -1,3 +1,5 @@
+import * as FontFamily from '../../../../common/textFontFamily/';
+
 const style = {
     mainContainerStyle: {
         flex: 1,
@@ -8,7 +10,8 @@ const style = {
         marginTop: 10
     },
     textViewStyle: {
-        // fontFamily: 'Times New Roman',
+        fontFamily: FontFamily.SegoeUI_Light,
+        letterSpacing: 1
     },
     amountDisplayStyle: {
         backgroundColor: 'white',

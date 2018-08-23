@@ -1,3 +1,5 @@
+import * as FontFamily from '../../../common/textFontFamily/';
+
 const style = {
     mainViewStyle: {
         flex: 1,
@@ -8,7 +10,9 @@ const style = {
     headingInfoStyle: {
         margin: 8,
         fontSize: 20,
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
+        fontFamily: FontFamily.SegoeUI_Bold
+
     },
     textInfoStyle: {
         color: 'rgb(109,117,125)'

@@ -15,14 +15,14 @@ class TransacationEntity extends Component {
         return (
             <View style={style.transactionCardStyle}>
                 <View style={style.rowOneStyle}>
-                    <Text> {transaction.type} {(transaction.type === sent ? ' To' : ' From')} </Text>
+                    <Text style={style.transactionTypeStyle}> {transaction.type} {(transaction.type === sent ? ' To' : ' From')} </Text>
                     <View style={style.rowOneViewStyle}>
                         <Text style={style.rowOneTextStyle}> {(transaction.type === sent ? '-' : '+')} {transaction.amount}</Text>
-                        <Text> {transaction.amountUnit} </Text>
+                        <Text style={style.unitStyle}> {transaction.amountUnit} </Text>
                     </View>
                 </View>
                 <View style={style.rowTwoStyle}>
-                    <Text> {transaction.transactionId}</Text>
+                    <Text style={style.transactionIdStyle}> {transaction.transactionId}</Text>
                     <View style={style.rowTwoViewStyle}>
                         <Text style={(transaction.transactionStatus === SUCCESS) ? style.successTextStyle : style.failureTextStyle}> {transaction.transactionStatus} </Text>
                     </View>

@@ -151,7 +151,7 @@ export default class WithdrawScreen extends Component {
               <Text style={style.bottomSendText}>Send</Text>
             </TouchableOpacity>
           </View>
-          <View style={{ height: 80 }} />
+          {/* <View style={{ height: 80 }} /> */}
         </KeyboardAvoidingView>
         {
           this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
