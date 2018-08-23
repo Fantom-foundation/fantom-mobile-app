@@ -25,19 +25,19 @@ const styles = {
         fontWeight: 'bold',
         fontSize: deviceWidth*0.08,
         marginTop: deviceHeight * 0.05,
-        FontFamily:'Segoe-UI'
+        fontFamily:'Segoe-UI'
     },
     subHeaderText2: {
         marginTop: deviceHeight * 0.02,
         fontSize: deviceWidth*0.04,
         color:'white',
-        FontFamily:'Segoe-UI'
+        fontFamily:'Segoe-UI'
         
     },
     subHeaderText3: {
         fontSize: deviceWidth*0.04,
         color:'white',
-        FontFamily:'Segoe-UI'
+        fontFamily:'Segoe-UI'
     },
     createWallet: {
         position:'absolute',
@@ -55,7 +55,7 @@ const styles = {
         fontSize: deviceWidth*0.05,
         marginTop: deviceHeight * 0.02,
         marginBottom: deviceHeight * 0.02,
-        FontFamily:'Segoe-UI-SemiBold'
+        fontFamily:'Segoe-UI-Bold'
     },
     footer: {
         position: 'absolute',

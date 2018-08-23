@@ -50,7 +50,6 @@ const style = {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        fontFamily:''
     },
     messageContainer: {
         marginTop: deviceHeight * 0.03,
