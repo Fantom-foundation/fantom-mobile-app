@@ -17,7 +17,7 @@ const style = {
         flexDirection: 'row', backgroundColor: '#fff'
     },
     nameContainer: {
-        fontWeight: 'bold', fontSize: deviceWidth * 0.045
+        fontWeight: 'bold', fontSize: deviceWidth * 0.045,fontFamily:'SFProDisplay-Regular'
     },
     mark: {
         flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 5, height: 48, borderColor: 'rgb(140,165,190)', borderWidth: 2

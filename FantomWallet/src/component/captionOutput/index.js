@@ -61,8 +61,8 @@ class CaptionOutput extends Component {
                         })}
                     </View>
                     <View style={style.messageContainer}>
-                        <Text style={{fontSize:deviceWidth*0.035}}>Please write down this new Secret Mnemonic</Text>
-                        <Text style={{fontSize:deviceWidth*0.035}}>All previous mnemonic will become invalid.</Text>
+                        <Text style={{fontSize:deviceWidth*0.035,fontFamily:'SegoeUI-SemiBold'}}>Please write down this new Secret Mnemonic</Text>
+                        <Text style={{fontSize:deviceWidth*0.035,fontFamily:'SegoeUI-SemiBold'}}>All previous mnemonic will become invalid.</Text>
                     </View>
                     <View style={style.clipBoardContainer}>
                         <TouchableOpacity onPress={() => this.copyToClipboard()}>
@@ -88,7 +88,7 @@ class CaptionOutput extends Component {
                                 seed: this.state.seed
                             })
                         }}
-                        buttonStyle={{ backgroundColor: 'black' }}
+                        buttonStyle={{ backgroundColor: 'black',fontFamily:'SegoeUI' }}
                     />
                 </View>
             </View>

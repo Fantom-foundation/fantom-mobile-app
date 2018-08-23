@@ -23,7 +23,7 @@ const style = {
     qrLinkTextStyle: {
         fontWeight: 'bold',
         textAlign:'center',
-        
+        fontFamily:'SegoeUI-Bold'
     },
 }
 export default style;
