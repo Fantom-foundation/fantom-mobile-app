@@ -3,7 +3,7 @@ const style = {
         marginTop: 36,
         marginLeft: 24,
         marginRight: 24,
-        marginBottom: 20
+  
     },
     billAmountLabelStyle: {
         flex: 1,
