@@ -15,20 +15,27 @@ export default class WithdrawScreen extends Component {
     openSortMenu: false,
     data: [{ id: 0, key: 'FANTOM', sc: 'FTM' }, { id: 1, key: 'FANTOM POINT', sc: 'FTM PT' }, { id: 2, key: 'ETHEREUM', sc: 'ETH' }],
     val: 'FTM',
-    index: 0
+    index: 0,
+    isTextFieldOpen:false
   }
   onTextFieldFocus() {
-    let scrollValue = (Platform.OS === 'ios') ? 60 : 200
-    setTimeout(() => {
-      this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
-    }, 10);
+    this.setState({
+      isTextFieldOpen:true
+    })
+    // let scrollValue = (Platform.OS === 'ios') ? 60 : 200
+    // setTimeout(() => {
+    //   this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
+    // }, 10);
   }
   onTextFieldBlur() {
     Keyboard.dismiss();
-    let scrollValue = (Platform.OS === 'ios') ? 0 : 0
-    setTimeout(() => {
-      this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
-    }, 10);
+    this.setState({
+      isTextFieldOpen:false
+    })
+    // let scrollValue = (Platform.OS === 'ios') ? 0 : 0
+    // setTimeout(() => {
+    //   this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
+    // }, 10);
   }
   handleSortMenu(item) {
     this.setState({
@@ -140,8 +147,8 @@ export default class WithdrawScreen extends Component {
                   style={style.memoTextInput}
                   placeholder='Enter Memo'
                   placeholderTextColor='#a7a7a7'
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()}
+                  onFocus={() => this.onTextFieldFocus()}
+                  onBlur={() => this.onTextFieldBlur()}
                 />
               </View>
             </View>
@@ -151,7 +158,10 @@ export default class WithdrawScreen extends Component {
               <Text style={style.bottomSendText}>Send</Text>
             </TouchableOpacity>
           </View>
-          {/* <View style={{ height: 80 }} /> */}
+          {
+          this.state.isTextFieldOpen &&
+          <View style={{height: 80}} />
+          }
         </KeyboardAvoidingView>
         {
           this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
