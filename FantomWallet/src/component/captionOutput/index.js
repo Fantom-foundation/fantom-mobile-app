@@ -74,9 +74,9 @@ class CaptionOutput extends Component {
                     <View style={style.lastMessageContainer}>
                         <View style={{ flexDirection: 'row', }}>
                             <Icon name='warning' size={16} color='rgb(233,177,18)' />
-                            <Text style={{ fontWeight: 'bold',fontSize:12 }}>You will lose your account if</Text>
+                            <Text style={{ fontSize:12,fontFamily:'Futura' }}> You will lose your account if</Text>
                         </View>
-                        <Text style={{ fontWeight: 'bold',fontSize:12 }}>      you lose your Secret PIN Mnemonic</Text>
+                        <Text style={{fontSize:12,fontFamily:'Futura' }}>      you lose your Secret PIN Mnemonic</Text>
                     </View>
                 </View>
                 <View style={style.footerStyle}>

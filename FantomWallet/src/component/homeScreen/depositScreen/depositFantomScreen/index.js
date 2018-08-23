@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard, } from 'react-native';
+import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard } from 'react-native';
 
 import style from './style';
 
 import QRCodeShare from './qrCodeShare/';
 import BillingAmountScreen from './billingAmount/';
 import Button from '../../../../general/button/';
-
 
 class DepositFantomScreen extends Component {
     constructor(props) {
@@ -34,7 +33,7 @@ class DepositFantomScreen extends Component {
     }
 
     onTextFieldFocus() {
-        let scrollValue = (Platform.OS === 'ios') ? 350 : 200
+        let scrollValue = (Platform.OS === 'ios') ? 220 : 200
         setTimeout(() => {
             this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
         }, 10);
@@ -52,6 +51,7 @@ class DepositFantomScreen extends Component {
         const qrLink = this.state.qrAddress;
 
         return (
+            
             <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.fantomViewStyle} showsVerticalScrollIndicator={false}>
                 <View style={style.amountDisplayStyle}>
                     <Text>{balanceText} </Text>
@@ -64,7 +64,7 @@ class DepositFantomScreen extends Component {
                 <View style={style.buttonViewStyle}>
                     <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
                 </View>
-                <View style={{height:20}}/>
+                <View style={{height:80}}/>
             </ScrollView>
         )
     }

@@ -28,11 +28,12 @@ const style = {
     secretText: {
         fontSize: deviceHeight * 0.03,
         fontWeight: 'bold',
-        color: 'rgb(233,177,18)'
+        color: 'rgb(233,177,18)',
+        fontFamily:'Futura'
     },
     text: {
         fontSize: deviceWidth < 320 ? 12 : 14,
-        fontWeight: 'bold'
+        fontFamily:'Futura'
     },
     textContainer: {
         marginTop: deviceHeight * 0.03,
@@ -49,7 +50,6 @@ const style = {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        fontFamily:''
     },
     messageContainer: {
         marginTop: deviceHeight * 0.03,
@@ -62,7 +62,8 @@ const style = {
         padding: 5
     },
     clipBoardText: {
-        fontSize: 20
+        fontSize: 20,
+        fontFamily:'Futura'
     },
     line: {
         backgroundColor: 'rgb(243,243,243)',
@@ -71,7 +72,6 @@ const style = {
     },
     lastMessageContainer: {
         marginTop: deviceWidth * 0.05,
-
     },
     footerStyle: {
         position: 'absolute',

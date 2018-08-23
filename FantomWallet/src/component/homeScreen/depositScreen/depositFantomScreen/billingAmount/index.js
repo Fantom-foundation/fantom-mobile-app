@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Platform, Keyboard, ScrollView } from 'react-native';
-
+import { View, Text, TextInput, } from 'react-native';
 import style from './style';
 
 class BillingAmountScreen extends Component {
@@ -33,7 +32,7 @@ class BillingAmountScreen extends Component {
     render() {
         return (
 
-            <View style={style.billAmountViewStyle}>
+            <View style={style.billAmountViewStyle} >
                 <View style={style.billAmountLabelStyle}>
                     <Text style={style.billAmountTextLabelStyle}>Billing Amount</Text>
                     <View style={style.ftmViewStyle}>
@@ -47,9 +46,11 @@ class BillingAmountScreen extends Component {
                     placeholder='Enter Amount'
                     placeholderTextColor='#a7a7a7'
                     keyboardType='decimal-pad'
-                    onFocus={this.onTextFieldFocus.bind(this)}
-                    onBlur={this.onTextFieldBlur.bind(this)}
+                    onFocus={() => this.onTextFieldFocus()}
+                    onBlur={() => this.onTextFieldBlur()}
                 />
+                <View style={{ height: 20 }} />
+                
             </View>
         )
     }

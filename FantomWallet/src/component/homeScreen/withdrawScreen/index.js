@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TextInput, TouchableOpacity, Platform, Keyboard } from 'react-native';
+import { ScrollView, View, Text, TextInput, TouchableOpacity, Platform, Keyboard,KeyboardAvoidingView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import style from './style';
 import SortMenuCard from '../../../general/sortMenuCard/index';
@@ -46,8 +46,8 @@ export default class WithdrawScreen extends Component {
     console.log('in send this.props  :', this.props)
     const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2, } : '';
     return (
-      <View style={style.withdrawViewStyle}>
-        <View style={[{flex: 1},dynamicStyle]}>
+      <View style={style.withdrawViewStyle} >
+        <KeyboardAvoidingView behavior="padding" style={[{flex: 1},dynamicStyle]}>
           <View style={style.sendContainer}>
             <Text style={style.sendText}>Send</Text>
           </View>
@@ -62,8 +62,8 @@ export default class WithdrawScreen extends Component {
                   style={style.addressTextInput}
                   placeholder='Enter Address'
                   placeholderTextColor='#a7a7a7'
-                  onFocus={() => this.onTextFieldFocus()}
-                  onBlur={() => this.onTextFieldBlur()}
+                  // onFocus={() => this.onTextFieldFocus()}
+                  // onBlur={() => this.onTextFieldBlur()}
                 />
               </View>
             </View>
@@ -80,8 +80,8 @@ export default class WithdrawScreen extends Component {
                   placeholder='Enter Amount'
                   keyboardType='decimal-pad'
                   placeholderTextColor='#a7a7a7'
-                  onFocus={() => this.onTextFieldFocus()}
-                  onBlur={() => this.onTextFieldBlur()}
+                  // onFocus={() => this.onTextFieldFocus()}
+                  // onBlur={() => this.onTextFieldBlur()}
                 />
                 <View style={style.sc}>
                   <Text>{this.state.val}</Text>
@@ -105,8 +105,8 @@ export default class WithdrawScreen extends Component {
                   placeholder='Enter Fees'
                   keyboardType='decimal-pad'
                   placeholderTextColor='#a7a7a7'
-                  onFocus={() => this.onTextFieldFocus()}
-                  onBlur={() => this.onTextFieldBlur()}
+                  // onFocus={() => this.onTextFieldFocus()}
+                  // onBlur={() => this.onTextFieldBlur()}
                 >
                 </TextInput>
                 <View style={style.ftmTextContainer}>
@@ -140,8 +140,8 @@ export default class WithdrawScreen extends Component {
                   style={style.memoTextInput}
                   placeholder='Enter Memo'
                   placeholderTextColor='#a7a7a7'
-                  onFocus={() => this.onTextFieldFocus()}
-                  onBlur={() => this.onTextFieldBlur()}
+                  // onFocus={() => this.onTextFieldFocus()}
+                  // onBlur={() => this.onTextFieldBlur()}
                 />
               </View>
             </View>
@@ -151,7 +151,8 @@ export default class WithdrawScreen extends Component {
               <Text style={style.bottomSendText}>Send</Text>
             </TouchableOpacity>
           </View>
-        </View>
+          <View style={{ height: 80 }} />
+        </KeyboardAvoidingView>
         {
           this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
             index={this.state.index} />
