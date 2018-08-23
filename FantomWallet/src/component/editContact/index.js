@@ -93,7 +93,7 @@ class EditContact extends Component {
                                 onChangeText={(address) => this.setState({ address })}
                                 value={this.state.address}
                                 style={style.addressTextInput}
-                                placeholder='Enter Wallet Address'
+                                placeholder='Enter wallet address'
                                 placeholderTextColor='#a7a7a7'
                                 onFocus={() => this.onTextFieldFocus()}
                                 onBlur={() => this.onTextFieldBlur()}
@@ -113,7 +113,7 @@ class EditContact extends Component {
                                 onChangeText={(name) => this.setState({ name })}
                                 value={this.state.name}
                                 style={style.nameTextInput}
-                                placeholder='Enter Name'
+                                placeholder='Enter name'
                                 placeholderTextColor='#a7a7a7'
                                 onFocus={() => this.onTextFieldFocus()}
                                 onBlur={() => this.onTextFieldBlur()}

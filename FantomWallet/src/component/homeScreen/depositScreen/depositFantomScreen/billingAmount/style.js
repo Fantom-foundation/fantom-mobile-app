@@ -11,14 +11,14 @@ const style = {
         flexDirection: 'row'
     },
     billAmountTextLabelStyle: {
-        fontSize: 16,
+        fontSize: 16,fontFamily:'SegoeUI-SemiBold'
     },
     ftmViewStyle: {
         flex: 1,
         alignItems: 'flex-end',
     },
     ftmLabelStyle: {
-        fontSize: 16
+        fontSize: 16,fontFamily:'SegoeUI-SemiBold'
     },
     amountInputStyle: {
         fontSize: 16,

@@ -31,12 +31,13 @@ const styles = {
         marginTop: deviceHeight * 0.02,
         fontSize: deviceWidth*0.04,
         color:'white',
-        
+        fontFamily:'SegoeUI'
         
     },
     subHeaderText3: {
         fontSize: deviceWidth*0.04,
-        color:'white'
+        color:'white',
+        fontFamily:'SegoeUI'
     },
     createWallet: {
         position:'absolute',
@@ -53,6 +54,7 @@ const styles = {
         fontSize: deviceWidth*0.05,
         marginTop: deviceHeight * 0.02,
         marginBottom: deviceHeight * 0.02,
+        fontFamily:'SegoeUI-SemiBold'
     },
     footer: {
         position: 'absolute',

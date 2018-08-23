@@ -19,16 +19,16 @@ const style = {
        alignItems:'center'
    },
    captchaText:{
-     fontSize: 24, fontWeight: 'bold' 
+     fontSize: 24, fontWeight: 'bold',fontFamily:'SegoeUI' 
    },
    subHeadContainer:{
      marginTop: 20, alignItems: 'center' 
    },
    pleaseText:{
-    fontSize: deviceWidth * 0.045, fontWeight: 'bold'
+    fontSize: deviceWidth * 0.045, fontFamily:'SegoeUI-SemiBold'
    },
    phraseText:{
-    fontSize: deviceWidth * 0.045, fontWeight: 'bold'
+    fontSize: deviceWidth * 0.045,fontFamily:'SegoeUI-SemiBold'
    },
    textBoxContainer:{
     marginTop: deviceHeight * 0.03
