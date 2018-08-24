@@ -109,8 +109,9 @@ const style = {
         fontSize: 16, height: deviceHeight * 0.06, paddingLeft: 10, color: '#a7a7a7', borderWidth: 1, borderColor: 'rgb(93,93,93)'
     },
     bottomSendContainer:{
-        alignItems: 'center', width: deviceWidth * 0.7, backgroundColor: 'rgb(233,177,18)', alignSelf: 'center',
-          position: 'absolute', bottom: deviceHeight * 0.02, padding: deviceHeight * 0.015
+        // alignItems: 'center', width: deviceWidth * 0.7, backgroundColor: 'rgb(233,177,18)', alignSelf: 'center',
+        //   position: 'absolute', bottom: deviceHeight * 0.02, padding: deviceHeight * 0.015
+        marginLeft: 35, marginRight: 35, shadowOffset: {width: 2, height: 2}, shadowColor: '#C0C0C0', shadowOpacity: 1, elevation: 2
     },
     bottomSendText:{
         fontSize: deviceHeight * 0.03

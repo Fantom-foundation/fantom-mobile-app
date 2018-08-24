@@ -20,7 +20,6 @@ const style = {
        marginLeft: deviceWidth * 0.27,
        position: 'absolute',
        top: 45,
-
        // top: deviceHeight * 0.061,
        width: deviceWidth * 0.7,
        shadowColor: 'blue',

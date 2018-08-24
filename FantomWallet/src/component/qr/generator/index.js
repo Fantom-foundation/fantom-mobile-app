@@ -27,7 +27,7 @@ export default class QRGenerator extends Component {
     this.refs.viewShot.capture().then(uri => {
       console.log("do something with ", uri);
       Share.open({ url: uri })
-        .then((res) => { console.log(res) })
+        .then((res) => { console.log('this.props.qrLink , res',this.props.qrLink, res) })
         .catch((err) => { err && console.log(err); });
     });
 

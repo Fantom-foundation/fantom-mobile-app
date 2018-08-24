@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TextInput, TouchableOpacity, Platform, Keyboard,KeyboardAvoidingView } from 'react-native';
+import { ScrollView, View, Text, TextInput, TouchableOpacity, Platform, Keyboard, KeyboardAvoidingView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import style from './style';
 import SortMenuCard from '../../../general/sortMenuCard/index';
 import { Dimensions } from 'react-native';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
+import Button from '../../../general/button/';
 /**
  * To Display WithdrawTab related tasks
  */
@@ -16,11 +17,11 @@ export default class WithdrawScreen extends Component {
     data: [{ id: 0, key: 'FANTOM', sc: 'FTM' }, { id: 1, key: 'FANTOM POINT', sc: 'FP' }, { id: 2, key: 'ETHEREUM', sc: 'ETH' }],
     val: 'FTM',
     index: 0,
-    isTextFieldOpen:false
+    isTextFieldOpen: false
   }
   onTextFieldFocus() {
     this.setState({
-      isTextFieldOpen:true
+      isTextFieldOpen: true
     })
     // let scrollValue = (Platform.OS === 'ios') ? 60 : 200
     // setTimeout(() => {
@@ -30,7 +31,7 @@ export default class WithdrawScreen extends Component {
   onTextFieldBlur() {
     Keyboard.dismiss();
     this.setState({
-      isTextFieldOpen:false
+      isTextFieldOpen: false
     })
     // let scrollValue = (Platform.OS === 'ios') ? 0 : 0
     // setTimeout(() => {
@@ -78,8 +79,8 @@ export default class WithdrawScreen extends Component {
                   style={style.addressTextInput}
                   placeholder='Enter Address'
                   placeholderTextColor='#a7a7a7'
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()}
+                // onFocus={() => this.onTextFieldFocus()}
+                // onBlur={() => this.onTextFieldBlur()}
                 />
               </View>
             </View>
@@ -96,8 +97,8 @@ export default class WithdrawScreen extends Component {
                   placeholder='Enter Amount'
                   keyboardType='decimal-pad'
                   placeholderTextColor='#a7a7a7'
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()}
+                // onFocus={() => this.onTextFieldFocus()}
+                // onBlur={() => this.onTextFieldBlur()}
                 />
                 <View style={style.sc}>
                   <Text>{this.state.val}</Text>
@@ -121,8 +122,8 @@ export default class WithdrawScreen extends Component {
                   placeholder='Enter Fees'
                   keyboardType='decimal-pad'
                   placeholderTextColor='#a7a7a7'
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()}
+                // onFocus={() => this.onTextFieldFocus()}
+                // onBlur={() => this.onTextFieldBlur()}
                 >
                 </TextInput>
                 <View style={style.ftmTextContainer}>
@@ -163,13 +164,19 @@ export default class WithdrawScreen extends Component {
             </View>
           </ScrollView>
           <View style={style.bottomSendContainer}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('SendMoney')}>
-              <Text style={style.bottomSendText}>Send</Text>
-            </TouchableOpacity>
+            <Button text='Send'
+              buttonStyle={{ backgroundColor: '#EEBD12', alignSelf: 'center', height: 50 }}
+              textStyle={{ color: '#000', fontWeight: 'normal' }}
+              onPress={() => this.props.navigation.navigate('SendMoney')} />
           </View>
+          {/* <View style={style.bottomSendContainer}> */}
+          {/* <TouchableOpacity style={style.bottomSendContainer} onPress={() => this.props.navigation.navigate('SendMoney')}>
+              <Text style={style.bottomSendText}>Send</Text>
+            </TouchableOpacity> */}
+          {/* </View> */}
           {
-          this.state.isTextFieldOpen &&
-          <View style={{height: 80}} />
+            this.state.isTextFieldOpen &&
+            <View style={{ height: 80 }} />
           }
         </KeyboardAvoidingView>
         {

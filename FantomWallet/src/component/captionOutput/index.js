@@ -64,11 +64,11 @@ class CaptionOutput extends Component {
                         <Text style={{fontSize:deviceWidth*0.035,fontFamily:'SegoeUI-SemiBold'}}>Please write down this new Secret Mnemonic</Text>
                         <Text style={{fontSize:deviceWidth*0.035,fontFamily:'SegoeUI-SemiBold'}}>All previous mnemonic will become invalid.</Text>
                     </View>
-                    <View style={style.clipBoardContainer}>
-                        <TouchableOpacity onPress={() => this.copyToClipboard()}>
+                    {/* <View style={style.clipBoardContainer}> */}
+                        <TouchableOpacity style={style.clipBoardContainer} onPress={() => this.copyToClipboard()}>
                             <Text style={style.clipBoardText}> Copy to clipboard</Text>
                         </TouchableOpacity>
-                    </View>
+                    {/* </View> */}
                     <View style={style.line}>
                     </View>
                     <View style={style.lastMessageContainer}>
