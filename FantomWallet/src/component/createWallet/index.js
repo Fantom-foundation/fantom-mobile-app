@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar, AsyncStorage } from 'react-native';
 import style from './style';
 
 //CaptchaVerification
@@ -7,6 +7,24 @@ import style from './style';
 
 
 class CreateWallet extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            qrAddress: '',
+        }
+    }
+    componentWillMount() {
+        AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
+    }
+    onCreateNewWallet() {
+        const walletAddress = this.state.qrAddress;
+        console.log('this.state.qrAddress  :', this.state.qrAddress);
+        if (walletAddress === null) {
+            this.props.navigation.navigate('CaptionOutput');
+        } else {
+            this.props.navigation.navigate('HomeScreen');
+        }
+    }
     render() {
         return (<ImageBackground
             style={style.imageBackground}
@@ -24,7 +42,7 @@ class CreateWallet extends Component {
                     <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
                     <Text style={style.subHeaderText3}>Ecosystem</Text>
                 </View>
-                <TouchableOpacity style={style.createWallet} onPress={() => { this.props.navigation.navigate('CaptionOutput') }} >
+                <TouchableOpacity style={style.createWallet} onPress={this.onCreateNewWallet.bind(this)} >
                     <Text style={style.createWalletText}>Create Wallet</Text>
                 </TouchableOpacity>
                 <View style={style.footer}>

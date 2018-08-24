@@ -15,6 +15,7 @@ const styles = {
     },
     headerContainer: {
         alignItems: 'center',
+        marginTop: 20,
     },
     subHeaderContainer: {
         marginTop:deviceHeight*0.25,

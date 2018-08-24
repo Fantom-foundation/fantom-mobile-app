@@ -64,7 +64,8 @@ class DepositPointScreen extends Component {
                 <View style={style.buttonViewStyle}>
                     <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
                 </View>
-                <View style={{height:80}}/>
+                <View style={{height:40}}/>
+                {/* <View style={{height:80, backgroundColor: 'green'}}/> */}
             </ScrollView>
         )
     }
