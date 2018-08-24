@@ -7,7 +7,7 @@ const deviceHeight = Dimensions.get('window').height;
 const style = {
     container: {
         marginTop: 10,
-        shadowColor: '#000', shadowOffset: { width: 1, height: 1 }, backgroundColor: '#fff', shadowOpacity: 0.3, shadowRadius: 3,
+        shadowColor: '#000', shadowOffset: { width: 1, height: 1 }, backgroundColor: '#fff', shadowOpacity: 0.3, shadowRadius: 3,elevation:1,
         borderWidth: 0.3, borderColor: 'rgb(209,209,209)'
     },
     subContainer: {

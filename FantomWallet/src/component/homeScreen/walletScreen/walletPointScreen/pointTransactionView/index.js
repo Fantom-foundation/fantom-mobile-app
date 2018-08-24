@@ -5,10 +5,12 @@ import style from './style';
 import EmptyTransactionEntity from '../../../../../general/transactionEntity/emptyTransactionEntity/';
 import SortMenuCard from '../../../../../general/sortMenuCard/';
 import DisplayTransaction from './displayTransactions';
+import { Dimensions } from 'react-native';
 
 import { SENT, RECEIVED, ALL_TRANSACTION } from '../../../../../common/constants/';
 import sortMenuIcon from '../../../../../images/arrow_With_bar.png';
-
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 class PointTransactionView extends Component {
     constructor(props) {
         super(props);
@@ -34,13 +36,19 @@ class PointTransactionView extends Component {
             })
         }
     }
-
+    handleClickOnScreen() {
+        if(this.state.openSortMenu){
+          this.setState({
+            openSortMenu: !this.state.openSortMenu
+          })
+        }
+      }
     render() {
         const { pointTransactionArr } = this.props;
         const selectedSortMenu = this.state.val;
 
         return (
-            <View >
+            <TouchableOpacity activeOpacity={1}style={style.withdrawViewStyle} onPress={() => this.handleClickOnScreen()}>
                 {pointTransactionArr.length > 0 &&
                     <View style={style.headingCardViewStyle}>
                         <Text style={style.headingCardTextStyle}> Transactions </Text>
@@ -57,6 +65,9 @@ class PointTransactionView extends Component {
                         ALL_TRANSACTION={ALL_TRANSACTION} />
                     {pointTransactionArr.length === 0 && <EmptyTransactionEntity />}
                 </View>
+                {
+          this.state.openSortMenu && <View style={{width:deviceWidth,height:deviceHeight,zIndex:1,top:-deviceHeight*0.5,position:'absolute'}}></View>
+        }
                 {this.state.openSortMenu &&
                     <SortMenuCard
                         data={this.state.data}
@@ -64,7 +75,7 @@ class PointTransactionView extends Component {
                         index={this.state.index}
                         handleSortMenu={(item) => this.handleSortMenu(item)} />
                 }
-            </View>
+            </TouchableOpacity>
         )
     }
 }

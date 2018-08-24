@@ -27,6 +27,7 @@ class SortMenuCard extends Component {
    render() {
 
        return (
+           
            <View style={this.props.type === 'withDraw' ? style.listContainerStyle : style.altListContainerStyle}>
                <View style={style.listStyle}>
                    <FlatList
