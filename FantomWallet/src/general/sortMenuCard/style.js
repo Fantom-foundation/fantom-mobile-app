@@ -12,6 +12,7 @@ const style = {
        shadowColor: 'blue',
        shadowOffset: { width: 0, height: 2 },
        shadowOpacity: 0.2,
+       zIndex:2
    },
 
    altListContainerStyle: {
@@ -25,6 +26,7 @@ const style = {
        shadowColor: 'blue',
        shadowOffset: { width: 0, height: 2 },
        shadowOpacity: 0.2,
+       zIndex:2
    },
    listStyle: {
        paddingLeft: deviceHeight * 0.03,

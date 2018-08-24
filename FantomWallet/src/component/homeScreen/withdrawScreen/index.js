@@ -13,7 +13,7 @@ export default class WithdrawScreen extends Component {
   state = {
     name: '',
     openSortMenu: false,
-    data: [{ id: 0, key: 'FANTOM', sc: 'FTM' }, { id: 1, key: 'FANTOM POINT', sc: 'FTM PT' }, { id: 2, key: 'ETHEREUM', sc: 'ETH' }],
+    data: [{ id: 0, key: 'FANTOM', sc: 'FTM' }, { id: 1, key: 'FANTOM POINT', sc: 'FP' }, { id: 2, key: 'ETHEREUM', sc: 'ETH' }],
     val: 'FTM',
     index: 0,
     isTextFieldOpen:false
@@ -48,12 +48,21 @@ export default class WithdrawScreen extends Component {
       })
     }
   }
+  handleClickOnScreen() {
+    if(this.state.openSortMenu){
+      this.setState({
+        openSortMenu: !this.state.openSortMenu
+      })
+    }
+    
+    
+  }
   render() {
 
     console.log('in send this.props  :', this.props)
     const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2, } : '';
     return (
-      <View style={style.withdrawViewStyle} >
+      <TouchableOpacity activeOpacity={1}style={style.withdrawViewStyle} onPress={() => this.handleClickOnScreen()}>
         <KeyboardAvoidingView behavior="padding" style={[{flex: 1},dynamicStyle]}>
           <View style={style.sendContainer}>
             <Text style={style.sendText}>Send</Text>
@@ -164,10 +173,13 @@ export default class WithdrawScreen extends Component {
           }
         </KeyboardAvoidingView>
         {
+          this.state.openSortMenu && <View style={{width:deviceWidth,height:deviceHeight,zIndex:1,position:'absolute'}}></View>
+        }
+        {
           this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
             index={this.state.index} />
         }
-      </View>
+      </TouchableOpacity>
     );
   }
 }

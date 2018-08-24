@@ -45,7 +45,8 @@ const style = {
         borderColor: '#afaeaf',
         shadowColor: 'rgb(174,175,174)',
         shadowOffset:{width:1,height:1},
-        shadowOpacity:0.3
+        shadowOpacity:0.3,
+        elevation:1,
     },
     addressTextInput: {
         fontSize: 16,
@@ -69,7 +70,7 @@ const style = {
     nameTextInputContainer: {
         height: 44, flexDirection: 'row', marginTop: 10, borderWidth: 1, borderRadius: 2, borderColor: '#afaeaf',shadowColor: 'rgb(174,175,174)',
         shadowOffset:{width:1,height:1},
-        shadowOpacity:0.3
+        shadowOpacity:0.3,elevation:1,
     },
     nameTextInput: {
         fontSize: 16, flex: 1, height: 44, paddingLeft: 10, color: '#a7a7a7'
