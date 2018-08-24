@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar, AsyncStorage } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
 import style from './style';
 
 //CaptchaVerification
@@ -7,23 +7,8 @@ import style from './style';
 
 
 class CreateWallet extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            qrAddress: '',
-        }
-    }
-    componentWillMount() {
-        AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
-    }
     onCreateNewWallet() {
-        const walletAddress = this.state.qrAddress;
-        console.log('this.state.qrAddress  :', this.state.qrAddress);
-        if (walletAddress === null) {
-            this.props.navigation.navigate('CaptionOutput');
-        } else {
-            this.props.navigation.navigate('HomeScreen');
-        }
+        this.props.navigation.navigate('CaptionOutput');
     }
     render() {
         return (<ImageBackground

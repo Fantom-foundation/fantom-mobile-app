@@ -37,6 +37,7 @@ class DepositNavigationBar extends Component {
 
         let renderTabNavigation = tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
             <DepositTab
+                key={index}
                 activeTabIndex={activeTabIndex}
                 index={index}
                 activeTabColor={ACTIVE_SUB_TAB_COLOR}

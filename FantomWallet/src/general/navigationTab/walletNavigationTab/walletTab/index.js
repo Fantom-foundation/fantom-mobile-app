@@ -8,13 +8,13 @@ class WalletTab extends Component {
         let { activeTabIndex, index, tabIfo, tabTextStyle, tabStyle, activeTabColor, inActiveTabColor } = this.props;
         tabStyle = {
             ...style.tabStyle,
-            tabStyle,
+            ...tabStyle,
             borderBottomColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
         }
 
         tabTextStyle = {
             ...style.tabTextStyle,
-            tabTextStyle,
+            ...tabTextStyle,
             fontWeight: activeTabIndex === index ? 'bold' : 'normal'
         }
         return (

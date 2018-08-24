@@ -20,8 +20,8 @@ class CaptionOutput extends Component {
         menmonicPromise.then((mnemonic) => {
             const seed = Bip39.mnemonicToSeed(mnemonic); //creates seed buffer
             const mnemonicWords = mnemonic.split(' ');
-            console.warn(mnemonicWords, 'mnemonic');
-            console.warn(seed, 'seed');
+            // console.warn(mnemonicWords, 'mnemonic');
+            // console.warn(seed, 'seed');
             this.setState({
                 mnemonicWords,
                 seed: seed,
@@ -63,7 +63,7 @@ class CaptionOutput extends Component {
                     </View>
                     {!this.state.loading ? (<View style={style.textContainer}>
                         {this.state.mnemonicWords.map((val, i) => {
-                            return (<View style={style.wordWrap}><Text style={style.text} >{val}</Text></View>);
+                            return (<View key={i} style={style.wordWrap}><Text style={style.text} >{val}</Text></View>);
                         })}
                     </View>) : <View style={{
                         height: deviceHeight * 0.25, flexDirection: 'row', alignSelf: 'center',

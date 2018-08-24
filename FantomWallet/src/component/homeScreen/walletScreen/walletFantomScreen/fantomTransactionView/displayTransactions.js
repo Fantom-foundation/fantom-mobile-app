@@ -9,11 +9,8 @@ class DisplayTransaction extends Component {
         displayTransaction = fantomTransactionArr.length > 0 &&
             fantomTransactionArr.map((transaction, index) => {
                 return (
-                    selectedSortMenu === transaction.type ?
-                        <TransactionEntity transaction={transaction} />
-                        :
-                        selectedSortMenu === ALL_TRANSACTION &&
-                        <TransactionEntity transaction={transaction} />
+                    (selectedSortMenu === transaction.type || selectedSortMenu === ALL_TRANSACTION) &&
+                    <TransactionEntity key={index} transaction={transaction} />
                 )
             });
 

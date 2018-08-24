@@ -10,7 +10,7 @@ class DisplayTransaction extends Component {
             pointTransactionArr.map((transaction, index) => {
                 return (
                     (selectedSortMenu === transaction.type || selectedSortMenu === ALL_TRANSACTION) &&
-                        <TransactionEntity key={index} transaction={transaction} />
+                    <TransactionEntity key={index} transaction={transaction} />
                 )
             });
         return displayTransaction;

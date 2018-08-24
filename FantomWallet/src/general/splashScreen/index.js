@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import { ImageBackground, Image } from 'react-native';
+import { ImageBackground, Image, AsyncStorage } from 'react-native';
 
-import style from './style'; 
+import style from './style';
+
 
 class SplashScreen extends Component {
+
+    componentDidMount() {
+        AsyncStorage.getItem('masterPrivateKey').then((val) => {
+            if (val && val !== '') {
+                setTimeout(() => this.props.navigation.navigate('HomeScreen'), 5000)
+            } else {
+                setTimeout(() => this.props.navigation.navigate('CreateWallet'), 5000)
+            }
+        });
+    }
+
     render() {
-        setTimeout(() => this.props.navigation.navigate('CreateWallet'), 5000)
         return (
             <ImageBackground
                 style={style.imageBackground}
                 source={require('../../images/background.png')}
                 imageStyle={{ resizeMode: 'cover' }}>
-                <Image  source={require('../../images/fantom-logo.png')}
+                <Image source={require('../../images/fantom-logo.png')}
                     resizeMode='contain' />
             </ImageBackground >
         );
