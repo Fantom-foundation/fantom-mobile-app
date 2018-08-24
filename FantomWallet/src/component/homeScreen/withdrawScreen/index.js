@@ -66,7 +66,7 @@ export default class WithdrawScreen extends Component {
           <View style={style.sendContainer}>
             <Text style={style.sendText}>Send</Text>
           </View>
-          <ScrollView ref={(scroll) => this.scrollView = scroll}>
+          <ScrollView ref={(scroll) => this.scrollView = scroll} showsVerticalScrollIndicator={false} >
 
             <View style={style.addressContainer}>
               <Text style={style.addressText}>Address to send</Text>
@@ -160,22 +160,32 @@ export default class WithdrawScreen extends Component {
                 />
               </View>
             </View>
-          </ScrollView>
-          <View style={style.bottomSendContainer}>
+            <View style={style.bottomSendContainer}>
             <Button text='Send'
               buttonStyle={{ backgroundColor: '#EEBD12', alignSelf: 'center', height: 50 }}
               textStyle={{ color: '#000', fontWeight: 'normal' }}
               onPress={() => this.props.navigation.navigate('SendMoney')} />
           </View>
+          {/* {
+            this.state.isTextFieldOpen &&
+            <View style={{ height: 80, backgroundColor: 'red' }} />
+          } */}
+          </ScrollView>
+          {/* <View style={style.bottomSendContainer}>
+            <Button text='Send'
+              buttonStyle={{ backgroundColor: '#EEBD12', alignSelf: 'center', height: 50 }}
+              textStyle={{ color: '#000', fontWeight: 'normal' }}
+              onPress={() => this.props.navigation.navigate('SendMoney')} />
+          </View> */}
           {/* <View style={style.bottomSendContainer}> */}
           {/* <TouchableOpacity style={style.bottomSendContainer} onPress={() => this.props.navigation.navigate('SendMoney')}>
               <Text style={style.bottomSendText}>Send</Text>
             </TouchableOpacity> */}
           {/* </View> */}
-          {
+          {/* {
             this.state.isTextFieldOpen &&
             <View style={{ height: 80 }} />
-          }
+          } */}
         </KeyboardAvoidingView>
         {
           this.state.openSortMenu && <View style={{width:deviceWidth,height:deviceHeight,zIndex:1,position:'absolute'}}></View>

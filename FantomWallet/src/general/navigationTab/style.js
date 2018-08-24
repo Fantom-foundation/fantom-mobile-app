@@ -13,6 +13,7 @@ const style = {
         backgroundColor: 'blue'
     },
     navigationTabStyle: {
+        backgroundColor: WHITE_COLOR,
         width: DEVICE_WIDTH,
         flexDirection: 'row',
         height: isPhoneX ? 78 : 64,
