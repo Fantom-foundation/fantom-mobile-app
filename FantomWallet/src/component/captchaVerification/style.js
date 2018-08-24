@@ -12,8 +12,9 @@ const style = {
        marginTop: deviceHeight * 0.05
    },
    arrowContainer:{
-       marginTop: deviceHeight * 0.02,
-       marginLeft: deviceHeight * 0.02,
+       marginTop: 8,
+       marginLeft: 8,
+       alignSelf: 'flex-start'
    },
    headerContainer:{
        alignItems:'center'
@@ -34,7 +35,8 @@ const style = {
     marginTop: deviceHeight * 0.03
    },
    mid : {
-       padding: deviceHeight * 0.03
+       height: deviceHeight - 24,
+       alignItems: 'center',
    },
    textBox:{
        marginBottom: deviceHeight * 0.03,
@@ -42,7 +44,7 @@ const style = {
    footerStyle: {
        position: 'absolute',
        bottom: 0,
-       flexDirection: 'row',
+       width: deviceWidth,
    },
 }
 

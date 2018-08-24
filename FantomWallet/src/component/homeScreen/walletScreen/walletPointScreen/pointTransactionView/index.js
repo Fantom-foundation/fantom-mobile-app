@@ -43,6 +43,24 @@ class PointTransactionView extends Component {
           })
         }
       }
+
+
+    renderSortMenu() {
+        if (this.state.openSortMenu) {
+            return (
+                <>
+                <View style={{width:deviceWidth,height:deviceHeight,zIndex:1,top:-deviceHeight*0.5,position:'absolute'}}></View>
+                <SortMenuCard
+                          data={this.state.data}
+                          type={'wallet'}
+                          index={this.state.index}
+                          handleSortMenu={(item) => this.handleSortMenu(item)} />
+                </>
+            )
+        }
+        return null;
+    }
+
     render() {
         const { pointTransactionArr } = this.props;
         const selectedSortMenu = this.state.val;
@@ -65,16 +83,7 @@ class PointTransactionView extends Component {
                         ALL_TRANSACTION={ALL_TRANSACTION} />
                     {pointTransactionArr.length === 0 && <EmptyTransactionEntity />}
                 </View>
-                {
-          this.state.openSortMenu && <View style={{width:deviceWidth,height:deviceHeight,zIndex:1,top:-deviceHeight*0.5,position:'absolute'}}></View>
-        }
-                {this.state.openSortMenu &&
-                    <SortMenuCard
-                        data={this.state.data}
-                        ype={'wallet'}
-                        index={this.state.index}
-                        handleSortMenu={(item) => this.handleSortMenu(item)} />
-                }
+               { this.renderSortMenu() }
             </TouchableOpacity>
         )
     }

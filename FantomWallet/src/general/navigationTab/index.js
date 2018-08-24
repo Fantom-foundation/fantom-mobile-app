@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 
 /** * InActive NavigationIcons */
 
@@ -33,8 +33,19 @@ class HomeNavigationBar extends Component {
         { inActiveIcon: depositIcon, activeIcon: depositWhiteIcon, tabRenderInfo: 'depositIcon' },
       ]
     }
+    this._backAndroidPress = this.backAndroidPress.bind(this);
+  }
+  backAndroidPress() {
+    BackHandler.exitApp()
+    return true;
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this._backAndroidPress)
   }
 
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this._backAndroidPress)
+  }
   handleSelectedTab = (index, tabRenderInfo) => {
     this.setState({
       activeTabIndex: index,

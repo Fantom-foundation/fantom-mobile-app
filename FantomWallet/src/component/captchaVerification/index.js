@@ -120,7 +120,10 @@ class CaptchaVerification extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={style.mainContainerStyle}>
+      <KeyboardAvoidingView style={style.mainContainerStyle}>
+                <ScrollView >
+                <View style={style.mid}>
+
         <View style={style.progressContainer}>
           <ProgressBar completed='2' remaining='3' />
         </View>
@@ -128,8 +131,6 @@ class CaptchaVerification extends Component {
           <View style={style.arrowContainer}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Icon name='arrow-back' size={24} color='black' /></TouchableOpacity>
           </View>
-          <ScrollView ref={(scroll) => this.scrollView = scroll}>
-          <View style={style.mid}>
             <View style={style.headerContainer}>
               <Text style={style.captchaText}>Captcha Verification</Text>
               <View style={style.subHeadContainer}>
@@ -177,11 +178,14 @@ class CaptchaVerification extends Component {
           {/* <View style={{ alignSelf: 'center' }}>
             <Text onPress={this.getMasterKey}>Get Master Key</Text>
           </View> */}
-        </View>
-        </ScrollView>
+                  
+        
         <View style={style.footerStyle}>
           <Button text='Verify' onPress={this.createWallet} buttonStyle={{ backgroundColor: 'black' }} />
         </View>
+        </View>
+        </ScrollView>
+
       </KeyboardAvoidingView>
     );
   }

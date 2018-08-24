@@ -13,7 +13,7 @@ class Tab extends Component {
 
          const iconStyle = {
              ...style.tabIconStyle,
-             tabIconStyle
+             ...tabIconStyle,
          }
         return (
             <TouchableOpacity
