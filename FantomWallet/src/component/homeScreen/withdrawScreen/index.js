@@ -55,8 +55,6 @@ export default class WithdrawScreen extends Component {
         openSortMenu: !this.state.openSortMenu
       })
     }
-    
-    
   }
   render() {
 
