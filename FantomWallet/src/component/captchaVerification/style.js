@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions,Platform } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -35,7 +35,7 @@ const style = {
     marginTop: deviceHeight * 0.03
    },
    mid : {
-       height: deviceHeight - 24,
+       height: Platform.OS === "ios" ? deviceHeight: deviceHeight - 24,
        alignItems: 'center',
    },
    textBox:{

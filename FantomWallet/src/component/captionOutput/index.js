@@ -73,7 +73,7 @@ class CaptionOutput extends Component {
                         <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>All previous mnemonic will become invalid.</Text>
                     </View>
                     {/* <View style={style.clipBoardContainer}> */}
-                    <TouchableOpacity style={style.clipBoardContainer} onPress={() => this.copyToClipboard()}>
+                    <TouchableOpacity style={style.clipBoardContainer} onPress={!this.state.loading && this.copyToClipboard.bind(this)}>
                         <Text style={style.clipBoardText}> Copy to clipboard</Text>
                     </TouchableOpacity>
                     {/* </View> */}
@@ -82,9 +82,8 @@ class CaptionOutput extends Component {
                     <View style={style.lastMessageContainer}>
                         <View style={{ flexDirection: 'row', }}>
                             <Image source={dangerIcon} style={{ width: 20, height: 16 }} />
-                            <Text style={{ fontSize: 12, fontFamily: 'Futura' }}> You will lose your account if</Text>
+                            <Text style={{ fontSize: 12, fontFamily: 'Futura' }}> You will lose your account if you lose your Secret PIN Mnemonic</Text>
                         </View>
-                        <Text style={{ fontSize: 12, fontFamily: 'Futura' }}>      you lose your Secret PIN Mnemonic</Text>
                     </View>
                 </View>
                 <View style={style.footerStyle}>
