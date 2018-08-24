@@ -61,7 +61,7 @@ class CaptionOutput extends Component {
                         })}
                     </View>
                     <View style={style.messageContainer}>
-                        <Text style={{fontSize:deviceWidth*0.035,fontFamily:'SegoeUI-SemiBold'}}>Please write down this new Secret Mnemonic</Text>
+                        <Text style={{fontSize:deviceWidth*0.035,fontFamily:'SegoeUI-SemiBold'}}>Please write down this new Secret Mnemonic.</Text>
                         <Text style={{fontSize:deviceWidth*0.035,fontFamily:'SegoeUI-SemiBold'}}>All previous mnemonic will become invalid.</Text>
                     </View>
                     {/* <View style={style.clipBoardContainer}> */}
@@ -73,7 +73,7 @@ class CaptionOutput extends Component {
                     </View>
                     <View style={style.lastMessageContainer}>
                         <View style={{ flexDirection: 'row', }}>
-                            <Icon name='warning' size={16} color='rgb(233,177,18)' />
+                        <Image source={dangerIcon} style={{width:20,height:16}}/>
                             <Text style={{ fontSize:12,fontFamily:'Futura' }}> You will lose your account if</Text>
                         </View>
                         <Text style={{fontSize:12,fontFamily:'Futura' }}>      you lose your Secret PIN Mnemonic</Text>
