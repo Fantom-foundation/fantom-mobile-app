@@ -8,7 +8,7 @@ const deviceHeight = Dimensions.get('window').height;
 const style = {
     textBox:{
         width:deviceWidth*0.9,height:44,borderWidth:1,
-        padding:10,fontFamily:'SegoeUI-SemiBold'
+        padding:10,fontFamily:'SegoeUI-SemiBold',borderColor:'rgb(223,224,224)'
     },
     phraseNumber:{
         marginBottom: deviceHeight* 0.01,

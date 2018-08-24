@@ -24,21 +24,23 @@ const styles = {
     subHeaderText1: {
         color:'white',
         fontWeight: 'bold',
-        fontSize: deviceWidth*0.08,
+        fontSize: 32,
         marginTop: deviceHeight * 0.05,
         fontFamily:'SegoeUI'
     },
     subHeaderText2: {
         marginTop: deviceHeight * 0.02,
-        fontSize: deviceWidth*0.04,
-        color:'white',
+        fontSize: 18,
+        fontWeight:'bold',
+        color:'rgb(158,162,166)',
         fontFamily:'SegoeUI'
         
     },
     subHeaderText3: {
-        fontSize: deviceWidth*0.04,
-        color:'white',
-        fontFamily:'SegoeUI'
+        fontSize: 18,
+        color:'rgb(158,162,166)',
+        fontFamily:'SegoeUI',
+        fontWeight:'bold',
     },
     createWallet: {
         position:'absolute',
