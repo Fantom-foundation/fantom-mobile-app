@@ -54,7 +54,7 @@ const style = {
         alignItems: 'flex-end'
     },
     successTextStyle: {
-        color: ' #00CE52',
+        color: '#00CE52',
         fontFamily: FontFamily.SFProDisplay_Regular,
         letterSpacing: 1
     },
