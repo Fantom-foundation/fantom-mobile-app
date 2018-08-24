@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, createStackNavigator } from 'react-navigation';
 
 import SplashScreen from './src/general/splashScreen/';
 import CreateWallet from './src/component/createWallet/';
@@ -17,13 +17,23 @@ import Settings from './src/component/homeScreen/settings/index';
 import AboutApp from './src/component/homeScreen/settings/aboutApp/index';
 import CustomerSupport from './src/component/homeScreen/settings/customerSupport/index';
 
-const Routing = StackNavigator({
+const Routing = createStackNavigator({
     SplashScreen: { screen: SplashScreen },
-    CreateWallet: { screen: CreateWallet },
+    CreateWallet: {
+        screen: CreateWallet,
+        navigationOptions: {
+            gesturesEnabled: false,
+        },
+    },
     Terms: { screen: TermsConditions },
     PrivacyPolicy: { screen: PrivacyPolicy },
     CaptionOutput: { screen: CaptionOutput },
-    HomeScreen: { screen: HomeScreen },
+    HomeScreen: {
+        screen: HomeScreen,
+        navigationOptions: {
+            gesturesEnabled: false,
+        },
+    },
     CaptchaVerification: { screen: CaptchaVerification },
     AddressBook: { screen: AddressBook },
     QRScanner: { screen: QRScanner },
