@@ -30,10 +30,10 @@ class CaptchaVerification extends Component {
       'mnemonicWords': navigation.getParam('mnemonicWords', 'NO-ID'),
       error: ''
     };
-    this.createWallet = this.createWallet.bind(this);
+    this.walletSetup = this.walletSetup.bind(this);
     this.changePhrase = this.changePhrase.bind(this);
   };
-  createWallet() {
+  walletSetup() {
     if(!this.checkValidation()){
       return;
     }
@@ -181,7 +181,7 @@ class CaptchaVerification extends Component {
                   
         
         <View style={style.footerStyle}>
-          <Button text='Verify' onPress={this.createWallet} buttonStyle={{ backgroundColor: 'black' }} />
+          <Button text='Verify' onPress={this.walletSetup} buttonStyle={{ backgroundColor: 'black' }} />
         </View>
         </View>
         </ScrollView>

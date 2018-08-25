@@ -72,11 +72,10 @@ export default class QRGenerator extends Component {
         </View>
 
         <ViewShot ref="viewShot" options={{ format: "jpg" }}>
-          <QRCode
-            content={this.state.text}
+          { (this.props.qrLink !== undefined && this.props.qrLink !== '') && <QRCode
+            content={this.props.qrLink}
             codeStyle='dot'
-            ecl='H'
-          />
+          />}
           {this.renderLogo()}
         </ViewShot>
         {/* <TouchableOpacity onPress={() => this.onPress()}><Text>Share</Text></TouchableOpacity> */}

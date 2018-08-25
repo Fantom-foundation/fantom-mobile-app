@@ -6,7 +6,7 @@ import style from './style';
 //CaptionOutput,EditContact
 
 
-class CreateWallet extends Component {
+class WalletSetup extends Component {
     onCreateNewWallet() {
         this.props.navigation.navigate('CaptionOutput');
     }
@@ -27,8 +27,8 @@ class CreateWallet extends Component {
                     <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
                     <Text style={style.subHeaderText3}>Ecosystem</Text>
                 </View>
-                <TouchableOpacity style={style.createWallet} onPress={this.onCreateNewWallet.bind(this)} >
-                    <Text style={style.createWalletText}>Create Wallet</Text>
+                <TouchableOpacity style={style.walletSetup} onPress={this.onCreateNewWallet.bind(this)} >
+                    <Text style={style.walletSetupText}>Create Wallet</Text>
                 </TouchableOpacity>
                 <View style={style.footer}>
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate('Terms') }} >
@@ -46,4 +46,4 @@ class CreateWallet extends Component {
     }
 }
 
-export default CreateWallet;
+export default WalletSetup;

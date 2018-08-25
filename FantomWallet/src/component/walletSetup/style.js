@@ -42,7 +42,7 @@ const styles = {
         fontFamily:'SegoeUI',
         fontWeight:'bold',
     },
-    createWallet: {
+    walletSetup: {
         position:'absolute',
         bottom:deviceHeight * 0.13,
         alignItems: 'center',
@@ -53,7 +53,7 @@ const styles = {
         width: deviceWidth * 0.7,
         alignSelf:'center'
     },
-    createWalletText: {
+    walletSetupText: {
         fontSize: deviceWidth*0.05,
         marginTop: deviceHeight * 0.02,
         marginBottom: deviceHeight * 0.02,

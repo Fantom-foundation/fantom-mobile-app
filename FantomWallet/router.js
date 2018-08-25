@@ -2,7 +2,7 @@ import React from 'react';
 import { StackNavigator, createStackNavigator } from 'react-navigation';
 
 import SplashScreen from './src/general/splashScreen/';
-import CreateWallet from './src/component/createWallet/';
+import WalletSetup from './src/component/walletSetup/';
 import PrivacyPolicy from './src/component/privacyPolicy/';
 import TermsConditions from './src/component/termsConditions/';
 import CaptionOutput from './src/component/captionOutput/index';
@@ -19,8 +19,8 @@ import CustomerSupport from './src/component/homeScreen/settings/customerSupport
 
 const Routing = createStackNavigator({
     SplashScreen: { screen: SplashScreen },
-    CreateWallet: {
-        screen: CreateWallet,
+    WalletSetup: {
+        screen: WalletSetup,
         navigationOptions: {
             gesturesEnabled: false,
         },
