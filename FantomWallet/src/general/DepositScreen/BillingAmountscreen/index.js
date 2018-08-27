@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, } from 'react-native';
+import { View, Text, TextInput, Platform } from 'react-native';
 import style from './style';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class BillingAmountScreen extends Component {
     constructor(props) {
@@ -47,8 +48,9 @@ class BillingAmountScreen extends Component {
                     onFocus={() => this.onTextFieldFocus()}
                     onBlur={() => this.onTextFieldBlur()}
                 />
+                {Platform.OS === 'ios' && <KeyboardSpacer topSpacing={-180}/>}
                 <View style={{ height: 20 }} />
-
+                
             </View>
         )
     }

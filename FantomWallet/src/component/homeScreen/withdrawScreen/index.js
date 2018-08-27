@@ -51,9 +51,10 @@ export default class WithdrawScreen extends Component {
 
   render() {
     const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2, } : '';
+    const ViewUse = this.state.openSortMenu ? TouchableOpacity : View;
     return (
-      <TouchableOpacity activeOpacity={1} style={style.withdrawViewStyle} onPress={() => this.handleClickOnScreen()}>
-        {/* <KeyboardAvoidingView behavior="padding" style={[{ flex: 1 }, dynamicStyle]}> */}
+      <ViewUse activeOpacity={1} style={style.withdrawViewStyle} onPress={() => this.handleClickOnScreen()}>
+        <KeyboardAvoidingView behavior="padding" style={[{ flex: 1 }, dynamicStyle]}>
         <ScrollView ref={(scroll) => this.scrollView = scroll} showsVerticalScrollIndicator={false} >
           <View style={style.sendContainer}>
             <Text style={style.sendText}>Send</Text>
@@ -145,6 +146,7 @@ export default class WithdrawScreen extends Component {
                   placeholder='Enter Memo'
                   placeholderTextColor='#a7a7a7'
                   onFocus={() => this.scrollView.scrollTo({ x: 0, y: 100, animated: true })}
+                  onBlur={() => this.scrollView.scrollTo({ x: 0, y: 0, animated: true })}
                 />
               </View>
             </View>
@@ -159,7 +161,7 @@ export default class WithdrawScreen extends Component {
 
           </ScrollView>
 
-        {/* </KeyboardAvoidingView> */}
+        </KeyboardAvoidingView>
         {
           this.state.openSortMenu && <View style={{ width: deviceWidth, height: deviceHeight, zIndex: 1, position: 'absolute' }}></View>
         }
@@ -167,7 +169,7 @@ export default class WithdrawScreen extends Component {
           this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
             index={this.state.index} />
         }
-      </TouchableOpacity>
+      </ViewUse>
     );
   }
 }

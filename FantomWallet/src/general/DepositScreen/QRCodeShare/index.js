@@ -15,10 +15,10 @@ class QRCodeShare extends Component {
         return (
             <View style={style.containerViewStyle}>
                 <View style={style.qrGeneratorstyle}>
-                    <QRGenerator titleText={titleText} qrLink={qrLink} />
+                    <QRGenerator titleText={titleText} qrLink={'qrLink'} />
                 </View>
                 <TouchableOpacity style={style.qrLinkViewStyle}>
-                    <Text style={style.qrLinkTextStyle}> {qrLink}</Text>
+                    <Text style={style.qrLinkTextStyle}> {'qrLink'}</Text>
                 </TouchableOpacity>
             </View>
         )
