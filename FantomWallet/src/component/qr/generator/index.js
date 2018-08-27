@@ -31,9 +31,9 @@ export default class QRGenerator extends Component {
         .catch((err) => { err && console.log(err); });
     });
 
-    console.warn(VersionCheck.getPackageName());        // com.reactnative.app
-    console.warn(VersionCheck.getCurrentBuildNumber()); // 10
-    console.warn(VersionCheck.getCurrentVersion());     // 0.1.1
+    // console.warn(VersionCheck.getPackageName());        // com.reactnative.app
+    // console.warn(VersionCheck.getCurrentBuildNumber()); // 10
+    // console.warn(VersionCheck.getCurrentVersion());     // 0.1.1
 
     VersionCheck.getLatestVersion()
       .then(latestVersion => {
