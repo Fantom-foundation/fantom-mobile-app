@@ -51,10 +51,12 @@ class CaptchaVerification extends Component {
       'addr': addr,
       'address': address
     };
+
+    const hexPublicKey = EthUtil.bufferToHex(pubKey)
     // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
-    this.saveMasterKey(masterPrivateKey);
+    this.saveMasterKey(masterPrivateKey, hexPublicKey);
     // Save pubKey generation
-    this.savePublicKey(pubKey);
+    // this.savePublicKey(pubKey);
 
     this.props.navigation.navigate('HomeScreen');
     /*
@@ -80,9 +82,9 @@ class CaptchaVerification extends Component {
     }
     return true;
   };
-  saveMasterKey = async (masterPrivateKey) => {
+  saveMasterKey = async (masterPrivateKey, publicKey) => {
     try {
-      await AsyncStorage.setItem('masterPrivateKey', masterPrivateKey);
+      await AsyncStorage.multiSet([['masterPrivateKey', masterPrivateKey], ['publicKey', publicKey]]);
     } catch (error) {
       if (error) {
         console.log(error);

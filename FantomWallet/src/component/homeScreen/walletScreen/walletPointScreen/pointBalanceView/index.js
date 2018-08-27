@@ -9,13 +9,22 @@ class PointBalanceView extends Component {
         this.state = {
           balanceTextThree: 0
         }
-        this.state.balanceTextThree = this.getEtherBalanceFromApiAsync(this.getPublicKey());
+        this.getPublicKey();
+        // this.state.balanceTextThree = this.getEtherBalanceFromApiAsync(this.getPublicKey());
 
     }
     getEtherBalanceFromApiAsync(address) {
-      return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address=0'+address+'&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
+       fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address='+address+'&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
         .then((response) => response.json())
         .then((responseJson) => {
+            console.log('responseJson');
+        console.log(responseJson);
+            if(responseJson && responseJson.status === "1" && responseJson.result) {
+                this.setState({
+                balanceTextThree: responseJson.result
+            })
+            }
+            
           return responseJson;
         })
         .catch((error) => {
@@ -23,10 +32,11 @@ class PointBalanceView extends Component {
         });
     }
     getPublicKey() {
-      const pubKey = AsyncStorage.getItem('publicKey');
-      console.log('getPublicKey');
-      console.log(pubKey);
-      return pubKey;
+      AsyncStorage.getItem('publicKey').then((val) => {
+        console.log('getPublicKey');
+        console.log(val);
+        this.getEtherBalanceFromApiAsync(val);
+      });
     }
     render() {
         const { pointTransactionArr } = this.props;
