@@ -26,7 +26,7 @@ class Address extends Component {
                             </Icon>
                         </View>
                         <View style={style.mid}>
-                            <Text style={style.nameContainer}>{this.props.name}</Text>
+                            <Text style={style.nameContainer}>{this.props.name || 'Anonymous'}</Text>
                             <Text>{this.props.line1Text}</Text>
                         </View>
                         <View style={style.icons}>
@@ -35,9 +35,9 @@ class Address extends Component {
                                     color={starIcon === 'star' ? '#e9b112' : 'rgba(0,0,0,0.6)'}
                                 />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.props.delete(this.props.id)}>
+                            {/* <TouchableOpacity onPress={() => this.props.delete(this.props.id)}>
                                 <EIicon style={{ color: 'rgba(0,0,0,0.6)' }} name='trash' size={40} />
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                         </View>
                     </View>
                 </View>

@@ -8,12 +8,14 @@ import ProgressBar from '../../general/progressBar/index';
 import { StatusBar } from 'react-native';
 import Address from './address/index';
 import QRCode from 'react-native-qrcode';
+import { connect } from 'react-redux';
 
 import arrowLeftButton from '../../images/arrowLeft_White.png';
 import editRightButton from '../../images/pluswhite.png';
 import whiteSearchIcon from '../../images/searchWhite.png';
 import searchIcon from '../../images/search.png'
 import { Dimensions } from 'react-native';
+import * as AddressAction from '../../redux/addressBook/action';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -31,40 +33,73 @@ class AddressBook extends Component {
         { id: 9, name: 'John Doe', line1Text: '4GWQCH37uJEvDzQkd', rate: false },
         { id: 10, name: 'John Doe', line1Text: '5GWQCH37uJEvDzQkd', rate: false }
         ],
-        displaySearch: false
+        displaySearch: false,
+        searchText: '',
     }
     onLeftIconPress = () => {
         this.props.navigation.goBack()
     }
     onSecondaryIconPress = () => {
         this.setState({
-            displaySearch: !this.state.displaySearch
+            displaySearch: !this.state.displaySearch,
+            searchText: '',
         })
     }
     onRightIconPress() {
         this.props.navigation.navigate('EditContact')
     }
+
     deleteItem = (id) => {
         const index = this.state.addressList.findIndex((el) => el.id === id);
         let newAddressLst = this.state.addressList.slice();
         newAddressLst.splice(index, 1);
         this.setState({ addressList: newAddressLst });
     }
-    rateChange = (id) => {
-        const index = this.state.addressList.findIndex((el) => el.id === id);
-        let newAddressLst = this.state.addressList.slice();
-        newAddressLst[index].rate = !newAddressLst[index].rate;
-        this.setState({ addressList: newAddressLst });
+
+    rateChange = (address) => {
+      this.props.toggleAddress(address);
+    }
+
+    renderAddressList() {
+      let addressListView = [];
+      let favoriteListView = [];
+      const addresses = this.props.addresses;
+        if (addresses) {
+          for (const key in addresses) {
+            if (addresses.hasOwnProperty(key)) {
+               const tempAddress = addresses[key];
+               if (this.state.displaySearch && this.state.searchText !== '') {
+                 const searchText = this.state.searchText.toLowerCase();
+                 const name = tempAddress.name.toLowerCase();
+                 const addressLower = tempAddress.address.toLowerCase();
+                 if (!(name.includes(searchText) || addressLower.includes(searchText))) {
+                  continue;
+                 }
+               }
+               addressListView.push(
+                <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} />
+               );
+               if (tempAddress.isFavourite) {
+                favoriteListView.push(
+                  <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} />
+                 );
+               }
+            }
+         }
+        }
+        if (this.state.addOrFavorite === 'favorite') {
+          return favoriteListView;
+        }
+        return addressListView;
     }
 
     render() {
-        console.log(this.state.displaySearch);
+        console.log(this.props.addresses);
         let addColor = style.add;
         let favColor = style.favorites;
         let addColorText = { color: 'black' };
         let favColorText = { color: 'black' };
-        let addressListView = null;
-        let favoriteListView = null;
+
         if (this.state.addOrFavorite === 'add') {
             addColor = { ...style.add, backgroundColor: 'rgb(63,62,63)' };
             addColorText = { color: 'rgb(232,232,232)' };
@@ -74,12 +109,7 @@ class AddressBook extends Component {
             favColorText = { color: 'rgb(232,232,232)' }
             addColor = style.add;
         }
-        if (this.state.addressList.length) {
-            addressListView = this.state.addressList.map((val, index) => <Address key={index} id={val.id} index={index} name={val.name} line1Text={val.line1Text} rate={val.rate} rateChange={this.rateChange} delete={this.deleteItem} />)
-        }
-        if (this.state.addressList.length) {
-            favoriteListView = this.state.addressList.filter((val) => val.rate === true).map((val, index) => <Address key={index} id={val.id} name={val.name} line1Text={val.line1Text} line2Text={val.line2Text} rate={val.rate} rateChange={this.rateChange} delete={this.deleteItem} />)
-        }
+        
 
         return (
             <View style={style.mainContainerStyle}>
@@ -109,20 +139,37 @@ class AddressBook extends Component {
                     <View style={ style.displaySearch} >
                         {this.state.displaySearch ?
                             (<View style={style.textInputContainer}>
-                                <TextInput placeholder='Search' style={{ flex: 3,fontFamily:'SFProDisplay-SemiBold' }}></TextInput>
+                                <TextInput placeholder='Search' style={{ flex: 3,fontFamily:'SFProDisplay-SemiBold' }}
+                                  onChangeText={(text) => this.setState({ searchText: text })}
+                                ></TextInput>
                                 <Image source={searchIcon} style={ style.imageSize} />
                             </View>) : null}
-                        {this.state.addOrFavorite === 'add' ? <ScrollView
+                        <ScrollView
                             showsVerticalScrollIndicator={false}
-                        >{addressListView}<View style={{ height: 50 }} />
-                        </ScrollView> : null}
+                        >{this.renderAddressList()}<View style={{ height: 50 }} />
+                        </ScrollView>
                     </View>
-                    {this.state.addOrFavorite === 'favorite' ? <ScrollView showsVerticalScrollIndicator={false} >{favoriteListView}</ScrollView> : null}
-
+                    
                 </View>
             </View>
         );
     }
 }
 
-export default AddressBook;
+const mapStateToProps = (state) => {
+  return {
+    addresses: state.addressBookReducer.addresses,
+  };
+},
+  mapDispatchToProps = (dispatch) => {
+    return {
+      addNewAddress: (walletAddress, name) => {
+        dispatch({ type: AddressAction.ADD_ADDRESS, address: walletAddress, name: name || '' })
+      },
+      toggleAddress: (walletAddress) => {
+        dispatch({ type: AddressAction.FAVOURITE_ADDRESS, address: walletAddress })
+      },
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressBook);

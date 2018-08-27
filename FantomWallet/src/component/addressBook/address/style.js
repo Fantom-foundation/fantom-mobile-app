@@ -29,7 +29,7 @@ const style = {
         flexDirection: 'column', flex: 5, justifyContent: 'center', marginLeft: 12
     },
     icons: {
-        flexDirection: 'row', flex: 2, alignItems: 'center', justifyContent: 'space-around'
+        flexDirection: 'row', flex: 2, alignItems: 'center', justifyContent: 'flex-end'
     }
 }
 

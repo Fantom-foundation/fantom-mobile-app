@@ -13,6 +13,8 @@ import EthereumJSWallet from 'ethereumjs-wallet';
 import Hdkey from 'hdkey';
 import EthUtil from 'ethereumjs-util';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
+import * as KeyAction from '../../redux/keys/action';
 // Method of generation taken from: https://medium.com/bitcraft/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998;
 import { Dimensions } from 'react-native';
 
@@ -55,6 +57,7 @@ class CaptchaVerification extends Component {
     const hexPublicKey = EthUtil.bufferToHex(pubKey)
     // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
     this.saveMasterKey(masterPrivateKey, hexPublicKey);
+    this.props.setMasterPublicKey(masterPrivateKey, hexPublicKey);
     // Save pubKey generation
     // this.savePublicKey(pubKey);
 
@@ -205,4 +208,25 @@ class CaptchaVerification extends Component {
     );
   }
 }
-export default CaptchaVerification;
+
+
+
+const mapStateToProps = (state) => {
+  return {
+  };
+},
+  mapDispatchToProps = (dispatch) => {
+      return {
+          setMasterKey: (key) => {
+            dispatch({type: KeyAction.MASTER_KEY, key});
+          },
+          setPublicKey: (key) => {
+            dispatch({type: KeyAction.PUBLIC_KEY, key});
+          },
+          setMasterPublicKey: (masterKey, publicKey) => {
+            dispatch({type: KeyAction.MASTER_PUBLIC_KEY, masterKey, publicKey});
+          },
+      };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(CaptchaVerification);
