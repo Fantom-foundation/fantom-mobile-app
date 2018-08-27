@@ -27,7 +27,7 @@ export default class QRGenerator extends Component {
     this.refs.viewShot.capture().then(uri => {
       console.log("do something with ", uri);
       Share.open({ url: uri })
-        .then((res) => { console.log('this.props.qrLink , res',this.props.qrLink, res) })
+        .then((res) => { console.log('this.props.qrLink , res', this.props.qrLink, res) })
         .catch((err) => { err && console.log(err); });
     });
 
@@ -106,16 +106,16 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
-},
-addressTitleTextStyle: {
-  fontWeight: 'bold'
-},
-addressShareIconStyle: {
-  flex: 1,
-  alignItems: 'flex-end',
-},
-addressShareImageIconStyle: {
-  width: 45,
-  height: 45
-},
+  },
+  addressTitleTextStyle: {
+    fontWeight: 'bold'
+  },
+  addressShareIconStyle: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  addressShareImageIconStyle: {
+    width: 45,
+    height: 45
+  },
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TransactionEntity from '../../../../../general/transactionEntity/';
+import TransactionEntity from '../../transactionEntity/index';
 
 class DisplayTransaction extends Component {
     render() {

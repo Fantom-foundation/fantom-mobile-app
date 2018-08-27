@@ -1,6 +1,6 @@
 const style = {
     billAmountViewStyle: {
-        marginTop: 36,
+        // marginTop: 36,
         marginLeft: 24,
         marginRight: 24,
   

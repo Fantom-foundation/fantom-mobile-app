@@ -15,7 +15,6 @@ class BillingAmountScreen extends Component {
         if (this.props.onAmountChange) {
             this.props.onAmountChange(amount);
         }
-
     }
 
     onTextFieldFocus() {
@@ -31,17 +30,16 @@ class BillingAmountScreen extends Component {
 
     render() {
         return (
-
             <View style={style.billAmountViewStyle} >
                 <View style={style.billAmountLabelStyle}>
                     <Text style={style.billAmountTextLabelStyle}>Billing Amount</Text>
                     <View style={style.ftmViewStyle}>
-                        <Text style={style.ftmLabelStyle}>FTM</Text>
+                        <Text style={style.ftmLabelStyle}>{this.props.headerText}</Text>
                     </View>
                 </View>
                 <TextInput
                     onChangeText={this.onAmountChange.bind(this)}
-                    value={this.state.amount}
+                    value={`${this.state.amount}`}
                     style={style.amountInputStyle}
                     placeholder='Enter Amount'
                     placeholderTextColor='#a7a7a7'
@@ -50,7 +48,7 @@ class BillingAmountScreen extends Component {
                     onBlur={() => this.onTextFieldBlur()}
                 />
                 <View style={{ height: 20 }} />
-                
+
             </View>
         )
     }

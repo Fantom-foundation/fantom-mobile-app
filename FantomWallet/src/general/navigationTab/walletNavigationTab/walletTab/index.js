@@ -14,7 +14,7 @@ class WalletTab extends Component {
 
         tabTextStyle = {
             ...style.tabTextStyle,
-            tabTextStyle,
+            ...tabTextStyle,
             fontWeight: activeTabIndex === index ? 'bold' : 'normal'
         }
         return (

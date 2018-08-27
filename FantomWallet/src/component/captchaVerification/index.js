@@ -119,8 +119,9 @@ class CaptchaVerification extends Component {
   }
 
   render() {
+    let behaviour = (Platform.OS === 'ios') ? 'padding' : null;
     return (
-      <KeyboardAvoidingView style={style.mainContainerStyle}>
+      <KeyboardAvoidingView behavior={behaviour}style={style.mainContainerStyle}>
                 <ScrollView >
                 <View style={style.mid}>
 
@@ -145,8 +146,7 @@ class CaptchaVerification extends Component {
                   phraseNumber='Enter phrase 5'
                   text={this.state.phraseFive}
                   onChangeText={(text) => this.changePhrase(text, 'phraseFive')}
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()} 
+                 
                   />
                 {(this.state.phraseFive !== '' && this.state.phraseFive !== this.state.mnemonicWords[4]) ? <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                   <Text style={{ color: 'red' }}>Phrase five does not match up.</Text></View> : null}
@@ -156,8 +156,7 @@ class CaptchaVerification extends Component {
                   phraseNumber='Enter phrase 9'
                   text={this.state.phraseNine}
                   onChangeText={(text) => this.changePhrase(text, 'phraseNine')}
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()} 
+                
                   />
                 {(this.state.phraseNine !== '' && this.state.phraseNine !== this.state.mnemonicWords[8]) ? <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                   <Text style={{ color: 'red' }}>Phrase nine does not match up.</Text></View> : null}
@@ -167,8 +166,7 @@ class CaptchaVerification extends Component {
                   phraseNumber='Enter phrase 12'
                   text={this.state.phraseTwelve}
                   onChangeText={(text) => this.changePhrase(text, 'phraseTwelve')}
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()} 
+                 
                   />
                 {(this.state.phraseTwelve !== '' && this.state.phraseTwelve !== this.state.mnemonicWords[11]) ? <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                   <Text style={{ color: 'red' }}>Phrase twelve does not match up.</Text></View> : null}

@@ -58,7 +58,7 @@ const style = {
     clipBoardContainer: {
         backgroundColor: 'rgb(216,216,216)',
         alignItems: 'center',
-        marginTop: deviceHeight * 0.05,
+        marginTop: deviceHeight * 0.04,
         padding: 5
     },
     clipBoardText: {
@@ -67,11 +67,11 @@ const style = {
     },
     line: {
         backgroundColor: 'rgb(243,243,243)',
-        marginTop: deviceWidth * 0.15,
+        marginTop: deviceWidth * 0.12,
         height: 2
     },
     lastMessageContainer: {
-        marginTop: deviceWidth * 0.05,
+        marginTop: deviceWidth * 0.045,
     },
     footerStyle: {
         position: 'absolute',

@@ -1,4 +1,4 @@
-import * as FontFamily from '../../../../../common/textFontFamily/';
+import * as FontFamily from '../../../common/textFontFamily';
 
 const style = {
     fantomBalanceView: {

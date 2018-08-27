@@ -23,10 +23,10 @@ export default class WithdrawScreen extends Component {
     this.setState({
       isTextFieldOpen: true
     })
-    // let scrollValue = (Platform.OS === 'ios') ? 60 : 200
-    // setTimeout(() => {
-    //   this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
-    // }, 10);
+    let scrollValue = (Platform.OS === 'ios') ? 60 : 200
+    setTimeout(() => {
+      this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
+    }, 10);
   }
   onTextFieldBlur() {
     Keyboard.dismiss();

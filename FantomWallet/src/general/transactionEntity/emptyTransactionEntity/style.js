@@ -3,7 +3,7 @@ import * as FontFamily from '../../../common/textFontFamily/';
 const style = {
     mainViewStyle: {
         flex: 1,
-        margin: 50,
+        marginTop: 45,
         alignItems: 'center',
         // backgroundColor: '#000'
     },
@@ -11,11 +11,12 @@ const style = {
         margin: 8,
         fontSize: 20,
         // fontWeight: 'bold',
-        fontFamily: FontFamily.SegoeUI_Bold
+        fontFamily: FontFamily.SegoeUI_Bold,
+        
 
     },
     textInfoStyle: {
-        color: 'rgb(109,117,125)'
+        color: 'rgb(109,117,125)',
     },
 }
 

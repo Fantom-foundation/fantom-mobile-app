@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import style from './style';
-import EmptyTransactionEntity from '../../../../../general/transactionEntity/emptyTransactionEntity/';
-import SortMenuCard from '../../../../../general/sortMenuCard/';
+import EmptyTransactionEntity from '../../transactionEntity/index';
+import SortMenuCard from '../../sortMenuCard/';
 import DisplayTransaction from './displayTransactions';
 
-import sortMenuIcon from '../../../../../images/arrow_With_bar.png';
+import sortMenuIcon from '../../../images/arrow_With_bar.png'
 
 
-import { SENT, RECEIVED, ALL_TRANSACTION } from '../../../../../common/constants/';
+import { SENT, RECEIVED, ALL_TRANSACTION } from '../../../common/constants/';
 
 class FantomTransactionView extends Component {
 

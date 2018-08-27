@@ -4,7 +4,9 @@ import { View, Text } from 'react-native';
 import style from './style';
 
 class FantomBalanceView extends Component {
+
     render() {
+
         const { fantomTransactionArr } = this.props;
 
         let balanceTextOne = '(1,000\\ = 1.00002312FTM)';
