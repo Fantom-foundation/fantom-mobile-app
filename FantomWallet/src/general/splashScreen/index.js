@@ -11,7 +11,8 @@ class SplashScreen extends Component {
             if (val && val !== '') {
                 setTimeout(() => this.props.navigation.navigate('HomeScreen'), 5000)
             } else {
-                setTimeout(() => this.props.navigation.navigate('walletSetup'), 5000)
+                // this.props.navigation.navigate('WalletSetup')
+                setTimeout(() => this.props.navigation.navigate('WalletSetup'), 5000)
             }
         });
     }
