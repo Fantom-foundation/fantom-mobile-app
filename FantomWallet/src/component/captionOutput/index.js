@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Clipboard, Image, ActivityIndicator, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, Clipboard, Image, ActivityIndicator, Dimensions, ScrollView } from 'react-native';
 import style from './style';
 import Button from '../../general/button/index';
 import '../../../global';
@@ -20,8 +20,6 @@ class CaptionOutput extends Component {
         menmonicPromise.then((mnemonic) => {
             const seed = Bip39.mnemonicToSeed(mnemonic); //creates seed buffer
             const mnemonicWords = mnemonic.split(' ');
-            // console.warn(mnemonicWords, 'mnemonic');
-            // console.warn(seed, 'seed');
             this.setState({
                 mnemonicWords,
                 seed: seed,
@@ -38,7 +36,6 @@ class CaptionOutput extends Component {
         const string = this.state.mnemonicWords.join(',');
         await Clipboard.setString(string);
         const clipboardContent = await Clipboard.getString();
-        console.log(clipboardContent);
     }
     onConfirmHandler() {
         this.props.navigation.navigate('CaptchaVerification', {
@@ -52,40 +49,57 @@ class CaptionOutput extends Component {
                 <View style={style.progressContainer}>
                     <ProgressBar completed='2' remaining='3' />
                 </View>
-                <View style={style.arrowContainer}>
-                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Icon name='arrow-back' size={24} color='black' /></TouchableOpacity>
-                </View>
-                <View style={style.mid}>
-                    <View style={style.warningContainer}>
-                        {/* <Icon name='warning' size={25} color='rgb(233,177,18)' /> */}
-                        <Image source={dangerIcon} style={{ width: 20, height: 20 }} />
-                        <Text style={style.secretText}> Secret Mnemonic:</Text>
-                    </View>
-                    {!this.state.loading ? (<View style={style.textContainer}>
-                        {this.state.mnemonicWords.map((val, i) => {
-                            return (<View key={i} style={style.wordWrap}><Text style={style.text} >{val}</Text></View>);
-                        })}
-                    </View>) : <View style={{
-                        height: deviceHeight * 0.25, flexDirection: 'row', alignSelf: 'center',
-                    }}><ActivityIndicator size="small" color="#000" /></View>}
-                    <View style={style.messageContainer}>
-                        <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>Please write down this new Secret Mnemonic.</Text>
-                        <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>All previous mnemonic will become invalid.</Text>
-                    </View>
-                    {/* <View style={style.clipBoardContainer}> */}
-                    <TouchableOpacity style={style.clipBoardContainer} onPress={() => this.copyToClipboard()}>
-                        <Text style={style.clipBoardText}> Copy to clipboard</Text>
-                    </TouchableOpacity>
-                    {/* </View> */}
-                    <View style={style.line}>
-                    </View>
-                    <View style={style.lastMessageContainer}>
-                        <View style={{ flexDirection: 'row', }}>
-                            <Image source={dangerIcon} style={{ width: 20, height: 16 }} />
-                            <Text style={{ fontSize: 12, fontFamily: 'Futura' }}> You will lose your account if</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={style.arrowContainer}>
+                    <Icon name='arrow-back' size={24} color='black' />
+                </TouchableOpacity>
+                <View style={{ height: deviceHeight * 0.75 }}>
+                    <ScrollView
+                        style={style.mid}
+                        scrollEnabled={true}
+                    >
+                        <View style={style.warningContainer}>
+                            <Image source={dangerIcon} style={{ width: 20, height: 20 }} />
+                            <Text style={style.secretText}> Secret Mnemonic:</Text>
                         </View>
-                        <Text style={{ fontSize: 12, fontFamily: 'Futura' }}>      you lose your Secret PIN Mnemonic</Text>
-                    </View>
+                        {
+                            !this.state.loading ? (
+                                <View style={style.textContainer}>
+                                    {
+                                        this.state.mnemonicWords.map((val, i) => {
+                                            return (
+                                                <View key={i} style={style.wordWrap}>
+                                                    <Text style={style.text} >{val}</Text>
+                                                </View>
+                                            );
+                                        })
+                                    }
+                                </View>
+                            )
+                                :
+                                <View style={{
+                                    height: deviceHeight * 0.25, flexDirection: 'row', alignSelf: 'center',
+                                }}>
+                                    <ActivityIndicator size="small" color="#000" />
+                                </View>
+                        }
+                        <View style={style.messageContainer}>
+                            <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>Please write down this new Secret Mnemonic.</Text>
+                            <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>All previous mnemonic will become invalid.</Text>
+                        </View>
+                        <TouchableOpacity style={style.clipBoardContainer} onPress={() => this.copyToClipboard()}>
+                            <Text style={style.clipBoardText}> Copy to clipboard</Text>
+                        </TouchableOpacity>
+                        <View style={style.line}>
+                        </View>
+                        <View style={style.lastMessageContainer}>
+                            <Image source={dangerIcon} style={{ width: 20, height: 16 }} />
+                            <View>
+                                <Text style={{ fontSize: 12, fontFamily: 'Futura' }}> You will lose your account if</Text>
+                                <Text style={{ fontSize: 12, fontFamily: 'Futura' }}> you lose your Secret PIN Mnemonic.</Text>
+                            </View>
+
+                        </View>
+                    </ScrollView>
                 </View>
                 <View style={style.footerStyle}>
                     <Button

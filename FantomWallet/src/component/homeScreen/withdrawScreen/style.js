@@ -1,4 +1,6 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
+
+const isAndroid = (Platform.OS === 'android');
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -22,8 +24,15 @@ const style = {
         fontWeight: 'bold'
     },
     addressTextInputContainer: {
-        flexDirection: 'row', width: deviceWidth - 32, height: deviceHeight * 0.06, marginTop: deviceHeight * 0.005,
-        paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'rgb(93,93,93)', alignItems: 'center'
+        flexDirection: 'row',
+        width: deviceWidth - 32,
+        height: isAndroid ? deviceHeight * 0.07 : deviceHeight * 0.06,
+        marginTop: deviceHeight * 0.005,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderWidth: 1,
+        borderColor: 'rgb(93,93,93)',
+        alignItems: 'center'
     },
     addressTextInput: {
         flex: 1, fontSize: 16, color: '#a7a7a7'
@@ -37,11 +46,9 @@ const style = {
     price: {
         fontWeight: 'bold'
     },
-    currentPrice: {
-        fontWeight: 'bold'
-    },
     priceTextInputContainer: {
-        flexDirection: 'row', width: deviceWidth - 32, marginTop: deviceHeight * 0.005, height: deviceHeight * 0.06, paddingLeft: 10, paddingRight: 10,
+        flexDirection: 'row', width: deviceWidth - 32, marginTop: deviceHeight * 0.005,
+        height: isAndroid ? deviceHeight * 0.07 : deviceHeight * 0.06, paddingLeft: 10, paddingRight: 10,
         borderWidth: 1, borderColor: 'rgb(93,93,93)', alignItems: 'center'
     },
     priceTextInput: {
@@ -70,7 +77,8 @@ const style = {
         flex: 1
     },
     ftmTextContainer: {
-        width: 120, justifyContent: 'center'
+        width: deviceWidth * 0.27,
+        alignItems: 'flex-end'
     },
     ftmText: {
         fontSize: 12
