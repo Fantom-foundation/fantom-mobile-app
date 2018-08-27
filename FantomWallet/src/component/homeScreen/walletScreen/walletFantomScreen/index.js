@@ -9,6 +9,7 @@ import TransactionView from '../../../../general/WalletScreens/TransactionView';
 import { SUCCESS, FAILED, SENT, RECEIVED } from '../../../../common/constants/';
 
 class WalletFantomScreen extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -23,6 +24,24 @@ class WalletFantomScreen extends Component {
                 { type: SENT, amount: '00.00001230', amountUnit: 'FTM', transactionId: '23JGDGD...D872', transactionStatus: SUCCESS },
             ],
         }
+      //  this.state.fantomTransactionArr = this.getTransactionsFromApiAsync(this.getPublicKey());
+
+    }
+    getTransactionsFromApiAsync(address) {
+      return fetch('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address='+address+'&startblock=0&endblock=99999999&sort=asc&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
+        .then((response) => response.json())
+        .then((responseJson) => {
+          return responseJson;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    getPublicKey() {
+      const pubKey = AsyncStorage.getItem('publicKey');
+      console.log('getPublicKey');
+      console.log(pubKey);
+      return pubKey;
     }
     render() {
         const balanceText = '(1,000\\ = 1.00002312FTM)';

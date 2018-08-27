@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
-
+import Web3 from 'web3';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
@@ -21,6 +21,20 @@ class SendMoney extends Component {
     };
   };
 
+  transferMoney (from, to, value){
+    Web3.eth.sendTransaction({
+    from: from,
+    to: to,
+    value: Web3.toWei(value, "ether"),
+    }, function(err, transactionHash) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(transactionHash);
+        }
+    });
+  };
+
   render() {
     return (
       <View style={style.mainContainerStyle}>
@@ -37,7 +51,7 @@ class SendMoney extends Component {
           </View>
           <View style={style.textFieldStyle}>
             <TextField
-              placeHolderText={'Address to send'}
+              placeHolderText={'Addresses to send'}
             />
           </View>
           <View style={style.textFieldStyle}>

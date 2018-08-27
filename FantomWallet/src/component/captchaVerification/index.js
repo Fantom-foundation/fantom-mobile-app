@@ -30,10 +30,10 @@ class CaptchaVerification extends Component {
       'mnemonicWords': navigation.getParam('mnemonicWords', 'NO-ID'),
       error: ''
     };
-    this.createWallet = this.createWallet.bind(this);
+    this.walletSetup = this.walletSetup.bind(this);
     this.changePhrase = this.changePhrase.bind(this);
   };
-  createWallet() {
+  walletSetup() {
     if(!this.checkValidation()){
       return;
     }
@@ -51,8 +51,13 @@ class CaptchaVerification extends Component {
       'addr': addr,
       'address': address
     };
+
+    const hexPublicKey = EthUtil.bufferToHex(pubKey)
     // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
-    this.saveMasterKey(masterPrivateKey);
+    this.saveMasterKey(masterPrivateKey, hexPublicKey);
+    // Save pubKey generation
+    // this.savePublicKey(pubKey);
+
     this.props.navigation.navigate('HomeScreen');
     /*
        If using ethereumjs-wallet instead do after line 1:
@@ -77,9 +82,19 @@ class CaptchaVerification extends Component {
     }
     return true;
   };
-  saveMasterKey = async (masterPrivateKey) => {
+  saveMasterKey = async (masterPrivateKey, publicKey) => {
     try {
-      await AsyncStorage.setItem('masterPrivateKey', masterPrivateKey);
+      await AsyncStorage.multiSet([['masterPrivateKey', masterPrivateKey], ['publicKey', publicKey]]);
+    } catch (error) {
+      if (error) {
+        console.log(error);
+      }
+      // Error saving data
+    }
+  };
+  savePublicKey = async (publicKey) => {
+    try {
+      await AsyncStorage.setItem('publicKey', publicKey);
     } catch (error) {
       if (error) {
         console.log(error);
@@ -178,12 +193,12 @@ class CaptchaVerification extends Component {
           </View> */}
                   
         
+        
+        </View>
+        </ScrollView>
         <View style={style.footerStyle}>
           <Button text='Verify' onPress={this.createWallet} buttonStyle={{ backgroundColor: 'black' }} />
         </View>
-        </View>
-        </ScrollView>
-
       </KeyboardAvoidingView>
     );
   }

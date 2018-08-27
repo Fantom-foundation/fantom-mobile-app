@@ -6,14 +6,11 @@ class DisplayTransaction extends Component {
         const { fantomTransactionArr, selectedSortMenu, ALL_TRANSACTION } = this.props;
 
         let displayTransaction = '';
-        displayTransaction = fantomTransactionArr.length > 0 &&
-            fantomTransactionArr.map((transaction, index) => {
+        displayTransaction = fantomTransactionArr && fantomTransactionArr.length > 0 &&
+         fantomTransactionArr.map((transaction, index) => {
                 return (
-                    selectedSortMenu === transaction.type ?
-                        <TransactionEntity transaction={transaction} />
-                        :
-                        selectedSortMenu === ALL_TRANSACTION &&
-                        <TransactionEntity transaction={transaction} />
+                    (selectedSortMenu === transaction.type || selectedSortMenu === ALL_TRANSACTION) &&
+                    <TransactionEntity key={index} transaction={transaction} />
                 )
             });
 

@@ -1,29 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar, AsyncStorage } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
 import style from './style';
 
 //CaptchaVerification
 //CaptionOutput,EditContact
 
 
-class CreateWallet extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            qrAddress: '',
-        }
-    }
-    componentWillMount() {
-        AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
-    }
+class WalletSetup extends Component {
     onCreateNewWallet() {
-        const walletAddress = this.state.qrAddress;
-        console.log('this.state.qrAddress  :', this.state.qrAddress);
-        if (walletAddress === null) {
-            this.props.navigation.navigate('CaptionOutput');
-        } else {
-            this.props.navigation.navigate('HomeScreen');
-        }
+        this.props.navigation.navigate('CaptionOutput');
     }
     render() {
         return (<ImageBackground
@@ -42,8 +27,8 @@ class CreateWallet extends Component {
                     <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
                     <Text style={style.subHeaderText3}>Ecosystem</Text>
                 </View>
-                <TouchableOpacity style={style.createWallet} onPress={this.onCreateNewWallet.bind(this)} >
-                    <Text style={style.createWalletText}>Create Wallet</Text>
+                <TouchableOpacity style={style.walletSetup} onPress={this.onCreateNewWallet.bind(this)} >
+                    <Text style={style.walletSetupText}>Create Wallet</Text>
                 </TouchableOpacity>
                 <View style={style.footer}>
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate('Terms') }} >
@@ -61,4 +46,4 @@ class CreateWallet extends Component {
     }
 }
 
-export default CreateWallet;
+export default WalletSetup;

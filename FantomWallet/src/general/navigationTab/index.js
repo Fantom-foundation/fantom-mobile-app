@@ -60,6 +60,7 @@ class HomeNavigationBar extends Component {
 
     let renderTabNavigation = tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
       <Tab
+        key={index}
         activeTabIndex={activeTabIndex}
         index={index}
         ACTIVE_TAB_COLOR={ACTIVE_TAB_COLOR}

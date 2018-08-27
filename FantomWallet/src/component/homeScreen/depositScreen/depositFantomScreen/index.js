@@ -13,10 +13,10 @@ class DepositFantomScreen extends Component {
         super(props);
         this.state = {
             amount: 0,
-            qrAddress: '1E6yOxiEuiBflg/?LKSngL?SNgKLskdhf',
+            qrAddress: '',
         }
     }
-    componentDidMount() {
+    componentDidlMount() {
         AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
     }
     onQRShare() {
