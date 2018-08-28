@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ScrollView, TextInput, Alert } from 'react-native';
 import { LinkButton } from 'general/';
 import Header from '../../general/header/index';
 import style from './style';
@@ -49,11 +49,13 @@ class AddressBook extends Component {
         this.props.navigation.navigate('EditContact')
     }
 
-    deleteItem = (id) => {
-        const index = this.state.addressList.findIndex((el) => el.id === id);
-        let newAddressLst = this.state.addressList.slice();
-        newAddressLst.splice(index, 1);
-        this.setState({ addressList: newAddressLst });
+    deleteItem = (address) => {
+      Alert.alert('Confirm Dialog', 'Are you sure you want to delete this contact.',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => {this.props.deleteAddress(address);}},
+      ]);
+      
     }
 
     rateChange = (address) => {
@@ -77,11 +79,11 @@ class AddressBook extends Component {
                  }
                }
                addressListView.push(
-                <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} />
+                <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} delete={this.deleteItem} />
                );
                if (tempAddress.isFavourite) {
                 favoriteListView.push(
-                  <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} />
+                  <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} delete={this.deleteItem} />
                  );
                }
             }
@@ -168,6 +170,9 @@ const mapStateToProps = (state) => {
       },
       toggleAddress: (walletAddress) => {
         dispatch({ type: AddressAction.FAVOURITE_ADDRESS, address: walletAddress })
+      },
+      deleteAddress: (walletAddress) => {
+        dispatch({ type: AddressAction.DELETE_ADDRESS, address: walletAddress })
       },
     };
   };

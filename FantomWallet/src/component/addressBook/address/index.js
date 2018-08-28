@@ -35,9 +35,9 @@ class Address extends Component {
                                     color={starIcon === 'star' ? '#e9b112' : 'rgba(0,0,0,0.6)'}
                                 />
                             </TouchableOpacity>
-                            {/* <TouchableOpacity onPress={() => this.props.delete(this.props.id)}>
+                            <TouchableOpacity onPress={() => this.props.delete(this.props.id)}>
                                 <EIicon style={{ color: 'rgba(0,0,0,0.6)' }} name='trash' size={40} />
-                            </TouchableOpacity> */}
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>

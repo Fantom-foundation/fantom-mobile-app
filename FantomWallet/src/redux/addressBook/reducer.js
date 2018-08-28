@@ -31,7 +31,7 @@ function toggleFavouriteAddress(state, action) {
     });
     return Object.assign({}, state, {
       addresses: newAddresses,
-    });;
+    });
   }
   return state;
 }
@@ -47,10 +47,27 @@ function updateAddressTimeStamp(state, action) {
     });
     return Object.assign({}, state, {
       addresses: newAddresses,
-    });;
+    });
   }
   return state;
 }
+
+function deleteAddress(state, action) {
+  let oldAddresses = state.addresses;
+  const addressKey = action.address;
+  const oldAddress = oldAddresses[addressKey];
+  if (oldAddress) {
+    delete oldAddresses[addressKey];
+    const newAddresses = {
+      ...oldAddresses,
+    }
+    return Object.assign({}, state, {
+      addresses: newAddresses,
+    });
+  }
+  return state;
+}
+
 
 const AddressReducer = (state = { addresses: {} }, action) => {
     switch (action.type) {
@@ -60,6 +77,8 @@ const AddressReducer = (state = { addresses: {} }, action) => {
           return toggleFavouriteAddress(state, action)
         case Actions.TIMESTAMP_ADDRESS:
           return updateAddressTimeStamp(state, action)
+        case Actions.DELETE_ADDRESS:
+          return deleteAddress(state, action)
         default:
             return state;
     }
