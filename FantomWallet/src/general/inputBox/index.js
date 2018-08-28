@@ -14,6 +14,7 @@ export default class InputBox extends Component {
                     onChangeText={(text) => this.props.onChangeText(text)}
                     value={this.props.text}
                     style={style.textBox}
+                    autoCapitalize='none'
                     // onFocus={() => this.props.onFocus()}
                     // onBlur={() => this.props.onBlur()}
                 />

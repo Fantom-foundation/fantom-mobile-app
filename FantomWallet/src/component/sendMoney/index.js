@@ -17,51 +17,75 @@ class SendMoney extends Component {
   constructor(props) {
     super(props);
     const { navigation } = this.props;
+    let address='';
+    let coin ='';
+    let memo='';
+    let amount='';
+    let fees ='';
+    
+    // const { address, coin, memo, amount, fees } = this.props.navigation.state.params
     this.state = {
+      address: address,
+      amount: amount,
+      coin: coin,
+      memo: memo,
+      fees: fees
+
     };
   };
 
-  transferMoney (from, to, value){
+  transferMoney(from, to, value) {
     Web3.eth.sendTransaction({
-    from: from,
-    to: to,
-    value: Web3.toWei(value, "ether"),
-    }, function(err, transactionHash) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(transactionHash);
-        }
+      from: from,
+      to: to,
+      value: Web3.toWei(value, "ether"),
+    }, function (err, transactionHash) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(transactionHash);
+      }
     });
   };
-
+  onConfirmHandler = () => {
+    console.warn('confirmed');
+  }
   render() {
+    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
     return (
       <View style={style.mainContainerStyle}>
         <Header text='Check Send' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
         <View style={style.mid}>
           <View style={[style.textFieldStyle, { marginTop: 40, }]}>
             <TextField
-              placeHolderText={'Coin'}
               isimagePresent={true}
               imgUrl={require('../../images/fantom-logo-dark.png')}
               imgStyle={{ width: deviceWidth * 0.2 }}
               textinputStyle={{ width: deviceWidth * 0.55 }}
+              isTextPresent={true}
+              rightTextValue={coin}
+              placeHolderText={'Coin'}
             />
           </View>
           <View style={style.textFieldStyle}>
             <TextField
               placeHolderText={'Addresses to send'}
+              isTextPresent={true}
+              rightTextValue={address}
             />
           </View>
           <View style={style.textFieldStyle}>
             <TextField
               placeHolderText={'Price'}
+              isTextPresent={true}
+              rightTextValue={amount}
             />
           </View>
           <View style={style.textFieldStyle}>
             <TextField
               placeHolderText={'Fees'}
+              isTextPresent={true}
+              rightTextValue={fees}
             />
           </View>
           <View style={style.textFieldStyle}>
@@ -69,7 +93,7 @@ class SendMoney extends Component {
               placeHolderText={'Memo'}
               textinputStyle={{ width: deviceWidth * 0.65 }}
               isTextPresent={true}
-              rightTextValue={'none'}
+              rightTextValue={memo}
             />
           </View>
           <Text style={style.additionalInfoTextStyle}>
@@ -82,7 +106,7 @@ class SendMoney extends Component {
         </View>
         <View style={style.buttonViewStyle}>
           <Button text="Cancel" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#000' }} onPress={() => this.props.navigation.goBack()} />
-          <Button text="Confirm" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#ECB414' }} onPress={() => console.warn('confirm')} />
+          <Button text="Confirm" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#ECB414' }} onPress={() => this.onConfirmHandler()} />
         </View>
       </View>
     );

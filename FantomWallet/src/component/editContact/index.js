@@ -4,7 +4,6 @@ import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
 import { StatusBar } from 'react-native';
-import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Dialogbox from './dialogBox/index';
 import arrowLeftButton from '../../images/arrowLeft_White.png'
@@ -14,8 +13,6 @@ import checkedIcon from '../../images/CheckedIcon.png'
 import contact from '../../images/contact.png';
 import qrCode from '../../images/QR_code.png'
 
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
 class EditContact extends Component {
     onLeftIconPress = () => {
         console.log('onLeftIconPressonLeftIconPress');
@@ -97,6 +94,7 @@ class EditContact extends Component {
                                 placeholderTextColor='#a7a7a7'
                                 onFocus={() => this.onTextFieldFocus()}
                                 onBlur={() => this.onTextFieldBlur()}
+                                autoCapitalize='none'
                             />
                             <View style={style.iconContainer}>
                                 {/* <Icon  name='address-book' size={30} />
@@ -117,6 +115,7 @@ class EditContact extends Component {
                                 placeholderTextColor='#a7a7a7'
                                 onFocus={() => this.onTextFieldFocus()}
                                 onBlur={() => this.onTextFieldBlur()}
+                                autoCapitalize='none'
                             />
 
                         </View>

@@ -29,13 +29,13 @@ const style = {
         height: isAndroid ? deviceHeight * 0.07 : deviceHeight * 0.06,
         marginTop: deviceHeight * 0.005,
         paddingLeft: 10,
-        paddingRight: 10,
+        paddingRight: 3,
         borderWidth: 1,
         borderColor: 'rgb(93,93,93)',
         alignItems: 'center'
     },
     addressTextInput: {
-        flex: 1, fontSize: 16, color: '#a7a7a7'
+        flex: 1, fontSize: 16, color: '#a7a7a7',width: deviceWidth * 0.7,
     },
     priceContainer: {
         marginTop: deviceHeight * 0.02
@@ -55,7 +55,7 @@ const style = {
         flex: 1, fontSize: 16, color: '#a7a7a7'
     },
     sc: {
-        width: deviceWidth * 0.1,
+        width: 35,
     },
     availableContainer: {
         flexDirection: 'row', justifyContent: 'flex-end', marginTop: deviceHeight * 0.01, alignItems: 'center'
@@ -74,7 +74,7 @@ const style = {
         borderColor: 'rgb(93,93,93)'
     },
     feesTextInput: {
-        flex: 1
+        flex: 1,color: '#a7a7a7'
     },
     ftmTextContainer: {
         width: deviceWidth * 0.27,

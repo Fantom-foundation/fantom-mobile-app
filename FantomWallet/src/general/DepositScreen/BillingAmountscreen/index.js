@@ -46,6 +46,7 @@ class BillingAmountScreen extends Component {
                     keyboardType='decimal-pad'
                     onFocus={() => this.onTextFieldFocus()}
                     onBlur={() => this.onTextFieldBlur()}
+                    autoCapitalize='none'
                 />
                 <View style={{ height: 20 }} />
 

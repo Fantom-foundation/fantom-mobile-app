@@ -109,7 +109,7 @@ class AddressBook extends Component {
                     <View style={ style.displaySearch} >
                         {this.state.displaySearch ?
                             (<View style={style.textInputContainer}>
-                                <TextInput placeholder='Search' style={{ flex: 3,fontFamily:'SFProDisplay-SemiBold' }}></TextInput>
+                                <TextInput placeholder='Search' autoCapitalize='none' style={{ flex: 3,fontFamily:'SFProDisplay-SemiBold' }}></TextInput>
                                 <Image source={searchIcon} style={ style.imageSize} />
                             </View>) : null}
                         {this.state.addOrFavorite === 'add' ? <ScrollView

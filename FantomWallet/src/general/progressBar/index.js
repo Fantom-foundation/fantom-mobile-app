@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { View } from 'react-native';
 import style from './style';
 
 import { Dimensions } from 'react-native';

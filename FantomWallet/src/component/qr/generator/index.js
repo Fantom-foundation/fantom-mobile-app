@@ -10,7 +10,8 @@ import {
   StyleSheet,
   View,
   Image,
-  TouchableOpacity, Text
+  TouchableOpacity, Text,
+  ActivityIndicator
 } from 'react-native';
 import uploadQR from '../../../images/uploading.png';
 
@@ -42,20 +43,22 @@ export default class QRGenerator extends Component {
   }
 
   renderLogo() {
-    const size = 250;
-    const logoWidth = 146;
-    const logoHeight = 35;
-    return (
-      <View style={{ flexDirection: 'row', width: logoWidth, height: logoHeight, position: 'absolute', left: ((size / 2) - (logoWidth / 2)), top: ((size / 2) - (logoHeight / 2)) }}>
-        <Image resizeMode='contain' source={require('../../../images/fantom-logo-small.png')} style={{ backgroundColor: 'white', height: logoHeight }} />
-        <Text style={{ padding: 5, alignSelf: 'center', justifyContent: 'center', fontSize: 24, fontWeight: '900', backgroundColor: 'white' }}>FANTOM</Text>
-      </View>
-    )
+    if (this.props.qrLink !== undefined && this.props.qrLink !== '') {
+      const size = 250;
+      const logoWidth = 146;
+      const logoHeight = 35;
+      return (
+        <View style={{ flexDirection: 'row', width: logoWidth, height: logoHeight, position: 'absolute', left: ((size / 2) - (logoWidth / 2)), top: ((size / 2) - (logoHeight / 2)) }}>
+          <Image resizeMode='contain' source={require('../../../images/fantom-logo-small.png')} style={{ backgroundColor: 'white', height: logoHeight }} />
+          <Text style={{ padding: 5, alignSelf: 'center', justifyContent: 'center', fontSize: 24, fontWeight: '900', backgroundColor: 'white' }}>FANTOM</Text>
+        </View>
+      )
+    }
+
   }
 
 
   render() {
-
     return (
       <View style={style.container}>
         {/* <TextInput
@@ -72,11 +75,15 @@ export default class QRGenerator extends Component {
         </View>
 
         <ViewShot ref="viewShot" options={{ format: "jpg" }}>
-          { (this.props.qrLink !== undefined && this.props.qrLink !== '') && <QRCode
+          {(this.props.qrLink !== undefined && this.props.qrLink !== '') && <QRCode
             content={this.props.qrLink}
             codeStyle='dot'
           />}
           {this.renderLogo()}
+          {(this.props.qrLink === undefined || this.props.qrLink === '') &&
+            <View style={style.loaderStyle}>
+              <ActivityIndicator size="large" color="#000" />
+            </View>}
         </ViewShot>
         {/* <TouchableOpacity onPress={() => this.onPress()}><Text>Share</Text></TouchableOpacity> */}
       </View>
@@ -117,4 +124,9 @@ const style = StyleSheet.create({
     width: 45,
     height: 45
   },
+  loaderStyle: {
+    height: 350,
+    flexDirection: 'row',
+    alignSelf: 'center',
+  }
 });

@@ -43,8 +43,10 @@ class TextField extends Component {
           style={[styles.inputFieldStyle, this.props.textinputStyle]}
           onChangeText={(text) => this.setState({ text })}
           placeholder={this.props.placeHolderText}
-          value={this.state.text}
+          value={this.props.text}
           placeholderTextColor={'#000'}
+          editable={false} selectTextOnFocus={false}
+          autoCapitalize='none'
         />
         {
           this.props.isimagePresent &&

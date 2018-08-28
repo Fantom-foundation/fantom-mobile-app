@@ -197,7 +197,7 @@ class CaptchaVerification extends Component {
         </View>
         </ScrollView>
         <View style={style.footerStyle}>
-          <Button text='Verify' onPress={this.createWallet} buttonStyle={{ backgroundColor: 'black' }} />
+          <Button text='Verify' onPress={this.walletSetup} buttonStyle={{ backgroundColor: 'black' }} />
         </View>
       </KeyboardAvoidingView>
     );
