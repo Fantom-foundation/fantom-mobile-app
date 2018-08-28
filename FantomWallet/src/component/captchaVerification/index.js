@@ -137,15 +137,16 @@ class CaptchaVerification extends Component {
   }
 
   render() {
+    let behaviour = (Platform.OS === 'ios') ? 'padding' : null;
     return (
-      <KeyboardAvoidingView style={style.mainContainerStyle}>
+      <KeyboardAvoidingView behavior={behaviour}style={style.mainContainerStyle}>
                 <ScrollView >
                 <View style={style.mid}>
 
         <View style={style.progressContainer}>
           <ProgressBar completed='2' remaining='3' />
         </View>
-
+        
           <View style={style.arrowContainer}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Icon name='arrow-back' size={24} color='black' /></TouchableOpacity>
           </View>
@@ -156,15 +157,14 @@ class CaptchaVerification extends Component {
                 <Text style={ style.phraseText }>phrase out of the 12 back-up phrases</Text>
               </View>
             </View>
-
+            
             <View style={ style.textBoxContainer}>
               <View style={style.textBox}>
                 <InputBox
                   phraseNumber='Enter phrase 5'
                   text={this.state.phraseFive}
                   onChangeText={(text) => this.changePhrase(text, 'phraseFive')}
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()}
+                 
                   />
                 {(this.state.phraseFive !== '' && this.state.phraseFive !== this.state.mnemonicWords[4]) ? <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                   <Text style={{ color: 'red' }}>Phrase five does not match up.</Text></View> : null}
@@ -174,8 +174,7 @@ class CaptchaVerification extends Component {
                   phraseNumber='Enter phrase 9'
                   text={this.state.phraseNine}
                   onChangeText={(text) => this.changePhrase(text, 'phraseNine')}
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()}
+                
                   />
                 {(this.state.phraseNine !== '' && this.state.phraseNine !== this.state.mnemonicWords[8]) ? <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                   <Text style={{ color: 'red' }}>Phrase nine does not match up.</Text></View> : null}
@@ -185,25 +184,24 @@ class CaptchaVerification extends Component {
                   phraseNumber='Enter phrase 12'
                   text={this.state.phraseTwelve}
                   onChangeText={(text) => this.changePhrase(text, 'phraseTwelve')}
-                  // onFocus={() => this.onTextFieldFocus()}
-                  // onBlur={() => this.onTextFieldBlur()}
+                 
                   />
                 {(this.state.phraseTwelve !== '' && this.state.phraseTwelve !== this.state.mnemonicWords[11]) ? <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                   <Text style={{ color: 'red' }}>Phrase twelve does not match up.</Text></View> : null}
               </View>
           </View>
-
+          
           {/* <View style={{ alignSelf: 'center' }}>
             <Text onPress={this.getMasterKey}>Get Master Key</Text>
           </View> */}
-
-
-        <View style={style.footerStyle}>
-          <Button text='Verify' onPress={this.walletSetup} buttonStyle={{ backgroundColor: 'black' }} />
-        </View>
+                  
+        
+        
         </View>
         </ScrollView>
-
+        <View style={style.footerStyle}>
+          <Button text='Verify' onPress={this.createWallet} buttonStyle={{ backgroundColor: 'black' }} />
+        </View>
       </KeyboardAvoidingView>
     );
   }

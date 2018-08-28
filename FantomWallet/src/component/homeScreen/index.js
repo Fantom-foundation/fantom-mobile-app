@@ -15,7 +15,7 @@ export default class TransactionEntity extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: 'green' }}>
+            <View style={{ flex: 1, }}>
                 <StatusBar barStyle="light-content" />
                 <Header text='FANTOM'
                     rightButtonIcon={settingIcon}
@@ -26,7 +26,7 @@ export default class TransactionEntity extends Component {
                     leftButtonIcon={leftIcon}
                 />
                 <NavigationTab navigation={this.props.navigation}/>
-               
+
             </View>
         );
     }

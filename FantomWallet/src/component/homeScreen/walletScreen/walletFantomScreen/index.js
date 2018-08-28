@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import style from './style';
-import { AsyncStorage } from "react-native";
-import FantomBalanceView from './fantomBalanceView/';
-import FantomTransactionView from './fantomTransactionView/';
+
+import BalanceView from '../../../../general/WalletScreens/BalanceView'
+import TransactionView from '../../../../general/WalletScreens/TransactionView';
 
 import { SUCCESS, FAILED, SENT, RECEIVED } from '../../../../common/constants/';
 
@@ -52,8 +52,8 @@ class WalletFantomScreen extends Component {
                     <Text style={style.textViewStyle}>{balanceText} </Text>
                 </View>
                 <ScrollView style={style.fantomViewStyle} showsVerticalScrollIndicator={false}>
-                    <FantomBalanceView fantomTransactionArr={fantomTransactionArr} />
-                    <FantomTransactionView fantomTransactionArr={fantomTransactionArr} />
+                    <BalanceView fantomTransactionArr={fantomTransactionArr} />
+                    <TransactionView fantomTransactionArr={fantomTransactionArr} />
                 </ScrollView>
             </View>
         )

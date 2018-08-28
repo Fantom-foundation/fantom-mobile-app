@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 
 import style from './style';
+import BalanceView from '../../../../general/WalletScreens/BalanceView'
+import TransactionView from '../../../../general/WalletScreens/TransactionView';
 
-import PointBalanceView from './pointBalanceView/';
-import PointTransactionView from './pointTransactionView/';
-
-import { SUCCESS, FAILED, SENT,RECEIVED } from '../../../../common/constants/';
+import { SUCCESS, FAILED, SENT, RECEIVED } from '../../../../common/constants/';
 
 class WalletPointScreen extends Component {
     constructor(props) {
@@ -24,8 +23,10 @@ class WalletPointScreen extends Component {
         const pointTransactionArr = this.state.pointTransactionArr;
         return (
             <ScrollView style={style.pointViewStyle} showsVerticalScrollIndicator={false}>
-                <PointBalanceView pointTransactionArr={pointTransactionArr} />
-                <PointTransactionView pointTransactionArr={pointTransactionArr} />
+                {/* <PointBalanceView pointTransactionArr={pointTransactionArr} />
+                <PointTransactionView pointTransactionArr={pointTransactionArr} /> */}
+                <BalanceView fantomTransactionArr={pointTransactionArr} />
+                <TransactionView fantomTransactionArr={pointTransactionArr} />
             </ScrollView>
         )
     }

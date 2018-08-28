@@ -3,8 +3,8 @@ import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard } from 'react-
 
 import style from './style';
 
-import QRCodeShare from './qrCodeShare/';
-import BillingAmountScreen from './billingAmount/';
+import QRCodeShare from '../../../../general/DepositScreen/QRCodeShare';
+import BillingAmountScreen from '../../../../general/DepositScreen/BillingAmountscreen';
 import Button from '../../../../general/button/';
 
 class DepositPointScreen extends Component {
@@ -51,7 +51,7 @@ class DepositPointScreen extends Component {
         const qrLink = this.state.qrAddress;
 
         return (
-            
+
             <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.pointViewStyle} showsVerticalScrollIndicator={false}>
                 <View style={style.amountDisplayStyle}>
                     <Text>{balanceText} </Text>
@@ -60,12 +60,13 @@ class DepositPointScreen extends Component {
                 <BillingAmountScreen
                     onAmountChange={this.onAmountChange.bind(this)}
                     onTextFieldFocus={this.onTextFieldFocus.bind(this)}
-                    onTextFieldBlur={this.onTextFieldBlur.bind(this)} />
+                    onTextFieldBlur={this.onTextFieldBlur.bind(this)}
+                    headerText='FP'
+                />
                 <View style={style.buttonViewStyle}>
                     <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
                 </View>
-                <View style={{height:40}}/>
-                {/* <View style={{height:80, backgroundColor: 'green'}}/> */}
+                <View style={{ height: 40 }} />
             </ScrollView>
         )
     }

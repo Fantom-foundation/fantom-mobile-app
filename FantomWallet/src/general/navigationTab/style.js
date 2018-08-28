@@ -5,22 +5,23 @@ const isPhoneX = (DEVICE_HEIGHT >= iPhoneX_Height)
 const style = {
     mainContainerStyle: {
         flex: 1,
-        backgroundColor: WHITE_COLOR,
-        justifyContent: 'flex-end',
+        // backgroundColor: 'red',
+        
     },
     tabInfoStyle: {
         flex: 1,
-        backgroundColor: 'blue'
+        marginBottom: isPhoneX ? 78 : 64,
     },
     navigationTabStyle: {
-        backgroundColor: WHITE_COLOR,
+        position: 'absolute',
         width: DEVICE_WIDTH,
         flexDirection: 'row',
         height: isPhoneX ? 78 : 64,
-        alignItems: 'center',
+        bottom: 0,
         shadowOffset: { width: 0, height: -5 },
         shadowColor: 'black',
-        shadowOpacity: 0.1
+        shadowOpacity: 0.1,
+        elevation:12
     }
 }
 export default style;
