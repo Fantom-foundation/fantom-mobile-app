@@ -3,8 +3,8 @@ import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard } from 'react-
 
 import style from './style';
 
-import QRCodeShare from '../../../../general/DepositScreen/QRCodeShare';
-import BillingAmountScreen from '../../../../general/DepositScreen/BillingAmountscreen';
+import QRCodeShare from '../../../../general/depositScreen/qrCodeShare';
+import BillingAmountScreen from '../../../../general/depositScreen/billingAmountscreen';
 import Button from '../../../../general/button/';
 
 class DepositPointScreen extends Component {

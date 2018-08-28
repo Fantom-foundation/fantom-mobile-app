@@ -1,13 +1,13 @@
-import { Dimensions } from 'react-native';
+import { Dimensions,Platform } from 'react-native';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 const style = {
    listContainerStyle: {
-       backgroundColor: '#fff',
        position: 'absolute',
-       top: 178,
-       right:4,
+       backgroundColor:'white',
+       top:Platform.OS==='ios' ? 193:200,
+       right:15,
        width: deviceWidth * 0.7,
        shadowColor: 'blue',
        shadowOffset: { width: 0, height: 2 },

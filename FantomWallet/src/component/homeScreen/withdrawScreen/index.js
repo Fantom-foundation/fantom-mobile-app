@@ -65,9 +65,10 @@ export default class WithdrawScreen extends Component {
 
   render() {
     const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2, } : '';
+    const ViewUse = this.state.openSortMenu ? TouchableOpacity : View;
     return (
-      <TouchableOpacity activeOpacity={1} style={style.withdrawViewStyle} onPress={() => this.handleClickOnScreen()}>
-        {/* <KeyboardAvoidingView behavior="padding" style={[{ flex: 1 }, dynamicStyle]}> */}
+      <ViewUse activeOpacity={1} style={style.withdrawViewStyle} onPress={() => this.handleClickOnScreen()}>
+        <KeyboardAvoidingView behavior="padding" style={[{ flex: 1 }, dynamicStyle]}>
         <ScrollView ref={(scroll) => this.scrollView = scroll} showsVerticalScrollIndicator={false} >
           <View style={style.sendContainer}>
             <Text style={style.sendText}>Send</Text>
@@ -158,20 +159,22 @@ export default class WithdrawScreen extends Component {
             </View>
           </View>
 
-          <View style={style.addressContainer}>
-            <Text style={style.addressText}>Memo</Text>
-            <View style={style.addressTextInputContainer}>
-              <TextInput
-                onChangeText={(memo) => this.setState({ memo })}
-                value={this.state.memo}
-                style={style.addressTextInput}
-                placeholder='Enter Memo'
-                placeholderTextColor='#a7a7a7'
-                onFocus={() => this.scrollView.scrollTo({ x: 0, y: 100, animated: true })}
-                autoCapitalize='none'
-              />
+            <View style={style.addressContainer}>
+              <Text style={style.addressText}>Memo</Text>
+              <View style={style.addressTextInputContainer}>
+                <TextInput
+                  onChangeText={(memo) => this.setState({ memo })}
+                  value={this.state.memo}
+                  style={style.addressTextInput}
+                  placeholder='Enter Memo'
+                  placeholderTextColor='#a7a7a7'
+                  onFocus={() => this.scrollView.scrollTo({ x: 0, y: 100, animated: true })}
+                  // onBlur={() => this.scrollView.scrollTo({ x: 0, y: 0, animated: true })}
+                  autoCapitalize='none'
+                />
+              </View>
             </View>
-          </View>
+          {/* </View> */}
 
 
           <View style={style.bottomSendContainer}>
@@ -189,9 +192,15 @@ export default class WithdrawScreen extends Component {
           }
         </ScrollView>
 
-        {/* </KeyboardAvoidingView> */}
-
-      </TouchableOpacity>
+        </KeyboardAvoidingView>
+        {/* {
+          this.state.openSortMenu && <View style={{ width: deviceWidth, height: deviceHeight, zIndex: 1, position: 'absolute' }}></View>
+        }
+        {
+          this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
+            index={this.state.index} />
+        } */}
+      </ViewUse>
     );
   }
 }

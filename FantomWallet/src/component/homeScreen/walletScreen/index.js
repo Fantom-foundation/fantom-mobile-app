@@ -11,14 +11,6 @@ export default class WalletScreen extends Component {
   render() {
     return (
       <View style={style.walletViewStyle} >
-        {/* <Header text='FANTOM'
-          rightButtonIcon={settingIcon}
-          headerStyle={{ backgroundColor: '#EEBD12', }}
-          onRightIconPress={this.onRightIconPress.bind(this)}
-          fantomIcon={fantomIcon}
-          secondaryButtonIcon={secondaryIcon}
-          leftButtonIcon={leftIcon}
-        /> */}
         {/* <View style={style.arrowNavigationStyle}>
           <TouchableOpacity onPress={this.handleGoBack}>
             <MaterialIcon name="arrow-back" size={25} />

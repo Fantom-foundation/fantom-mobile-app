@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 import style from './style';
 
-class FantomBalanceView extends Component {
+class BalanceView extends Component {
 
     render() {
 
@@ -36,4 +36,4 @@ class FantomBalanceView extends Component {
     }
 }
 
-export default FantomBalanceView;
+export default BalanceView;
