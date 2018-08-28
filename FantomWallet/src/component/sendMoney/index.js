@@ -59,7 +59,7 @@ class SendMoney extends Component {
           <View style={[style.textFieldStyle, { marginTop: 40, }]}>
             <TextField
               isimagePresent={true}
-              imgUrl={require('../../images/fantom-logo-dark.png')}
+              // imgUrl={require('../../images/fantom-logo-dark.png')}
               imgStyle={{ width: deviceWidth * 0.2 }}
               textinputStyle={{ width: deviceWidth * 0.55 }}
               isTextPresent={true}
@@ -69,7 +69,7 @@ class SendMoney extends Component {
           </View>
           <View style={style.textFieldStyle}>
             <TextField
-              placeHolderText={'Addresses to send'}
+              placeHolderText={'Address'}
               isTextPresent={true}
               rightTextValue={address}
             />
