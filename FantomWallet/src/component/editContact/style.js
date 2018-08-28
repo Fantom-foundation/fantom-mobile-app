@@ -50,13 +50,13 @@ const style = {
     },
     addressTextInput: {
         fontSize: 16,
-        width: deviceWidth * 0.7,
+        flex: 1,
         height: 44,
         paddingLeft: 10,
         color: '#a7a7a7'
     },
     iconContainer: {
-        alignItems: 'center', flex: 1, flexDirection: 'row', justifyContent: 'space-around'
+        alignItems: 'center', width: 32, marginRight: 8,flexDirection: 'row', justifyContent: 'flex-end'
     },
     qrCodeIcon: {
         color: 'grey'

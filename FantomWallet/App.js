@@ -10,11 +10,15 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 import Router from './router';
-import store from './src/redux/store';
+import factory from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
 import './global';
 const Bip39 = require('bip39');
 const Hdkey = require('hdkey');
 const EthUtils = require('ethereumjs-util');
+
+const {store, persistor} = factory();
+
 
 // console.log('bip39');
 // console.log(bip39);
@@ -39,7 +43,9 @@ export default class App extends Component<Props> {
 
     return (
       <Provider store={store}>
-        <Router />
+        <PersistGate loading={null} persistor={persistor}>
+          <Router />
+        </PersistGate>
       </Provider>
     );
   }
