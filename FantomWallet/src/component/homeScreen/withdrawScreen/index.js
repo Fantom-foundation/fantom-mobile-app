@@ -88,8 +88,8 @@ export default class WithdrawScreen extends Component {
               />
               <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'space-around', width: '25%' }}>
 
-                <Image source={qrCode} style={{ width: 30, height: 30 }} />
-                <Image source={user} style={{ width: 30, height: 30 }} />
+                <Image source={qrCode} style={{ width: 28, height: 28 }} />
+                <Image source={user} style={{ width: 26, height: 26 }} />
               </View>
             </View>
           </View>

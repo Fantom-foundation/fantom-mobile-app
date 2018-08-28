@@ -59,7 +59,7 @@ class TextField extends Component {
         {
           this.props.isTextPresent &&
           <View style={styles.additionalViewStyles}>
-            <Text style={styles.rightSideTextStyle}>
+            <Text numberOfLines={1} style={styles.rightSideTextStyle}>
               {rightSideText}
             </Text>
           </View>

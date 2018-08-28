@@ -33,7 +33,6 @@ const style = {
         paddingLeft: 20,
     },
     textFieldStyle: {
-
         paddingRight: 20,
         marginTop: 10,
         height: 50,
@@ -66,17 +65,20 @@ const style = {
         flex: 1,
         height: 40,
         paddingLeft: 10,
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: '700',
     },
     additionalViewStyles: {
         position: 'absolute',
         height: 40,
         right: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width:'60%',
+        justifyContent:'center',
+        alignItems:'flex-end',
     },
     rightSideTextStyle: {
-        fontSize: 18,
+        fontSize: 14,
         color: 'rgb(101,101,101)'
     },
 }
