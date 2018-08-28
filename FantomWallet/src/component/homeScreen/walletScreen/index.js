@@ -2,11 +2,38 @@ import React, { Component } from 'react';
 import { View  } from 'react-native';
 import style from './style';
 import WalletNavigationTab from '../../../general/navigationTab/walletNavigationTab/';
-
+import { connect } from 'react-redux';
 /**
  * To Display WalletTab related tasks
  */
-export default class WalletScreen extends Component {
+class WalletScreen extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      balance: '',
+    }
+    if (this.props.publicKey) {
+      this.getEtherBalanceFromApiAsync(this.props.publicKey);
+    }
+  }
+
+  getEtherBalanceFromApiAsync(address) {
+    return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address='+address+'&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson, 'res');
+        if (responseJson.status && responseJson.status === "1") {
+          this.setState({
+            balance: responseJson.result,
+          })
+        }
+        return responseJson;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   render() {
     return (
@@ -24,3 +51,16 @@ export default class WalletScreen extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    publicKey: state.keyReducer.publicKey,
+  };
+},
+  mapDispatchToProps = (dispatch) => {
+    return {
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletScreen);
