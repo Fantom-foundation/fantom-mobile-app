@@ -8,7 +8,8 @@ const deviceHeight = Dimensions.get('window').height;
 const style = {
     withdrawViewStyle: {
         flex: 1,
-        padding: 15,
+        paddingTop: 15,
+        paddingHorizontal:15,
         backgroundColor: '#fff'
     },
     sendContainer: {
