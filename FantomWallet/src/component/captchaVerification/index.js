@@ -36,7 +36,6 @@ class CaptchaVerification extends Component {
     this.changePhrase = this.changePhrase.bind(this);
   };
   walletSetup() {
-    Alert.alert('Success', 'Verification Button Pressed.');
     if(!this.checkValidation()){
       return;
     }

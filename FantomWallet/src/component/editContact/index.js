@@ -15,7 +15,7 @@ import checkedIcon from '../../images/CheckedIcon.png'
 import contact from '../../images/contact.png';
 import qrCode from '../../images/QR_code.png'
 import * as AddressAction from '../../redux/addressBook/action';
-
+import Web3 from 'web3';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 class EditContact extends Component {
@@ -43,6 +43,11 @@ class EditContact extends Component {
             dialogBox: true
         })
         } else {
+          const isValid = Web3.utils.isAddress(address);
+          if (!isValid) {
+            Alert.alert('Error', 'Please enter valid address.');
+            return;
+          }
           this.props.addNewAddress(address, name);
           Alert.alert('Success', 'Address added successfully.');
           this.setState({
@@ -86,7 +91,9 @@ class EditContact extends Component {
     }
 
     onScanSuccess(address) {
-
+      this.setState({
+        address,
+      });
     }
 
     render() {

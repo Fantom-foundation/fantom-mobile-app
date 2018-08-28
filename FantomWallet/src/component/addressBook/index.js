@@ -62,7 +62,17 @@ class AddressBook extends Component {
       this.props.toggleAddress(address);
     }
 
+    onSelection(address) {
+      const callbackFunc = this.props.navigation.getParam('onSelection', null);
+      if (callbackFunc) {
+        callbackFunc(address);
+        this.props.navigation.goBack();
+      }
+    }
+
     renderAddressList() {
+      const isEditMode = this.props.navigation.getParam('isEditMode', false);
+
       let addressListView = [];
       let favoriteListView = [];
       const addresses = this.props.addresses;
@@ -79,11 +89,11 @@ class AddressBook extends Component {
                  }
                }
                addressListView.push(
-                <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} delete={this.deleteItem} />
+                <Address key={key} id={tempAddress.address} isEditMode={isEditMode} onSelection={this.onSelection.bind(this)} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} delete={this.deleteItem} />
                );
                if (tempAddress.isFavourite) {
                 favoriteListView.push(
-                  <Address key={key} id={tempAddress.address} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} delete={this.deleteItem} />
+                  <Address key={key} id={tempAddress.address} isEditMode={isEditMode} onSelection={this.onSelection.bind(this)} index={key} name={tempAddress.name} line1Text={tempAddress.address} rate={tempAddress.isFavourite} rateChange={this.rateChange} delete={this.deleteItem} />
                  );
                }
             }
@@ -101,6 +111,7 @@ class AddressBook extends Component {
         let favColor = style.favorites;
         let addColorText = { color: 'black' };
         let favColorText = { color: 'black' };
+
 
         if (this.state.addOrFavorite === 'add') {
             addColor = { ...style.add, backgroundColor: 'rgb(63,62,63)' };
@@ -148,6 +159,7 @@ class AddressBook extends Component {
                             </View>) : null}
                         <ScrollView
                             showsVerticalScrollIndicator={false}
+                            style={{ height: deviceHeight }}
                         >{this.renderAddressList()}<View style={{ height: 50 }} />
                         </ScrollView>
                     </View>

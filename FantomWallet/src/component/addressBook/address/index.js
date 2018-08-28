@@ -9,16 +9,26 @@ const deviceHeight = Dimensions.get('window').height;
 
 class Address extends Component {
 
-    onLeftIconPress = () => {
-        this.props.navigation.goBack()
+    onAddressSelection() {
+      if (this.props.onSelection) {
+        this.props.onSelection(this.props.id);
+      }
     }
+
     render() {
         let starIcon = 'star-border';
         if (this.props.rate) {
             starIcon = 'star'
         }
+        const isEditMode = this.props.isEditMode || false;
+        // const isEditMode = true;
+        const MainView = isEditMode ? TouchableOpacity : View;
+        const propsToMainView = {};
+        if (isEditMode) {
+          propsToMainView.onPress = this.onAddressSelection.bind(this);
+        }
         return (
-            <View style={style.container}>
+            <MainView style={style.container} {...propsToMainView}>
                 <View style={style.subContainer}>
                     <View style={style.subSubContainer}>
                         <View style={{ alignSelf: 'center' }}>
@@ -41,7 +51,7 @@ class Address extends Component {
                         </View>
                     </View>
                 </View>
-            </View>
+            </MainView>
         );
     }
 }
