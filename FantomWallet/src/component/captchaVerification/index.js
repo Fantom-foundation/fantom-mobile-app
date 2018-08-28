@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, Platform, ScrollView, Keyboard,KeyboardAvoidingView } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Platform, ScrollView, Keyboard,KeyboardAvoidingView, Alert } from 'react-native';
 import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
 import ProgressBar from '../../general/progressBar/index';
@@ -36,6 +36,7 @@ class CaptchaVerification extends Component {
     this.changePhrase = this.changePhrase.bind(this);
   };
   walletSetup() {
+    Alert.alert('Success', 'Verification Button Pressed.');
     if(!this.checkValidation()){
       return;
     }
