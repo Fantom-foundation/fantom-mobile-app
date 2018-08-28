@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, CheckBox, ScrollView, Platform,Image,TouchableOpacity, Alert} from 'react-native';
+import { Text, View, TextInput, CheckBox, ScrollView, Platform,Image,TouchableOpacity, Alert, Dimensions} from 'react-native';
 import { connect } from 'react-redux';
 import Header from '../../general/header/index';
 import style from './style';

@@ -152,13 +152,10 @@ class AddressBook extends Component {
                     <View style={ style.displaySearch} >
                         {this.state.displaySearch ?
                             (<View style={style.textInputContainer}>
-<<<<<<< HEAD
-                                <TextInput placeholder='Search' autoCapitalize='none' style={{ flex: 3,fontFamily:'SFProDisplay-SemiBold' }}></TextInput>
-=======
                                 <TextInput placeholder='Search' style={{ flex: 3,fontFamily:'SFProDisplay-SemiBold' }}
                                   onChangeText={(text) => this.setState({ searchText: text })}
+                                  autoCapitalize='none'
                                 ></TextInput>
->>>>>>> 2018/Kapil/PersitenceWithRedux
                                 <Image source={searchIcon} style={ style.imageSize} />
                             </View>) : null}
                         <ScrollView

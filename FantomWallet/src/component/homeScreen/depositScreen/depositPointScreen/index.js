@@ -3,8 +3,8 @@ import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard, KeyboardAvoid
 
 import style from './style';
 
-import QRCodeShare from '../../../../general/depositScreen/qrCodeShare';
-import BillingAmountScreen from '../../../../general/depositScreen/billingAmountscreen';
+import QRCodeShare from '../../../../general/depositView/qrShareCode/';
+import BillingAmountScreen from '../../../../general/depositView/billingAmountView';
 import Button from '../../../../general/button/';
 import {DEVICE_HEIGHT} from '../../../../common/constants/index';
 
