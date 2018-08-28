@@ -20,7 +20,6 @@ function addNewAddress(state, action) {
 }
 
 function toggleFavouriteAddress(state, action) {
-  debugger;
   let oldAddresses = state.addresses;
   const addressKey = action.address;
   const oldAddress = oldAddresses[addressKey];

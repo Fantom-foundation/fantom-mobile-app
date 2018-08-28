@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Dimensions, Alert } from 'react-native';
 import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
 import Web3 from 'web3';
@@ -7,7 +7,7 @@ import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
 import TextField from './TextField'
-
+import { connect } from 'react-redux';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -42,13 +42,18 @@ class SendMoney extends Component {
     }, function (err, transactionHash) {
       if (err) {
         console.log(err);
+        Alert.alert('Success', `${err}`);
       } else {
         console.log(transactionHash);
+        Alert.alert('Success', `${transactionHash}`);
       }
     });
   };
   onConfirmHandler = () => {
+    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
     console.warn('confirmed');
+    this.transferMoney(this.props.publicKey, address, amount);
+
   }
   render() {
     const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
@@ -113,4 +118,16 @@ class SendMoney extends Component {
   }
 }
 
-export default SendMoney;
+
+const mapStateToProps = (state) => {
+  return {
+    masterKey: state.keyReducer.masterKey,
+    publicKey: state.keyReducer.publicKey,
+  };
+},
+  mapDispatchToProps = (dispatch) => {
+    return {
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SendMoney);

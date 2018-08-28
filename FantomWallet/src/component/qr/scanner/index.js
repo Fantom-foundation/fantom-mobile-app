@@ -98,6 +98,7 @@ export default class QRCodeScanner extends Component {
     }
 
     this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
+    this._setScanning = this._setScanning.bind(this);
   }
 
   componentWillMount() {

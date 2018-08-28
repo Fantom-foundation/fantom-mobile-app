@@ -22,9 +22,12 @@ export default class ScanScreen extends Component {
     const successFunc = this.props.navigation.getParam('onScanSuccess', null);
     const data = e.data;
     if (data) {
-      const isValid = Web3.utils.isAddress(address);
+      const isValid = Web3.utils.isAddress(data);
       if (!isValid) {
-        Alert.alert('Error', 'Please enter valid address.');
+        Alert.alert('Error', 'Please enter valid address.',
+        [
+          {text: 'Ok', onPress: () => { this.scanner._setScanning(false); }, style: 'cancel'},
+        ]);
         return;
       }
       if (successFunc) {
@@ -45,6 +48,9 @@ export default class ScanScreen extends Component {
       <StatusBar barStyle="light-content" />
       <Header text='Scan QR' leftButtonIcon={arrowLeftButton} onLeftIconPress={this.onLeftIconPress.bind(this)} leftIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
       <QRCodeScanner
+      ref={(scanner) => {
+        this.scanner = scanner;
+      }}
         onRead={this.onSuccess.bind(this)}
       />
       </View>

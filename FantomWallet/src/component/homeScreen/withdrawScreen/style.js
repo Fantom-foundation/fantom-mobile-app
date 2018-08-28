@@ -57,6 +57,8 @@ const style = {
     },
     sc: {
         width: 35,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     availableContainer: {
         flexDirection: 'row', justifyContent: 'flex-end', marginTop: deviceHeight * 0.01, alignItems: 'center'

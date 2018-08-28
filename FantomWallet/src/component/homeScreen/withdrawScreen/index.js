@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
   ScrollView, View, Text, TextInput, TouchableOpacity,
-  Keyboard, KeyboardAvoidingView, Dimensions, Image, Platform
+  Keyboard, KeyboardAvoidingView, Dimensions, Image, Platform, Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Web3 from 'web3';
 
 import SortMenuCard from '../../../general/sortMenuCard/index';
 import Button from '../../../general/button/';
@@ -56,9 +57,19 @@ export default class WithdrawScreen extends Component {
   handleSendMoney() {
     const { address, amount, fees, memo } = this.state;
     const coin = this.state.val;
-    if (!coin || !address || !amount || !fees || !memo) {
-      console.warn('empty fields');
-      return
+    let message = '';
+    if (address === '') {
+      message = 'Please enter address.';
+    } else if (!Web3.utils.isAddress(address)) {
+      message = 'Please enter valid address.';
+    } else if (amount === '') {
+      message = 'Please enter valid amount';
+    } else if (fees === '') {
+      message = 'Please enter valid fees.';
+    }
+    if (message !== '') {
+      Alert.alert('Error', message);
+      return;
     }
     this.props.navigation.navigate('SendMoney', { address: address, amount: amount, coin: coin, memo: memo, fees: fees });
   }
@@ -66,7 +77,20 @@ export default class WithdrawScreen extends Component {
     if (Platform.OS === 'ios') {
       return null;
     } else { return this.scrollView.scrollTo({ x: 0, y: 0, animated: true }) }
+  }
 
+  onScanSuccess(address) {
+    this.setState({
+      address,
+    });
+  }
+
+  onScannerPress() {
+    this.props.navigation.navigate('QRScanner', { onScanSuccess: this.onScanSuccess.bind(this) });
+  }
+
+  onContactPress() {
+    this.props.navigation.navigate('AddressBook', { isEditMode: true, onSelection: this.onScanSuccess.bind(this) });
   }
 
   render() {
@@ -92,10 +116,13 @@ export default class WithdrawScreen extends Component {
                   placeholderTextColor='#a7a7a7'
                   autoCapitalize='none'
                 />
-                <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'space-around', width: '25%' }}>
-
+                <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'space-around', width: 80 }}>
+                  <TouchableOpacity onPress={this.onScannerPress.bind(this)} style={{ width: 40, height: 28,  alignItems: 'center' }}>
                   <Image source={qrCode} style={{ width: 28, height: 28 }} />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={this.onContactPress.bind(this)} style={{ width: 40, height: 28, alignItems: 'center' }}>
                   <Image source={user} style={{ width: 26, height: 26 }} />
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-
+import { connect } from 'react-redux';
 import style from './style';
 
 import BalanceView from '../../../../general/walletScreen/viewBalance'
@@ -25,12 +25,21 @@ class WalletFantomScreen extends Component {
             ],
         }
       //  this.state.fantomTransactionArr = this.getTransactionsFromApiAsync(this.getPublicKey());
-
+        if (this.props.publicKey) {
+          this.getTransactionsFromApiAsync(this.props.publicKey);
+        }
     }
     getTransactionsFromApiAsync(address) {
-      return fetch('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address='+address+'&startblock=0&endblock=99999999&sort=asc&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
+      
+      fetch('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address='+address+'&startblock=0&endblock=99999999&sort=asc&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
         .then((response) => response.json())
         .then((responseJson) => {
+          console.log('response', responseJson);
+          if (responseJson && responseJson.result && responseJson.result.length) {
+            // this.setState({
+
+            // })
+          }
           return responseJson;
         })
         .catch((error) => {
@@ -60,4 +69,15 @@ class WalletFantomScreen extends Component {
     }
 }
 
-export default WalletFantomScreen;
+
+const mapStateToProps = (state) => {
+  return {
+    publicKey: state.keyReducer.publicKey,
+  };
+},
+  mapDispatchToProps = (dispatch) => {
+    return {
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletFantomScreen);
