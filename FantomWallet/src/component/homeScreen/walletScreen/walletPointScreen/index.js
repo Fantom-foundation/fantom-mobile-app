@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 
 import style from './style';
-import BalanceView from '../../../../general/WalletScreens/BalanceView'
-import TransactionView from '../../../../general/WalletScreens/TransactionView';
+import BalanceView from '../../../../general/walletScreens/balanceView'
+import TransactionView from '../../../../general/walletScreens/transactionView';
 
 import { SUCCESS, FAILED, SENT, RECEIVED } from '../../../../common/constants/';
 

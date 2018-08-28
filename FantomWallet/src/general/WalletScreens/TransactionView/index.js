@@ -9,9 +9,9 @@ import DisplayTransaction from './displayTransactions';
 import sortMenuIcon from '../../../images/arrow_With_bar.png'
 
 
-import { SENT, RECEIVED, ALL_TRANSACTION } from '../../../common/constants/';
+import { SENT, RECEIVED, ALL_TRANSACTION, DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../common/constants/';
 
-class FantomTransactionView extends Component {
+class TransactionView extends Component {
 
     constructor(props) {
         super(props);
@@ -26,8 +26,14 @@ class FantomTransactionView extends Component {
         }
     }
 
+    toggleSortMenu() {
+        console.warn('sort item : ', this.state.openSortMenu);
+        this.setState({
+            openSortMenu: !this.state.openSortMenu
+        })
+    }
     handleSortMenu(item) {
-        console.log('sort item : ', item)
+        console.warn('sort item : ', this.state.openSortMenu);
         this.setState({
             openSortMenu: !this.state.openSortMenu
         })
@@ -37,6 +43,36 @@ class FantomTransactionView extends Component {
                 index: item.id
             })
         }
+    }
+
+    handleClickOnScreen() {
+        if (this.state.openSortMenu) {
+            this.setState({
+                openSortMenu: false
+            })
+        }
+    }
+
+    renderSortMenu() {
+        if (this.state.openSortMenu) {
+            return (
+                <>
+                    <TouchableOpacity
+                        style={{
+                            width: DEVICE_WIDTH,
+                            height: DEVICE_HEIGHT,
+                            zIndex: 1, top: -DEVICE_HEIGHT * 0.5,
+                            position: 'absolute',
+                        }} onPress={this.handleClickOnScreen.bind(this)}></TouchableOpacity>
+                    <SortMenuCard
+                        data={this.state.data}
+                        type={'wallet'}
+                        index={this.state.index}
+                        handleSortMenu={(item) => this.handleSortMenu(item)} />
+                </>
+            )
+        }
+        return null;
     }
 
     render() {
@@ -49,7 +85,7 @@ class FantomTransactionView extends Component {
                     <View style={style.headingCardViewStyle}>
                         <Text style={style.headingCardTextStyle}> Transactions </Text>
                         <View style={style.transactionSortIconStyle}>
-                            <TouchableOpacity onPress={this.handleSortMenu.bind(this)}>
+                            <TouchableOpacity onPress={() => this.toggleSortMenu()}>
                                 <Image source={sortMenuIcon} style={{ width: 33, height: 30 }} />
                             </TouchableOpacity>
                         </View>
@@ -61,16 +97,17 @@ class FantomTransactionView extends Component {
                         ALL_TRANSACTION={ALL_TRANSACTION} />
                     {fantomTransactionArr.length === 0 && <EmptyTransactionEntity />}
                 </View>
-                {this.state.openSortMenu &&
+                {/* {this.state.openSortMenu &&
                     <SortMenuCard
                         data={this.state.data}
                         type={'transaction'}
                         index={this.state.index}
                         handleSortMenu={(item) => this.handleSortMenu(item)} />
-                }
+                } */}
+                {this.renderSortMenu()}
             </View>
         )
     }
 }
 
-export default FantomTransactionView;
+export default TransactionView;
