@@ -6,7 +6,7 @@ import style from './style';
 import QRCodeShare from '../../../../general/depositView/qrShareCode/';
 import BillingAmountScreen from '../../../../general/depositView/billingAmountView';
 import Button from '../../../../general/button/';
-import {DEVICE_HEIGHT} from '../../../../common/constants/index';
+import { DEVICE_HEIGHT } from '../../../../common/constants/index';
 
 class DepositPointScreen extends Component {
     constructor(props) {
@@ -34,17 +34,14 @@ class DepositPointScreen extends Component {
     }
 
     onTextFieldFocus() {
-        let scrollValue = (Platform.OS === 'ios') ? 220 : 200
-        setTimeout(() => {
-            this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
-        }, 10);
+        let moveBy = 930 - DEVICE_HEIGHT;
+        if (moveBy > 0) {
+            this.scrollView.scrollTo({ x: 0, y: moveBy, animated: true })
+        }
     }
     onTextFieldBlur() {
         Keyboard.dismiss();
-        let scrollValue = (Platform.OS === 'ios') ? 150 : 0
-        setTimeout(() => {
-            this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
-        }, 10);
+        this.scrollView.scrollToEnd()
     }
 
     render() {
@@ -52,23 +49,23 @@ class DepositPointScreen extends Component {
         const qrLink = this.state.qrAddress;
 
         return (
-                <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.pointViewStyle} showsVerticalScrollIndicator={false}>
-                    <View style={style.amountDisplayStyle}>
-                        <Text>{balanceText} </Text>
-                    </View>
-                    <QRCodeShare qrLink={qrLink} />
-                    <BillingAmountScreen
-                        onAmountChange={this.onAmountChange.bind(this)}
-                        onTextFieldFocus={this.onTextFieldFocus.bind(this)}
-                        onTextFieldBlur={this.onTextFieldBlur.bind(this)}  
-                        headerText='FP'
-                    />
-                    <View style={style.buttonViewStyle}>
-                        <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
-                    </View>
-                    <View style={{ height: 40 }} />
-                </ScrollView>
-          
+            <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.pointViewStyle} showsVerticalScrollIndicator={false}>
+                <View style={style.amountDisplayStyle}>
+                    <Text>{balanceText} </Text>
+                </View>
+                <QRCodeShare qrLink={qrLink} />
+                <BillingAmountScreen
+                    onAmountChange={this.onAmountChange.bind(this)}
+                    onTextFieldFocus={this.onTextFieldFocus.bind(this)}
+                    onTextFieldBlur={this.onTextFieldBlur.bind(this)}
+                    headerText='FP'
+                />
+                <View style={style.buttonViewStyle}>
+                    <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
+                </View>
+                <View style={{ height: 40 }} />
+            </ScrollView>
+
         )
     }
 }

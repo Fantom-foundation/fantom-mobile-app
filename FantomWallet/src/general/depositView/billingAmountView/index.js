@@ -49,7 +49,7 @@ class BillingAmountScreen extends Component {
                     onBlur={() => this.onTextFieldBlur()}
                     autoCapitalize='none'
                 />
-                {Platform.OS === 'ios' && <KeyboardSpacer topSpacing={-180}/>}
+                {/* {Platform.OS === 'ios' && <KeyboardSpacer topSpacing={-180}/>} */}
                 <View style={{ height: 20 }} />
                 
             </View>

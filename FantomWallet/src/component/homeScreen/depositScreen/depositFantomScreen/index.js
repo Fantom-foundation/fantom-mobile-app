@@ -1,102 +1,4 @@
-// import React, { Component } from 'react';
-// import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard, KeyboardAvoidingView } from 'react-native';
-// import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-// import style from './style';
-
-// import QRCodeShare from '../../../../general/DepositScreen/QRCodeShare';
-// import BillingAmountScreen from '../../../../general/DepositScreen/BillingAmountscreen';
-// import Button from '../../../../general/button/';
-
-// class DepositFantomScreen extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             amount: 0,
-//             qrAddress: '',
-//         }
-//     }
-//     componentDidlMount() {
-//         AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
-//     }
-//     onQRShare() {
-//         console.warn('share QR');
-//     }
-
-//     onAmountChange(amount) {
-//         this.setState({
-//             amount
-//         })
-//     }
-//     onCopyAddress() {
-//         console.warn('copy address');
-//     }
-
-//     render() {
-//         // const balanceText = '(1,000\\ = 1.00002312FTM)';
-//         // const qrLink = this.state.qrAddress;
-
-//         // return (
-//         //     <ScrollView
-//         //         ref={(scroll) => this.scrollView = scroll}
-//         //         style={style.fantomViewStyle}
-//         //         showsVerticalScrollIndicator={false}
-//         //     >
-//         //         <View style={style.amountDisplayStyle}>
-//         //             <Text>{balanceText} </Text>
-//         //         </View>
-
-//         //         <QRCodeShare qrLink={qrLink} />
-
-//         //         <BillingAmountScreen
-//         //             onAmountChange={this.onAmountChange.bind(this)}
-//         //             headerText='FTM'
-//         //         />
-
-//         //         <View style={style.buttonViewStyle}>
-//         //             <Button
-//         //                 text='Copy Address'
-//         //                 buttonStyle={{ backgroundColor: '#EEBD12' }}
-//         //                 textStyle={{ color: '#000' }}
-//         //                 onPress={this.onCopyAddress.bind(this)}
-//         //             />
-//         //         </View>
-
-//         //         <View style={{ height: 40 }} />
-
-//         //         <KeyboardSpacer onToggle={(isShown) => {
-//         //             if (!isShown) return;
-//         //             const val = isShown ? 220 : 0
-//         //             this.scrollView.scrollTo({ x: 0, y: val, animated: true })
-//         //         }} />
-
-//         //     </ScrollView>
-//         // )
-//         const balanceText = '(1,000\\ = 1.00002312FTM)';
-//         const qrLink = this.state.qrAddress;
-
-//         return (
-
-//             <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.pointViewStyle} showsVerticalScrollIndicator={false}>
-//                 <View style={style.amountDisplayStyle}>
-//                     <Text>{balanceText} </Text>
-//                 </View>
-//                 <QRCodeShare qrLink={qrLink} />
-//                 <BillingAmountScreen
-//                     onAmountChange={this.onAmountChange.bind(this)}
-//                     headerText='FTM'
-//                 />
-//                 <View style={style.buttonViewStyle}>
-//                     <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
-//                 </View>
-//                 <View style={{ height: 40 }} />
-//             </ScrollView>
-//         )
-//     }
-// }
-
-
-// export default DepositFantomScreen;
 
 import React, { Component } from 'react';
 import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard } from 'react-native';
@@ -106,6 +8,8 @@ import style from './style';
 import QRCodeShare from '../../../../general/depositView/qrShareCode';
 import BillingAmountScreen from '../../../../general/depositView/billingAmountView';
 import Button from '../../../../general/button/';
+
+import { DEVICE_HEIGHT } from '../../../../common/constants/';
 
 class DepositFantomScreen extends Component {
     constructor(props) {
@@ -133,18 +37,17 @@ class DepositFantomScreen extends Component {
     }
 
     onTextFieldFocus() {
-        let scrollValue = (Platform.OS === 'ios') ? 220 : 200
-        setTimeout(() => {
-            this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
-        }, 10);
+        let moveBy = 930 - DEVICE_HEIGHT;
+        if (moveBy > 0) {
+            this.scrollView.scrollTo({ x: 0, y: moveBy, animated: true })
+        }
     }
     onTextFieldBlur() {
         Keyboard.dismiss();
-        let scrollValue = (Platform.OS === 'ios') ? 150 : 0
-        setTimeout(() => {
-            this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
-        }, 10);
+        this.scrollView.scrollToEnd()
     }
+
+
 
     render() {
         const balanceText = '(1,000\\ = 1.00002312FTM)';
@@ -152,7 +55,7 @@ class DepositFantomScreen extends Component {
 
         return (
 
-            <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.pointViewStyle} showsVerticalScrollIndicator={false}>
+            <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.fantomViewStyle} showsVerticalScrollIndicator={false}>
                 <View style={style.amountDisplayStyle}>
                     <Text>{balanceText} </Text>
                 </View>
@@ -166,7 +69,7 @@ class DepositFantomScreen extends Component {
                 <View style={style.buttonViewStyle}>
                     <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
                 </View>
-                <View style={{ height: 40 }} />
+                <View style={{ height: 40, marginBottom: 10 }} />
             </ScrollView>
         )
     }
