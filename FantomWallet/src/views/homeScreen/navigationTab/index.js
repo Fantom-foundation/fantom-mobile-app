@@ -3,16 +3,16 @@ import { View, BackHandler } from 'react-native';
 
 /** * InActive NavigationIcons */
 
-import walletIcon from '../../images/walletBlack.png';
-import sendIcon from '../../images/sendIcon.png';
-import depositIcon from '../../images/downloading_Black.png';
-import activityIcon from '../../images/running_menBlack.png';
+import walletIcon from '../../../images/walletBlack.png';
+import sendIcon from '../../../images/sendIcon.png';
+import depositIcon from '../../../images/downloading_Black.png';
+import activityIcon from '../../../images/running_menBlack.png';
 
 /** * Active NavigationIcons */
-import walletWhiteIcon from '../../images/wallet_white.png';
-import sendWhiteIcon from '../../images/sendWhite.png';
-import depositWhiteIcon from '../../images/downloading_white.png';
-import activityWhiteIcon from '../../images/running_men_White.png';
+import walletWhiteIcon from '../../../images/wallet_white.png';
+import sendWhiteIcon from '../../../images/sendWhite.png';
+import depositWhiteIcon from '../../../images/downloading_white.png';
+import activityWhiteIcon from '../../../images/running_men_White.png';
 
 /*** Color Constants */
 import { ACTIVE_TAB_COLOR, WHITE_COLOR } from '../../common/constants/';

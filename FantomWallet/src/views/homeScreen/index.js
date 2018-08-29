@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StatusBar } from 'react-native';
-import NavigationTab from '../../general/navigationTab/';
+import NavigationTab from '../../views/homeScreen/navigationTab/';
 import Header from '../../general/header/';
 
 import fantomIcon from '../../images/fantomWhiteIcon.png';
@@ -25,8 +25,7 @@ export default class TransactionEntity extends Component {
                     secondaryButtonIcon={secondaryIcon}
                     leftButtonIcon={leftIcon}
                 />
-                <NavigationTab navigation={this.props.navigation}/>
-
+                <NavigationTab navigation={this.props.navigation} />
             </View>
         );
     }

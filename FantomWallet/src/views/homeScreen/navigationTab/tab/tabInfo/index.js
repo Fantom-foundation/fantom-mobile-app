@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 
-import WalletTab from '../../../../component/homeScreen/walletScreen/';
-import WithdrawTab from '../../../../component/homeScreen/withdrawScreen/';
-import DepositTab from '../../../../component/homeScreen/depositScreen/';
+import WalletTab from '../../../walletScreen/';
+import WithdrawTab from '../../../withdrawScreen/';
+import DepositTab from '../../../depositScreen/';
 
 class TabInfo extends Component {
 

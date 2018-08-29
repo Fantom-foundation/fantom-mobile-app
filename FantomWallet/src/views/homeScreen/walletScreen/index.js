@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View  } from 'react-native';
 import style from './style';
-import WalletNavigationTab from '../../../general/navigationTab/walletNavigationTab/';
+import WalletNavigationTab from '../navigationTab/walletNavigationTab/';
 import { connect } from 'react-redux';
 /**
  * To Display WalletTab related tasks

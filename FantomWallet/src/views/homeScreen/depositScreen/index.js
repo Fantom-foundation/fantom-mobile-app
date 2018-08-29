@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import style from './style';
 
-import DepositNavigationTab from '../../../general/navigationTab/depositNavigationTab/';
+import DepositNavigationTab from '../navigationTab/depositNavigationTab/';
 // import Header from '../../../general/header/';
 
 // import fantomIcon from '../../../images/fantomWhiteIcon.png';

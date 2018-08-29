@@ -4,9 +4,9 @@ import { Text } from 'react-native';
 /**
  * WalletScreen Tabs
  */
-import PointTab from '../../../../../component/homeScreen/walletScreen/walletPointScreen/';
-import FantomTab from '../../../../../component/homeScreen/walletScreen/walletFantomScreen/';
-import EthererumTab from '../../../../../component/homeScreen/walletScreen/walletEthererumScreen/';
+import PointTab from '../../../walletScreen/walletPointScreen/';
+import FantomTab from '../../../walletScreen/walletFantomScreen/';
+import EthererumTab from '../../../walletScreen/walletEthererumScreen/';
 
 class WalletTabInfo extends Component {
     render() {
