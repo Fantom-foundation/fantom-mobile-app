@@ -39,6 +39,7 @@ class CaptchaVerification extends Component {
     if(!this.checkValidation()){
       return;
     }
+    debugger;
     const root = Hdkey.fromMasterSeed(this.state.seed);
     const masterPrivateKey = root.privateKey.toString('hex');
     const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
@@ -54,10 +55,11 @@ class CaptchaVerification extends Component {
       'address': address
     };
 
-    const hexPublicKey = EthUtil.bufferToHex(pubKey)
+    const hexPrivateKey = EthUtil.bufferToHex(addrNode._privateKey)
+    // const bufferAgain = EthUtil.toBuffer(hexPrivateKey);
     // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
-    this.saveMasterKey(masterPrivateKey, hexPublicKey);
-    this.props.setMasterPublicKey(masterPrivateKey, hexPublicKey);
+    // this.saveMasterKey(masterPrivateKey, hexPublicKey);
+    this.props.setKeys(masterPrivateKey, address, hexPrivateKey);
     // Save pubKey generation
     // this.savePublicKey(pubKey);
 
@@ -221,8 +223,8 @@ const mapStateToProps = (state) => {
           setPublicKey: (key) => {
             dispatch({type: KeyAction.PUBLIC_KEY, key});
           },
-          setMasterPublicKey: (masterKey, publicKey) => {
-            dispatch({type: KeyAction.MASTER_PUBLIC_KEY, masterKey, publicKey});
+          setKeys: (masterKey, publicKey, privateKey) => {
+            dispatch({type: KeyAction.MASTER_PUBLIC_PRIVATE_KEY, masterKey, publicKey, privateKey});
           },
       };
   };

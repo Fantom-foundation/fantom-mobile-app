@@ -2,52 +2,79 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, Dimensions, Alert } from 'react-native';
 import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
-import Web3 from 'web3';
+// import Web3 from 'web3';
+import Web3 from './web3.min.js';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
 import TextField from './TextField'
 import { connect } from 'react-redux';
+import EthUtil from 'ethereumjs-util';
+var Tx = require('ethereumjs-tx');
+
+const web3 = new Web3(
+  new Web3.providers.HttpProvider('https://ropstein.infura.io/143ba4fa4da9469ebb2695e07e96b9ee'),
+);
+
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 // Method of generation taken from: https://medium.com/bitcraft/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998;
 
 class SendMoney extends Component {
-  constructor(props) {
-    super(props);
-    const { navigation } = this.props;
-    let address='';
-    let coin ='';
-    let memo='';
-    let amount='';
-    let fees ='';
-    
-    // const { address, coin, memo, amount, fees } = this.props.navigation.state.params
-    this.state = {
-      address: address,
-      amount: amount,
-      coin: coin,
-      memo: memo,
-      fees: fees
 
-    };
-  };
+
+//   var privateKey = new Buffer('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
+
+// var rawTx = {
+//   nonce: '0x00',
+//   gasPrice: '0x09184e72a000',
+//   gasLimit: '0x2710',
+//   to: '0x0000000000000000000000000000000000000000',
+//   value: '0x00',
+//   data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
+// }
+
+// var tx = new Tx(rawTx);
+// tx.sign(privateKey);
+
+// var serializedTx = tx.serialize();
+
+// // console.log(serializedTx.toString('hex'));
+// // 0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f
+
+// web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+// .on('receipt', console.log);
 
   transferMoney(from, to, value) {
-    Web3.eth.sendTransaction({
+    const privateKeyBuffer = EthUtil.toBuffer(this.props.privateKey);
+    console.log(from, 'from');
+    var rawTx = {
       from: from,
       to: to,
-      value: Web3.toWei(value, "ether"),
-    }, function (err, transactionHash) {
-      if (err) {
-        console.log(err);
-        Alert.alert('Success', `${err}`);
-      } else {
-        console.log(transactionHash);
-        Alert.alert('Success', `${transactionHash}`);
-      }
-    });
+      value: Web3.utils.toWei(value, "ether"),
+      gas: 21000
+};
+const tx = new Tx(rawTx);
+tx.sign(privateKeyBuffer);
+const serializedTx = tx.serialize();
+console.log(serializedTx.toString('hex'));
+web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+.then((result) => {console.log(result)})
+.catch((err) => { console.log(err) })
+    // web3.eth.sendTransaction({
+    //   from: from,
+    //   to: to,
+    //   value: Web3.utils.toWei(value, "ether"),
+    // }, function (err, transactionHash) {
+    //   if (err) {
+    //     console.log(err);
+    //     Alert.alert('Success', `${err}`);
+    //   } else {
+    //     console.log(transactionHash);
+    //     Alert.alert('Success', `${transactionHash}`);
+    //   }
+    // });
   };
   onConfirmHandler = () => {
     const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
@@ -123,6 +150,7 @@ const mapStateToProps = (state) => {
   return {
     masterKey: state.keyReducer.masterKey,
     publicKey: state.keyReducer.publicKey,
+    privateKey: state.keyReducer.privateKey,
   };
 },
   mapDispatchToProps = (dispatch) => {

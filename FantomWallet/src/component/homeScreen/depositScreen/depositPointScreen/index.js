@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard, KeyboardAvoidingView } from 'react-native';
-
+import { connect } from 'react-redux';
 import style from './style';
 
 import QRCodeShare from '../../../../general/depositView/qrShareCode/';
@@ -16,9 +16,23 @@ class DepositPointScreen extends Component {
             qrAddress: '',
         }
     }
-    componentWillMount() {
-        AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
+    // componentWillMount() {
+    //     AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
+    // }
+
+    componentDidMount() {
+      this.timeout = setTimeout(() => {
+        this.setState({
+          qrAddress: this.props.publicKey,
+        })
+      }, 2000);
     }
+
+    componentWillUnmount() {
+      clearTimeout(this.timeout);
+    }
+
+
     onQRShare() {
         console.warn('share QR');
     }
@@ -73,4 +87,14 @@ class DepositPointScreen extends Component {
     }
 }
 
-export default DepositPointScreen;
+const mapStateToProps = (state) => {
+  return {
+    publicKey: state.keyReducer.publicKey,
+  };
+},
+  mapDispatchToProps = (dispatch) => {
+    return {
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(DepositPointScreen);

@@ -8,7 +8,8 @@ class SplashScreen extends Component {
 
   componentDidMount() {
     const val = this.props.masterKey;
-    if (val && val !== '') {
+    const privateKey = this.props.privateKey;
+    if (val && val !== '' && privateKey && privateKey !== '') {
       setTimeout(() => this.props.navigation.navigate('HomeScreen'), 5000)
     } else {
       setTimeout(() => this.props.navigation.navigate('WalletSetup'), 5000)
@@ -31,6 +32,7 @@ class SplashScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     masterKey: state.keyReducer.masterKey,
+    privateKey: state.keyReducer.privateKey,
   };
 },
   mapDispatchToProps = (dispatch) => {

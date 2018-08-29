@@ -171,9 +171,9 @@ export default class WithdrawScreen extends Component {
                   onBlur={this.onBlur.bind(this)}
                 >
                 </TextInput>
-                <View style={style.ftmTextContainer}>
+                {/* <View style={style.ftmTextContainer}>
                   <Text style={style.ftmText}>0.0000002  FTM</Text>
-                </View>
+                </View> */}
               </View>
               <View style={style.speedContainer}>
                 <View>
