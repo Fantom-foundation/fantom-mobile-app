@@ -4,7 +4,7 @@ const style = {
 
     containerViewStyle: {
         flex: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
         marginBottom:20
     },
     qrGeneratorstyle: {
