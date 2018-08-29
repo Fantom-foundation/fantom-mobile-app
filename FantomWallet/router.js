@@ -1,7 +1,7 @@
 import React from 'react';
 import { StackNavigator, createStackNavigator } from 'react-navigation';
 
-import SplashScreen from './src/general/splashScreen/';
+import SplashScreen from './src/views/splashScreen/';
 import WalletSetup from './src/component/walletSetup/';
 import PrivacyPolicy from './src/component/privacyPolicy/';
 import TermsConditions from './src/component/termsConditions/';
