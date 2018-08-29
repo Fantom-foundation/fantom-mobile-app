@@ -1,4 +1,4 @@
-import { WHITE_COLOR, DEVICE_HEIGHT, DEVICE_WIDTH, iPhoneX_Height } from '../../common/constants/';
+import { WHITE_COLOR, DEVICE_HEIGHT, DEVICE_WIDTH, iPhoneX_Height } from '../../../common/constants/';
 
 const isPhoneX = (DEVICE_HEIGHT >= iPhoneX_Height)
 

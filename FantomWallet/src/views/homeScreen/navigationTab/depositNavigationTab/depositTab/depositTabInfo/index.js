@@ -4,9 +4,9 @@ import { Text } from 'react-native';
 /**
  * DepositScreen Tabs
  */
-import PointTab from '../../../depositScreen/depositPointScreen/';
-import FantomTab from '../../../depositScreen/depositFantomScreen/';
-import EthererumTab from '../../../depositScreen/depositEthereumScreen/';
+import PointTab from '../../../../depositScreen/depositPointScreen/';
+import FantomTab from '../../../../depositScreen/depositFantomScreen/';
+import EthererumTab from '../../../../depositScreen/depositEthereumScreen/';
 
 class DepositTabInfo extends Component {
     render() {

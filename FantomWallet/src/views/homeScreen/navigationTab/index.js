@@ -15,7 +15,7 @@ import depositWhiteIcon from '../../../images/downloading_white.png';
 import activityWhiteIcon from '../../../images/running_men_White.png';
 
 /*** Color Constants */
-import { ACTIVE_TAB_COLOR, WHITE_COLOR } from '../../common/constants/';
+import { ACTIVE_TAB_COLOR, WHITE_COLOR } from '../../../common/constants/';
 
 import style from './style';
 import Tab from './tab/index';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View  } from 'react-native';
 import style from './style';
-import WalletNavigationTab from '../navigationTab/walletNavigationTab/';
+import WalletView from '../walletScreen/walletView/';
 import { connect } from 'react-redux';
 /**
  * To Display WalletTab related tasks
@@ -38,15 +38,9 @@ class WalletScreen extends Component {
   render() {
     return (
       <View style={style.walletViewStyle} >
-        {/* <View style={style.arrowNavigationStyle}>
-          <TouchableOpacity onPress={this.handleGoBack}>
-            <MaterialIcon name="arrow-back" size={25} />
-          </TouchableOpacity>
-        </View> */}
-        <View style={style.walletScreenStyle}>
-          <WalletNavigationTab />
+         <View style={style.walletScreenStyle}>
+          <WalletView />
         </View>
-
       </View>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 /*** Color Constants */
-import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR, } from '../../../common/constants/';
+import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR, } from '../../../../common/constants/';
 
 import style from './style';
 import DepositTab from './depositTab/';

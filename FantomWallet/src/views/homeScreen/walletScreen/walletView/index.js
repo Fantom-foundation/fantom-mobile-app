@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 /*** Color Constants */
-import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR, } from '../../../common/constants/';
+import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR, } from '../../../../common/constants/';
 
 import style from './style';
 import WalletTab from './walletTab/';
 import WalletTabInfo from './walletTab/walletTabInfo/';
-
+import FantomTab from '../walletFantomScreen/index';
 
 class WalletNavigationBar extends Component {
     constructor(props) {
@@ -53,7 +53,8 @@ class WalletNavigationBar extends Component {
                     {renderTabNavigation}
                 </View>
                 <View style={style.tabInfoStyle}>
-                    {renderTabIfo}
+                    {/* {renderTabIfo} */}
+                    <FantomTab navigation={navigation} />
                 </View>
             </View>
         )

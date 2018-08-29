@@ -1,4 +1,4 @@
-import { WHITE_COLOR, DEVICE_WIDTH, } from '../../../common/constants/';
+import { WHITE_COLOR, DEVICE_WIDTH, } from '../../../../common/constants/';
 
 const style = {
     mainContainerStyle: {
