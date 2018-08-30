@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Platform } from 'react-native';
 import style from './style';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class BillingAmountScreen extends Component {
     constructor(props) {

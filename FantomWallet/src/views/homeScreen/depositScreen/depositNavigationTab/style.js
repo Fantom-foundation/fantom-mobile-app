@@ -1,4 +1,4 @@
-import { DEVICE_WIDTH } from '../../../../../common/constants/';
+import { DEVICE_WIDTH } from '../../../../common/constants/index';
 
 const style = {
     tabStyle: {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import style from './style';
-import QRGenerator from '../../../views/qr/generator';
+import QRGenerator from '../../../../views/qr/generator/index';
 
 
 class QRCodeShare extends Component {

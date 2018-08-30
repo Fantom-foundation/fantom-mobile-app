@@ -1,17 +1,17 @@
 
 
 import React, { Component } from 'react';
-import { ScrollView, View, Text, AsyncStorage, Platform, Keyboard } from 'react-native';
+import { ScrollView, View, Text, AsyncStorage, Keyboard } from 'react-native';
 
 import style from './style';
 
-import QRCodeShare from '../../../../general/depositView/qrShareCode';
-import BillingAmountScreen from '../../../../general/depositView/billingAmountView';
+import QRCodeShare from '../qrShareCode/index';
+import BillingAmountScreen from '../billingAmountView/index';
 import Button from '../../../../general/button/';
 
 import { DEVICE_HEIGHT } from '../../../../common/constants/';
 
-class DepositFantomScreen extends Component {
+class DepositViewInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,13 +46,14 @@ class DepositFantomScreen extends Component {
         Keyboard.dismiss();
         this.scrollView.scrollToEnd()
     }
-
-
-
+    
     render() {
         const balanceText = '(1,000\\ = 1.00002312FTM)';
         const qrLink = this.state.qrAddress;
-
+        let headerText = 'FP'
+        if(this.props.selectedTab === 'Fantom'){
+            headerText = 'FTM';
+        }
         return (
 
             <ScrollView ref={(scroll) => this.scrollView = scroll} style={style.fantomViewStyle} showsVerticalScrollIndicator={false}>
@@ -64,7 +65,7 @@ class DepositFantomScreen extends Component {
                     onAmountChange={this.onAmountChange.bind(this)}
                     onTextFieldFocus={this.onTextFieldFocus.bind(this)}
                     onTextFieldBlur={this.onTextFieldBlur.bind(this)}
-                    headerText='FTM'
+                    headerText={headerText}
                 />
                 <View style={style.buttonViewStyle}>
                     <Button text='Copy Address' buttonStyle={{ backgroundColor: '#EEBD12' }} textStyle={{ color: '#000' }} onPress={this.onCopyAddress.bind(this)} />
@@ -75,4 +76,4 @@ class DepositFantomScreen extends Component {
     }
 }
 
-export default DepositFantomScreen;
+export default DepositViewInfo;
