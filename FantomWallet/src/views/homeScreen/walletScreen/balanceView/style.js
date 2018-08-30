@@ -22,15 +22,20 @@ const style = {
         paddingTop: 20,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'center',
+        // backgroundColor: 'red',
     },
     balanceViewTextOne: {
         fontSize: 32,
         fontFamily: FontFamily.SegoeUI_Bold,
+        flex: 1,
+        textAlign: 'center',
+        // backgroundColor: 'yellow',
     },
     balanceTextTwo: {
         padding: 4,
         alignItems: 'center',
+        // backgroundColor: 'green',
     },
     balanceTextStyle: {
         fontSize: 14,
@@ -39,6 +44,7 @@ const style = {
     balanceUnitText: {
         fontSize: 20,
         fontFamily: FontFamily.SegoeUI_Bold,
+        // backgroundColor: 'pink'
     }
 }
 export default style;

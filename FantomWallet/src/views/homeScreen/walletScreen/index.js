@@ -3,6 +3,8 @@ import { View  } from 'react-native';
 import style from './style';
 import WalletView from '../walletScreen/walletView/';
 import { connect } from 'react-redux';
+const Web3 = require('web3');
+
 /**
  * To Display WalletTab related tasks
  */
@@ -24,8 +26,11 @@ class WalletScreen extends Component {
       .then((responseJson) => {
         console.log('balance response : ',responseJson);
         if (responseJson.status && responseJson.status === "1") {
+          const balance = responseJson.result;
+          const valInWei = Web3.utils.fromWei(balance, 'ether');
+          console.log(valInWei, 'balance');
           this.setState({
-            balance: responseJson.result,
+            balance: valInWei,
           })
         }
         return responseJson;

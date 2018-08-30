@@ -20,10 +20,6 @@ class DepositViewInfo extends Component {
             qrAddress: '',
         }
     }
-    // componentWillMount() {
-    //     AsyncStorage.getItem('masterPrivateKey').then((val) => this.setState({ qrAddress: val }))
-    // }
-
 
     componentDidMount() {
       this.timeout = setTimeout(() => {
