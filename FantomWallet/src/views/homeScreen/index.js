@@ -112,7 +112,7 @@ class TransactionEntity extends Component {
     }
 
     onRefresh(){
-        if (this.props.publicKey) {
+        if (this.props.publicKey && !this.props.isLoading) {
             this.setState({
                 isLoading: true,
             })

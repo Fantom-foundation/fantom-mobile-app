@@ -9,7 +9,7 @@ function addNewAddress(state, action) {
     isFavourite: false,
   };
   if (action.timeStamp) {
-    addressObj.timeStamp = timeStamp;
+    addressObj.timeStamp = action.timeStamp;
   }
   const newAddresses = Object.assign({}, oldAddresses, {
     [addressKey]: addressObj
@@ -68,6 +68,26 @@ function deleteAddress(state, action) {
 }
 
 
+function addUpdateAddressTimeStamp(state, action) {
+  let oldAddresses = state.addresses;
+  const addressKey = action.address;
+  const oldAddress = oldAddresses[addressKey];
+  if (oldAddress && action.timeStamp) {
+    oldAddress.timeStamp = action.timeStamp;
+    const newAddresses = Object.assign({}, oldAddresses, {
+      [addressKey]: oldAddress
+    });
+    return Object.assign({}, state, {
+      addresses: newAddresses,
+    });
+  } else {
+    addNewAddress(state, action);
+  }
+  return state;
+}
+
+
+
 const AddressReducer = (state = { addresses: {} }, action) => {
     switch (action.type) {
         case Actions.ADD_ADDRESS:
@@ -78,6 +98,8 @@ const AddressReducer = (state = { addresses: {} }, action) => {
           return updateAddressTimeStamp(state, action)
         case Actions.DELETE_ADDRESS:
           return deleteAddress(state, action)
+        case Actions.ADD_UPDATE_ADDRESS:
+          return addUpdateAddressTimeStamp(state, action)
         default:
             return state;
     }

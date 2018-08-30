@@ -75,8 +75,21 @@ class AddressBook extends Component {
 
       let addressListView = [];
       let favoriteListView = [];
-      const addresses = this.props.addresses;
-        if (addresses) {
+      const addressesStored = this.props.addresses;
+        if (addressesStored) {
+          const addresses = {};
+          let objArr = Object.keys(addressesStored).map(function(key) {
+            return addressesStored[key];
+          });
+          objArr = objArr.sort(function(a,b){
+            if (a.timeStamp && b.timeStamp) {
+              return new Date(b.date) - new Date(a.date);
+            }
+            return -1;
+          });
+          for (const obj of objArr) {
+            addresses[obj.address] = obj
+          }
           for (const key in addresses) {
             if (addresses.hasOwnProperty(key)) {
                const tempAddress = addresses[key];

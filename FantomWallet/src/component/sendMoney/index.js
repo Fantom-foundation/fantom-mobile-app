@@ -13,6 +13,8 @@ import Button from '../../general/button/index';
 import TextField from './TextField'
 import { connect } from 'react-redux';
 import EthUtil from 'ethereumjs-util';
+import Loading from '../../general/loader/'
+import * as AddressAction from '../../redux/addressBook/action';
 var Tx = require('ethereumjs-tx');
 
 const web3 = new Web3(
@@ -26,93 +28,92 @@ const deviceHeight = Dimensions.get('window').height;
 
 class SendMoney extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+    }
+    this.isConfirmationRecieved = false;
+  }
 
-//   var privateKey = new Buffer('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
-
-// var rawTx = {
-//   nonce: '0x00',
-//   gasPrice: '0x09184e72a000',
-//   gasLimit: '0x2710',
-//   to: '0x0000000000000000000000000000000000000000',
-//   value: '0x00',
-//   data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
-// }
-
-// var tx = new Tx(rawTx);
-// tx.sign(privateKey);
-
-// var serializedTx = tx.serialize();
-
-// // console.log(serializedTx.toString('hex'));
-// // 0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f
-
-// web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-// .on('receipt', console.log);
-
-  transferMoney(from, to, value) {
+  transferMoney(from, to, value, fees, memo) {
     console.log('from', from);
-
-
+    this.setState({ isLoading: true });
     web3.eth.getTransactionCount(from).then((count) => {
-      console.log(count, 'txcount');
+      const privateKeyBuffer = EthUtil.toBuffer(this.props.privateKey);
+      web3.eth.getGasPrice((err, result) => {
+        console.log('wei fees', Web3.utils.toWei(fees, 'ether'));
+        var rawTx = {
+          from: from,
+          to: to,
+          value: Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
+          gasLimit: Web3.utils.toHex(Web3.utils.toWei(fees, 'ether')),
+          gasPrice: Web3.utils.toHex(result),
+          nonce: Web3.utils.toHex(count),
+          data: memo,
+        };
+        const tx = new Tx(rawTx);
+        tx.sign(privateKeyBuffer);
+        const serializedTx = tx.serialize();
+        web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+          .on('transactionHash', function (hash) {
+            console.log('transactionHash', hash);
+          })
+          .on('receipt', function (receipt) {
+            console.log('receipt', receipt);
+          })
+          .on('confirmation', (confirmationNumber, receipt) => {
+            console.log('confirmation confirmationNumber', confirmationNumber);
+            console.log('confirmation', receipt);
+            if (confirmationNumber === 1 && !this.isConfirmationRecieved) {
+              this.setState({ isLoading: false });
+              this.isConfirmationRecieved = true;
+              Alert.alert('Success', 'Transfer successful.',
+              [
+                {text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel'},
+              ]);
 
-    const privateKeyBuffer = EthUtil.toBuffer(this.props.privateKey);
-    web3.eth.getGasPrice((err, result) => {
-      console.log(err, 'gas price err');
-      console.log(result, 'gas price result');
-    
-    // console.log(gasPrice, 'gasPrice');
-    console.log(from, 'from');
-//     var rawTx = {
-//       from: from,
-//       to: to,
-//       value: Web3.utils.toWei(value, "ether"),
-//       gas: 22000,
-//       gasPrice: result,
-// };
-var rawTx = {
-  from: from,
-  to: to,
-  value:  Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
-  gas: Web3.utils.toHex(22000),
-  gasPrice: Web3.utils.toHex(result),
-  nonce: Web3.utils.toHex(count),
-};
-console.log(rawTx, 'rawTx');
-const tx = new Tx(rawTx);
-tx.sign(privateKeyBuffer);
-const serializedTx = tx.serialize();
-console.log(serializedTx.toString('hex'));
-web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-.on('transactionHash', function(hash){
-  console.log('transactionHash', hash);
-})
-.on('receipt', function(receipt){
-  console.log('receipt', receipt);
-})
-.on('confirmation', function(confirmationNumber, receipt){
-  console.log('confirmation confirmationNumber', confirmationNumber);
-  console.log('confirmation', receipt);
-})
-.on('error', console.error);
-
-
-});
-
-}).catch((err) => {
-  console.log(err, 'err');
-});
+            }
+          })
+          .on('error', (err) => {
+            console.log('error', err);
+            let message = '';
+            if (err.message) {
+              message = err.message
+            }
+            this.setState({ isLoading: false });
+            Alert.alert('Error', message);
+          });
+      });
+    }).catch((err) => {
+      console.log(err, 'err');
+      let message = '';
+      if (err.message) {
+        message = err.message
+      }
+      this.setState({ isLoading: false });
+      Alert.alert('Error', message);
+    });
   };
+
+  alertSuccessfulButtonPressed() {
+    const { address, reload } = this.props.navigation.state.params;
+    const currentDate = new Date();
+    this.props.addUpdateTimestampAddress(address, '', currentDate.getTime())
+    if (reload) {
+      reload();
+    }
+    this.props.navigation.goBack()
+  }
+
   onConfirmHandler = () => {
-    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
+    const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
     console.warn('confirmed');
-    this.transferMoney(this.props.publicKey, address, '0.001');
-    // this.transferMoney(this.props.publicKey, address, amount);
+    this.transferMoney(this.props.publicKey, address, amount, fees, memo);
 
   }
   render() {
-    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
-    // const { address, coin, amount, fees, memo } =   { address: '1', coin: '1', amount: '1', fees: '1', memo: '' }
+    const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
     return (
       <View style={style.mainContainerStyle}>
         <Header text='Check Send' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
@@ -169,6 +170,7 @@ web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
           <Button text="Cancel" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#000' }} onPress={() => this.props.navigation.goBack()} />
           <Button text="Confirm" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#ECB414' }} onPress={() => this.onConfirmHandler()} />
         </View>
+        {this.state.isLoading && <Loading />}
       </View>
     );
   }
@@ -184,6 +186,9 @@ const mapStateToProps = (state) => {
 },
   mapDispatchToProps = (dispatch) => {
     return {
+      addUpdateTimestampAddress: (walletAddress, name, timeStamp) => {
+        dispatch({ type: AddressAction.ADD_UPDATE_ADDRESS, address: walletAddress, name: name || '', timeStamp })
+      },
     };
   };
 

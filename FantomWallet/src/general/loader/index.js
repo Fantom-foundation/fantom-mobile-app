@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     opacity: 1.0,
-    backgroundColor: 'rgba(100, 100, 100, 0.1)',
+    backgroundColor: 'rgba(100, 100, 100, 0.3)',
     width: deviceWidth,
     height: deviceHeight,
     zIndex: 12200,
@@ -49,7 +49,7 @@ export default class Loading extends Component {
           animating={true}
           style={[styles.activityIndicator, { marginTop: marginStyle }]}
           size="large"
-          color="rgba(0,0,0,0.7 )"
+          color="rgba(0,0,0,1)"
         />
       </View>
     );

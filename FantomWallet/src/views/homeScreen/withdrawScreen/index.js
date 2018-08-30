@@ -71,7 +71,18 @@ export default class WithdrawScreen extends Component {
       Alert.alert('Error', message);
       return;
     }
-    this.props.navigation.navigate('SendMoney', { address: address, amount: amount, coin: coin, memo: memo, fees: fees });
+    this.props.navigation.navigate('SendMoney', { address: address, amount: amount, coin: coin, memo: memo, fees: fees, reload: this.reload.bind(this) });
+  }
+
+  reload() {
+    this.setState({
+      name: '',
+      val: 'FTM',
+      address: '',
+      amount: '',
+      fees: '',
+      memo: '',
+    })
   }
 
 
