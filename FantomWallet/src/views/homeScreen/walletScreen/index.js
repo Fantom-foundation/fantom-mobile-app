@@ -27,10 +27,9 @@ class WalletScreen extends Component {
         console.log('balance response : ',responseJson);
         if (responseJson.status && responseJson.status === "1") {
           const balance = responseJson.result;
-          const valInWei = Web3.utils.fromWei(balance, 'ether');
-          console.log(valInWei, 'balance');
+          const valInEther = Web3.utils.fromWei(balance, 'ether');
           this.setState({
-            balance: valInWei,
+            balance: valInEther,
           })
         }
         return responseJson;
