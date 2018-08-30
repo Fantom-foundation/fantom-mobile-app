@@ -85,7 +85,7 @@ class AddressBook extends Component {
             if (a.timeStamp && b.timeStamp) {
               return new Date(b.date) - new Date(a.date);
             }
-            return -1;
+            return 1;
           });
           for (const obj of objArr) {
             addresses[obj.address] = obj

@@ -81,7 +81,7 @@ function addUpdateAddressTimeStamp(state, action) {
       addresses: newAddresses,
     });
   } else {
-    addNewAddress(state, action);
+    return addNewAddress(state, action);
   }
   return state;
 }
