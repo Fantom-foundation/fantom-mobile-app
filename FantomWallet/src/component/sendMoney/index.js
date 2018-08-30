@@ -15,6 +15,10 @@ import { connect } from 'react-redux';
 import EthUtil from 'ethereumjs-util';
 var Tx = require('ethereumjs-tx');
 
+const web3 = new Web3(
+  new Web3.providers.HttpProvider('https://ropsten.infura.io/'),
+);
+
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -48,16 +52,9 @@ class SendMoney extends Component {
   transferMoney(from, to, value) {
     console.log('from', from);
 
-const web3 = new Web3(
-  new Web3.providers.HttpProvider('https://ropsten.infura.io/'),
-);
-    const bn = web3.eth.blockNumber;
-    console.log(bn, 'bn');
 
     web3.eth.getTransactionCount(from).then((count) => {
       console.log(count, 'txcount');
-
-    web3.eth.getBalance(from).then((res) => { console.log(res, 'balance res') }).catch((err) => {console.log(err, 'balance err')})
 
     const privateKeyBuffer = EthUtil.toBuffer(this.props.privateKey);
     web3.eth.getGasPrice((err, result) => {
@@ -105,36 +102,17 @@ web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
 }).catch((err) => {
   console.log(err, 'err');
 });
-// .then((result) => {console.log(result)})
-// .catch((err) => { console.log(err) })
-
-
-
-
-    // web3.eth.sendTransaction({
-    //   from: from,
-    //   to: to,
-    //   value: Web3.utils.toWei(value, "ether"),
-    // }, function (err, transactionHash) {
-    //   if (err) {
-    //     console.log(err);
-    //     Alert.alert('Success', `${err}`);
-    //   } else {
-    //     console.log(transactionHash);
-    //     Alert.alert('Success', `${transactionHash}`);
-    //   }
-    // });
   };
   onConfirmHandler = () => {
-    // const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
+    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
     console.warn('confirmed');
-    this.transferMoney(this.props.publicKey, '0x4d8868F7d7581d770735821bb0c83137Ceaf18FD', '0.001');
+    this.transferMoney(this.props.publicKey, address, '0.001');
     // this.transferMoney(this.props.publicKey, address, amount);
 
   }
   render() {
-    // const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
-    const { address, coin, amount, fees, memo } =   { address: '1', coin: '1', amount: '1', fees: '1', memo: '' }
+    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
+    // const { address, coin, amount, fees, memo } =   { address: '1', coin: '1', amount: '1', fees: '1', memo: '' }
     return (
       <View style={style.mainContainerStyle}>
         <Header text='Check Send' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
