@@ -5,8 +5,8 @@ import { View } from 'react-native';
 import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR, } from '../../../../common/constants/';
 
 import style from './style';
-import DepositTab from './depositTab/';
-import DepositTabInfo from './depositTab/depositTabInfo/';
+import DepositNavigationTab from '../depositNavigationTab/index';
+import DepositViewInfo from '../depositViewInfo/';
 
 class DepositNavigationBar extends Component {
     constructor(props) {
@@ -28,31 +28,36 @@ class DepositNavigationBar extends Component {
             tabRenderInfo: tabRenderInfo,
         })
     }
-
+    renderTabNavigation() {
+        const { tabIconList, activeTabIndex } = this.state;
+        return (
+            <>
+                {
+                    tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
+                        <DepositNavigationTab
+                            key={index}
+                            activeTabIndex={activeTabIndex}
+                            index={index}
+                            activeTabColor={ACTIVE_SUB_TAB_COLOR}
+                            inActiveTabColor={WHITE_COLOR}
+                            tabIfo={tabIfo}
+                            handleSelectedTab={this.handleSelectedTab.bind(this)} />
+                    ))
+                }
+            </>
+        )
+    }
     render() {
-        const { tabIconList, activeTabIndex, tabRenderInfo } = this.state;
+        
         const navigation = this.props.navigation;
-
-        let renderTabIfo = <DepositTabInfo tabRenderInfo={tabRenderInfo} navigation={navigation} />
-
-        let renderTabNavigation = tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
-            <DepositTab
-                key={index}
-                activeTabIndex={activeTabIndex}
-                index={index}
-                activeTabColor={ACTIVE_SUB_TAB_COLOR}
-                inActiveTabColor={WHITE_COLOR}
-                tabIfo={tabIfo}
-                handleSelectedTab={this.handleSelectedTab.bind(this)} />
-        ))
 
         return (
             <View style={style.mainContainerStyle}>
-                <View style={style.navigationTabStyle}>
-                    {renderTabNavigation}
-                </View>
+               {/* <View style={style.navigationTabStyle}>
+                    {this.renderTabNavigation()}
+                </View> */}
                 <View style={style.tabInfoStyle}>
-                    {renderTabIfo}
+                    <DepositViewInfo navigation={navigation} selectedTab={this.state.tabRenderInfo} />
                 </View>
             </View>
         )
