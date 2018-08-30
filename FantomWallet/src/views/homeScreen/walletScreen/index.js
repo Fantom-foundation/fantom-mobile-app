@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View  } from 'react-native';
+import { View } from 'react-native';
 import style from './style';
 import WalletView from '../walletScreen/walletView/';
 import { connect } from 'react-redux';
@@ -10,40 +10,16 @@ const Web3 = require('web3');
  */
 class WalletScreen extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      balance: '0',
-    }
-    if (this.props.publicKey) {
-      this.getEtherBalanceFromApiAsync(this.props.publicKey);
-    }
-  }
-
-  getEtherBalanceFromApiAsync(address) {
-    return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address='+address+'&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log('balance response : ',responseJson);
-        if (responseJson.status && responseJson.status === "1") {
-          const balance = responseJson.result;
-          const valInEther = Web3.utils.fromWei(balance, 'ether');
-          this.setState({
-            balance: valInEther,
-          })
-        }
-        return responseJson;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
   render() {
+    const { balance, transactionData, isLoading, navigation, onRefresh } = this.props;
     return (
       <View style={style.walletViewStyle} >
-         <View style={style.walletScreenStyle}>
-          <WalletView balance={this.state.balance}/>
+        <View style={style.walletScreenStyle}>
+          <WalletView balance={balance}
+            navigation = {navigation}
+            transactionData={transactionData}
+            isLoading={isLoading}
+            onRefresh={onRefresh} />
         </View>
       </View>
     );

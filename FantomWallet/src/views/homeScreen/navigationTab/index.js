@@ -55,8 +55,15 @@ class HomeNavigationBar extends Component {
 
   render() {
     const { tabIconList, activeTabIndex, tabRenderInfo } = this.state;
-
-    let renderTabIfo = <TabInfo tabRenderInfo={tabRenderInfo} navigation={this.props.navigation} />
+    const {balance, transactionData, isLoading, onRefresh} = this.props;
+    let renderTabIfo = <TabInfo 
+                      tabRenderInfo={tabRenderInfo} 
+                      navigation={this.props.navigation} 
+                      balance={balance}
+                      transactionData={transactionData}
+                      isLoading={isLoading}
+                      onRefresh={onRefresh}
+                      />
 
     let renderTabNavigation = tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
       <Tab

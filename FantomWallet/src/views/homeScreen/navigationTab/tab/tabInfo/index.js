@@ -8,11 +8,15 @@ import DepositTab from '../../../depositScreen/';
 class TabInfo extends Component {
 
     render() {
-        const { tabRenderInfo, navigation, } = this.props;
-
+        const { tabRenderInfo, navigation, balance, transactionData, isLoading, onRefresh } = this.props;
         if (tabRenderInfo && tabRenderInfo !== null && tabRenderInfo !== undefined) {
             if (tabRenderInfo === 'walletIcon') {
-                return <WalletTab navigation={navigation} />
+                return <WalletTab
+                            navigation={navigation}
+                            balance={balance}
+                            transactionData={transactionData}
+                            isLoading={isLoading}
+                            onRefresh={onRefresh} />
             } else if (tabRenderInfo === 'sendIcon') {
                 return <WithdrawTab navigation={navigation} />
             } else if (tabRenderInfo === 'depositIcon') {
