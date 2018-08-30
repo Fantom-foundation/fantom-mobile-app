@@ -41,11 +41,12 @@ const style = {
     },
     rowTwoStyle: {
         flexDirection: 'row',
-        margin: 4
+        margin: 4,
     },
     transactionIdStyle: {
+        width: deviceWidth/2,
         fontFamily: FontFamily.SFProDisplay_Regular,
-        letterSpacing: 1
+        letterSpacing: 1,
     },
     rowTwoViewStyle: {
         flex: 1,

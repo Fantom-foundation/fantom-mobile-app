@@ -7,14 +7,13 @@ class BalanceView extends Component {
 
     render() {
 
-        const { fantomTransactionArr } = this.props;
+        let { fantomTransactionArr, balance } = this.props;
 
-        let balanceTextTwo = '12.23532454';
         let balanceTextThree = 'FTM';
         let balanceTextFour = '122,000\\';
 
-        if (fantomTransactionArr.length === 0) {
-            balanceTextTwo = '00.00000000';
+        if (balance === '0') {
+            balance = '00.00000000';
             balanceTextFour = '0,000\\';
         }
 
@@ -22,7 +21,7 @@ class BalanceView extends Component {
             <View style={style.fantomBalanceView}>
                 <View style={style.balanceContainer}>
                     <View style={style.balanceViewText}>
-                        <Text style={style.balanceViewTextOne}> {balanceTextTwo} </Text>
+                        <Text style={style.balanceViewTextOne}> {balance} </Text>
                         <Text style={style.balanceUnitText}> {balanceTextThree} </Text>
                     </View>
                     <View style={style.balanceTextTwo}>

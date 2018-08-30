@@ -11,7 +11,7 @@ class WalletScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      balance: '',
+      balance: '0',
     }
     if (this.props.publicKey) {
       this.getEtherBalanceFromApiAsync(this.props.publicKey);
@@ -22,7 +22,7 @@ class WalletScreen extends Component {
     return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address='+address+'&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson, 'res');
+        console.log('balance response : ',responseJson);
         if (responseJson.status && responseJson.status === "1") {
           this.setState({
             balance: responseJson.result,
@@ -39,7 +39,7 @@ class WalletScreen extends Component {
     return (
       <View style={style.walletViewStyle} >
          <View style={style.walletScreenStyle}>
-          <WalletView />
+          <WalletView balance={this.state.balance}/>
         </View>
       </View>
     );

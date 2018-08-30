@@ -7,7 +7,7 @@ import SortMenuCard from '../../../../general/sortMenuCard/';
 import DisplayTransaction from './displayTransactions';
 
 import sortMenuIcon from '../../../../images/arrow_With_bar.png'
-
+import Loader from '../../../../general/loader/';
 
 import { SENT, RECEIVED, ALL_TRANSACTION, DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants/';
 
@@ -61,7 +61,7 @@ class TransactionView extends Component {
                         style={{
                             width: DEVICE_WIDTH,
                             height: DEVICE_HEIGHT,
-                            zIndex: 1, top: -DEVICE_HEIGHT * 0.5,
+                            zIndex: 1, top: - DEVICE_HEIGHT * 0.5,
                             position: 'absolute',
                         }} onPress={this.handleClickOnScreen.bind(this)}></TouchableOpacity>
                     <SortMenuCard
@@ -74,10 +74,17 @@ class TransactionView extends Component {
         }
         return null;
     }
+    renderLoader() {
+        if (this.props.isLoading === true) {
+            return  <Loader isLoading={this.props.isLoading} loaderStyle={0.25}/> 
+        }
+    }
 
     render() {
-        const { fantomTransactionArr } = this.props;
+        const { fantomTransactionArr, publicKey, isLoading } = this.props;
         const selectedSortMenu = this.state.val;
+        console.log('publicKey publicKey :', publicKey);
+
 
         return (
             <View style={{ flex: 1 }}>
@@ -91,11 +98,14 @@ class TransactionView extends Component {
                         </View>
                     </View>}
                 <View style={this.state.openSortMenu ? { opacity: 0.2, } : ''}>
+                    {this.renderLoader()}
                     <DisplayTransaction
                         fantomTransactionArr={fantomTransactionArr}
                         selectedSortMenu={selectedSortMenu}
-                        allTransaction={ALL_TRANSACTION} />
-                    {fantomTransactionArr.length === 0 && <EmptyTransactionEntity />}
+                        allTransaction={ALL_TRANSACTION}
+                        publicKey={publicKey}
+                        isLoading={isLoading} />
+                    {isLoading === false && fantomTransactionArr.length === 0 && <EmptyTransactionEntity />}
                 </View>
                 {this.renderSortMenu()}
             </View>
