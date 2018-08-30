@@ -5,9 +5,9 @@ import { View } from 'react-native';
 import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR, } from '../../../../common/constants/';
 
 import style from './style';
-import WalletTab from './walletTab/';
-import WalletTabInfo from './walletTab/walletTabInfo/';
-import FantomTab from '../walletFantomScreen/index';
+import WalletNaviagtionTab from '../walletNaviagtionTab/';
+// import WalletTabInfo from './walletTab/walletTabInfo/';
+import WalletViewInfo from '../walletViewInfo/';
 
 class WalletNavigationBar extends Component {
     constructor(props) {
@@ -30,31 +30,35 @@ class WalletNavigationBar extends Component {
         })
     }
 
+    renderTabNavigation() {
+        const { tabIconList, activeTabIndex } = this.state;
+        return (
+            <>
+                {
+                    tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
+                        <WalletNaviagtionTab
+                            key={index}
+                            activeTabIndex={activeTabIndex}
+                            index={index}
+                            activeTabColor={ACTIVE_SUB_TAB_COLOR}
+                            inActiveTabColor={WHITE_COLOR}
+                            tabIfo={tabIfo}
+                            handleSelectedTab={this.handleSelectedTab.bind(this)} />
+                    ))
+                }
+            </>
+        )
+    }
+
     render() {
-        const { tabIconList, activeTabIndex, tabRenderInfo } = this.state;
         const navigation = this.props.navigation;
-
-        let renderTabIfo = <WalletTabInfo tabRenderInfo={tabRenderInfo} navigation={navigation} />
-
-        let renderTabNavigation = tabIconList.length > 0 && tabIconList.map((tabIfo, index) => (
-            <WalletTab
-                key={index}
-                activeTabIndex={activeTabIndex}
-                index={index}
-                activeTabColor={ACTIVE_SUB_TAB_COLOR}
-                inActiveTabColor={WHITE_COLOR}
-                tabIfo={tabIfo}
-                handleSelectedTab={this.handleSelectedTab.bind(this)} />
-        ))
-
         return (
             <View style={style.mainContainerStyle}>
-                <View style={style.navigationTabStyle}>
-                    {renderTabNavigation}
-                </View>
+                {/* <View style={style.navigationTabStyle}>
+                    {this.renderTabNavigation()}
+                </View> */}
                 <View style={style.tabInfoStyle}>
-                    {/* {renderTabIfo} */}
-                    <FantomTab navigation={navigation} />
+                    <WalletViewInfo navigation={navigation} selectedTab={this.state.tabRenderInfo} />
                 </View>
             </View>
         )

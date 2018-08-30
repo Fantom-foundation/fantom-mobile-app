@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native';
 
 
 import style from './style';
-import walletIcon from '../../../images/wallet.png';
+import walletIcon from '../../../../../../images/wallet.png';
 
 class EmptyTransactionEntity extends Component {
     render() {

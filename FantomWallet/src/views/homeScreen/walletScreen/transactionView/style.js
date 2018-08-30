@@ -1,4 +1,4 @@
-import * as FontFamily from '../../../common/textFontFamily/index';
+import * as FontFamily from '../../../../common/textFontFamily/';
 
 const style = {
     mainViewStyle: {

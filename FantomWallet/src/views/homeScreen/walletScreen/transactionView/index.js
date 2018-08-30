@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import style from './style';
-import EmptyTransactionEntity from '../../transactionEntity/index';
-import SortMenuCard from '../../sortMenuCard/';
+import EmptyTransactionEntity from './transactionEntity/emptyTransactionEntity/';
+import SortMenuCard from '../../../../general/sortMenuCard/';
 import DisplayTransaction from './displayTransactions';
 
-import sortMenuIcon from '../../../images/arrow_With_bar.png'
+import sortMenuIcon from '../../../../images/arrow_With_bar.png'
 
 
-import { SENT, RECEIVED, ALL_TRANSACTION, DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../common/constants/';
+import { SENT, RECEIVED, ALL_TRANSACTION, DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants/';
 
 class TransactionView extends Component {
 
@@ -27,13 +27,13 @@ class TransactionView extends Component {
     }
 
     toggleSortMenu() {
-        console.warn('sort item : ', this.state.openSortMenu);
+        console.log('toggleSortMenu sort item : ', this.state.openSortMenu);
         this.setState({
             openSortMenu: !this.state.openSortMenu
         })
     }
     handleSortMenu(item) {
-        console.warn('sort item : ', this.state.openSortMenu);
+        console.log('handleSortMenu sort item : ', this.state.openSortMenu);
         this.setState({
             openSortMenu: !this.state.openSortMenu
         })
@@ -94,16 +94,9 @@ class TransactionView extends Component {
                     <DisplayTransaction
                         fantomTransactionArr={fantomTransactionArr}
                         selectedSortMenu={selectedSortMenu}
-                        ALL_TRANSACTION={ALL_TRANSACTION} />
+                        allTransaction={ALL_TRANSACTION} />
                     {fantomTransactionArr.length === 0 && <EmptyTransactionEntity />}
                 </View>
-                {/* {this.state.openSortMenu &&
-                    <SortMenuCard
-                        data={this.state.data}
-                        type={'transaction'}
-                        index={this.state.index}
-                        handleSortMenu={(item) => this.handleSortMenu(item)} />
-                } */}
                 {this.renderSortMenu()}
             </View>
         )

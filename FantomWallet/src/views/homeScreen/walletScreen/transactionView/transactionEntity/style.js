@@ -1,4 +1,4 @@
-import * as FontFamily from '../../common/textFontFamily/';
+import * as FontFamily from '../../../../../common/textFontFamily/';
 import { Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;

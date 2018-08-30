@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
 import style from './style';
-
-const sent = 'Sent';
-const received = 'Received';
-
-import { SUCCESS } from '../../common/constants/';
+import { SUCCESS, SENT } from '../../../../../common/constants/';
 
 
 class TransacationEntity extends Component {
@@ -15,9 +11,9 @@ class TransacationEntity extends Component {
         return (
             <View style={style.transactionCardStyle}>
                 <View style={style.rowOneStyle}>
-                    <Text style={style.transactionTypeStyle}> {transaction.type} {(transaction.type === sent ? ' To' : ' From')} </Text>
+                    <Text style={style.transactionTypeStyle}> {transaction.type} {(transaction.type === SENT ? ' To' : ' From')} </Text>
                     <View style={style.rowOneViewStyle}>
-                        <Text style={style.rowOneTextStyle}> {(transaction.type === sent ? '-' : '+')} {transaction.amount}</Text>
+                        <Text style={style.rowOneTextStyle}> {(transaction.type === SENT ? '-' : '+')} {transaction.amount}</Text>
                         <Text style={style.unitStyle}> {transaction.amountUnit} </Text>
                     </View>
                 </View>

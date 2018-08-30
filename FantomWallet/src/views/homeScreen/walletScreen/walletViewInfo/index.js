@@ -3,10 +3,10 @@ import { ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import style from './style';
 
-import BalanceView from '../../../../general/walletScreen/viewBalance'
-import TransactionView from '../../../../general/walletScreen/viewTransaction';
+import BalanceView from '../balanceView/'
+import TransactionView from '../transactionView/';
 
-import { SUCCESS, FAILED, SENT, RECEIVED } from '../../../../common/constants/';
+import { SUCCESS, FAILED, SENT, RECEIVED, POINT, FANTOM } from '../../../../common/constants/';
 
 class WalletFantomScreen extends Component {
 
@@ -30,7 +30,7 @@ class WalletFantomScreen extends Component {
         }
     }
     getTransactionsFromApiAsync(address) {
-      
+      const dummyAddress = '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae';
       fetch('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address='+address+'&startblock=0&endblock=99999999&sort=asc&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
         .then((response) => response.json())
         .then((responseJson) => {
@@ -53,6 +53,8 @@ class WalletFantomScreen extends Component {
       return pubKey;
     }
     render() {
+      console.log('this.props.selectedTab : ', this.props.selectedTab);
+
         const balanceText = '(1,000\\ = 1.00002312FTM)';
         const fantomTransactionArr = this.state.fantomTransactionArr;
         return (

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import style from './style';
 
-class WalletTab extends Component {
+class WalletNavigationTab extends Component {
 
     render() {
         let { activeTabIndex, index, tabIfo, tabTextStyle, tabStyle, activeTabColor, inActiveTabColor } = this.props;
@@ -26,4 +26,4 @@ class WalletTab extends Component {
         )
     }
 }
-export default WalletTab;
+export default WalletNavigationTab;

@@ -9,13 +9,11 @@ class BalanceView extends Component {
 
         const { fantomTransactionArr } = this.props;
 
-        let balanceTextOne = '(1,000\\ = 1.00002312FTM)';
         let balanceTextTwo = '12.23532454';
         let balanceTextThree = 'FTM';
         let balanceTextFour = '122,000\\';
 
         if (fantomTransactionArr.length === 0) {
-            balanceTextOne = '(1,000\\ = 2312FTM)';
             balanceTextTwo = '00.00000000';
             balanceTextFour = '0,000\\';
         }
