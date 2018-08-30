@@ -64,9 +64,10 @@ export default class WithdrawScreen extends Component {
       message = 'Please enter valid address.';
     } else if (amount === '') {
       message = 'Please enter valid amount';
-    } else if (fees === '') {
-      message = 'Please enter valid fees.';
-    }
+    } 
+    // else if (fees === '') {
+    //   message = 'Please enter valid fees.';
+    // }
     if (message !== '') {
       Alert.alert('Error', message);
       return;
@@ -174,7 +175,7 @@ export default class WithdrawScreen extends Component {
             </View>
           </View>
 
-          <View style={style.feesContainer}>
+          {/* <View style={style.feesContainer}>
             <Text style={style.feesText}>Fees</Text>
             <View style={style.addressTextInputContainer}>
               <TextInput
@@ -189,9 +190,9 @@ export default class WithdrawScreen extends Component {
               // onBlur={this.onBlur.bind(this)}
               >
               </TextInput>
-              {/* <View style={style.ftmTextContainer}>
+              <View style={style.ftmTextContainer}>
                 <Text style={style.ftmText}>0.0000002  FTM</Text>
-              </View> */}
+              </View>
             </View>
             <View style={style.speedContainer}>
               <View>
@@ -210,7 +211,7 @@ export default class WithdrawScreen extends Component {
                 <Text style={style.fastText}>Fast</Text>
               </View>
             </View>
-          </View>
+          </View> */}
 
           <View style={style.addressContainer}>
             <Text style={style.addressText}>Memo</Text>

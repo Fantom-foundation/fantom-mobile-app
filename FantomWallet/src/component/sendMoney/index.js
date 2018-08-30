@@ -36,18 +36,18 @@ class SendMoney extends Component {
     this.isConfirmationRecieved = false;
   }
 
-  transferMoney(from, to, value, fees, memo) {
+  transferMoney(from, to, value, memo) {
     console.log('from', from);
     this.setState({ isLoading: true });
     web3.eth.getTransactionCount(from).then((count) => {
       const privateKeyBuffer = EthUtil.toBuffer(this.props.privateKey);
       web3.eth.getGasPrice((err, result) => {
-        console.log('wei fees', Web3.utils.toWei(fees, 'ether'));
+        // console.log('wei fees', Web3.utils.toWei(fees, 'ether'));
         var rawTx = {
           from: from,
           to: to,
           value: Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
-          gasLimit: Web3.utils.toHex(Web3.utils.toWei(fees, 'ether')),
+          gasLimit: Web3.utils.toHex(22000),
           gasPrice: Web3.utils.toHex(result),
           nonce: Web3.utils.toHex(count),
           data: memo,
@@ -109,7 +109,7 @@ class SendMoney extends Component {
   onConfirmHandler = () => {
     const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
     console.warn('confirmed');
-    this.transferMoney(this.props.publicKey, address, amount, fees, memo);
+    this.transferMoney(this.props.publicKey, address, amount, memo);
 
   }
   render() {
@@ -143,13 +143,13 @@ class SendMoney extends Component {
               rightTextValue={amount}
             />
           </View>
-          <View style={style.textFieldStyle}>
+          {/* <View style={style.textFieldStyle}>
             <TextField
               placeHolderText={'Fees'}
               isTextPresent={true}
               rightTextValue={fees}
             />
-          </View>
+          </View> */}
           <View style={style.textFieldStyle}>
             <TextField
               placeHolderText={'Memo'}
