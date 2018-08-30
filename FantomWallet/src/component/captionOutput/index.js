@@ -35,7 +35,7 @@ class CaptionOutput extends Component {
 
         const string = this.state.mnemonicWords.join(',');
         await Clipboard.setString(string);
-        const clipboardContent = await Clipboard.getString();
+        // const clipboardContent = await Clipboard.getString();
     }
     onConfirmHandler() {
         this.props.navigation.navigate('CaptchaVerification', {

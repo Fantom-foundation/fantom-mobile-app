@@ -62,8 +62,6 @@ class DepositFantomScreen extends Component {
         this.scrollView.scrollToEnd()
     }
 
-
-
     render() {
         const balanceText = '(1,000\\ = 1.00002312FTM)';
         const qrLink = this.state.qrAddress;

@@ -6,13 +6,14 @@
  * @flow
  */
 
+import './global';
+
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 import Router from './router';
 import factory from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
-import './global';
 const Bip39 = require('bip39');
 const Hdkey = require('hdkey');
 const EthUtils = require('ethereumjs-util');
@@ -31,11 +32,10 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-const Web3 = require('web3');
+// const Web3 = require('web3');
+// import Web3 from './src/component/sendMoney/web3.min.js'
 var hdkey = require('ethereumjs-wallet/hdkey')
-const web3 = new Web3(
-  new Web3.providers.HttpProvider('https://ropstein.infura.io/'),
-);
+
 
 type Props = {};
 export default class App extends Component<Props> {

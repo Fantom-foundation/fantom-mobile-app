@@ -1,9 +1,12 @@
+import '../../../global';
+
+const Web3 = require('web3');
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, Dimensions, Alert } from 'react-native';
 import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
-// import Web3 from 'web3';
-import Web3 from './web3.min.js';
+// import Web31 from 'web3';
+// import Web3 from './web3.min.js';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
@@ -11,10 +14,6 @@ import TextField from './TextField'
 import { connect } from 'react-redux';
 import EthUtil from 'ethereumjs-util';
 var Tx = require('ethereumjs-tx');
-
-const web3 = new Web3(
-  new Web3.providers.HttpProvider('https://ropstein.infura.io/143ba4fa4da9469ebb2695e07e96b9ee'),
-);
 
 
 const deviceWidth = Dimensions.get('window').width;
@@ -47,21 +46,71 @@ class SendMoney extends Component {
 // .on('receipt', console.log);
 
   transferMoney(from, to, value) {
+    console.log('from', from);
+
+const web3 = new Web3(
+  new Web3.providers.HttpProvider('https://ropsten.infura.io/'),
+);
+    const bn = web3.eth.blockNumber;
+    console.log(bn, 'bn');
+
+    web3.eth.getTransactionCount(from).then((count) => {
+      console.log(count, 'txcount');
+
+    web3.eth.getBalance(from).then((res) => { console.log(res, 'balance res') }).catch((err) => {console.log(err, 'balance err')})
+
     const privateKeyBuffer = EthUtil.toBuffer(this.props.privateKey);
+    web3.eth.getGasPrice((err, result) => {
+      console.log(err, 'gas price err');
+      console.log(result, 'gas price result');
+    
+    // console.log(gasPrice, 'gasPrice');
     console.log(from, 'from');
-    var rawTx = {
-      from: from,
-      to: to,
-      value: Web3.utils.toWei(value, "ether"),
-      gas: 21000
+//     var rawTx = {
+//       from: from,
+//       to: to,
+//       value: Web3.utils.toWei(value, "ether"),
+//       gas: 22000,
+//       gasPrice: result,
+// };
+var rawTx = {
+  from: from,
+  to: to,
+  value:  Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
+  gas: Web3.utils.toHex(22000),
+  gasPrice: Web3.utils.toHex(result),
+  nonce: Web3.utils.toHex(count),
 };
+console.log(rawTx, 'rawTx');
 const tx = new Tx(rawTx);
 tx.sign(privateKeyBuffer);
 const serializedTx = tx.serialize();
 console.log(serializedTx.toString('hex'));
 web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-.then((result) => {console.log(result)})
-.catch((err) => { console.log(err) })
+.on('transactionHash', function(hash){
+  console.log('transactionHash', hash);
+})
+.on('receipt', function(receipt){
+  console.log('receipt', receipt);
+})
+.on('confirmation', function(confirmationNumber, receipt){
+  console.log('confirmation confirmationNumber', confirmationNumber);
+  console.log('confirmation', receipt);
+})
+.on('error', console.error);
+
+
+});
+
+}).catch((err) => {
+  console.log(err, 'err');
+});
+// .then((result) => {console.log(result)})
+// .catch((err) => { console.log(err) })
+
+
+
+
     // web3.eth.sendTransaction({
     //   from: from,
     //   to: to,
@@ -77,13 +126,15 @@ web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
     // });
   };
   onConfirmHandler = () => {
-    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
+    // const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
     console.warn('confirmed');
-    this.transferMoney(this.props.publicKey, address, amount);
+    this.transferMoney(this.props.publicKey, '0x4d8868F7d7581d770735821bb0c83137Ceaf18FD', '0.001');
+    // this.transferMoney(this.props.publicKey, address, amount);
 
   }
   render() {
-    const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
+    // const { address, coin, amount, fees, memo } =   this.props.navigation.state.params;
+    const { address, coin, amount, fees, memo } =   { address: '1', coin: '1', amount: '1', fees: '1', memo: '' }
     return (
       <View style={style.mainContainerStyle}>
         <Header text='Check Send' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
