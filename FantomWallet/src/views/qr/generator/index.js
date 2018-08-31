@@ -36,10 +36,10 @@ export default class QRGenerator extends Component {
     // console.warn(VersionCheck.getCurrentBuildNumber()); // 10
     // console.warn(VersionCheck.getCurrentVersion());     // 0.1.1
 
-    VersionCheck.getLatestVersion()
-      .then(latestVersion => {
-        console.log(latestVersion, 'latest');    // 0.1.2
-      });
+    // VersionCheck.getLatestVersion()
+    //   .then(latestVersion => {
+    //     console.log(latestVersion, 'latest');    // 0.1.2
+    //   });
   }
 
   renderLogo() {

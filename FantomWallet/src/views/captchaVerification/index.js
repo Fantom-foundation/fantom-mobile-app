@@ -39,7 +39,6 @@ class CaptchaVerification extends Component {
     if(!this.checkValidation()){
       return;
     }
-    debugger;
     const root = Hdkey.fromMasterSeed(this.state.seed);
     const masterPrivateKey = root.privateKey.toString('hex');
     const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
