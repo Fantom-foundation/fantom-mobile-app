@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Platform } from 'react-native';
 import style from './style';
 
+/**
+ * BillingAmountScreen: This component is meant for handling tasks related to billing on deposit screen.
+ */
 class BillingAmountScreen extends Component {
     constructor(props) {
         super(props);

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 import style from './style';
 import { SUCCESS, SENT, RECEIVED, FAILED } from '../../../../../common/constants/';
 
-
+/**
+ * TransacationEntity: This component is meant for rendering transaction cards. 
+ */
 class TransacationEntity extends Component {
     render() {
         const { transaction, publicKey } = this.props;
@@ -27,6 +30,11 @@ class TransacationEntity extends Component {
             </View>
         )
     }
+}
+
+TransacationEntity.propTypes = {
+    publicKey: PropTypes.string,
+    transaction: PropTypes.object,
 }
 
 export default TransacationEntity;

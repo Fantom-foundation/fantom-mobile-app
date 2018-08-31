@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, AsyncStorage, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import style from './style';
 
@@ -12,6 +13,9 @@ import Button from '../../../../general/button/';
 
 import { DEVICE_HEIGHT } from '../../../../common/constants/';
 
+/**
+ * DepositViewInfo: This component is meant for redering deposit screen related information.
+ */
 class DepositViewInfo extends Component {
     constructor(props) {
         super(props);
@@ -22,15 +26,15 @@ class DepositViewInfo extends Component {
     }
 
     componentDidMount() {
-      this.timeout = setTimeout(() => {
-        this.setState({
-          qrAddress: this.props.publicKey,
-        })
-      }, 500);
+        this.timeout = setTimeout(() => {
+            this.setState({
+                qrAddress: this.props.publicKey,
+            })
+        }, 500);
     }
 
     componentWillUnmount() {
-      clearTimeout(this.timeout);
+        clearTimeout(this.timeout);
     }
 
 
@@ -58,12 +62,12 @@ class DepositViewInfo extends Component {
         Keyboard.dismiss();
         this.scrollView.scrollToEnd()
     }
-    
+
     render() {
         const balanceText = '(1,000\\ = 1.00002312FTM)';
         const qrLink = this.state.qrAddress;
         let headerText = 'FP'
-        if(this.props.selectedTab === 'Fantom'){
+        if (this.props.selectedTab === 'Fantom') {
             headerText = 'FTM';
         }
         return (
@@ -90,13 +94,19 @@ class DepositViewInfo extends Component {
 
 
 const mapStateToProps = (state) => {
-  return {
-    publicKey: state.keyReducer.publicKey,
-  };
-},
-  mapDispatchToProps = (dispatch) => {
     return {
+        publicKey: state.keyReducer.publicKey,
     };
-  };
+},
+    mapDispatchToProps = (dispatch) => {
+        return {
+        };
+    };
+
+DepositViewInfo.propTypes = {
+    publicKey: PropTypes.string,
+    navigation: PropTypes.object,
+    selectedTab: PropTypes.string,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepositViewInfo);

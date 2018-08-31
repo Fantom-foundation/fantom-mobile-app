@@ -8,7 +8,7 @@ import TermsConditions from './src/views/termsConditions/index';
 import CaptionOutput from './src/views/captionOutput/index';
 import HomeScreen from './src/views/homeScreen/';
 import CaptchaVerification from './src/views/captchaVerification/index';
-import AddressBook from './src/views/addressBook/index';
+import AddressBook from './src/views/homeScreen/settings/addressBook/'
 import QRScanner from './src/views/qr/scanner/view';
 import QRGenerator from './src/views/qr/generator/';
 import EditContact from './src/views/editContact/index';

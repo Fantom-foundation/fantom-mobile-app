@@ -3,9 +3,13 @@ import { ImageBackground, Image, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import style from './style';
 
-
+/**
+ * SplashScreen: Splash Screen for app. 
+ */
 class SplashScreen extends Component {
-
+/**
+ * Render different screens based on user is already a registered user or not.
+ */
   componentDidMount() {
     const val = this.props.masterKey;
     const privateKey = this.props.privateKey;

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import style from './style';
 
+/**
+ * DepositNavigationTab: This component is meant for displaying navigation tab bar on Deposit screen containing list of tab.
+ */
 class DepositNavigationTab extends Component {
 
     render() {

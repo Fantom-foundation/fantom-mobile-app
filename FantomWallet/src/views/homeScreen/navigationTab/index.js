@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, BackHandler } from 'react-native';
+import PropTypes from 'prop-types';
 
 /** * InActive NavigationIcons */
 
@@ -21,6 +22,9 @@ import style from './style';
 import Tab from './tab/index';
 import TabInfo from './tab/tabInfo/';
 
+/**
+ * HomeNavigationBar: This component is meant for rendering navigation tab bar on home screen containing list of tabs.
+ */
 class HomeNavigationBar extends Component {
   constructor(props) {
     super(props);
@@ -55,10 +59,10 @@ class HomeNavigationBar extends Component {
 
   render() {
     const { tabIconList, activeTabIndex, tabRenderInfo } = this.state;
-    const {balance, transactionData, isLoading, onRefresh} = this.props;
+    const {balance, transactionData, isLoading, onRefresh, navigation} = this.props;
     let renderTabIfo = <TabInfo 
                       tabRenderInfo={tabRenderInfo} 
-                      navigation={this.props.navigation} 
+                      navigation={navigation} 
                       balance={balance}
                       transactionData={transactionData}
                       isLoading={isLoading}
@@ -70,8 +74,8 @@ class HomeNavigationBar extends Component {
         key={index}
         activeTabIndex={activeTabIndex}
         index={index}
-        ACTIVE_TAB_COLOR={ACTIVE_TAB_COLOR}
-        WHITE_COLOR={WHITE_COLOR}
+        activeTabColor={ACTIVE_TAB_COLOR}
+        inActiveTabColor={WHITE_COLOR}
         tabIfo={tabIfo}
         handleSelectedTab={this.handleSelectedTab.bind(this)} />
     ))
@@ -88,6 +92,17 @@ class HomeNavigationBar extends Component {
       </View>
     )
   }
+}
+
+HomeNavigationBar.propTypes = {
+  balance: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+  transactionData: PropTypes.array,
+  isLoading: PropTypes.bool,
+  navigation: PropTypes.object,
+  onRefresh: PropTypes.func
 }
 
 export default HomeNavigationBar;

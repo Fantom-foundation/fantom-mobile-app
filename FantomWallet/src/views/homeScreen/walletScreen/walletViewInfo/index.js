@@ -14,6 +14,9 @@ class WalletFantomScreen extends Component {
     }
   }
 
+  /**
+   * _onRefresh()  : This function is meant for refreshing of data from Api, to update transaction list.
+   */
   _onRefresh =  () => {
     this.setState({ refreshing: true });
     if (this.props.onRefresh) {

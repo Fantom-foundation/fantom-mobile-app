@@ -12,6 +12,10 @@ import leftIcon from '../../images/notification_red.png';
 import settingIcon from '../../images/setting.png';
 import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants/';
 
+
+/**
+ *  This is the Home Screen for App.
+ */
 class TransactionEntity extends Component {
 
     constructor(props) {
@@ -29,6 +33,10 @@ class TransactionEntity extends Component {
         }
     }
 
+    /**
+     * getEtherBalanceFromApiAsync() :  Api to fetch wallet balance for given address.
+     * @param { String } address : address to fetch wallet balance.
+     */
     getEtherBalanceFromApiAsync(address) {
         return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address=' + address + '&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
             .then((response) => response.json())
@@ -48,6 +56,10 @@ class TransactionEntity extends Component {
             });
     }
 
+    /**
+     * getTransactionsFromApiAsync():  Api to fetch transactions for given address.
+     * @param {String} address : address to fetch transactions.
+     */
     getTransactionsFromApiAsync(address) {
         const dummyAddress = '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae';
         fetch('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address=' + address + '&startblock=0&endblock=99999999&sort=asc&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
@@ -71,6 +83,10 @@ class TransactionEntity extends Component {
             });
     }
 
+    /**
+     * loadTransactionData() :  Function to create array of objects from response of Api calling for storing transactions.
+     * @param {*} responseJson : Json of transaction response data from Api.
+     */
     loadTransactionData(responseJson) {
         let transactionData = [];
         // let publicKey = '0x4d8868F7d7581d770735821bb0c83137Ceaf18FD'.toLowerCase();
@@ -111,7 +127,10 @@ class TransactionEntity extends Component {
         });
     }
 
-    onRefresh(){
+    /**
+     * onRefresh() :  To reload the transaction data on page refresh.
+     */
+    onRefresh() {
         if (this.props.publicKey && !this.props.isLoading) {
             this.setState({
                 isLoading: true,
@@ -142,9 +161,9 @@ class TransactionEntity extends Component {
                     navigation={this.props.navigation}
                     balance={balance}
                     transactionData={transactionData}
-                    isLoading={isLoading} 
+                    isLoading={isLoading}
                     onRefresh={this.onRefresh.bind(this)}
-                    />
+                />
             </View>
         );
     }

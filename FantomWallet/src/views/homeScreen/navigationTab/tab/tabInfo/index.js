@@ -5,6 +5,9 @@ import WalletTab from '../../../walletScreen/';
 import WithdrawTab from '../../../withdrawScreen/';
 import DepositTab from '../../../depositScreen/';
 
+/**
+ * TabInfo: This component is meant for rendering different screen based on selected tab from navigation tab bar.
+ */
 class TabInfo extends Component {
 
     render() {

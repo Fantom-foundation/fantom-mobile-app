@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-
+import PropTypes from 'prop-types';
 import style from './style';
 import EmptyTransactionEntity from './transactionEntity/emptyTransactionEntity/';
 import SortMenuCard from '../../../../general/sortMenuCard/';
@@ -11,6 +11,9 @@ import Loader from '../../../../general/loader/';
 
 import { SENT, RECEIVED, ALL_TRANSACTION, DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants/';
 
+/**
+ * TransactionView: This component is meant for rendering transactions done on particuler wallet.
+ */
 class TransactionView extends Component {
 
     constructor(props) {
@@ -76,15 +79,13 @@ class TransactionView extends Component {
     }
     renderLoader() {
         if (this.props.isLoading === true) {
-            return  <Loader isLoading={this.props.isLoading} loaderStyle={0.25}/> 
+            return <Loader isLoading={this.props.isLoading} loaderStyle={0.25} />
         }
     }
 
     render() {
         const { fantomTransactionArr, publicKey, isLoading } = this.props;
         const selectedSortMenu = this.state.val;
-        console.log('publicKey publicKey :', publicKey);
-
 
         return (
             <View style={{ flex: 1 }}>
@@ -105,12 +106,19 @@ class TransactionView extends Component {
                         allTransaction={ALL_TRANSACTION}
                         publicKey={publicKey}
                         isLoading={isLoading} />
-                    {isLoading === false && fantomTransactionArr.length === 0 && <EmptyTransactionEntity />}
+                    {isLoading === false && fantomTransactionArr.length === 0 &&
+                         <EmptyTransactionEntity title='No Transactions' message='(The wallet will show you recent transactions)'/>}
                 </View>
                 {this.renderSortMenu()}
             </View>
         )
     }
+}
+
+TransactionView.propTypes = {
+    publicKey: PropTypes.string,
+    fantomTransactionArr: PropTypes.array,
+    isLoading: PropTypes.bool,
 }
 
 export default TransactionView;

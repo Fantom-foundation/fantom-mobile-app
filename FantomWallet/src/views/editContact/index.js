@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, CheckBox, ScrollView, Platform,Image,TouchableOpacity, Alert, Dimensions} from 'react-native';
+import { Text, View, TextInput, CheckBox, ScrollView, Platform, Image, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Header from '../../general/header/index';
 import style from './style';
@@ -17,44 +17,52 @@ import * as AddressAction from '../../redux/addressBook/action';
 import Web3 from 'web3';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
+
+/**
+ * EditContact: This component is meant for functionality of Contact editing in App.
+ */
 class EditContact extends Component {
-    onLeftIconPress = () => {
-        console.log('onLeftIconPressonLeftIconPress');
-        this.props.navigation.goBack()
-    }
+
     state = {
         address: '',
         name: '',
         dialogBox: false,
-        checked:true
+        checked: true
+    }
+    onLeftIconPress = () => {
+        console.log('onLeftIconPressonLeftIconPress');
+        this.props.navigation.goBack()
     }
 
-
+    /**
+     * onConfirmClick()  : This function is called when user clicks on Confirm button , 
+     *  to confirm changes done in contact.
+     */
     onConfirmClick() {
         console.log('console function')
 
-      if (this.state.name !== '' && this.state.address !== '') {
-        const name = this.state.name;
-        const address = this.state.address;
-        const addressExist = this.props.addresses[address];
-        if (addressExist) {
-          this.setState({
-            dialogBox: true
-        })
-        } else {
-          const isValid = Web3.utils.isAddress(address);
-          if (!isValid) {
-            Alert.alert('Error', 'Please enter valid address.');
-            return;
-          }
-          this.props.addNewAddress(address, name);
-          Alert.alert('Success', 'Address added successfully.');
-          this.setState({
-            name: '',
-            address: '',
-          })
+        if (this.state.name !== '' && this.state.address !== '') {
+            const name = this.state.name;
+            const address = this.state.address;
+            const addressExist = this.props.addresses[address];
+            if (addressExist) {
+                this.setState({
+                    dialogBox: true
+                })
+            } else {
+                const isValid = Web3.utils.isAddress(address);
+                if (!isValid) {
+                    Alert.alert('Error', 'Please enter valid address.');
+                    return;
+                }
+                this.props.addNewAddress(address, name);
+                Alert.alert('Success', 'Address added successfully.');
+                this.setState({
+                    name: '',
+                    address: '',
+                })
+            }
         }
-      }
     }
     onCancelClick() {
         this.props.navigation.goBack();
@@ -64,7 +72,7 @@ class EditContact extends Component {
             dialogBox: false
         })
     }
-    checkBoxClicked(){
+    checkBoxClicked() {
         // this.setState({
         //     checked:!this.state.checked
         // })
@@ -84,15 +92,20 @@ class EditContact extends Component {
             this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true })
         }, 10);
     }
-
+    /**
+     * openScanner(): This function is meant for opening QRScanner to scan the address in QR code.
+     */
     openScanner() {
-      this.props.navigation.navigate('QRScanner', { onScanSuccess: this.onScanSuccess.bind(this) });
+        this.props.navigation.navigate('QRScanner', { onScanSuccess: this.onScanSuccess.bind(this) });
     }
 
+    /**
+     * @param {*} address : address conatins QR Address , scaned by QR Scanner.
+     */
     onScanSuccess(address) {
-      this.setState({
-        address,
-      });
+        this.setState({
+            address,
+        });
     }
 
     render() {
@@ -109,8 +122,8 @@ class EditContact extends Component {
                         <View style={style.fantomContainer}>
 
                             {/* <Icon style={style.fantomIcon} name='check-square' size={30} /> */}
-                            <TouchableOpacity activeOpacity={1}  onPress={() => this.checkBoxClicked()}>
-                            <Image source={this.state.checked ? checkedIcon:checkbox} style={{width:28,height:28}}/>
+                            <TouchableOpacity activeOpacity={1} onPress={() => this.checkBoxClicked()}>
+                                <Image source={this.state.checked ? checkedIcon : checkbox} style={{ width: 28, height: 28 }} />
                             </TouchableOpacity>
                             <Text style={style.fantomText}>FANTOM</Text>
                         </View>
@@ -135,7 +148,7 @@ class EditContact extends Component {
                             <TouchableOpacity style={style.iconContainer} onPress={this.openScanner.bind(this)}>
                                 {/* <Icon  name='address-book' size={30} />
                                 <Icon style={style.qrCodeIcon} name='qrcode' size={30} /> */}
-                                <Image source={qrCode} style={{width:32,height:32}} />
+                                <Image source={qrCode} style={{ width: 32, height: 32 }} />
                                 {/* <Image source={contact} style={{width:32,height:32}} /> */}
                             </TouchableOpacity>
                         </View>
@@ -160,11 +173,11 @@ class EditContact extends Component {
                 </ScrollView>
 
                 <View style={style.footer}>
-                    <Button buttonStyle={style.cancelButton} text="Cancel" onPress={() => this.onCancelClick()}/>
+                    <Button buttonStyle={style.cancelButton} text="Cancel" onPress={() => this.onCancelClick()} />
                     <Button buttonStyle={style.confirmButton} onPress={() => this.onConfirmClick()} text="Confirm" />
                 </View>
                 {
-                    this.state.dialogBox && <Dialogbox onConfirm={() => this.closeDialogBox()}/>
+                    this.state.dialogBox && <Dialogbox onConfirm={() => this.closeDialogBox()} />
                 }
 
             </View>
@@ -174,34 +187,16 @@ class EditContact extends Component {
 
 
 const mapStateToProps = (state) => {
-  return {
-    addresses: state.addressBookReducer.addresses,
-  };
-},
-  mapDispatchToProps = (dispatch) => {
     return {
-      addNewAddress: (walletAddress, name) => {
-        dispatch({ type: AddressAction.ADD_ADDRESS, address: walletAddress, name: name || '' })
-      },
+        addresses: state.addressBookReducer.addresses,
     };
-  };
+},
+    mapDispatchToProps = (dispatch) => {
+        return {
+            addNewAddress: (walletAddress, name) => {
+                dispatch({ type: AddressAction.ADD_ADDRESS, address: walletAddress, name: name || '' })
+            },
+        };
+    };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditContact);
-
-
-
-
-{/* <View style={{ flex: 1, flexDirection: 'row',backgroundColor:'red', borderColor: 'rgb(179,179,179)', borderRadius: 2, borderWidth: 1,
-                         marginTop: deviceHeight * 0.01,  }}>
-                            <TextInput
-                                onChangeText={(address) => this.setState({ address })}
-                                value={this.state.address}
-                                style={{ flex: 7, fontSize: 16 }}
-                                placeholder='Enter Wallet Address'
-                            />
-                            <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Icon style={{ color: 'grey' }} name='address-book' size={30} />
-
-                                <Icon style={{ color: 'grey' }} name='qrcode' size={30} />
-                            </View>
-                        </View> */}
