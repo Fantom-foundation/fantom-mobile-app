@@ -16,7 +16,8 @@ const style = {
         shadowColor: 'rgb(237,231,246)',
         shadowOffset: { width: 0, height: 10 },
         // shadowOpacity: 0.04
-        shadowOpacity: 1
+        shadowOpacity: 1, 
+        elevation: 1,
     },
     rowOneStyle: {
         flexDirection: 'row',

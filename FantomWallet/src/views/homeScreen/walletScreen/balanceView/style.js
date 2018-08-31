@@ -9,6 +9,7 @@ const style = {
         shadowOffset: { width: 0, height: 10, },
         shadowColor: 'rgb(243,240,250)',
         shadowOpacity: 1,
+        elevation: 1,
 
     },
     balanceContainer: {

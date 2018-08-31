@@ -31,6 +31,7 @@ const style = {
         shadowOffset: { width: -1, height: 1 },
         shadowOpacity: 1,
         paddingLeft: 20,
+        elevation: 1,
     },
     textFieldStyle: {
         paddingRight: 20,
