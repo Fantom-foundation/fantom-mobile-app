@@ -6,6 +6,10 @@ import { Dimensions } from 'react-native';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 //top:deviceHeight*0.38,left:deviceWidth*0.11
+
+/**
+ * DialogBox: This component displays a dialog, when user clicks on confirm button after contact editing.
+ */
 class DialogBox extends Component {
     render() {
         return (

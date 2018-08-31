@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import style from './style';
 
+/**
+ * WalletNavigationTab: This component is meant for displaying navigation tab bar on wallet screen containing list of tab.
+ */
 class WalletNavigationTab extends Component {
 
     render() {

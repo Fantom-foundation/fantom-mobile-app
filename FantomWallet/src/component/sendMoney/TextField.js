@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
-import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
 
 import Header from '../../general/header/index';

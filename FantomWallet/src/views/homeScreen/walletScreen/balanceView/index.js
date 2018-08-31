@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
 import style from './style';
-
+/**
+ * BalanceView: This component is meant for rendering balance of wallet on wallet screen.
+ */
 class BalanceView extends Component {
 
     render() {

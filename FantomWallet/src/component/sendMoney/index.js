@@ -3,7 +3,6 @@ import '../../../global';
 const Web3 = require('web3');
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, Dimensions, Alert } from 'react-native';
-import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
 // import Web31 from 'web3';
 // import Web3 from './web3.min.js';

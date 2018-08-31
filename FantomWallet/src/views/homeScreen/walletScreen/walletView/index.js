@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 /*** Color Constants */
 import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR, SENT, RECEIVED, SUCCESS, FAILED, } from '../../../../common/constants/';
@@ -84,4 +85,15 @@ const mapStateToProps = (state) => {
         return {
         };
     };
+
+WalletNavigationBar.propTypes = {
+    balance: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+    ]),
+    transactionData: PropTypes.array,
+    isLoading: PropTypes.bool,
+    navigation: PropTypes.object,
+    onRefresh: PropTypes.func
+}
 export default connect(mapStateToProps, mapDispatchToProps)(WalletNavigationBar);

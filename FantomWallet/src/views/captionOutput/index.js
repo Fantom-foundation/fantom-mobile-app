@@ -9,6 +9,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import dangerIcon from '../../images/warning.png'
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
+
+/**
+ * CaptionOutput: This component is meant for generating secret codes for captcha verification.
+ */
 class CaptionOutput extends Component {
     constructor(props) {
         super(props);

@@ -4,9 +4,14 @@ import FontIcon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EIicon from 'react-native-vector-icons/EvilIcons';
 import style from './style';
+import PropTypes from 'prop-types';
+
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
+/**
+ * Address: This component is meant for rendering list of address saved in address book.
+ */
 class Address extends Component {
 
     onAddressSelection() {
@@ -54,6 +59,18 @@ class Address extends Component {
             </MainView>
         );
     }
+}
+
+Address.propTypes = {
+    id: PropTypes.string,
+    delete: PropTypes.func,
+    rateChange: PropTypes.func,
+    line1Text:  PropTypes.string,
+    name: PropTypes.string,
+    isEditMode: PropTypes.bool,
+    rate:  PropTypes.string,
+    onSelection: PropTypes.func,
+
 }
 
 export default Address;

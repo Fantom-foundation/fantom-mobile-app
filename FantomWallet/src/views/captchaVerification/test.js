@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, Platform, ScrollView, Keyboard, KeyboardAvoidingView } from 'react-native';
-import { LinkButton } from 'general/';
 import { AsyncStorage } from "react-native"
 import ProgressBar from '../../general/progressBar/index';
 import Header from '../../general/header/index';

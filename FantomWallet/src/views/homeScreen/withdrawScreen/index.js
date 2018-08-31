@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Web3 from 'web3';
+import PropTypes from 'prop-types';
 
 import SortMenuCard from '../../../general/sortMenuCard/index';
 import Button from '../../../general/button/';
@@ -54,6 +55,11 @@ export default class WithdrawScreen extends Component {
       })
     }
   }
+
+  /**
+   *  handleSendMoney()  : This function is meant for handling input box validations ,
+   *  and navigate to SendMoney screen if all fields are filled.
+   */
   handleSendMoney() {
     const { address, amount, fees, memo } = this.state;
     const coin = this.state.val;
@@ -64,7 +70,7 @@ export default class WithdrawScreen extends Component {
       message = 'Please enter valid address.';
     } else if (amount === '') {
       message = 'Please enter valid amount';
-    } 
+    }
     // else if (fees === '') {
     //   message = 'Please enter valid fees.';
     // }
@@ -74,7 +80,9 @@ export default class WithdrawScreen extends Component {
     }
     this.props.navigation.navigate('SendMoney', { address: address, amount: amount, coin: coin, memo: memo, fees: fees, reload: this.reload.bind(this) });
   }
-
+  /**
+   * reload() :  on screen reload reset the fields.
+   */
   reload() {
     this.setState({
       name: '',
@@ -98,6 +106,9 @@ export default class WithdrawScreen extends Component {
     this.scrollView.scrollToEnd()
   }
 
+/**
+ * onScanSuccess()  : This function is meant to set address when user clicks on scanner button.
+ */
   onScanSuccess(address) {
     this.setState({
       address,
@@ -117,7 +128,6 @@ export default class WithdrawScreen extends Component {
     const ViewUse = this.state.openSortMenu ? TouchableOpacity : View;
     return (
       <ViewUse activeOpacity={1} style={style.withdrawViewStyle} onPress={() => this.handleClickOnScreen()}>
-        {/* <KeyboardAvoidingView behavior="padding" style={[{ flex: 1}, dynamicStyle]}> */}
         <ScrollView ref={(scroll) => this.scrollView = scroll} style={[{ flex: 1 }, dynamicStyle]} showsVerticalScrollIndicator={false} >
           <View style={style.sendContainer}>
             <Text style={style.sendText}>Send</Text>
@@ -237,16 +247,7 @@ export default class WithdrawScreen extends Component {
               textStyle={{ color: '#000', fontWeight: 'normal' }}
               onPress={this.handleSendMoney.bind(this)} />
           </View>
-          {/* {
-            this.state.openSortMenu && <View style={{ width: deviceWidth, height: deviceHeight, zIndex: 1, position: 'absolute' }}></View>
-          }
-          {
-            this.state.openSortMenu && <SortMenuCard handleSortMenu={(item) => this.handleSortMenu(item)} data={this.state.data} type={'withDraw'}
-              index={this.state.index} />
-          } */}
         </ScrollView>
-
-        {/* </KeyboardAvoidingView> */}
         {
           this.state.openSortMenu && <View style={{ width: deviceWidth, height: deviceHeight, zIndex: 1, position: 'absolute' }}></View>
         }
@@ -257,4 +258,8 @@ export default class WithdrawScreen extends Component {
       </ViewUse>
     );
   }
+}
+
+WithdrawScreen.propTypes = {
+  navigation: PropTypes.object,
 }

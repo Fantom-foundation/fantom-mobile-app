@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 import style from './style';
 import QRGenerator from '../../../../views/qr/generator/index';
 
-
+/**
+ * QRCodeShare: This component is meant for displaying QR code and QR address.
+ */
 class QRCodeShare extends Component {
     onQRShare() {
         console.warn('share QR');
@@ -25,4 +28,7 @@ class QRCodeShare extends Component {
     }
 }
 
+QRCodeShare.propTypes = {
+    qrLink: PropTypes.string,
+}
 export default QRCodeShare;

@@ -5,7 +5,9 @@ import Header from '../../../general/header/index';
 
 import leftArrowIcon from '../../../images/arrowLeft_White.png';
 import style from './style';
-
+/**
+ * Settings: This component is meant for performing tasks related to app settings.
+ */
 class Settings extends Component {
     onLeftIconPress = () => {
         this.props.navigation.goBack()

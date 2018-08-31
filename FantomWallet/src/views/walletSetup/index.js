@@ -5,7 +5,11 @@ import style from './style';
 //CaptchaVerification
 //CaptionOutput,EditContact
 
-
+/**
+ * WalletSetup: This component will render UI for wallet setup screen,
+ *  this component is rendered only if the user first time uses the app on Phone,
+ *  through this screen user is navigated to fill captcha verification to generate key.
+ */
 class WalletSetup extends Component {
     onCreateNewWallet() {
         this.props.navigation.navigate('CaptionOutput');

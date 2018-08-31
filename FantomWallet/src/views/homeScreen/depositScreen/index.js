@@ -4,12 +4,10 @@ import { View } from 'react-native';
 import style from './style';
 
 import DepositView from './depositView/index';
-
+/**
+ * To Display DepositTab related tasks
+ */
 export default class DepositScreen extends Component {
-
-    // onRightIconPress() {
-    //     this.props.navigation.navigate('AddressBook');
-    // }
     render() {
         return (
             <View style={style.depositViewStyle}>
