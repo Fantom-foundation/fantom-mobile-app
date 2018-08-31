@@ -29,7 +29,7 @@ export default class TermsConditions extends Component {
                 <StatusBar
                     barStyle="light-content" />
                 <Header text={'Terms of Service'} rightButtonIcon={crossButton} onRightIconPress={this.onRightIconPress} textStyle={{ fontFamily: 'SegoeUI-SemiBold' }} />
-                <WebView source={{ uri: 'http://www.innow8apps.com' }} />
+                <WebView source={{ uri: 'http://fantom.foundation' }} />
                 <View style={style.footerStyle}>
                     <Button text={'Confirm'} buttonStyle={{ fontFamily: 'SegoeUI' }}
                     />

@@ -39,7 +39,7 @@ export default class PrivacyPolicy extends Component {
                 <StatusBar
                     barStyle="light-content" />
                 <Header text={'Privacy Policy'} rightButtonIcon={crossButton} onRightIconPress={this.onRightIconPress} />
-                <WebView source={{ uri: 'http://www.innow8apps.com' }} />
+                <WebView source={{ uri: 'http://fantom.foundation' }} />
                 <View style={style.footerStyle}>
                     <Button text={'Confirm'} />
                 </View>
