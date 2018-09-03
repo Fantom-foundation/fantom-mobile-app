@@ -76,7 +76,7 @@ class DepositViewInfo extends Component {
                 <View style={style.amountDisplayStyle}>
                     <Text>{balanceText} </Text>
                 </View>
-                <QRCodeShare qrLink={qrLink} />
+                <QRCodeShare qrLink={qrLink} billingAmount={this.state.amount} />
                 <BillingAmountScreen
                     onAmountChange={this.onAmountChange.bind(this)}
                     onTextFieldFocus={this.onTextFieldFocus.bind(this)}
