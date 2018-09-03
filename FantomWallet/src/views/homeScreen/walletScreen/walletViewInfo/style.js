@@ -21,6 +21,19 @@ const style = {
         shadowColor: 'rgb(246,243,250)',
         shadowOpacity: 1,
         elevation: 2,
+    },
+    refreshMessageViewStyle: {
+        backgroundColor: '#DCDCDC',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
+    refreshTextStyle: {
+        fontSize: 12,
+        paddingRight: 4
+    },
+    refreshIconStyle: {
+        alignSelf: 'center'
     }
 }
 export default style;

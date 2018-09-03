@@ -5,6 +5,7 @@ import style from './style';
 
 import BalanceView from '../balanceView/'
 import TransactionView from '../transactionView/';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class WalletFantomScreen extends Component {
   constructor(props) {
@@ -17,10 +18,10 @@ class WalletFantomScreen extends Component {
   /**
    * _onRefresh()  : This function is meant for refreshing of data from Api, to update transaction list.
    */
-  _onRefresh =  () => {
+  _onRefresh = () => {
     this.setState({ refreshing: true });
     if (this.props.onRefresh) {
-       this.props.onRefresh();
+      this.props.onRefresh();
       if (this.props.isLoading === false) {
         this.setState({ refreshing: false })
       }
@@ -35,6 +36,12 @@ class WalletFantomScreen extends Component {
       <View style={style.mainContainerStyle}>
         <View style={style.amountDisplayStyle}>
           <Text style={style.textViewStyle}>{balanceText} </Text>
+        </View>
+        <View style={style.refreshMessageViewStyle}>
+          <Text style={style.refreshTextStyle}>
+            Scroll down to refresh
+          </Text>
+          <MaterialIcons name="refresh" size={12} style={style.refreshIconStyle} />
         </View>
         <ScrollView
           style={style.fantomViewStyle}
