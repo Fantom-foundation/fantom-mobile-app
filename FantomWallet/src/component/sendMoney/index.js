@@ -68,9 +68,9 @@ class SendMoney extends Component {
               this.setState({ isLoading: false });
               this.isConfirmationRecieved = true;
               Alert.alert('Success', 'Transfer successful.',
-              [
-                {text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel'},
-              ]);
+                [
+                  { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
+                ]);
 
             }
           })
@@ -158,7 +158,7 @@ class SendMoney extends Component {
             />
           </View>
           <Text style={style.additionalInfoTextStyle}>
-            The above information is correct
+            Please check if the above information is correct.
           </Text>
           <Text style={style.additionalInfoTextStyle}>
             Please check again.
