@@ -11,7 +11,8 @@ import {
   View,
   Image,
   TouchableOpacity, Text,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert,
 } from 'react-native';
 import uploadQR from '../../../images/uploading.png';
 
@@ -25,21 +26,18 @@ export default class QRGenerator extends Component {
   };
 
   onPress() {
+    const billingAmount = this.props.billingAmount;
+    if (billingAmount === '' || billingAmount === 0 || billingAmount === '0') {
+      Alert.alert('Error', 'Please enter billing amount.');
+      return;
+    }
     this.refs.viewShot.capture().then(uri => {
       console.log("do something with ", uri);
-      Share.open({ url: uri })
+      const message = `Billing amount: ${billingAmount}`
+      Share.open({ url: uri, title: 'Fantom',  })
         .then((res) => { console.log('this.props.qrLink , res', this.props.qrLink, res) })
         .catch((err) => { err && console.log(err); });
     });
-
-    // console.warn(VersionCheck.getPackageName());        // com.reactnative.app
-    // console.warn(VersionCheck.getCurrentBuildNumber()); // 10
-    // console.warn(VersionCheck.getCurrentVersion());     // 0.1.1
-
-    // VersionCheck.getLatestVersion()
-    //   .then(latestVersion => {
-    //     console.log(latestVersion, 'latest');    // 0.1.2
-    //   });
   }
 
   renderLogo() {
