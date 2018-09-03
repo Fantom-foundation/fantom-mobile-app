@@ -16,6 +16,7 @@ import SendMoney from './src/component/sendMoney/index';
 import Settings from './src/views/homeScreen/settings/index';
 import AboutApp from './src/views/homeScreen/settings/aboutApp/index';
 import CustomerSupport from './src/views/homeScreen/settings/customerSupport/index';
+import RecoverWallet from './src/views/recoverWallet/';
 
 const Routing = createStackNavigator({
     SplashScreen: { screen: SplashScreen },
@@ -42,7 +43,8 @@ const Routing = createStackNavigator({
     SendMoney: { screen: SendMoney },
     Settings: { screen: Settings },
     AboutApp: { screen: AboutApp },
-    CustomerSupport: { screen: CustomerSupport }
+    CustomerSupport: { screen: CustomerSupport },
+    RecoverWallet:{screen: RecoverWallet},
 },
     {
         headerMode: 'none',

@@ -22,6 +22,7 @@ class CaptionOutput extends Component {
     componentDidMount() {
         const menmonicPromise = Bip39.generateMnemonic();
         menmonicPromise.then((mnemonic) => {
+           
             const seed = Bip39.mnemonicToSeed(mnemonic); //creates seed buffer
             const mnemonicWords = mnemonic.split(' ');
             this.setState({

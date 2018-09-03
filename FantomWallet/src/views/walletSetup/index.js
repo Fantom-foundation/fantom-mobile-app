@@ -34,6 +34,12 @@ class WalletSetup extends Component {
                 <TouchableOpacity style={style.walletSetup} onPress={this.onCreateNewWallet.bind(this)} >
                     <Text style={style.walletSetupText}>Create Wallet</Text>
                 </TouchableOpacity>
+                {/* <View > */}
+                    <TouchableOpacity style={style.recoverWalletStyle} onPress={() => { this.props.navigation.navigate('RecoverWallet') }} >
+                        <Text style={style.footerText1}>Recover Wallet</Text>
+                    </TouchableOpacity>
+                {/* </View> */}
+
                 <View style={style.footer}>
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate('Terms') }} >
                         <Text style={style.footerText1}>Terms of Service</Text>
