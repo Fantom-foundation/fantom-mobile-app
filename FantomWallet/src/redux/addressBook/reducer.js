@@ -86,23 +86,49 @@ function addUpdateAddressTimeStamp(state, action) {
   return state;
 }
 
+function updateContact(state, action) {
+  console.warn('action in redux  :',action)
+  let oldAddresses = state.addresses;
+  const addressKey = action.oldWalletAddress;
+  const oldAddress = oldAddresses[addressKey];
+  const newAddress = action.newWalletAddress;
+  if (oldAddress) {
+    let updateAddressObject = {
+      ...oldAddress,
+      address: action.newWalletAddress,
+      name: action.name,
+    };
+    delete oldAddresses[addressKey];
+
+    const newAddresses = {
+      ...oldAddresses,
+      [newAddress]: updateAddressObject,
+    }
+    return Object.assign({}, state, {
+      addresses: newAddresses,
+    });
+  }
+  return state;
+}
 
 
 const AddressReducer = (state = { addresses: {} }, action) => {
-    switch (action.type) {
-        case Actions.ADD_ADDRESS:
-          return addNewAddress(state, action)
-        case Actions.FAVOURITE_ADDRESS:
-          return toggleFavouriteAddress(state, action)
-        case Actions.TIMESTAMP_ADDRESS:
-          return updateAddressTimeStamp(state, action)
-        case Actions.DELETE_ADDRESS:
-          return deleteAddress(state, action)
-        case Actions.ADD_UPDATE_ADDRESS:
-          return addUpdateAddressTimeStamp(state, action)
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case Actions.ADD_ADDRESS:
+      return addNewAddress(state, action)
+    case Actions.FAVOURITE_ADDRESS:
+      return toggleFavouriteAddress(state, action)
+    case Actions.TIMESTAMP_ADDRESS:
+      return updateAddressTimeStamp(state, action)
+    case Actions.DELETE_ADDRESS:
+      return deleteAddress(state, action)
+    case Actions.ADD_UPDATE_ADDRESS:
+      return addUpdateAddressTimeStamp(state, action)
+    case Actions.EDIT_CONTACT:
+      return updateContact(state, action)
+    default:
+      return state;
+  }
 }
 
 export default AddressReducer;

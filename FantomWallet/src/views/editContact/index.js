@@ -27,7 +27,19 @@ class EditContact extends Component {
         address: '',
         name: '',
         dialogBox: false,
-        checked: true
+        checked: true,
+        headerText: 'Add Contact',
+    }
+
+    componentDidMount() {
+        const params = this.props.navigation.state.params;
+        if (params && params.name && params.address) {
+            this.setState({
+                name: params.name,
+                address: params.address,
+                headerText: 'Edit Contact'
+            })
+        }
     }
     onLeftIconPress = () => {
         console.log('onLeftIconPressonLeftIconPress');
@@ -42,10 +54,12 @@ class EditContact extends Component {
         console.log('console function')
 
         if (this.state.name !== '' && this.state.address !== '') {
+            const params = this.props.navigation.state.params;
+            const isEditMode = params && params.name && params.address;
             const name = this.state.name;
             const address = this.state.address;
             const addressExist = this.props.addresses[address];
-            if (addressExist) {
+            if (addressExist && !isEditMode) {
                 this.setState({
                     dialogBox: true
                 })
@@ -55,12 +69,24 @@ class EditContact extends Component {
                     Alert.alert('Error', 'Please enter valid address.');
                     return;
                 }
-                this.props.addNewAddress(address, name);
-                Alert.alert('Success', 'Address added successfully.');
-                this.setState({
-                    name: '',
-                    address: '',
-                })
+                
+                if (isEditMode) {
+                    this.props.updateContact(params.address, this.state.address, this.state.name);
+                    Alert.alert('Success', 'Address updated successfully.', [
+                        { text: 'Ok', onPress: () => {this.props.navigation.goBack()}, style: 'cancel' },
+                      ]);
+                    
+                }
+                else {
+                    this.props.addNewAddress(address, name);
+                    Alert.alert('Success', 'Address added successfully.');
+                    this.setState({
+                        name: '',
+                        address: '',
+                    })
+                }
+
+               
             }
         }
     }
@@ -109,10 +135,18 @@ class EditContact extends Component {
     }
 
     render() {
+        console.warn('props are : ', this.props)
         return (
             <View style={style.mainContainerStyle}>
                 <StatusBar barStyle="light-content" />
-                <Header text='Add Contact' leftButtonIcon={arrowLeftButton} onLeftIconPress={this.onLeftIconPress} leftIconSize={30} rightIconSize={30} headerStyle={{ backgroundColor: 'rgb(233,177,18)' }} rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
+                <Header
+                    text={this.state.headerText}
+                    leftButtonIcon={arrowLeftButton}
+                    onLeftIconPress={this.onLeftIconPress}
+                    leftIconSize={30} rightIconSize={30}
+                    headerStyle={{ backgroundColor: 'rgb(233,177,18)' }}
+                    rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
+                    leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }} />
 
                 <ScrollView ref={(scroll) => this.scrollView = scroll}
                     style={style.scrollView}
@@ -196,6 +230,13 @@ const mapStateToProps = (state) => {
             addNewAddress: (walletAddress, name) => {
                 dispatch({ type: AddressAction.ADD_ADDRESS, address: walletAddress, name: name || '' })
             },
+            updateContact: (oldWalletAddress,newWalletAddress, name) => {
+                dispatch({
+                    type: AddressAction.EDIT_CONTACT,
+                    oldWalletAddress: oldWalletAddress,
+                    newWalletAddress: newWalletAddress, name: name || ''
+                })
+            }
         };
     };
 

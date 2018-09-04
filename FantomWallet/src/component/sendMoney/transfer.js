@@ -57,5 +57,5 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
 }
 
 export function transferMoney(from, to, value, memo, privateKey) {
-  
+  return transferMoneyViaEthereum(from, to, value, memo, privateKey);
 };
