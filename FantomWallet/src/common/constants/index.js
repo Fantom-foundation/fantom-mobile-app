@@ -24,3 +24,7 @@ export const iPhoneX_Height = 812;
 /**************************************************** */
 export const POINT = 'Point';
 export const FANTOM = 'Fantom';
+
+/**********************  WALLET TYPE ***************************** */
+export const ETHER_TYPE = 'ether_type';
+export const FANTOM_TYPE = 'fantom_type';

@@ -10,7 +10,7 @@ import fantomIcon from '../../images/fantomWhiteIcon.png';
 import secondaryIcon from '../../images/icon.png';
 import leftIcon from '../../images/notification_red.png';
 import settingIcon from '../../images/setting.png';
-import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants/';
+import { SUCCESS, RECEIVED, SENT, FAILED, ETHER_TYPE, FANTOM_TYPE } from '../../common/constants/';
 
 
 /**
@@ -24,24 +24,67 @@ class TransactionEntity extends Component {
             balance: '0',
             transactionData: [],
             isLoading: true,
+            walletType: ETHER_TYPE
         }
         this.loadTransactionData = this.loadTransactionData.bind(this);
         //  this.state.fantomTransactionArr = this.getTransactionsFromApiAsync(this.getPublicKey());
         if (this.props.publicKey) {
-            this.getEtherBalanceFromApiAsync(this.props.publicKey);
+            this.getWalletBalance(this.props.publicKey, this.state.walletType);
+            // this.getEtherBalanceFromApiAsync(this.props.publicKey);
             this.getTransactionsFromApiAsync(this.props.publicKey);
         }
     }
 
+    ////////////////////////////////////
+
+    getWalletBalance(address, walletType) {
+        if (walletType === ETHER_TYPE) {
+            this.getEtherBalanceFromApiAsync(address);
+        } else if (walletType === FANTOM_TYPE) {
+            this.getFantomBalanceFromApiAsync(address);
+        }
+    }
+
     /**
-     * getEtherBalanceFromApiAsync() :  Api to fetch wallet balance for given address.
+     * getFantomBalanceFromApiAsync() :  Api to fetch wallet balance for given address of Fantom own endpoint.
+     * @param { String } address : address to fetch wallet balance.
+     */
+    getFantomBalanceFromApiAsync(address) {
+        let dummyAddress = 0xFD00A5fE03CB4672e4380046938cFe5A18456Df4;
+        return fetch('http://18.221.128.6:8080/account/'+dummyAddress)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log('from fantom own wallet , balance response : ', responseJson);
+                if (responseJson && responseJson.balance) {
+                    const balance = responseJson.balance;
+                    console.log('balance: ', balance);
+                    // const valInEther = Web3.utils.fromWei(balance, 'ether');
+                    // console.log('valInEther: ', valInEther);
+                    // this.setState({
+                    //     balance: valInEther,
+                    // })
+                }
+                return responseJson;
+            })
+            .catch((error) => {
+                
+                console.error(error);
+            });
+    }
+
+
+
+    //////////////////////////////
+
+    /**
+     * getEtherBalanceFromApiAsync() :  Api to fetch Ether wallet balance for given address.
      * @param { String } address : address to fetch wallet balance.
      */
     getEtherBalanceFromApiAsync(address) {
         return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address=' + address + '&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log('balance response : ', responseJson);
+                console.warn('from ether , balance response : ', responseJson);
                 if (responseJson.status && responseJson.status === "1") {
                     const balance = responseJson.result;
                     const valInEther = Web3.utils.fromWei(balance, 'ether');
