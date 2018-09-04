@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import EthUtil from 'ethereumjs-util';
 import Loading from '../../general/loader/'
 import * as AddressAction from '../../redux/addressBook/action';
+import {transferMoney} from './transfer';
 var Tx = require('ethereumjs-tx');
 
 const web3 = new Web3(
@@ -38,59 +39,14 @@ class SendMoney extends Component {
   transferMoney(from, to, value, memo) {
     console.log('from', from);
     this.setState({ isLoading: true });
-    web3.eth.getTransactionCount(from).then((count) => {
-      const privateKeyBuffer = EthUtil.toBuffer(this.props.privateKey);
-      web3.eth.getGasPrice((err, result) => {
-        // console.log('wei fees', Web3.utils.toWei(fees, 'ether'));
-        var rawTx = {
-          from: from,
-          to: to,
-          value: Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
-          gasLimit: Web3.utils.toHex(22000),
-          gasPrice: Web3.utils.toHex(result),
-          nonce: Web3.utils.toHex(count),
-          data: memo,
-        };
-        const tx = new Tx(rawTx);
-        tx.sign(privateKeyBuffer);
-        const serializedTx = tx.serialize();
-        web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-          .on('transactionHash', function (hash) {
-            console.log('transactionHash', hash);
-          })
-          .on('receipt', function (receipt) {
-            console.log('receipt', receipt);
-          })
-          .on('confirmation', (confirmationNumber, receipt) => {
-            console.log('confirmation confirmationNumber', confirmationNumber);
-            console.log('confirmation', receipt);
-            if (confirmationNumber === 1 && !this.isConfirmationRecieved) {
-              this.setState({ isLoading: false });
-              this.isConfirmationRecieved = true;
-              Alert.alert('Success', 'Transfer successful.',
+    transferMoney(from, to, value, memo, this.props.privateKey).then((data) => {
+      Alert.alert('Success', 'Transfer successful.',
                 [
                   { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
                 ]);
-
-            }
-          })
-          .on('error', (err) => {
-            console.log('error', err);
-            let message = '';
-            if (err.message) {
-              message = err.message
-            }
-            this.setState({ isLoading: false });
-            Alert.alert('Error', message);
-          });
-      });
     }).catch((err) => {
-      console.log(err, 'err');
-      let message = '';
-      if (err.message) {
-        message = err.message
-      }
       this.setState({ isLoading: false });
+      const message = err.message || 'Invalid error. Please check the data and try again.'
       Alert.alert('Error', message);
     });
   };

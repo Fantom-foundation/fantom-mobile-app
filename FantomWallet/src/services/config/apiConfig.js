@@ -1,26 +1,9 @@
 export default {
-    development: {
-        auth0: {
-            apiUrl: '',
-            scope: '',
-            client_id: '',
-            connection: '',
-        },
-        core: {
-            apiUrl: 'https://jsonplaceholder.typicode.com/',
-            key: '',
-        },
+    ethereum: {
+      isEthereumMode: true,
     },
-    production: {
-        auth0: {
-            apiUrl: '',
-            scope: '',
-            client_id: '',
-            connection: '',
-        },
-        core: {
-            apiUrl: 'https://jsonplaceholder.typicode.com/',
-            key: '',
-        },
+    testnet: {
+      isEthereumMode: false,
+      apiUrl: 'http://18.221.128.6:8080'
     },
 };

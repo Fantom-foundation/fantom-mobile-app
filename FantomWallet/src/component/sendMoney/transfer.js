@@ -1,5 +1,9 @@
 import '../../../global';
 import EthUtil from 'ethereumjs-util';
+import axios from 'axios';
+import config from '../../services/config/';
+const configHelper = config();
+
 var Tx = require('ethereumjs-tx');
 const Web3 = require('web3');
 
@@ -56,6 +60,65 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
   })
 }
 
+function transferMoneyViaFantom(from, to, value, memo, privateKey) {
+  this.isConfirmationRecieved = false;
+  return new Promise((resolve, reject) => {
+    getNonceFantom(from).then((count) => {
+      const privateKeyBuffer = EthUtil.toBuffer(privateKey);
+      const rawTx = {
+        from: from,
+        to: to,
+        value: Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
+        gasPrice: '0x09184e72a000',
+        gasLimit: '0x27100',
+        nonce: Web3.utils.toHex(count),
+        data: memo,
+      };
+      const tx = new Tx(rawTx);
+      tx.sign(privateKeyBuffer);
+      const serializedTx = tx.serialize();
+
+        const hexTx = '0x' + serializedTx.toString('hex')
+
+      axios.post('http://18.221.128.6:8080/sendRawTransaction', hexTx)
+        .then(function (response) {
+          console.log(response.data);
+          resolve({ success: true });
+        })
+        .catch(function (error) {
+          console.log(error);
+          reject(error);
+        });
+
+
+
+    }).catch((err) => {
+      console.log(err, 'err');
+      reject({ success: false, message });
+    });
+  })
+}
+
+function getNonceFantom(address) {
+  return new Promise((resolve, reject) => {
+    axios.get('http://18.221.128.6:8080/account/' + address)
+      .then(function (response) {
+        console.log('nonce', response.data.nonce)
+        resolve(response.data.nonce);
+        // tx.nonce = response.data.nonce
+        // generateRawTx(tx, priv)
+      })
+      .catch(function (error) {
+        console.log(error);
+        reject(error);
+      });
+  });
+}
+
 export function transferMoney(from, to, value, memo, privateKey) {
-  return transferMoneyViaEthereum(from, to, value, memo, privateKey);
+  console.log(configHelper, 'config');
+  if (configHelper.isEthereumMode) {
+    return transferMoneyViaEthereum(from, to, value, memo, privateKey);
+  }
+  return transferMoneyViaFantom(from, to, value, memo, privateKey);
 };
