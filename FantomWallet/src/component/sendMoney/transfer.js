@@ -41,7 +41,11 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
             console.log('confirmation', receipt);
             if (confirmationNumber === 1 && !this.isConfirmationRecieved) {
               this.isConfirmationRecieved = true;
-              resolve({ success: true });
+              let hash = '';
+              if (receipt && receipt.transactionHash) {
+                hash = receipt.transactionHash;
+              }
+              resolve({ success: true, hash });
             }
           })
           .on('error', (err) => {
@@ -80,10 +84,15 @@ function transferMoneyViaFantom(from, to, value, memo, privateKey) {
 
         const hexTx = '0x' + serializedTx.toString('hex')
 
-      axios.post('http://18.221.128.6:8080/sendRawTransaction', hexTx)
+      axios.post(configHelper.apiUrl + '/sendRawTransaction', hexTx)
         .then(function (response) {
           console.log(response.data);
-          resolve({ success: true });
+          if (response && response.data && response.data.txHash) {
+            resolve({ success: true, hash: response.data.txHash });
+          } else {
+            reject({ message: 'Invalid response received' });
+          }
+          
         })
         .catch(function (error) {
           console.log(error);
