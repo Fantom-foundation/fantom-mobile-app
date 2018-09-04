@@ -62,7 +62,6 @@ class AddressBook extends Component {
   }
 
   handleEditContact(name, address) {
-    console.warn('edit contact called', name, address);
     this.props.navigation.navigate('EditContact', { name: name, address: address });
   }
 

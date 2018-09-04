@@ -128,19 +128,19 @@ class Header extends Component {
 
 Header.propTypes = {
     text: PropTypes.string,
-    rightButtonIcon: PropTypes.number,
+    // rightButtonIcon: PropTypes.number,
     isShowRightButtonIcon: PropTypes.bool,
-    leftButtonIcon: PropTypes.number,
+    // leftButtonIcon: PropTypes.number,
     isShowLeftButtonIcon: PropTypes.bool,
     headerStyle: PropTypes.object,
     textStyle: PropTypes.object,
     rightButtonStyle: PropTypes.object,
     leftButtonStyle: PropTypes.object,
     activeOpacity: PropTypes.number,
-    secondaryButtonIcon: PropTypes.number,
+    // secondaryButtonIcon: PropTypes.number,
     isShowSecondaryButtonIcon: PropTypes.string,
     secondaryButtonStyle: PropTypes.object,
-    fantomIcon: PropTypes.number,
+    // fantomIcon: PropTypes.number,
 }
 
 Header.defaultProps = {

@@ -30,7 +30,7 @@ class TextField extends Component {
   render() {
     let url = '', rightSideText = ''
     if (this.props.isimagePresent && this.props.imgUrl && this.props.imgUrl !== '') {
-      url = this.props.imgUrl
+      url = this.props.imgUrl;
     }
     if (this.props.isTextPresent && this.props.rightTextValue && this.props.rightTextValue !== '') {
       rightSideText = this.props.rightTextValue
@@ -48,7 +48,7 @@ class TextField extends Component {
           autoCapitalize='none'
         />
         {
-          this.props.isimagePresent &&
+          this.props.isimagePresent && 
           <Image
             source={url}
             style={[styles.additionalViewStyles, this.props.imgStyle]}

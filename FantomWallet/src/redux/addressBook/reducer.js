@@ -87,7 +87,6 @@ function addUpdateAddressTimeStamp(state, action) {
 }
 
 function updateContact(state, action) {
-  console.warn('action in redux  :',action)
   let oldAddresses = state.addresses;
   const addressKey = action.oldWalletAddress;
   const oldAddress = oldAddresses[addressKey];

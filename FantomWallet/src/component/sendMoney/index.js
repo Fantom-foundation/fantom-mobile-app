@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import EthUtil from 'ethereumjs-util';
 import Loading from '../../general/loader/'
 import * as AddressAction from '../../redux/addressBook/action';
-import {transferMoney} from './transfer';
+import { transferMoney } from './transfer';
 var Tx = require('ethereumjs-tx');
 
 const web3 = new Web3(
@@ -43,16 +43,16 @@ class SendMoney extends Component {
       if (data.hash && data.hash !== '') {
         this.setState({ isLoading: false });
         Alert.alert('Success', `Transfer successful with transaction hash: ${data.hash}`,
-                [
-                  // { text: 'Copy', onPress: () => { Clipboard.setString(data.hash); } },
-                  { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
-                ]);
+          [
+            // { text: 'Copy', onPress: () => { Clipboard.setString(data.hash); } },
+            { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
+          ]);
         return;
       }
       Alert.alert('Success', 'Transfer successful.',
-                [
-                  { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
-                ]);
+        [
+          { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
+        ]);
     }).catch((err) => {
       this.setState({ isLoading: false });
       const message = err.message || 'Invalid error. Please check the data and try again.'
@@ -72,7 +72,6 @@ class SendMoney extends Component {
 
   onConfirmHandler = () => {
     const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
-    console.warn('confirmed');
     this.transferMoney(this.props.publicKey, address, amount, memo);
 
   }
@@ -80,13 +79,13 @@ class SendMoney extends Component {
     const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
     return (
       <View style={style.mainContainerStyle}>
-        <Header text='Check Send' leftButtonIcon='arrow-back' onLeftIconPress={this.onLeftIconPress} />
+        <Header text='Check Send' />
         <View style={style.mid}>
           <View style={[style.textFieldStyle, { marginTop: 40, }]}>
             <TextField
-              isimagePresent={true}
+              // isimagePresent={true}
               // imgUrl={require('../../images/fantom-logo-dark.png')}
-              imgStyle={{ width: deviceWidth * 0.2 }}
+              // imgStyle={{ width: deviceWidth * 0.2 }}
               textinputStyle={{ width: deviceWidth * 0.55 }}
               isTextPresent={true}
               rightTextValue={coin}
@@ -125,9 +124,6 @@ class SendMoney extends Component {
           <Text style={style.additionalInfoTextStyle}>
             Please check if the above information is correct.
           </Text>
-          {/* <Text style={style.additionalInfoTextStyle}>
-            Please check again.
-          </Text> */}
           <View style={{ height: 40 }} />
         </View>
         <View style={style.buttonViewStyle}>

@@ -51,8 +51,6 @@ class EditContact extends Component {
      *  to confirm changes done in contact.
      */
     onConfirmClick() {
-        console.log('console function')
-
         if (this.state.name !== '' && this.state.address !== '') {
             const params = this.props.navigation.state.params;
             const isEditMode = params && params.name && params.address;
@@ -135,7 +133,6 @@ class EditContact extends Component {
     }
 
     render() {
-        console.warn('props are : ', this.props)
         return (
             <View style={style.mainContainerStyle}>
                 <StatusBar barStyle="light-content" />
