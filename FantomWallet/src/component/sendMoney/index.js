@@ -2,7 +2,7 @@ import '../../../global';
 
 const Web3 = require('web3');
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, Dimensions, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Dimensions, Alert, Clipboard } from 'react-native';
 import { AsyncStorage } from "react-native"
 // import Web31 from 'web3';
 // import Web3 from './web3.min.js';
@@ -40,6 +40,15 @@ class SendMoney extends Component {
     console.log('from', from);
     this.setState({ isLoading: true });
     transferMoney(from, to, value, memo, this.props.privateKey).then((data) => {
+      if (data.hash && data.hash !== '') {
+        this.setState({ isLoading: false });
+        Alert.alert('Success', `Transfer successful with transaction hash: ${data.hash}`,
+                [
+                  // { text: 'Copy', onPress: () => { Clipboard.setString(data.hash); } },
+                  { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
+                ]);
+        return;
+      }
       Alert.alert('Success', 'Transfer successful.',
                 [
                   { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
