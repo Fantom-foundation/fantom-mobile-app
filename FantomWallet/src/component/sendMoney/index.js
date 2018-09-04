@@ -125,9 +125,9 @@ class SendMoney extends Component {
           <Text style={style.additionalInfoTextStyle}>
             Please check if the above information is correct.
           </Text>
-          <Text style={style.additionalInfoTextStyle}>
+          {/* <Text style={style.additionalInfoTextStyle}>
             Please check again.
-          </Text>
+          </Text> */}
           <View style={{ height: 40 }} />
         </View>
         <View style={style.buttonViewStyle}>

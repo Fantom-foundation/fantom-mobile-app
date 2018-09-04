@@ -6,6 +6,8 @@ import Hdkey from 'hdkey';
 import { connect } from 'react-redux';
 import * as KeyAction from '../../redux/keys/action'
 import Bip39 from 'react-native-bip39';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import style from './style';
 
 class RecoverWallet extends Component {
     state = {
@@ -59,12 +61,7 @@ class RecoverWallet extends Component {
             'address': address
         };
         const hexPrivateKey = EthUtil.bufferToHex(addrNode._privateKey)
-        // const bufferAgain = EthUtil.toBuffer(hexPrivateKey);
-        // Save masterPrivateKey to device DO NOT USE IN PRODUCTION
-        // this.saveMasterKey(masterPrivateKey, hexPublicKey);
         this.props.setKeys(masterPrivateKey, address, hexPrivateKey);
-        // Save pubKey generation
-        // this.savePublicKey(pubKey);
 
         this.props.navigation.navigate('HomeScreen');
         /*
@@ -87,16 +84,16 @@ class RecoverWallet extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={style.containerStyle}>
                 <StatusBar barStyle="dark-content" />
-                <View style={{ flex: 1, marginTop: 24, }}>
-                    <View style={{
-                        margin: 4,
-                        borderWidth: 1,
-                        borderColor: 'black'
-                    }}>
+                <View style={style.mainViewStyle}>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}
+                        style={style.backButtonStyle}>
+                        <Icon name='arrow-back' size={24} color='black' />
+                    </TouchableOpacity>
+                    <View style={style.textViewStyle}>
                         <TextInput
-                            style={{ height: 100, padding: 8, }}
+                            style={style.textFieldStyle}
                             value={this.state.seed}
                             editable={true}
                             multiline={true}
@@ -105,21 +102,17 @@ class RecoverWallet extends Component {
                             onChangeText={(text) => this.setState({ mnemonic: text, errorText: '' })}
                         />
                     </View>
-                    <View style={{ flex: 1, height: 20, padding: 8 }}>
+                    <View style={style.messageTextStyle}>
                         <Text>
                             Please enter comma seprated values.
                         </Text>
                         {this.state.errorText !== '' &&
-                            <Text style={{ color: 'red' }}>
+                            <Text style={style.errorTextStyle}>
                                 {this.state.errorText}
                             </Text>
                         }
                     </View>
-                    <View style={{
-                        flex: 1,
-                        justifyContent: 'flex-end',
-                        alignContent: 'center'
-                    }}>
+                    <View style={style.buttonViewStyle}>
                         <Button text='Recover Wallet' buttonStyle={{ backgroundColor: '#000' }} onPress={this.handleRecoverWallet.bind(this)} />
                     </View>
                 </View>

@@ -58,15 +58,12 @@ class TransactionEntity extends Component {
      */
     getFantomBalanceFromApiAsync(address) {
         let dummyAddress = 0xFD00A5fE03CB4672e4380046938cFe5A18456Df4;
-        return fetch('http://18.221.128.6:8080/account/' + dummyAddress)
+        return fetch(configHelper.apiUrl + '/account/' + dummyAddress)
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log('from fantom own wallet , balance response : ', responseJson);
                 if (responseJson && responseJson.balance) {
                     const balance = responseJson.balance;
-                    console.log('balance: ', balance);
                     const valInEther = Web3.utils.fromWei('' + balance, 'ether');
-                    console.log('valInEther: ', valInEther);
                     this.setState({
                         balance: valInEther,
                     })
@@ -86,9 +83,9 @@ class TransactionEntity extends Component {
     getFantomTransactionsFromApiAsync(address) {
         const dummyAddress = '0x68a07a9dc6ff0052e42f4e7afa117e90fb896eda168211f040da69606a2aeddc';
 
-        fetch('http://18.221.128.6:8080/transaction/' + dummyAddress)
+        fetch(configHelper.apiUrl + '/transaction/' + dummyAddress)
 
-            // fetch('http://18.221.128.6:8080/transactions/'+ dummyAddress)
+            // fetch(configHelper.apiUrl+'/transactions/'+ dummyAddress)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log('from fantom own wallet , transaction response : ', responseJson);
@@ -119,7 +116,6 @@ class TransactionEntity extends Component {
         let transactionData = [];
         let publicKey = '0xfd00a5fe03cb4672e4380046938cfe5a18456df4'.toLowerCase();
         // let publicKey = this.props.publicKey.toLowerCase();
-        console.log('my key : ', publicKey)
         let type = '';
         let transactionId = '';
         // for (let data of result) {
@@ -184,7 +180,6 @@ class TransactionEntity extends Component {
      * @param {String} address : address to fetch transactions.
      */
     getEtherTransactionsFromApiAsync(address) {
-        const dummyAddress = '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae';
         fetch('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address=' + address + '&startblock=0&endblock=99999999&sort=asc&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
             .then((response) => response.json())
             .then((responseJson) => {
@@ -211,9 +206,7 @@ class TransactionEntity extends Component {
      */
     loadTransactionData(responseJson) {
         let transactionData = [];
-        // let publicKey = '0x4d8868F7d7581d770735821bb0c83137Ceaf18FD'.toLowerCase();
         let publicKey = this.props.publicKey.toLowerCase();
-        console.log('my key : ', publicKey)
         let type = '';
         let transactionId = '';
         for (let data of responseJson.result) {
@@ -259,7 +252,7 @@ class TransactionEntity extends Component {
             })
             this.getWalletBalance(this.props.publicKey);
             this.getWalletTransaction(this.props.publicKey);
-         }
+        }
     }
 
     onRightIconPress() {
