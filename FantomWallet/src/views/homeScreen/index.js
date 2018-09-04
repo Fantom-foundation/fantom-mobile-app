@@ -10,8 +10,10 @@ import fantomIcon from '../../images/fantomWhiteIcon.png';
 import secondaryIcon from '../../images/icon.png';
 import leftIcon from '../../images/notification_red.png';
 import settingIcon from '../../images/setting.png';
-import { SUCCESS, RECEIVED, SENT, FAILED, ETHER_TYPE, FANTOM_TYPE } from '../../common/constants/';
+import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants/';
 
+import config from '../../services/config/';
+const configHelper = config();
 
 /**
  *  This is the Home Screen for App.
@@ -24,57 +26,136 @@ class TransactionEntity extends Component {
             balance: '0',
             transactionData: [],
             isLoading: true,
-            walletType: ETHER_TYPE
         }
         this.loadTransactionData = this.loadTransactionData.bind(this);
-        //  this.state.fantomTransactionArr = this.getTransactionsFromApiAsync(this.getPublicKey());
+        this.loadFantomTransactionData = this.loadFantomTransactionData.bind(this);
         if (this.props.publicKey) {
-            this.getWalletBalance(this.props.publicKey, this.state.walletType);
-            // this.getEtherBalanceFromApiAsync(this.props.publicKey);
-            this.getTransactionsFromApiAsync(this.props.publicKey);
+            this.getWalletBalance(this.props.publicKey);
+            this.getWalletTransaction(this.props.publicKey);
         }
     }
 
-    ////////////////////////////////////
-
-    getWalletBalance(address, walletType) {
-        if (walletType === ETHER_TYPE) {
+    getWalletBalance(address) {
+        if (configHelper.isEthereumMode) {
             this.getEtherBalanceFromApiAsync(address);
-        } else if (walletType === FANTOM_TYPE) {
+        } else {
             this.getFantomBalanceFromApiAsync(address);
         }
     }
 
+    getWalletTransaction(address) {
+        if (configHelper.isEthereumMode) {
+            this.getEtherTransactionsFromApiAsync(address);
+        } else {
+            this.getFantomTransactionsFromApiAsync(address);
+        }
+    }
+
+    ///////////////////////////////////////////   FOR FANTOM OWN END POINT  ////////////////////////////////////////////////////////////////
     /**
      * getFantomBalanceFromApiAsync() :  Api to fetch wallet balance for given address of Fantom own endpoint.
      * @param { String } address : address to fetch wallet balance.
      */
     getFantomBalanceFromApiAsync(address) {
         let dummyAddress = 0xFD00A5fE03CB4672e4380046938cFe5A18456Df4;
-        return fetch('http://18.221.128.6:8080/account/'+dummyAddress)
+        return fetch('http://18.221.128.6:8080/account/' + dummyAddress)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log('from fantom own wallet , balance response : ', responseJson);
                 if (responseJson && responseJson.balance) {
                     const balance = responseJson.balance;
                     console.log('balance: ', balance);
-                    // const valInEther = Web3.utils.fromWei(balance, 'ether');
-                    // console.log('valInEther: ', valInEther);
-                    // this.setState({
-                    //     balance: valInEther,
-                    // })
+                    const valInEther = Web3.utils.fromWei('' + balance, 'ether');
+                    console.log('valInEther: ', valInEther);
+                    this.setState({
+                        balance: valInEther,
+                    })
                 }
                 return responseJson;
             })
             .catch((error) => {
-                
                 console.error(error);
             });
     }
 
 
+    /**
+     * getFantomTransactionsFromApiAsync():  Api to fetch transactions for given address of Fantom own endpoint.
+     * @param {String} address : address to fetch transactions.
+     */
+    getFantomTransactionsFromApiAsync(address) {
+        const dummyAddress = '0x68a07a9dc6ff0052e42f4e7afa117e90fb896eda168211f040da69606a2aeddc';
 
-    //////////////////////////////
+        fetch('http://18.221.128.6:8080/transaction/' + dummyAddress)
+
+            // fetch('http://18.221.128.6:8080/transactions/'+ dummyAddress)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log('from fantom own wallet , transaction response : ', responseJson);
+                // if (responseJson && responseJson.result && responseJson.result.length) {
+                if (responseJson) {
+                    // this.loadFantomTransactionData(responseJson.result);
+                    this.loadFantomTransactionData(responseJson);
+                } else {
+                    this.setState({
+                        isLoading: false,
+                    });
+                }
+                return responseJson;
+            })
+            .catch((error) => {
+                console.error(error);
+                this.setState({
+                    isLoading: false,
+                });
+            });
+    }
+
+    /**
+    * loadFantomTransactionData() :  Function to create array of objects from response of Api calling for storing transactions.
+    * @param {*} responseJson : Json of transaction response data from Api.
+    */
+    loadFantomTransactionData(result) {
+        let transactionData = [];
+        let publicKey = '0xfd00a5fe03cb4672e4380046938cfe5a18456df4'.toLowerCase();
+        // let publicKey = this.props.publicKey.toLowerCase();
+        console.log('my key : ', publicKey)
+        let type = '';
+        let transactionId = '';
+        // for (let data of result) {
+        let data = result;
+        if (publicKey === data.from.toLowerCase()) {
+            type = SENT;
+            transactionId = data.to;
+        } else if (publicKey === data.to.toLowerCase()) {
+            type = RECEIVED;
+            transactionId = data.from;
+        }
+        transactionStatus = (data.failed === false) ? SUCCESS : FAILED;
+        if (publicKey === data.from || publicKey === data.to) {
+            const value = data.value || '0';
+            const valInEther = Web3.utils.fromWei(value, 'ether');
+
+            transactionData.push({
+                type: type,
+                amount: valInEther,
+                transactionId: transactionId,
+                transactionStatus: transactionStatus,
+                amountUnit: 'FTM',
+                from: data.from,
+                to: data.to,
+                isError: (data.failed === false) ? '0' : '1',
+            });
+        }
+        // }
+        transactionData = transactionData.reverse();
+        this.setState({
+            transactionData,
+            isLoading: false,
+        });
+    }
+
+    ///////////////////////////////////////////   FOR ETHER END POINT  ////////////////////////////////////////////////////////////////
 
     /**
      * getEtherBalanceFromApiAsync() :  Api to fetch Ether wallet balance for given address.
@@ -84,7 +165,6 @@ class TransactionEntity extends Component {
         return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address=' + address + '&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
             .then((response) => response.json())
             .then((responseJson) => {
-                console.warn('from ether , balance response : ', responseJson);
                 if (responseJson.status && responseJson.status === "1") {
                     const balance = responseJson.result;
                     const valInEther = Web3.utils.fromWei(balance, 'ether');
@@ -100,15 +180,14 @@ class TransactionEntity extends Component {
     }
 
     /**
-     * getTransactionsFromApiAsync():  Api to fetch transactions for given address.
+     * getEtherTransactionsFromApiAsync():  Api to fetch transactions for given address.
      * @param {String} address : address to fetch transactions.
      */
-    getTransactionsFromApiAsync(address) {
+    getEtherTransactionsFromApiAsync(address) {
         const dummyAddress = '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae';
         fetch('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address=' + address + '&startblock=0&endblock=99999999&sort=asc&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log('response of dummyAddress', responseJson);
                 if (responseJson && responseJson.result && responseJson.result.length) {
                     this.loadTransactionData(responseJson);
                 } else {
@@ -178,9 +257,9 @@ class TransactionEntity extends Component {
             this.setState({
                 isLoading: true,
             })
-            this.getEtherBalanceFromApiAsync(this.props.publicKey);
-            this.getTransactionsFromApiAsync(this.props.publicKey);
-        }
+            this.getWalletBalance(this.props.publicKey);
+            this.getWalletTransaction(this.props.publicKey);
+         }
     }
 
     onRightIconPress() {
@@ -188,6 +267,7 @@ class TransactionEntity extends Component {
     }
 
     render() {
+        console.log('public key  :', this.props.publicKey)
         const { balance, transactionData, isLoading } = this.state;
         return (
             <View style={{ flex: 1, }}>
