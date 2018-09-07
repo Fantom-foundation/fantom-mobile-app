@@ -1,4 +1,5 @@
 {
   "name": "FantomWallet",
-  "displayName": "FantomWallet"
+  "displayName": "FantomWallet",
+  "expo": { "sdkVersion": "26.0.0" }
 }

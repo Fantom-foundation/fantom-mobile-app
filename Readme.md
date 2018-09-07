@@ -92,3 +92,6 @@ For more detail visit: `https://facebook.github.io/react-native/docs/getting-sta
 ```
 react-native run-android
 ```
+
+## Running on Device
+To run the app on device, please follow instructions [here](https://facebook.github.io/react-native/docs/0.56/running-on-device)
