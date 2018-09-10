@@ -14,7 +14,8 @@ export default function() {
     //     configUrls = config['development']
     // }
 
-    configUrls = config['ethereum']    
+    // configUrls = config['ethereum'];
+    configUrls = config['testnet']    
 
     return configUrls
 }

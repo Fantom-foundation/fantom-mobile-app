@@ -15,6 +15,35 @@ import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants/';
 import config from '../../services/config/';
 const configHelper = config();
 
+function scientificToDecimal(num) {
+    const sign = Math.sign(num);
+    //if the number is in scientific notation remove it
+    if(/\d+\.?\d*e[\+\-]*\d+/i.test(num)) {
+        const zero = '0';
+        const parts = String(num).toLowerCase().split('e'); //split into coeff and exponent
+        const e = parts.pop(); //store the exponential part
+        let l = Math.abs(e); //get the number of zeros
+        const direction = e/l; // use to determine the zeroes on the left or right
+        const coeff_array = parts[0].split('.');
+        
+        if (direction === -1) {
+            coeff_array[0] = Math.abs(coeff_array[0]);
+            num = zero + '.' + new Array(l).join(zero) + coeff_array.join('');
+        }
+        else {
+            const dec = coeff_array[1];
+            if (dec) l = l - dec.length;
+            num = coeff_array.join('') + new Array(l+1).join(zero);
+        }
+    }
+    
+    if (sign < 0) {
+        num = -num;
+    }
+
+    return num;
+}
+
 /**
  *  This is the Home Screen for App.
  */
@@ -57,12 +86,12 @@ class TransactionEntity extends Component {
      * @param { String } address : address to fetch wallet balance.
      */
     getFantomBalanceFromApiAsync(address) {
-        let dummyAddress = 0xFD00A5fE03CB4672e4380046938cFe5A18456Df4;
+        let dummyAddress = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
         return fetch(configHelper.apiUrl + '/account/' + dummyAddress)
             .then((response) => response.json())
             .then((responseJson) => {
                 if (responseJson && responseJson.balance) {
-                    const balance = responseJson.balance;
+                    const balance = scientificToDecimal(responseJson.balance);
                     const valInEther = Web3.utils.fromWei('' + balance, 'ether');
                     this.setState({
                         balance: valInEther,
@@ -71,7 +100,7 @@ class TransactionEntity extends Component {
                 return responseJson;
             })
             .catch((error) => {
-                console.error(error);
+                console.log(error);
             });
     }
 
@@ -101,7 +130,7 @@ class TransactionEntity extends Component {
                 return responseJson;
             })
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
                 this.setState({
                     isLoading: false,
                 });
@@ -158,7 +187,8 @@ class TransactionEntity extends Component {
      * @param { String } address : address to fetch wallet balance.
      */
     getEtherBalanceFromApiAsync(address) {
-        return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address=' + address + '&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
+        const dummyAddress = '0x4d8868F7d7581d770735821bb0c83137Ceaf18FD'
+        return fetch('https://api-ropsten.etherscan.io/api?module=account&action=balance&address=' + dummyAddress + '&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP')
             .then((response) => response.json())
             .then((responseJson) => {
                 if (responseJson.status && responseJson.status === "1") {

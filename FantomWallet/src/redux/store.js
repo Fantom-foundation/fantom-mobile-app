@@ -23,7 +23,7 @@ export default () => {
   let store = createStore(persistedReducer, {},
     compose(applyMiddleware(sagaMiddleware)));
   
-  let persistor = persistStore(store);
+  let persistor = persistStore(store, { timeout: 1000 });
 
 sagaMiddleware.run(rootSaga).done.catch((e) => {
   if (_.has(e, 'message')) {
