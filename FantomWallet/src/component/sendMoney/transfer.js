@@ -65,6 +65,7 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
 }
 
 function transferMoneyViaFantom(from, to, value, memo, privateKey) {
+
   this.isConfirmationRecieved = false;
   return new Promise((resolve, reject) => {
     getNonceFantom(from).then((count) => {
@@ -110,7 +111,7 @@ function transferMoneyViaFantom(from, to, value, memo, privateKey) {
 
 function getNonceFantom(address) {
   return new Promise((resolve, reject) => {
-    axios.get('http://18.221.128.6:8080/account/' + address)
+    axios.get(configHelper.apiUrl + '/account/' + address)
       .then(function (response) {
         console.log('nonce', response.data.nonce)
         resolve(response.data.nonce);
@@ -129,5 +130,11 @@ export function transferMoney(from, to, value, memo, privateKey) {
   if (configHelper.isEthereumMode) {
     return transferMoneyViaEthereum(from, to, value, memo, privateKey);
   }
+  let dummyPublicKey = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
+  let dummyPrivateKey = '0x50c4bf4dde1f383a172f52cb4624f089f685e67e00c6741a3ae03826c99cf082';
+
+  from = dummyPublicKey;
+  privateKey = dummyPrivateKey; 
+
   return transferMoneyViaFantom(from, to, value, memo, privateKey);
 };
