@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import style from './style';
 
-import BalanceView from '../balanceView/'
-import TransactionView from '../transactionView/';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import BalanceView from '../balanceView';
+import TransactionView from '../transactionView';
 
 class WalletFantomScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       refreshing: false,
-    }
+    };
+    this.onRefresh = this.onRefresh.bind(this);
   }
 
   /**
    * _onRefresh()  : This function is meant for refreshing of data from Api, to update transaction list.
    */
-  _onRefresh = () => {
+  onRefresh() {
     this.setState({ refreshing: true });
     if (this.props.onRefresh) {
       this.props.onRefresh();
       if (this.props.isLoading === false) {
-        this.setState({ refreshing: false })
+        this.setState({ refreshing: false });
       }
     }
   }
@@ -38,37 +39,35 @@ class WalletFantomScreen extends Component {
           <Text style={style.textViewStyle}>{balanceText} </Text>
         </View>
         <View style={style.refreshMessageViewStyle}>
-          <Text style={style.refreshTextStyle}>
-            Scroll down to refresh
-          </Text>
+          <Text style={style.refreshTextStyle}>Scroll down to refresh</Text>
           <MaterialIcons name="refresh" size={12} style={style.refreshIconStyle} />
         </View>
         <ScrollView
           style={style.fantomViewStyle}
           showsVerticalScrollIndicator={false}
           refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }>
+            <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+          }
+        >
           <BalanceView fantomTransactionArr={fantomTransactionArr} balance={this.props.balance} />
-          <TransactionView fantomTransactionArr={fantomTransactionArr} publicKey={this.props.publicKey} isLoading={this.props.isLoading} />
+          <TransactionView
+            fantomTransactionArr={fantomTransactionArr}
+            publicKey={this.props.publicKey}
+            isLoading={this.props.isLoading}
+          />
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
+const mapStateToProps = state => ({
+  publicKey: state.keyReducer.publicKey,
+});
 
-const mapStateToProps = (state) => {
-  return {
-    publicKey: state.keyReducer.publicKey,
-  };
-},
-  mapDispatchToProps = (dispatch) => {
-    return {
-    };
-  };
+const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletFantomScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletFantomScreen);

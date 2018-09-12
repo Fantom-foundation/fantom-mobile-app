@@ -1,110 +1,86 @@
 import '../../../global';
-
-const Web3 = require('web3');
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, Dimensions, Alert, Clipboard } from 'react-native';
-import { AsyncStorage } from "react-native"
-// import Web31 from 'web3';
-// import Web3 from './web3.min.js';
+import { Text, View, Dimensions, Alert } from 'react-native';
+import { connect } from 'react-redux';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
-import TextField from './TextField'
-import { connect } from 'react-redux';
-import EthUtil from 'ethereumjs-util';
-import Loading from '../../general/loader/'
+import TextField from './TextField';
+import Loading from '../../general/loader/index';
 import * as AddressAction from '../../redux/addressBook/action';
 import { transferMoney } from './transfer';
-var Tx = require('ethereumjs-tx');
-
-const web3 = new Web3(
-  new Web3.providers.HttpProvider('https://ropsten.infura.io/'),
-);
-
 
 const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
-// Method of generation taken from: https://medium.com/bitcraft/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998;
 
 class SendMoney extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       isLoading: false,
-    }
+    };
     this.isConfirmationRecieved = false;
   }
 
-  transferMoney(from, to, value, memo) {
-    console.log('from', from);
-    this.setState({ isLoading: true });
-    transferMoney(from, to, value, memo, this.props.privateKey).then((data) => {
-      if (data.hash && data.hash !== '') {
-        this.setState({ isLoading: false });
-        Alert.alert('Success', `Transfer successful with transaction hash: ${data.hash}`,
-          [
-            // { text: 'Copy', onPress: () => { Clipboard.setString(data.hash); } },
-            { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
-          ]);
-        return;
-      }
-      Alert.alert('Success', 'Transfer successful.',
-        [
-          { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
-        ]);
-    }).catch((err) => {
-      this.setState({ isLoading: false });
-      const message = err.message || 'Invalid error. Please check the data and try again.'
-      Alert.alert('Error', message);
-    });
-  };
+  onConfirmHandler() {
+    const { address, amount, fees, memo } = this.props.navigation.state.params;
+    this.transferMoney(this.props.publicKey, address, amount, memo);
+  }
 
   alertSuccessfulButtonPressed() {
     const { address, reload } = this.props.navigation.state.params;
     const currentDate = new Date();
-    this.props.addUpdateTimestampAddress(address, '', currentDate.getTime())
+    this.props.addUpdateTimestampAddress(address, '', currentDate.getTime());
     if (reload) {
       reload();
     }
-    this.props.navigation.goBack()
+    this.props.navigation.goBack();
   }
 
-  onConfirmHandler = () => {
-    const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
-    this.transferMoney(this.props.publicKey, address, amount, memo);
-
+  transferMoney(from, to, value, memo) {
+    this.setState({ isLoading: true });
+    transferMoney(from, to, value, memo, this.props.privateKey)
+      .then(data => {
+        if (data.hash && data.hash !== '') {
+          this.setState({ isLoading: false });
+          Alert.alert('Success', `Transfer successful with transaction hash: ${data.hash}`, [
+            // { text: 'Copy', onPress: () => { Clipboard.setString(data.hash); } },
+            { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
+          ]);
+          return;
+        }
+        Alert.alert('Success', 'Transfer successful.', [
+          { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
+        ]);
+      })
+      .catch(err => {
+        this.setState({ isLoading: false });
+        const message = err.message || 'Invalid error. Please check the data and try again.';
+        Alert.alert('Error', message);
+      });
   }
+
   render() {
     const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
     return (
       <View style={style.mainContainerStyle}>
-        <Header text='Check Send' />
+        <Header text="Check Send" />
         <View style={style.mid}>
-          <View style={[style.textFieldStyle, { marginTop: 40, }]}>
+          <View style={[style.textFieldStyle, { marginTop: 40 }]}>
             <TextField
               // isimagePresent={true}
               // imgUrl={require('../../images/fantom-logo-dark.png')}
               // imgStyle={{ width: deviceWidth * 0.2 }}
               textinputStyle={{ width: deviceWidth * 0.55 }}
-              isTextPresent={true}
+              isTextPresent
               rightTextValue={coin}
-              placeHolderText={'Coin'}
+              placeHolderText="Coin"
             />
           </View>
           <View style={style.textFieldStyle}>
-            <TextField
-              placeHolderText={'Address'}
-              isTextPresent={true}
-              rightTextValue={address}
-            />
+            <TextField placeHolderText="Address" isTextPresent rightTextValue={address} />
           </View>
           <View style={style.textFieldStyle}>
-            <TextField
-              placeHolderText={'Price'}
-              isTextPresent={true}
-              rightTextValue={amount}
-            />
+            <TextField placeHolderText="Price" isTextPresent rightTextValue={amount} />
           </View>
           {/* <View style={style.textFieldStyle}>
             <TextField
@@ -115,9 +91,9 @@ class SendMoney extends Component {
           </View> */}
           <View style={style.textFieldStyle}>
             <TextField
-              placeHolderText={'Memo'}
+              placeHolderText="Memo"
               textinputStyle={{ width: deviceWidth * 0.65 }}
-              isTextPresent={true}
+              isTextPresent
               rightTextValue={memo}
             />
           </View>
@@ -127,8 +103,16 @@ class SendMoney extends Component {
           <View style={{ height: 40 }} />
         </View>
         <View style={style.buttonViewStyle}>
-          <Button text="Cancel" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#000' }} onPress={() => this.props.navigation.goBack()} />
-          <Button text="Confirm" buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#ECB414' }} onPress={() => this.onConfirmHandler()} />
+          <Button
+            text="Cancel"
+            buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#000' }}
+            onPress={() => this.props.navigation.goBack()}
+          />
+          <Button
+            text="Confirm"
+            buttonStyle={{ width: deviceWidth * 0.5, backgroundColor: '#ECB414' }}
+            onPress={() => this.onConfirmHandler()}
+          />
         </View>
         {this.state.isLoading && <Loading />}
       </View>
@@ -136,20 +120,24 @@ class SendMoney extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  masterKey: state.keyReducer.masterKey,
+  publicKey: state.keyReducer.publicKey,
+  privateKey: state.keyReducer.privateKey,
+});
 
-const mapStateToProps = (state) => {
-  return {
-    masterKey: state.keyReducer.masterKey,
-    publicKey: state.keyReducer.publicKey,
-    privateKey: state.keyReducer.privateKey,
-  };
-},
-  mapDispatchToProps = (dispatch) => {
-    return {
-      addUpdateTimestampAddress: (walletAddress, name, timeStamp) => {
-        dispatch({ type: AddressAction.ADD_UPDATE_ADDRESS, address: walletAddress, name: name || '', timeStamp })
-      },
-    };
-  };
+const mapDispatchToProps = dispatch => ({
+  addUpdateTimestampAddress: (walletAddress, name, timeStamp) => {
+    dispatch({
+      type: AddressAction.ADD_UPDATE_ADDRESS,
+      address: walletAddress,
+      name: name || '',
+      timeStamp,
+    });
+  },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SendMoney);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SendMoney);

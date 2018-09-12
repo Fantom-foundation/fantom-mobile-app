@@ -1,64 +1,58 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View } from 'react-native';
-import style from './style';
-import WalletView from '../walletScreen/walletView/';
 import { connect } from 'react-redux';
-const Web3 = require('web3');
 import PropTypes from 'prop-types';
-
+import style from './style';
+import WalletView from './walletView';
 
 /**
  * To Display WalletTab related tasks
  */
-class WalletScreen extends Component {
-
+class WalletScreen extends PureComponent {
   render() {
     const { balance, transactionData, isLoading, navigation, onRefresh } = this.props;
     return (
-      <View style={style.walletViewStyle} >
+      <View style={style.walletViewStyle}>
         <View style={style.walletScreenStyle}>
-          <WalletView balance={balance}
+          <WalletView
+            balance={balance}
             navigation={navigation}
             transactionData={transactionData}
             isLoading={isLoading}
-            onRefresh={onRefresh} />
+            onRefresh={onRefresh}
+          />
         </View>
       </View>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  publicKey: state.keyReducer.publicKey,
+});
 
-const mapStateToProps = (state) => {
-  return {
-    publicKey: state.keyReducer.publicKey,
-  };
-},
-  mapDispatchToProps = (dispatch) => {
-    return {
-    };
-  };
+const mapDispatchToProps = () => ({});
 
 /**
-* Custom setting props to be passed for WalletScreen: 
-* 
-* balance: Wallet balance to be displayed, fetched from Api.
-* transactionData: Contains all transactions done by user, fetched from Api.
-* isLoading: Contains bool value for rendering  loader on screen , for the time transaction data is being fetched from Api.
-* navigation: Contains navigation information within the app.
-* onRefresh: Callback function to refresh transaction data from Api.
-* 
-*/
+ * Custom setting props to be passed for WalletScreen:
+ *
+ * balance: Wallet balance to be displayed, fetched from Api.
+ * transactionData: Contains all transactions done by user, fetched from Api.
+ * isLoading: Contains bool value for rendering  loader on screen , for the time transaction data is being fetched from Api.
+ * navigation: Contains navigation information within the app.
+ * onRefresh: Callback function to refresh transaction data from Api.
+ *
+ */
 
 WalletScreen.propTypes = {
-  balance: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  balance: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   transactionData: PropTypes.array,
   isLoading: PropTypes.bool,
   navigation: PropTypes.object,
-  onRefresh: PropTypes.func
-}
+  onRefresh: PropTypes.func,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletScreen);
