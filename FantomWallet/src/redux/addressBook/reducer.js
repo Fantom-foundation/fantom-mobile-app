@@ -1,4 +1,4 @@
-import * as Actions from './action'
+import * as Actions from './action';
 
 function addNewAddress(state, action) {
   let oldAddresses = state.addresses;
@@ -12,11 +12,11 @@ function addNewAddress(state, action) {
     addressObj.timeStamp = action.timeStamp;
   }
   const newAddresses = Object.assign({}, oldAddresses, {
-    [addressKey]: addressObj
+    [addressKey]: addressObj,
   });
   return Object.assign({}, state, {
     addresses: newAddresses,
-  });;
+  });
 }
 
 function toggleFavouriteAddress(state, action) {
@@ -26,7 +26,7 @@ function toggleFavouriteAddress(state, action) {
   if (oldAddress) {
     oldAddress.isFavourite = !oldAddress.isFavourite;
     const newAddresses = Object.assign({}, oldAddresses, {
-      [addressKey]: oldAddress
+      [addressKey]: oldAddress,
     });
     return Object.assign({}, state, {
       addresses: newAddresses,
@@ -42,7 +42,7 @@ function updateAddressTimeStamp(state, action) {
   if (oldAddress && action.timeStamp) {
     oldAddress.timeStamp = action.timeStamp;
     const newAddresses = Object.assign({}, oldAddresses, {
-      [addressKey]: oldAddress
+      [addressKey]: oldAddress,
     });
     return Object.assign({}, state, {
       addresses: newAddresses,
@@ -59,14 +59,13 @@ function deleteAddress(state, action) {
     delete oldAddresses[addressKey];
     const newAddresses = {
       ...oldAddresses,
-    }
+    };
     return Object.assign({}, state, {
       addresses: newAddresses,
     });
   }
   return state;
 }
-
 
 function addUpdateAddressTimeStamp(state, action) {
   let oldAddresses = state.addresses;
@@ -75,15 +74,15 @@ function addUpdateAddressTimeStamp(state, action) {
   if (oldAddress && action.timeStamp) {
     oldAddress.timeStamp = action.timeStamp;
     const newAddresses = Object.assign({}, oldAddresses, {
-      [addressKey]: oldAddress
+      [addressKey]: oldAddress,
     });
     return Object.assign({}, state, {
       addresses: newAddresses,
     });
-  } else {
-    return addNewAddress(state, action);
   }
-  return state;
+  return addNewAddress(state, action);
+
+  // return state;
 }
 
 function updateContact(state, action) {
@@ -102,7 +101,7 @@ function updateContact(state, action) {
     const newAddresses = {
       ...oldAddresses,
       [newAddress]: updateAddressObject,
-    }
+    };
     return Object.assign({}, state, {
       addresses: newAddresses,
     });
@@ -110,24 +109,23 @@ function updateContact(state, action) {
   return state;
 }
 
-
 const AddressReducer = (state = { addresses: {} }, action) => {
   switch (action.type) {
     case Actions.ADD_ADDRESS:
-      return addNewAddress(state, action)
+      return addNewAddress(state, action);
     case Actions.FAVOURITE_ADDRESS:
-      return toggleFavouriteAddress(state, action)
+      return toggleFavouriteAddress(state, action);
     case Actions.TIMESTAMP_ADDRESS:
-      return updateAddressTimeStamp(state, action)
+      return updateAddressTimeStamp(state, action);
     case Actions.DELETE_ADDRESS:
-      return deleteAddress(state, action)
+      return deleteAddress(state, action);
     case Actions.ADD_UPDATE_ADDRESS:
-      return addUpdateAddressTimeStamp(state, action)
+      return addUpdateAddressTimeStamp(state, action);
     case Actions.EDIT_CONTACT:
-      return updateContact(state, action)
+      return updateContact(state, action);
     default:
       return state;
   }
-}
+};
 
 export default AddressReducer;

@@ -30,7 +30,6 @@ class WalletFantomScreen extends Component {
   }
 
   render() {
-    console.log('this.props.selectedTab : ', this.props.selectedTab);
     const balanceText = '(1,000\\ = 1.00002312FTM)';
     const fantomTransactionArr = this.props.transactionData;
     return (
@@ -65,9 +64,9 @@ const mapStateToProps = state => ({
   publicKey: state.keyReducer.publicKey,
 });
 
-const mapDispatchToProps = dispatch => ({});
+// const mapDispatchToProps = dispatch => ({});
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
+  // ,  mapDispatchToProps
 )(WalletFantomScreen);

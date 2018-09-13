@@ -8,7 +8,7 @@ import Button from '../../general/button/index';
 import TextField from './TextField';
 import Loading from '../../general/loader/index';
 import * as AddressAction from '../../redux/addressBook/action';
-import { transferMoney } from './transfer';
+import transferMoney from './transfer';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -22,7 +22,7 @@ class SendMoney extends Component {
   }
 
   onConfirmHandler() {
-    const { address, amount, fees, memo } = this.props.navigation.state.params;
+    const { address, amount, memo } = this.props.navigation.state.params;
     this.transferMoney(this.props.publicKey, address, amount, memo);
   }
 
@@ -60,7 +60,7 @@ class SendMoney extends Component {
   }
 
   render() {
-    const { address, coin, amount, fees, memo } = this.props.navigation.state.params;
+    const { address, coin, amount, memo } = this.props.navigation.state.params;
     return (
       <View style={style.mainContainerStyle}>
         <Header text="Check Send" />

@@ -1,8 +1,8 @@
 const _model = {
-    userId: undefined,
-    id: undefined,
-    title: '',
-    completed: false,
+  userId: undefined,
+  id: undefined,
+  title: '',
+  completed: false,
 };
 
 const model = _model;

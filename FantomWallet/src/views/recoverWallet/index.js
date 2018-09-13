@@ -10,18 +10,6 @@ import Button from '../../general/button';
 import style from './style';
 
 class RecoverWallet extends Component {
-  /**
-   * isValidSeed() :  This function is meant to check that captcha entered by user is valid or not.
-   *    If invalid then error message is displayed.
-   */
-  static isValidSeed(mnemonic) {
-    const mnemonicKey = mnemonic.split(',');
-    if (mnemonicKey.length === 12) {
-      return true;
-    }
-    return false;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -29,6 +17,18 @@ class RecoverWallet extends Component {
       errorText: '',
     };
     this.handleRecoverWallet = this.handleRecoverWallet.bind(this);
+  }
+
+  /**
+   * isValidSeed() :  This function is meant to check that captcha entered by user is valid or not.
+   *    If invalid then error message is displayed.
+   */
+  isValidSeed(mnemonic) {
+    const mnemonicKey = mnemonic.split(',');
+    if (mnemonicKey.length === 12) {
+      return true;
+    }
+    return false;
   }
 
   handleRecoverWallet() {

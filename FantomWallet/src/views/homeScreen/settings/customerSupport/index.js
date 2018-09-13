@@ -27,7 +27,7 @@ class CustomerSupport extends Component {
         <Header
           text="Customer Support"
           leftButtonIcon={leftArrowIcon}
-          onLeftIconPress={() => this.onLeftIconPress}
+          onLeftIconPress={() => this.onLeftIconPress()}
         />
         <View style={style.mid}>
           <View style={style.textContainer}>

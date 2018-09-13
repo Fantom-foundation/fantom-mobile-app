@@ -167,8 +167,9 @@ const style = {
     marginRight: 35,
     shadowOffset: { width: 2, height: 2 },
     shadowColor: '#C0C0C0',
-    shadowOpacity: 1,
+    shadowOpacity: 0.9,
     elevation: 2,
+    backgroundColor: 'white', // invisible color
     marginBottom: 10,
   },
   bottomSendText: {

@@ -6,17 +6,18 @@ import keyReducer from './keys/reducer';
 import addressBookReducer from './addressBook/reducer';
 
 const appReducers = combineReducers({
-    counterReducer,
-    testApiReducer,
-    keyReducer,
-    addressBookReducer,
+  counterReducer,
+  testApiReducer,
+  keyReducer,
+  addressBookReducer,
 });
 
 function rootReducer(state, action) {
-    if (action.type === 'CLEAR_STORAGE') {
-        state = undefined
-    }
-    return appReducers(state, action);
+  let newState = state;
+  if (action.type === 'CLEAR_STORAGE') {
+    newState = undefined;
+  }
+  return appReducers(newState, action);
 }
 
 export default rootReducer;

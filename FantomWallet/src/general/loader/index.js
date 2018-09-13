@@ -1,12 +1,12 @@
-//Libraries
-import React, { Component } from 'react';
+// Libraries
+import React, { PureComponent } from 'react';
 import { View, Dimensions, ActivityIndicator, StyleSheet } from 'react-native';
 
-//Calculate  max height and width of device
+// Calculate  max height and width of device
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
-//Styling
+// Styling
 const styles = StyleSheet.create({
   overlayView: {
     flex: 1,
@@ -23,20 +23,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 80,
-
-  }
+  },
 });
 
-export default class Loading extends Component {
-  //   static propTypes = {
-  //     isLoading: React.PropTypes.bool
-  //   }
-
-  // Specifies the default values for props:
-  static defaultProps = {
-    isLoading: false
-  };
-
+export default class Loading extends PureComponent {
   render() {
     const { loaderStyle } = this.props;
     const marginStyle = loaderStyle ? deviceHeight * loaderStyle - 40 : deviceHeight * 0.5 - 40;
@@ -46,7 +36,7 @@ export default class Loading extends Component {
     return (
       <View style={styles.overlayView}>
         <ActivityIndicator
-          animating={true}
+          animating
           style={[styles.activityIndicator, { marginTop: marginStyle }]}
           size="large"
           color="rgba(0,0,0,1)"
@@ -55,3 +45,8 @@ export default class Loading extends Component {
     );
   }
 }
+
+// Specifies the default values for props:
+Loading.defaultProps = {
+  isLoading: false,
+};
