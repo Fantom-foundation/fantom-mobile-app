@@ -16,6 +16,42 @@ import {
 import Permissions from 'react-native-permissions';
 import { RNCamera as Camera } from 'react-native-camera';
 
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+  },
+  infoView: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: Dimensions.get('window').width,
+  },
+
+  camera: {
+    flex: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+  },
+
+  rectangleContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+
+  rectangle: {
+    height: 250,
+    width: 250,
+    borderWidth: 2,
+    borderColor: '#00FF00',
+    backgroundColor: 'transparent',
+  },
+});
+
 const PERMISSION_AUTHORIZED = 'authorized';
 const CAMERA_PERMISSION = 'camera';
 
@@ -127,7 +163,7 @@ export default class QRCodeScanner extends Component {
           >
             <Camera
               style={[styles.camera, this.props.cameraStyle]}
-              onBarCodeRead={this._handleBarCodeRead.bind(this)}
+              onBarCodeRead={() => this._handleBarCodeRead()}
               type={this.props.cameraType}
             >
               {this._renderCameraMarker()}
@@ -139,7 +175,7 @@ export default class QRCodeScanner extends Component {
         <Camera
           type={cameraType}
           style={[styles.camera, this.props.cameraStyle]}
-          onBarCodeRead={this._handleBarCodeRead.bind(this)}
+          onBarCodeRead={() => this._handleBarCodeRead()}
         >
           {this._renderCameraMarker()}
         </Camera>
@@ -169,42 +205,6 @@ export default class QRCodeScanner extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
-  infoView: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: Dimensions.get('window').width,
-  },
-
-  camera: {
-    flex: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-  },
-
-  rectangleContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-  },
-
-  rectangle: {
-    height: 250,
-    width: 250,
-    borderWidth: 2,
-    borderColor: '#00FF00',
-    backgroundColor: 'transparent',
-  },
-});
 
 QRCodeScanner.propTypes = {
   onRead: PropTypes.func,

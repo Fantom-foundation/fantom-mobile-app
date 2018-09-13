@@ -16,7 +16,7 @@ class Address extends Component {
   }
 
   handleEditContact(name, address) {
-    let updatedName = '';
+    let updatedName = name;
     if (!name) {
       updatedName = 'Anonymous';
     }

@@ -1,4 +1,4 @@
-import { WHITE_COLOR, DEVICE_HEIGHT, DEVICE_WIDTH, iPhoneXHeight } from '../../../common/constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH, iPhoneXHeight } from '../../../common/constants';
 
 const isPhoneX = DEVICE_HEIGHT >= iPhoneXHeight;
 
@@ -20,6 +20,7 @@ const style = {
     shadowOffset: { width: 0, height: -5 },
     shadowColor: 'black',
     shadowOpacity: 0.1,
+    backgroundColor: 'white',
     elevation: 12,
   },
 };

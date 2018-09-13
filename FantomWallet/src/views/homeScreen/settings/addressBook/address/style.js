@@ -7,7 +7,9 @@ const style = {
     marginTop: 10,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
+    backgroundColor: 'white',
+
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 1,

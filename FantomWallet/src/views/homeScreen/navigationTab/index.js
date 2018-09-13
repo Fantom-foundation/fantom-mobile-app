@@ -24,11 +24,6 @@ import TabInfo from './tab/tabInfo';
  * HomeNavigationBar: This component is meant for rendering navigation tab bar on home screen containing list of tabs.
  */
 class HomeNavigationBar extends Component {
-  static backAndroidPress() {
-    BackHandler.exitApp();
-    return true;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -50,6 +45,11 @@ class HomeNavigationBar extends Component {
 
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.backAndroidPress);
+  }
+
+  backAndroidPress() {
+    BackHandler.exitApp();
+    return true;
   }
 
   handleSelectedTab(index, tabRenderInfo) {

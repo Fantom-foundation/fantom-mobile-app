@@ -52,17 +52,17 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
             })
             .on('error', errChk => {
               console.log('error', errChk);
-              let message = '';
+              let messageObj = '';
               if (errChk.message) {
-                message = errChk.message;
+                messageObj = errChk.message;
               }
-              reject({ success: false, message });
+              reject({ success: false, message: messageObj });
             });
         });
       })
       .catch(err => {
         console.log(err, 'err');
-        reject({ success: false, message });
+        reject({ success: false, message: 'Some error occured.' });
       });
   });
 }
@@ -122,20 +122,20 @@ function transferMoneyViaFantom(from, to, value, memo, privateKey) {
       })
       .catch(err => {
         console.log(err, 'err');
-        reject({ success: false, message });
+        reject({ success: false, message: 'Some error occured.' });
       });
   });
 }
 
-export function transferMoney(from, to, value, memo, privateKey) {
+export default function transferMoney(from, to, value, memo, privateKey) {
   if (configHelper.isEthereumMode) {
     return transferMoneyViaEthereum(from, to, value, memo, privateKey);
   }
   const dummyPublicKey = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
   const dummyPrivateKey = '0x50c4bf4dde1f383a172f52cb4624f089f685e67e00c6741a3ae03826c99cf082';
 
-  from = dummyPublicKey;
-  privateKey = dummyPrivateKey;
-
+  from = dummyPublicKey; //eslint-disable-line
+  privateKey = dummyPrivateKey;//eslint-disable-line
+  console.log('fantom transfer from : ', from);
   return transferMoneyViaFantom(from, to, value, memo, privateKey);
 }

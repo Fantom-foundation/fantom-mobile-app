@@ -106,9 +106,9 @@ class TransactionEntity extends Component {
    * @param { String } address : address to fetch wallet balance.
    */
   getEtherBalanceFromApiAsync(address) {
-    const dummyAddress = '0x4d8868F7d7581d770735821bb0c83137Ceaf18FD';
+    // const dummyAddress = '0x4d8868F7d7581d770735821bb0c83137Ceaf18FD';
     return fetch(
-      `https://api-ropsten.etherscan.io/api?module=account&action=balance&address=${dummyAddress}&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP`
+      `https://api-ropsten.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=WQ1D9TBEG4IWFNGZSX3YP4QKXUI1CVAUBP`
     )
       .then(response => response.json())
       .then(responseJson => {
@@ -158,7 +158,7 @@ class TransactionEntity extends Component {
    * getFantomBalanceFromApiAsync() :  Api to fetch wallet balance for given address of Fantom own endpoint.
    * @param { String } address : address to fetch wallet balance.
    */
-  getFantomBalanceFromApiAsync(address) {
+  getFantomBalanceFromApiAsync(address) {//eslint-disable-line
     const dummyAddress = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
     return fetch(`${configHelper.apiUrl}/account/${dummyAddress}`)
       .then(response => response.json())
@@ -181,7 +181,7 @@ class TransactionEntity extends Component {
    * getFantomTransactionsFromApiAsync():  Api to fetch transactions for given address of Fantom own endpoint.
    * @param {String} address : address to fetch transactions.
    */
-  getFantomTransactionsFromApiAsync(address) {
+  getFantomTransactionsFromApiAsync(address) {//eslint-disable-line
     const dummyAddress = '0x68a07a9dc6ff0052e42f4e7afa117e90fb896eda168211f040da69606a2aeddc';
 
     fetch(`${configHelper.apiUrl}/transaction/${dummyAddress}`)
@@ -201,7 +201,7 @@ class TransactionEntity extends Component {
         return responseJson;
       })
       .catch(error => {
-        // console.error(error);
+        console.log(error);
         this.setState({
           isLoading: false,
         });
@@ -268,9 +268,9 @@ class TransactionEntity extends Component {
         type = RECEIVED;
         transactionId = data.from;
       }
-      transactionStatus = data.isError === '0' ? SUCCESS : FAILED;
+      let transactionStatus = data.isError === '0' ? SUCCESS : FAILED;
       if (publicKey === data.from || publicKey === data.to) {
-        const value = data.value;
+        const { value } = data.value;
         const valInEther = Web3.utils.fromWei(value, 'ether');
 
         transactionData.push({
@@ -293,7 +293,6 @@ class TransactionEntity extends Component {
   }
 
   render() {
-    console.log('public key  :', this.props.publicKey);
     const { balance, transactionData, isLoading } = this.state;
     return (
       <View style={{ flex: 1 }}>
@@ -302,7 +301,7 @@ class TransactionEntity extends Component {
           text="FANTOM"
           rightButtonIcon={settingIcon}
           headerStyle={{ backgroundColor: '#EEBD12' }}
-          onRightIconPress={this.onRightIconPress.bind(this)}
+          onRightIconPress={() => this.onRightIconPress()}
           fantomIcon={fantomIcon}
           secondaryButtonIcon={secondaryIcon}
           leftButtonIcon={leftIcon}

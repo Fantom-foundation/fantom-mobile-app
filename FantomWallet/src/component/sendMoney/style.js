@@ -74,7 +74,6 @@ const style = {
     right: 10,
     justifyContent: 'center',
     width: '60%',
-    justifyContent: 'center',
     alignItems: 'flex-end',
   },
   rightSideTextStyle: {
