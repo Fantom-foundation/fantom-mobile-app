@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>FantomWallet</string>
+	<string>Fantom Payments - Testnet</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,9 +21,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0.2</string>
 	<key>LSApplicationCategoryType</key>
-	<string/>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>
@@ -44,12 +44,22 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Please allow access to media.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Please allow access to bluetooth.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Please allow access to calendar.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow camera permission for QR code scanning.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>Please allow access to location.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Please allow access to motion.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Please allow access for library.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Please allow access to speech.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -90,8 +100,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

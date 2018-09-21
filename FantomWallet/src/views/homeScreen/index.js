@@ -55,7 +55,7 @@ class TransactionEntity extends Component {
     this.state = {
       balance: '0',
       transactionData: [],
-      isLoading: true,
+      isLoading: this.props.publicKey ? true : false,
     };
     this.loadTransactionData = this.loadTransactionData.bind(this);
     this.loadFantomTransactionData = this.loadFantomTransactionData.bind(this);
@@ -95,7 +95,7 @@ class TransactionEntity extends Component {
     if (configHelper.isEthereumMode) {
       this.getEtherTransactionsFromApiAsync(address);
     } else {
-      this.getFantomTransactionsFromApiAsync(address);
+      // this.getFantomTransactionsFromApiAsync(address);
     }
   }
 
@@ -159,21 +159,25 @@ class TransactionEntity extends Component {
    * @param { String } address : address to fetch wallet balance.
    */
   getFantomBalanceFromApiAsync(address) {//eslint-disable-line
-    const dummyAddress = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
-    return fetch(`${configHelper.apiUrl}/account/${dummyAddress}`)
+    // const dummyAddress = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
+    return fetch(`${configHelper.apiUrl}/account/${address}`)
       .then(response => response.json())
       .then(responseJson => {
-        if (responseJson && responseJson.balance) {
+        if (responseJson && responseJson.balance !== undefined) {
           const balance = scientificToDecimal(responseJson.balance);
           const valInEther = Web3.utils.fromWei(`${balance}`, 'ether');
           this.setState({
             balance: valInEther,
+            isLoading: false,
           });
         }
         return responseJson;
       })
       .catch(error => {
         console.log(error);
+        this.setState({
+          isLoading: false,
+        });
       });
   }
 

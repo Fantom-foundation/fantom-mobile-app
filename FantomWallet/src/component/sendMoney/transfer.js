@@ -94,7 +94,8 @@ function transferMoneyViaFantom(from, to, value, memo, privateKey) {
           from,
           to,
           value: Web3.utils.toHex(Web3.utils.toWei(value, 'ether')),
-          gasPrice: '0x09184e72a000',
+          // gasPrice: '0x09184e72a000',
+          gasPrice: '0x000000000001',
           gasLimit: '0x27100',
           nonce: Web3.utils.toHex(count),
           data: memo,
@@ -131,11 +132,11 @@ export default function transferMoney(from, to, value, memo, privateKey) {
   if (configHelper.isEthereumMode) {
     return transferMoneyViaEthereum(from, to, value, memo, privateKey);
   }
-  const dummyPublicKey = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
-  const dummyPrivateKey = '0x50c4bf4dde1f383a172f52cb4624f089f685e67e00c6741a3ae03826c99cf082';
+  // const dummyPublicKey = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
+  // const dummyPrivateKey = '0x50c4bf4dde1f383a172f52cb4624f089f685e67e00c6741a3ae03826c99cf082';
 
-  from = dummyPublicKey; //eslint-disable-line
-  privateKey = dummyPrivateKey;//eslint-disable-line
-  console.log('fantom transfer from : ', from);
+  // from = dummyPublicKey; //eslint-disable-line
+  // privateKey = dummyPrivateKey;//eslint-disable-line
+  // console.log('fantom transfer from : ', from);
   return transferMoneyViaFantom(from, to, value, memo, privateKey);
 }
