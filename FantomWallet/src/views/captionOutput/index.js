@@ -99,11 +99,11 @@ class CaptionOutput extends Component {
             )}
             <View style={style.messageContainer}>
               <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>
-                Please write down this new Secret Mnemonic.
+              Please write down this new mnemonic, and keep it secret.
               </Text>
-              <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>
+              {/* <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>
                 All previous mnemonic will become invalid.
-              </Text>
+              </Text> */}
             </View>
             <TouchableOpacity
               style={style.clipBoardContainer}
@@ -117,11 +117,11 @@ class CaptionOutput extends Component {
               <View>
                 <Text style={{ fontSize: 12, fontFamily: 'Futura' }}>
                   {' '}
-                  You will lose your account if
+                  You may lose your account if
                 </Text>
                 <Text style={{ fontSize: 12, fontFamily: 'Futura' }}>
                   {' '}
-                  you lose your Secret PIN Mnemonic.
+                  your mnemonic is known by others.
                 </Text>
               </View>
             </View>

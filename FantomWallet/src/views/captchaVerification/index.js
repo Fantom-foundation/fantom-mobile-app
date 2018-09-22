@@ -137,8 +137,8 @@ class CaptchaVerification extends Component {
             <View style={style.headerContainer}>
               <Text style={style.captchaText}>Captcha Verification</Text>
               <View style={style.subHeadContainer}>
-                <Text style={style.pleaseText}>Please enter the corresponding</Text>
-                <Text style={style.phraseText}>phrase out of the 12 back-up phrases</Text>
+                <Text style={style.pleaseText}>Please enter the corresponding phrases out of the 12 back-up phrases shown previously (from left to right)</Text>
+                {/* <Text style={style.phraseText}>phrase out of the 12 back-up phrases</Text> */}
               </View>
             </View>
 

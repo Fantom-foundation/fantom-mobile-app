@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Keyboard } from 'react-native';
+import { ScrollView, View, Text, Keyboard, Clipboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -45,8 +45,10 @@ class DepositViewInfo extends Component {
     });
   }
 
-  onCopyAddress() {
+  async onCopyAddress() {
     console.warn('copy address');
+    const string = this.state.qrAddress
+    await Clipboard.setString(string);
   }
 
   onTextFieldFocus() {
@@ -74,10 +76,12 @@ class DepositViewInfo extends Component {
         style={style.fantomViewStyle}
         showsVerticalScrollIndicator={false}
       >
-        <View style={style.amountDisplayStyle}>
+        {/* <View style={style.amountDisplayStyle}>
           <Text>{balanceText} </Text>
-        </View>
-        <QRCodeShare qrLink={qrLink} billingAmount={this.state.amount} />
+        </View> */}
+        <QRCodeShare
+        copyAddress={() => this.onCopyAddress()}
+        qrLink={qrLink} billingAmount={this.state.amount} />
         <BillingAmountScreen
           onAmountChange={() => this.onAmountChange()}
           onTextFieldFocus={() => this.onTextFieldFocus()}

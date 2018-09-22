@@ -31,6 +31,8 @@ const style = {
   pleaseText: {
     fontSize: deviceWidth * 0.045,
     fontFamily: 'SegoeUI-SemiBold',
+    paddingHorizontal: 12,
+    textAlign: 'center',
   },
   phraseText: {
     fontSize: deviceWidth * 0.045,

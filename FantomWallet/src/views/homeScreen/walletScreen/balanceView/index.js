@@ -25,9 +25,9 @@ class BalanceView extends PureComponent {
             </Text>
             {/* <Text style={style.balanceUnitText}>{balanceTextThree}</Text> */}
           </View>
-          <View style={style.balanceTextTwo}>
+          {/* <View style={style.balanceTextTwo}>
             <Text style={style.balanceTextStyle}> {balanceTextFour} </Text>
-          </View>
+          </View> */}
         </View>
       </View>
     );

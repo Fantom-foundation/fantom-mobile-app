@@ -5,6 +5,7 @@ const style = {
     margin: 1,
     backgroundColor: '#fff',
     height: 150,
+    justifyContent: 'center',
 
     shadowOffset: { width: 0, height: 10 },
     shadowColor: 'rgb(243,240,250)',
@@ -16,20 +17,21 @@ const style = {
     // shadowOffset: { width: 0, height: 12, },
     // shadowColor: 'rgb(232,231,234)',
     // shadowOpacity: 0.5,
+    
   },
   balanceViewText: {
-    marginTop: 8,
-    paddingTop: 20,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'red',
+    // backgroundColor: 'green',
   },
   balanceViewTextOne: {
     fontSize: 32,
     fontFamily: FontFamily.SegoeUIBold,
     flex: 1,
     textAlign: 'center',
+    alignSelf: 'center',
+    // backgroundColor: 'red'
     // backgroundColor: 'yellow',
   },
   balanceTextTwo: {

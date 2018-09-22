@@ -307,8 +307,8 @@ class TransactionEntity extends Component {
           headerStyle={{ backgroundColor: '#EEBD12' }}
           onRightIconPress={() => this.onRightIconPress()}
           fantomIcon={fantomIcon}
-          secondaryButtonIcon={secondaryIcon}
-          leftButtonIcon={leftIcon}
+          
+          
         />
         <NavigationTab
           navigation={this.props.navigation}
