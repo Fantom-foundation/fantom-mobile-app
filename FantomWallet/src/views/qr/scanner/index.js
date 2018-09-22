@@ -112,7 +112,7 @@ export default class QRCodeScanner extends Component {
 
   _handleBarCodeRead(e) {
     if (!this.state.scanning) {
-      Vibration.vibrate();
+      // Vibration.vibrate();
       this._setScanning(true);
       this.props.onRead(e);
       if (this.props.reactivate) {

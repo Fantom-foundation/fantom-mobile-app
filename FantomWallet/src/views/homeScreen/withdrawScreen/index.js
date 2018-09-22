@@ -204,7 +204,7 @@ export default class WithdrawScreen extends Component {
           <View style={style.priceContainer}>
             <View style={style.priceTextContainer}>
               <Text style={style.price}>Price</Text>
-              <Text style={style.price}>Current price:12,0000 Won</Text>
+              {/* <Text style={style.price}>Current price:12,0000 Won</Text> */}
             </View>
             <View style={style.addressTextInputContainer}>
               <TextInput
@@ -227,7 +227,7 @@ export default class WithdrawScreen extends Component {
               </TouchableOpacity>
             </View>
             <View style={style.availableContainer}>
-              <Text>Available: 12,000000 FTM </Text>
+              <Text>Available: {this.props.balance} FTM </Text>
               <View style={style.allContainer}>
                 <Text>all</Text>
               </View>

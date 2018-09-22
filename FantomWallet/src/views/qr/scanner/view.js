@@ -4,7 +4,7 @@ import { View, StyleSheet, StatusBar, Alert } from 'react-native';
 import Web3 from 'web3';
 import arrowLeftButton from '../../../images/arrowLeft_White.png';
 import Header from '../../../general/header/index';
-import QRCodeScanner from '.';
+import QRCodeScanner from './';
 
 const styles = StyleSheet.create({
   centerText: {
@@ -74,7 +74,7 @@ export default class ScanScreen extends Component {
           ref={scanner => {
             this.scanner = scanner;
           }}
-          onRead={() => this.onSuccess()}
+          onRead={(e) => this.onSuccess(e)}
         />
       </View>
     );

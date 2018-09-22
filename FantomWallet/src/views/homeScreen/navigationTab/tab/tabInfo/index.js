@@ -31,10 +31,10 @@ class TabInfo extends PureComponent {
         );
       }
       if (tabRenderInfo === 'sendIcon') {
-        return <WithdrawTab navigation={navigation} />;
+        return <WithdrawTab navigation={navigation} balance={balance}/>;
       }
       if (tabRenderInfo === 'depositIcon') {
-        return <DepositTab navigation={navigation} />;
+        return <DepositTab navigation={navigation} balance={balance}/>;
       }
     }
     return <Text />;
