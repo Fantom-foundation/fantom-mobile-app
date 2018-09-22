@@ -125,7 +125,7 @@ class TransactionView extends Component {
             fantomTransactionArr.length === 0 && (
               <EmptyTransactionEntity
                 title="No Transactions"
-                message="(The wallet will show you recent transactions)"
+                message="(Your recent transactions will be displayed here)"
               />
             )}
         </View>

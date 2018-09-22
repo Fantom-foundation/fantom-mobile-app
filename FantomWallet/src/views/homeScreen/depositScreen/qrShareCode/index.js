@@ -25,7 +25,7 @@ class QRCodeShare extends Component {
             billingAmount={this.props.billingAmount}
           />
         </View>
-        <TouchableOpacity style={style.qrLinkViewStyle}>
+        <TouchableOpacity onPress={() => this.props.copyAddress()} style={style.qrLinkViewStyle}>
           <Text style={style.qrLinkTextStyle}> {qrLink}</Text>
         </TouchableOpacity>
       </View>
