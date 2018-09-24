@@ -41,7 +41,7 @@ export default class WithdrawScreen extends Component {
       val: 'FTM',
       index: 0,
       address: '',
-      amount: '',
+      amount: 0,
       fees: '',
       memo: '',
     };
@@ -146,6 +146,13 @@ export default class WithdrawScreen extends Component {
     });
   }
 
+  setAllAmountToPrice() {
+    const { maxFantomBalance } = this.props;
+    this.setState({
+      amount: maxFantomBalance,
+    });
+  }
+
   render() {
     const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2 } : '';
     const ViewUse = this.state.openSortMenu ? TouchableOpacity : View;
@@ -209,7 +216,7 @@ export default class WithdrawScreen extends Component {
             <View style={style.addressTextInputContainer}>
               <TextInput
                 onChangeText={amount => this.setState({ amount })}
-                value={this.state.amount}
+                value={`${this.state.amount}`}
                 style={style.priceTextInput}
                 placeholder="Enter Amount"
                 keyboardType="decimal-pad"
@@ -227,9 +234,23 @@ export default class WithdrawScreen extends Component {
               </TouchableOpacity>
             </View>
             <View style={style.availableContainer}>
-              <Text>Available: {this.props.balance} FTM </Text>
+              <View
+                style={{
+                  alignItems: 'flex-end',
+                  paddingRight: 10,
+                  width: deviceWidth * 0.8,
+                }}
+              >
+                <Text>Available to Transfer:</Text>
+                <Text> {this.props.maxFantomBalance} FTM </Text>
+              </View>
               <View style={style.allContainer}>
-                <Text>all</Text>
+                <TouchableOpacity
+                  onPress={() => this.setAllAmountToPrice()}
+                  style={{ flexDirection: 'row', padding: 2 }}
+                >
+                  <Text>all</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

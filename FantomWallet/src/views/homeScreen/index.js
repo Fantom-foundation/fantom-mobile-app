@@ -54,8 +54,10 @@ class TransactionEntity extends Component {
     super(props);
     this.state = {
       balance: '0',
+      gasPrice: 0x000000000001,
+      maxFantomBalance: 0,
       transactionData: [],
-      isLoading: this.props.publicKey ? true : false,
+      isLoading: !!this.props.publicKey,
     };
     this.loadTransactionData = this.loadTransactionData.bind(this);
     this.loadFantomTransactionData = this.loadFantomTransactionData.bind(this);
@@ -163,19 +165,33 @@ class TransactionEntity extends Component {
     return fetch(`${configHelper.apiUrl}/account/${address}`)
       .then(response => response.json())
       .then(responseJson => {
-        if (responseJson && responseJson.balance !== undefined) {
+        if (responseJson && responseJson.balance !== undefined && responseJson.balance) {
           const balance = scientificToDecimal(responseJson.balance);
           const valInEther = Web3.utils.fromWei(`${balance}`, 'ether');
+          const { gasPrice } = this.state;
+          const gasPriceInEther = Web3.utils.fromWei(`${gasPrice}`, 'ether');
+          const maxFantomBalance = valInEther - gasPriceInEther;
+
           this.setState({
             balance: valInEther,
+            maxFantomBalance,
+            isLoading: false,
+          });
+        } else {
+          this.setState({
+            balance: 0,
+            maxFantomBalance: 0,
             isLoading: false,
           });
         }
+
         return responseJson;
       })
       .catch(error => {
         console.log(error);
         this.setState({
+          maxFantomBalance: 0,
+          balance: 0,
           isLoading: false,
         });
       });
@@ -297,7 +313,7 @@ class TransactionEntity extends Component {
   }
 
   render() {
-    const { balance, transactionData, isLoading } = this.state;
+    const { balance, transactionData, isLoading, maxFantomBalance } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
@@ -307,12 +323,11 @@ class TransactionEntity extends Component {
           headerStyle={{ backgroundColor: '#EEBD12' }}
           onRightIconPress={() => this.onRightIconPress()}
           fantomIcon={fantomIcon}
-          
-          
         />
         <NavigationTab
           navigation={this.props.navigation}
           balance={balance}
+          maxFantomBalance={maxFantomBalance}
           transactionData={transactionData}
           isLoading={isLoading}
           onRefresh={this.onRefresh}

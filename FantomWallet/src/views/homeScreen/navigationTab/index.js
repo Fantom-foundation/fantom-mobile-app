@@ -61,12 +61,20 @@ class HomeNavigationBar extends Component {
 
   render() {
     const { tabIconList, activeTabIndex, tabRenderInfo } = this.state;
-    const { balance, transactionData, isLoading, onRefresh, navigation } = this.props;
+    const {
+      balance,
+      transactionData,
+      isLoading,
+      onRefresh,
+      navigation,
+      maxFantomBalance,
+    } = this.props;
     const renderTabIfo = (
       <TabInfo
         tabRenderInfo={tabRenderInfo}
         navigation={navigation}
         balance={balance}
+        maxFantomBalance={maxFantomBalance}
         transactionData={transactionData}
         isLoading={isLoading}
         onRefresh={onRefresh}

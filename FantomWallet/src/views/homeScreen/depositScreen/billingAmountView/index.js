@@ -42,7 +42,7 @@ class BillingAmountScreen extends Component {
           </View>
         </View>
         <TextInput
-          onChangeText={() => this.onAmountChange()}
+          onChangeText={ammount => this.onAmountChange(ammount)}
           value={`${this.state.amount}`}
           style={style.amountInputStyle}
           placeholder="Enter Amount"
