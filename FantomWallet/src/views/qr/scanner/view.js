@@ -30,13 +30,14 @@ const styles = StyleSheet.create({
 });
 
 export default class ScanScreen extends Component {
+  // 0x3E22efd6FA7Af208FAF1ECF2c356D7611bB06F30
   onSuccess(e) {
     const successFunc = this.props.navigation.getParam('onScanSuccess', null);
     const { data } = e;
     if (data) {
       const isValid = Web3.utils.isAddress(data);
       if (!isValid) {
-        Alert.alert('Error', 'Please enter valid address.', [
+        Alert.alert('Error', 'Please scan a valid QR code.', [
           {
             text: 'Ok',
             onPress: () => {
