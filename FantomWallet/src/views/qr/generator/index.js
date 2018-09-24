@@ -57,7 +57,12 @@ const style = StyleSheet.create({
 export default class QRGenerator extends Component {
   onPress() {
     const { billingAmount } = this.props;
-    if (billingAmount === '' || billingAmount === 0 || billingAmount === '0') {
+    if (
+      billingAmount === undefined ||
+      billingAmount === '' ||
+      billingAmount === 0 ||
+      billingAmount === '0'
+    ) {
       Alert.alert('Error', 'Please enter billing amount.');
       return;
     }

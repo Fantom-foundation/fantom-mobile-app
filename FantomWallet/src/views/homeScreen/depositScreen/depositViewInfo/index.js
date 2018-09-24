@@ -21,6 +21,7 @@ class DepositViewInfo extends Component {
       amount: 0,
       qrAddress: '',
     };
+    this.onAmountChange = this.onAmountChange.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +41,7 @@ class DepositViewInfo extends Component {
   }
 
   onAmountChange(amount) {
+    amount = amount.trim();
     this.setState({
       amount,
     });
@@ -47,7 +49,7 @@ class DepositViewInfo extends Component {
 
   async onCopyAddress() {
     console.warn('copy address');
-    const string = this.state.qrAddress
+    const string = this.state.qrAddress;
     await Clipboard.setString(string);
   }
 
@@ -66,10 +68,11 @@ class DepositViewInfo extends Component {
   render() {
     const balanceText = '(1,000\\ = 1.00002312FTM)';
     const qrLink = this.state.qrAddress;
-    let headerText = 'FP';
-    if (this.props.selectedTab === 'Fantom') {
-      headerText = 'FTM';
-    }
+    let headerText = 'FTM';
+    // if (this.props.selectedTab === 'Fantom') {
+    //   headerText = 'FTM';
+    // }
+
     return (
       <ScrollView
         ref={scroll => (this.scrollView = scroll)}
@@ -80,10 +83,12 @@ class DepositViewInfo extends Component {
           <Text>{balanceText} </Text>
         </View> */}
         <QRCodeShare
-        copyAddress={() => this.onCopyAddress()}
-        qrLink={qrLink} billingAmount={this.state.amount} />
+          copyAddress={() => this.onCopyAddress()}
+          qrLink={qrLink}
+          billingAmount={this.state.amount}
+        />
         <BillingAmountScreen
-          onAmountChange={() => this.onAmountChange()}
+          onAmountChange={this.onAmountChange}
           onTextFieldFocus={() => this.onTextFieldFocus()}
           onTextFieldBlur={() => this.onTextFieldBlur()}
           headerText={headerText}

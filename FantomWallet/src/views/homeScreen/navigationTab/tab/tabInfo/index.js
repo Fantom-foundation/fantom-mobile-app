@@ -14,6 +14,7 @@ class TabInfo extends PureComponent {
       tabRenderInfo,
       navigation,
       balance,
+      maxFantomBalance,
       transactionData,
       isLoading,
       onRefresh,
@@ -31,10 +32,16 @@ class TabInfo extends PureComponent {
         );
       }
       if (tabRenderInfo === 'sendIcon') {
-        return <WithdrawTab navigation={navigation} balance={balance}/>;
+        return (
+          <WithdrawTab
+            navigation={navigation}
+            balance={balance}
+            maxFantomBalance={maxFantomBalance}
+          />
+        );
       }
       if (tabRenderInfo === 'depositIcon') {
-        return <DepositTab navigation={navigation} balance={balance}/>;
+        return <DepositTab navigation={navigation} balance={balance} />;
       }
     }
     return <Text />;
