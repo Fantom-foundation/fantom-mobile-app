@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import NavigationTab from './navigationTab';
 import Header from '../../general/header';
 
-import fantomIcon from '../../images/fantomWhiteIcon.png';
+// import fantomIcon from '../../images/fantomWhiteIcon.png';fantom_logo_TranparentWhite.png
+import fantomIcon from '../../images/fantom_logo_TranparentWhite.png';
 import secondaryIcon from '../../images/icon.png';
 import leftIcon from '../../images/notification_red.png';
 import settingIcon from '../../images/setting.png';
@@ -318,7 +319,7 @@ class TransactionEntity extends Component {
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
         <Header
-          text="FANTOM"
+          // text="FANTOM"
           rightButtonIcon={settingIcon}
           headerStyle={{ backgroundColor: '#EEBD12' }}
           onRightIconPress={() => this.onRightIconPress()}

@@ -99,7 +99,7 @@ class CaptionOutput extends Component {
             )}
             <View style={style.messageContainer}>
               <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>
-              Please write down this new mnemonic, and keep it secret.
+                Please write down this new mnemonic, and keep it secret.
               </Text>
               {/* <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>
                 All previous mnemonic will become invalid.
@@ -115,11 +115,11 @@ class CaptionOutput extends Component {
             <View style={style.lastMessageContainer}>
               <Image source={dangerIcon} style={{ width: 20, height: 16 }} />
               <View>
-                <Text style={{ fontSize: 12, fontFamily: 'Futura' }}>
+                <Text style={{ fontSize: deviceWidth <= 320 ? 12 : 14, fontFamily: 'Futura' }}>
                   {' '}
                   You may lose your account if
                 </Text>
-                <Text style={{ fontSize: 12, fontFamily: 'Futura' }}>
+                <Text style={{ fontSize: deviceWidth <= 320 ? 12 : 14, fontFamily: 'Futura' }}>
                   {' '}
                   your mnemonic is known by others.
                 </Text>
