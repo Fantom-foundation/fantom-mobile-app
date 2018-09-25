@@ -29,9 +29,27 @@ class Header extends Component {
     }
   }
 
+  renderHeaderText() {
+    let { text, textStyle } = this.props;
+
+    const textStyleProps = textStyle || {};
+    textStyle = {
+      ...style.textStyle,
+      ...textStyleProps,
+    };
+
+    if (text) {
+      return (
+        <>
+          <Text style={textStyle}>{text}</Text>
+        </>
+      );
+    }
+    return null;
+  }
+
   render() {
     let {
-      text,
       rightButtonIcon,
       isShowRightButtonIcon,
       leftButtonIcon,
@@ -86,7 +104,7 @@ class Header extends Component {
             {fantomIcon && (
               <Image source={fantomIcon} style={style.fantomIconStyle} resizeMode="contain" />
             )}
-            <Text style={textStyle}>{text}</Text>
+            {this.renderHeaderText()}
           </View>
 
           {!isShowSecondaryButtonIcon &&

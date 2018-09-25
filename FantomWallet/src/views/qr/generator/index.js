@@ -68,7 +68,7 @@ export default class QRGenerator extends Component {
     }
     this.viewShot.capture().then(uri => {
       console.log('do something with ', uri);
-      const message = `Billing amount: ${billingAmount}`;
+      const message = `Billing amount: ${billingAmount} FTM`;
       Share.open({ url: uri, title: 'Fantom', message })
         .then(res => {
           console.log('this.props.qrLink , res', this.props.qrLink, res);
@@ -91,16 +91,17 @@ export default class QRGenerator extends Component {
             width: logoWidth,
             height: logoHeight,
             position: 'absolute',
+            backgroundColor: 'white',
             left: size / 2 - logoWidth / 2,
             top: size / 2 - logoHeight / 2,
           }}
         >
           <Image
-            resizeMode="contain"
-            source={require('../../../images/fantom-logo-small.png')} // eslint-disable-line
-            style={{ backgroundColor: 'white', height: logoHeight }}
+            // resizeMode="contain"
+            source={require('../../../images/fantom_logo_Black.jpg')} // eslint-disable-line 
+            style={{ alignSelf: 'center', backgroundColor: 'white', flex: 1, height: logoHeight }}
           />
-          <Text
+          {/* <Text
             style={{
               padding: 5,
               alignSelf: 'center',
@@ -111,7 +112,7 @@ export default class QRGenerator extends Component {
             }}
           >
             FANTOM
-          </Text>
+          </Text> */}
         </View>
       );
     }

@@ -50,7 +50,7 @@ const style = {
     padding: 38,
   },
   fantomIconStyle: {
-    width: 20,
+    width: 100,
     height: 25,
     paddingRight: 30,
   },
