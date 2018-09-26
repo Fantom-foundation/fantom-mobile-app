@@ -101,17 +101,18 @@ class TransactionView extends Component {
   render() {
     const { publicKey, isLoading, transactions } = this.props;
     const selectedSortMenu = this.state.val;
-    const fantomTransactionArr = transactions || [];
+    const fantomTransaction = transactions || [];
+    const fantomTransactionArr = fantomTransaction.reverse();
     return (
       <View style={{ flex: 1 }}>
         {fantomTransactionArr.length > 0 && (
           <View style={style.headingCardViewStyle}>
-            <Text style={style.headingCardTextStyle}> Transactions </Text>
-            <View style={style.transactionSortIconStyle}>
+            <Text style={style.headingCardTextStyle}> Sent Transactions </Text>
+            {/* <View style={style.transactionSortIconStyle}>
               <TouchableOpacity onPress={() => this.toggleSortMenu()}>
                 <Image source={sortMenuIcon} style={{ width: 33, height: 30 }} />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
         )}
         <View style={this.state.openSortMenu ? { opacity: 0.2 } : ''}>

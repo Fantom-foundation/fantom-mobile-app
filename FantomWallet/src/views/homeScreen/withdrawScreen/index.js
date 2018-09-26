@@ -106,7 +106,7 @@ export default class WithdrawScreen extends Component {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   handleSendMoney() {
-    const { address, amount, fees, memo } = this.state;
+    const { address, amount, fees, memo, actualAmount } = this.state;
     const coin = this.state.val;
     let message = '';
     if (address === '') {
@@ -125,7 +125,7 @@ export default class WithdrawScreen extends Component {
     }
     this.props.navigation.navigate('SendMoney', {
       address,
-      amount,
+      amount: actualAmount,
       coin,
       memo,
       fees,
@@ -142,6 +142,7 @@ export default class WithdrawScreen extends Component {
       val: 'FTM',
       address: '',
       amount: '',
+      actualAmount: '',
       fees: '',
       memo: '',
     });
@@ -149,9 +150,11 @@ export default class WithdrawScreen extends Component {
 
   setAllAmountToPrice() {
     const { maxFantomBalance } = this.props;
-    const ftmBalance = maxFantomBalance.toString();
+    const ftmBalance = (Number(maxFantomBalance).toFixed(4)).toString();
+    const maxFantomBalanceStr = maxFantomBalance.toString();
     this.setState({
       amount: ftmBalance,
+      actualAmount: maxFantomBalanceStr,
     });
   }
 
@@ -218,7 +221,7 @@ export default class WithdrawScreen extends Component {
             </View>
             <View style={style.addressTextInputContainer}>
               <TextInput
-                onChangeText={amount => this.setState({ amount })}
+                onChangeText={amount => this.setState({ amount, actualAmount: amount })}
                 value={`${this.state.amount}`}
                 style={style.priceTextInput}
                 placeholder="Enter Amount"

@@ -91,6 +91,7 @@ class SendMoney extends Component {
 
   render() {
     const { address, coin, amount, memo } = this.props.navigation.state.params;
+    const ftmBalance = (Number(amount).toFixed(4)).toString();
     return (
       <View style={style.mainContainerStyle}>
         <Header text="Check Send" />
@@ -110,7 +111,7 @@ class SendMoney extends Component {
             <TextField placeHolderText="Address" isTextPresent rightTextValue={address} />
           </View>
           <View style={style.textFieldStyle}>
-            <TextField placeHolderText="Price" isTextPresent rightTextValue={amount} />
+            <TextField placeHolderText="Price" isTextPresent rightTextValue={ftmBalance} />
           </View>
           {/* <View style={style.textFieldStyle}>
             <TextField
