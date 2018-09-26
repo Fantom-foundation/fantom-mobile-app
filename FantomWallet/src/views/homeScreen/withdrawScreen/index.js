@@ -41,7 +41,7 @@ export default class WithdrawScreen extends Component {
       val: 'FTM',
       index: 0,
       address: '',
-      amount: 0,
+      amount: '',
       fees: '',
       memo: '',
     };
@@ -130,6 +130,7 @@ export default class WithdrawScreen extends Component {
       memo,
       fees,
       reload: this.reload.bind(this),
+      maxFantomBalance: this.props.maxFantomBalance,
     });
   }
 
@@ -148,14 +149,16 @@ export default class WithdrawScreen extends Component {
 
   setAllAmountToPrice() {
     const { maxFantomBalance } = this.props;
+    const ftmBalance = maxFantomBalance.toString();
     this.setState({
-      amount: maxFantomBalance,
+      amount: ftmBalance,
     });
   }
 
   render() {
     const dynamicStyle = this.state.openSortMenu ? { opacity: 0.2 } : '';
     const ViewUse = this.state.openSortMenu ? TouchableOpacity : View;
+    const ftmBalance = Number(this.props.maxFantomBalance).toFixed(4);
     return (
       <ViewUse
         activeOpacity={1}
@@ -242,7 +245,7 @@ export default class WithdrawScreen extends Component {
                 }}
               >
                 <Text>Available to Transfer:</Text>
-                <Text> {this.props.maxFantomBalance} FTM </Text>
+                <Text> {ftmBalance} FTM </Text>
               </View>
               <View style={style.allContainer}>
                 <TouchableOpacity

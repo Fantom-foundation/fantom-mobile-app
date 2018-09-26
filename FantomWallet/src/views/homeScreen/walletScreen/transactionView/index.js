@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import style from './style';
 import EmptyTransactionEntity from './transactionEntity/emptyTransactionEntity';
 import SortMenuCard from '../../../../general/sortMenuCard';
@@ -97,9 +99,9 @@ class TransactionView extends Component {
   }
 
   render() {
-    const { fantomTransactionArr, publicKey, isLoading } = this.props;
+    const { publicKey, isLoading, transactions } = this.props;
     const selectedSortMenu = this.state.val;
-
+    const fantomTransactionArr = transactions || [];
     return (
       <View style={{ flex: 1 }}>
         {fantomTransactionArr.length > 0 && (
@@ -141,4 +143,13 @@ TransactionView.propTypes = {
   isLoading: PropTypes.bool,
 };
 
-export default TransactionView;
+const mapStateToProps = state => ({
+  transactions: state.transactionReducer.transactions,
+});
+
+const mapDispatchToProps = () => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TransactionView);

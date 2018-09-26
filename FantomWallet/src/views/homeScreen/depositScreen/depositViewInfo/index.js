@@ -48,8 +48,8 @@ class DepositViewInfo extends Component {
   }
 
   async onCopyAddress() {
-    console.warn('copy address');
     const string = this.state.qrAddress;
+    console.warn('copy address', string);
     await Clipboard.setString(string);
   }
 

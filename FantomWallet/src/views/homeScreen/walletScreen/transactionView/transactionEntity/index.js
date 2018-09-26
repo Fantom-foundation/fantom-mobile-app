@@ -29,7 +29,8 @@ class TransacationEntity extends PureComponent {
         <View style={style.rowTwoStyle}>
           <Text numberOfLines={1} style={style.transactionIdStyle}>
             {' '}
-            {transaction.transactionId}
+            {/* {transaction.transactionId} */}
+            {transaction.to}
           </Text>
           <View style={style.rowTwoViewStyle}>
             <Text

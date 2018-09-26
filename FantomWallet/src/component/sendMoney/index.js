@@ -8,7 +8,9 @@ import Button from '../../general/button/index';
 import TextField from './TextField';
 import Loading from '../../general/loader/index';
 import * as AddressAction from '../../redux/addressBook/action';
+import * as TransactionAction from '../../redux/transactions/action';
 import transferMoney from './transfer';
+import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -22,14 +24,20 @@ class SendMoney extends Component {
   }
 
   onConfirmHandler() {
-    const { address, amount, memo } = this.props.navigation.state.params;
-    this.transferMoney(this.props.publicKey, address, amount, memo);
+    const { address, amount, memo, maxFantomBalance } = this.props.navigation.state.params;
+    if (amount === 0 || amount > maxFantomBalance) {
+      Alert.alert('Error', 'Please enter valid amount.');
+    } else {
+      this.transferMoney(this.props.publicKey, address, amount, memo);
+      // console.warn(amount, maxFantomBalance, 'amount');
+    }
   }
 
   alertSuccessfulButtonPressed() {
     const { address, reload } = this.props.navigation.state.params;
     const currentDate = new Date();
     this.props.addUpdateTimestampAddress(address, '', currentDate.getTime());
+
     if (reload) {
       reload();
     }
@@ -42,6 +50,17 @@ class SendMoney extends Component {
       .then(data => {
         if (data.hash && data.hash !== '') {
           this.setState({ isLoading: false });
+          const transaction = {
+            type: SENT,
+            amount: value,
+            transactionId: '',
+            transactionStatus: SUCCESS,
+            amountUnit: 'FTM',
+            from,
+            to,
+            isError: false,
+          };
+          this.props.addTransactionToStore(transaction);
           Alert.alert('Success', `Transfer successful with transaction hash: ${data.hash}`, [
             // { text: 'Copy', onPress: () => { Clipboard.setString(data.hash); } },
             { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
@@ -54,6 +73,17 @@ class SendMoney extends Component {
       })
       .catch(err => {
         this.setState({ isLoading: false });
+        const transaction = {
+          type: SENT,
+          amount: value,
+          transactionId: '',
+          transactionStatus: FAILED,
+          amountUnit: 'FTM',
+          from,
+          to,
+          isError: false,
+        };
+        this.props.addTransactionToStore(transaction);
         const message = err.message || 'Invalid error. Please check the data and try again.';
         Alert.alert('Error', message);
       });
@@ -133,6 +163,12 @@ const mapDispatchToProps = dispatch => ({
       address: walletAddress,
       name: name || '',
       timeStamp,
+    });
+  },
+  addTransactionToStore: transaction => {
+    dispatch({
+      type: TransactionAction.ADD_TRANSACTION,
+      transaction,
     });
   },
 });

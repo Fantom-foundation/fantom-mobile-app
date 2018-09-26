@@ -21,7 +21,8 @@ const configHelper = config();
 function scientificToDecimal(num) {
   const sign = Math.sign(num);
   // if the number is in scientific notation remove it
-  if (/\d+\.?\d*e[\+\-]*\d+/i.test(num)) { // eslint-disable-line
+  if (/\d+\.?\d*e[\+\-]*\d+/i.test(num)) {
+    // eslint-disable-line
     const zero = '0';
     const parts = String(num)
       .toLowerCase()
@@ -161,7 +162,8 @@ class TransactionEntity extends Component {
    * getFantomBalanceFromApiAsync() :  Api to fetch wallet balance for given address of Fantom own endpoint.
    * @param { String } address : address to fetch wallet balance.
    */
-  getFantomBalanceFromApiAsync(address) {//eslint-disable-line
+  getFantomBalanceFromApiAsync(address) {
+    //eslint-disable-line
     // const dummyAddress = '0xFD00A5fE03CB4672e4380046938cFe5A18456Df4';
     return fetch(`${configHelper.apiUrl}/account/${address}`)
       .then(response => response.json())
@@ -169,12 +171,13 @@ class TransactionEntity extends Component {
         if (responseJson && responseJson.balance !== undefined && responseJson.balance) {
           const balance = scientificToDecimal(responseJson.balance);
           const valInEther = Web3.utils.fromWei(`${balance}`, 'ether');
+          const ftmBalance = valInEther;
           const { gasPrice } = this.state;
           const gasPriceInEther = Web3.utils.fromWei(`${gasPrice}`, 'ether');
           const maxFantomBalance = valInEther - gasPriceInEther;
 
           this.setState({
-            balance: valInEther,
+            balance: ftmBalance,
             maxFantomBalance,
             isLoading: false,
           });
@@ -202,7 +205,8 @@ class TransactionEntity extends Component {
    * getFantomTransactionsFromApiAsync():  Api to fetch transactions for given address of Fantom own endpoint.
    * @param {String} address : address to fetch transactions.
    */
-  getFantomTransactionsFromApiAsync(address) {//eslint-disable-line
+  getFantomTransactionsFromApiAsync(address) {
+    //eslint-disable-line
     const dummyAddress = '0x68a07a9dc6ff0052e42f4e7afa117e90fb896eda168211f040da69606a2aeddc';
 
     fetch(`${configHelper.apiUrl}/transaction/${dummyAddress}`)
