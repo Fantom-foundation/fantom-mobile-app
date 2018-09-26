@@ -4,7 +4,7 @@ import { View, StyleSheet, StatusBar, Alert } from 'react-native';
 import Web3 from 'web3';
 import arrowLeftButton from '../../../images/arrowLeft_White.png';
 import Header from '../../../general/header/index';
-import QRCodeScanner from './';
+import QRCodeScanner from '.';
 
 const styles = StyleSheet.create({
   centerText: {
@@ -35,7 +35,8 @@ export default class ScanScreen extends Component {
     const successFunc = this.props.navigation.getParam('onScanSuccess', null);
     const { data } = e;
     if (data) {
-      const isValid = Web3.utils.isAddress(data);
+      const dataStr = data.trim();
+      const isValid = Web3.utils.isAddress(dataStr);
       if (!isValid) {
         Alert.alert('Error', 'Please scan a valid QR code.', [
           {
@@ -75,7 +76,7 @@ export default class ScanScreen extends Component {
           ref={scanner => {
             this.scanner = scanner;
           }}
-          onRead={(e) => this.onSuccess(e)}
+          onRead={e => this.onSuccess(e)}
         />
       </View>
     );

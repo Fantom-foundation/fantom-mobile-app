@@ -215,7 +215,7 @@ class AddressBook extends Component {
                 style={favColor}
                 onPress={() => this.setState({ addOrFavorite: 'favorite' })}
               >
-                <Text style={favColorText}>Favorites</Text>
+                <Text style={favColorText}>Favourites</Text>
               </TouchableOpacity>
             </View>
           ) : null}

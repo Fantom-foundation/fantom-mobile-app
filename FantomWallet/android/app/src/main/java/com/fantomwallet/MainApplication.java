@@ -5,7 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.bitgo.randombytes.RandomBytesPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
-import com.horcrux.svg.SvgPackage;
+//import com.horcrux.svg.SvgPackage;
 import cl.json.RNSharePackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import org.reactnative.camera.RNCameraPackage;
@@ -33,7 +33,7 @@ public class MainApplication extends Application implements ShareApplication, Re
           new MainReactPackage(),
             new RandomBytesPackage(),
             new RNVersionCheckPackage(),
-            new SvgPackage(),
+//            new SvgPackage(),
             new RNSharePackage(),
             new RNViewShotPackage(),
             new RNCameraPackage(),
