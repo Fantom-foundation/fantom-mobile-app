@@ -11,6 +11,7 @@ import { SUCCESS, SENT } from '../../../../../common/constants';
 class TransacationEntity extends PureComponent {
   render() {
     const { transaction } = this.props;
+    const ftmBalance = (Number(transaction.amount).toFixed(4)).toString();
     return (
       <View style={style.transactionCardStyle}>
         <View style={style.rowOneStyle}>
@@ -21,7 +22,7 @@ class TransacationEntity extends PureComponent {
           <View style={style.rowOneViewStyle}>
             <Text style={style.rowOneTextStyle}>
               {' '}
-              {transaction.type === SENT ? '-' : '+'} {transaction.amount}
+              {transaction.type === SENT ? '-' : '+'} {ftmBalance}
             </Text>
             <Text style={style.unitStyle}> {transaction.amountUnit} </Text>
           </View>
