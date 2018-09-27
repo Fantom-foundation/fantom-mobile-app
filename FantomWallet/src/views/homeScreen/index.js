@@ -70,6 +70,14 @@ class TransactionEntity extends Component {
     this.onRefresh = this.onRefresh.bind(this);
   }
 
+  componentDidMount() {
+    setInterval(() => {
+      if (this.props.publicKey && !this.props.isLoading) {
+        this.getWalletBalance(this.props.publicKey);
+      }
+    }, 1000);
+  }
+
   /**
    * onRefresh() :  To reload the transaction data on page refresh.
    */
