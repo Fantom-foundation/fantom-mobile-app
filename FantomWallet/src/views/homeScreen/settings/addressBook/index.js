@@ -31,17 +31,6 @@ class AddressBook extends Component {
     super(props);
     this.state = {
       addOrFavorite: 'add',
-      // addressList: [{ id: 1, name: 'John Doe', line1Text: '1GWQCH37uJEvDzQkd', rate: false },
-      // { id: 2, name: 'John Doe', line1Text: '2GWQCH37uJEvDzQkd', rate: false },
-      // { id: 3, name: 'John Doe', line1Text: '3GWQCH37uJEvDzQkd', rate: false },
-      // { id: 4, name: 'John Doe', line1Text: '4GWQCH37uJEvDzQkd', rate: false },
-      // { id: 5, name: 'John Doe', line1Text: '5GWQCH37uJEvDzQkd', rate: false },
-      // { id: 6, name: 'John Doe', line1Text: '1GWQCH37uJEvDzQkd', rate: false },
-      // { id: 7, name: 'John Doe', line1Text: '2GWQCH37uJEvDzQkd', rate: false },
-      // { id: 8, name: 'John Doe', line1Text: '3GWQCH37uJEvDzQkd', rate: false },
-      // { id: 9, name: 'John Doe', line1Text: '4GWQCH37uJEvDzQkd', rate: false },
-      // { id: 10, name: 'John Doe', line1Text: '5GWQCH37uJEvDzQkd', rate: false }
-      // ],
       displaySearch: false,
       searchText: '',
     };
@@ -169,7 +158,6 @@ class AddressBook extends Component {
   }
 
   render() {
-    console.log(this.props.addresses);
     let addColor = style.add;
     let favColor = style.favorites;
     let addColorText = { color: 'black' };

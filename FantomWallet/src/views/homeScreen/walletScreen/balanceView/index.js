@@ -9,8 +9,6 @@ class BalanceView extends PureComponent {
     const { balance } = this.props;
     const ftmBalance = Number(balance).toFixed(4);
 
-    // const balanceTextFour = '122,000\\';
-
     return (
       <View style={style.fantomBalanceView}>
         <View style={style.balanceContainer}>
@@ -18,11 +16,7 @@ class BalanceView extends PureComponent {
             <Text numberOfLines={1} style={style.balanceViewTextOne}>
               {ftmBalance} FTM
             </Text>
-            {/* <Text style={style.balanceUnitText}>{balanceTextThree}</Text> */}
           </View>
-          {/* <View style={style.balanceTextTwo}>
-            <Text style={style.balanceTextStyle}> {balanceTextFour} </Text>
-          </View> */}
         </View>
       </View>
     );

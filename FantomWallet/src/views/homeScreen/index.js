@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
-
 import NavigationTab from './navigationTab';
 import Header from '../../general/header';
 
 // import fantomIcon from '../../images/fantomWhiteIcon.png';fantom_logo_TranparentWhite.png
 import fantomIcon from '../../images/fantom_logo_TranparentWhite.png';
-import secondaryIcon from '../../images/icon.png';
-import leftIcon from '../../images/notification_red.png';
 import settingIcon from '../../images/setting.png';
 import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants';
 
@@ -213,7 +210,8 @@ class TransactionEntity extends Component {
    * getFantomTransactionsFromApiAsync():  Api to fetch transactions for given address of Fantom own endpoint.
    * @param {String} address : address to fetch transactions.
    */
-  getFantomTransactionsFromApiAsync(address) {
+  // getFantomTransactionsFromApiAsync(address) {
+  getFantomTransactionsFromApiAsync() {
     //eslint-disable-line
     const dummyAddress = '0x68a07a9dc6ff0052e42f4e7afa117e90fb896eda168211f040da69606a2aeddc';
 
