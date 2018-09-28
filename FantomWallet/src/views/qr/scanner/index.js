@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Dimensions,
-  Vibration,
   Animated,
   Easing,
   View,
@@ -121,20 +120,6 @@ export default class QRCodeScanner extends Component {
     }
   }
 
-  _renderTopContent() {
-    if (this.props.topContent) {
-      return this.props.topContent;
-    }
-    return null;
-  }
-
-  _renderBottomContent() {
-    if (this.props.bottomContent) {
-      return this.props.bottomContent;
-    }
-    return null;
-  }
-
   _renderCameraMarker() {
     if (this.props.showMarker) {
       if (this.props.customMarker) {
@@ -193,15 +178,7 @@ export default class QRCodeScanner extends Component {
 
   render() {
     return (
-      <View style={[styles.mainContainer, this.props.containerStyle]}>
-        {/* <View style={[styles.infoView, this.props.topViewStyle]}>
-          {this._renderTopContent()}
-        </View> */}
-        {this._renderCamera()}
-        {/* <View style={[styles.infoView, this.props.bottomViewStyle]}>
-          {this._renderBottomContent()}
-        </View> */}
-      </View>
+      <View style={[styles.mainContainer, this.props.containerStyle]}>{this._renderCamera()}</View>
     );
   }
 }
@@ -216,8 +193,8 @@ QRCodeScanner.propTypes = {
   customMarker: PropTypes.element,
   containerStyle: PropTypes.any,
   cameraStyle: PropTypes.any,
-  topContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-  bottomContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  topContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]), // eslint-disable-line
+  bottomContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]), // eslint-disable-line
   notAuthorizedView: PropTypes.element,
   permissionDialogTitle: PropTypes.string,
   permissionDialogMessage: PropTypes.string,

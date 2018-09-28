@@ -97,22 +97,9 @@ export default class QRGenerator extends Component {
           }}
         >
           <Image
-            // resizeMode="contain"
-            source={require('../../../images/fantom_logo_Black.jpg')} // eslint-disable-line 
+            source={require('../../../images/fantom_logo_Black.jpg')} // eslint-disable-line
             style={{ alignSelf: 'center', backgroundColor: 'white', flex: 1, height: logoHeight }}
           />
-          {/* <Text
-            style={{
-              padding: 5,
-              alignSelf: 'center',
-              justifyContent: 'center',
-              fontSize: 24,
-              fontWeight: '900',
-              backgroundColor: 'white',
-            }}
-          >
-            FANTOM
-          </Text> */}
         </View>
       );
     }
@@ -122,12 +109,6 @@ export default class QRGenerator extends Component {
   render() {
     return (
       <View style={style.container}>
-        {/* <TextInput
-          style={styles.input}
-          onChangeText={(text) => this.setState({text: text})}
-          value={this.state.text}
-        /> */}
-
         <View style={style.addressTitleViewStyle}>
           <Text style={style.addressTitleTextStyle}> {this.props.titleText} </Text>
           <TouchableOpacity style={style.addressShareIconStyle} onPress={() => this.onPress()}>
@@ -154,7 +135,6 @@ export default class QRGenerator extends Component {
             </View>
           )}
         </ViewShot>
-        {/* <TouchableOpacity onPress={() => this.onPress()}><Text>Share</Text></TouchableOpacity> */}
       </View>
     );
   }

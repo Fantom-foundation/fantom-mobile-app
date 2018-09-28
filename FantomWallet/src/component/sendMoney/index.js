@@ -10,7 +10,7 @@ import Loading from '../../general/loader/index';
 import * as AddressAction from '../../redux/addressBook/action';
 import * as TransactionAction from '../../redux/transactions/action';
 import transferMoney from './transfer';
-import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants';
+import { SUCCESS, SENT, FAILED } from '../../common/constants';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -91,7 +91,9 @@ class SendMoney extends Component {
 
   render() {
     const { address, coin, amount, memo } = this.props.navigation.state.params;
-    const ftmBalance = (Number(amount).toFixed(4)).toString();
+    const ftmBalance = Number(amount)
+      .toFixed(4)
+      .toString();
     return (
       <View style={style.mainContainerStyle}>
         <Header text="Check Send" />

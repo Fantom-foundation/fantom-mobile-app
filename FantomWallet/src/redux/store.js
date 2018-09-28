@@ -22,7 +22,7 @@ export default () => {
 
   sagaMiddleware.run(rootSaga).done.catch(e => {
     if (_.has(e, 'message')) {
-      console.log('');
+      console.log(e, 'e');
     }
   });
   return { store, persistor };

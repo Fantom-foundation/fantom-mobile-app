@@ -79,6 +79,27 @@ export default class WithdrawScreen extends Component {
     this.props.navigation.navigate('QRScanner', { onScanSuccess: this.onScanSuccess.bind(this) });
   }
 
+  setAllAmountToPrice() {
+    const { maxFantomBalance } = this.props;
+    const ftmBalance = Number(maxFantomBalance)
+      .toFixed(4)
+      .toString();
+    const maxFantomBalanceStr = maxFantomBalance.toString();
+    this.setState({
+      amount: ftmBalance,
+      actualAmount: maxFantomBalanceStr,
+    });
+  }
+
+  handleClickOnScreen() {
+    const { openSortMenu } = this.state;
+    if (openSortMenu) {
+      this.setState({
+        openSortMenu: !openSortMenu,
+      });
+    }
+  }
+
   handleSortMenu(item) {
     const { openSortMenu } = this.state;
     this.setState({
@@ -88,15 +109,6 @@ export default class WithdrawScreen extends Component {
       this.setState({
         val: item.sc,
         index: item.id,
-      });
-    }
-  }
-
-  handleClickOnScreen() {
-    const { openSortMenu } = this.state;
-    if (openSortMenu) {
-      this.setState({
-        openSortMenu: !openSortMenu,
       });
     }
   }
@@ -145,16 +157,6 @@ export default class WithdrawScreen extends Component {
       actualAmount: '',
       fees: '',
       memo: '',
-    });
-  }
-
-  setAllAmountToPrice() {
-    const { maxFantomBalance } = this.props;
-    const ftmBalance = (Number(maxFantomBalance).toFixed(4)).toString();
-    const maxFantomBalanceStr = maxFantomBalance.toString();
-    this.setState({
-      amount: ftmBalance,
-      actualAmount: maxFantomBalanceStr,
     });
   }
 
@@ -217,7 +219,6 @@ export default class WithdrawScreen extends Component {
           <View style={style.priceContainer}>
             <View style={style.priceTextContainer}>
               <Text style={style.price}>Price</Text>
-              {/* <Text style={style.price}>Current price:12,0000 Won</Text> */}
             </View>
             <View style={style.addressTextInputContainer}>
               <TextInput
@@ -261,7 +262,9 @@ export default class WithdrawScreen extends Component {
             </View>
           </View>
 
-          {/* <View style={style.feesContainer}>
+          {/* uncomment this for displaying the transfer fees amount view 
+          
+          <View style={style.feesContainer}>
             <Text style={style.feesText}>Fees</Text>
             <View style={style.addressTextInputContainer}>
               <TextInput

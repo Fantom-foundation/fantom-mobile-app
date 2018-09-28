@@ -41,9 +41,9 @@ class DepositViewInfo extends Component {
   }
 
   onAmountChange(amount) {
-    amount = amount.trim();
+    //  let amount = amount.trim();
     this.setState({
-      amount,
+      amount: amount.trim(),
     });
   }
 
@@ -66,7 +66,7 @@ class DepositViewInfo extends Component {
   }
 
   render() {
-    const balanceText = '(1,000\\ = 1.00002312FTM)';
+    // const balanceText = '(1,000\\ = 1.00002312FTM)';
     const qrLink = this.state.qrAddress;
     let headerText = 'FTM';
     // if (this.props.selectedTab === 'Fantom') {
@@ -116,7 +116,7 @@ const mapStateToProps = state => ({
 DepositViewInfo.propTypes = {
   publicKey: PropTypes.string,
   //   navigation: PropTypes.object,
-  selectedTab: PropTypes.string,
+  // selectedTab: PropTypes.string,
 };
 
 export default connect(

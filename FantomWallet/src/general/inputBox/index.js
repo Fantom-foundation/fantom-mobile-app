@@ -16,8 +16,6 @@ export default class InputBox extends PureComponent {
           value={this.props.text}
           style={style.textBox}
           autoCapitalize="none"
-          // onFocus={() => this.props.onFocus()}
-          // onBlur={() => this.props.onBlur()}
         />
       </View>
     );

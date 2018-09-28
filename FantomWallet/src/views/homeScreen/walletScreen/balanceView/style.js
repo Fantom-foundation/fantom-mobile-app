@@ -12,18 +12,11 @@ const style = {
     shadowOpacity: 1,
     elevation: 1,
   },
-  balanceContainer: {
-    // backgroundColor: '#fff',
-    // shadowOffset: { width: 0, height: 12, },
-    // shadowColor: 'rgb(232,231,234)',
-    // shadowOpacity: 0.5,
-    
-  },
+  balanceContainer: {},
   balanceViewText: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'green',
   },
   balanceViewTextOne: {
     fontSize: 32,
@@ -31,13 +24,10 @@ const style = {
     flex: 1,
     textAlign: 'center',
     alignSelf: 'center',
-    // backgroundColor: 'red'
-    // backgroundColor: 'yellow',
   },
   balanceTextTwo: {
     padding: 4,
     alignItems: 'center',
-    // backgroundColor: 'green',
   },
   balanceTextStyle: {
     fontSize: 14,
@@ -46,7 +36,6 @@ const style = {
   balanceUnitText: {
     fontSize: 20,
     fontFamily: FontFamily.SegoeUIBold,
-    // backgroundColor: 'pink'
   },
 };
 export default style;

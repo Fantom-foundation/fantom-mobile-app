@@ -46,12 +46,6 @@ class RecoverWallet extends Component {
     mnemonic = mnemonic.replace(/,/g, ' ');
     const seed = Bip39.mnemonicToSeed(mnemonic); // creates seed buffer
 
-    // const mnemonicWords = mnemonic.split(' ');
-    // this.setState({
-    //     mnemonicWords,
-    //     seed: seed,
-    // })
-
     this.walletSetup(seed);
   }
 

@@ -2,10 +2,8 @@ import _ from 'lodash';
 import TestApi from './action';
 import testApiFormat from './format';
 import model from './model';
-// import Mock from './mock'
 
 export default function testApiReducer(state = model, action) {
-  //   let body;
   let response;
   let mock;
   let updatedState;
