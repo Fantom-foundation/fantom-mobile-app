@@ -89,6 +89,8 @@ class RecoverWallet extends Component {
               editable
               multiline
               numberOfLines={4}
+              blurOnSubmit
+              returnKeyType='done'
               placeholder="Enter Secret Mnemonic Codes."
               onChangeText={text => this.setState({ mnemonic: text, errorText: '' })}
             />
