@@ -11,8 +11,12 @@ import {
   Text,
   ActivityIndicator,
   Alert,
+  Dimensions
 } from 'react-native';
 import uploadQR from '../../../images/uploading.png';
+
+export const DEVICE_WIDTH = Dimensions.get('window').width;
+export const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const style = StyleSheet.create({
   container: {
@@ -57,6 +61,7 @@ const style = StyleSheet.create({
 export default class QRGenerator extends Component {
   onPress() {
     const { billingAmount } = this.props;
+    
     if (
       billingAmount === undefined ||
       billingAmount === '' ||
@@ -66,9 +71,10 @@ export default class QRGenerator extends Component {
       Alert.alert('Error', 'Please enter billing amount.');
       return;
     }
+    // const updatedBillingAmount = Math.round(billingAmount * 10000) / 10000
     this.viewShot.capture().then(uri => {
       console.log('do something with ', uri);
-      const message = `Billing amount: ${billingAmount} FTM`;
+      const message = '';
       Share.open({ url: uri, title: 'Fantom', message })
         .then(res => {
           console.log('this.props.qrLink , res', this.props.qrLink, res);
@@ -107,6 +113,8 @@ export default class QRGenerator extends Component {
   }
 
   render() {
+    const { billingAmount } = this.props;
+    const updatedBillingAmount = Math.round(billingAmount * 10000) / 10000
     return (
       <View style={style.container}>
         <View style={style.addressTitleViewStyle}>
@@ -120,11 +128,30 @@ export default class QRGenerator extends Component {
           </TouchableOpacity>
         </View>
 
-        <ViewShot
+        {/* <ViewShot
           ref={viewShot => {
             this.viewShot = viewShot;
           }}
           options={{ format: 'jpg' }}
+        > */}
+        <View>
+          {this.props.qrLink !== undefined &&
+            this.props.qrLink !== '' && <QRCode content={this.props.qrLink} codeStyle="dot" />}
+          {this.renderLogo()}
+          {(this.props.qrLink === undefined || this.props.qrLink === '') && (
+            <View style={style.loaderStyle}>
+              <ActivityIndicator size="large" color="#000" />
+            </View>
+          )}
+        </View>
+       {/* </ViewShot> */}
+
+<ViewShot
+          ref={viewShot => {
+            this.viewShot = viewShot;
+          }}
+          options={{ format: 'jpg' }}
+          style={{ position: 'absolute', left: -(DEVICE_WIDTH * 5), top: -(DEVICE_HEIGHT * 5), backgroundColor: 'white' }}
         >
           {this.props.qrLink !== undefined &&
             this.props.qrLink !== '' && <QRCode content={this.props.qrLink} codeStyle="dot" />}
@@ -134,7 +161,10 @@ export default class QRGenerator extends Component {
               <ActivityIndicator size="large" color="#000" />
             </View>
           )}
-        </ViewShot>
+          <View style={{ height: 2, backgroundColor: 'rgb(50, 50, 50)', flex: 1, margin: 10 }} />
+          <Text style={{ margin: 10 , marginTop: 0, fontSize: 16, fontWeight: 'bold', width: 230}}>Billing amount: {updatedBillingAmount} FTM</Text>
+       </ViewShot>
+
       </View>
     );
   }
