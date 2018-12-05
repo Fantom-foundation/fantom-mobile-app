@@ -64,6 +64,8 @@
 	<string>Please allow access to speech.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SF-Pro-Display-Regular.ttf</string>
+		<string>SF-Pro-Display-Bold.ttf</string>
 		<string>Lato-Regular.ttf</string>
 		<string>Roboto-Black.ttf</string>
 		<string>Lato-Black.ttf</string>

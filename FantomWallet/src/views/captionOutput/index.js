@@ -1,24 +1,22 @@
+// Library
 import React, { Component } from 'react';
 import {
   Text,
   View,
   TouchableOpacity,
   Clipboard,
-  Image,
   ActivityIndicator,
   Dimensions,
   ScrollView,
 } from 'react-native';
 import Bip39 from 'react-native-bip39';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+// Components
 import style from './style';
 import Button from '../../general/button/index';
 import '../../../global';
 import ProgressBar from '../../general/progressBar/index';
-import dangerIcon from '../../images/warning.png';
-
-const deviceWidth = Dimensions.get('window').width;
+// Calculate height of device
 const deviceHeight = Dimensions.get('window').height;
 
 /**
@@ -60,6 +58,76 @@ class CaptionOutput extends Component {
     // const clipboardContent = await Clipboard.getString();
   }
 
+  renderButtonContainer() {
+    return (
+      <View style={style.footerStyle}>
+        <Button
+          text="CONFIRM"
+          onPress={!this.state.loading && this.onConfirmHandler.bind(this)}
+          buttonStyle={{
+            backgroundColor: this.state.loading ? 'rgba(0,177,255,0.7)' : '#00B1FF',
+            fontFamily: 'SFProDisplay-Bold',
+          }}
+        />
+      </View>
+    );
+  }
+
+  renderWarningContainer() {
+    return (
+      <View style={style.lastMessageContainer}>
+        <Icon name="warning" size={30} color="#ABE158" />
+        <Text style={style.warningTextStyle}>You may lose your account if</Text>
+        <Text style={style.warningTextStyle}>you lose your Secret PIN Mnemonic.</Text>
+      </View>
+    );
+  }
+
+  renderCopyContainer() {
+    return (
+      <View style={{ marginBottom: deviceHeight * 0.05, alignItems: 'center' }}>
+        <View style={style.messageContainer}>
+          <Text style={style.instructionTextStyle}>
+            Please write down this new new Secret Mnemonic.
+          </Text>
+          <Text style={style.instructionTextStyle}>All previous mnemonic will become invalid.</Text>
+        </View>
+
+        <TouchableOpacity style={style.clipBoardContainer} onPress={() => this.copyToClipboard()}>
+          <View style={style.copyIconContainerStyle}>
+            <Icon name="content-copy" color="#fff" size={20} />
+          </View>
+        </TouchableOpacity>
+        <Text style={style.clipBoardText}> Copy to clipboard</Text>
+      </View>
+    );
+  }
+
+  renderMnemonicValue() {
+    if (!this.state.loading) {
+      if (this.state.mnemonicWords.length > 0) {
+        const mnemonicArr = this.state.mnemonicWords;
+        return (
+          <View style={style.textContainer}>
+            {mnemonicArr.map((val, i) => {
+              let textValue = val.charAt(0).toUpperCase() + val.slice(1); // Capitalize first alphabet of word
+              return (
+                <View key={i} style={style.wordWrap}>
+                  <Text style={style.text}>{textValue}</Text>
+                </View>
+              );
+            })}
+          </View>
+        );
+      }
+    }
+    return (
+      <View style={style.activityIndicatorContainerStyle}>
+        <ActivityIndicator size="small" color="#fff" />
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={style.mainContainer}>
@@ -70,73 +138,22 @@ class CaptionOutput extends Component {
           onPress={() => this.props.navigation.goBack()}
           style={style.arrowContainer}
         >
-          <Icon name="arrow-back" size={24} color="black" />
+          <Icon name="chevron-left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <View style={{ height: deviceHeight * 0.75 }}>
+
+        <View style={{ flex: 1 }}>
           <ScrollView style={style.mid} scrollEnabled>
             <View style={style.warningContainer}>
-              <Image source={dangerIcon} style={{ width: 20, height: 20 }} />
-              <Text style={style.secretText}> Secret Mnemonic:</Text>
+              <Icon name="warning" size={30} color="#ABE158" />
+              <Text style={style.secretText}> Secret Mnemonic</Text>
             </View>
-            {!this.state.loading ? (
-              <View style={style.textContainer}>
-                {this.state.mnemonicWords.map((val, i) => (
-                  <View key={i} style={style.wordWrap}>
-                    <Text style={style.text}>{val}</Text>
-                  </View>
-                ))}
-              </View>
-            ) : (
-              <View
-                style={{
-                  height: deviceHeight * 0.25,
-                  flexDirection: 'row',
-                  alignSelf: 'center',
-                }}
-              >
-                <ActivityIndicator size="small" color="#000" />
-              </View>
-            )}
-            <View style={style.messageContainer}>
-              <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>
-                Please write down this new mnemonic, and keep it secret.
-              </Text>
-              {/* <Text style={{ fontSize: deviceWidth * 0.035, fontFamily: 'SegoeUI-SemiBold' }}>
-                All previous mnemonic will become invalid.
-              </Text> */}
-            </View>
-            <TouchableOpacity
-              style={style.clipBoardContainer}
-              onPress={() => this.copyToClipboard()}
-            >
-              <Text style={style.clipBoardText}> Copy to clipboard</Text>
-            </TouchableOpacity>
-            <View style={style.line} />
-            <View style={style.lastMessageContainer}>
-              <Image source={dangerIcon} style={{ width: 20, height: 16 }} />
-              <View>
-                <Text style={{ fontSize: deviceWidth <= 320 ? 12 : 14, fontFamily: 'Futura' }}>
-                  {' '}
-                  You may lose your account if
-                </Text>
-                <Text style={{ fontSize: deviceWidth <= 320 ? 12 : 14, fontFamily: 'Futura' }}>
-                  {' '}
-                  your mnemonic is known by others.
-                </Text>
-              </View>
-            </View>
+            {this.renderMnemonicValue()}
+            {this.renderCopyContainer()}
+            {this.renderWarningContainer()}
+            <View style={{ height: deviceHeight * 0.15 }} />
           </ScrollView>
         </View>
-        <View style={style.footerStyle}>
-          <Button
-            text="Confirm"
-            onPress={!this.state.loading && this.onConfirmHandler.bind(this)}
-            buttonStyle={{
-              backgroundColor: this.state.loading ? '#f2f2f2' : 'black',
-              fontFamily: 'SegoeUI',
-            }}
-          />
-        </View>
+        {this.renderButtonContainer()}
       </View>
     );
   }
