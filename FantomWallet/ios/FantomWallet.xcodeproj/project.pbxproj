@@ -77,6 +77,8 @@
 		D8F38D7B21B7CF0A005CB59A /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D7A21B7CF0A005CB59A /* Lato-Black.ttf */; };
 		D8F38D7D21B7CF12005CB59A /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D7C21B7CF12005CB59A /* Roboto-Black.ttf */; };
 		D8F38D7F21B7D0F1005CB59A /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D7E21B7D0F1005CB59A /* Lato-Regular.ttf */; };
+		D8F38D8121B7FFD3005CB59A /* SF-Pro-Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D8021B7FFD2005CB59A /* SF-Pro-Display-Bold.ttf */; };
+		D8F38D8321B7FFDB005CB59A /* SF-Pro-Display-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D8221B7FFDB005CB59A /* SF-Pro-Display-Regular.ttf */; };
 		E862767899234393BBA9765F /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1BADDDAAF84458EB08386A3 /* Feather.ttf */; };
 		F3DF2EC3DABA48D5907F6F97 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35875473D49346C191F520D9 /* FontAwesome5_Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -499,6 +501,8 @@
 		D8F38D7A21B7CF0A005CB59A /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		D8F38D7C21B7CF12005CB59A /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		D8F38D7E21B7D0F1005CB59A /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		D8F38D8021B7FFD2005CB59A /* SF-Pro-Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.ttf"; sourceTree = "<group>"; };
+		D8F38D8221B7FFDB005CB59A /* SF-Pro-Display-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.ttf"; sourceTree = "<group>"; };
 		DFDD45D585D741509542B654 /* libRNRandomBytes-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNRandomBytes-tvOS.a"; sourceTree = "<group>"; };
 		F95929CA91DF45B0BB28BD2C /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -872,6 +876,8 @@
 				C5C3E891212F0D620024CA91 /* Segoe-UI-SemiLight.ttf */,
 				C5C3E892212F0D620024CA91 /* Segoe-UI.ttf */,
 				C5C3E893212F0D620024CA91 /* SF-Pro-Display-Regular.otf */,
+				D8F38D8021B7FFD2005CB59A /* SF-Pro-Display-Bold.ttf */,
+				D8F38D8221B7FFDB005CB59A /* SF-Pro-Display-Regular.ttf */,
 				D8F38D7E21B7D0F1005CB59A /* Lato-Regular.ttf */,
 				C5C3E894212F0D620024CA91 /* SF-Pro-Display-RegularItalic.otf */,
 				C5C3E895212F0D620024CA91 /* SF-Pro-Display-Semibold.otf */,
@@ -1487,6 +1493,8 @@
 				C5C3E8D4212F0D630024CA91 /* SF-Pro-Text-Semibold.otf in Resources */,
 				C5C3E8CC212F0D630024CA91 /* Segoe-UI-SemiLight.ttf in Resources */,
 				80D02C113A924EB8B4696ED2 /* MaterialCommunityIcons.ttf in Resources */,
+				D8F38D8121B7FFD3005CB59A /* SF-Pro-Display-Bold.ttf in Resources */,
+				D8F38D8321B7FFDB005CB59A /* SF-Pro-Display-Regular.ttf in Resources */,
 				73FC366C004D42368EF88F0D /* MaterialIcons.ttf in Resources */,
 				C5C3E8CF212F0D630024CA91 /* SF-Pro-Display-RegularItalic.otf in Resources */,
 				5391CD0860724C7FB14B07A3 /* Octicons.ttf in Resources */,

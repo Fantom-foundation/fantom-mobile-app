@@ -10,8 +10,8 @@ export default class ProgressBar extends PureComponent {
     remaining = Number(remaining);
     return (
       <View style={style.wrapper}>
-        <View style={{ flex: completed, backgroundColor: 'black' }} />
-        <View style={{ flex: remaining, backgroundColor: 'grey' }} />
+        <View style={{ flex: completed, backgroundColor: '#00B1FF' }} />
+        <View style={{ flex: remaining, backgroundColor: '#FFFFFF' }} />
       </View>
     );
   }
