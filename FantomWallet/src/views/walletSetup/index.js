@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
 import style from './style';
+import styles from './style';
 
 // CaptchaVerification
 // CaptionOutput,EditContact
@@ -15,41 +16,39 @@ class WalletSetup extends PureComponent {
   onCreateNewWallet() {
     this.props.navigation.navigate('CaptionOutput');
   }
-
-  render() {
+  renderHeaderImage() {
     return (
-      <ImageBackground
-        style={style.imageBackground}
-        source={require('../../images/background.png')}
-        imageStyle={{ resizeMode: 'cover' }}
-      >
-        <StatusBar barStyle="light-content" />
-        <View style={style.mainContainer}>
-          <View style={style.headerContainer}>
-            <Image
-              source={require('../../images/fantom-logo.png')}
-              style={style.headerImage}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={style.subHeaderContainer}>
-            <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
-            <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
-            <Text style={style.subHeaderText3}>Ecosystem</Text>
-          </View>
-          <TouchableOpacity style={style.walletSetup} onPress={() => this.onCreateNewWallet()}>
-            <Text style={style.walletSetupText}>Create Wallet</Text>
-          </TouchableOpacity>
-          {/* <View > */}
+      <View style={style.headerContainer}>
+        <Image
+          source={require('../../images/FantomWalletWhiteIcon.png')}
+          style={style.headerImage}
+          resizeMode="contain"
+        />
+      </View>
+    );
+  }
+  renderMidContainer() {
+    return (
+      <View style={style.subHeaderContainer}>
+        <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
+        <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
+        <Text style={style.subHeaderText2}>Ecosystem</Text>
+      </View>
+    );
+  }
+
+  renderBottomButtons() {
+    return (
+      <View style={styles.bottomButtonContainer}>
+        <View style={styles.upperButtonContainer}>
           <TouchableOpacity
             style={style.recoverWalletStyle}
             onPress={() => {
               this.props.navigation.navigate('RecoverWallet');
             }}
           >
-            <Text style={style.footerText1}>Recover Wallet</Text>
+            <Text style={style.footerText1}>Restore Wallet</Text>
           </TouchableOpacity>
-          {/* </View> */}
 
           <View style={style.footer}>
             <TouchableOpacity
@@ -57,7 +56,7 @@ class WalletSetup extends PureComponent {
                 this.props.navigation.navigate('Terms');
               }}
             >
-              <Text style={style.footerText1}>Terms of Service</Text>
+              <Text style={style.footerText2}>Terms of Service</Text>
             </TouchableOpacity>
             <View style={style.division} />
 
@@ -66,7 +65,29 @@ class WalletSetup extends PureComponent {
             </TouchableOpacity>
           </View>
         </View>
-      </ImageBackground>
+        <TouchableOpacity style={style.walletSetup} onPress={() => this.onCreateNewWallet()}>
+          <Text style={style.walletSetupText}>CREATE WALLET</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  render() {
+    return (
+      // <ImageBackground
+      //   style={style.imageBackground}
+      //   source={require('../../images/background.png')}
+      //   imageStyle={{ resizeMode: 'cover' }}
+      // >
+      <View style={style.imageBackground}>
+        <StatusBar barStyle="light-content" />
+        <View style={style.mainContainer}>
+          {this.renderHeaderImage()}
+          {this.renderMidContainer()}
+          {this.renderBottomButtons()}
+        </View>
+      </View>
+      //</ImageBackground>
     );
   }
 }

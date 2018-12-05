@@ -28,7 +28,8 @@ class SplashScreen extends Component {
         source={require('../../images/background.png')}
         imageStyle={{ resizeMode: 'cover' }}
       >
-        <Image source={require('../../images/fantom-logo.png')} resizeMode="contain" />
+        {/* <Image source={require('../../images/fantom-logo.png')} resizeMode="contain" /> */}
+        <Image source={require('../../images/fantomWhiteIcon.png')} resizeMode="contain" />
       </ImageBackground>
     );
   }

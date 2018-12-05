@@ -13,81 +13,83 @@ const styles = {
     height: deviceHeight,
     backgroundColor: 'black',
   },
+  // Header image styles
   headerContainer: {
     alignItems: 'center',
-    marginTop: 20,
   },
+  headerImage: {
+    width: deviceWidth * 0.4,
+  },
+  // Mid Container style
   subHeaderContainer: {
-    marginTop: deviceHeight * 0.25,
+    marginTop: deviceHeight * 0.12,
+    width: deviceWidth * 0.9,
+    paddingVertical: deviceHeight * 0.08,
+    alignSelf: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgb(35,39,40)',
+    borderRadius: 10,
   },
   subHeaderText1: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 32,
-    marginTop: deviceHeight * 0.05,
     fontFamily: 'SegoeUI',
+    marginBottom: deviceHeight * 0.02,
   },
   subHeaderText2: {
-    marginTop: deviceHeight * 0.02,
     fontSize: 18,
-    fontWeight: 'bold',
-    color: 'rgb(158,162,166)',
+    color: '#fff',
     fontFamily: 'SegoeUI',
   },
-  subHeaderText3: {
-    fontSize: 18,
-    color: 'rgb(158,162,166)',
-    fontFamily: 'SegoeUI',
+  // Footer button Styles
+  bottomButtonContainer: {
+    position: 'absolute',
+    bottom: 0,
+  },
+  upperButtonContainer: {
+    width: deviceWidth,
+    height: 50,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgb(35,39,40)',
+    paddingHorizontal: 15,
+  },
+  recoverWalletStyle: {
+    padding: 5,
+    alignItems: 'center',
+  },
+  footerText1: {
+    color: '#00B1FF',
     fontWeight: 'bold',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+  },
+  footerText2: {
+    color: 'white',
+  },
+  division: {
+    width: 1,
+    backgroundColor: 'white',
+    marginHorizontal: 5,
   },
   walletSetup: {
-    position: 'absolute',
-    // bottom: deviceHeight * 0.13,
-    bottom: deviceHeight * 0.16,
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop: deviceHeight * 0.1,
-    borderWidth: 1,
-    backgroundColor: 'rgb(235,187,17)',
-    width: deviceWidth * 0.7,
+    backgroundColor: '#00B1FF',
+    width: deviceWidth,
   },
   walletSetupText: {
     fontSize: deviceWidth * 0.05,
     marginTop: deviceHeight * 0.02,
     marginBottom: deviceHeight * 0.02,
     fontFamily: 'SegoeUI-SemiBold',
-  },
-  footer: {
-    position: 'absolute',
-    bottom: deviceHeight * 0.05,
-    flexDirection: 'row',
-    width: deviceWidth - 40,
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-  },
-  footerText1: {
-    // marginLeft: deviceWidth * 0.2,
-    color: 'white',
     fontWeight: 'bold',
+    color: '#FFF',
   },
-  division: {
-    width: 1,
-    backgroundColor: 'white',
-  },
-  footerText2: {
-    // marginLeft: deviceWidth * 0.1,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  recoverWalletStyle: {
-    // backgroundColor: 'green',
-    padding: 4,
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: deviceHeight * 0.11,
-    width: deviceWidth,
-  },
-  recoverWalletTextStyle: {},
 };
 export default styles;
