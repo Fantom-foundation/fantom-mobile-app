@@ -32,15 +32,14 @@ const styles = {
   },
   subHeaderText1: {
     color: 'white',
-    fontWeight: 'bold',
     fontSize: 32,
-    fontFamily: 'SegoeUI',
+    fontFamily: 'Roboto-Black',
     marginBottom: deviceHeight * 0.02,
   },
   subHeaderText2: {
     fontSize: 18,
     color: '#fff',
-    fontFamily: 'SegoeUI',
+    fontFamily: 'Lato-Regular',
   },
   // Footer button Styles
   bottomButtonContainer: {
@@ -68,6 +67,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
+    paddingVertical: 5,
   },
   footerText2: {
     color: 'white',
@@ -87,7 +87,7 @@ const styles = {
     fontSize: deviceWidth * 0.05,
     marginTop: deviceHeight * 0.02,
     marginBottom: deviceHeight * 0.02,
-    fontFamily: 'SegoeUI-SemiBold',
+    fontFamily: 'Roboto-Black',
     fontWeight: 'bold',
     color: '#FFF',
   },

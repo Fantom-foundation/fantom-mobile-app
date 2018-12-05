@@ -64,6 +64,9 @@
 	<string>Please allow access to speech.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Lato-Regular.ttf</string>
+		<string>Roboto-Black.ttf</string>
+		<string>Lato-Black.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>Feather.ttf</string>
@@ -93,6 +96,16 @@
 		<string>Segoe-UI-SemiBold.ttf</string>
 		<string>Segoe-UI.ttf</string>
 	</array>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string></string>
+	</array>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
