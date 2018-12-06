@@ -1,29 +1,41 @@
+import { Dimensions } from 'react-native';
 import * as FontFamily from '../../../../common/textFontFamily';
 
+const deviceWidth = Dimensions.get('window').width;
 const style = {
   fantomBalanceView: {
-    margin: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgb(44,52,58)',
     height: 150,
-    justifyContent: 'center',
-
-    shadowOffset: { width: 0, height: 10 },
-    shadowColor: 'rgb(243,240,250)',
-    shadowOpacity: 1,
-    elevation: 1,
+    width: deviceWidth - 32,
+    alignSelf: 'center',
+    borderRadius: 10,
   },
-  balanceContainer: {},
+  balanceContainer: {
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgb(50,59,66)',
+    height: 40,
+    justifyContent: 'center',
+    paddingLeft: 32,
+  },
+  amountHeadingStyle: {
+    color: 'rgb(166,225,100)',
+    fontSize: 12,
+    fontFamily: 'SFProDisplay-Medium',
+  },
   balanceViewText: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   balanceViewTextOne: {
-    fontSize: 32,
-    fontFamily: FontFamily.SegoeUIBold,
+    fontSize: 24,
+    fontFamily: 'SFProDisplay-Bold',
     flex: 1,
     textAlign: 'center',
     alignSelf: 'center',
+    color: '#fff',
   },
   balanceTextTwo: {
     padding: 4,

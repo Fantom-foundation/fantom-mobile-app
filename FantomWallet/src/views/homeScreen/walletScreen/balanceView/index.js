@@ -12,11 +12,12 @@ class BalanceView extends PureComponent {
     return (
       <View style={style.fantomBalanceView}>
         <View style={style.balanceContainer}>
-          <View style={style.balanceViewText}>
-            <Text numberOfLines={1} style={style.balanceViewTextOne}>
-              {ftmBalance} FTM
-            </Text>
-          </View>
+          <Text style={style.amountHeadingStyle}>Amount</Text>
+        </View>
+        <View style={style.balanceViewText}>
+          <Text numberOfLines={1} style={style.balanceViewTextOne}>
+            {ftmBalance} FTM
+          </Text>
         </View>
       </View>
     );

@@ -93,7 +93,7 @@ class TransactionView extends Component {
 
   renderLoader() {
     if (this.props.isLoading === true) {
-      return <Loader isLoading={this.props.isLoading} loaderStyle={0.25} />;
+      return <Loader isLoading={this.props.isLoading} loaderStyle={0.25} loaderColor="#fff" />;
     }
     return null;
   }
@@ -115,7 +115,12 @@ class TransactionView extends Component {
             </View> */}
           </View>
         )}
-        <View style={this.state.openSortMenu ? { opacity: 0.2 } : ''}>
+        <View
+          style={[
+            this.state.openSortMenu ? { opacity: 0.2 } : '',
+            { backgroundColor: 'rgb(14,14,18)' },
+          ]}
+        >
           {this.renderLoader()}
           <DisplayTransaction
             fantomTransactionArr={fantomTransactionArr}
@@ -128,7 +133,7 @@ class TransactionView extends Component {
             fantomTransactionArr.length === 0 && (
               <EmptyTransactionEntity
                 title="No Transactions"
-                message="(Your recent transactions will be displayed here)"
+                message="(The wallet will show you recent transactions)"
               />
             )}
         </View>

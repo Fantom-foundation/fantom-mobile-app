@@ -7,7 +7,7 @@ const deviceHeight = Dimensions.get('window').height;
 
 const style = {
   withdrawViewStyle: {
-    flex: 1,
+    height: deviceHeight,
     paddingTop: 15,
     paddingHorizontal: 15,
     backgroundColor: '#fff',

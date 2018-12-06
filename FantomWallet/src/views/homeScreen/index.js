@@ -1,19 +1,21 @@
+// Library
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import Web3 from 'web3';
+// Component
 import NavigationTab from './navigationTab';
 import Header from '../../general/header';
-import Web3 from 'web3'
-// import fantomIcon from '../../images/fantomWhiteIcon.png';fantom_logo_TranparentWhite.png
-import fantomIcon from '../../images/fantom_logo_TranparentWhite.png';
-import settingIcon from '../../images/setting.png';
-import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants';
-
 import config from '../../services/config';
-
-// const Web3 = require('web3');
+import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants';
+// import fantomIcon from '../../images/fantomWhiteIcon.png';fantom_logo_TranparentWhite.png
+// import fantomIcon from '../../images/fantom_logo_TranparentWhite.png';
+import fantomIcon from '../../images/FantomWalletWhiteIcon.png';
+import settingIcon from '../../images/setting.png';
+import refreshWhiteIcon from '../../images/refreshWhiteIcon.png';
 
 const configHelper = config();
+const deviceHeight = Dimensions.get('window').height;
 
 function scientificToDecimal(num) {
   const sign = Math.sign(num);
@@ -57,6 +59,7 @@ class TransactionEntity extends Component {
       maxFantomBalance: 0,
       transactionData: [],
       isLoading: !!this.props.publicKey,
+      activeTabIndex: 0,
     };
     this.loadTransactionData = this.loadTransactionData.bind(this);
     this.loadFantomTransactionData = this.loadFantomTransactionData.bind(this);
@@ -206,6 +209,12 @@ class TransactionEntity extends Component {
       });
   }
 
+  onTabChange(index) {
+    this.setState({
+      activeTabIndex: index,
+    });
+  }
+
   /**
    * getFantomTransactionsFromApiAsync():  Api to fetch transactions for given address of Fantom own endpoint.
    * @param {String} address : address to fetch transactions.
@@ -324,16 +333,20 @@ class TransactionEntity extends Component {
   }
 
   render() {
-    const { balance, transactionData, isLoading, maxFantomBalance } = this.state;
+    const { balance, transactionData, isLoading, maxFantomBalance, activeTabIndex } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
         <Header
-          // text="FANTOM"
           rightButtonIcon={settingIcon}
-          headerStyle={{ backgroundColor: '#EEBD12' }}
+          headerStyle={{
+            backgroundColor: 'rgb(44,52,58)',
+            height: deviceHeight < 810 ? 84 : (106 / 812) * deviceHeight,
+          }}
           onRightIconPress={() => this.onRightIconPress()}
           fantomIcon={fantomIcon}
+          leftButtonIcon={activeTabIndex === 0 ? refreshWhiteIcon : ''}
+          onLeftIconPress={() => this.onRefresh()}
         />
         <NavigationTab
           navigation={this.props.navigation}
@@ -342,6 +355,7 @@ class TransactionEntity extends Component {
           transactionData={transactionData}
           isLoading={isLoading}
           onRefresh={this.onRefresh}
+          onTabChange={index => this.onTabChange(index)}
         />
       </View>
     );
