@@ -2,7 +2,6 @@ import { Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
-
 const styles = {
   mainContainer: {
     padding: deviceHeight * 0.05,
@@ -10,7 +9,8 @@ const styles = {
   },
   imageBackground: {
     width: deviceWidth,
-    height: deviceHeight,
+    // height: deviceHeight,
+    flex: 1,
     backgroundColor: 'black',
   },
   // Header image styles

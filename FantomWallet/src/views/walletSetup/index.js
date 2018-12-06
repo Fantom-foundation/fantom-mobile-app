@@ -65,6 +65,7 @@ class WalletSetup extends PureComponent {
             </TouchableOpacity>
           </View>
         </View>
+        {/* Create Wallet button */}
         <TouchableOpacity style={style.walletSetup} onPress={() => this.onCreateNewWallet()}>
           <Text style={style.walletSetupText}>CREATE WALLET</Text>
         </TouchableOpacity>
