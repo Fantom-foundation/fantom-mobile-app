@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import '../../../global';
+import _ from 'lodash';
 import Hdkey from 'hdkey';
 import EthUtil from 'ethereumjs-util';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -27,13 +28,20 @@ class CaptchaVerification extends Component {
   constructor(props) {
     super(props);
     const { navigation } = this.props;
+    let shuffledMnemonics = navigation.getParam('mnemonicWords', 'NO-ID');
+    if (shuffledMnemonics) {
+      shuffledMnemonics = _.shuffle(navigation.getParam('mnemonicWords', 'NO-ID'));
+    }
+
     this.state = {
       phraseFive: '',
       phraseNine: '',
       phraseTwelve: '',
       seed: navigation.getParam('seed', 'NO-ID'),
-      mnemonicWords: navigation.getParam('mnemonicWords', 'NO-ID'),
+      mnemonicWords: shuffledMnemonics,
+      mnemonicWordsArray: [].concat(navigation.getParam('mnemonicWords', 'NO-ID')),
       error: '',
+      verifyMnemonic: [],
     };
     this.walletSetup = this.walletSetup.bind(this);
     this.changePhrase = this.changePhrase.bind(this);
@@ -63,7 +71,11 @@ class CaptchaVerification extends Component {
    *  Then navigate user to HomeScreen.
    */
   walletSetup() {
-    if (!this.checkValidation()) {
+    console.log(this.state.mnemonicWordsArray, '1 array');
+    console.log(this.state.verifyMnemonic, '2 array');
+    const isSucess = _.isEqual(this.state.mnemonicWordsArray, this.state.verifyMnemonic.data);
+    console.log(isSucess, 'verifyData');
+    if (!isSucess) {
       return;
     }
     const root = Hdkey.fromMasterSeed(this.state.seed);
@@ -119,33 +131,125 @@ class CaptchaVerification extends Component {
     this.setState(state);
   }
 
+  verifyWords(data, index) {
+    const { verifyMnemonic, mnemonicWords } = this.state;
+    const appendWord = verifyMnemonic;
+    let updatedMnemonicsArray = mnemonicWords;
+
+    if (data) {
+      updatedMnemonicsArray.map(word => {
+        if (word === data) {
+          updatedMnemonicsArray.splice(updatedMnemonicsArray.indexOf(word), 1);
+        }
+        return null;
+      });
+    }
+    console.log(updatedMnemonicsArray, '123');
+
+    if (appendWord) {
+      const appendData = {
+        data,
+        index,
+      };
+      appendWord.push(appendData);
+      this.setState({
+        verifyMnemonic: appendWord,
+      });
+    } else {
+      const appendData = {
+        data,
+        index,
+      };
+      this.setState({
+        verifyMnemonic: appendData,
+      });
+    }
+  }
+
+  resetWords(val) {
+    const updateMnemonicsArray = this.state.mnemonicWords;
+    const verifyWord = this.state.verifyMnemonic;
+    if (val) {
+      updateMnemonicsArray.splice(val.index, 0, val.data);
+      verifyWord.splice(verifyWord.indexOf(val.data), 1);
+      this.setState({
+        mnemonicWords: updateMnemonicsArray.join().split(','),
+      });
+    }
+  }
+
+  renderMnemonicValue() {
+    const mnemonicArr = this.state.verifyMnemonic;
+    return (
+      <View style={style.textContainer}>
+        {mnemonicArr.map((val, i) => {
+          let textValue = val.data.charAt(0).toUpperCase() + val.data.slice(1); // Capitalize first alphabet of word
+          return (
+            <TouchableOpacity
+              key={i}
+              style={style.mnemonicBtn}
+              onPress={() => this.resetWords(val)}
+            >
+              <Text style={{ color: '#fff' }}>{textValue}</Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  }
+
+  renderMnemonicBtn() {
+    const { mnemonicWords } = this.state;
+    debugger;
+    if (mnemonicWords) {
+      return mnemonicWords.map((data, index) => {
+        const key = index;
+        return (
+          <TouchableOpacity
+            key={key}
+            style={style.mnemonicBtn}
+            onPress={() => this.verifyWords(data, index)}
+          >
+            <Text style={style.mnemonicBtnText}>{data}</Text>
+          </TouchableOpacity>
+        );
+      });
+    }
+    return null;
+  }
+
   render() {
     const behaviour = Platform.OS === 'ios' ? 'padding' : null;
+    console.log(this.state.mnemonicWordsArray, 'render');
+    const { mnemonicWords, verifyMnemonic } = this.state;
+
     return (
       <KeyboardAvoidingView behavior={behaviour} style={style.mainContainerStyle}>
         <ScrollView>
           <View style={style.mid}>
             <View style={style.progressContainer}>
-              <ProgressBar completed="2" remaining="3" />
+              <ProgressBar completed="2" remaining="0" />
             </View>
 
             <View style={style.arrowContainer}>
               <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                <Icon name="arrow-back" size={24} color="black" />
+                <Icon name="chevron-left" size={24} color="#fff" />
               </TouchableOpacity>
             </View>
             <View style={style.headerContainer}>
               <Text style={style.captchaText}>Captcha Verification</Text>
               <View style={style.subHeadContainer}>
                 <Text style={style.pleaseText}>
-                  Please enter the corresponding phrases out of the 12 back-up phrases shown
-                  previously (from left to right)
+                  Please enter the corresponding phrase out of the 12 back-up phrases
                 </Text>
                 {/* <Text style={style.phraseText}>phrase out of the 12 back-up phrases</Text> */}
               </View>
             </View>
-
-            <View style={style.textBoxContainer}>
+            <View style={style.displayMnemonicView}>
+              <Text style={style.backupPhrase}>Let's verify your backup phrase</Text>
+              {this.renderMnemonicValue()}
+            </View>
+            {/* <View style={style.textBoxContainer}>
               <View style={style.textBox}>
                 <InputBox
                   phraseNumber="Enter phrase 5"
@@ -185,18 +289,24 @@ class CaptchaVerification extends Component {
                   </View>
                 ) : null}
               </View>
-            </View>
+            </View> */}
 
             {/* <View style={{ alignSelf: 'center' }}>
             <Text onPress={this.getMasterKey}>Get Master Key</Text>
           </View> */}
+
+            {this.state.mnemonicWords && (
+              <Text style={style.orderTextStyle}>Please tap each word in the correct order</Text>
+            )}
+            <View style={style.mnemonicBtnMainView}>{this.renderMnemonicBtn()}</View>
           </View>
+          <View style={style.seperatotView} />
         </ScrollView>
         <View style={style.footerStyle}>
           <Button
             text="Verify"
             onPress={this.walletSetup}
-            buttonStyle={{ backgroundColor: 'black' }}
+            buttonStyle={{ backgroundColor: 'rgb(0,177,251)' }}
           />
         </View>
       </KeyboardAvoidingView>
