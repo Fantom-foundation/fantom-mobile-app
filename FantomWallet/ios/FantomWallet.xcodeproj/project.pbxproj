@@ -73,6 +73,10 @@
 		C5E564BC211D81D30028C173 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E564BB211D81BC0028C173 /* libReactNativePermissions.a */; };
 		D2655567B1194331B6BE56A2 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5217257A97984F459C52C6A4 /* libRNShare.a */; };
 		D3BDA50E396B4557BFECEF4B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD61B7084DF441039C0885B6 /* SimpleLineIcons.ttf */; };
+		D8930B7121B8FE9900F77B59 /* SF-Pro-Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B4121B8FE9800F77B59 /* SF-Pro-Display-Medium.ttf */; };
+		D8930B7421B907E600F77B59 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B7221B907E600F77B59 /* Montserrat-SemiBold.ttf */; };
+		D8930B7521B907E600F77B59 /* SF-Pro-Display-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B7321B907E600F77B59 /* SF-Pro-Display-Thin.ttf */; };
+		D8930B7721B9095900F77B59 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B7621B9095900F77B59 /* Roboto-Light.ttf */; };
 		D89A3434BC134611B0E30A2D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 829B72B81BC242B18E2CD5E8 /* Ionicons.ttf */; };
 		D8F38D7B21B7CF0A005CB59A /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D7A21B7CF0A005CB59A /* Lato-Black.ttf */; };
 		D8F38D7D21B7CF12005CB59A /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D7C21B7CF12005CB59A /* Roboto-Black.ttf */; };
@@ -498,6 +502,10 @@
 		C5E564B6211D81BB0028C173 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		CEB34175F27F4AED8080B592 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		D1BADDDAAF84458EB08386A3 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		D8930B4121B8FE9800F77B59 /* SF-Pro-Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.ttf"; sourceTree = "<group>"; };
+		D8930B7221B907E600F77B59 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		D8930B7321B907E600F77B59 /* SF-Pro-Display-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.ttf"; sourceTree = "<group>"; };
+		D8930B7621B9095900F77B59 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		D8F38D7A21B7CF0A005CB59A /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		D8F38D7C21B7CF12005CB59A /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		D8F38D7E21B7D0F1005CB59A /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
@@ -879,8 +887,12 @@
 				D8F38D8021B7FFD2005CB59A /* SF-Pro-Display-Bold.ttf */,
 				D8F38D8221B7FFDB005CB59A /* SF-Pro-Display-Regular.ttf */,
 				D8F38D7E21B7D0F1005CB59A /* Lato-Regular.ttf */,
+				D8930B7621B9095900F77B59 /* Roboto-Light.ttf */,
 				C5C3E894212F0D620024CA91 /* SF-Pro-Display-RegularItalic.otf */,
 				C5C3E895212F0D620024CA91 /* SF-Pro-Display-Semibold.otf */,
+				D8930B4121B8FE9800F77B59 /* SF-Pro-Display-Medium.ttf */,
+				D8930B7221B907E600F77B59 /* Montserrat-SemiBold.ttf */,
+				D8930B7321B907E600F77B59 /* SF-Pro-Display-Thin.ttf */,
 				C5C3E896212F0D620024CA91 /* SF-Pro-Display-SemiboldItalic.otf */,
 				C5C3E897212F0D620024CA91 /* SF-Pro-Text-Regular.otf */,
 				C5C3E898212F0D620024CA91 /* SF-Pro-Text-RegularItalic.otf */,
@@ -1467,6 +1479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				D8930B7521B907E600F77B59 /* SF-Pro-Display-Thin.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				1F6BE60F19CB4DF38B721A9E /* Entypo.ttf in Resources */,
 				590DC9822DE344C0AB3BA415 /* EvilIcons.ttf in Resources */,
@@ -1481,12 +1494,14 @@
 				D8F38D7D21B7CF12005CB59A /* Roboto-Black.ttf in Resources */,
 				490167F70BDC45A1808541B9 /* FontAwesome5_Brands.ttf in Resources */,
 				C5C3E8C8212F0D630024CA91 /* Segoe-UI-Bold.ttf in Resources */,
+				D8930B7421B907E600F77B59 /* Montserrat-SemiBold.ttf in Resources */,
 				F3DF2EC3DABA48D5907F6F97 /* FontAwesome5_Regular.ttf in Resources */,
 				55C148C5B44C44AC92749C07 /* FontAwesome5_Solid.ttf in Resources */,
 				C5C3E8CD212F0D630024CA91 /* Segoe-UI.ttf in Resources */,
 				C5C3E8C9212F0D630024CA91 /* Segoe-UI-Italic.ttf in Resources */,
 				C5C3E8CB212F0D630024CA91 /* Segoe-UI-SemiBold.ttf in Resources */,
 				C5C3E8CA212F0D630024CA91 /* Segoe-UI-Light.ttf in Resources */,
+				D8930B7121B8FE9900F77B59 /* SF-Pro-Display-Medium.ttf in Resources */,
 				BC45C16403974CC8B2BC7C39 /* Foundation.ttf in Resources */,
 				C5C3E8D3212F0D630024CA91 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				D89A3434BC134611B0E30A2D /* Ionicons.ttf in Resources */,
@@ -1498,6 +1513,7 @@
 				73FC366C004D42368EF88F0D /* MaterialIcons.ttf in Resources */,
 				C5C3E8CF212F0D630024CA91 /* SF-Pro-Display-RegularItalic.otf in Resources */,
 				5391CD0860724C7FB14B07A3 /* Octicons.ttf in Resources */,
+				D8930B7721B9095900F77B59 /* Roboto-Light.ttf in Resources */,
 				C5C3E8D0212F0D630024CA91 /* SF-Pro-Display-Semibold.otf in Resources */,
 				D3BDA50E396B4557BFECEF4B /* SimpleLineIcons.ttf in Resources */,
 				07DB30A074DB441CB60F9480 /* Zocial.ttf in Resources */,

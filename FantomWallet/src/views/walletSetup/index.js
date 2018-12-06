@@ -56,7 +56,7 @@ class WalletSetup extends PureComponent {
                 this.props.navigation.navigate('Terms');
               }}
             >
-              <Text style={style.footerText2}>Terms of Service</Text>
+              <Text style={style.footerText2}>Term of Service</Text>
             </TouchableOpacity>
             <View style={style.division} />
 
