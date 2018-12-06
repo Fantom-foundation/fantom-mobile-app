@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { ImageBackground, Image } from 'react-native';
+import { ImageBackground, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import style from './style';
 
@@ -23,14 +23,16 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      <ImageBackground
-        style={style.imageBackground}
-        source={require('../../images/background.png')}
-        imageStyle={{ resizeMode: 'cover' }}
-      >
+      // <ImageBackground
+      //   style={style.imageBackground}
+      //   source={require('../../images/background.png')}
+      //   imageStyle={{ resizeMode: 'cover' }}
+      // >
+      <View style={style.imageBackground}>
         {/* <Image source={require('../../images/fantom-logo.png')} resizeMode="contain" /> */}
         <Image source={require('../../images/fantomWhiteIcon.png')} resizeMode="contain" />
-      </ImageBackground>
+      </View>
+      //  </ImageBackground>
     );
   }
 }

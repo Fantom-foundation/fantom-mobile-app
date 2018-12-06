@@ -7,7 +7,7 @@ const style = {
   imageBackground: {
     width: deviceWidth,
     height: deviceHeight,
-    backgroundColor: 'black',
+    backgroundColor: '#111',
     justifyContent: 'center',
     alignItems: 'center',
   },
