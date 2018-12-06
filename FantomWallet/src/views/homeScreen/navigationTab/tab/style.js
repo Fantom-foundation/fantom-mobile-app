@@ -9,6 +9,6 @@ const style = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  tabIconStyle: { width: 40, height: 40 },
+  tabIconStyle: { width: 30, height: 30 },
 };
 export default style;

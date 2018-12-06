@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { ImageBackground, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import style from './style';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 
 /**
  * SplashScreen: Splash Screen for app.
@@ -31,6 +32,20 @@ class SplashScreen extends Component {
       <View style={style.imageBackground}>
         {/* <Image source={require('../../images/fantom-logo.png')} resizeMode="contain" /> */}
         <Image source={require('../../images/fantomWhiteIcon.png')} resizeMode="contain" />
+        <Image
+          style={{
+            width: DEVICE_WIDTH * 0.6,
+            height: DEVICE_HEIGHT * 0.77,
+            justifyContent: 'center',
+            alignItems: 'center',
+            opacity: 0.03,
+            right: -((DEVICE_WIDTH * 0.6) / 2),
+            // top: 0,
+            position: 'absolute',
+          }}
+          source={require('../../images/BackgroundIcon.png')}
+          resizeMode="contain"
+        />
       </View>
       //  </ImageBackground>
     );
