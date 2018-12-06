@@ -26,14 +26,14 @@ const style = {
   },
   secretText: {
     fontSize: deviceWidth <= 320 ? 16 : 20,
-    color: '#ABE158', // Green
+    color: 'rgb(166,225,100)', // Green
     fontFamily: 'SFProDisplay-Bold',
     marginTop: 10,
   },
   text: {
-    fontSize: deviceWidth <= 320 ? 14 : 16,
+    fontSize: deviceWidth <= 320 ? 12 : 14,
     fontFamily: 'SFProDisplay-Regular',
-    color: '#00B1FF', // Blue
+    color: 'rgb(0,177,251)', // Blue
   },
   activityIndicatorContainerStyle: {
     height: deviceHeight * 0.25,
@@ -41,7 +41,8 @@ const style = {
     alignSelf: 'center',
   },
   textContainer: {
-    marginVertical: deviceHeight * 0.05,
+    marginTop: deviceHeight * 0.05,
+    marginBottom: deviceHeight * 0.07,
     width: deviceWidth - 32,
     alignSelf: 'center',
     borderWidth: 1,
@@ -52,7 +53,7 @@ const style = {
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgb(27,29,33)',
+    backgroundColor: 'rgb(38,44,50)',
     paddingVertical: 15,
   },
   wordWrap: {
@@ -87,7 +88,7 @@ const style = {
   copyIconContainerStyle: {
     height: deviceWidth * 0.2,
     width: deviceWidth * 0.2,
-    backgroundColor: 'rgb(39,45,50)',
+    backgroundColor: 'rgb(44,52,58)',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: (deviceWidth * 0.2) / 2,
