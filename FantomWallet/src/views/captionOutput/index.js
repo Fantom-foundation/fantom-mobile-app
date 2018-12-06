@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Bip39 from 'react-native-bip39';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LinearGradient from 'react-native-linear-gradient';
 // Components
 import style from './style';
 import Button from '../../general/button/index';
@@ -75,11 +76,18 @@ class CaptionOutput extends Component {
 
   renderWarningContainer() {
     return (
-      <View style={style.lastMessageContainer}>
-        <Icon name="warning" size={24} color="rgb(166,225,100)" />
-        <Text style={style.warningTextStyle}>You will lose your account if</Text>
-        <Text style={style.warningTextStyle}>you lose your Secret PIN Mnemonic.</Text>
-      </View>
+      <LinearGradient
+        startPoint={{ x: 1, y: 0 }}
+        endPoint={{ x: 0, y: 1 }}
+        colors={['rgb(44,52,58)', 'rgb(31,38,43)']}
+        style={style.lastMessageContainer}
+      >
+        <View style={style.lastMessageContainer}>
+          <Icon name="warning" size={24} color="rgb(166,225,100)" />
+          <Text style={style.warningTextStyle}>You will lose your account if</Text>
+          <Text style={style.warningTextStyle}>you lose your Secret PIN Mnemonic.</Text>
+        </View>
+      </LinearGradient>
     );
   }
 

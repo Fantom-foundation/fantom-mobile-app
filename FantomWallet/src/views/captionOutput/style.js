@@ -27,12 +27,12 @@ const style = {
   secretText: {
     fontSize: deviceWidth <= 320 ? 16 : 20,
     color: 'rgb(166,225,100)', // Green
-    fontFamily: 'SFProDisplay-Bold',
+    fontFamily: 'SFProDisplay-Semibold',
     marginTop: 10,
   },
   text: {
     fontSize: deviceWidth <= 320 ? 12 : 14,
-    fontFamily: 'SFProDisplay-Regular',
+    fontFamily: 'SFProDisplay-Medium',
     color: 'rgb(0,177,251)', // Blue
   },
   activityIndicatorContainerStyle: {
@@ -71,7 +71,7 @@ const style = {
   },
   instructionTextStyle: {
     fontSize: deviceWidth * 0.037,
-    fontFamily: 'SFProDisplay-Regular',
+    fontFamily: 'SFProDisplay-Thin',
     color: '#FFF',
   },
   clipBoardContainer: {
@@ -106,7 +106,7 @@ const style = {
   lastMessageContainer: {
     width: deviceWidth - 32,
     alignSelf: 'center',
-    backgroundColor: 'rgb(35,39,40)',
+    // backgroundColor: 'rgb(31,38,53)',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -114,7 +114,7 @@ const style = {
   },
   warningTextStyle: {
     fontSize: deviceWidth <= 320 ? 12 : 14,
-    fontFamily: 'SFProDisplay-Regular',
+    fontFamily: 'SFProDisplay-Light',
     color: '#fff',
   },
   footerStyle: {
