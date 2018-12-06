@@ -65,7 +65,7 @@ class CaptionOutput extends Component {
           text="CONFIRM"
           onPress={!this.state.loading && this.onConfirmHandler.bind(this)}
           buttonStyle={{
-            backgroundColor: this.state.loading ? 'rgba(0,177,255,0.7)' : '#00B1FF',
+            backgroundColor: this.state.loading ? 'rgba(0,177,251,0.9)' : 'rgb(0,177,251)',
             fontFamily: 'SFProDisplay-Bold',
           }}
         />
@@ -76,8 +76,8 @@ class CaptionOutput extends Component {
   renderWarningContainer() {
     return (
       <View style={style.lastMessageContainer}>
-        <Icon name="warning" size={30} color="#ABE158" />
-        <Text style={style.warningTextStyle}>You may lose your account if</Text>
+        <Icon name="warning" size={24} color="rgb(166,225,100)" />
+        <Text style={style.warningTextStyle}>You will lose your account if</Text>
         <Text style={style.warningTextStyle}>you lose your Secret PIN Mnemonic.</Text>
       </View>
     );
@@ -88,9 +88,11 @@ class CaptionOutput extends Component {
       <View style={{ marginBottom: deviceHeight * 0.05, alignItems: 'center' }}>
         <View style={style.messageContainer}>
           <Text style={style.instructionTextStyle}>
-            Please write down this new new Secret Mnemonic.
+            Please write down this new Secret Mnemonic.
           </Text>
-          <Text style={style.instructionTextStyle}>All previous mnemonic will become invalid.</Text>
+          <Text style={style.instructionTextStyle}>
+            All previous mnemonics will become invalid.
+          </Text>
         </View>
 
         <TouchableOpacity style={style.clipBoardContainer} onPress={() => this.copyToClipboard()}>
@@ -144,7 +146,7 @@ class CaptionOutput extends Component {
         <View style={{ flex: 1 }}>
           <ScrollView style={style.mid} scrollEnabled>
             <View style={style.warningContainer}>
-              <Icon name="warning" size={30} color="#ABE158" />
+              <Icon name="warning" size={30} color="rgb(166,225,100)" />
               <Text style={style.secretText}> Secret Mnemonic</Text>
             </View>
             {this.renderMnemonicValue()}

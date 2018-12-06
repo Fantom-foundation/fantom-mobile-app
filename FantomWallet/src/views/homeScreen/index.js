@@ -3,7 +3,7 @@ import { View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import NavigationTab from './navigationTab';
 import Header from '../../general/header';
-
+import Web3 from 'web3'
 // import fantomIcon from '../../images/fantomWhiteIcon.png';fantom_logo_TranparentWhite.png
 import fantomIcon from '../../images/fantom_logo_TranparentWhite.png';
 import settingIcon from '../../images/setting.png';
@@ -11,7 +11,7 @@ import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants';
 
 import config from '../../services/config';
 
-const Web3 = require('web3');
+// const Web3 = require('web3');
 
 const configHelper = config();
 
