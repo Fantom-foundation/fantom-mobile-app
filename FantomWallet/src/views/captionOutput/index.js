@@ -132,7 +132,7 @@ class CaptionOutput extends Component {
     return (
       <View style={style.mainContainer}>
         <View style={style.progressContainer}>
-          <ProgressBar completed="2" remaining="3" />
+          <ProgressBar completed="1" remaining="1" />
         </View>
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
