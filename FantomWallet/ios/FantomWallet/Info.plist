@@ -8,6 +8,14 @@
 	<string>Fantom Payments - Testnet</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string></string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -54,6 +62,8 @@
 	<string>Please allow access to calendar.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow camera permission for QR code scanning.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow access to location.</string>
 	<key>NSMotionUsageDescription</key>
@@ -65,6 +75,10 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Display-Regular.ttf</string>
+		<string>Roboto-Light.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>SF-Pro-Display-Thin.ttf</string>
+		<string>SF-Pro-Display-Medium.ttf</string>
 		<string>SF-Pro-Display-Bold.ttf</string>
 		<string>Lato-Regular.ttf</string>
 		<string>Roboto-Black.ttf</string>
@@ -98,16 +112,6 @@
 		<string>Segoe-UI-SemiBold.ttf</string>
 		<string>Segoe-UI.ttf</string>
 	</array>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string/>
-	</array>
-	<key>CFBundleIconFile</key>
-	<string/>
-	<key>NSHumanReadableCopyright</key>
-	<string/>
-	<key>CFBundleGetInfoString</key>
-	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
