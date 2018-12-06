@@ -33,13 +33,14 @@ const styles = {
   subHeaderText1: {
     color: '#FFF',
     fontSize: 32,
-    fontFamily: 'SFProDisplay-Bold',
+    fontFamily: 'SFProDisplay-Thin',
+    fontWeight: '400',
     marginBottom: deviceHeight * 0.02,
   },
   subHeaderText2: {
     fontSize: 18,
     color: '#fff',
-    fontFamily: 'SFProDisplay-Regular',
+    fontFamily: 'SFProDisplay-Thin',
   },
   // Footer button Styles
   bottomButtonContainer: {
@@ -62,7 +63,7 @@ const styles = {
   footerText1: {
     color: '#00B1FF',
     fontWeight: 'bold',
-    fontFamily: 'SFProDisplay-Bold',
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
   },
   footer: {
@@ -73,7 +74,7 @@ const styles = {
   },
   footerText2: {
     color: 'white',
-    fontFamily: 'SFProDisplay-Regular',
+    fontFamily: 'Roboto-Light',
     fontSize: 14,
   },
   division: {
