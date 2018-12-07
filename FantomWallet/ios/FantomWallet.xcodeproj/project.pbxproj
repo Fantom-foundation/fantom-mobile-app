@@ -72,13 +72,13 @@
 		C5E564BC211D81D30028C173 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E564BB211D81BC0028C173 /* libReactNativePermissions.a */; };
 		D12719C121B900420081DF44 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D12719BB21B9002F0081DF44 /* libRNSVG.a */; };
 		D1271A2E21B90E870081DF44 /* SF-Pro-Display-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D12719FE21B90E870081DF44 /* SF-Pro-Display-Light.ttf */; };
-		D1271ABC21B922F80081DF44 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1271A8C21B922F50081DF44 /* libBVLinearGradient.a */; };
 		D2655567B1194331B6BE56A2 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5217257A97984F459C52C6A4 /* libRNShare.a */; };
 		D3BDA50E396B4557BFECEF4B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD61B7084DF441039C0885B6 /* SimpleLineIcons.ttf */; };
 		D8930B7121B8FE9900F77B59 /* SF-Pro-Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B4121B8FE9800F77B59 /* SF-Pro-Display-Medium.ttf */; };
 		D8930B7421B907E600F77B59 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B7221B907E600F77B59 /* Montserrat-SemiBold.ttf */; };
 		D8930B7521B907E600F77B59 /* SF-Pro-Display-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B7321B907E600F77B59 /* SF-Pro-Display-Thin.ttf */; };
 		D8930B7721B9095900F77B59 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8930B7621B9095900F77B59 /* Roboto-Light.ttf */; };
+		D8930BD321B95B5400F77B59 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1271A8C21B922F50081DF44 /* libBVLinearGradient.a */; };
 		D89A3434BC134611B0E30A2D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 829B72B81BC242B18E2CD5E8 /* Ionicons.ttf */; };
 		D8F38D7B21B7CF0A005CB59A /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D7A21B7CF0A005CB59A /* Lato-Black.ttf */; };
 		D8F38D7D21B7CF12005CB59A /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F38D7C21B7CF12005CB59A /* Roboto-Black.ttf */; };
@@ -565,9 +565,9 @@
 				8165F1618FCF4A0F93D15F55 /* libRNCamera.a in Frameworks */,
 				C5E564BC211D81D30028C173 /* libReactNativePermissions.a in Frameworks */,
 				D12719C121B900420081DF44 /* libRNSVG.a in Frameworks */,
+				D8930BD321B95B5400F77B59 /* libBVLinearGradient.a in Frameworks */,
 				D2655567B1194331B6BE56A2 /* libRNShare.a in Frameworks */,
 				21348E11A6A64268AA66453F /* libRNVersionCheck.a in Frameworks */,
-				D1271ABC21B922F80081DF44 /* libBVLinearGradient.a in Frameworks */,
 				11AF0EED3A8946B792791CF8 /* libRNRandomBytes.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

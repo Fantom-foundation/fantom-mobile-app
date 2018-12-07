@@ -171,7 +171,7 @@ class CaptchaVerification extends Component {
     const verifyWord = this.state.verifyMnemonic;
     if (val) {
       updateMnemonicsArray.splice(val.index, 0, val.data);
-      verifyWord.splice(verifyWord.indexOf(val.data), 1);
+      verifyWord.splice(verifyWord.indexOf(val.data, 1));
       this.setState({
         mnemonicWords: updateMnemonicsArray.join().split(','),
       });
@@ -180,6 +180,7 @@ class CaptchaVerification extends Component {
 
   renderMnemonicValue() {
     const mnemonicArr = this.state.verifyMnemonic;
+    console.log(mnemonicArr, 'mnemonicArr');
     return (
       <View style={style.textContainer}>
         {mnemonicArr.map((val, i) => {

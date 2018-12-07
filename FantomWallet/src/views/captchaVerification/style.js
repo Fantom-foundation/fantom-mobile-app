@@ -32,6 +32,7 @@ const style = {
   },
   textContainer: {
     marginTop: 24,
+    // minHeight: deviceHeight * 0.2,
 
     width: deviceWidth - 32,
     alignSelf: 'center',
