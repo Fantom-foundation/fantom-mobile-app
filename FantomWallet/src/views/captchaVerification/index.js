@@ -42,11 +42,23 @@ class CaptchaVerification extends Component {
       seed: navigation.getParam('seed', 'NO-ID'),
       mnemonicWords: shuffledMnemonics,
       mnemonicWordsArray: [].concat(navigation.getParam('mnemonicWords', 'NO-ID')),
-      // error: '',
       verifyMnemonic: [],
     };
     this.walletSetup = this.walletSetup.bind(this);
     // this.changePhrase = this.changePhrase.bind(this);
+  }
+
+  componentWillMount() {
+    const { mnemonicWords } = this.state;
+    let arr = [];
+    if (mnemonicWords.length > 0) {
+      mnemonicWords.map((data, i) => {
+        const objectValue = { name: data, index: i, isClickable: true };
+        arr.push(objectValue);
+        return null;
+      });
+    }
+    this.setState({ mnemonicWords: arr });
   }
 
   onNavigation() {
@@ -141,22 +153,29 @@ class CaptchaVerification extends Component {
 
   verifyWords(data, index) {
     // Called on selection button from bottom buttons
+
     const { verifyMnemonic, mnemonicWords } = this.state;
     const appendWord = verifyMnemonic;
     let updatedMnemonicsArray = mnemonicWords;
 
     if (data) {
       updatedMnemonicsArray.map(word => {
-        if (word === data) {
-          updatedMnemonicsArray.splice(updatedMnemonicsArray.indexOf(word), 1, '');
+        if (word.name === data.name) {
+          let updatedObject = {
+            name: word.name,
+            index: word.index,
+            isClickable: !word.isClickable,
+          };
+          updatedMnemonicsArray.splice(updatedMnemonicsArray.indexOf(word), 1, updatedObject);
         }
         return null;
       });
     }
     if (appendWord) {
       const appendData = {
-        data,
-        index,
+        name: data.name,
+        index: data.index,
+        isClickable: !data.isClickable,
       };
       appendWord.push(appendData);
       this.setState({
@@ -164,8 +183,9 @@ class CaptchaVerification extends Component {
       });
     } else {
       const appendData = {
-        data,
-        index,
+        name: data.name,
+        index: data.index,
+        isClickable: !data.isClickable,
       };
       this.setState({
         verifyMnemonic: appendData,
@@ -178,11 +198,12 @@ class CaptchaVerification extends Component {
     const updateMnemonicsArray = this.state.mnemonicWords;
     const verifyWord = this.state.verifyMnemonic;
     if (val) {
-      updateMnemonicsArray.splice(val.index, 1, val.data);
+      let dataObj = { name: val.name, index: val.index, isClickable: !val.isClickable };
+      updateMnemonicsArray.splice(val.index, 1, dataObj);
 
       if (verifyWord && verifyWord.length > 0) {
         verifyWord.map((obj, i) => {
-          if (obj.data === val.data && obj.index === val.index) {
+          if (obj.name === val.name && obj.index === val.index) {
             verifyWord.splice(i, 1);
           }
           return null;
@@ -203,13 +224,13 @@ class CaptchaVerification extends Component {
       emptySelectedArr = true;
     }
     return (
-      <View style={[style.textContainer, { minHeight: emptySelectedArr ? 80 : 0 }]}>
+      <View style={[style.textContainer, { minHeight: emptySelectedArr ? 82 : 0 }]}>
         {mnemonicArr.map((val, i) => {
-          let textValue = val.data.charAt(0).toUpperCase() + val.data.slice(1); // Capitalize first alphabet of word
+          let textValue = val.name.charAt(0).toUpperCase() + val.name.slice(1); // Capitalize first alphabet of word
           return (
             <TouchableOpacity
               key={i}
-              style={style.mnemonicBtn}
+              style={[style.mnemonicBtn, { margin: 10 }]}
               onPress={() => this.resetWords(val)}
             >
               <Text style={{ color: '#fff' }}>{textValue}</Text>
@@ -224,20 +245,33 @@ class CaptchaVerification extends Component {
     // Unselected mnemonics container
     const { mnemonicWords } = this.state;
     if (mnemonicWords) {
-      return mnemonicWords.map((data, index) => {
+      return mnemonicWords.map((Obj, index) => {
         const key = index;
-        if (data === '') {
-          return <View key={key} style={style.selectedTextContainer} />;
-        }
-        let textValue = data.charAt(0).toUpperCase() + data.slice(1);
+        let textValue = Obj.name.charAt(0).toUpperCase() + Obj.name.slice(1);
         return (
-          <TouchableOpacity
-            key={key}
-            style={style.mnemonicBtn}
-            onPress={() => this.verifyWords(data, index)}
+          <View
+            style={{
+              borderWidth: !Obj.isClickable ? 1 : 1,
+              borderColor: !Obj.isClickable ? 'rgb(0,177,251)' : '#111',
+              opacity: !Obj.isClickable ? 0.6 : 1,
+              margin: 10,
+              borderRadius: 4,
+            }}
           >
-            <Text style={style.mnemonicBtnText}>{textValue}</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              key={key}
+              style={[
+                style.mnemonicBtn,
+                {
+                  opacity: !Obj.isClickable ? 0.3 : 1,
+                },
+              ]}
+              disabled={!Obj.isClickable}
+              onPress={() => this.verifyWords(Obj, index)}
+            >
+              <Text style={style.mnemonicBtnText}>{textValue}</Text>
+            </TouchableOpacity>
+          </View>
         );
       });
     }
@@ -253,7 +287,6 @@ class CaptchaVerification extends Component {
             <Text style={style.pleaseText}>
               Please enter the corresponding phrase out of the 12 back-up phrases
             </Text>
-            {/* <Text style={style.phraseText}>phrase out of the 12 back-up phrases</Text> */}
           </View>
         </View>
         <View style={style.displayMnemonicView}>
