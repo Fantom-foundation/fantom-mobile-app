@@ -1,8 +1,8 @@
-import { WHITE_COLOR, DEVICE_WIDTH } from '../../../../common/constants';
+import { WHITE_COLOR, DEVICE_WIDTH, DEVICE_HEIGHT } from '../../../../common/constants';
 
 const style = {
   mainContainerStyle: {
-    flex: 1,
+    height: DEVICE_HEIGHT,
     backgroundColor: WHITE_COLOR,
     justifyContent: 'flex-end',
   },

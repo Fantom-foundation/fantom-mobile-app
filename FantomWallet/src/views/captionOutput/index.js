@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Dimensions,
   ScrollView,
+  Image,
 } from 'react-native';
 import Bip39 from 'react-native-bip39';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -17,6 +18,8 @@ import style from './style';
 import Button from '../../general/button/index';
 import '../../../global';
 import ProgressBar from '../../general/progressBar/index';
+
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 // Calculate height of device
 const deviceHeight = Dimensions.get('window').height;
 
@@ -163,6 +166,18 @@ class CaptionOutput extends Component {
             <View style={{ height: deviceHeight * 0.15 }} />
           </ScrollView>
         </View>
+        <Image
+          style={{
+            width: DEVICE_WIDTH * 0.6,
+            height: DEVICE_HEIGHT * 0.77,
+            opacity: 0.03,
+            top: DEVICE_HEIGHT * 0.07,
+            right: -((DEVICE_WIDTH * 0.6) / 2),
+            position: 'absolute',
+          }}
+          source={require('../../images/BackgroundIcon.png')}
+          resizeMode="contain"
+        />
         {this.renderButtonContainer()}
       </View>
     );

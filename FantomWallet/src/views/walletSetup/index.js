@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
 import style from './style';
-import styles from './style';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 
 // CaptchaVerification
 // CaptionOutput,EditContact
@@ -39,8 +39,8 @@ class WalletSetup extends PureComponent {
 
   renderBottomButtons() {
     return (
-      <View style={styles.bottomButtonContainer}>
-        <View style={styles.upperButtonContainer}>
+      <View style={style.bottomButtonContainer}>
+        <View style={style.upperButtonContainer}>
           <TouchableOpacity
             style={style.recoverWalletStyle}
             onPress={() => {
@@ -86,6 +86,18 @@ class WalletSetup extends PureComponent {
           {this.renderHeaderImage()}
           {this.renderMidContainer()}
           {this.renderBottomButtons()}
+          <Image
+            style={{
+              width: DEVICE_WIDTH * 0.6,
+              height: DEVICE_HEIGHT * 0.77,
+              opacity: 0.03,
+              top: DEVICE_HEIGHT * 0.1,
+              right: -((DEVICE_WIDTH * 0.6) / 2),
+              position: 'absolute',
+            }}
+            source={require('../../images/BackgroundIcon.png')}
+            resizeMode="contain"
+          />
         </View>
       </View>
       //</ImageBackground>

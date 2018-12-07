@@ -7,6 +7,7 @@ import {
   ScrollView,
   Keyboard,
   KeyboardAvoidingView,
+  Image,
 } from 'react-native';
 import '../../../global';
 import _ from 'lodash';
@@ -20,6 +21,8 @@ import InputBox from '../../general/inputBox/index';
 import Button from '../../general/button/index';
 import style from './style';
 import ProgressBar from '../../general/progressBar/index';
+
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 /**
  * CaptchaVerification: This component is meant for authenticating user with captcha verification,
  *  based secret codes generated in CaptionOutput.
@@ -302,6 +305,18 @@ class CaptchaVerification extends Component {
             <View style={style.mnemonicBtnMainView}>{this.renderMnemonicBtn()}</View>
           </View>
           <View style={style.seperatotView} />
+          <Image
+            style={{
+              width: DEVICE_WIDTH * 0.6,
+              height: DEVICE_HEIGHT * 0.77,
+              opacity: 0.03,
+              top: DEVICE_HEIGHT * 0.07,
+              right: -((DEVICE_WIDTH * 0.6) / 2),
+              position: 'absolute',
+            }}
+            source={require('../../images/BackgroundIcon.png')}
+            resizeMode="contain"
+          />
         </ScrollView>
         <View style={style.footerStyle}>
           <Button

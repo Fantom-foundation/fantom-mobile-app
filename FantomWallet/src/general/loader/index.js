@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
 
 export default class Loading extends PureComponent {
   render() {
-    const { loaderStyle } = this.props;
+    const { loaderStyle, loaderColor } = this.props;
+    const activityIndicatorColor = loaderColor || 'rgba(0,0,0,1)';
     const marginStyle = loaderStyle ? deviceHeight * loaderStyle - 40 : deviceHeight * 0.5 - 40;
     if (this.props.isLoading && this.props.isLoading === false) {
       return null;
@@ -39,7 +40,7 @@ export default class Loading extends PureComponent {
           animating
           style={[styles.activityIndicator, { marginTop: marginStyle }]}
           size="large"
-          color="rgba(0,0,0,1)"
+          color={activityIndicatorColor}
         />
       </View>
     );

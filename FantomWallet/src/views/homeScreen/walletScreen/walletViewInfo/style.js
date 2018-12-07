@@ -6,8 +6,8 @@ const style = {
   },
   fantomViewStyle: {
     flex: 1,
-    backgroundColor: 'white',
-    marginTop: 10,
+    backgroundColor: 'rgb(14,14,18)',
+    paddingTop: 32,
   },
   textViewStyle: {
     fontFamily: FontFamily.SegoeUILight,
