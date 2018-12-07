@@ -1,20 +1,30 @@
-import { Dimensions, Platform } from 'react-native';
-
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
-
+// Library
+import { Platform } from 'react-native';
+// Component
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+// To check device platform
+const isIOS = Platform.OS === 'ios';
+// Styling
 const style = {
   mainContainerStyle: {
     flex: 1,
     backgroundColor: '#000',
   },
   progressContainer: {
-    marginTop: deviceHeight * 0.05,
+    marginTop: DEVICE_HEIGHT * 0.05,
   },
   arrowContainer: {
     marginTop: 8,
     marginLeft: 8,
     alignSelf: 'flex-start',
+  },
+  backgroundImageStyle: {
+    width: DEVICE_WIDTH * 0.6,
+    height: DEVICE_HEIGHT * 0.77,
+    opacity: 0.04,
+    top: DEVICE_HEIGHT * 0.07,
+    right: -((DEVICE_WIDTH * 0.5) / 2),
+    position: 'absolute',
   },
   headerContainer: {
     alignItems: 'center',
@@ -28,12 +38,11 @@ const style = {
   subHeadContainer: {
     marginTop: 20,
     alignItems: 'center',
-    width: deviceWidth * 0.8,
+    width: DEVICE_WIDTH * 0.8,
   },
   textContainer: {
     marginTop: 24,
-
-    width: deviceWidth - 32,
+    width: DEVICE_WIDTH - 32,
     alignSelf: 'center',
     borderWidth: 1,
     borderColor: '#fff',
@@ -47,26 +56,27 @@ const style = {
     paddingVertical: 15,
   },
   wordWrap: {
-    width: deviceWidth * 0.2,
-    height: deviceHeight * 0.05,
-    marginBottom: deviceWidth * 0.03,
+    width: DEVICE_WIDTH * 0.2,
+    height: DEVICE_HEIGHT * 0.05,
+    marginBottom: DEVICE_WIDTH * 0.03,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   messageContainer: {
-    marginTop: deviceHeight * 0.03,
+    marginTop: DEVICE_HEIGHT * 0.03,
     alignItems: 'center',
-    marginHorizontal: deviceWidth * 0.1,
+    marginHorizontal: DEVICE_WIDTH * 0.1,
   },
   backupPhrase: {
     color: '#fff',
   },
   displayMnemonicView: {
-    marginTop: deviceHeight * 0.08,
+    marginTop: DEVICE_HEIGHT * 0.08,
+    alignItems: 'center',
   },
   pleaseText: {
-    fontSize: deviceWidth * 0.045,
+    fontSize: DEVICE_WIDTH * 0.045,
     fontFamily: 'SFProDisplay-Thin',
     paddingHorizontal: 0,
     textAlign: 'center',
@@ -74,47 +84,60 @@ const style = {
     color: '#fff',
   },
   orderTextStyle: {
-    marginTop: deviceHeight * 0.05,
+    marginTop: DEVICE_HEIGHT * 0.05,
     color: 'rgb(166,225,100)',
-    width: deviceWidth * 0.5,
+    width: DEVICE_WIDTH * 0.5,
     textAlign: 'center',
     fontSize: 16,
   },
   mnemonicBtnMainView: {
-    width: deviceWidth * 0.8,
+    width: DEVICE_WIDTH * 0.9,
     marginTop: 16,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   phraseText: {
-    fontSize: deviceWidth * 0.045,
+    fontSize: DEVICE_WIDTH * 0.045,
     fontFamily: 'SegoeUI-SemiBold',
   },
   textBoxContainer: {
-    marginTop: deviceHeight * 0.03,
+    marginTop: DEVICE_HEIGHT * 0.03,
   },
   mid: {
-    height: Platform.OS === 'ios' ? deviceHeight : deviceHeight - 24,
+    height: isIOS ? DEVICE_HEIGHT : DEVICE_HEIGHT - 24,
     alignItems: 'center',
   },
   textBox: {
-    marginBottom: deviceHeight * 0.03,
-  },
-  seperatotView: {
-    height: deviceHeight * 0.2,
+    marginBottom: DEVICE_HEIGHT * 0.03,
   },
   mnemonicBtn: {
-    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 5,
     margin: 10,
     height: 30,
     backgroundColor: 'rgb(0,177,251)',
+    borderRadius: 4,
+    minWidth: 50,
+    overflow: 'hidden',
+  },
+  selectedTextContainer: {
+    width: 50,
+    height: 30,
+    padding: 5,
+    margin: 10,
+    borderWidth: 1,
+    borderColor: 'rgb(0,177,251)',
     borderRadius: 4,
   },
   mnemonicBtnText: { color: '#fff', fontWeight: '600', textAlign: 'center' },
   footerStyle: {
     position: 'absolute',
     bottom: 0,
-    width: deviceWidth,
+    width: DEVICE_WIDTH,
   },
 };
 
