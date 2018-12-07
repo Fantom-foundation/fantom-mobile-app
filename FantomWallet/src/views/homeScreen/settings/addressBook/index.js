@@ -178,7 +178,9 @@ class AddressBook extends Component {
         <StatusBar barStyle="light-content" />
         <Header
           text="Address Book"
-          leftButtonIcon={arrowLeftButton}
+          leftButtonIcon="chevron-left"
+          leftIconColor="#fff"
+          leftIconSize={22}
           rightButtonIcon={editRightButton}
           onLeftIconPress={this.onLeftIconPress}
           onRightIconPress={() => this.onRightIconPress()}

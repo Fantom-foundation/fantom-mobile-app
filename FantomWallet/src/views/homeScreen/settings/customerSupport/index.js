@@ -26,7 +26,9 @@ class CustomerSupport extends Component {
       <View style={style.container}>
         <Header
           text="Customer Support"
-          leftButtonIcon={leftArrowIcon}
+          leftButtonIcon="chevron-left"
+          leftIconColor="#fff"
+          leftIconSize={22}
           onLeftIconPress={() => this.onLeftIconPress()}
         />
         <View style={style.mid}>

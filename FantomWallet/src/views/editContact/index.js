@@ -154,7 +154,8 @@ class EditContact extends Component {
         <StatusBar barStyle="light-content" />
         <Header
           text={this.state.headerText}
-          leftButtonIcon={arrowLeftButton}
+          leftButtonIcon="chevron-left"
+          leftIconColor="#fff"
           onLeftIconPress={this.onLeftIconPress}
           leftIconSize={30}
           rightIconSize={30}

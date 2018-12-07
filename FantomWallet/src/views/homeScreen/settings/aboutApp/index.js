@@ -33,7 +33,9 @@ class AboutApp extends Component {
         <View>
           <Header
             text="About App"
-            leftButtonIcon={leftArrowIcon}
+            leftButtonIcon="chevron-left"
+            leftIconColor="#fff"
+            leftIconSize={22}
             onLeftIconPress={() => this.onLeftIconPress()}
           />
         </View>

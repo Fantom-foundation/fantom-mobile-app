@@ -66,7 +66,8 @@ export default class ScanScreen extends Component {
         <StatusBar barStyle="light-content" />
         <Header
           text="Scan QR"
-          leftButtonIcon={arrowLeftButton}
+          leftButtonIcon="chevron-left"
+          leftIconColor="#fff"
           onLeftIconPress={() => this.onLeftIconPress()}
           leftIconSize={30}
           headerStyle={{ backgroundColor: 'rgb(233,177,18)' }}
