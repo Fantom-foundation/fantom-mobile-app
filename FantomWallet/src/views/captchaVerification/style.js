@@ -11,7 +11,7 @@ const style = {
     backgroundColor: '#000',
   },
   progressContainer: {
-    marginTop: DEVICE_HEIGHT * 0.05,
+    marginTop: DEVICE_HEIGHT * 0.03,
   },
   arrowContainer: {
     marginTop: 8,
@@ -117,21 +117,10 @@ const style = {
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 5,
-    margin: 10,
     height: 30,
     backgroundColor: 'rgb(0,177,251)',
     borderRadius: 4,
-    minWidth: 50,
     overflow: 'hidden',
-  },
-  selectedTextContainer: {
-    width: 50,
-    height: 30,
-    padding: 5,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: 'rgb(0,177,251)',
-    borderRadius: 4,
   },
   mnemonicBtnText: { color: '#fff', fontWeight: '600', textAlign: 'center' },
   footerStyle: {
