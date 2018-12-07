@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import style from './style';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // const WHITE_COLOR = '#fff';
 
@@ -140,8 +140,13 @@ class Header extends Component {
                 activeOpacity={activeOpacity}
                 onPress={() => this.onLeftIconPress()}
               >
+                <Icon
+                  name={this.props.leftButtonIcon}
+                  size={this.props.leftIconSize}
+                  color={this.props.leftIconColor}
+                />
                 {/* <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} /> */}
-                <Image source={leftIcon} style={style.leftImageStyle} resizeMode="contain" />
+                {/* <Image source={leftIcon} style={style.leftImageStyle} resizeMode="contain" /> */}
               </TouchableOpacity>
             )}
         </View>

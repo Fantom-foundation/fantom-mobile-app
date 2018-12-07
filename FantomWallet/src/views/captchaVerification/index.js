@@ -86,10 +86,11 @@ class CaptchaVerification extends Component {
    */
   walletSetup() {
     let verifyMnemonicArr = [];
+
     if (this.state.verifyMnemonic.length > 0) {
       const arr = this.state.verifyMnemonic;
       arr.map(obj => {
-        verifyMnemonicArr.push(obj.data);
+        verifyMnemonicArr.push(obj.name);
         return null;
       });
     }

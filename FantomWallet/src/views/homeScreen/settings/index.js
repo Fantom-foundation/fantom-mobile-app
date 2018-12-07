@@ -19,7 +19,9 @@ class Settings extends Component {
         <View>
           <Header
             text="Settings"
-            leftButtonIcon={leftArrowIcon}
+            leftButtonIcon="chevron-left"
+            leftIconColor="#fff"
+            leftIconSize={22}
             onLeftIconPress={() => this.onLeftIconPress()}
           />
         </View>
