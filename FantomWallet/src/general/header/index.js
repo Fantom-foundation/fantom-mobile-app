@@ -48,6 +48,42 @@ class Header extends Component {
     return null;
   }
 
+  renderRightButton(
+    isShowRightButtonIcon,
+    rightIcon,
+    rightButtonStyle,
+    activeOpacity,
+    rightIconSize,
+    rightIconColor
+  ) {
+    let rightBtnVisibility = !this.props.isRightBtnImage ? this.props.isRightBtnImage : true;
+
+    if (!isShowRightButtonIcon && rightIcon !== '') {
+      if (!rightBtnVisibility) {
+        return (
+          <TouchableOpacity
+            style={rightButtonStyle}
+            activeOpacity={activeOpacity}
+            onPress={() => this.onRightIconPress()}
+          >
+            <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />
+          </TouchableOpacity>
+        );
+      }
+      return (
+        <TouchableOpacity
+          style={rightButtonStyle}
+          activeOpacity={activeOpacity}
+          onPress={() => this.onRightIconPress()}
+        >
+          {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
+          <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  }
+
   render() {
     let {
       rightButtonIcon,
@@ -120,18 +156,26 @@ class Header extends Component {
                 />
               </TouchableOpacity>
             )}
+          {this.renderRightButton(
+            isShowRightButtonIcon,
+            rightIcon,
+            rightButtonStyle,
+            activeOpacity,
+            this.props.rightIconSize,
+            this.props.rightIconColor
+          )}
 
-          {!isShowRightButtonIcon &&
+          {/* {!isShowRightButtonIcon &&
             rightIcon !== '' && (
               <TouchableOpacity
                 style={rightButtonStyle}
                 activeOpacity={activeOpacity}
                 onPress={() => this.onRightIconPress()}
-              >
-                {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
-                <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
+              > */}
+          {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
+          {/* <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
               </TouchableOpacity>
-            )}
+            )} */}
 
           {!isShowLeftButtonIcon &&
             leftIcon !== '' && (

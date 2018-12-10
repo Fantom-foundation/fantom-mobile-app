@@ -11,15 +11,18 @@ import {
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import Header from '../../../../general/header';
 import style from './style';
 import Address from './address/index';
 
-import arrowLeftButton from '../../../../images/arrowLeft_White.png';
 import editRightButton from '../../../../images/pluswhite.png';
 import whiteSearchIcon from '../../../../images/searchWhite.png';
 import searchIcon from '../../../../images/search.png';
 import * as AddressAction from '../../../../redux/addressBook/action';
+
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants';
 
 const deviceHeight = Dimensions.get('window').height;
 
@@ -89,7 +92,6 @@ class AddressBook extends Component {
 
   renderAddressList() {
     const isEditMode = this.props.navigation.getParam('isEditMode', false);
-
     let addressListView = [];
     let favoriteListView = [];
     const addressesStored = this.props.addresses;
@@ -116,6 +118,7 @@ class AddressBook extends Component {
               continue; //eslint-disable-line
             }
           }
+
           addressListView.push(
             <Address
               key={key}
@@ -157,70 +160,101 @@ class AddressBook extends Component {
     return addressListView;
   }
 
-  render() {
+  renderMidButtons() {
     let addColor = style.add;
     let favColor = style.favorites;
-    let addColorText = { color: 'black' };
-    let favColorText = { color: 'black' };
+    let textStyle = { color: '#FFF', fontFamily: 'SFProDisplay-Semibold' };
 
     if (this.state.addOrFavorite === 'add') {
-      addColor = { ...style.add, backgroundColor: 'rgb(63,62,63)' };
-      addColorText = { color: 'rgb(232,232,232)' };
+      addColor = { ...style.add, backgroundColor: 'rgb(0,177,251)' };
       favColor = style.favorites;
     } else if (this.state.addOrFavorite === 'favorite') {
-      favColor = { ...style.favorites, backgroundColor: 'rgb(63,62,63)' };
-      favColorText = { color: 'rgb(232,232,232)' };
+      favColor = { ...style.favorites, backgroundColor: 'rgb(0,177,251)' };
       addColor = style.add;
     }
+    if (!this.state.displaySearch) {
+      return (
+        <View style={style.subHeader}>
+          <TouchableOpacity
+            style={addColor}
+            onPress={() => this.setState({ addOrFavorite: 'add' })}
+          >
+            <Text style={textStyle}>Recent</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={favColor}
+            onPress={() => this.setState({ addOrFavorite: 'favorite' })}
+          >
+            <Text style={textStyle}>Favourites</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    return null;
+  }
 
+  renderSearchBar() {
+    if (this.state.displaySearch) {
+      return (
+        <View style={style.textInputContainer}>
+          <TextInput
+            placeholder="Search"
+            placeholderTextColor="rgba(255,255, 255,0.8)"
+            style={{
+              flex: 3,
+              fontFamily: 'SFProDisplay-Regular',
+              color: 'rgba(255,255, 255, 0.8)',
+            }}
+            onChangeText={text => this.setState({ searchText: text })}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+          <MaterialIcons name="search" size={20} color="rgba(255,255,255,0.8)" />
+        </View>
+      );
+    }
+    return null;
+  }
+
+  render() {
     return (
       <View style={style.mainContainerStyle}>
         <StatusBar barStyle="light-content" />
+        {/* add-circle-outline */}
         <Header
           text="Address Book"
           leftButtonIcon="chevron-left"
           leftIconColor="#fff"
           leftIconSize={22}
-          rightButtonIcon={editRightButton}
           onLeftIconPress={this.onLeftIconPress}
+          isRightBtnImage={false}
+          rightButtonIcon="add-circle-outline"
+          rightIconSize={22}
+          rightIconColor="#fff"
           onRightIconPress={() => this.onRightIconPress()}
-          rightIconSize={30}
-          headerStyle={{ backgroundColor: 'rgb(233,177,18)' }}
-          rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
-          leftButtonStyle={{ flex: 1 }}
           secondaryButtonIcon={whiteSearchIcon}
           onSecondaryIconPress={this.onSecondaryIconPress}
+          leftButtonStyle={{ marginLeft: -10 }}
+          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
+          headerStyle={{
+            backgroundColor: 'rgb(44,52,58)',
+            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+          }}
         />
 
         <View style={style.addressList}>
-          {!this.state.displaySearch ? (
-            <View style={style.subHeader}>
-              <TouchableOpacity
-                style={addColor}
-                onPress={() => this.setState({ addOrFavorite: 'add' })}
-              >
-                <Text style={addColorText}>Recent</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={favColor}
-                onPress={() => this.setState({ addOrFavorite: 'favorite' })}
-              >
-                <Text style={favColorText}>Favourites</Text>
-              </TouchableOpacity>
-            </View>
-          ) : null}
+          {/* Background Image */}
+          <Image
+            style={style.backgroundImageStyle}
+            source={require('../../../../images/BackgroundIcon.png')}
+            resizeMode="contain"
+          />
+          {/* Displays RECENT and FAVOURITE buttons */}
+          {this.renderMidButtons()}
+
           <View style={style.displaySearch}>
-            {this.state.displaySearch ? (
-              <View style={style.textInputContainer}>
-                <TextInput
-                  placeholder="Search"
-                  style={{ flex: 3, fontFamily: 'SFProDisplay-SemiBold' }}
-                  onChangeText={text => this.setState({ searchText: text })}
-                  autoCapitalize="none"
-                />
-                <Image source={searchIcon} style={style.imageSize} />
-              </View>
-            ) : null}
+            {/* Displays search Bar */}
+            {this.renderSearchBar()}
             <ScrollView showsVerticalScrollIndicator={false} style={{ height: deviceHeight }}>
               {this.renderAddressList()}
               <View style={{ height: 50 }} />

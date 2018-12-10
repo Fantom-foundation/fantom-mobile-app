@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import EIicon from 'react-native-vector-icons/EvilIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 import style from './style';
 
@@ -41,29 +42,31 @@ class Address extends Component {
       <MainView style={style.container} {...propsToMainView}>
         <View style={style.subContainer}>
           <View style={style.subSubContainer}>
-            <View style={{ alignSelf: 'center' }}>
+            {/* Left container */}
+            <View style={style.leftContainerStyle}>
               <TouchableOpacity onPress={() => this.props.rateChange(this.props.id)}>
-                <Icon
-                  name={starIcon}
-                  size={25}
-                  color={starIcon === 'star' ? '#e9b112' : 'rgba(0,0,0,0.6)'}
-                />
+                <Icon name={starIcon} size={25} color="rgb(0,177,251)" />
               </TouchableOpacity>
-              {/* <Icon style={{ color: 'rgba(0,0,0,0.4)', alignSelf: 'flex-end' }} name="person" size={30} >
-                            </Icon> */}
             </View>
+            <View style={style.lineSeparatorStyle} />
+            {/* Middle container */}
             <View style={style.mid}>
               <Text style={style.nameContainer}>{this.props.name || 'Anonymous'}</Text>
-              <Text>{this.props.line1Text}</Text>
+              <Text style={style.addressTextStyle}>{this.props.line1Text}</Text>
             </View>
-            <View style={style.icons}>
+            {/* Rightcontainer */}
+            <View style={style.iconsContainer}>
               <TouchableOpacity
                 onPress={() => this.handleEditContact(this.props.name, this.props.line1Text)}
+                style={style.optionButtonStyle}
               >
-                <Icon name="edit" size={25} color="rgba(0,0,0,0.6)" />
+                <MaterialCommunityIcons name="pencil" size={16} color="#FFF" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.props.delete(this.props.id)}>
-                <EIicon style={{ color: 'rgba(0,0,0,0.6)' }} name="trash" size={40} />
+              <TouchableOpacity
+                onPress={() => this.props.delete(this.props.id)}
+                style={style.optionButtonStyle}
+              >
+                <FontAwesomeIcons style={{ color: '#FFF' }} name="trash" size={16} />
               </TouchableOpacity>
             </View>
           </View>

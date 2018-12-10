@@ -28,7 +28,7 @@ const style = {
   mainViewStyle: {
     width: deviceWidth,
     position: 'absolute',
-    bottom: 10,
+    bottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },
