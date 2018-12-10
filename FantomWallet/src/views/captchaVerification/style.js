@@ -21,10 +21,10 @@ const style = {
   backgroundImageStyle: {
     width: DEVICE_WIDTH * 0.6,
     height: DEVICE_HEIGHT * 0.77,
-    opacity: 0.04,
     top: DEVICE_HEIGHT * 0.07,
-    right: -((DEVICE_WIDTH * 0.5) / 2),
     position: 'absolute',
+    opacity: isIOS ? 0.03 : 0.02,
+    right: -((DEVICE_WIDTH * 0.45) / 2),
   },
   headerContainer: {
     alignItems: 'center',
