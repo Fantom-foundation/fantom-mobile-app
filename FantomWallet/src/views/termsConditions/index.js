@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../../general/header';
 import Button from '../../general/button';
+import { DEVICE_HEIGHT } from '../../common/constants';
 
 import style from './style';
 import crossButton from '../../images/crossButtonWhite.png';
@@ -33,8 +34,14 @@ export default class TermsConditions extends Component {
         <Header
           text="Terms of Service"
           rightButtonIcon={crossButton}
+          isRightBtnImage
           onRightIconPress={this.onRightIconPress}
-          textStyle={{ fontFamily: 'SegoeUI-SemiBold' }}
+          // textStyle={{ fontFamily: 'SegoeUI-SemiBold' }}
+          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
+          headerStyle={{
+            backgroundColor: 'rgb(44,52,58)',
+            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+          }}
         />
         <WebView source={{ uri: 'http://fantom.foundation' }} />
         <View style={style.footerStyle}>

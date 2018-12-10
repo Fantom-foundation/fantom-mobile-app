@@ -335,6 +335,7 @@ class TransactionEntity extends Component {
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
         <Header
+          isRightBtnImage
           rightButtonIcon={settingIcon}
           headerStyle={{
             backgroundColor: 'rgb(44,52,58)',
