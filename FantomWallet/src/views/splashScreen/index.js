@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { ImageBackground, Image, View } from 'react-native';
+import { ImageBackground, Image, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import style from './style';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
-
+const isIOS = Platform.OS === 'ios';
 /**
  * SplashScreen: Splash Screen for app.
  */
@@ -38,8 +38,8 @@ class SplashScreen extends Component {
             height: DEVICE_HEIGHT * 0.77,
             justifyContent: 'center',
             alignItems: 'center',
-            opacity: 0.03,
-            right: -((DEVICE_WIDTH * 0.6) / 2),
+            opacity: isIOS ? 0.03 : 0.02,
+            right: -((DEVICE_WIDTH * 0.45) / 2),
             // top: 0,
             position: 'absolute',
           }}

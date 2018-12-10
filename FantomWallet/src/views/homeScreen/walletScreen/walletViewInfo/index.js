@@ -51,6 +51,7 @@ class WalletFantomScreen extends Component {
             <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
           }
         >
+          <View style={{ height: 32, backgroundColor: 'rgb(14,14,18)' }} />
           <BalanceView fantomTransactionArr={fantomTransactionArr} balance={this.props.balance} />
           <TransactionView
             fantomTransactionArr={fantomTransactionArr}
