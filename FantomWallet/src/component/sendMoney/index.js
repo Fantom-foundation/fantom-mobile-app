@@ -47,7 +47,7 @@ class SendMoney extends Component {
 
   transferMoney(from, to, value, memo) {
     this.setState({ isLoading: true });
-    const date = moment().format('YYYY-MM-DD hh:mm:ss a');
+    const date = moment().format('YYYY-MMM-DD hh:mm:ss a');
 
     transferMoney(from, to, value, memo, this.props.privateKey)
       .then(data => {

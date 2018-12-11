@@ -93,9 +93,14 @@ class TransacationEntity extends PureComponent {
       transaction.date !== null &&
       transaction.date !== undefined
     ) {
-      date = moment(transaction.date).format('DD');
-      month = moment(transaction.date).format('MMM');
-      diff = moment(transaction.date).fromNow();
+      date = moment(transaction.date, 'YYYY-MMM-DD hh:mm:ss a').format('DD');
+      month = moment(transaction.date, 'YYYY-MMM-DD hh:mm:ss a').format('MMM');
+      diff = moment(transaction.date, 'YYYY-MMM-DD hh:mm:ss a').fromNow();
+      if (date === 'Invalid date' || month === 'Invalid date') {
+        date = '';
+        month = '';
+        diff = '';
+      }
     }
 
     if (
