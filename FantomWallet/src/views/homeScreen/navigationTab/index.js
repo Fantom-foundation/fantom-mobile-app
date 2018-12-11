@@ -113,8 +113,6 @@ class HomeNavigationBar extends Component {
             height: DEVICE_HEIGHT * 0.77,
             justifyContent: 'center',
             alignItems: 'center',
-            // opacity: 0.03,
-            // right: -((DEVICE_WIDTH * 0.3) / 2),
             top: 0,
             position: 'absolute',
             opacity: isIOS ? 0.03 : 0.02,

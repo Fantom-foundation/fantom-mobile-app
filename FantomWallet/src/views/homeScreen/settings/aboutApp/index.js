@@ -50,7 +50,7 @@ class AboutApp extends Component {
           text="About App"
           leftButtonIcon="chevron-left"
           leftIconColor="#fff"
-          leftIconSize={22}
+          leftIconSize={30}
           leftButtonStyle={{ marginLeft: -10 }}
           onLeftIconPress={() => this.onLeftIconPress()}
           textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}

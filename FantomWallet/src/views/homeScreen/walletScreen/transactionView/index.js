@@ -1,15 +1,16 @@
+// Library
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+// style
 import style from './style';
+// components
 import EmptyTransactionEntity from './transactionEntity/emptyTransactionEntity';
 import SortMenuCard from '../../../../general/sortMenuCard';
 import DisplayTransaction from './displayTransactions';
-
-import sortMenuIcon from '../../../../images/arrow_With_bar.png';
 import Loader from '../../../../general/loader';
+// import sortMenuIcon from '../../../../images/arrow_With_bar.png';
 
 import {
   SENT,
@@ -103,32 +104,53 @@ class TransactionView extends Component {
     const selectedSortMenu = this.state.val;
     const fantomTransaction = transactions || [];
     const fantomTransactionArr = fantomTransaction.reverse();
+
     return (
       <View style={{ flex: 1 }}>
         {fantomTransactionArr.length > 0 && (
-          <View style={style.headingCardViewStyle}>
-            <Text style={style.headingCardTextStyle}> Sent Transactions </Text>
-            {/* <View style={style.transactionSortIconStyle}>
+          <View
+            style={{
+              marginTop: 20,
+              width: DEVICE_WIDTH - 32,
+              alignSelf: 'center',
+              backgroundColor: 'rgb(44,52,58)',
+              borderRadius: 10,
+            }}
+          >
+            <View style={style.headingCardViewStyle}>
+              <Text style={style.headingCardTextStyle}>Transactions</Text>
+            </View>
+            <View
+              style={[
+                this.state.openSortMenu ? { opacity: 0.2 } : '',
+                { borderBottomLeftRadius: 10, borderBottomRightRadius: 10 },
+              ]}
+            >
+              {this.renderLoader()}
+              <DisplayTransaction
+                fantomTransactionArr={fantomTransactionArr}
+                selectedSortMenu={selectedSortMenu}
+                allTransaction={ALL_TRANSACTION}
+                publicKey={publicKey}
+                isLoading={isLoading}
+              />
+            </View>
+          </View>
+        )}
+
+        {/* <View style={style.tr
+        ansactionSortIconStyle}>
               <TouchableOpacity onPress={() => this.toggleSortMenu()}>
                 <Image source={sortMenuIcon} style={{ width: 33, height: 30 }} />
               </TouchableOpacity>
             </View> */}
-          </View>
-        )}
+
         <View
           style={[
             this.state.openSortMenu ? { opacity: 0.2 } : '',
             { backgroundColor: 'rgb(14,14,18)' },
           ]}
         >
-          {this.renderLoader()}
-          <DisplayTransaction
-            fantomTransactionArr={fantomTransactionArr}
-            selectedSortMenu={selectedSortMenu}
-            allTransaction={ALL_TRANSACTION}
-            publicKey={publicKey}
-            isLoading={isLoading}
-          />
           {isLoading === false &&
             fantomTransactionArr.length === 0 && (
               <EmptyTransactionEntity
@@ -137,7 +159,7 @@ class TransactionView extends Component {
               />
             )}
         </View>
-        {this.renderSortMenu()}
+        {/* {this.renderSortMenu()} */}
       </View>
     );
   }

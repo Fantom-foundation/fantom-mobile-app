@@ -2,6 +2,7 @@ import '../../../global';
 import React, { Component } from 'react';
 import { Text, View, Dimensions, Alert } from 'react-native';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import Header from '../../general/header/index';
 import style from './style';
 import Button from '../../general/button/index';
@@ -46,6 +47,8 @@ class SendMoney extends Component {
 
   transferMoney(from, to, value, memo) {
     this.setState({ isLoading: true });
+    const date = moment().format('YYYY-MM-DD hh:mm:ss a');
+
     transferMoney(from, to, value, memo, this.props.privateKey)
       .then(data => {
         if (data.hash && data.hash !== '') {
@@ -59,6 +62,7 @@ class SendMoney extends Component {
             from,
             to,
             isError: false,
+            date,
           };
           this.props.addTransactionToStore(transaction);
           Alert.alert('Success', `Transfer successful with transaction hash: ${data.hash}`, [

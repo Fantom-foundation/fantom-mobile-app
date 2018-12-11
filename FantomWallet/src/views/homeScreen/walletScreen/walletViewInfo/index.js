@@ -6,6 +6,7 @@ import style from './style';
 
 import BalanceView from '../balanceView';
 import TransactionView from '../transactionView';
+import { DEVICE_HEIGHT } from '../../../../common/constants';
 
 class WalletFantomScreen extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class WalletFantomScreen extends Component {
             publicKey={this.props.publicKey}
             isLoading={this.props.isLoading}
           />
+          <View style={{ height: DEVICE_HEIGHT * 0.25 }} />
         </ScrollView>
       </View>
     );
