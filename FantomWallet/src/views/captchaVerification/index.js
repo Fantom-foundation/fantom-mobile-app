@@ -17,11 +17,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import * as KeyAction from '../../redux/keys/action';
 // Method of generation taken from: https://medium.com/bitcraft/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998;
-import InputBox from '../../general/inputBox/index';
 import Button from '../../general/button/index';
 import style from './style';
 import ProgressBar from '../../general/progressBar/index';
-
+import BackgroundFantomIcon from '../../images/BackgroundIcon.png';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 /**
  * CaptchaVerification: This component is meant for authenticating user with captcha verification,
@@ -43,11 +42,23 @@ class CaptchaVerification extends Component {
       seed: navigation.getParam('seed', 'NO-ID'),
       mnemonicWords: shuffledMnemonics,
       mnemonicWordsArray: [].concat(navigation.getParam('mnemonicWords', 'NO-ID')),
-      error: '',
       verifyMnemonic: [],
     };
     this.walletSetup = this.walletSetup.bind(this);
-    this.changePhrase = this.changePhrase.bind(this);
+    // this.changePhrase = this.changePhrase.bind(this);
+  }
+
+  componentWillMount() {
+    const { mnemonicWords } = this.state;
+    let arr = [];
+    if (mnemonicWords.length > 0) {
+      mnemonicWords.map((data, i) => {
+        const objectValue = { name: data, index: i, isClickable: true };
+        arr.push(objectValue);
+        return null;
+      });
+    }
+    this.setState({ mnemonicWords: arr });
   }
 
   onNavigation() {
@@ -74,10 +85,17 @@ class CaptchaVerification extends Component {
    *  Then navigate user to HomeScreen.
    */
   walletSetup() {
-    console.log(this.state.mnemonicWordsArray, '1 array');
-    console.log(this.state.verifyMnemonic, '2 array');
-    const isSucess = _.isEqual(this.state.mnemonicWordsArray, this.state.verifyMnemonic.data);
-    console.log(isSucess, 'verifyData');
+    let verifyMnemonicArr = [];
+
+    if (this.state.verifyMnemonic.length > 0) {
+      const arr = this.state.verifyMnemonic;
+      arr.map(obj => {
+        verifyMnemonicArr.push(obj.name);
+        return null;
+      });
+    }
+    const isSucess = _.isEqual(this.state.mnemonicWordsArray, verifyMnemonicArr);
+
     if (!isSucess) {
       return;
     }
@@ -123,36 +141,42 @@ class CaptchaVerification extends Component {
     return true;
   }
 
-  /**
-   * changePhrase()  : on change handler for text fields.
-   * @param { String } text : Contains captcha text phrase.
-   * @param {*} phrase : Contains position value of captcha phrase in generated captcha codes.
-   */
-  changePhrase(text, phrase) {
-    const { state } = this;
-    state[phrase] = text;
-    this.setState(state);
-  }
+  // /**
+  //  * changePhrase()  : on change handler for text fields.
+  //  * @param { String } text : Contains captcha text phrase.
+  //  * @param {*} phrase : Contains position value of captcha phrase in generated captcha codes.
+  //  */
+  // changePhrase(text, phrase) {
+  //   const { state } = this;
+  //   state[phrase] = text;
+  //   this.setState(state);
+  // }
 
   verifyWords(data, index) {
+    // Called on selection button from bottom buttons
+
     const { verifyMnemonic, mnemonicWords } = this.state;
     const appendWord = verifyMnemonic;
     let updatedMnemonicsArray = mnemonicWords;
 
     if (data) {
       updatedMnemonicsArray.map(word => {
-        if (word === data) {
-          updatedMnemonicsArray.splice(updatedMnemonicsArray.indexOf(word), 1);
+        if (word.name === data.name) {
+          let updatedObject = {
+            name: word.name,
+            index: word.index,
+            isClickable: !word.isClickable,
+          };
+          updatedMnemonicsArray.splice(updatedMnemonicsArray.indexOf(word), 1, updatedObject);
         }
         return null;
       });
     }
-    console.log(updatedMnemonicsArray, '123');
-
     if (appendWord) {
       const appendData = {
-        data,
-        index,
+        name: data.name,
+        index: data.index,
+        isClickable: !data.isClickable,
       };
       appendWord.push(appendData);
       this.setState({
@@ -160,8 +184,9 @@ class CaptchaVerification extends Component {
       });
     } else {
       const appendData = {
-        data,
-        index,
+        name: data.name,
+        index: data.index,
+        isClickable: !data.isClickable,
       };
       this.setState({
         verifyMnemonic: appendData,
@@ -170,28 +195,43 @@ class CaptchaVerification extends Component {
   }
 
   resetWords(val) {
+    // Unselect the selected Values
     const updateMnemonicsArray = this.state.mnemonicWords;
     const verifyWord = this.state.verifyMnemonic;
     if (val) {
-      updateMnemonicsArray.splice(val.index, 0, val.data);
-      verifyWord.splice(verifyWord.indexOf(val.data, 1));
+      let dataObj = { name: val.name, index: val.index, isClickable: !val.isClickable };
+      updateMnemonicsArray.splice(val.index, 1, dataObj);
+
+      if (verifyWord && verifyWord.length > 0) {
+        verifyWord.map((obj, i) => {
+          if (obj.name === val.name && obj.index === val.index) {
+            verifyWord.splice(i, 1);
+          }
+          return null;
+        });
+      }
       this.setState({
-        mnemonicWords: updateMnemonicsArray.join().split(','),
+        mnemonicWords: updateMnemonicsArray,
+        verifyMnemonic: verifyWord,
       });
     }
   }
 
   renderMnemonicValue() {
+    // Selected mnemonics container
     const mnemonicArr = this.state.verifyMnemonic;
-    console.log(mnemonicArr, 'mnemonicArr');
+    let emptySelectedArr = false;
+    if (mnemonicArr.length === 0) {
+      emptySelectedArr = true;
+    }
     return (
-      <View style={style.textContainer}>
+      <View style={[style.textContainer, { minHeight: emptySelectedArr ? 82 : 0 }]}>
         {mnemonicArr.map((val, i) => {
-          let textValue = val.data.charAt(0).toUpperCase() + val.data.slice(1); // Capitalize first alphabet of word
+          let textValue = val.name.charAt(0).toUpperCase() + val.name.slice(1); // Capitalize first alphabet of word
           return (
             <TouchableOpacity
               key={i}
-              style={style.mnemonicBtn}
+              style={[style.mnemonicBtn, { margin: 10 }]}
               onPress={() => this.resetWords(val)}
             >
               <Text style={{ color: '#fff' }}>{textValue}</Text>
@@ -203,121 +243,92 @@ class CaptchaVerification extends Component {
   }
 
   renderMnemonicBtn() {
+    // Unselected mnemonics container
     const { mnemonicWords } = this.state;
-    debugger;
     if (mnemonicWords) {
-      return mnemonicWords.map((data, index) => {
+      return mnemonicWords.map((Obj, index) => {
         const key = index;
+        let textValue = Obj.name.charAt(0).toUpperCase() + Obj.name.slice(1);
         return (
-          <TouchableOpacity
-            key={key}
-            style={style.mnemonicBtn}
-            onPress={() => this.verifyWords(data, index)}
+          <View
+            style={{
+              borderWidth: !Obj.isClickable ? 1 : 1,
+              borderColor: !Obj.isClickable ? 'rgb(0,177,251)' : '#111',
+              opacity: !Obj.isClickable ? 0.6 : 1,
+              margin: 10,
+              borderRadius: 4,
+            }}
           >
-            <Text style={style.mnemonicBtnText}>{data}</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              key={key}
+              style={[
+                style.mnemonicBtn,
+                {
+                  opacity: !Obj.isClickable ? 0.3 : 1,
+                },
+              ]}
+              disabled={!Obj.isClickable}
+              onPress={() => this.verifyWords(Obj, index)}
+            >
+              <Text style={style.mnemonicBtnText}>{textValue}</Text>
+            </TouchableOpacity>
+          </View>
         );
       });
     }
     return null;
   }
 
+  renderInnerContainer() {
+    return (
+      <ScrollView>
+        <View style={style.headerContainer}>
+          <Text style={style.captchaText}>Captcha Verification</Text>
+          <View style={style.subHeadContainer}>
+            <Text style={style.pleaseText}>
+              Please enter the corresponding phrase out of the 12 back-up phrases
+            </Text>
+          </View>
+        </View>
+        <View style={style.displayMnemonicView}>
+          <Text style={style.backupPhrase}>Let's verify your backup phrase</Text>
+          {this.renderMnemonicValue()}
+        </View>
+
+        {this.state.mnemonicWords && (
+          <View style={{ alignItems: 'center' }}>
+            <Text style={style.orderTextStyle}>Please tap each word in the correct order</Text>
+          </View>
+        )}
+        <View style={style.mnemonicBtnMainView}>{this.renderMnemonicBtn()}</View>
+        <View style={{ height: DEVICE_HEIGHT * 0.12 }} />
+      </ScrollView>
+    );
+  }
+
   render() {
     const behaviour = Platform.OS === 'ios' ? 'padding' : null;
-    console.log(this.state.mnemonicWordsArray, 'render');
-    const { mnemonicWords, verifyMnemonic } = this.state;
-
     return (
       <KeyboardAvoidingView behavior={behaviour} style={style.mainContainerStyle}>
-        <ScrollView>
-          <View style={style.mid}>
-            <View style={style.progressContainer}>
-              <ProgressBar completed="2" remaining="0" />
-            </View>
-
-            <View style={style.arrowContainer}>
-              <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                <Icon name="chevron-left" size={24} color="#fff" />
-              </TouchableOpacity>
-            </View>
-            <View style={style.headerContainer}>
-              <Text style={style.captchaText}>Captcha Verification</Text>
-              <View style={style.subHeadContainer}>
-                <Text style={style.pleaseText}>
-                  Please enter the corresponding phrase out of the 12 back-up phrases
-                </Text>
-                {/* <Text style={style.phraseText}>phrase out of the 12 back-up phrases</Text> */}
-              </View>
-            </View>
-            <View style={style.displayMnemonicView}>
-              <Text style={style.backupPhrase}>Let's verify your backup phrase</Text>
-              {this.renderMnemonicValue()}
-            </View>
-            {/* <View style={style.textBoxContainer}>
-              <View style={style.textBox}>
-                <InputBox
-                  phraseNumber="Enter phrase 5"
-                  text={this.state.phraseFive}
-                  onChangeText={text => this.changePhrase(text, 'phraseFive')}
-                />
-                {this.state.phraseFive !== '' &&
-                this.state.phraseFive !== this.state.mnemonicWords[4] ? (
-                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Text style={{ color: 'red' }}>Phrase five does not match up.</Text>
-                  </View>
-                ) : null}
-              </View>
-              <View style={style.textBox}>
-                <InputBox
-                  phraseNumber="Enter phrase 9"
-                  text={this.state.phraseNine}
-                  onChangeText={text => this.changePhrase(text, 'phraseNine')}
-                />
-                {this.state.phraseNine !== '' &&
-                this.state.phraseNine !== this.state.mnemonicWords[8] ? (
-                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Text style={{ color: 'red' }}>Phrase nine does not match up.</Text>
-                  </View>
-                ) : null}
-              </View>
-              <View style={style.textBox}>
-                <InputBox
-                  phraseNumber="Enter phrase 12"
-                  text={this.state.phraseTwelve}
-                  onChangeText={text => this.changePhrase(text, 'phraseTwelve')}
-                />
-                {this.state.phraseTwelve !== '' &&
-                this.state.phraseTwelve !== this.state.mnemonicWords[11] ? (
-                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Text style={{ color: 'red' }}>Phrase twelve does not match up.</Text>
-                  </View>
-                ) : null}
-              </View>
-            </View> */}
-
-            {/* <View style={{ alignSelf: 'center' }}>
-            <Text onPress={this.getMasterKey}>Get Master Key</Text>
-          </View> */}
-
-            {this.state.mnemonicWords && (
-              <Text style={style.orderTextStyle}>Please tap each word in the correct order</Text>
-            )}
-            <View style={style.mnemonicBtnMainView}>{this.renderMnemonicBtn()}</View>
+        <View style={style.mid}>
+          <View style={style.progressContainer}>
+            <ProgressBar completed="2" remaining="0" />
           </View>
-          <View style={style.seperatotView} />
+          {/* Go Back icon */}
+          <View style={style.arrowContainer}>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Icon name="chevron-left" size={24} color="#fff" />
+            </TouchableOpacity>
+          </View>
+          {/* Background Image */}
           <Image
-            style={{
-              width: DEVICE_WIDTH * 0.6,
-              height: DEVICE_HEIGHT * 0.77,
-              opacity: 0.03,
-              top: DEVICE_HEIGHT * 0.07,
-              right: -((DEVICE_WIDTH * 0.6) / 2),
-              position: 'absolute',
-            }}
-            source={require('../../images/BackgroundIcon.png')}
+            style={style.backgroundImageStyle}
+            source={BackgroundFantomIcon}
             resizeMode="contain"
           />
-        </ScrollView>
+          {this.renderInnerContainer()}
+        </View>
+        {/* Button container */}
         <View style={style.footerStyle}>
           <Button
             text="Verify"
@@ -331,7 +342,6 @@ class CaptchaVerification extends Component {
 }
 
 const mapStateToProps = () => ({});
-
 const mapDispatchToProps = dispatch => ({
   setMasterKey: key => {
     dispatch({ type: KeyAction.MASTER_KEY, key });

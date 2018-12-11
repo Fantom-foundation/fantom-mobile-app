@@ -200,7 +200,6 @@ class TransactionEntity extends Component {
         return responseJson;
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           maxFantomBalance: 0,
           balance: 0,
@@ -228,7 +227,6 @@ class TransactionEntity extends Component {
       // fetch(configHelper.apiUrl+'/transactions/'+ dummyAddress)
       .then(response => response.json())
       .then(responseJson => {
-        console.log('from fantom own wallet , transaction response : ', responseJson);
         // if (responseJson && responseJson.result && responseJson.result.length) {
         if (responseJson) {
           // this.loadFantomTransactionData(responseJson.result);
@@ -241,7 +239,6 @@ class TransactionEntity extends Component {
         return responseJson;
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           isLoading: false,
         });
@@ -338,6 +335,7 @@ class TransactionEntity extends Component {
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
         <Header
+          isRightBtnImage
           rightButtonIcon={settingIcon}
           headerStyle={{
             backgroundColor: 'rgb(44,52,58)',
@@ -345,7 +343,9 @@ class TransactionEntity extends Component {
           }}
           onRightIconPress={() => this.onRightIconPress()}
           fantomIcon={fantomIcon}
-          leftButtonIcon={activeTabIndex === 0 ? refreshWhiteIcon : ''}
+          leftButtonIcon={activeTabIndex === 0 ? 'refresh' : ''}
+          leftIconColor="#fff"
+          leftIconSize={24}
           onLeftIconPress={() => this.onRefresh()}
         />
         <NavigationTab

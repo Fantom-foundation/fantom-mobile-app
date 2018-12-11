@@ -4,31 +4,45 @@ const deviceWidth = Dimensions.get('window').width;
 
 const style = {
   container: {
+    width: deviceWidth - 32,
+    alignSelf: 'center',
     marginTop: 10,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
-    backgroundColor: 'white',
-
+    backgroundColor: 'rgb(32,37,42)',
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 1,
-    borderWidth: 0.3,
-    borderColor: 'rgb(209,209,209)',
   },
   subContainer: {
-    paddingTop: 15,
-    paddingBottom: 15,
     paddingLeft: 10,
-    paddingRight: 10,
   },
   subSubContainer: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgb(32,37,42)',
+  },
+  leftContainerStyle: {
+    alignSelf: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    flexDirection: 'row',
+  },
+  lineSeparatorStyle: {
+    borderRightWidth: 1,
+    borderRightColor: 'rgba(255,255,255,0.2)',
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
   },
   nameContainer: {
-    fontWeight: 'bold',
-    fontSize: deviceWidth * 0.045,
+    fontSize: 14,
+    fontFamily: 'SFProDisplay-Medium',
+    color: '#FFF',
+  },
+  addressTextStyle: {
+    fontSize: 12,
     fontFamily: 'SFProDisplay-Regular',
+    color: '#FFF',
   },
   mark: {
     flex: 1,
@@ -45,15 +59,25 @@ const style = {
   },
   mid: {
     flexDirection: 'column',
-    flex: 5,
+    flex: 3,
     justifyContent: 'center',
-    marginLeft: 12,
+    marginLeft: 14,
   },
-  icons: {
+  iconsContainer: {
+    flex: 1,
     flexDirection: 'row',
-    width: 60,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    backgroundColor: 'rgb(44,52,58)',
+  },
+  optionButtonStyle: {
+    height: 24,
+    width: 24,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
 

@@ -1,9 +1,17 @@
 /* eslint-disable */
 import React, { PureComponent } from 'react';
-import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Platform,
+  ImageBackground,
+  StatusBar,
+} from 'react-native';
 import style from './style';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
-
+const isIOS = Platform.OS === 'ios';
 // CaptchaVerification
 // CaptionOutput,EditContact
 
@@ -90,9 +98,9 @@ class WalletSetup extends PureComponent {
             style={{
               width: DEVICE_WIDTH * 0.6,
               height: DEVICE_HEIGHT * 0.77,
-              opacity: 0.03,
+              opacity: isIOS ? 0.03 : 0.02,
               top: DEVICE_HEIGHT * 0.1,
-              right: -((DEVICE_WIDTH * 0.6) / 2),
+              right: -((DEVICE_WIDTH * 0.45) / 2),
               position: 'absolute',
             }}
             source={require('../../images/BackgroundIcon.png')}

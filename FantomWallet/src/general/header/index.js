@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import style from './style';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // const WHITE_COLOR = '#fff';
 
@@ -43,6 +43,42 @@ class Header extends Component {
         <>
           <Text style={textStyle}>{text}</Text>
         </>
+      );
+    }
+    return null;
+  }
+
+  renderRightButton(
+    isShowRightButtonIcon,
+    rightIcon,
+    rightButtonStyle,
+    activeOpacity,
+    rightIconSize,
+    rightIconColor
+  ) {
+    let rightBtnVisibility = !this.props.isRightBtnImage ? this.props.isRightBtnImage : true;
+
+    if (!isShowRightButtonIcon && rightIcon !== '') {
+      if (!rightBtnVisibility) {
+        return (
+          <TouchableOpacity
+            style={rightButtonStyle}
+            activeOpacity={activeOpacity}
+            onPress={() => this.onRightIconPress()}
+          >
+            <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} />
+          </TouchableOpacity>
+        );
+      }
+      return (
+        <TouchableOpacity
+          style={rightButtonStyle}
+          activeOpacity={activeOpacity}
+          onPress={() => this.onRightIconPress()}
+        >
+          {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
+          <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
+        </TouchableOpacity>
       );
     }
     return null;
@@ -120,18 +156,26 @@ class Header extends Component {
                 />
               </TouchableOpacity>
             )}
+          {this.renderRightButton(
+            isShowRightButtonIcon,
+            rightIcon,
+            rightButtonStyle,
+            activeOpacity,
+            this.props.rightIconSize,
+            this.props.rightIconColor
+          )}
 
-          {!isShowRightButtonIcon &&
+          {/* {!isShowRightButtonIcon &&
             rightIcon !== '' && (
               <TouchableOpacity
                 style={rightButtonStyle}
                 activeOpacity={activeOpacity}
                 onPress={() => this.onRightIconPress()}
-              >
-                {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
-                <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
+              > */}
+          {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
+          {/* <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
               </TouchableOpacity>
-            )}
+            )} */}
 
           {!isShowLeftButtonIcon &&
             leftIcon !== '' && (
@@ -140,8 +184,13 @@ class Header extends Component {
                 activeOpacity={activeOpacity}
                 onPress={() => this.onLeftIconPress()}
               >
+                <Icon
+                  name={this.props.leftButtonIcon}
+                  size={this.props.leftIconSize}
+                  color={this.props.leftIconColor}
+                />
                 {/* <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} /> */}
-                <Image source={leftIcon} style={style.leftImageStyle} resizeMode="contain" />
+                {/* <Image source={leftIcon} style={style.leftImageStyle} resizeMode="contain" /> */}
               </TouchableOpacity>
             )}
         </View>

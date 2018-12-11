@@ -9,6 +9,7 @@ import {
   Dimensions,
   ScrollView,
   Image,
+  Platform,
 } from 'react-native';
 import Bip39 from 'react-native-bip39';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,7 +23,7 @@ import ProgressBar from '../../general/progressBar/index';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 // Calculate height of device
 const deviceHeight = Dimensions.get('window').height;
-
+const isIOS = Platform.OS === 'ios';
 /**
  * CaptionOutput: This component is meant for generating secret codes for captcha verification.
  */
@@ -170,9 +171,11 @@ class CaptionOutput extends Component {
           style={{
             width: DEVICE_WIDTH * 0.6,
             height: DEVICE_HEIGHT * 0.77,
-            opacity: 0.03,
+            // opacity: 0.03,
             top: DEVICE_HEIGHT * 0.07,
-            right: -((DEVICE_WIDTH * 0.6) / 2),
+            opacity: isIOS ? 0.03 : 0.02,
+            right: -((DEVICE_WIDTH * 0.45) / 2),
+            // right: -((DEVICE_WIDTH * 0.6) / 2),
             position: 'absolute',
           }}
           source={require('../../images/BackgroundIcon.png')}

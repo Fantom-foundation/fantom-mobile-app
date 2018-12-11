@@ -1,3 +1,4 @@
+// Library
 import React, { Component } from 'react';
 import {
   Text,
@@ -11,18 +12,14 @@ import {
   StatusBar,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Web3 from 'web3';
+// Components
 import Header from '../../general/header/index';
 import style from './style';
-import Button from '../../general/button/index';
 import Dialogbox from './dialogBox/index';
-import arrowLeftButton from '../../images/arrowLeft_White.png';
-import checkbox from '../../images/checkbox.png';
-import checkedIcon from '../../images/CheckedIcon.png';
-import qrCode from '../../images/QR_code.png';
+import qrCode from '../../images/QR.png';
 import * as AddressAction from '../../redux/addressBook/action';
-
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 /**
  * EditContact: This component is meant for functionality of Contact editing in App.
  */
@@ -33,7 +30,6 @@ class EditContact extends Component {
       address: '',
       name: '',
       dialogBox: false,
-      checked: true,
       headerText: 'Add Contact',
     };
     this.onLeftIconPress = this.onLeftIconPress.bind(this);
@@ -51,7 +47,6 @@ class EditContact extends Component {
   }
 
   onLeftIconPress() {
-    console.log('onLeftIconPressonLeftIconPress');
     this.props.navigation.goBack();
   }
 
@@ -100,10 +95,6 @@ class EditContact extends Component {
     }
   }
 
-  onCancelClick() {
-    this.props.navigation.goBack();
-  }
-
   onTextFieldFocus() {
     let scrollValue = Platform.OS === 'ios' ? 50 : 200;
 
@@ -136,16 +127,33 @@ class EditContact extends Component {
     this.props.navigation.navigate('QRScanner', { onScanSuccess: this.onScanSuccess.bind(this) });
   }
 
-  checkBoxClicked() {
-    // this.setState({
-    //     checked:!this.state.checked
-    // })
-  }
-
   closeDialogBox() {
     this.setState({
       dialogBox: false,
     });
+  }
+
+  renderConfirmButton() {
+    return (
+      <View style={style.confirmContainer}>
+        <TouchableOpacity
+          style={style.confirmButtonOuterContainer}
+          onPress={() => this.onConfirmClick()}
+        >
+          <View style={style.confirmButtonInnerContainer}>
+            <Image
+              source={require('../../images/Tick.png')}
+              style={{
+                height: DEVICE_WIDTH * 0.09,
+                width: DEVICE_WIDTH * 0.09,
+              }}
+              resizeMode="contain"
+            />
+          </View>
+        </TouchableOpacity>
+        <Text style={style.confirmTextStyle}>Confirm</Text>
+      </View>
+    );
   }
 
   render() {
@@ -154,13 +162,16 @@ class EditContact extends Component {
         <StatusBar barStyle="light-content" />
         <Header
           text={this.state.headerText}
-          leftButtonIcon={arrowLeftButton}
+          leftButtonIcon="chevron-left"
+          leftIconColor="#fff"
           onLeftIconPress={this.onLeftIconPress}
           leftIconSize={30}
-          rightIconSize={30}
-          headerStyle={{ backgroundColor: 'rgb(233,177,18)' }}
-          rightButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
-          leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
+          leftButtonStyle={{ marginLeft: -10 }}
+          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
+          headerStyle={{
+            backgroundColor: 'rgb(44,52,58)',
+            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+          }}
         />
 
         <ScrollView
@@ -168,27 +179,20 @@ class EditContact extends Component {
           style={style.scrollView}
           scrollEnabled={false}
         >
-          <View style={style.header}>
-            <View style={style.fantomContainer}>
-              {/* <Icon style={style.fantomIcon} name='check-square' size={30} /> */}
-              <TouchableOpacity activeOpacity={1} onPress={() => this.checkBoxClicked()}>
-                <Image
-                  source={this.state.checked ? checkedIcon : checkbox}
-                  style={{ width: 28, height: 28 }}
-                />
-              </TouchableOpacity>
-              <Text style={style.fantomText}>FANTOM</Text>
-            </View>
-            <Icon style={style.downArrowIcon} name="caret-down" size={30} />
-          </View>
-
+          {/* Background Image */}
+          <Image
+            style={style.backgroundImageStyle}
+            source={require('../../images/BackgroundIcon.png')}
+            resizeMode="contain"
+          />
+          {/* Address text Input View */}
           <View style={style.addressContainer}>
-            <Text style={style.addressText}>Address</Text>
-            <View style={style.addressInputContainer}>
+            <Text style={style.inputTextHeading}>Address</Text>
+            <View style={style.textInputContainer}>
               <TextInput
                 onChangeText={address => this.setState({ address })}
                 value={this.state.address}
-                style={style.addressTextInput}
+                style={style.enteredTextStyle}
                 placeholder="Enter wallet address"
                 placeholderTextColor="#a7a7a7"
                 autoCorrect={false}
@@ -197,42 +201,31 @@ class EditContact extends Component {
                 autoCapitalize="none"
               />
               <TouchableOpacity style={style.iconContainer} onPress={() => this.openScanner()}>
-                {/* <Icon  name='address-book' size={30} />
-                                <Icon style={style.qrCodeIcon} name='qrcode' size={30} /> */}
-                <Image source={qrCode} style={{ width: 32, height: 32 }} />
-                {/* <Image source={contact} style={{width:32,height:32}} /> */}
+                <Image source={qrCode} style={{ width: 30, height: 30 }} />
               </TouchableOpacity>
             </View>
           </View>
+          {/* Name TextInput View */}
           <View style={style.nameContainer}>
-            <Text style={style.nameText}>Name</Text>
-            <View style={style.nameTextInputContainer}>
+            <Text style={style.inputTextHeading}>Name</Text>
+            <View style={style.textInputContainer}>
               <TextInput
                 onChangeText={name => this.setState({ name })}
                 value={this.state.name}
-                style={style.nameTextInput}
+                style={style.enteredTextStyle}
                 placeholder="Enter name"
                 placeholderTextColor="#a7a7a7"
+                autoCorrect={false}
                 onFocus={() => this.onTextFieldFocus()}
                 onBlur={() => this.onTextFieldBlur()}
                 autoCapitalize="none"
               />
             </View>
           </View>
+          {/* Confirm container */}
+          {this.renderConfirmButton()}
         </ScrollView>
 
-        <View style={style.footer}>
-          <Button
-            buttonStyle={style.cancelButton}
-            text="Cancel"
-            onPress={() => this.onCancelClick()}
-          />
-          <Button
-            buttonStyle={style.confirmButton}
-            onPress={() => this.onConfirmClick()}
-            text="Confirm"
-          />
-        </View>
         {this.state.dialogBox && <Dialogbox onConfirm={() => this.closeDialogBox()} />}
       </View>
     );
@@ -242,7 +235,6 @@ class EditContact extends Component {
 const mapStateToProps = state => ({
   addresses: state.addressBookReducer.addresses,
 });
-
 const mapDispatchToProps = dispatch => ({
   addNewAddress: (walletAddress, name) => {
     dispatch({ type: AddressAction.ADD_ADDRESS, address: walletAddress, name: name || '' });
