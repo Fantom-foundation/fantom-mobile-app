@@ -16,11 +16,11 @@ const style = {
     backgroundColor: 'rgb(50,59,66)',
     height: 40,
     justifyContent: 'center',
-    paddingLeft: 32,
+    paddingLeft: 28,
   },
   amountHeadingStyle: {
     color: 'rgb(166,225,100)',
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'SFProDisplay-Medium',
   },
   balanceViewText: {

@@ -345,7 +345,11 @@ class TransactionEntity extends Component {
           fantomIcon={fantomIcon}
           leftButtonIcon={activeTabIndex === 0 ? 'refresh' : ''}
           leftIconColor="#fff"
-          leftIconSize={24}
+          leftIconSize={30}
+          rightImageStyling={{
+            height: 30,
+            width: 30,
+          }}
           onLeftIconPress={() => this.onRefresh()}
         />
         <NavigationTab

@@ -225,7 +225,7 @@ class AddressBook extends Component {
           text="Address Book"
           leftButtonIcon="chevron-left"
           leftIconColor="#fff"
-          leftIconSize={22}
+          leftIconSize={30}
           onLeftIconPress={this.onLeftIconPress}
           isRightBtnImage={false}
           rightButtonIcon="add-circle-outline"

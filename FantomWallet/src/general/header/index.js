@@ -70,6 +70,11 @@ class Header extends Component {
           </TouchableOpacity>
         );
       }
+      const rightImageStyleVal = this.props.rightImageStyling || {};
+      const rightImageStyling = {
+        ...style.rightImageStyle,
+        ...rightImageStyleVal,
+      };
       return (
         <TouchableOpacity
           style={rightButtonStyle}
@@ -77,7 +82,7 @@ class Header extends Component {
           onPress={() => this.onRightIconPress()}
         >
           {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
-          <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
+          <Image source={rightIcon} style={rightImageStyling} resizeMode="contain" />
         </TouchableOpacity>
       );
     }

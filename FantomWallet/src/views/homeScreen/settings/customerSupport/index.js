@@ -26,14 +26,18 @@ class CustomerSupport extends Component {
     this.props.navigation.goBack();
   }
 
-  renderLinkRow(iconNmae, textHeading, urlLink, linkText) {
+  renderLinkRow(iconName, textHeading, urlLink, linkText) {
     let IconType = MaterialIcons;
-    if (iconNmae === 'globe') {
+    if (iconName === 'globe') {
       IconType = FontAwesome5Icon;
+    }
+    let iconStyle = {};
+    if (iconName === 'headset-mic') {
+      iconStyle = { transform: [{ rotateX: '0deg' }, { rotateY: '180deg' }] };
     }
     return (
       <View style={style.textContainer}>
-        <IconType name={iconNmae} color="#FFF" size={20} />
+        <IconType name={iconName} color="#FFF" size={20} style={iconStyle} />
         <View style={{ paddingLeft: 8 }}>
           <Text style={style.textHeaderStyle}>{textHeading}</Text>
           <TouchableOpacity onPress={() => Linking.openURL(`${urlLink}`)}>
@@ -52,7 +56,7 @@ class CustomerSupport extends Component {
           text="Customer Support"
           leftButtonIcon="chevron-left"
           leftIconColor="#fff"
-          leftIconSize={22}
+          leftIconSize={30}
           onLeftIconPress={() => this.onLeftIconPress()}
           textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
           headerStyle={{

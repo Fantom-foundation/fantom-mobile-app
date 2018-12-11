@@ -1,67 +1,65 @@
-import { Dimensions } from 'react-native';
-import * as FontFamily from '../../../../../common/textFontFamily';
-
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
-
 const style = {
-  transactionCardStyle: {
-    marginTop: deviceHeight * 0.01,
-    marginBottom: deviceHeight * 0.01,
-    // marginBottom: 8,
-    // height: 56,
-    height: deviceHeight * 0.09,
-    backgroundColor: '#fff',
-    shadowColor: 'rgb(237,231,246)',
-    shadowOffset: { width: 0, height: 10 },
-    // shadowOpacity: 0.04
-    shadowOpacity: 1,
-    elevation: 1,
-  },
-  rowOneStyle: {
-    flexDirection: 'row',
-    margin: 4,
-  },
-  rowOneViewStyle: {
+  mainContainerStyle: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+    alignItems: 'center',
   },
-  transactionTypeStyle: {
-    // fontFamily: FontFamily.SegoeUI
+  dateContainer: {
+    flex: 0.4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  rowOneTextStyle: {
-    fontFamily: FontFamily.SegoeUISemibold,
+  dateTextStyle: {
+    fontFamily: 'SFProDisplay-Bold',
+    color: 'rgb(252,252,252)',
+    fontSize: 14,
   },
-  unitStyle: {
+  iconContainerStyle: {
+    flex: 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  idContainerStyle: {
+    flex: 2.3,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  idTextStyle: {
+    fontFamily: 'SFProDisplay-Regular',
+    color: 'rgb(255,255,255)',
     fontSize: 12,
-    fontFamily: FontFamily.SegoeUI,
   },
-  rowTwoStyle: {
-    flexDirection: 'row',
-    margin: 4,
-  },
-  transactionIdStyle: {
-    width: deviceWidth / 2,
-    fontFamily: FontFamily.SFProDisplayRegular,
-    letterSpacing: 1,
-  },
-  rowTwoViewStyle: {
+  timeDiffContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  timeDiffTextStyle: {
+    fontFamily: 'SFProDisplay-Italic',
+    color: 'rgb(159,215,97)',
+    fontSize: 10,
+  },
+  amountContainerStyle: {
+    flex: 1,
+    paddingVertical: 4,
+    marginLeft: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    borderRadius: 2,
   },
-  successTextStyle: {
-    color: '#00CE52',
-    fontFamily: FontFamily.SFProDisplayRegular,
-    letterSpacing: 1,
+  amountValueTextStyle: {
+    fontFamily: 'SFProDisplay-Medium',
+    color: 'rgb(255,255,255)',
+    fontSize: 10,
   },
-  failureTextStyle: {
-    color: '#FF0000',
-    fontFamily: FontFamily.SFProDisplayRegular,
-    letterSpacing: 1,
+  amountUnitTextStyle: {
+    fontFamily: 'SFProDisplay-Light',
+    color: 'rgb(255,255,255)',
+    fontSize: 10,
   },
 };
 
