@@ -134,7 +134,7 @@ class TransactionEntity extends Component {
         return responseJson;
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
       });
   }
 
@@ -158,7 +158,7 @@ class TransactionEntity extends Component {
         return responseJson;
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
         this.setState({
           isLoading: false,
         });

@@ -51,7 +51,6 @@ class SendMoney extends Component {
       Alert.alert('Error', 'Please enter valid amount.');
     } else {
       this.transferMoney(this.props.publicKey, address, amount, memo);
-      // console.warn(amount, maxFantomBalance, 'amount');
     }
   }
 
@@ -244,7 +243,7 @@ class SendMoney extends Component {
           {this.renderConfirmButton()}
           <View style={{ height: DEVICE_HEIGHT * 0.1 }} />
         </ScrollView>
-        {this.state.isLoading && <Loading />}
+        {this.state.isLoading && <Loading loaderColor="#fff" />}
       </View>
     );
   }

@@ -7,13 +7,14 @@ import {
   StyleSheet,
   View,
   Image,
-  TouchableOpacity,
+  // TouchableOpacity,
   Text,
   ActivityIndicator,
   Alert,
-  Dimensions
+  Dimensions,
 } from 'react-native';
-import uploadQR from '../../../images/uploading.png';
+import FantomLogoTranparentWhite from '../../../images/fantom_logo_TranparentWhite.png';
+// import uploadQR from '../../../images/uploading.png';
 
 export const DEVICE_WIDTH = Dimensions.get('window').width;
 export const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -21,7 +22,6 @@ export const DEVICE_HEIGHT = Dimensions.get('window').height;
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -36,12 +36,19 @@ const style = StyleSheet.create({
   },
 
   addressTitleViewStyle: {
-    flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    justifyContent: 'center',
+    padding: 12,
+    width: DEVICE_WIDTH - 32,
+    borderRadius: 4,
+    marginBottom: 24,
+
+    backgroundColor: 'rgb(44,52,58)',
   },
   addressTitleTextStyle: {
-    fontWeight: 'bold',
+    color: '#FFF',
+    fontFamily: 'SFProDisplay-Semibold',
+    fontSize: 16,
   },
   addressShareIconStyle: {
     flex: 1,
@@ -59,9 +66,14 @@ const style = StyleSheet.create({
 });
 
 export default class QRGenerator extends Component {
+  constructor(props) {
+    super(props);
+    this.onPress = this.onPress.bind(this);
+  }
+
   onPress() {
     const { billingAmount } = this.props;
-    
+
     if (
       billingAmount === undefined ||
       billingAmount === '' ||
@@ -73,14 +85,13 @@ export default class QRGenerator extends Component {
     }
     // const updatedBillingAmount = Math.round(billingAmount * 10000) / 10000
     this.viewShot.capture().then(uri => {
-      console.log('do something with ', uri);
       const message = '';
       Share.open({ url: uri, title: 'Fantom', message })
         .then(res => {
-          console.log('this.props.qrLink , res', this.props.qrLink, res);
+          // console.log('this.props.qrLink , res', this.props.qrLink, res);
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
         });
     });
   }
@@ -90,21 +101,28 @@ export default class QRGenerator extends Component {
       const size = 250;
       const logoWidth = 146;
       const logoHeight = 35;
+      const logoConatinerStyle = {
+        flexDirection: 'row',
+        width: logoWidth,
+        height: logoHeight,
+        position: 'absolute',
+        left: size / 2 - logoWidth / 2,
+        top: size / 2 - logoHeight / 2,
+        padding: 15,
+        backgroundColor: 'rgb(14,14,18)',
+      };
+      let logoImgStyle = {
+        alignSelf: 'center',
+        backgroundColor: 'rgb(14,14,18)',
+        flex: 1,
+        height: logoHeight,
+      };
       return (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: logoWidth,
-            height: logoHeight,
-            position: 'absolute',
-            backgroundColor: 'white',
-            left: size / 2 - logoWidth / 2,
-            top: size / 2 - logoHeight / 2,
-          }}
-        >
+        <View style={logoConatinerStyle}>
           <Image
-            source={require('../../../images/fantom_logo_Black.jpg')} // eslint-disable-line
-            style={{ alignSelf: 'center', backgroundColor: 'white', flex: 1, height: logoHeight }}
+            source={FantomLogoTranparentWhite} // eslint-disable-line
+            style={logoImgStyle}
+            resizeMode="contain"
           />
         </View>
       );
@@ -114,44 +132,44 @@ export default class QRGenerator extends Component {
 
   render() {
     const { billingAmount } = this.props;
-    const updatedBillingAmount = Math.round(billingAmount * 10000) / 10000
+    const updatedBillingAmount = Math.round(billingAmount * 10000) / 10000;
     return (
       <View style={style.container}>
+        {/* Top heading */}
         <View style={style.addressTitleViewStyle}>
           <Text style={style.addressTitleTextStyle}> {this.props.titleText} </Text>
-          <TouchableOpacity style={style.addressShareIconStyle} onPress={() => this.onPress()}>
-            <Image
-              source={uploadQR}
-              style={style.addressShareImageIconStyle}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
         </View>
 
-        {/* <ViewShot
-          ref={viewShot => {
-            this.viewShot = viewShot;
-          }}
-          options={{ format: 'jpg' }}
-        > */}
-        <View>
+        <View style={{ flex: 1 }}>
           {this.props.qrLink !== undefined &&
-            this.props.qrLink !== '' && <QRCode content={this.props.qrLink} codeStyle="dot" />}
+            this.props.qrLink !== '' && (
+              <QRCode
+                content={this.props.qrLink}
+                codeStyle="dot"
+                color="#FFF"
+                backgroundColor="rgb(14,14,18)"
+              />
+            )}
+          {/* Displays fantom log in center of QR code */}
           {this.renderLogo()}
           {(this.props.qrLink === undefined || this.props.qrLink === '') && (
             <View style={style.loaderStyle}>
-              <ActivityIndicator size="large" color="#000" />
+              <ActivityIndicator size="large" color="#FFF" />
             </View>
           )}
         </View>
-       {/* </ViewShot> */}
 
-<ViewShot
+        <ViewShot
           ref={viewShot => {
             this.viewShot = viewShot;
           }}
           options={{ format: 'jpg' }}
-          style={{ position: 'absolute', left: -(DEVICE_WIDTH * 5), top: -(DEVICE_HEIGHT * 5), backgroundColor: 'white' }}
+          style={{
+            position: 'absolute',
+            left: -(DEVICE_WIDTH * 5),
+            top: -(DEVICE_HEIGHT * 5),
+            backgroundColor: 'white',
+          }}
         >
           {this.props.qrLink !== undefined &&
             this.props.qrLink !== '' && <QRCode content={this.props.qrLink} codeStyle="dot" />}
@@ -162,9 +180,10 @@ export default class QRGenerator extends Component {
             </View>
           )}
           <View style={{ height: 2, backgroundColor: 'rgb(50, 50, 50)', flex: 1, margin: 10 }} />
-          <Text style={{ margin: 10 , marginTop: 0, fontSize: 16, fontWeight: 'bold', width: 230}}>Billing amount: {updatedBillingAmount} FTM</Text>
-       </ViewShot>
-
+          <Text style={{ margin: 10, marginTop: 0, fontSize: 16, fontWeight: 'bold', width: 230 }}>
+            Billing amount: {updatedBillingAmount} FTM
+          </Text>
+        </ViewShot>
       </View>
     );
   }

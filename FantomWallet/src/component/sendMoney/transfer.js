@@ -33,14 +33,12 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
           web3.eth
             .sendSignedTransaction(`0x${serializedTx.toString('hex')}`)
             .on('transactionHash', hash => {
-              console.log('transactionHash', hash);
+              // console.log('transactionHash', hash);
             })
             .on('receipt', receipt => {
-              console.log('receipt', receipt);
+              // console.log('receipt', receipt);
             })
             .on('confirmation', (confirmationNumber, receipt) => {
-              console.log('confirmation confirmationNumber', confirmationNumber);
-              console.log('confirmation', receipt);
               if (confirmationNumber === 1 && !this.isConfirmationRecieved) {
                 this.isConfirmationRecieved = true;
                 let hash = '';
@@ -51,7 +49,6 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
               }
             })
             .on('error', errChk => {
-              console.log('error', errChk);
               let messageObj = '';
               if (errChk.message) {
                 messageObj = errChk.message;
@@ -61,7 +58,6 @@ function transferMoneyViaEthereum(from, to, value, memo, privateKey) {
         });
       })
       .catch(err => {
-        console.log(err, 'err');
         reject({ success: false, message: 'Some error occured.' });
       });
   });
@@ -72,13 +68,11 @@ function getNonceFantom(address) {
     axios
       .get(`${configHelper.apiUrl}/account/${address}`)
       .then(response => {
-        console.log('nonce', response.data.nonce);
         resolve(response.data.nonce);
         // tx.nonce = response.data.nonce
         // generateRawTx(tx, priv)
       })
       .catch(error => {
-        console.log(error);
         reject(error);
       });
   });
@@ -109,7 +103,6 @@ function transferMoneyViaFantom(from, to, value, memo, privateKey) {
         axios
           .post(`${configHelper.apiUrl}/sendRawTransaction`, hexTx)
           .then(response => {
-            console.log(response.data);
             if (response && response.data && response.data.txHash) {
               resolve({ success: true, hash: response.data.txHash });
             } else {
@@ -117,12 +110,10 @@ function transferMoneyViaFantom(from, to, value, memo, privateKey) {
             }
           })
           .catch(error => {
-            console.log(error);
             reject(error);
           });
       })
       .catch(err => {
-        console.log(err, 'err');
         reject({ success: false, message: 'Some error occured.' });
       });
   });
