@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, BackHandler, Platform } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 
 /** * InActive NavigationIcons */
@@ -18,9 +18,7 @@ import { ACTIVE_TAB_COLOR } from '../../../common/constants';
 import style from './style';
 import Tab from './tab/index';
 import TabInfo from './tab/tabInfo';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../common/constants';
 
-const isIOS = Platform.OS === 'ios';
 /**
  * HomeNavigationBar: This component is meant for rendering navigation tab bar on home screen containing list of tabs.
  */
@@ -106,21 +104,6 @@ class HomeNavigationBar extends Component {
       <View style={style.mainContainerStyle}>
         <View style={style.tabInfoStyle}>{renderTabIfo}</View>
         <View style={style.navigationTabStyle}>{renderTabNavigation}</View>
-
-        <Image
-          style={{
-            width: DEVICE_WIDTH * 0.4,
-            height: DEVICE_HEIGHT * 0.77,
-            justifyContent: 'center',
-            alignItems: 'center',
-            top: 0,
-            position: 'absolute',
-            opacity: isIOS ? 0.03 : 0.02,
-            right: -((DEVICE_WIDTH * 0.3) / 2),
-          }}
-          source={require('../../../images/BackgroundIcon.png')}
-          resizeMode="contain"
-        />
       </View>
     );
   }
