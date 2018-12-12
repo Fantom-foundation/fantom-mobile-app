@@ -1,15 +1,15 @@
+// Library
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Keyboard, Clipboard } from 'react-native';
+import { ScrollView, View, Text, Keyboard, Clipboard, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+// Style
 import style from './style';
-
+// Components
 import QRCodeShare from '../qrShareCode/index';
 import BillingAmountScreen from '../billingAmountView/index';
-import Button from '../../../../general/button';
-
-import { DEVICE_HEIGHT } from '../../../../common/constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants';
 
 /**
  * DepositViewInfo: This component is meant for redering deposit screen related information.
@@ -18,10 +18,11 @@ class DepositViewInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: 0,
+      amount: '',
       qrAddress: '',
     };
     this.onAmountChange = this.onAmountChange.bind(this);
+    this.shareData = {};
   }
 
   componentDidMount() {
@@ -36,20 +37,15 @@ class DepositViewInfo extends Component {
     clearTimeout(this.timeout);
   }
 
-  onQRShare() {
-    console.warn('share QR');
-  }
-
   onAmountChange(amount) {
-    //  let amount = amount.trim();
     this.setState({
       amount: amount.trim(),
     });
   }
 
   async onCopyAddress() {
+    // Copies address to clipboard
     const string = this.state.qrAddress;
-    console.warn('copy address', string);
     await Clipboard.setString(string);
   }
 
@@ -65,13 +61,27 @@ class DepositViewInfo extends Component {
     this.scrollView.scrollToEnd();
   }
 
+  onShare() {
+    // called on click of share button
+    this.qrcode.shareQR();
+  }
+
+  renderConfirmButton() {
+    return (
+      <View style={style.confirmContainer}>
+        <TouchableOpacity style={style.confirmButtonOuterContainer} onPress={() => this.onShare()}>
+          <View style={style.confirmButtonInnerContainer}>
+            <EvilIcons name="share-apple" color="#FFF" size={DEVICE_WIDTH * 0.09} />
+          </View>
+        </TouchableOpacity>
+        <Text style={style.confirmTextStyle}>Share</Text>
+      </View>
+    );
+  }
+
   render() {
-    // const balanceText = '(1,000\\ = 1.00002312FTM)';
     const qrLink = this.state.qrAddress;
     let headerText = 'FTM';
-    // if (this.props.selectedTab === 'Fantom') {
-    //   headerText = 'FTM';
-    // }
 
     return (
       <ScrollView
@@ -79,10 +89,8 @@ class DepositViewInfo extends Component {
         style={style.fantomViewStyle}
         showsVerticalScrollIndicator={false}
       >
-        {/* <View style={style.amountDisplayStyle}>
-          <Text>{balanceText} </Text>
-        </View> */}
         <QRCodeShare
+          ref={refObj => (this.qrcode = refObj)}
           copyAddress={() => this.onCopyAddress()}
           qrLink={qrLink}
           billingAmount={this.state.amount}
@@ -93,15 +101,9 @@ class DepositViewInfo extends Component {
           onTextFieldBlur={() => this.onTextFieldBlur()}
           headerText={headerText}
         />
-        <View style={style.buttonViewStyle}>
-          <Button
-            text="Copy Address"
-            buttonStyle={{ backgroundColor: '#EEBD12' }}
-            textStyle={{ color: '#000' }}
-            onPress={() => this.onCopyAddress()}
-          />
-        </View>
-        <View style={{ height: 40, marginBottom: 10 }} />
+        {this.renderConfirmButton()}
+
+        <View style={{ height: DEVICE_HEIGHT * 0.15, marginBottom: 10 }} />
       </ScrollView>
     );
   }
@@ -115,8 +117,6 @@ const mapStateToProps = state => ({
 
 DepositViewInfo.propTypes = {
   publicKey: PropTypes.string,
-  //   navigation: PropTypes.object,
-  // selectedTab: PropTypes.string,
 };
 
 export default connect(

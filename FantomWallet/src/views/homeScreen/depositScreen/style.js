@@ -1,20 +1,27 @@
-import { Dimensions } from 'react-native';
+import { Platform } from 'react-native';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../common/constants';
 
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
-
+const isAndroid = Platform.OS === 'android';
 const style = {
   depositViewStyle: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgb(14,14,18)',
   },
-  textViewStyle: {
-    // backgroundColor: 'red'
-    // fontFamily: 'Times New Roman',
-  },
+  textViewStyle: {},
   depositScreenStyle: {
-    width: deviceWidth,
-    height: deviceHeight * 0.84,
+    width: DEVICE_WIDTH,
+    height: DEVICE_HEIGHT * 0.84,
+    backgroundColor: 'rgb(14,14,18)',
+  },
+  backgroundIconStyle: {
+    width: DEVICE_WIDTH * 0.45,
+    height: DEVICE_HEIGHT * 0.85,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 0,
+    position: 'absolute',
+    opacity: !isAndroid ? 0.03 : 0.02,
+    right: -((DEVICE_WIDTH * 0.3) / 2),
   },
 };
 export default style;

@@ -1,8 +1,8 @@
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants';
+
 const style = {
   billAmountViewStyle: {
-    // marginTop: 36,
-    marginLeft: 24,
-    marginRight: 24,
+    backgroundColor: 'rgb(14, 14, 18)',
   },
   billAmountLabelStyle: {
     flex: 1,
@@ -16,10 +16,13 @@ const style = {
   ftmViewStyle: {
     flex: 1,
     alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingRight: 10,
   },
   ftmLabelStyle: {
     fontSize: 16,
     fontFamily: 'SegoeUI-SemiBold',
+    color: '#fff',
   },
   amountInputStyle: {
     fontSize: 16,
@@ -33,6 +36,34 @@ const style = {
     marginLeft: 60,
     marginRight: 60,
     marginBottom: 20,
+  },
+
+  billingAmtContainer: {
+    width: DEVICE_WIDTH - 32,
+    marginTop: DEVICE_HEIGHT * 0.03,
+    alignSelf: 'center',
+  },
+  inputTextHeading: {
+    fontSize: 16,
+    fontFamily: 'SFProDisplay-Regular',
+    color: '#FFFFFF',
+    paddingLeft: 12,
+  },
+  textInputContainer: {
+    height: 50,
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1.5,
+    borderRadius: 4,
+    borderBottomColor: 'rgb(56,65,71)',
+    backgroundColor: 'rgb(32,37,42)',
+  },
+  enteredTextStyle: {
+    fontSize: 12,
+    flex: 1,
+    paddingLeft: 12,
+    color: '#fff',
+    fontFamily: 'SFProDisplay-Regular',
   },
 };
 export default style;
