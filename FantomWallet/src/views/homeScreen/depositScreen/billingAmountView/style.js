@@ -9,10 +9,6 @@ const style = {
     padding: 8,
     flexDirection: 'row',
   },
-  billAmountTextLabelStyle: {
-    fontSize: 16,
-    fontFamily: 'SegoeUI-SemiBold',
-  },
   ftmViewStyle: {
     flex: 1,
     alignItems: 'flex-end',
@@ -21,7 +17,7 @@ const style = {
   },
   ftmLabelStyle: {
     fontSize: 16,
-    fontFamily: 'SegoeUI-SemiBold',
+    fontFamily: 'SFProDisplay-Regular',
     color: '#fff',
   },
   amountInputStyle: {

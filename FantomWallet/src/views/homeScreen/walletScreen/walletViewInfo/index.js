@@ -31,20 +31,9 @@ class WalletFantomScreen extends Component {
   }
 
   render() {
-    // const balanceText = '(1,000\\ = 1.00002312FTM)';
     const fantomTransactionArr = this.props.transactionData;
     return (
       <View style={style.mainContainerStyle}>
-        {/* <View style={style.amountDisplayStyle}>
-          <Text style={style.textViewStyle}>{balanceText} </Text>
-        </View> */}
-
-        {/* Pull Down to refresh */}
-        {/* <View style={style.refreshMessageViewStyle}>
-          <Text style={style.refreshTextStyle}>Scroll down to refresh</Text>
-          <MaterialIcons name="refresh" size={12} style={style.refreshIconStyle} />
-        </View> */}
-
         <ScrollView
           style={style.fantomViewStyle}
           showsVerticalScrollIndicator={false}

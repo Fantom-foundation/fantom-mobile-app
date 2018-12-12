@@ -83,11 +83,6 @@ class WalletSetup extends PureComponent {
 
   render() {
     return (
-      // <ImageBackground
-      //   style={style.imageBackground}
-      //   source={require('../../images/background.png')}
-      //   imageStyle={{ resizeMode: 'cover' }}
-      // >
       <View style={style.imageBackground}>
         <StatusBar barStyle="light-content" />
         <View style={style.mainContainer}>
@@ -108,7 +103,6 @@ class WalletSetup extends PureComponent {
           />
         </View>
       </View>
-      //</ImageBackground>
     );
   }
 }

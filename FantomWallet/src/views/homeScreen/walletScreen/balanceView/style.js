@@ -29,25 +29,13 @@ const style = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  balanceViewTextOne: {
+  balanceUnitTextStyle: {
     fontSize: 24,
     fontFamily: 'SFProDisplay-Bold',
     flex: 1,
     textAlign: 'center',
     alignSelf: 'center',
     color: '#fff',
-  },
-  balanceTextTwo: {
-    padding: 4,
-    alignItems: 'center',
-  },
-  balanceTextStyle: {
-    fontSize: 14,
-    fontFamily: FontFamily.SegoeUILight,
-  },
-  balanceUnitText: {
-    fontSize: 20,
-    fontFamily: FontFamily.SegoeUIBold,
   },
 };
 export default style;
