@@ -15,7 +15,7 @@ class BalanceView extends PureComponent {
           <Text style={style.amountHeadingStyle}>Amount</Text>
         </View>
         <View style={style.balanceViewText}>
-          <Text numberOfLines={1} style={style.balanceViewTextOne}>
+          <Text numberOfLines={1} style={style.balanceUnitTextStyle}>
             {ftmBalance} FTM
           </Text>
         </View>

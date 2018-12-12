@@ -36,7 +36,6 @@ export default class TermsConditions extends Component {
           rightButtonIcon={crossButton}
           isRightBtnImage
           onRightIconPress={this.onRightIconPress}
-          // textStyle={{ fontFamily: 'SegoeUI-SemiBold' }}
           textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
           headerStyle={{
             backgroundColor: 'rgb(44,52,58)',

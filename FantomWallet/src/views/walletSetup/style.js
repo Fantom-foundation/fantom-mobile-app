@@ -74,7 +74,7 @@ const styles = {
   },
   footerText2: {
     color: 'white',
-    fontFamily: 'Roboto-Light',
+    fontFamily: 'SFProDisplay-Light',
     fontSize: 14,
   },
   division: {
