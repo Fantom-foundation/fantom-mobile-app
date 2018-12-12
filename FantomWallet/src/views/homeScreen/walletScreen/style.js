@@ -1,3 +1,7 @@
+import { Platform } from 'react-native';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../common/constants';
+
+const isIOS = Platform.OS === 'ios';
 const style = {
   walletViewStyle: {
     flex: 1,
@@ -11,6 +15,16 @@ const style = {
   walletScreenStyle: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  backgroundImgStyle: {
+    width: DEVICE_WIDTH * 0.5,
+    height: DEVICE_HEIGHT * 0.77,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 0,
+    position: 'absolute',
+    opacity: isIOS ? 0.03 : 0.02,
+    right: -((DEVICE_WIDTH * 0.4) / 2),
   },
 };
 export default style;

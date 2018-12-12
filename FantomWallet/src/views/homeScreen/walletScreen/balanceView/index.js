@@ -7,7 +7,7 @@ import style from './style';
 class BalanceView extends PureComponent {
   render() {
     const { balance } = this.props;
-    const ftmBalance = Number(balance).toFixed(4);
+    const ftmBalance = Number(balance).toFixed(6);
 
     return (
       <View style={style.fantomBalanceView}>
