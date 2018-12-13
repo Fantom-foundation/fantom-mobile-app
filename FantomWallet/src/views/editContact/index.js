@@ -199,6 +199,7 @@ class EditContact extends Component {
                 onFocus={() => this.onTextFieldFocus()}
                 onBlur={() => this.onTextFieldBlur()}
                 autoCapitalize="none"
+                underlineColorAndroid="transparent"
               />
               <TouchableOpacity style={style.iconContainer} onPress={() => this.openScanner()}>
                 <Image source={qrCode} style={{ width: 30, height: 30 }} />
@@ -219,6 +220,7 @@ class EditContact extends Component {
                 onFocus={() => this.onTextFieldFocus()}
                 onBlur={() => this.onTextFieldBlur()}
                 autoCapitalize="none"
+                underlineColorAndroid="transparent"
               />
             </View>
           </View>

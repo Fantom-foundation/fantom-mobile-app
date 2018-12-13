@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { QRCode } from 'react-native-custom-qr-codes';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
-
 import {
   StyleSheet,
   View,
@@ -14,7 +13,6 @@ import {
   Dimensions,
 } from 'react-native';
 import FantomLogoTranparentWhite from '../../../images/fantom_logo_TranparentWhite.png';
-// import uploadQR from '../../../images/uploading.png';
 
 export const DEVICE_WIDTH = Dimensions.get('window').width;
 export const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -97,7 +95,13 @@ export default class QRGenerator extends Component {
   }
 
   renderLogo() {
-    if (this.props.qrLink !== undefined && this.props.qrLink !== '') {
+    if (
+      this.props &&
+      this.props.qrLink &&
+      this.props.qrLink !== undefined &&
+      this.props.qrLink !== '' &&
+      this.props.qrLink !== null
+    ) {
       const size = 250;
       const logoWidth = 146;
       const logoHeight = 35;
@@ -130,6 +134,35 @@ export default class QRGenerator extends Component {
     return null;
   }
 
+  renderLoader() {
+    return (
+      <View style={style.loaderStyle}>
+        <ActivityIndicator size="large" color="#FFF" />
+      </View>
+    );
+  }
+
+  renderQrCode() {
+    if (
+      this.props &&
+      this.props.qrLink &&
+      this.props.qrLink !== undefined &&
+      this.props.qrLink !== '' &&
+      this.props.qrLink !== null
+    ) {
+      return (
+        <QRCode
+          content={this.props.qrLink}
+          codeStyle="dot"
+          color="#FFF"
+          backgroundColor="rgb(14,14,18)"
+        />
+      );
+    }
+    // If link is not present, start loader
+    return this.renderLoader();
+  }
+
   render() {
     const { billingAmount } = this.props;
     const updatedBillingAmount = Math.round(billingAmount * 10000) / 10000;
@@ -141,24 +174,13 @@ export default class QRGenerator extends Component {
         </View>
 
         <View style={{ flex: 1 }}>
-          {this.props.qrLink !== undefined &&
-            this.props.qrLink !== '' && (
-              <QRCode
-                content={this.props.qrLink}
-                codeStyle="dot"
-                color="#FFF"
-                backgroundColor="rgb(14,14,18)"
-              />
-            )}
+          {this.renderQrCode()}
+
           {/* Displays fantom log in center of QR code */}
           {this.renderLogo()}
-          {(this.props.qrLink === undefined || this.props.qrLink === '') && (
-            <View style={style.loaderStyle}>
-              <ActivityIndicator size="large" color="#FFF" />
-            </View>
-          )}
         </View>
 
+        {/* For sharing */}
         <ViewShot
           ref={viewShot => {
             this.viewShot = viewShot;

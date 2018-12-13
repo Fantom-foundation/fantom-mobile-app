@@ -190,6 +190,7 @@ export default class WithdrawScreen extends Component {
             onSubmitEditing={() => {
               Keyboard.dismiss();
             }}
+            underlineColorAndroid="transparent"
           />
           <TouchableOpacity style={style.iconContainer} onPress={() => this.onScannerPress()}>
             <Image source={qrCode} style={{ width: 25, height: 25 }} resizeMode="contain" />
@@ -223,6 +224,7 @@ export default class WithdrawScreen extends Component {
             onSubmitEditing={() => {
               Keyboard.dismiss();
             }}
+            underlineColorAndroid="transparent"
           />
           <View style={style.priceSubContainer}>
             <Text style={style.priceTextStyle}>FTM</Text>
@@ -251,6 +253,7 @@ export default class WithdrawScreen extends Component {
             onFocus={() => this.onFocus()}
             onBlur={() => this.onBlur()}
             multiline
+            underlineColorAndroid="transparent"
           />
         </View>
       </View>

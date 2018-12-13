@@ -27,6 +27,8 @@ class TextField extends PureComponent {
           editable={false}
           selectTextOnFocus={false}
           autoCapitalize="none"
+          underlineColorAndroid="transparent"
+          autoCorrect={false}
         />
         {this.props.isimagePresent && (
           <Image
