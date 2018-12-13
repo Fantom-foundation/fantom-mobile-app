@@ -23,7 +23,7 @@ const style = {
     height: DEVICE_HEIGHT * 0.77,
     top: DEVICE_HEIGHT * 0.07,
     position: 'absolute',
-    opacity: isIOS ? 0.03 : 0.02,
+    opacity: isIOS ? 0.03 : 0.03,
     right: -((DEVICE_WIDTH * 0.45) / 2),
   },
   headerContainer: {
