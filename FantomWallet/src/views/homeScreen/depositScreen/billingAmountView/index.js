@@ -45,11 +45,12 @@ class BillingAmountScreen extends Component {
             autoCorrect={false}
             onChangeText={ammount => this.onAmountChange(ammount)}
             value={`${this.state.amount}`}
-            placeholder="Enter Amount"
+            placeholder="0"
             keyboardType="decimal-pad"
             onFocus={() => this.onTextFieldFocus()}
             onBlur={() => this.onTextFieldBlur()}
             autoCapitalize="none"
+            underlineColorAndroid="transparent"
           />
           <View style={style.ftmViewStyle}>
             <Text style={style.ftmLabelStyle}>{this.props.headerText}</Text>

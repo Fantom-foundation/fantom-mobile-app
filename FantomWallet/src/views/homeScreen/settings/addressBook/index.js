@@ -208,6 +208,7 @@ class AddressBook extends Component {
             onChangeText={text => this.setState({ searchText: text })}
             autoCapitalize="none"
             autoCorrect={false}
+            underlineColorAndroid="transparent"
           />
           <MaterialIcons name="search" size={20} color="rgba(255,255,255,0.8)" />
         </View>

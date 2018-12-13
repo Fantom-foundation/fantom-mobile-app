@@ -16,6 +16,8 @@ export default class InputBox extends PureComponent {
           value={this.props.text}
           style={style.textBox}
           autoCapitalize="none"
+          underlineColorAndroid="transparent"
+          autoCorrect={false}
         />
       </View>
     );
