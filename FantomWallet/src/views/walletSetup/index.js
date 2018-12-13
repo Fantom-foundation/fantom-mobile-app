@@ -85,22 +85,22 @@ class WalletSetup extends PureComponent {
     return (
       <View style={style.imageBackground}>
         <StatusBar barStyle="light-content" />
+        <Image
+          style={{
+            width: DEVICE_WIDTH * 0.6,
+            height: DEVICE_HEIGHT * 0.77,
+            opacity: isIOS ? 0.03 : 0.04,
+            top: DEVICE_HEIGHT * 0.1,
+            right: -((DEVICE_WIDTH * 0.45) / 2),
+            position: 'absolute',
+          }}
+          source={require('../../images/BackgroundIcon.png')}
+          resizeMode="contain"
+        />
         <View style={style.mainContainer}>
           {this.renderHeaderImage()}
           {this.renderMidContainer()}
           {this.renderBottomButtons()}
-          <Image
-            style={{
-              width: DEVICE_WIDTH * 0.6,
-              height: DEVICE_HEIGHT * 0.77,
-              opacity: isIOS ? 0.03 : 0.02,
-              top: DEVICE_HEIGHT * 0.1,
-              right: -((DEVICE_WIDTH * 0.45) / 2),
-              position: 'absolute',
-            }}
-            source={require('../../images/BackgroundIcon.png')}
-            resizeMode="contain"
-          />
         </View>
       </View>
     );
