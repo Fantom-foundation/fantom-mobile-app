@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Text } from 'react-native';
 
 import WalletTab from '../../../walletScreen';
 import WithdrawTab from '../../../withdrawScreen';
@@ -9,7 +8,7 @@ import DepositTab from '../../../depositScreen';
  * TabInfo: This component is meant for rendering different screen based on selected tab from navigation tab bar.
  */
 class TabInfo extends PureComponent {
-  render() {
+  renderTab() {
     const {
       tabRenderInfo,
       navigation,
@@ -44,7 +43,11 @@ class TabInfo extends PureComponent {
         return <DepositTab navigation={navigation} balance={balance} />;
       }
     }
-    return <Text />;
+    return null;
+  }
+
+  render() {
+    return <React.Fragment>{this.renderTab()}</React.Fragment>;
   }
 }
 export default TabInfo;
