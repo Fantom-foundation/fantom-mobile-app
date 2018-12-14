@@ -5,7 +5,8 @@ const isAndroid = Platform.OS === 'android';
 
 const style = {
   mainContainerStyle: {
-    flex: 1,
+    height: DEVICE_HEIGHT,
+    width: DEVICE_WIDTH,
     backgroundColor: 'rgb(14,14,18)',
   },
   topMarginContainer: {
@@ -80,7 +81,6 @@ const style = {
     fontSize: 12,
     flex: 1,
     paddingLeft: 12,
-    // backgroundColor: 'rgb(32,37,42)',
     color: '#fff',
     fontFamily: 'SFProDisplay-Regular',
   },

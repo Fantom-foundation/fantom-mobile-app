@@ -66,6 +66,7 @@ class Settings extends Component {
             {this.renderOptionCard('Privacy Policy', PrivacyPolicy, 'PrivacyPolicy')}
             {this.renderOptionCard('About App', AboutApp, 'AboutApp')}
           </View>
+          <View style={{ height: DEVICE_HEIGHT * 0.08 }} />
         </ScrollView>
       </View>
     );

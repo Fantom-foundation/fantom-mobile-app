@@ -2,7 +2,7 @@ import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants';
 
 const style = {
   fantomViewStyle: {
-    flex: 1,
+    height: DEVICE_HEIGHT,
   },
   amountDisplayStyle: {
     backgroundColor: '#fff',

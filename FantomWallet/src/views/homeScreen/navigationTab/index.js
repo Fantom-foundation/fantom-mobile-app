@@ -13,7 +13,7 @@ import sendWhiteIcon from '../../../images/sendWhite.png';
 import depositWhiteIcon from '../../../images/downloading_white.png';
 
 /** * Color Constants */
-import { ACTIVE_TAB_COLOR } from '../../../common/constants';
+import { INACTIVE_TAB_COLOR } from '../../../common/constants';
 
 import style from './style';
 import Tab from './tab/index';
@@ -93,8 +93,8 @@ class HomeNavigationBar extends Component {
           key={index}
           activeTabIndex={activeTabIndex}
           index={index}
-          activeTabColor={ACTIVE_TAB_COLOR}
-          inActiveTabColor="rgb(0,177,251)"
+          activeTabColor="rgb(0,177,251)"
+          inActiveTabColor={INACTIVE_TAB_COLOR}
           tabIfo={tabIfo}
           handleSelectedTab={this.handleSelectedTab}
         />

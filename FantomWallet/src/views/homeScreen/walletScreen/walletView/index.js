@@ -8,7 +8,6 @@ import { ACTIVE_SUB_TAB_COLOR, WHITE_COLOR } from '../../../../common/constants'
 
 import style from './style';
 import WalletNaviagtionTab from '../walletNaviagtionTab';
-// import WalletTabInfo from './walletTab/walletTabInfo/';
 import WalletViewInfo from '../walletViewInfo';
 
 class WalletNavigationBar extends Component {
@@ -17,11 +16,7 @@ class WalletNavigationBar extends Component {
     this.state = {
       activeTabIndex: 0,
       tabRenderInfo: 'Point',
-      tabIconList: [
-        { tabRenderInfo: 'Point' },
-        { tabRenderInfo: 'Fantom' },
-        // { tabRenderInfo: 'Ethererum' }, /* To render Ethererum tab uncomment 'Ethererum' object  */
-      ],
+      tabIconList: [{ tabRenderInfo: 'Point' }, { tabRenderInfo: 'Fantom' }],
     };
   }
 
@@ -57,9 +52,6 @@ class WalletNavigationBar extends Component {
 
     return (
       <View style={style.mainContainerStyle}>
-        {/* <View style={style.navigationTabStyle}>
-                    {this.renderTabNavigation()}
-                </View> */}
         <View style={style.tabInfoStyle}>
           <WalletViewInfo
             navigation={navigation}
@@ -79,8 +71,6 @@ const mapStateToProps = state => ({
   publicKey: state.keyReducer.publicKey,
 });
 
-// const mapDispatchToProps = dispatch => ({});
-
 WalletNavigationBar.propTypes = {
   balance: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   transactionData: PropTypes.array,
@@ -88,7 +78,4 @@ WalletNavigationBar.propTypes = {
   navigation: PropTypes.object,
   onRefresh: PropTypes.func,
 };
-export default connect(
-  mapStateToProps
-  //   , mapDispatchToProps
-)(WalletNavigationBar);
+export default connect(mapStateToProps)(WalletNavigationBar);
