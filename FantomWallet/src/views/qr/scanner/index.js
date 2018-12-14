@@ -150,9 +150,9 @@ export default class QRCodeScanner extends Component {
               style={[styles.camera, this.props.cameraStyle]}
               onBarCodeRead={e => this._handleBarCodeRead(e)}
               type={this.props.cameraType}
-              googleVisionBarcodeMode={
-                Camera.Constants.GoogleVisionBarcodeDetection.BarcodeMode.INVERTED
-              }
+              // googleVisionBarcodeMode={
+              //   Camera.Constants.GoogleVisionBarcodeDetection.BarcodeMode.INVERTED
+              // }
             >
               {this._renderCameraMarker()}
             </Camera>
@@ -164,9 +164,9 @@ export default class QRCodeScanner extends Component {
           type={cameraType}
           style={[styles.camera, this.props.cameraStyle]}
           onBarCodeRead={e => this._handleBarCodeRead(e)}
-          googleVisionBarcodeMode={
-            Camera.Constants.GoogleVisionBarcodeDetection.BarcodeMode.INVERTED
-          }
+          // googleVisionBarcodeMode={
+          //   Camera.Constants.GoogleVisionBarcodeDetection.BarcodeMode.INVERTED
+          // }
         >
           {this._renderCameraMarker()}
         </Camera>
