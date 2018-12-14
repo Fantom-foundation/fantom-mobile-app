@@ -21,7 +21,7 @@
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-bip39": "^2.3.0",
-    "react-native-camera": "^1.2.0",
+    "react-native-camera": "^1.6.1",
     "react-native-custom-qr-codes": "^1.0.2",
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-linear-gradient": "^2.5.3",
