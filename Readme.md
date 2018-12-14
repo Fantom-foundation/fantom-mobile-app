@@ -29,14 +29,15 @@ Node.js comes with npm, which lets you install the React Native command line int
 
 ```
 npm install -g create-react-native-app
+npm install -g react-native-cli
 ```
 If you get an error like Cannot find module 'npmlog', try installing npm directly: curl -0 -L http://npmjs.org/install.sh | sudo sh.
 
 
 ## Setup
 
-* git clone https://github.com/fantom-foundation-private/foodtech.git
-* cd FantomWallet
+* git clone git@github.com:Fantom-foundation/fantom-mobile-app.git
+* cd fantom-mobile-app/FantomWallet/
 ```
 npm install
 ```
