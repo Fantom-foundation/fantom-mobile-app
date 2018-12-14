@@ -4,7 +4,9 @@ import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../common/constants';
 const isIOS = Platform.OS === 'ios';
 const style = {
   walletViewStyle: {
-    flex: 1,
+    height: DEVICE_HEIGHT,
+    width: DEVICE_WIDTH,
+    backgroundColor: 'rgb(14,14,18)',
   },
   textViewStyle: {},
   arrowNavigationStyle: {

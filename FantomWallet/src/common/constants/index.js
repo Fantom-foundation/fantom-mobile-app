@@ -10,7 +10,7 @@ export const ALL_TRANSACTION = 'All';
 /** ***************** COLOR VALUE CONSTANTS **************** */
 export const WHITE_COLOR = '#fff';
 export const BLACK_COLOR = '#000';
-export const ACTIVE_TAB_COLOR = 'rgb(38,44,50)';
+export const INACTIVE_TAB_COLOR = 'rgb(38,44,50)';
 export const ACTIVE_SUB_TAB_COLOR = '#FF0000';
 
 /** *****************    DEVICE DIMENSIONS ***************** */

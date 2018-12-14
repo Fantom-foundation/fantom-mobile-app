@@ -48,7 +48,7 @@ class WalletFantomScreen extends Component {
             publicKey={this.props.publicKey}
             isLoading={this.props.isLoading}
           />
-          <View style={{ height: DEVICE_HEIGHT * 0.25 }} />
+          <View style={{ height: DEVICE_HEIGHT * 0.3 }} />
         </ScrollView>
       </View>
     );

@@ -1,9 +1,11 @@
+import { DEVICE_HEIGHT } from '../../../../common/constants';
+
 const style = {
   mainContainerStyle: {
     flex: 1,
   },
   fantomViewStyle: {
-    flex: 1,
+    height: DEVICE_HEIGHT,
     backgroundColor: 'rgb(14,14,18)',
   },
 };

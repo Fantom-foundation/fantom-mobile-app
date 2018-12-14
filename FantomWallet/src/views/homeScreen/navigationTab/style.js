@@ -15,7 +15,6 @@ const style = {
     position: 'absolute',
     width: DEVICE_WIDTH,
     flexDirection: 'row',
-    // height: isPhoneX ? 78 : 64,
     bottom: 0,
     shadowOffset: { width: 0, height: -5 },
     shadowColor: 'black',
