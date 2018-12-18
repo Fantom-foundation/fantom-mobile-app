@@ -74,28 +74,34 @@ export default class WithdrawScreen extends Component {
    */
   handleSendMoney() {
     const { address, amount, fees, memo, actualAmount } = this.state;
-    const coin = this.state.val;
-    let message = '';
-    if (address === '') {
-      message = 'Please enter address.';
-    } else if (!Web3.utils.isAddress(address)) {
-      message = 'Please enter valid address.';
-    } else if (amount === '') {
-      message = 'Please enter valid amount';
+    const ftmBalance = Number(this.props.maxFantomBalance);
+    if (Number(actualAmount) === 0) {
+      Alert.alert('Error', 'Please enter valid amount');
+    } else if (actualAmount > ftmBalance) {
+      Alert.alert('Error', 'Insufficient balance');
+    } else {
+      const coin = this.state.val;
+      let message = '';
+      if (address === '') {
+        message = 'Please enter address.';
+      } else if (!Web3.utils.isAddress(address)) {
+        message = 'Please enter valid address.';
+      } else if (amount === '') {
+        message = 'Please enter valid amount';
+      }
+      if (message !== '') {
+        Alert.alert('Error', message);
+      }
+      this.props.navigation.navigate('SendMoney', {
+        address,
+        amount: actualAmount,
+        coin,
+        memo,
+        fees,
+        reload: this.reload.bind(this),
+        maxFantomBalance: this.props.maxFantomBalance,
+      });
     }
-    if (message !== '') {
-      Alert.alert('Error', message);
-      return;
-    }
-    this.props.navigation.navigate('SendMoney', {
-      address,
-      amount: actualAmount,
-      coin,
-      memo,
-      fees,
-      reload: this.reload.bind(this),
-      maxFantomBalance: this.props.maxFantomBalance,
-    });
   }
 
   /**
@@ -112,7 +118,13 @@ export default class WithdrawScreen extends Component {
     });
   }
 
-  renderAmountContainer(ftmBalance) {
+  toFixed(num, fixed) {
+    const re = new RegExp(`^-?\\d+(?:.\\d{0,${fixed || -1}})?`);
+    return num.toString().match(re)[0];
+  }
+
+  renderAmountContainer() {
+    const ftmBalanceFixed = this.toFixed(this.props.maxFantomBalance, 4);
     return (
       <View style={style.amtContainer}>
         <View style={style.balanceHeadingContainer}>
@@ -120,7 +132,7 @@ export default class WithdrawScreen extends Component {
         </View>
         <View style={style.balanceViewText}>
           <Text numberOfLines={1} style={style.balanceViewTextOne}>
-            {ftmBalance} {this.state.val}
+            {ftmBalanceFixed} {this.state.val}
           </Text>
         </View>
       </View>
@@ -160,6 +172,8 @@ export default class WithdrawScreen extends Component {
   }
 
   renderPriceContainer() {
+    const FixedBalance = this.toFixed(this.props.maxFantomBalance, 4);
+    const ftmBalance = Number(this.props.maxFantomBalance);
     return (
       <View style={style.addressContainer}>
         <Text style={style.inputTextHeading}>Price</Text>
@@ -181,9 +195,12 @@ export default class WithdrawScreen extends Component {
           <View style={style.priceSubContainer}>
             <Text style={style.priceTextStyle}>FTM</Text>
           </View>
-          <View style={[style.priceSubContainer, { backgroundColor: 'rgb(0,177,251)' }]}>
+          <TouchableOpacity
+            style={[style.priceSubContainer, { backgroundColor: 'rgb(0,177,251)' }]}
+            onPress={() => this.setState({ amount: FixedBalance, actualAmount: ftmBalance })}
+          >
             <Text style={[style.priceTextStyle, { fontFamily: 'SFProDisplay-Semibold' }]}>ALL</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -236,7 +253,6 @@ export default class WithdrawScreen extends Component {
   }
 
   render() {
-    const ftmBalance = Number(this.props.maxFantomBalance).toFixed(6);
     return (
       <View style={style.mainContainerStyle}>
         <Image style={style.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
@@ -248,7 +264,7 @@ export default class WithdrawScreen extends Component {
           showsVerticalScrollIndicator={false}
         >
           <View style={style.topMarginContainer} />
-          {this.renderAmountContainer(ftmBalance)}
+          {this.renderAmountContainer()}
           {/* Address to send */}
           {this.renderAddressContainer()}
           {/* Price container */}
