@@ -51,7 +51,7 @@ export default class TermsConditions extends Component {
             height: headerHeight,
           }}
         />
-        <WebView source={{ uri: 'http://fantom.foundation' }} onLoad={() => this.hideSpinner()} />
+        <WebView source={{ uri: 'http://fantom.foundation' }} onLoad={() => this.hideSpinner()} onError={() => this.hideSpinner()} />
         {/* <View style={style.footerStyle}>
           <Button text="Confirm" buttonStyle={{ fontFamily: 'SegoeUI' }} />
         </View> */}
