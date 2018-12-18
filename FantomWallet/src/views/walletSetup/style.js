@@ -57,8 +57,9 @@ const styles = {
     paddingHorizontal: 15,
   },
   recoverWalletStyle: {
-    padding: 5,
     alignItems: 'center',
+    height: '100%',
+    justifyContent: 'center',
   },
   footerText1: {
     color: '#00B1FF',
@@ -70,7 +71,9 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
+    alignItems: 'center',
     paddingVertical: 5,
+    height: '100%',
   },
   footerText2: {
     color: 'white',
@@ -81,6 +84,7 @@ const styles = {
     width: 1,
     backgroundColor: 'white',
     marginHorizontal: 5,
+    height: '60%',
   },
   walletSetup: {
     alignItems: 'center',
