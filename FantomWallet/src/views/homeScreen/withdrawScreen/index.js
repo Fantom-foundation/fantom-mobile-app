@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Web3 from 'web3';
 import PropTypes from 'prop-types';
+// import BigInt from 'big-integer';
 
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../common/constants';
 // Images
@@ -171,12 +172,17 @@ export default class WithdrawScreen extends Component {
     );
   }
 
+  allAmountClicked(FixedBalance, ftmBalance) {
+    this.setState({ amount: FixedBalance, actualAmount: ftmBalance });
+  }
+
   renderPriceContainer() {
     const FixedBalance = this.toFixed(this.props.maxFantomBalance, 4);
-    const ftmBalance = Number(this.props.maxFantomBalance);
+    const ftmBalance = this.props.maxFantomBalance;
+
     return (
       <View style={style.addressContainer}>
-        <Text style={style.inputTextHeading}>Price</Text>
+        <Text style={style.inputTextHeading}>Amount</Text>
         <View style={style.textInputContainer}>
           <TextInput
             style={style.enteredTextStyle}
@@ -197,7 +203,7 @@ export default class WithdrawScreen extends Component {
           </View>
           <TouchableOpacity
             style={[style.priceSubContainer, { backgroundColor: 'rgb(0,177,251)' }]}
-            onPress={() => this.setState({ amount: FixedBalance, actualAmount: ftmBalance })}
+            onPress={() => this.allAmountClicked(ftmBalance, ftmBalance)}
           >
             <Text style={[style.priceTextStyle, { fontFamily: 'SFProDisplay-Semibold' }]}>ALL</Text>
           </TouchableOpacity>

@@ -80,6 +80,7 @@ class SendMoney extends Component {
           ]);
           return;
         }
+
         Alert.alert('Success', 'Transfer successful.', [
           { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
         ]);
@@ -95,6 +96,7 @@ class SendMoney extends Component {
           from,
           to,
           isError: false,
+          date,
         };
         this.props.addTransactionToStore(transaction);
         const message = err.message || 'Invalid error. Please check the data and try again.';
@@ -150,7 +152,7 @@ class SendMoney extends Component {
       <View style={style.addressContainer}>
         <Text style={style.inputTextHeading}>Price</Text>
         <View style={style.textInputContainer}>
-          <TextInput style={style.valueTextStyle} value={amount} editable={false} />
+          <TextInput style={style.valueTextStyle} value={amount.toString()} editable={false} />
           <View style={style.priceSubContainer}>
             <Text style={style.priceTextStyle}>{coin}</Text>
           </View>
