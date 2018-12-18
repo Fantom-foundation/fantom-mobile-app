@@ -64,13 +64,13 @@ class AboutApp extends Component {
           {this.renderDetailsContainer(
             'Android version',
             'Data information: 2018120102022',
-            'Version information 1.0 (latest version)'
+            `Version information ${this.state.version} (latest version)`
           )}
           {/* About IOS */}
           {this.renderDetailsContainer(
             'ios version',
             'Data information: 2018120102022',
-            'Version information 1.0 (latest version)'
+            `Version information ${this.state.version} (latest version)`
           )}
           <Image
             style={style.backgroundImageStyle}

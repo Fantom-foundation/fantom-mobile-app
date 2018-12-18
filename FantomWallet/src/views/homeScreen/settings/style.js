@@ -87,7 +87,7 @@ const style = {
   backgroundImageStyle: {
     width: DEVICE_WIDTH * 0.5,
     height: DEVICE_HEIGHT * 0.6,
-    top: DEVICE_HEIGHT * 0.18,
+    top: DEVICE_HEIGHT * 0.25,
     position: 'absolute',
     opacity: isIOS ? 0.03 : 0.02,
     right: -((DEVICE_WIDTH * 0.45) / 2),
