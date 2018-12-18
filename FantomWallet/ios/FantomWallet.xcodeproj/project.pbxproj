@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -1766,10 +1767,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z9Z83R4W7B;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1789,7 +1791,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fantom.payments;
 				PRODUCT_NAME = FantomWallet;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6354ef1e-3937-41c5-86d7-6904945b1522";
+				PROVISIONING_PROFILE_SPECIFIER = FantomProvProfile;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1821,7 +1824,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fantom.payments;
 				PRODUCT_NAME = FantomWallet;
-				PROVISIONING_PROFILE = "78ce1708-39e3-40fb-ad07-5788268bd34e";
+				PROVISIONING_PROFILE = "6354ef1e-3937-41c5-86d7-6904945b1522";
 				PROVISIONING_PROFILE_SPECIFIER = FantomProvProfile;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
