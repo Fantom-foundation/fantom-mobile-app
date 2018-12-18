@@ -59,7 +59,7 @@ export default class PrivacyPolicy extends Component {
             height: headerHeight,
           }}
         />
-        <WebView source={{ uri: 'http://fantom.foundation' }} onLoad={() => this.hideSpinner()} />
+        <WebView source={{ uri: 'http://fantom.foundation' }} onLoad={() => this.hideSpinner()} onError={() => this.hideSpinner()} />
         {visible && (
           <View
             style={{
