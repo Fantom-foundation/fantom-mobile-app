@@ -43,9 +43,9 @@ export default class TermsConditions extends Component {
           }}
         />
         <WebView source={{ uri: 'http://fantom.foundation' }} />
-        <View style={style.footerStyle}>
+        {/* <View style={style.footerStyle}>
           <Button text="Confirm" buttonStyle={{ fontFamily: 'SegoeUI' }} />
-        </View>
+        </View> */}
       </View>
     );
   }
