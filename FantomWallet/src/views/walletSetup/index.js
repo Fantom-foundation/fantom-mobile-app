@@ -60,6 +60,7 @@ class WalletSetup extends PureComponent {
 
           <View style={style.footer}>
             <TouchableOpacity
+            style={{ height: '100%', justifyContent: 'center'}}
               onPress={() => {
                 this.props.navigation.navigate('Terms');
               }}
@@ -68,7 +69,7 @@ class WalletSetup extends PureComponent {
             </TouchableOpacity>
             <View style={style.division} />
 
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
+            <TouchableOpacity style={{ height: '100%', justifyContent: 'center'}} onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
               <Text style={style.footerText2}>Privacy Policy</Text>
             </TouchableOpacity>
           </View>

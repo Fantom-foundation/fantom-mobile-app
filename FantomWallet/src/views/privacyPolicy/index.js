@@ -51,9 +51,9 @@ export default class PrivacyPolicy extends Component {
           }}
         />
         <WebView source={{ uri: 'http://fantom.foundation' }} />
-        <View style={style.footerStyle}>
+        {/* <View style={style.footerStyle}>
           <Button text="Confirm" />
-        </View>
+        </View> */}
       </View>
     );
   }
