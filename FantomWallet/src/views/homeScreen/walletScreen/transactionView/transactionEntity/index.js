@@ -10,6 +10,11 @@ import style from './style';
  * TransacationEntity: This component is meant for rendering transaction cards.
  */
 class TransacationEntity extends PureComponent {
+  toFixed(num, fixed) {
+    const re = new RegExp(`^-?\\d+(?:.\\d{0,${fixed || -1}})?`);
+    return num.toString().match(re)[0];
+  }
+
   renderDateContainer(date, month) {
     return (
       <View style={style.dateContainer}>
@@ -110,20 +115,7 @@ class TransacationEntity extends PureComponent {
       transaction.amount !== null &&
       transaction.amount !== undefined
     ) {
-      ftmBalance = Number(transaction.amount)
-        .toFixed(4)
-        .toString();
-    }
-    if (
-      transaction &&
-      transaction.amount &&
-      transaction.amount !== '' &&
-      transaction.amount !== null &&
-      transaction.amount !== undefined
-    ) {
-      ftmBalance = Number(transaction.amount)
-        .toFixed(4)
-        .toString();
+      ftmBalance = this.toFixed(transaction.amount, 4);
     }
     if (
       transaction &&
