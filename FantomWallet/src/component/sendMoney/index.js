@@ -80,6 +80,7 @@ class SendMoney extends Component {
           ]);
           return;
         }
+
         Alert.alert('Success', 'Transfer successful.', [
           { text: 'Ok', onPress: () => this.alertSuccessfulButtonPressed(), style: 'cancel' },
         ]);
@@ -95,6 +96,7 @@ class SendMoney extends Component {
           from,
           to,
           isError: false,
+          date,
         };
         this.props.addTransactionToStore(transaction);
         const message = err.message || 'Invalid error. Please check the data and try again.';
@@ -113,7 +115,13 @@ class SendMoney extends Component {
     this.props.navigation.goBack();
   }
 
-  renderAmountContainer(ftmBalance) {
+  toFixed(num, fixed) {
+    const re = new RegExp(`^-?\\d+(?:.\\d{0,${fixed || -1}})?`);
+    return num.toString().match(re)[0];
+  }
+
+  renderAmountContainer(maxFantomBalance) {
+    const amt = this.toFixed(maxFantomBalance, 4);
     return (
       <View style={style.amtContainer}>
         <View style={style.balanceHeadingContainer}>
@@ -121,7 +129,7 @@ class SendMoney extends Component {
         </View>
         <View style={style.balanceViewText}>
           <Text numberOfLines={1} style={style.balanceViewTextOne}>
-            {ftmBalance} {this.state.val}
+            {amt} {this.state.val}
           </Text>
         </View>
       </View>
@@ -144,7 +152,7 @@ class SendMoney extends Component {
       <View style={style.addressContainer}>
         <Text style={style.inputTextHeading}>Price</Text>
         <View style={style.textInputContainer}>
-          <TextInput style={style.valueTextStyle} value={amount} editable={false} />
+          <TextInput style={style.valueTextStyle} value={amount.toString()} editable={false} />
           <View style={style.priceSubContainer}>
             <Text style={style.priceTextStyle}>{coin}</Text>
           </View>
@@ -204,7 +212,6 @@ class SendMoney extends Component {
 
   render() {
     const { address, coin, amount, memo, maxFantomBalance } = this.props.navigation.state.params;
-    const ftmBalance = Number(maxFantomBalance).toFixed(6);
     return (
       <View style={style.mainContainerStyle}>
         <StatusBar barStyle="light-content" />
@@ -230,7 +237,7 @@ class SendMoney extends Component {
           showsVerticalScrollIndicator={false}
         >
           <View style={style.topMarginContainer} />
-          {this.renderAmountContainer(ftmBalance)}
+          {this.renderAmountContainer(maxFantomBalance)}
           {/* Address to send */}
           {this.renderAddressContainer(address)}
           {/* Price container */}
@@ -248,68 +255,6 @@ class SendMoney extends Component {
     );
   }
 }
-// render() {
-//   const { address, coin, amount, memo } = this.props.navigation.state.params;
-//   const ftmBalance = Number(amount)
-//     .toFixed(4)
-//     .toString();
-//   return (
-//     <View style={style.mainContainerStyle}>
-//       <Header text="Check Send" />
-//       <View style={style.mid}>
-//         <View style={[style.textFieldStyle, { marginTop: 40 }]}>
-//           <TextField
-//             // isimagePresent={true}
-//             // imgUrl={require('../../images/fantom-logo-dark.png')}
-//             // imgStyle={{ width: DEVICE_WIDTH * 0.2 }}
-//             textinputStyle={{ width: DEVICE_WIDTH * 0.55 }}
-//             isTextPresent
-//             rightTextValue={coin}
-//             placeHolderText="Coin"
-//           />
-//         </View>
-//         <View style={style.textFieldStyle}>
-//           <TextField placeHolderText="Address" isTextPresent rightTextValue={address} />
-//         </View>
-//         <View style={style.textFieldStyle}>
-//           <TextField placeHolderText="Price" isTextPresent rightTextValue={ftmBalance} />
-//         </View>
-//         {/* <View style={style.textFieldStyle}>
-//           <TextField
-//             placeHolderText={'Fees'}
-//             isTextPresent={true}
-//             rightTextValue={fees}
-//           />
-//         </View> */}
-//         <View style={style.textFieldStyle}>
-//           <TextField
-//             placeHolderText="Memo"
-//             textinputStyle={{ width: DEVICE_WIDTH * 0.65 }}
-//             isTextPresent
-//             rightTextValue={memo}
-//           />
-//         </View>
-//         <Text style={style.additionalInfoTextStyle}>
-//           Please check if the above information is correct.
-//         </Text>
-//         <View style={{ height: 40 }} />
-//       </View>
-//       <View style={style.buttonViewStyle}>
-//         <Button
-//           text="Cancel"
-//           buttonStyle={{ width: DEVICE_WIDTH * 0.5, backgroundColor: '#000' }}
-//           onPress={() => this.props.navigation.goBack()}
-//         />
-//         <Button
-//           text="Confirm"
-//           buttonStyle={{ width: DEVICE_WIDTH * 0.5, backgroundColor: '#ECB414' }}
-//           onPress={() => this.onConfirmHandler()}
-//         />
-//       </View>
-//       {this.state.isLoading && <Loading />}
-//     </View>
-//   );
-// }
 
 const mapStateToProps = state => ({
   masterKey: state.keyReducer.masterKey,

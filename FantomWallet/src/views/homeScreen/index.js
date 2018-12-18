@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { View, StatusBar, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Web3 from 'web3';
+
+import BigInt from 'big-integer';
 // Component
 import NavigationTab from './navigationTab';
 import Header from '../../general/header';
@@ -75,7 +77,7 @@ class TransactionEntity extends Component {
       if (this.props.publicKey && !this.props.isLoading) {
         this.getWalletBalance(this.props.publicKey);
       }
-    }, 1000);
+    }, 5000);
   }
 
   /**
@@ -181,12 +183,12 @@ class TransactionEntity extends Component {
           const valInEther = Web3.utils.fromWei(`${balance}`, 'ether');
           const ftmBalance = valInEther;
           const { gasPrice } = this.state;
-          const gasPriceInEther = Web3.utils.fromWei(`${gasPrice}`, 'ether');
-          const maxFantomBalance = valInEther - gasPriceInEther;
+          const maxFantomBalance = BigInt(responseJson.balance).minus(gasPrice);
+          const convertToEther = Web3.utils.fromWei(`${maxFantomBalance.value}`, 'ether');
 
           this.setState({
             balance: ftmBalance,
-            maxFantomBalance,
+            maxFantomBalance: convertToEther,
             isLoading: false,
           });
         } else {
