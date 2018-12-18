@@ -151,7 +151,9 @@ export default class QRGenerator extends Component {
       this.props.qrLink !== null
     ) {
       // return null;
-      return <QRCode content={this.props.qrLink} ecl="M" color="#fff" backgroundColor="rgb(14,14,18)" />;
+      return (
+        <QRCode content={this.props.qrLink} ecl="M" backgroundColor="white" color="rgb(14,14,18)" />
+      );
     }
     // If link is not present, start loader
     return this.renderLoader();
@@ -189,7 +191,12 @@ export default class QRGenerator extends Component {
         >
           {this.props.qrLink !== undefined &&
             this.props.qrLink !== '' && (
-              <QRCode content={this.props.qrLink} ecl="M" color="#fff" backgroundColor="rgb(14,14,18)" />
+              <QRCode
+                content={this.props.qrLink}
+                ecl="M"
+                backgroundColor="white"
+                color="rgb(14,14,18)"
+              />
             )}
           {this.renderLogo()}
           {(this.props.qrLink === undefined || this.props.qrLink === '') && (

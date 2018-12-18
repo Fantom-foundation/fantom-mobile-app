@@ -15,6 +15,8 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+
 }
 
 allprojects {
@@ -29,6 +31,7 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -38,4 +41,6 @@ ext {
     compileSdkVersion = 26
     targetSdkVersion = 26
     supportLibVersion = "26.1.0"
+    googlePlayServicesVersion   = "12.0.1"
+
 }

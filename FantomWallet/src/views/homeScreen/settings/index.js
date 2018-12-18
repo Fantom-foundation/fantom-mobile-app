@@ -54,11 +54,11 @@ class Settings extends Component {
           }}
           onLeftIconPress={() => this.onLeftIconPress()}
         />
+        {/* Background image */}
+        <Image style={style.backgroundImageStyle} source={BackgroundIcon} resizeMode="contain" />
 
         {/* Options */}
         <ScrollView style={{ height: DEVICE_HEIGHT }} scrollEnabled={DEVICE_HEIGHT < 665}>
-          {/* Background image */}
-          <Image style={style.backgroundImageStyle} source={BackgroundIcon} resizeMode="contain" />
           <View style={style.mainContainer}>
             {this.renderOptionCard('Address Book', AddressBook, 'AddressBook')}
             {this.renderOptionCard('Customer Support', CustomerSupport, 'CustomerSupport')}

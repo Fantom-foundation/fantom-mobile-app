@@ -2,7 +2,7 @@ import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants';
 
 const style = {
   billAmountViewStyle: {
-    backgroundColor: 'rgb(14, 14, 18)',
+    backgroundColor: 'transparent',
   },
   billAmountLabelStyle: {
     flex: 1,
@@ -38,6 +38,7 @@ const style = {
     width: DEVICE_WIDTH - 32,
     marginTop: DEVICE_HEIGHT * 0.03,
     alignSelf: 'center',
+    backgroundColor: 'transparent',
   },
   inputTextHeading: {
     fontSize: 16,

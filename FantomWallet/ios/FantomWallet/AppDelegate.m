@@ -38,6 +38,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [NSThread sleepForTimeInterval:2.0];
   return YES;
 }
 
