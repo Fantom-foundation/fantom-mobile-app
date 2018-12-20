@@ -12,6 +12,9 @@ import QRGenerator from '../../../qr/generator/index';
 class QRCodeShare extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      isWalletAddressCopied: false,
+    };
     this.shareQR = this.shareQR.bind(this);
   }
 
@@ -33,6 +36,7 @@ class QRCodeShare extends PureComponent {
 
   render() {
     const { qrLink } = this.props;
+
     const titleText = 'Address QR Code';
     return (
       <View style={style.containerViewStyle}>

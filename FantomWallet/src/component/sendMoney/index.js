@@ -148,11 +148,15 @@ class SendMoney extends Component {
   }
 
   renderPriceContainer(coin, amount) {
+    let amountValue = '0';
+    if (amount) {
+      amountValue = amount.toString();
+    }
     return (
       <View style={style.addressContainer}>
         <Text style={style.inputTextHeading}>Price</Text>
         <View style={style.textInputContainer}>
-          <TextInput style={style.valueTextStyle} value={amount.toString()} editable={false} />
+          <TextInput style={style.valueTextStyle} value={amountValue} editable={false} />
           <View style={style.priceSubContainer}>
             <Text style={style.priceTextStyle}>{coin}</Text>
           </View>

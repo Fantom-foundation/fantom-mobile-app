@@ -4,6 +4,8 @@ import { ScrollView, View, Text, Keyboard, Clipboard, TouchableOpacity } from 'r
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import DropdownAlert from 'react-native-dropdownalert';
+
 // Style
 import style from './style';
 // Components
@@ -45,6 +47,8 @@ class DepositViewInfo extends Component {
 
   async onCopyAddress() {
     // Copies address to clipboard
+    this.fetchData();
+
     const string = this.state.qrAddress;
     await Clipboard.setString(string);
   }
@@ -78,11 +82,17 @@ class DepositViewInfo extends Component {
       </View>
     );
   }
+  fetchData = async () => {
+    const displaytext = 'copied';
+    this.dropdown.alertWithType('info', displaytext.toUpperCase(), '');
+  };
 
   render() {
-    const qrLink = this.state.qrAddress;
+    const { qrAddress } = this.state;
+    const qrLink = qrAddress;
     let headerText = 'FTM';
 
+    console.log(this.props, 'propsData');
     return (
       <ScrollView
         ref={scroll => (this.scrollView = scroll)}
@@ -104,6 +114,14 @@ class DepositViewInfo extends Component {
         {this.renderConfirmButton()}
 
         <View style={{ height: DEVICE_HEIGHT * 0.15, marginBottom: 10 }} />
+        <View style={{ position: 'absolute', top: 0, flex: 1, width: DEVICE_WIDTH }}>
+          <DropdownAlert
+            infoImageSrc={require('../../../../images/copyContent.png')}
+            infoColor="#000"
+            ref={ref => (this.dropdown = ref)}
+            style={{ backgroundColor: 'red' }}
+          />
+        </View>
       </ScrollView>
     );
   }
