@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, StatusBar, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Web3 from 'web3';
+import DropdownAlert from 'react-native-dropdownalert';
 
 import BigInt from 'big-integer';
 // Component
@@ -331,6 +332,15 @@ class TransactionEntity extends Component {
     });
   }
 
+  fetchData() {
+    const displaytext = 'copied';
+    this.dropdown.alertWithType('custom', displaytext.toUpperCase(), '');
+  }
+
+  renderToastNotification(data) {
+    this.fetchData();
+  }
+
   render() {
     const { balance, transactionData, isLoading, maxFantomBalance, activeTabIndex } = this.state;
     return (
@@ -362,6 +372,12 @@ class TransactionEntity extends Component {
           isLoading={isLoading}
           onRefresh={this.onRefresh}
           onTabChange={index => this.onTabChange(index)}
+          renderToastNotification={data => this.renderToastNotification(data)}
+        />
+        <DropdownAlert
+          containerStyle={{ backgroundColor: 'rgb(0,168,251)' }}
+          ref={ref => (this.dropdown = ref)}
+          style={{ backgroundColor: 'red' }}
         />
       </View>
     );

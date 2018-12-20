@@ -47,7 +47,9 @@ class DepositViewInfo extends Component {
 
   async onCopyAddress() {
     // Copies address to clipboard
-    this.fetchData();
+    // this.fetchData();
+
+    this.props.renderToastNotification();
 
     const string = this.state.qrAddress;
     await Clipboard.setString(string);
@@ -92,7 +94,6 @@ class DepositViewInfo extends Component {
     const qrLink = qrAddress;
     let headerText = 'FTM';
 
-    console.log(this.props, 'propsData');
     return (
       <ScrollView
         ref={scroll => (this.scrollView = scroll)}

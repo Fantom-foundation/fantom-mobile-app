@@ -16,7 +16,7 @@ export default class DepositScreen extends PureComponent {
       <View style={style.depositViewStyle}>
         <View style={style.depositScreenStyle}>
           <Image style={style.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
-          <DepositView />
+          <DepositView renderToastNotification={this.props.renderToastNotification} />
         </View>
       </View>
     );
