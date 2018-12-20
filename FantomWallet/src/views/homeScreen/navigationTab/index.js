@@ -83,6 +83,7 @@ class HomeNavigationBar extends Component {
         transactionData={transactionData}
         isLoading={isLoading}
         onRefresh={onRefresh}
+        renderToastNotification={this.props.renderToastNotification}
       />
     );
 

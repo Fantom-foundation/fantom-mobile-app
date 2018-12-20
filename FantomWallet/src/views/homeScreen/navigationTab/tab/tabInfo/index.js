@@ -40,7 +40,13 @@ class TabInfo extends PureComponent {
         );
       }
       if (tabRenderInfo === 'depositIcon') {
-        return <DepositTab navigation={navigation} balance={balance} />;
+        return (
+          <DepositTab
+            navigation={navigation}
+            balance={balance}
+            renderToastNotification={this.props.renderToastNotification}
+          />
+        );
       }
     }
     return null;

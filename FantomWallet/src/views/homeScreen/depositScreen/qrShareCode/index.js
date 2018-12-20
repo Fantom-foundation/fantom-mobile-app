@@ -12,9 +12,7 @@ import QRGenerator from '../../../qr/generator/index';
 class QRCodeShare extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      isWalletAddressCopied: false,
-    };
+    this.state = {};
     this.shareQR = this.shareQR.bind(this);
   }
 

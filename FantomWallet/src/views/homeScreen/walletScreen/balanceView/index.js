@@ -14,7 +14,6 @@ class BalanceView extends PureComponent {
     const { balance } = this.props;
     const ftmBalance = this.toFixed(balance, 4);
     // const ftmBalance = Number(balance).toFixed(6);
-    console.warn(balance, 'maxFantomBalance');
 
     return (
       <View style={style.fantomBalanceView}>

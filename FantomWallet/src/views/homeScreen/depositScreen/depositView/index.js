@@ -20,7 +20,10 @@ class DepositNavigationBar extends Component {
 
     return (
       <View style={style.mainContainerStyle}>
-        <DepositViewInfo navigation={navigation} />
+        <DepositViewInfo
+          renderToastNotification={this.props.renderToastNotification}
+          navigation={navigation}
+        />
       </View>
     );
   }
