@@ -84,7 +84,7 @@ class DepositViewInfo extends Component {
   }
   fetchData = async () => {
     const displaytext = 'copied';
-    this.dropdown.alertWithType('info', displaytext.toUpperCase(), '');
+    this.dropdown.alertWithType('custom', displaytext.toUpperCase(), '');
   };
 
   render() {
@@ -116,8 +116,7 @@ class DepositViewInfo extends Component {
         <View style={{ height: DEVICE_HEIGHT * 0.15, marginBottom: 10 }} />
         <View style={{ position: 'absolute', top: 0, flex: 1, width: DEVICE_WIDTH }}>
           <DropdownAlert
-            infoImageSrc={require('../../../../images/copyContent.png')}
-            infoColor="#000"
+            containerStyle={{ backgroundColor: 'rgb(0,168,251)' }}
             ref={ref => (this.dropdown = ref)}
             style={{ backgroundColor: 'red' }}
           />
