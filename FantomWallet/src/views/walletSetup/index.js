@@ -39,7 +39,7 @@ class WalletSetup extends PureComponent {
     return (
       <View style={style.subHeaderContainer}>
         <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
-        <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
+        {/* <Text style={style.subHeaderText2}>The Future of Decentralized </Text> */}
         <Text style={style.subHeaderText2}>Ecosystem</Text>
       </View>
     );
@@ -60,7 +60,7 @@ class WalletSetup extends PureComponent {
 
           <View style={style.footer}>
             <TouchableOpacity
-            style={{ height: '100%', justifyContent: 'center'}}
+              style={{ height: '100%', justifyContent: 'center' }}
               onPress={() => {
                 this.props.navigation.navigate('Terms');
               }}
@@ -69,7 +69,10 @@ class WalletSetup extends PureComponent {
             </TouchableOpacity>
             <View style={style.division} />
 
-            <TouchableOpacity style={{ height: '100%', justifyContent: 'center'}} onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
+            <TouchableOpacity
+              style={{ height: '100%', justifyContent: 'center' }}
+              onPress={() => this.props.navigation.navigate('PrivacyPolicy')}
+            >
               <Text style={style.footerText2}>Privacy Policy</Text>
             </TouchableOpacity>
           </View>

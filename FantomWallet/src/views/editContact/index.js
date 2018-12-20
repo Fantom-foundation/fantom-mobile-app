@@ -85,7 +85,16 @@ class EditContact extends Component {
           ]);
         } else {
           this.props.addNewAddress(address, name);
-          Alert.alert('Success', 'Address added successfully.');
+          // Alert.alert('Success', 'Address added successfully.');
+          Alert.alert('Success', 'Address updated successfully.', [
+            {
+              text: 'Ok',
+              onPress: () => {
+                this.props.navigation.goBack();
+              },
+              // style: 'cancel',
+            },
+          ]);
           this.setState({
             name: '',
             address: '',

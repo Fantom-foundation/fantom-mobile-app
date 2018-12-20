@@ -93,15 +93,17 @@ export default class WithdrawScreen extends Component {
       if (message !== '') {
         Alert.alert('Error', message);
       }
-      this.props.navigation.navigate('SendMoney', {
-        address,
-        amount: actualAmount,
-        coin,
-        memo,
-        fees,
-        reload: this.reload.bind(this),
-        maxFantomBalance: this.props.maxFantomBalance,
-      });
+      if (address && Web3.utils.isAddress(address) && amount) {
+        this.props.navigation.navigate('SendMoney', {
+          address,
+          amount: actualAmount,
+          coin,
+          memo,
+          fees,
+          reload: this.reload.bind(this),
+          maxFantomBalance: this.props.maxFantomBalance,
+        });
+      }
     }
   }
 
