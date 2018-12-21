@@ -154,7 +154,7 @@ class SendMoney extends Component {
     }
     return (
       <View style={style.addressContainer}>
-        <Text style={style.inputTextHeading}>Price</Text>
+        <Text style={style.inputTextHeading}>Amount</Text>
         <View style={style.textInputContainer}>
           <TextInput style={style.valueTextStyle} value={amountValue} editable={false} />
           <View style={style.priceSubContainer}>
@@ -215,7 +215,14 @@ class SendMoney extends Component {
   }
 
   render() {
-    const { address, coin, amount, memo, maxFantomBalance } = this.props.navigation.state.params;
+    const {
+      address,
+      coin,
+      amount,
+      memo,
+      maxFantomBalance,
+      balance,
+    } = this.props.navigation.state.params;
     return (
       <View style={style.mainContainerStyle}>
         <StatusBar barStyle="light-content" />
@@ -241,7 +248,7 @@ class SendMoney extends Component {
           showsVerticalScrollIndicator={false}
         >
           <View style={style.topMarginContainer} />
-          {this.renderAmountContainer(maxFantomBalance)}
+          {this.renderAmountContainer(balance)}
           {/* Address to send */}
           {this.renderAddressContainer(address)}
           {/* Price container */}

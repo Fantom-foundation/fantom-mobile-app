@@ -17,6 +17,7 @@
     "ethereumjs-wallet": "^0.6.2",
     "hdkey": "^1.1.0",
     "lodash": "^4.17.10",
+    "mathjs": "^5.4.0",
     "moment": "^2.22.2",
     "node-libs-browser": "2.1.0",
     "react": "16.4.1",
