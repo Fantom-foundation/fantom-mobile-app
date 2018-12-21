@@ -17,6 +17,12 @@ import fantomIcon from '../../images/FantomWalletWhiteIcon.png';
 import settingIcon from '../../images/setting.png';
 import refreshWhiteIcon from '../../images/refreshWhiteIcon.png';
 
+let math = require('mathjs');
+
+math.config({
+  number: 'bignumber',
+});
+
 const configHelper = config();
 const deviceHeight = Dimensions.get('window').height;
 
@@ -184,9 +190,15 @@ class TransactionEntity extends Component {
           const valInEther = Web3.utils.fromWei(`${balance}`, 'ether');
           const ftmBalance = valInEther;
           const { gasPrice } = this.state;
-          const maxFantomBalance = BigInt(responseJson.balance).minus(gasPrice);
-          const convertToEther = Web3.utils.fromWei(`${maxFantomBalance.value}`, 'ether');
-
+          // const maxFantomBalance = BigInt(responseJson.balance).minus(gasPrice);
+          // const maxFantomBalance = Double(responseJson.balance) - Number(gasPrice);
+          // const maxFantomBalance = responseJson.balance - gasPrice;
+          const maxFantomBalance = math.subtract(math.bignumber(responseJson.balance), gasPrice);
+          console.log('responseJson.balance', responseJson.balance);
+          console.log('balance', balance);
+          console.log('maxFantomBalance', maxFantomBalance);
+          const convertToEther = Web3.utils.fromWei(`${maxFantomBalance.toString()}`, 'ether');
+          console.log('convertToEther', convertToEther);
           this.setState({
             balance: ftmBalance,
             maxFantomBalance: convertToEther,

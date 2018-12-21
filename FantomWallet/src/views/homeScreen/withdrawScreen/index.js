@@ -102,6 +102,7 @@ export default class WithdrawScreen extends Component {
           fees,
           reload: this.reload.bind(this),
           maxFantomBalance: this.props.maxFantomBalance,
+          balance: this.props.balance,
         });
       }
     }
@@ -127,7 +128,7 @@ export default class WithdrawScreen extends Component {
   }
 
   renderAmountContainer() {
-    const ftmBalanceFixed = this.toFixed(this.props.maxFantomBalance, 4);
+    const ftmBalanceFixed = this.toFixed(this.props.balance, 4);
     return (
       <View style={style.amtContainer}>
         <View style={style.balanceHeadingContainer}>

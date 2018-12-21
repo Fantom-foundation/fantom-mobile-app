@@ -40,7 +40,7 @@ class WalletSetup extends PureComponent {
       <View style={style.subHeaderContainer}>
         <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
         {/* <Text style={style.subHeaderText2}>The Future of Decentralized </Text> */}
-        <Text style={style.subHeaderText2}>Ecosystem</Text>
+        {/* <Text style={style.subHeaderText2}>Ecosystem</Text> */}
       </View>
     );
   }
