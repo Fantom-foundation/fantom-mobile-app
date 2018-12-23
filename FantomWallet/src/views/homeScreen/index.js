@@ -4,8 +4,8 @@ import { View, StatusBar, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Web3 from 'web3';
 import DropdownAlert from 'react-native-dropdownalert';
-
 import BigInt from 'big-integer';
+import HttpDataProvider from './httpProvider';
 // Component
 import NavigationTab from './navigationTab';
 import Header from '../../general/header';
@@ -83,6 +83,7 @@ class TransactionEntity extends Component {
     setInterval(() => {
       if (this.props.publicKey && !this.props.isLoading) {
         this.getWalletBalance(this.props.publicKey);
+        this.getWalletTransaction(this.props.publicKey);
       }
     }, 5000);
   }
@@ -117,6 +118,7 @@ class TransactionEntity extends Component {
       this.getEtherTransactionsFromApiAsync(address);
     } else {
       // this.getFantomTransactionsFromApiAsync(address);
+      this.fetchTransactionList(address);
     }
   }
 
@@ -172,6 +174,58 @@ class TransactionEntity extends Component {
           isLoading: false,
         });
       });
+  }
+
+  fetchTransactionList(address) {
+    HttpDataProvider.post('https://graphql.fantom.services/graphql?', {
+      query: `
+        {
+          transactions(first: 100,from: "${address}", to: "${address}", byDirection: "desc") {
+            pageInfo {
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                hash
+                from
+                to
+                block
+                value
+              }
+            }
+          }
+        }`,
+    })
+      .then(
+        res => {
+          console.log(res, 'graphql');
+          if (res && res.data && res.data.data) {
+            this.formatTransactionList(res.data.data);
+          }
+          return null;
+        },
+        () => {
+          console.log('1');
+        }
+      )
+      .catch(err => {
+        console.log(err, 'err in graphql');
+      });
+  }
+
+  formatTransactionList(data) {
+    debugger;
+    if (data && data.transactions && data.transactions.edges && data.transactions.edges.length) {
+      const edgesArray = data.transactions.edges;
+      const transactionArr = [];
+      for (const edge of edgesArray) {
+        if (edge && edge.node) {
+          transactionArr.push(edge.node);
+        }
+      }
+      this.setState({ transactionData: transactionArr });
+    }
   }
 
   // /////////////////////////////////////////   FOR FANTOM OWN END POINT  ////////////////////////////////////////////////////////////////
@@ -355,6 +409,7 @@ class TransactionEntity extends Component {
 
   render() {
     const { balance, transactionData, isLoading, maxFantomBalance, activeTabIndex } = this.state;
+    console.log('Home transactionData', transactionData);
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />

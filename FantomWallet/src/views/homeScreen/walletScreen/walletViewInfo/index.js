@@ -32,6 +32,7 @@ class WalletFantomScreen extends Component {
 
   render() {
     const fantomTransactionArr = this.props.transactionData;
+    console.log('fantomTransactionArr WalletViewInfor', fantomTransactionArr);
     return (
       <View style={style.mainContainerStyle}>
         <ScrollView

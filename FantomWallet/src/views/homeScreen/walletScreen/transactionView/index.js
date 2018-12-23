@@ -100,10 +100,11 @@ class TransactionView extends Component {
   }
 
   render() {
-    const { publicKey, isLoading, transactions } = this.props;
+    const { publicKey, isLoading, transactions, fantomTransactionArr: transactionArr } = this.props;
     const selectedSortMenu = this.state.val;
-    const fantomTransaction = transactions || [];
-    const fantomTransactionArr = fantomTransaction.reverse();
+    const fantomTransactionArr = transactionArr || [];
+    console.log(fantomTransactionArr, 'fantomTransactionArr');
+    // const fantomTransactionArr = fantomTransaction.reverse();
 
     return (
       <View style={{ flex: 1 }}>

@@ -14,6 +14,7 @@ import BackgroundImage from '../../../images/BackgroundIcon.png';
 class WalletScreen extends PureComponent {
   render() {
     const { balance, transactionData, isLoading, navigation, onRefresh } = this.props;
+    console.log(transactionData, 'WalletScreentransactionData');
     return (
       <View style={style.walletViewStyle}>
         <View style={style.walletScreenStyle}>

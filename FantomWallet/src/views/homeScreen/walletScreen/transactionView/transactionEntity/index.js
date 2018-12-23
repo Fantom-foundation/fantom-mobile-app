@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text } from 'react-native';
 import moment from 'moment';
+import Web3 from 'web3';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 // Styling
 import style from './style';
@@ -66,8 +67,8 @@ class TransacationEntity extends PureComponent {
     let date = '';
     let month = '';
     let diff = '';
-    let ftmBalance = '';
-    let transactionAmountUnit = '';
+    let ftmBalance = '-';
+    let transactionAmountUnit = 'FTM';
     if (transaction) {
       if (
         transaction.from &&
@@ -108,14 +109,10 @@ class TransacationEntity extends PureComponent {
       }
     }
 
-    if (
-      transaction &&
-      transaction.amount &&
-      transaction.amount !== '' &&
-      transaction.amount !== null &&
-      transaction.amount !== undefined
-    ) {
-      ftmBalance = this.toFixed(transaction.amount, 4);
+    if (transaction && transaction.value) {
+      const valInEther = Web3.utils.fromWei(`${transaction.value}`, 'ether');
+      // const ftmBalance = valInEther;
+      ftmBalance = this.toFixed(valInEther, 4);
     }
     if (
       transaction &&
@@ -129,12 +126,12 @@ class TransacationEntity extends PureComponent {
 
     return (
       <View style={style.mainContainerStyle}>
-        {this.renderDateContainer(date, month)}
+        {/* {this.renderDateContainer(date, month)} */}
         <View style={style.iconContainerStyle}>
           <MaterialIcons name={iconName} size={18} color={iconColor} style={iconStyle} />
         </View>
         {this.renderIdContainer(Id)}
-        {this.renderTimeDiffcontainer(diff)}
+        {/* {this.renderTimeDiffcontainer(diff)} */}
         {this.renderAmtcontainer(iconColor, ftmBalance, transactionAmountUnit)}
       </View>
     );

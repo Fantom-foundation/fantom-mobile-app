@@ -3,7 +3,8 @@ const style = {
     flex: 1,
     flexDirection: 'row',
     paddingVertical: 10,
-    paddingHorizontal: 5,
+    paddingLeft: 1,
+    paddingRight: 8,
     alignItems: 'center',
   },
   dateContainer: {
@@ -17,7 +18,8 @@ const style = {
     fontSize: 14,
   },
   iconContainerStyle: {
-    flex: 0.3,
+    // flex: 0.3,
+    marginHorizontal: 6,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -43,8 +45,9 @@ const style = {
     fontSize: 10,
   },
   amountContainerStyle: {
-    flex: 1,
+    // flex: 1,
     paddingVertical: 4,
+    paddingHorizontal: 6,
     marginLeft: 2,
     justifyContent: 'center',
     alignItems: 'center',
