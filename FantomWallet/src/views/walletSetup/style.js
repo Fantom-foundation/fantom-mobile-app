@@ -52,7 +52,7 @@ const styles = {
     height: 50,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     backgroundColor: 'rgb(35,39,40)',
     paddingHorizontal: 15,
   },
@@ -66,6 +66,7 @@ const styles = {
     fontWeight: 'bold',
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
+    justifyContent: 'center',
   },
   footer: {
     flexDirection: 'row',
