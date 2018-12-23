@@ -62,8 +62,8 @@ class Settings extends Component {
           <View style={style.mainContainer}>
             {this.renderOptionCard('Address Book', AddressBook, 'AddressBook')}
             {this.renderOptionCard('Customer Support', CustomerSupport, 'CustomerSupport')}
-            {this.renderOptionCard('Terms of Service', TermsOfServices, 'Terms')}
-            {this.renderOptionCard('Privacy Policy', PrivacyPolicy, 'PrivacyPolicy')}
+            {/* {this.renderOptionCard('Terms of Service', TermsOfServices, 'Terms')}
+            {this.renderOptionCard('Privacy Policy', PrivacyPolicy, 'PrivacyPolicy')} */}
             {this.renderOptionCard('About App', AboutApp, 'AboutApp')}
           </View>
           <View style={{ height: DEVICE_HEIGHT * 0.08 }} />

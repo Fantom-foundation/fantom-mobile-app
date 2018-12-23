@@ -58,7 +58,7 @@ class WalletSetup extends PureComponent {
             <Text style={style.footerText1}>Restore Wallet</Text>
           </TouchableOpacity>
 
-          <View style={style.footer}>
+          {/* <View style={style.footer}>
             <TouchableOpacity
               style={{ height: '100%', justifyContent: 'center' }}
               onPress={() => {
@@ -75,7 +75,7 @@ class WalletSetup extends PureComponent {
             >
               <Text style={style.footerText2}>Privacy Policy</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
         {/* Create Wallet button */}
         <TouchableOpacity style={style.walletSetup} onPress={() => this.onCreateNewWallet()}>
