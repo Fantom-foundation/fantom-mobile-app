@@ -17,8 +17,8 @@ class CustomerSupport extends Component {
     super(props);
     this.state = {
       websiteLink: 'https://fantom.foundation/',
-      phoneNumber: 'tel://100012345678',
-      displayPhoneNumber: '1000-12345678',
+      phoneNumber: 'mailto:contact@fantom.foundation',
+      displayPhoneNumber: 'contact@fantom.foundation',
     };
   }
 
@@ -69,7 +69,7 @@ class CustomerSupport extends Component {
         <View style={style.midContainer}>
           {this.renderLinkRow('globe', 'Fantom Website', websiteLink, websiteLink)}
           <View style={{ height: 25 }} />
-          {this.renderLinkRow('headset-mic', 'Help', phoneNumber, displayPhoneNumber)}
+          {this.renderLinkRow('email', 'Help', phoneNumber, displayPhoneNumber)}
         </View>
 
         <View style={style.footerContainerStyle}>
