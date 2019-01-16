@@ -8,7 +8,6 @@ import {
   TextInput,
   Alert,
   StatusBar,
-  Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -17,14 +16,12 @@ import Header from '../../../../general/header';
 import style from './style';
 import Address from './address/index';
 
-import editRightButton from '../../../../images/pluswhite.png';
 import whiteSearchIcon from '../../../../images/searchWhite.png';
-import searchIcon from '../../../../images/search.png';
+import BackgroundImage from '../../../../images/BackgroundIcon.png';
+
 import * as AddressAction from '../../../../redux/addressBook/action';
 
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../../../common/constants';
-
-const deviceHeight = Dimensions.get('window').height;
 
 /**
  * AddressBook: This component is meant for handling actions related to Address Book in app.
@@ -118,7 +115,6 @@ class AddressBook extends Component {
               continue; //eslint-disable-line
             }
           }
-
           addressListView.push(
             <Address
               key={key}
@@ -208,6 +204,7 @@ class AddressBook extends Component {
             onChangeText={text => this.setState({ searchText: text })}
             autoCapitalize="none"
             autoCorrect={false}
+            underlineColorAndroid="transparent"
           />
           <MaterialIcons name="search" size={20} color="rgba(255,255,255,0.8)" />
         </View>
@@ -225,7 +222,7 @@ class AddressBook extends Component {
           text="Address Book"
           leftButtonIcon="chevron-left"
           leftIconColor="#fff"
-          leftIconSize={22}
+          leftIconSize={30}
           onLeftIconPress={this.onLeftIconPress}
           isRightBtnImage={false}
           rightButtonIcon="add-circle-outline"
@@ -244,20 +241,16 @@ class AddressBook extends Component {
 
         <View style={style.addressList}>
           {/* Background Image */}
-          <Image
-            style={style.backgroundImageStyle}
-            source={require('../../../../images/BackgroundIcon.png')}
-            resizeMode="contain"
-          />
+          <Image style={style.backgroundImageStyle} source={BackgroundImage} resizeMode="contain" />
           {/* Displays RECENT and FAVOURITE buttons */}
           {this.renderMidButtons()}
 
           <View style={style.displaySearch}>
             {/* Displays search Bar */}
             {this.renderSearchBar()}
-            <ScrollView showsVerticalScrollIndicator={false} style={{ height: deviceHeight }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ height: DEVICE_HEIGHT }}>
               {this.renderAddressList()}
-              <View style={{ height: 50 }} />
+              <View style={{ height: DEVICE_HEIGHT * 0.3 }} />
             </ScrollView>
           </View>
         </View>

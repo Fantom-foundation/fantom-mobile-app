@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// style
 import style from './style';
+// components
 import WalletView from './walletView';
+import BackgroundImage from '../../../images/BackgroundIcon.png';
 
 /**
  * To Display WalletTab related tasks
@@ -11,6 +14,7 @@ import WalletView from './walletView';
 class WalletScreen extends PureComponent {
   render() {
     const { balance, transactionData, isLoading, navigation, onRefresh } = this.props;
+    console.log(transactionData, 'WalletScreentransactionData');
     return (
       <View style={style.walletViewStyle}>
         <View style={style.walletScreenStyle}>
@@ -21,6 +25,7 @@ class WalletScreen extends PureComponent {
             isLoading={isLoading}
             onRefresh={onRefresh}
           />
+          <Image style={style.backgroundImgStyle} source={BackgroundImage} resizeMode="contain" />
         </View>
       </View>
     );

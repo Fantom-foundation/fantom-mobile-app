@@ -6,6 +6,7 @@ import style from './style';
 
 import BalanceView from '../balanceView';
 import TransactionView from '../transactionView';
+import { DEVICE_HEIGHT } from '../../../../common/constants';
 
 class WalletFantomScreen extends Component {
   constructor(props) {
@@ -30,20 +31,10 @@ class WalletFantomScreen extends Component {
   }
 
   render() {
-    // const balanceText = '(1,000\\ = 1.00002312FTM)';
     const fantomTransactionArr = this.props.transactionData;
+    console.log('fantomTransactionArr WalletViewInfor', fantomTransactionArr);
     return (
       <View style={style.mainContainerStyle}>
-        {/* <View style={style.amountDisplayStyle}>
-          <Text style={style.textViewStyle}>{balanceText} </Text>
-        </View> */}
-
-        {/* Pull Down to refresh */}
-        {/* <View style={style.refreshMessageViewStyle}>
-          <Text style={style.refreshTextStyle}>Scroll down to refresh</Text>
-          <MaterialIcons name="refresh" size={12} style={style.refreshIconStyle} />
-        </View> */}
-
         <ScrollView
           style={style.fantomViewStyle}
           showsVerticalScrollIndicator={false}
@@ -58,6 +49,7 @@ class WalletFantomScreen extends Component {
             publicKey={this.props.publicKey}
             isLoading={this.props.isLoading}
           />
+          <View style={{ height: DEVICE_HEIGHT * 0.3 }} />
         </ScrollView>
       </View>
     );

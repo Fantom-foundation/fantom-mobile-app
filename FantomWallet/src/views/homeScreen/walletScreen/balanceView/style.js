@@ -16,11 +16,11 @@ const style = {
     backgroundColor: 'rgb(50,59,66)',
     height: 40,
     justifyContent: 'center',
-    paddingLeft: 32,
+    paddingLeft: 28,
   },
   amountHeadingStyle: {
     color: 'rgb(166,225,100)',
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'SFProDisplay-Medium',
   },
   balanceViewText: {
@@ -29,25 +29,13 @@ const style = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  balanceViewTextOne: {
+  balanceUnitTextStyle: {
     fontSize: 24,
     fontFamily: 'SFProDisplay-Bold',
     flex: 1,
     textAlign: 'center',
     alignSelf: 'center',
     color: '#fff',
-  },
-  balanceTextTwo: {
-    padding: 4,
-    alignItems: 'center',
-  },
-  balanceTextStyle: {
-    fontSize: 14,
-    fontFamily: FontFamily.SegoeUILight,
-  },
-  balanceUnitText: {
-    fontSize: 20,
-    fontFamily: FontFamily.SegoeUIBold,
   },
 };
 export default style;

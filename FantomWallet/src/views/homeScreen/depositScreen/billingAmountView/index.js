@@ -9,7 +9,7 @@ class BillingAmountScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: 0,
+      amount: '',
     };
   }
 
@@ -32,26 +32,38 @@ class BillingAmountScreen extends Component {
     }
   }
 
-  render() {
+  renderBillingContainer() {
     return (
-      <View style={style.billAmountViewStyle}>
-        <View style={style.billAmountLabelStyle}>
-          <Text style={style.billAmountTextLabelStyle}>Billing Amount</Text>
+      <View style={style.billingAmtContainer}>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={style.inputTextHeading}>Billing Amount</Text>
+        </View>
+        <View style={style.textInputContainer}>
+          <TextInput
+            style={style.enteredTextStyle}
+            placeholderTextColor="rgba( 255, 255, 255, 0.2)"
+            autoCorrect={false}
+            onChangeText={ammount => this.onAmountChange(ammount)}
+            value={`${this.state.amount}`}
+            placeholder="0"
+            keyboardType="decimal-pad"
+            onFocus={() => this.onTextFieldFocus()}
+            onBlur={() => this.onTextFieldBlur()}
+            autoCapitalize="none"
+            underlineColorAndroid="transparent"
+          />
           <View style={style.ftmViewStyle}>
             <Text style={style.ftmLabelStyle}>{this.props.headerText}</Text>
           </View>
         </View>
-        <TextInput
-          onChangeText={ammount => this.onAmountChange(ammount)}
-          value={`${this.state.amount}`}
-          style={style.amountInputStyle}
-          placeholder="Enter Amount"
-          placeholderTextColor="#a7a7a7"
-          keyboardType="decimal-pad"
-          onFocus={() => this.onTextFieldFocus()}
-          onBlur={() => this.onTextFieldBlur()}
-          autoCapitalize="none"
-        />
+      </View>
+    );
+  }
+
+  render() {
+    return (
+      <View style={style.billAmountViewStyle}>
+        {this.renderBillingContainer()}
         {/* {Platform.OS === 'ios' && <KeyboardSpacer topSpacing={-180}/>} */}
         <View style={{ height: 20 }} />
       </View>

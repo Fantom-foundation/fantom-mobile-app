@@ -39,8 +39,8 @@ class WalletSetup extends PureComponent {
     return (
       <View style={style.subHeaderContainer}>
         <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
-        <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
-        <Text style={style.subHeaderText2}>Ecosystem</Text>
+        {/* <Text style={style.subHeaderText2}>The Future of Decentralized </Text> */}
+        {/* <Text style={style.subHeaderText2}>Ecosystem</Text> */}
       </View>
     );
   }
@@ -58,8 +58,9 @@ class WalletSetup extends PureComponent {
             <Text style={style.footerText1}>Restore Wallet</Text>
           </TouchableOpacity>
 
-          <View style={style.footer}>
+          {/* <View style={style.footer}>
             <TouchableOpacity
+              style={{ height: '100%', justifyContent: 'center' }}
               onPress={() => {
                 this.props.navigation.navigate('Terms');
               }}
@@ -68,10 +69,13 @@ class WalletSetup extends PureComponent {
             </TouchableOpacity>
             <View style={style.division} />
 
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
+            <TouchableOpacity
+              style={{ height: '100%', justifyContent: 'center' }}
+              onPress={() => this.props.navigation.navigate('PrivacyPolicy')}
+            >
               <Text style={style.footerText2}>Privacy Policy</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
         {/* Create Wallet button */}
         <TouchableOpacity style={style.walletSetup} onPress={() => this.onCreateNewWallet()}>
@@ -83,32 +87,26 @@ class WalletSetup extends PureComponent {
 
   render() {
     return (
-      // <ImageBackground
-      //   style={style.imageBackground}
-      //   source={require('../../images/background.png')}
-      //   imageStyle={{ resizeMode: 'cover' }}
-      // >
       <View style={style.imageBackground}>
         <StatusBar barStyle="light-content" />
+        <Image
+          style={{
+            width: DEVICE_WIDTH * 0.6,
+            height: DEVICE_HEIGHT * 0.77,
+            opacity: isIOS ? 0.03 : 0.04,
+            top: DEVICE_HEIGHT * 0.1,
+            right: -((DEVICE_WIDTH * 0.45) / 2),
+            position: 'absolute',
+          }}
+          source={require('../../images/BackgroundIcon.png')}
+          resizeMode="contain"
+        />
         <View style={style.mainContainer}>
           {this.renderHeaderImage()}
           {this.renderMidContainer()}
           {this.renderBottomButtons()}
-          <Image
-            style={{
-              width: DEVICE_WIDTH * 0.6,
-              height: DEVICE_HEIGHT * 0.77,
-              opacity: isIOS ? 0.03 : 0.02,
-              top: DEVICE_HEIGHT * 0.1,
-              right: -((DEVICE_WIDTH * 0.45) / 2),
-              position: 'absolute',
-            }}
-            source={require('../../images/BackgroundIcon.png')}
-            resizeMode="contain"
-          />
         </View>
       </View>
-      //</ImageBackground>
     );
   }
 }

@@ -85,7 +85,16 @@ class EditContact extends Component {
           ]);
         } else {
           this.props.addNewAddress(address, name);
-          Alert.alert('Success', 'Address added successfully.');
+          // Alert.alert('Success', 'Address added successfully.');
+          Alert.alert('Success', 'Address updated successfully.', [
+            {
+              text: 'Ok',
+              onPress: () => {
+                this.props.navigation.goBack();
+              },
+              // style: 'cancel',
+            },
+          ]);
           this.setState({
             name: '',
             address: '',
@@ -199,6 +208,7 @@ class EditContact extends Component {
                 onFocus={() => this.onTextFieldFocus()}
                 onBlur={() => this.onTextFieldBlur()}
                 autoCapitalize="none"
+                underlineColorAndroid="transparent"
               />
               <TouchableOpacity style={style.iconContainer} onPress={() => this.openScanner()}>
                 <Image source={qrCode} style={{ width: 30, height: 30 }} />
@@ -219,6 +229,7 @@ class EditContact extends Component {
                 onFocus={() => this.onTextFieldFocus()}
                 onBlur={() => this.onTextFieldBlur()}
                 autoCapitalize="none"
+                underlineColorAndroid="transparent"
               />
             </View>
           </View>

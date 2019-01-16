@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { View, StyleSheet, StatusBar, Alert } from 'react-native';
 import Web3 from 'web3';
+import { DEVICE_HEIGHT } from '../../../common/constants';
 import arrowLeftButton from '../../../images/arrowLeft_White.png';
 import Header from '../../../general/header/index';
 import QRCodeScanner from '.';
@@ -65,13 +66,17 @@ export default class ScanScreen extends Component {
       <View style={styles.mainContainerStyle}>
         <StatusBar barStyle="light-content" />
         <Header
-          text="Scan QR"
+          text="QR Scan"
           leftButtonIcon="chevron-left"
           leftIconColor="#fff"
-          onLeftIconPress={() => this.onLeftIconPress()}
           leftIconSize={30}
-          headerStyle={{ backgroundColor: 'rgb(233,177,18)' }}
-          leftButtonStyle={{ backgroundColor: 'rgb(233,177,18)' }}
+          leftButtonStyle={{ marginLeft: -10 }}
+          onLeftIconPress={() => this.onLeftIconPress()}
+          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
+          headerStyle={{
+            backgroundColor: 'rgb(44,52,58)',
+            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+          }}
         />
         <QRCodeScanner
           ref={scanner => {

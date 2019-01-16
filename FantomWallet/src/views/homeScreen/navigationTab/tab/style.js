@@ -5,10 +5,13 @@ const isPhoneX = DEVICE_HEIGHT >= iPhoneXHeight;
 const style = {
   tabStyle: {
     flex: 1,
-    height: isPhoneX ? 78 : 64,
+    height: isPhoneX ? 60 : 48,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  tabIconStyle: { width: 30, height: 30 },
+  tabIconStyle: {
+    width: 30,
+    height: 30,
+  },
 };
 export default style;

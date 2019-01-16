@@ -55,7 +55,7 @@ const style = {
   },
   backgroundImageStyle: {
     width: DEVICE_WIDTH * 0.5,
-    height: DEVICE_HEIGHT * 1.0,
+    height: DEVICE_HEIGHT * 0.8,
     justifyContent: 'center',
     alignItems: 'center',
     top: 0,

@@ -1,7 +1,8 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { ImageBackground, Image, View, Platform } from 'react-native';
+import { Image, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
+
 import style from './style';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
 const isIOS = Platform.OS === 'ios';
@@ -24,13 +25,7 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      // <ImageBackground
-      //   style={style.imageBackground}
-      //   source={require('../../images/background.png')}
-      //   imageStyle={{ resizeMode: 'cover' }}
-      // >
       <View style={style.imageBackground}>
-        {/* <Image source={require('../../images/fantom-logo.png')} resizeMode="contain" /> */}
         <Image source={require('../../images/fantomWhiteIcon.png')} resizeMode="contain" />
         <Image
           style={{
@@ -40,14 +35,12 @@ class SplashScreen extends Component {
             alignItems: 'center',
             opacity: isIOS ? 0.03 : 0.02,
             right: -((DEVICE_WIDTH * 0.45) / 2),
-            // top: 0,
             position: 'absolute',
           }}
           source={require('../../images/BackgroundIcon.png')}
           resizeMode="contain"
         />
       </View>
-      //  </ImageBackground>
     );
   }
 }

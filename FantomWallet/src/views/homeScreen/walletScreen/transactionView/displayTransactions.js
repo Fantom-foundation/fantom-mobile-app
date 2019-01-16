@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import TransactionEntity from './transactionEntity';
-
 /**
  * DisplayTransaction: This component is meant for displaying all transactions.
  */
@@ -24,7 +24,20 @@ class DisplayTransaction extends Component {
       fantomTransactionArr.map(
         (transaction, index) =>
           (selectedSortMenu === transaction.type || selectedSortMenu === allTransaction) && (
-            <TransactionEntity key={index} transaction={transaction} publicKey={publicKey} />
+            <View key={index}>
+              {/* adding line separator */}
+              {index > 0 && (
+                <View
+                  style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: 'rgba(255,255,255,0.1)',
+                    marginHorizontal: 5,
+                  }}
+                />
+              )}
+              {/* Transaction Row */}
+              <TransactionEntity transaction={transaction} publicKey={publicKey} />
+            </View>
           )
       );
 

@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { View, StatusBar, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Web3 from 'web3';
+import DropdownAlert from 'react-native-dropdownalert';
+import BigInt from 'big-integer';
+import HttpDataProvider from './httpProvider';
 // Component
 import NavigationTab from './navigationTab';
 import Header from '../../general/header';
@@ -13,6 +16,12 @@ import { SUCCESS, RECEIVED, SENT, FAILED } from '../../common/constants';
 import fantomIcon from '../../images/FantomWalletWhiteIcon.png';
 import settingIcon from '../../images/setting.png';
 import refreshWhiteIcon from '../../images/refreshWhiteIcon.png';
+
+let math = require('mathjs');
+
+math.config({
+  number: 'bignumber',
+});
 
 const configHelper = config();
 const deviceHeight = Dimensions.get('window').height;
@@ -74,8 +83,9 @@ class TransactionEntity extends Component {
     setInterval(() => {
       if (this.props.publicKey && !this.props.isLoading) {
         this.getWalletBalance(this.props.publicKey);
+        this.getWalletTransaction(this.props.publicKey);
       }
-    }, 1000);
+    }, 5000);
   }
 
   /**
@@ -108,6 +118,7 @@ class TransactionEntity extends Component {
       this.getEtherTransactionsFromApiAsync(address);
     } else {
       // this.getFantomTransactionsFromApiAsync(address);
+      this.fetchTransactionList(address);
     }
   }
 
@@ -134,7 +145,7 @@ class TransactionEntity extends Component {
         return responseJson;
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
       });
   }
 
@@ -158,11 +169,63 @@ class TransactionEntity extends Component {
         return responseJson;
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
         this.setState({
           isLoading: false,
         });
       });
+  }
+
+  fetchTransactionList(address) {
+    HttpDataProvider.post('https://graphql.fantom.services/graphql?', {
+      query: `
+        {
+          transactions(first: 100,from: "${address}", to: "${address}", byDirection: "desc") {
+            pageInfo {
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                hash
+                from
+                to
+                block
+                value
+              }
+            }
+          }
+        }`,
+    })
+      .then(
+        res => {
+          console.log(res, 'graphql');
+          if (res && res.data && res.data.data) {
+            this.formatTransactionList(res.data.data);
+          }
+          return null;
+        },
+        () => {
+          console.log('1');
+        }
+      )
+      .catch(err => {
+        console.log(err, 'err in graphql');
+      });
+  }
+
+  formatTransactionList(data) {
+    debugger;
+    if (data && data.transactions && data.transactions.edges && data.transactions.edges.length) {
+      const edgesArray = data.transactions.edges;
+      const transactionArr = [];
+      for (const edge of edgesArray) {
+        if (edge && edge.node) {
+          transactionArr.push(edge.node);
+        }
+      }
+      this.setState({ transactionData: transactionArr });
+    }
   }
 
   // /////////////////////////////////////////   FOR FANTOM OWN END POINT  ////////////////////////////////////////////////////////////////
@@ -181,12 +244,18 @@ class TransactionEntity extends Component {
           const valInEther = Web3.utils.fromWei(`${balance}`, 'ether');
           const ftmBalance = valInEther;
           const { gasPrice } = this.state;
-          const gasPriceInEther = Web3.utils.fromWei(`${gasPrice}`, 'ether');
-          const maxFantomBalance = valInEther - gasPriceInEther;
-
+          // const maxFantomBalance = BigInt(responseJson.balance).minus(gasPrice);
+          // const maxFantomBalance = Double(responseJson.balance) - Number(gasPrice);
+          // const maxFantomBalance = responseJson.balance - gasPrice;
+          const maxFantomBalance = math.subtract(math.bignumber(responseJson.balance), gasPrice);
+          console.log('responseJson.balance', responseJson.balance);
+          console.log('balance', balance);
+          console.log('maxFantomBalance', maxFantomBalance);
+          const convertToEther = Web3.utils.fromWei(`${maxFantomBalance.toString()}`, 'ether');
+          console.log('convertToEther', convertToEther);
           this.setState({
             balance: ftmBalance,
-            maxFantomBalance,
+            maxFantomBalance: convertToEther,
             isLoading: false,
           });
         } else {
@@ -329,8 +398,18 @@ class TransactionEntity extends Component {
     });
   }
 
+  fetchData() {
+    const displaytext = 'copied';
+    this.dropdown.alertWithType('custom', displaytext.toUpperCase(), '');
+  }
+
+  renderToastNotification(data) {
+    this.fetchData();
+  }
+
   render() {
     const { balance, transactionData, isLoading, maxFantomBalance, activeTabIndex } = this.state;
+    console.log('Home transactionData', transactionData);
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
@@ -345,7 +424,11 @@ class TransactionEntity extends Component {
           fantomIcon={fantomIcon}
           leftButtonIcon={activeTabIndex === 0 ? 'refresh' : ''}
           leftIconColor="#fff"
-          leftIconSize={24}
+          leftIconSize={30}
+          rightImageStyling={{
+            height: 30,
+            width: 30,
+          }}
           onLeftIconPress={() => this.onRefresh()}
         />
         <NavigationTab
@@ -356,6 +439,12 @@ class TransactionEntity extends Component {
           isLoading={isLoading}
           onRefresh={this.onRefresh}
           onTabChange={index => this.onTabChange(index)}
+          renderToastNotification={data => this.renderToastNotification(data)}
+        />
+        <DropdownAlert
+          containerStyle={{ backgroundColor: 'rgb(0,168,251)' }}
+          ref={ref => (this.dropdown = ref)}
+          style={{ backgroundColor: 'red' }}
         />
       </View>
     );
