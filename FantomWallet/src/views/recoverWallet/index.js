@@ -14,12 +14,12 @@ import { connect } from 'react-redux';
 import Bip39 from 'react-native-bip39';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import Header from '../../general/header/index';
-import * as KeyAction from '../../redux/keys/action';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import Header from '~/components/Header/index';
+import * as KeyAction from '~/redux/keys/action';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
-import BackgroundImage from '../../images/BackgroundIcon.png';
-import fantomIcon from '../../images/FantomWalletWhiteIcon.png';
+import BackgroundImage from '~/images/BackgroundIcon.png';
+import fantomIcon from '~/images/FantomWalletWhiteIcon.png';
 import style from './style';
 
 class RecoverWallet extends Component {

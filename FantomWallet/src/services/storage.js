@@ -6,6 +6,8 @@ export const Helper = {
   *getItem(params) {
     const { key, callback } = params.params;
 
+    // FIXME: need TEST
+    // eslint-disable-next-line no-shadow
     let item = yield SInfo.getItem(key, (error, item) => {
       if (item) {
         if (item.indexOf('{') !== -1) {
@@ -104,7 +106,7 @@ export const Helper = {
 
     yield SInfo.getAllKeys(keys => {
       SInfo.multiGet(keys, stores => {
-        stores.map((i, store) => {
+        stores.forEach((i, store) => {
           // get at each store's key/value so you can work with it
           let key = store[i][0];
           //   let value = store[i][1];

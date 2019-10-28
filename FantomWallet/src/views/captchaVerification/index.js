@@ -9,19 +9,18 @@ import {
   KeyboardAvoidingView,
   Image,
 } from 'react-native';
-import '../../../global';
 import _ from 'lodash';
 import Hdkey from 'hdkey';
 import EthUtil from 'ethereumjs-util';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
-import * as KeyAction from '../../redux/keys/action';
+import * as KeyAction from '~/redux/keys/action';
 // Method of generation taken from: https://medium.com/bitcraft/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998;
-import Button from '../../general/button/index';
+import Button from '~/components/general/Button';
+import ProgressBar from '~/components/general/ProgressBar';
 import style from './style';
-import ProgressBar from '../../general/progressBar/index';
-import BackgroundFantomIcon from '../../images/BackgroundIcon.png';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import BackgroundFantomIcon from '~/images/BackgroundIcon.png';
+import { DEVICE_HEIGHT } from '~/common/constants';
 /**
  * CaptchaVerification: This component is meant for authenticating user with captcha verification,
  *  based secret codes generated in CaptionOutput.
@@ -152,7 +151,7 @@ class CaptchaVerification extends Component {
   //   this.setState(state);
   // }
 
-  verifyWords(data, index) {
+  verifyWords(data) {
     // Called on selection button from bottom buttons
 
     const { verifyMnemonic, mnemonicWords } = this.state;
@@ -291,6 +290,7 @@ class CaptchaVerification extends Component {
           </View>
         </View>
         <View style={style.displayMnemonicView}>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
           <Text style={style.backupPhrase}>Let's verify your backup phrase</Text>
           {this.renderMnemonicValue()}
         </View>

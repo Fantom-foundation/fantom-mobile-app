@@ -1,5 +1,5 @@
 // Helpers
-import * as saga from '../../services/saga';
+import * as saga from '~/services/saga';
 
 // Constants
 const TestApi = saga.createEntityApi('testApi');

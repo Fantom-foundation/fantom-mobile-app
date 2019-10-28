@@ -22,3 +22,6 @@ export const iPhoneXHeight = 812;
 /** ************************************************** */
 export const POINT = 'Point';
 export const FANTOM = 'Fantom';
+
+/** TRANSACTION */
+export const GAS_PRICE = 0x000000000001;

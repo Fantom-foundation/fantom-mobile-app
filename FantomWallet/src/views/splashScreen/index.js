@@ -4,7 +4,7 @@ import { Image, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 import style from './style';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 const isIOS = Platform.OS === 'ios';
 /**
  * SplashScreen: Splash Screen for app.
@@ -26,7 +26,7 @@ class SplashScreen extends Component {
   render() {
     return (
       <View style={style.imageBackground}>
-        <Image source={require('../../images/fantomWhiteIcon.png')} resizeMode="contain" />
+        <Image source={require('~/images/fantomWhiteIcon.png')} resizeMode="contain" />
         <Image
           style={{
             width: DEVICE_WIDTH * 0.6,
@@ -37,7 +37,7 @@ class SplashScreen extends Component {
             right: -((DEVICE_WIDTH * 0.45) / 2),
             position: 'absolute',
           }}
-          source={require('../../images/BackgroundIcon.png')}
+          source={require('~/images/BackgroundIcon.png')}
           resizeMode="contain"
         />
       </View>
@@ -46,8 +46,8 @@ class SplashScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  masterKey: state.keyReducer.masterKey,
-  privateKey: state.keyReducer.privateKey,
+  masterKey: state.keys.masterKey,
+  privateKey: state.keys.privateKey,
 });
 
 const mapDispatchToProps = dispatch => ({});

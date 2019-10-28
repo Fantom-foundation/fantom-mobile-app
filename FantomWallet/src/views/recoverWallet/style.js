@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 const isIOS = Platform.OS === 'ios';
 

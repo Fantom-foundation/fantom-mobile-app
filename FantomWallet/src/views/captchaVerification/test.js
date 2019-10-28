@@ -9,15 +9,14 @@ import {
   KeyboardAvoidingView,
   Dimensions,
 } from 'react-native';
-import '../../../global';
 import Hdkey from 'hdkey';
 import EthUtil from 'ethereumjs-util';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // Method of generation taken from: https://medium.com/bitcraft/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998;
-import InputBox from '../../general/inputBox/index';
-import Button from '../../general/button/index';
+import InputBox from '~/components/general/InputBox';
+import Button from '~/components/general/Button';
 import style from './style';
-import ProgressBar from '../../general/progressBar/index';
+import ProgressBar from '~/components/general/ProgressBar';
 
 const deviceHeight = Dimensions.get('window').height;
 class CaptchaVerification extends Component {

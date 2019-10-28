@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 // Library
 import React, { Component } from 'react';
 import {
@@ -16,11 +17,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 // Components
 import style from './style';
-import Button from '../../general/button/index';
-import '../../../global';
-import ProgressBar from '../../general/progressBar/index';
+import Button from '~/components/general/Button';
+import ProgressBar from '~/components/general/ProgressBar';
 
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 // Calculate height of device
 const deviceHeight = Dimensions.get('window').height;
 const isIOS = Platform.OS === 'ios';
@@ -178,7 +178,7 @@ class CaptionOutput extends Component {
             // right: -((DEVICE_WIDTH * 0.6) / 2),
             position: 'absolute',
           }}
-          source={require('../../images/BackgroundIcon.png')}
+          source={require('~/images/BackgroundIcon.png')}
           resizeMode="contain"
         />
         {this.renderButtonContainer()}

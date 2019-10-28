@@ -2,24 +2,18 @@ import { combineReducers } from 'redux';
 
 import counterReducer from './counter/reducer';
 import testApiReducer from './testApi/reducer';
-import keyReducer from './keys/reducer';
+import keys from './keys/reducer';
 import addressBookReducer from './addressBook/reducer';
 import transactionReducer from './transactions/reducer';
+import wallet from './wallet/reducer';
 
 const appReducers = combineReducers({
   counterReducer,
   testApiReducer,
-  keyReducer,
+  keys,
   addressBookReducer,
   transactionReducer,
+  wallet,
 });
 
-function rootReducer(state, action) {
-  let newState = state;
-  if (action.type === 'CLEAR_STORAGE') {
-    newState = undefined;
-  }
-  return appReducers(newState, action);
-}
-
-export default rootReducer;
+export default appReducers;

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { View, WebView, StatusBar, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
-import Header from '../../general/header';
-import Button from '../../general/button';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import Header from '~/components/Header';
+// import Button from '~/components/general/Button';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 import style from './style';
-import crossButton from '../../images/crossButtonWhite.png';
+import crossButton from '~/images/crossButtonWhite.png';
 /**
  * TermsConditions :  This component is meant for displaying legal requirements of the application.
  */
@@ -51,7 +51,11 @@ export default class TermsConditions extends Component {
             height: headerHeight,
           }}
         />
-        <WebView source={{ uri: 'http://fantom.foundation' }} onLoad={() => this.hideSpinner()} onError={() => this.hideSpinner()} />
+        <WebView
+          source={{ uri: 'http://fantom.foundation' }}
+          onLoad={() => this.hideSpinner()}
+          onError={() => this.hideSpinner()}
+        />
         {/* <View style={style.footerStyle}>
           <Button text="Confirm" buttonStyle={{ fontFamily: 'SegoeUI' }} />
         </View> */}

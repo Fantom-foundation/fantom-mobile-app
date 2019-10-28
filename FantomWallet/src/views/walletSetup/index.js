@@ -10,7 +10,7 @@ import {
   StatusBar,
 } from 'react-native';
 import style from './style';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 const isIOS = Platform.OS === 'ios';
 // CaptchaVerification
 // CaptionOutput,EditContact
@@ -28,7 +28,7 @@ class WalletSetup extends PureComponent {
     return (
       <View style={style.headerContainer}>
         <Image
-          source={require('../../images/FantomWalletWhiteIcon.png')}
+          source={require('~/images/FantomWalletWhiteIcon.png')}
           style={style.headerImage}
           resizeMode="contain"
         />
@@ -98,7 +98,7 @@ class WalletSetup extends PureComponent {
             right: -((DEVICE_WIDTH * 0.45) / 2),
             position: 'absolute',
           }}
-          source={require('../../images/BackgroundIcon.png')}
+          source={require('~/images/BackgroundIcon.png')}
           resizeMode="contain"
         />
         <View style={style.mainContainer}>

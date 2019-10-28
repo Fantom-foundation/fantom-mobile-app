@@ -2,7 +2,8 @@
   "extends": [
     "airbnb",
     "prettier",
-    "prettier/react"
+    "prettier/react",
+    "plugin:flowtype/recommended"
   ],
   "rules": {
     "react/jsx-filename-extension": [
@@ -29,6 +30,8 @@
     "no-return-assign": 0,
     "no-restricted-syntax": 0,
     "no-prototype-builtins": 0,
+    "linebreak-style": 0,
+    "import/no-extraneous-dependencies": 0,
     "prettier/prettier": [
       "error",
       {
@@ -43,6 +46,17 @@
     "react-native-globals"
   ],
   "env": {
-    "react-native-globals/all": true
-  }
+    "react-native-globals/all": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["~", "./src"]
+        ],
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  },
 }

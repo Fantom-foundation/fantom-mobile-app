@@ -1,7 +1,7 @@
 // Library
 import { Platform } from 'react-native';
 // Component
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../common/constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 // To check device platform
 const isIOS = Platform.OS === 'ios';
 // Styling
