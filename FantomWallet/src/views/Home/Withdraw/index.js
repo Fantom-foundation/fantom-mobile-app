@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { DEVICE_HEIGHT, DEVICE_WIDTH, GAS_PRICE } from '~/common/constants';
-import { estimationMaxFantomBalance } from '~/utils/converts';
+import { estimationMaxFantomBalance, toFixed } from '~/utils/converts';
 // Images
 import person from '~/images/person_whiteOutline.png';
 import qrCode from '~/images/QR.png';
@@ -146,14 +146,8 @@ class WithdrawScreen extends Component<Props, State> {
     });
   }
 
-  toFixed(num, fixed) {
-    const re = new RegExp(`^-?\\d+(?:.\\d{0,${fixed || -1}})?`);
-    // $FlowFixMe
-    return num.toString().match(re)[0];
-  }
-
   renderAmountContainer() {
-    const ftmBalanceFixed = this.toFixed(this.props.balance, 4);
+    const ftmBalanceFixed = toFixed(this.props.balance, 4);
     return (
       <View style={style.amtContainer}>
         <View style={style.balanceHeadingContainer}>

@@ -42,6 +42,7 @@ const style = {
   },
   textContainer: {
     marginTop: 24,
+    minHeight: 82,
     width: DEVICE_WIDTH - 32,
     alignSelf: 'center',
     borderWidth: 1,

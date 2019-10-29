@@ -1,47 +1,40 @@
-import React, { PureComponent } from 'react';
+// @flow
+import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
-import PropTypes from 'prop-types';
 
 import style from './styles';
+
+type Props = {
+  activeTabIndex: number,
+  index: number,
+  activeTabColor: string,
+  inActiveTabColor: string,
+  tabIfo: {
+    route: string,
+    icon: string,
+  },
+  handleSelectedTab: string => void,
+};
 /**
  * Tab : This component is meant for rendering diffrent tabs on home screen navigation tab bar.
  */
-class Tab extends PureComponent {
-  render() {
-    const {
-      activeTabIndex,
-      index,
-      activeTabColor,
-      inActiveTabColor,
-      tabIfo,
-      tabIconStyle,
-    } = this.props;
-    const tabStyle = {
+const Tab = ({
+  activeTabIndex,
+  index,
+  activeTabColor,
+  inActiveTabColor,
+  tabIfo,
+  handleSelectedTab,
+}: Props) => (
+  <TouchableOpacity
+    style={{
       ...style.tabStyle,
       backgroundColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
-    };
+    }}
+    onPress={() => handleSelectedTab(tabIfo.route)}
+  >
+    <Image source={tabIfo.icon} resizeMode="contain" style={style.tabIconStyle} />
+  </TouchableOpacity>
+);
 
-    const iconStyle = {
-      ...style.tabIconStyle,
-      ...tabIconStyle,
-    };
-    return (
-      <TouchableOpacity style={tabStyle} onPress={() => this.props.handleSelectedTab(tabIfo.route)}>
-        <Image
-          source={activeTabIndex === index ? tabIfo.activeIcon : tabIfo.inActiveIcon}
-          resizeMode="contain"
-          style={iconStyle}
-        />
-      </TouchableOpacity>
-    );
-  }
-}
-Tab.propTypes = {
-  activeTabIndex: PropTypes.number,
-  index: PropTypes.number,
-  activeTabColor: PropTypes.string,
-  inActiveTabColor: PropTypes.string,
-  tabIfo: PropTypes.object,
-  tabIconStyle: PropTypes.object,
-};
 export default Tab;

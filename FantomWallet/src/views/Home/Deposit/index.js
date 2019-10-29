@@ -1,6 +1,7 @@
 /* eslint-disable*/
-import React, { PureComponent } from 'react';
+import React, { useRef } from 'react';
 import { View, Image } from 'react-native';
+import DropdownAlert from 'react-native-dropdownalert';
 // Style
 import style from './style';
 // Component
@@ -10,15 +11,23 @@ import BackgroundIcon from '~/images/BackgroundIcon.png';
 /**
  * To Display DepositTab related tasks
  */
-export default class DepositScreen extends PureComponent {
-  render() {
-    return (
-      <View style={style.depositViewStyle}>
-        <View style={style.depositScreenStyle}>
-          <Image style={style.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
-          <DepositView renderToastNotification={this.props.renderToastNotification} />
-        </View>
-      </View>
-    );
+export default () => {
+  const renderToastNotification = (text) => {
+    this.dropdown.alertWithType('custom', text.toUpperCase(), '');
   }
+  const dropdown = useRef(null);
+  return (
+    <View style={style.depositViewStyle}>
+      <View style={style.depositScreenStyle}>
+        <Image style={style.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
+        <DepositView renderToastNotification={renderToastNotification} />
+      </View>
+      <DropdownAlert
+          containerStyle={{ backgroundColor: 'rgb(0,168,251)' }}
+          ref={ref => (this.dropdown = ref)}
+          style={{ backgroundColor: 'red' }}
+        />
+    </View>
+  );
 }
+

@@ -49,3 +49,9 @@ export function estimationMaxFantomBalance(fantomWei, gasPrice) {
 
   // due to mock bignumber it is difficult to evaluate the behavior
 }
+
+export const toFixed = (num, fixed) => {
+  if (!num) return '';
+  const re = new RegExp(`^-?\\d+(?:.\\d{0,${fixed || -1}})?`);
+  return num.toString().match(re)[0];
+};

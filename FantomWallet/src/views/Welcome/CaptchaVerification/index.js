@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   Platform,
   ScrollView,
-  Keyboard,
   KeyboardAvoidingView,
   Image,
 } from 'react-native';
@@ -29,73 +28,40 @@ class CaptchaVerification extends Component {
   constructor(props) {
     super(props);
     const { navigation } = this.props;
-    let shuffledMnemonics = navigation.getParam('mnemonicWords', 'NO-ID');
-    if (shuffledMnemonics) {
-      shuffledMnemonics = _.shuffle(navigation.getParam('mnemonicWords', 'NO-ID'));
-    }
+    const mnemonic = navigation.getParam('mnemonic', 'NO-ID');
+    let shuffledMnemonics = _.shuffle(mnemonic).map((word, index) => ({
+      name: word,
+      index,
+      isClickable: true,
+    }));
 
     this.state = {
-      phraseFive: '',
-      phraseNine: '',
-      phraseTwelve: '',
       seed: navigation.getParam('seed', 'NO-ID'),
-      mnemonicWords: shuffledMnemonics,
-      mnemonicWordsArray: [].concat(navigation.getParam('mnemonicWords', 'NO-ID')),
+      mnemonic,
+      shuffledMnemonics,
       verifyMnemonic: [],
     };
-    this.walletSetup = this.walletSetup.bind(this);
-    // this.changePhrase = this.changePhrase.bind(this);
-  }
-
-  componentWillMount() {
-    const { mnemonicWords } = this.state;
-    let arr = [];
-    if (mnemonicWords.length > 0) {
-      mnemonicWords.map((data, i) => {
-        const objectValue = { name: data, index: i, isClickable: true };
-        arr.push(objectValue);
-        return null;
-      });
-    }
-    this.setState({ mnemonicWords: arr });
   }
 
   onNavigation() {
     this.props.navigation.navigate('HomeScreen');
   }
 
-  onTextFieldFocus() {
-    const scrollValue = Platform.OS === 'ios' ? 80 : 200;
-    setTimeout(() => {
-      this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true });
-    }, 10);
-  }
-
-  onTextFieldBlur() {
-    Keyboard.dismiss();
-    const scrollValue = Platform.OS === 'ios' ? 0 : 0;
-    setTimeout(() => {
-      this.scrollView.scrollTo({ x: 0, y: scrollValue, animated: true });
-    }, 10);
-  }
-
   /**
-   * walletSetup() : This function verifies the user and generates a unique masterPrivateKey for that user.
+   * handleVerify() : This function verifies the user and generates a unique masterPrivateKey for that user.
    *  Then navigate user to HomeScreen.
    */
-  walletSetup() {
-    let verifyMnemonicArr = [];
+  handleVerify = () => {
+    const { verifyMnemonic, mnemonic } = this.state;
+    if (!verifyMnemonic) return;
 
-    if (this.state.verifyMnemonic.length > 0) {
-      const arr = this.state.verifyMnemonic;
-      arr.map(obj => {
-        verifyMnemonicArr.push(obj.name);
-        return null;
-      });
-    }
-    const isSucess = _.isEqual(this.state.mnemonicWordsArray, verifyMnemonicArr);
+    const arr = this.state.verifyMnemonic;
+    const verifyMnemonicArr = arr.map(obj => obj.name);
+
+    const isSucess = _.isEqual(mnemonic, verifyMnemonicArr);
 
     if (!isSucess) {
+      // 'Phrase five does not match up.'
       return;
     }
     const root = Hdkey.fromMasterSeed(this.state.seed);
@@ -116,86 +82,25 @@ class CaptchaVerification extends Component {
        If using ethereumjs-wallet instead do after line 1:
        const address = addrNode.getWallet().getChecksumAddressString();
     */
-  }
+  };
 
-  /**
-   * checkValidation() :  This function is meant to check that captcha entered by user is valid or not.
-   *    If invalid then error message is displayed.
-   */
-  checkValidation() {
-    const { phraseFive, phraseNine, phraseTwelve } = this.state;
-    // check to make sure entered phrases match up.
-    if (phraseFive !== this.state.mnemonicWords[4]) {
-      this.state.errorMessage = 'Phrase five does not match up.';
-      return false;
-    }
-    if (phraseNine !== this.state.mnemonicWords[8]) {
-      this.state.errorMessage = 'Phrase nine does not match up.';
-      return false;
-    }
-    if (phraseTwelve !== this.state.mnemonicWords[11]) {
-      this.state.errorMessage = 'Phrase twelve does not match up.';
-      return false;
-    }
-    return true;
-  }
+  handleShuffledWord(name, index) {
+    const { verifyMnemonic, shuffledMnemonics } = this.state;
 
-  // /**
-  //  * changePhrase()  : on change handler for text fields.
-  //  * @param { String } text : Contains captcha text phrase.
-  //  * @param {*} phrase : Contains position value of captcha phrase in generated captcha codes.
-  //  */
-  // changePhrase(text, phrase) {
-  //   const { state } = this;
-  //   state[phrase] = text;
-  //   this.setState(state);
-  // }
+    const updatedMnemonicsArray = shuffledMnemonics.map(item => ({
+      ...item,
+      isClickable: item.name !== name ? item.isClickable : false,
+    }));
 
-  verifyWords(data) {
-    // Called on selection button from bottom buttons
-
-    const { verifyMnemonic, mnemonicWords } = this.state;
-    const appendWord = verifyMnemonic;
-    let updatedMnemonicsArray = mnemonicWords;
-
-    if (data) {
-      updatedMnemonicsArray.map(word => {
-        if (word.name === data.name) {
-          let updatedObject = {
-            name: word.name,
-            index: word.index,
-            isClickable: !word.isClickable,
-          };
-          updatedMnemonicsArray.splice(updatedMnemonicsArray.indexOf(word), 1, updatedObject);
-        }
-        return null;
-      });
-    }
-    if (appendWord) {
-      const appendData = {
-        name: data.name,
-        index: data.index,
-        isClickable: !data.isClickable,
-      };
-      appendWord.push(appendData);
-      this.setState({
-        verifyMnemonic: appendWord,
-      });
-    } else {
-      const appendData = {
-        name: data.name,
-        index: data.index,
-        isClickable: !data.isClickable,
-      };
-      this.setState({
-        verifyMnemonic: appendData,
-      });
-    }
+    this.setState({
+      verifyMnemonic: [...verifyMnemonic, { name, index, isClickable: false }],
+      shuffledMnemonics: updatedMnemonicsArray,
+    });
   }
 
   resetWords(val) {
     // Unselect the selected Values
-    const updateMnemonicsArray = this.state.mnemonicWords;
+    const updateMnemonicsArray = this.state.shuffledMnemonics;
     const verifyWord = this.state.verifyMnemonic;
     if (val) {
       let dataObj = { name: val.name, index: val.index, isClickable: !val.isClickable };
@@ -210,7 +115,7 @@ class CaptchaVerification extends Component {
         });
       }
       this.setState({
-        mnemonicWords: updateMnemonicsArray,
+        shuffledMnemonics: updateMnemonicsArray,
         verifyMnemonic: verifyWord,
       });
     }
@@ -219,14 +124,10 @@ class CaptchaVerification extends Component {
   renderMnemonicValue() {
     // Selected mnemonics container
     const mnemonicArr = this.state.verifyMnemonic;
-    let emptySelectedArr = false;
-    if (mnemonicArr.length === 0) {
-      emptySelectedArr = true;
-    }
     return (
-      <View style={[style.textContainer, { minHeight: emptySelectedArr ? 82 : 0 }]}>
+      <View style={style.textContainer}>
         {mnemonicArr.map((val, i) => {
-          let textValue = val.name.charAt(0).toUpperCase() + val.name.slice(1); // Capitalize first alphabet of word
+          let textValue = val.name; // Capitalize first alphabet of word
           return (
             <TouchableOpacity
               key={i}
@@ -242,40 +143,36 @@ class CaptchaVerification extends Component {
   }
 
   renderMnemonicBtn() {
-    // Unselected mnemonics container
-    const { mnemonicWords } = this.state;
-    if (mnemonicWords) {
-      return mnemonicWords.map((Obj, index) => {
-        const key = index;
-        let textValue = Obj.name.charAt(0).toUpperCase() + Obj.name.slice(1);
-        return (
-          <View
-            style={{
-              borderWidth: !Obj.isClickable ? 1 : 1,
-              borderColor: !Obj.isClickable ? 'rgb(0,177,251)' : '#111',
-              opacity: !Obj.isClickable ? 0.6 : 1,
-              margin: 10,
-              borderRadius: 4,
-            }}
+    const { shuffledMnemonics } = this.state;
+    return shuffledMnemonics.map(({ name, isClickable }, index) => {
+      let textValue = name;
+      return (
+        <View
+          key={`${index}_${name}`}
+          style={{
+            borderWidth: !isClickable ? 1 : 1,
+            borderColor: !isClickable ? 'rgb(0,177,251)' : '#111',
+            opacity: !isClickable ? 0.6 : 1,
+            margin: 10,
+            borderRadius: 4,
+          }}
+        >
+          <TouchableOpacity
+            key={`touch_${index}_${name}`}
+            style={[
+              style.mnemonicBtn,
+              {
+                opacity: !isClickable ? 0.3 : 1,
+              },
+            ]}
+            disabled={!isClickable}
+            onPress={() => this.handleShuffledWord(name, index)}
           >
-            <TouchableOpacity
-              key={key}
-              style={[
-                style.mnemonicBtn,
-                {
-                  opacity: !Obj.isClickable ? 0.3 : 1,
-                },
-              ]}
-              disabled={!Obj.isClickable}
-              onPress={() => this.verifyWords(Obj, index)}
-            >
-              <Text style={style.mnemonicBtnText}>{textValue}</Text>
-            </TouchableOpacity>
-          </View>
-        );
-      });
-    }
-    return null;
+            <Text style={style.mnemonicBtnText}>{textValue}</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    });
   }
 
   renderInnerContainer() {
@@ -295,7 +192,7 @@ class CaptchaVerification extends Component {
           {this.renderMnemonicValue()}
         </View>
 
-        {this.state.mnemonicWords && (
+        {this.state.shuffledMnemonics && (
           <View style={{ alignItems: 'center' }}>
             <Text style={style.orderTextStyle}>Please tap each word in the correct order</Text>
           </View>
@@ -332,7 +229,7 @@ class CaptchaVerification extends Component {
         <View style={style.footerStyle}>
           <Button
             text="Verify"
-            onPress={this.walletSetup}
+            onPress={this.handleVerify}
             buttonStyle={{ backgroundColor: 'rgb(0,177,251)' }}
           />
         </View>

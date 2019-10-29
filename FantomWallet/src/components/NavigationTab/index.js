@@ -11,14 +11,13 @@ import depositWhiteIcon from '~/images/downloading_white.png';
 import { INACTIVE_TAB_COLOR } from '~/common/constants';
 
 import style from './styles';
-import Tab from './tab';
+import Tab from './Tab';
 
 const TABS = [
-  { inActiveIcon: walletWhiteIcon, activeIcon: walletWhiteIcon, route: 'Wallet' },
-  { inActiveIcon: sendWhiteIcon, activeIcon: sendWhiteIcon, route: 'Withdraw' },
+  { icon: walletWhiteIcon, route: 'Wallet' },
+  { icon: sendWhiteIcon, route: 'Withdraw' },
   {
-    inActiveIcon: depositWhiteIcon,
-    activeIcon: depositWhiteIcon,
+    icon: depositWhiteIcon,
     route: 'Deposit',
   },
 ];

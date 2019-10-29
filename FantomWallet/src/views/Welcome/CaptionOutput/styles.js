@@ -1,22 +1,23 @@
-import { Dimensions } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
-const style = {
+const isIOS = Platform.OS === 'ios';
+
+export default StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#111',
   },
   progressContainer: {
-    marginTop: deviceHeight * 0.03,
+    marginTop: DEVICE_HEIGHT * 0.03,
   },
   arrowContainer: {
-    marginTop: deviceHeight * 0.02,
-    marginLeft: deviceHeight * 0.02,
+    marginTop: DEVICE_HEIGHT * 0.02,
+    marginLeft: DEVICE_HEIGHT * 0.02,
   },
   mid: {
-    paddingTop: deviceHeight * 0.02,
+    paddingTop: DEVICE_HEIGHT * 0.02,
     flex: 1,
     // backgroundColor: 'red',
   },
@@ -25,25 +26,25 @@ const style = {
     alignItems: 'center',
   },
   secretText: {
-    fontSize: deviceWidth <= 320 ? 16 : 20,
+    fontSize: DEVICE_WIDTH <= 320 ? 16 : 20,
     color: 'rgb(166,225,100)', // Green
     fontFamily: 'SFProDisplay-Semibold',
     marginTop: 10,
   },
   text: {
-    fontSize: deviceWidth <= 320 ? 12 : 14,
+    fontSize: DEVICE_WIDTH <= 320 ? 12 : 14,
     fontFamily: 'SFProDisplay-Medium',
     color: 'rgb(0,177,251)', // Blue
   },
   activityIndicatorContainerStyle: {
-    height: deviceHeight * 0.25,
+    height: DEVICE_HEIGHT * 0.25,
     flexDirection: 'row',
     alignSelf: 'center',
   },
   textContainer: {
-    marginTop: deviceHeight * 0.05,
-    marginBottom: deviceHeight * 0.07,
-    width: deviceWidth - 32,
+    marginTop: DEVICE_HEIGHT * 0.05,
+    marginBottom: DEVICE_HEIGHT * 0.07,
+    width: DEVICE_WIDTH - 32,
     alignSelf: 'center',
     borderWidth: 1,
     borderColor: '#fff',
@@ -57,54 +58,58 @@ const style = {
     paddingVertical: 15,
   },
   wordWrap: {
-    width: deviceWidth * 0.2,
-    height: deviceHeight * 0.05,
-    marginBottom: deviceWidth * 0.03,
+    width: DEVICE_WIDTH * 0.2,
+    height: DEVICE_HEIGHT * 0.05,
+    marginBottom: DEVICE_WIDTH * 0.03,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  messageContainer: {
-    marginTop: deviceHeight * 0.03,
+  infoContainer: {
+    marginBottom: DEVICE_HEIGHT * 0.05,
     alignItems: 'center',
-    marginHorizontal: deviceWidth * 0.1,
+  },
+  messageContainer: {
+    marginTop: DEVICE_HEIGHT * 0.03,
+    alignItems: 'center',
+    marginHorizontal: DEVICE_WIDTH * 0.1,
   },
   instructionTextStyle: {
-    fontSize: deviceWidth * 0.037,
+    fontSize: DEVICE_WIDTH * 0.037,
     fontFamily: 'SFProDisplay-Thin',
     color: '#FFF',
   },
   clipBoardContainer: {
-    marginTop: deviceHeight * 0.04,
-    height: deviceWidth * 0.25,
-    width: deviceWidth * 0.25,
+    marginTop: DEVICE_HEIGHT * 0.04,
+    height: DEVICE_WIDTH * 0.25,
+    width: DEVICE_WIDTH * 0.25,
     backgroundColor: 'rgb(33,36,40)',
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
-    borderRadius: (deviceWidth * 0.25) / 2,
+    borderRadius: (DEVICE_WIDTH * 0.25) / 2,
     marginBottom: 10,
   },
   copyIconContainerStyle: {
-    height: deviceWidth * 0.2,
-    width: deviceWidth * 0.2,
+    height: DEVICE_WIDTH * 0.2,
+    width: DEVICE_WIDTH * 0.2,
     backgroundColor: 'rgb(44,52,58)',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: (deviceWidth * 0.2) / 2,
+    borderRadius: (DEVICE_WIDTH * 0.2) / 2,
   },
   clipBoardText: {
-    fontSize: deviceWidth <= 320 ? 12 : 14,
+    fontSize: DEVICE_WIDTH <= 320 ? 12 : 14,
     fontFamily: 'SFProDisplay-Regular',
     color: '#fff',
   },
   line: {
     backgroundColor: 'rgb(243,243,243)',
-    marginTop: deviceHeight * 0.05,
+    marginTop: DEVICE_HEIGHT * 0.05,
     height: 2,
   },
   lastMessageContainer: {
-    width: deviceWidth - 32,
+    width: DEVICE_WIDTH - 32,
     alignSelf: 'center',
     // backgroundColor: 'rgb(31,38,53)',
     justifyContent: 'center',
@@ -113,15 +118,25 @@ const style = {
     paddingVertical: 15,
   },
   warningTextStyle: {
-    fontSize: deviceWidth <= 320 ? 12 : 14,
+    fontSize: DEVICE_WIDTH <= 320 ? 12 : 14,
     fontFamily: 'SFProDisplay-Light',
     color: '#fff',
+  },
+  backgroundImage: {
+    width: DEVICE_WIDTH * 0.6,
+    height: DEVICE_HEIGHT * 0.77,
+    top: DEVICE_HEIGHT * 0.07,
+    opacity: isIOS ? 0.03 : 0.02,
+    right: -((DEVICE_WIDTH * 0.45) / 2),
+    position: 'absolute',
   },
   footerStyle: {
     position: 'absolute',
     bottom: 0,
-    width: deviceWidth,
+    width: DEVICE_WIDTH,
   },
-};
-
-export default style;
+  dropdown: {
+    backgroundColor: 'rgb(0,168,251)',
+  },
+  empty: { height: DEVICE_HEIGHT * 0.15 },
+});

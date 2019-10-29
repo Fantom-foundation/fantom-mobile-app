@@ -6,6 +6,7 @@ type Wallet = {
   balance: string,
   loading: boolean,
   history: Array<TransactionT>,
+  sendTransactionIsLoading: boolean,
 };
 
 type actionType = {
@@ -17,6 +18,7 @@ const initialState = {
   balance: '0',
   loading: false,
   history: [],
+  sendTransactionIsLoading: false,
 };
 
 export default (state: Wallet = initialState, action: actionType) => {
@@ -40,6 +42,13 @@ export default (state: Wallet = initialState, action: actionType) => {
         history: action.payload.history,
       };
     }
+    case types.SET_LOADING_SEND: {
+      return {
+        ...state,
+        sendTransactionIsLoading: action.payload.sendTransactionIsLoading,
+      };
+    }
+
     default:
       return state;
   }

@@ -47,12 +47,9 @@ class DepositViewInfo extends Component {
 
   async onCopyAddress() {
     // Copies address to clipboard
-    // this.fetchData();
-
-    this.props.renderToastNotification();
-
     const string = this.state.qrAddress;
     await Clipboard.setString(string);
+    this.props.renderToastNotification('Copied');
   }
 
   onTextFieldFocus() {

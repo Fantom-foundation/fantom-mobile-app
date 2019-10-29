@@ -6,6 +6,7 @@ import moment from 'moment';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import type { TransactionT } from '~/redux/wallet/actions';
+import { toFixed } from '~/utils/converts';
 // Styling
 import style from './style';
 
@@ -18,12 +19,6 @@ type Props = {
  * TransacationEntity: This component is meant for rendering transaction cards.
  */
 class TransacationEntity extends PureComponent<Props> {
-  toFixed(num: string, fixed: number) {
-    const re = new RegExp(`^-?\\d+(?:.\\d{0,${fixed || -1}})?`);
-    // $FlowFixMe
-    return num.toString().match(re)[0];
-  }
-
   renderDateContainer(date: string, month: string) {
     return (
       <View style={style.dateContainer}>
@@ -119,7 +114,7 @@ class TransacationEntity extends PureComponent<Props> {
 
     if (transaction && transaction.amount) {
       const valInEther = transaction.amount;
-      ftmBalance = this.toFixed(valInEther, 4);
+      ftmBalance = toFixed(valInEther, 4);
     }
     if (
       transaction &&

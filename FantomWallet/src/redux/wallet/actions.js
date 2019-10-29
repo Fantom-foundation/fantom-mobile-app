@@ -4,6 +4,8 @@ export const types = {
   SET_BALANCE: 'wallet/SET_BALANCE',
   GET_HISTORY: 'wallet/GET_HISTORY',
   SET_HISTORY: 'wallet/SET_HISTORY',
+  SEND_TRANSACTION: 'wallet/SEND_TRANSACTION',
+  SET_LOADING_SEND: 'wallet/SET_LOADING_SEND',
 };
 
 type Balance = {
@@ -23,6 +25,13 @@ export type TransactionT = {
   date: string,
 };
 
+type SendTransactionT = {
+  to: string,
+  value: string,
+  memo: string,
+  cbSuccess: () => void,
+};
+
 export const getBalance = ({ loading }: Balance) => ({
   type: types.GET_BALANCE,
   payload: { loading },
@@ -40,4 +49,14 @@ export const getHistory = () => ({
 export const setHistory = ({ history }: { history: Array<TransactionT> }) => ({
   type: types.SET_HISTORY,
   payload: { history },
+});
+
+export const sendTransaction = ({ to, value, memo, cbSuccess }: SendTransactionT) => ({
+  type: types.SEND_TRANSACTION,
+  payload: { to, value, memo, cbSuccess },
+});
+
+export const setLoadingSendTransaction = (sendTransactionIsLoading: boolean) => ({
+  type: types.SET_LOADING_SEND,
+  payload: { sendTransactionIsLoading },
 });
