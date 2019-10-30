@@ -2,21 +2,21 @@ import React, { PureComponent } from 'react';
 import { createStackNavigator } from 'react-navigation';
 
 import HomeNavigator from './HomeNavigator';
-import SplashScreen from '~/views/splashScreen';
-import WalletSetup from '~/views/walletSetup';
-import PrivacyPolicy from '~/views/privacyPolicy';
-import TermsConditions from '~/views/termsConditions';
-import CaptionOutput from '~/views/Welcome/CaptionOutput';
-import CaptchaVerification from '~/views/Welcome/CaptchaVerification';
-import AddressBook from '~/views/Settings/addressBook';
+import SplashScreen from '~/views/SplashScreen';
+import PrivacyPolicy from '~/views/Other/PrivacyPolicy';
+import TermsConditions from '~/views/Other/TermsConditions';
+import WalletSetup from '~/views/Welcome/WalletSetup';
+import CreateMnemonic from '~/views/Welcome/CreateMnemonic';
+import CheckMnemonic from '~/views/Welcome/CheckMnemonic';
+import RecoverWallet from '~/views/Welcome/RecoverWallet';
+import AddressBook from '~/views/Settings/AddressBook';
 import QRScanner from '~/components/QRCodeScanner/view';
 import QRGenerator from '~/components/QRCodeGenerator';
-import EditContact from '~/views/Settings/addressBook/editContact';
+import EditContact from '~/views/Settings/AddressBook/editContact';
 import SendMoney from '~/views/Home/Withdraw/SendMoney';
 import Settings from '~/views/Settings';
-import AboutApp from '~/views/Settings/aboutApp';
-import CustomerSupport from '~/views/Settings/customerSupport';
-import RecoverWallet from '~/views/recoverWallet';
+import AboutApp from '~/views/Settings/AboutApp';
+import CustomerSupport from '~/views/Settings/CustomerSupport';
 
 const Routing = createStackNavigator(
   {
@@ -29,7 +29,6 @@ const Routing = createStackNavigator(
     },
     Terms: { screen: TermsConditions },
     PrivacyPolicy: { screen: PrivacyPolicy },
-    CaptionOutput: { screen: CaptionOutput },
     SendMoney: { screen: SendMoney },
     HomeScreen: {
       screen: HomeNavigator,
@@ -37,7 +36,9 @@ const Routing = createStackNavigator(
         gesturesEnabled: false,
       },
     },
-    CaptchaVerification: { screen: CaptchaVerification },
+    CreateMnemonic: { screen: CreateMnemonic },
+    CheckMnemonic: { screen: CheckMnemonic },
+    RecoverWallet: { screen: RecoverWallet },
     AddressBook: { screen: AddressBook },
     QRScanner: { screen: QRScanner },
     QRGenerator: { screen: QRGenerator },
@@ -45,7 +46,6 @@ const Routing = createStackNavigator(
     Settings: { screen: Settings },
     AboutApp: { screen: AboutApp },
     CustomerSupport: { screen: CustomerSupport },
-    RecoverWallet: { screen: RecoverWallet },
   },
   {
     headerMode: 'none',

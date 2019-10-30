@@ -1,30 +1,37 @@
-import { Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
-const styles = {
+export default StyleSheet.create({
   mainContainer: {
-    padding: deviceHeight * 0.05,
+    padding: DEVICE_HEIGHT * 0.05,
     flex: 1,
   },
-  imageBackground: {
-    width: deviceWidth,
-    // height: deviceHeight,
+  backgroundContainer: {
+    width: DEVICE_WIDTH,
+    // height: DEVICE_HEIGHT,
     flex: 1,
     backgroundColor: 'black',
+  },
+  backgroundImage: {
+    width: DEVICE_WIDTH * 0.6,
+    height: DEVICE_HEIGHT * 0.77,
+    opacity: 0.05,
+    top: DEVICE_HEIGHT * 0.1,
+    right: -((DEVICE_WIDTH * 0.45) / 2),
+    position: 'absolute',
   },
   // Header image styles
   headerContainer: {
     alignItems: 'center',
   },
   headerImage: {
-    width: deviceWidth * 0.4,
+    width: DEVICE_WIDTH * 0.4,
   },
   // Mid Container style
   subHeaderContainer: {
-    marginTop: deviceHeight * 0.12,
-    width: deviceWidth * 0.9,
-    paddingVertical: deviceHeight * 0.08,
+    marginTop: DEVICE_HEIGHT * 0.12,
+    width: DEVICE_WIDTH * 0.9,
+    paddingVertical: DEVICE_HEIGHT * 0.08,
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor: 'rgb(35,39,40)',
@@ -35,7 +42,7 @@ const styles = {
     fontSize: 32,
     fontFamily: 'SFProDisplay-Thin',
     fontWeight: '400',
-    marginBottom: deviceHeight * 0.02,
+    marginBottom: DEVICE_HEIGHT * 0.02,
   },
   subHeaderText2: {
     fontSize: 18,
@@ -48,7 +55,7 @@ const styles = {
     bottom: 0,
   },
   upperButtonContainer: {
-    width: deviceWidth,
+    width: DEVICE_WIDTH,
     height: 50,
     alignItems: 'center',
     flexDirection: 'row',
@@ -91,15 +98,14 @@ const styles = {
     alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: '#00B1FF',
-    width: deviceWidth,
+    width: DEVICE_WIDTH,
   },
   walletSetupText: {
-    fontSize: deviceWidth * 0.05,
-    marginTop: deviceHeight * 0.02,
-    marginBottom: deviceHeight * 0.02,
+    fontSize: DEVICE_WIDTH * 0.05,
+    marginTop: DEVICE_HEIGHT * 0.02,
+    marginBottom: DEVICE_HEIGHT * 0.02,
     fontFamily: 'SFProDisplay-Bold',
     fontWeight: 'bold',
     color: '#FFF',
   },
-};
-export default styles;
+});

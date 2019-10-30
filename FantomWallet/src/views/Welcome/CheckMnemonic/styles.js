@@ -1,11 +1,11 @@
 // Library
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 // Component
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 // To check device platform
 const isIOS = Platform.OS === 'ios';
 // Styling
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
     backgroundColor: '#000',
@@ -123,12 +123,18 @@ const style = {
     borderRadius: 4,
     overflow: 'hidden',
   },
+  mnemonicBtnContainer: {
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 4,
+  },
   mnemonicBtnText: { color: '#fff', fontWeight: '600', textAlign: 'center' },
   footerStyle: {
     position: 'absolute',
     bottom: 0,
     width: DEVICE_WIDTH,
   },
-};
-
-export default style;
+  dropdown: {
+    backgroundColor: 'rgb(251,128,0)',
+  },
+});

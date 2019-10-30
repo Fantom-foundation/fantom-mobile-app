@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import Header from '~/components/Header';
-import style from './style';
+import styles from './styles';
 import Address from './address/index';
 
 import whiteSearchIcon from '~/images/searchWhite.png';
@@ -157,20 +157,20 @@ class AddressBook extends Component {
   }
 
   renderMidButtons() {
-    let addColor = style.add;
-    let favColor = style.favorites;
+    let addColor = styles.add;
+    let favColor = styles.favorites;
     let textStyle = { color: '#FFF', fontFamily: 'SFProDisplay-Semibold' };
 
     if (this.state.addOrFavorite === 'add') {
-      addColor = { ...style.add, backgroundColor: 'rgb(0,177,251)' };
-      favColor = style.favorites;
+      addColor = { ...styles.add, backgroundColor: 'rgb(0,177,251)' };
+      favColor = styles.favorites;
     } else if (this.state.addOrFavorite === 'favorite') {
-      favColor = { ...style.favorites, backgroundColor: 'rgb(0,177,251)' };
-      addColor = style.add;
+      favColor = { ...styles.favorites, backgroundColor: 'rgb(0,177,251)' };
+      addColor = styles.add;
     }
     if (!this.state.displaySearch) {
       return (
-        <View style={style.subHeader}>
+        <View style={styles.subHeader}>
           <TouchableOpacity
             style={addColor}
             onPress={() => this.setState({ addOrFavorite: 'add' })}
@@ -192,7 +192,7 @@ class AddressBook extends Component {
   renderSearchBar() {
     if (this.state.displaySearch) {
       return (
-        <View style={style.textInputContainer}>
+        <View style={styles.textInputContainer}>
           <TextInput
             placeholder="Search"
             placeholderTextColor="rgba(255,255, 255,0.8)"
@@ -215,7 +215,7 @@ class AddressBook extends Component {
 
   render() {
     return (
-      <View style={style.mainContainerStyle}>
+      <View style={styles.mainContainerStyle}>
         <StatusBar barStyle="light-content" />
         {/* add-circle-outline */}
         <Header
@@ -239,13 +239,17 @@ class AddressBook extends Component {
           }}
         />
 
-        <View style={style.addressList}>
+        <View style={styles.addressList}>
           {/* Background Image */}
-          <Image style={style.backgroundImageStyle} source={BackgroundImage} resizeMode="contain" />
+          <Image
+            style={styles.backgroundImageStyle}
+            source={BackgroundImage}
+            resizeMode="contain"
+          />
           {/* Displays RECENT and FAVOURITE buttons */}
           {this.renderMidButtons()}
 
-          <View style={style.displaySearch}>
+          <View style={styles.displaySearch}>
             {/* Displays search Bar */}
             {this.renderSearchBar()}
             <ScrollView showsVerticalScrollIndicator={false} style={{ height: DEVICE_HEIGHT }}>

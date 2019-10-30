@@ -20,19 +20,16 @@ import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
 
 /**
- * CaptionOutput: This component is meant for generating secret codes for captcha verification.
+ * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
  */
-const CaptionOutput = ({ navigation }) => {
+const CreateMnemonic = ({ navigation }) => {
   let dropdown = useRef(null);
   const [mnemonic, setMnemonic] = useState([]);
-  const [seed, setSeed] = useState('');
   const loading = !mnemonic.length;
 
   const generateMnemonic = async () => {
     const _menmonic = await Bip39.generateMnemonic();
-    const _seed = await Bip39.mnemonicToSeed(_menmonic); // creates seed buffer
     setMnemonic(_menmonic.split(' ').map(word => word[0].toUpperCase() + word.slice(1)));
-    setSeed(_seed);
   };
 
   useEffect(() => {
@@ -40,7 +37,7 @@ const CaptionOutput = ({ navigation }) => {
   }, []);
 
   const onConfirmHandler = () => {
-    navigation.navigate('CaptchaVerification', { mnemonic, seed });
+    navigation.navigate('CheckMnemonic', { mnemonic });
   };
 
   const copyToClipboard = () => {
@@ -130,4 +127,4 @@ const CaptionOutput = ({ navigation }) => {
   );
 };
 
-export default CaptionOutput;
+export default CreateMnemonic;

@@ -1,9 +1,9 @@
-import { Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 const isIOS = Platform.OS === 'ios';
 
-const style = {
+export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgb(14,14,18)',
@@ -17,6 +17,17 @@ const style = {
     alignSelf: 'center',
     justifyContent: 'space-between',
   },
+
+  headerComponent: {
+    backgroundColor: 'rgb(44,52,58)',
+    height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+  },
+  headerComponentText: { fontFamily: 'SFProDisplay-Semibold' },
+
+  listContainer: {
+    height: DEVICE_HEIGHT,
+  },
+
   addressBookContainer: {
     borderWidth: 1,
     borderColor: 'rgb(200,200,200)',
@@ -92,6 +103,6 @@ const style = {
     opacity: isIOS ? 0.03 : 0.02,
     right: -((DEVICE_WIDTH * 0.45) / 2),
   },
-};
 
-export default style;
+  empty: { height: DEVICE_HEIGHT * 0.08 },
+});

@@ -1,21 +1,21 @@
-import * as Actions from './action';
+import { types } from './actions';
 
-const KeyReducer = (state = { masterKey: '', publicKey: '', privateKey: '' }, action) => {
+const initialState = {
+  masterKey: '',
+  publicKey: '',
+  privateKey: '',
+};
+
+const KeyReducer = (state = initialState, action) => {
   switch (action.type) {
-    case Actions.MASTER_KEY:
-      return Object.assign({}, state, {
-        masterKey: action.key,
-      });
-    case Actions.PUBLIC_KEY:
-      return Object.assign({}, state, {
-        publicKey: action.key,
-      });
-    case Actions.MASTER_PUBLIC_PRIVATE_KEY:
-      return Object.assign({}, state, {
-        publicKey: action.publicKey,
-        masterKey: action.masterKey,
-        privateKey: action.privateKey,
-      });
+    case types.SET_KEYS:
+      return {
+        ...state,
+        publicKey: action.payload.publicKey,
+        masterKey: action.payload.masterKey,
+        privateKey: action.payload.privateKey,
+      };
+
     default:
       return state;
   }

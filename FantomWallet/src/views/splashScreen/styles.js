@@ -1,9 +1,9 @@
-import { Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
-const style = {
+export default StyleSheet.create({
   imageBackground: {
     width: deviceWidth,
     height: deviceHeight,
@@ -11,6 +11,4 @@ const style = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-};
-
-export default style;
+});

@@ -1,76 +1,74 @@
+// @flow
 // Library
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+
 // Components
 import Header from '~/components/Header/index';
-import { DEVICE_HEIGHT } from '~/common/constants';
 // Images
 import AboutApp from '~/images/AboutApp.png';
 import AddressBook from '~/images/AddressBook.png';
 import CustomerSupport from '~/images/CustomerSupport.png';
+import BackgroundIcon from '~/images/BackgroundIcon.png';
 // import PrivacyPolicy from '~/images/PrivacyPolicy.png';
 // import TermsOfServices from '~/images/TermsOfServices.png';
-import BackgroundIcon from '~/images/BackgroundIcon.png';
 // Styling
-import style from './style';
+import styles from './styles';
+
+type Props = {
+  navigation: {
+    navigate: string => void,
+    goBack: () => void,
+  },
+};
+
 /**
  * Settings: This component is meant for performing tasks related to app settings.
  */
-class Settings extends Component {
-  onLeftIconPress() {
-    this.props.navigation.goBack();
-  }
+const Settings = ({ navigation }: Props) => {
+  const onLeftIconPress = () => navigation.goBack();
+  const handleItem = navigationRoute => () => navigation.navigate(navigationRoute);
 
-  renderOptionCard(name, IconName, navigationRoute) {
-    return (
-      <TouchableOpacity
-        style={style.cardContainer}
-        onPress={() => this.props.navigation.navigate(navigationRoute)}
-      >
-        {/* Outer Circular View */}
-        <View style={style.outerCircularView}>
-          {/* Inner Circular View */}
-          <View style={style.innerCircularView}>
-            <Image source={IconName} style={style.iconImageStyle} resizeMode="contain" />
-          </View>
+  const renderOptionCard = (name, IconName, navigationRoute) => (
+    <TouchableOpacity style={styles.cardContainer} onPress={handleItem(navigationRoute)}>
+      {/* Outer Circular View */}
+      <View style={styles.outerCircularView}>
+        {/* Inner Circular View */}
+        <View style={styles.innerCircularView}>
+          <Image source={IconName} style={styles.iconImageStyle} resizeMode="contain" />
         </View>
-        <Text style={style.optionTextStyle}>{name}</Text>
-      </TouchableOpacity>
-    );
-  }
-
-  render() {
-    return (
-      <View style={style.container}>
-        <Header
-          text="Settings"
-          leftButtonIcon="chevron-left"
-          leftIconColor="#fff"
-          leftIconSize={30}
-          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
-          headerStyle={{
-            backgroundColor: 'rgb(44,52,58)',
-            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
-          }}
-          onLeftIconPress={() => this.onLeftIconPress()}
-        />
-        {/* Background image */}
-        <Image style={style.backgroundImageStyle} source={BackgroundIcon} resizeMode="contain" />
-
-        {/* Options */}
-        <ScrollView style={{ height: DEVICE_HEIGHT }} scrollEnabled={DEVICE_HEIGHT < 665}>
-          <View style={style.mainContainer}>
-            {this.renderOptionCard('Address Book', AddressBook, 'AddressBook')}
-            {this.renderOptionCard('Customer Support', CustomerSupport, 'CustomerSupport')}
-            {/* {this.renderOptionCard('Terms of Service', TermsOfServices, 'Terms')}
-            {this.renderOptionCard('Privacy Policy', PrivacyPolicy, 'PrivacyPolicy')} */}
-            {this.renderOptionCard('About App', AboutApp, 'AboutApp')}
-          </View>
-          <View style={{ height: DEVICE_HEIGHT * 0.08 }} />
-        </ScrollView>
       </View>
-    );
-  }
-}
+      <Text style={styles.optionTextStyle}>{name}</Text>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Header
+        text="Settings"
+        leftButtonIcon="chevron-left"
+        leftIconColor="#fff"
+        leftIconSize={30}
+        textStyle={styles.headerComponentText}
+        headerStyle={styles.headerComponent}
+        onLeftIconPress={onLeftIconPress}
+      />
+      {/* Background image */}
+      <Image style={styles.backgroundImageStyle} source={BackgroundIcon} resizeMode="contain" />
+
+      {/* Options */}
+      <ScrollView style={styles.listContainer}>
+        <View style={styles.mainContainer}>
+          {renderOptionCard('Address Book', AddressBook, 'AddressBook')}
+          {renderOptionCard('Customer Support', CustomerSupport, 'CustomerSupport')}
+          {/* {renderOptionCard('Terms of Service', TermsOfServices, 'Terms')}
+            {renderOptionCard('Privacy Policy', PrivacyPolicy, 'PrivacyPolicy')} */}
+          {renderOptionCard('About App', AboutApp, 'AboutApp')}
+        </View>
+        <View style={styles.empty} />
+      </ScrollView>
+    </View>
+  );
+};
 
 export default Settings;

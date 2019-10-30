@@ -1,13 +1,20 @@
-import { Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 
 const isIOS = Platform.OS === 'ios';
 
-const style = {
+export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgb(14,14,18)',
   },
+
+  headerComponent: {
+    backgroundColor: 'rgb(44,52,58)',
+    height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+  },
+  headerComponentText: { fontFamily: 'SFProDisplay-Semibold' },
+
   midContainer: {
     marginTop: 32,
     width: DEVICE_WIDTH - 32,
@@ -59,6 +66,7 @@ const style = {
     opacity: isIOS ? 0.03 : 0.02,
     right: -((DEVICE_WIDTH * 0.35) / 2),
   },
-};
 
-export default style;
+  linkIconStyle: { transform: [{ rotateX: '0deg' }, { rotateY: '180deg' }] },
+  empty: { height: 25 },
+});

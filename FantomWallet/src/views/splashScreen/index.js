@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { Image, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
-import style from './style';
+import styles from './styles';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 const isIOS = Platform.OS === 'ios';
 
@@ -24,13 +24,12 @@ const SplashScreen = ({masterKey, privateKey, navigation}: Props) => {
    * Render different screens based on user is already a registered user or not.
    */
   useEffect(()=> {
-    // const route = (masterKey && privateKey) ? 'HomeScreen' : 'WalletSetup' // FIXME:
-    const route = (masterKey && privateKey) ? 'WalletSetup' : 'WalletSetup'
+    const route = (masterKey && privateKey) ? 'HomeScreen' : 'WalletSetup'
     navigation.navigate(route)
   },[])
 
   return (
-    <View style={style.imageBackground}>
+    <View style={styles.imageBackground}>
       <Image source={require('~/images/fantomWhiteIcon.png')} resizeMode="contain" />
       <Image
         style={{
