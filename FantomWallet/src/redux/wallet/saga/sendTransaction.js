@@ -3,10 +3,9 @@ import { takeLatest, put, select } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import moment from 'moment';
 
-import { types, setLoadingSendTransaction } from '../actions';
+import { types, setLoadingSendTransaction, addTransaction } from '../actions';
 import Web3Agent from '~/services/api/web3';
 import type { TransactionT } from '../actions';
-import { ADD_TRANSACTION } from '~/redux/transactions/action';
 import { SUCCESS, FAILED, SENT } from '~/common/constants';
 
 type Action = {
@@ -58,10 +57,7 @@ export function* sendTransaction({ payload: { to, value, memo, cbSuccess } }: Ac
     isError: false,
     date,
   };
-  yield put({
-    type: ADD_TRANSACTION,
-    transaction,
-  });
+  yield put(addTransaction(transaction));
   yield put(setLoadingSendTransaction(false));
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, StyleSheet, StatusBar, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import Web3 from 'web3';
 import { DEVICE_HEIGHT } from '~/common/constants';
 import Header from '~/components/Header/index';
@@ -62,7 +62,6 @@ export default class ScanScreen extends Component {
   render() {
     return (
       <View style={styles.mainContainerStyle}>
-        <StatusBar barStyle="light-content" />
         <Header
           text="QR Scan"
           leftButtonIcon="chevron-left"

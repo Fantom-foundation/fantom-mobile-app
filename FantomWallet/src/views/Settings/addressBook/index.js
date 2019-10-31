@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// @flow
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -19,81 +20,81 @@ import Address from './address/index';
 import whiteSearchIcon from '~/images/searchWhite.png';
 import BackgroundImage from '~/images/BackgroundIcon.png';
 
-import * as AddressAction from '~/redux/addressBook/action';
+import {
+  addNewAddress as addNewAddressAction,
+  toggleAddress as toggleAddressAction,
+  deleteAddress as deleteAddressAction,
+} from '~/redux/addressBook/actions';
 
 import { DEVICE_HEIGHT } from '~/common/constants';
+
+type Props = {
+  addresses: { [string]: any },
+  toggleAddress: string => void,
+  deleteAddress: string => void,
+  navigation: {
+    navigate: (route: string, ?{ [string]: string }) => void,
+    goBack: () => void,
+    getParam: (string, ?any) => void,
+  },
+};
 
 /**
  * AddressBook: This component is meant for handling actions related to Address Book in app.
  */
-class AddressBook extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      addOrFavorite: 'add',
-      displaySearch: false,
-      searchText: '',
-    };
+const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Props) => {
+  const [addOrFavorite, setAddOrFavorite] = useState('add');
+  const [displaySearch, setDisplaySearch] = useState(false);
+  const [searchText, setSearchText] = useState('');
 
-    this.onLeftIconPress = this.onLeftIconPress.bind(this);
-    this.onSecondaryIconPress = this.onSecondaryIconPress.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.rateChange = this.rateChange.bind(this);
-    this.onSelection = this.onSelection.bind(this);
-    this.handleEditContact = this.handleEditContact.bind(this);
-  }
+  const onLeftIconPress = () => {
+    navigation.goBack();
+  };
 
-  onLeftIconPress() {
-    this.props.navigation.goBack();
-  }
+  const onSecondaryIconPress = () => {
+    setDisplaySearch(!displaySearch);
+    setSearchText('');
+  };
 
-  onSecondaryIconPress() {
-    const { displaySearch } = this.state;
-    this.setState({
-      displaySearch: !displaySearch,
-      searchText: '',
-    });
-  }
+  const onRightIconPress = () => {
+    navigation.navigate('EditContact');
+  };
 
-  onRightIconPress() {
-    this.props.navigation.navigate('EditContact');
-  }
-
-  onSelection(address) {
-    const callbackFunc = this.props.navigation.getParam('onSelection', null);
+  const onSelection = address => {
+    const callbackFunc = navigation.getParam('onSelection', null);
     if (callbackFunc) {
       callbackFunc(address);
-      this.props.navigation.goBack();
+      navigation.goBack();
     }
-  }
+  };
 
-  rateChange(address) {
-    this.props.toggleAddress(address);
-  }
+  const rateChange = address => {
+    toggleAddress(address);
+  };
 
-  handleEditContact(name, address) {
-    this.props.navigation.navigate('EditContact', { name, address });
-  }
+  const handleEditContact = (name, address) => {
+    navigation.navigate('EditContact', { name, address });
+  };
 
-  deleteItem(address) {
+  const deleteItem = address => {
     Alert.alert('Confirm Dialog', 'Are you sure you want to delete this contact.', [
       { text: 'Cancel', onPress: () => {}, style: 'cancel' },
       {
         text: 'Yes',
         onPress: () => {
-          this.props.deleteAddress(address);
+          deleteAddress(address);
         },
       },
     ]);
-  }
+  };
 
-  renderAddressList() {
-    const isEditMode = this.props.navigation.getParam('isEditMode', false);
+  const renderAddressList = () => {
+    const isEditMode = navigation.getParam('isEditMode', false);
     let addressListView = [];
     let favoriteListView = [];
-    const addressesStored = this.props.addresses;
+    const addressesStored = addresses;
     if (addressesStored) {
-      const addresses = {};
+      const _addresses = {};
       let objArr = Object.keys(addressesStored).map(key => addressesStored[key]);
       objArr = objArr.sort((a, b) => {
         if (a.timeStamp && b.timeStamp) {
@@ -102,16 +103,16 @@ class AddressBook extends Component {
         return 1;
       });
       for (const obj of objArr) {
-        addresses[obj.address] = obj;
+        _addresses[obj.address] = obj;
       }
-      for (const key in addresses) {
-        if (addresses.hasOwnProperty(key)) {
+      for (const key in _addresses) {
+        if (_addresses.hasOwnProperty(key)) {
           const tempAddress = addresses[key];
-          if (this.state.displaySearch && this.state.searchText !== '') {
-            const searchText = this.state.searchText.toLowerCase();
+          if (displaySearch && searchText !== '') {
+            const _searchText = searchText.toLowerCase();
             const name = tempAddress.name.toLowerCase();
             const addressLower = tempAddress.address.toLowerCase();
-            if (!(name.includes(searchText) || addressLower.includes(searchText))) {
+            if (!(name.includes(_searchText) || addressLower.includes(_searchText))) {
               continue; //eslint-disable-line
             }
           }
@@ -120,14 +121,14 @@ class AddressBook extends Component {
               key={key}
               id={tempAddress.address}
               isEditMode={isEditMode}
-              onSelection={this.onSelection}
+              onSelection={onSelection}
               index={key}
               name={tempAddress.name}
               line1Text={tempAddress.address}
               rate={tempAddress.isFavourite}
-              rateChange={this.rateChange}
-              delete={this.deleteItem}
-              handleEditContact={this.handleEditContact}
+              rateChange={rateChange}
+              delete={deleteItem}
+              handleEditContact={handleEditContact}
             />
           );
           if (tempAddress.isFavourite) {
@@ -136,61 +137,55 @@ class AddressBook extends Component {
                 key={key}
                 id={tempAddress.address}
                 isEditMode={isEditMode}
-                onSelection={this.onSelection}
+                onSelection={onSelection}
                 index={key}
                 name={tempAddress.name}
                 line1Text={tempAddress.address}
                 rate={tempAddress.isFavourite}
-                rateChange={this.rateChange}
-                delete={this.deleteItem}
-                handleEditContact={this.handleEditContact}
+                rateChange={rateChange}
+                delete={deleteItem}
+                handleEditContact={handleEditContact}
               />
             );
           }
         }
       }
     }
-    if (this.state.addOrFavorite === 'favorite') {
+    if (addOrFavorite === 'favorite') {
       return favoriteListView;
     }
     return addressListView;
-  }
+  };
 
-  renderMidButtons() {
+  const renderMidButtons = () => {
     let addColor = styles.add;
     let favColor = styles.favorites;
     let textStyle = { color: '#FFF', fontFamily: 'SFProDisplay-Semibold' };
 
-    if (this.state.addOrFavorite === 'add') {
+    if (addOrFavorite === 'add') {
       addColor = { ...styles.add, backgroundColor: 'rgb(0,177,251)' };
       favColor = styles.favorites;
-    } else if (this.state.addOrFavorite === 'favorite') {
+    } else if (addOrFavorite === 'favorite') {
       favColor = { ...styles.favorites, backgroundColor: 'rgb(0,177,251)' };
       addColor = styles.add;
     }
-    if (!this.state.displaySearch) {
+    if (!displaySearch) {
       return (
         <View style={styles.subHeader}>
-          <TouchableOpacity
-            style={addColor}
-            onPress={() => this.setState({ addOrFavorite: 'add' })}
-          >
+          <TouchableOpacity style={addColor} onPress={() => setAddOrFavorite('add')}>
             <Text style={textStyle}>Recent</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={favColor}
-            onPress={() => this.setState({ addOrFavorite: 'favorite' })}
-          >
+          <TouchableOpacity style={favColor} onPress={() => setAddOrFavorite('favorite')}>
             <Text style={textStyle}>Favourites</Text>
           </TouchableOpacity>
         </View>
       );
     }
     return null;
-  }
+  };
 
-  renderSearchBar() {
-    if (this.state.displaySearch) {
+  const renderSearchBar = () => {
+    if (displaySearch) {
       return (
         <View style={styles.textInputContainer}>
           <TextInput
@@ -201,7 +196,7 @@ class AddressBook extends Component {
               fontFamily: 'SFProDisplay-Regular',
               color: 'rgba(255,255, 255, 0.8)',
             }}
-            onChangeText={text => this.setState({ searchText: text })}
+            onChangeText={setSearchText}
             autoCapitalize="none"
             autoCorrect={false}
             underlineColorAndroid="transparent"
@@ -211,73 +206,61 @@ class AddressBook extends Component {
       );
     }
     return null;
-  }
+  };
 
-  render() {
-    return (
-      <View style={styles.mainContainerStyle}>
-        <StatusBar barStyle="light-content" />
-        {/* add-circle-outline */}
-        <Header
-          text="Address Book"
-          leftButtonIcon="chevron-left"
-          leftIconColor="#fff"
-          leftIconSize={30}
-          onLeftIconPress={this.onLeftIconPress}
-          isRightBtnImage={false}
-          rightButtonIcon="add-circle-outline"
-          rightIconSize={22}
-          rightIconColor="#fff"
-          onRightIconPress={() => this.onRightIconPress()}
-          secondaryButtonIcon={whiteSearchIcon}
-          onSecondaryIconPress={this.onSecondaryIconPress}
-          leftButtonStyle={{ marginLeft: -10 }}
-          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
-          headerStyle={{
-            backgroundColor: 'rgb(44,52,58)',
-            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
-          }}
-        />
+  return (
+    <View style={styles.mainContainerStyle}>
+      <StatusBar barStyle="light-content" />
+      {/* add-circle-outline */}
+      <Header
+        text="Address Book"
+        leftButtonIcon="chevron-left"
+        leftIconColor="#fff"
+        leftIconSize={30}
+        onLeftIconPress={onLeftIconPress}
+        isRightBtnImage={false}
+        rightButtonIcon="add-circle-outline"
+        rightIconSize={22}
+        rightIconColor="#fff"
+        onRightIconPress={() => onRightIconPress()}
+        secondaryButtonIcon={whiteSearchIcon}
+        onSecondaryIconPress={onSecondaryIconPress}
+        leftButtonStyle={{ marginLeft: -10 }}
+        textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
+        headerStyle={{
+          backgroundColor: 'rgb(44,52,58)',
+          height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+        }}
+      />
 
-        <View style={styles.addressList}>
-          {/* Background Image */}
-          <Image
-            style={styles.backgroundImageStyle}
-            source={BackgroundImage}
-            resizeMode="contain"
-          />
-          {/* Displays RECENT and FAVOURITE buttons */}
-          {this.renderMidButtons()}
+      <View style={styles.addressList}>
+        {/* Background Image */}
+        <Image style={styles.backgroundImageStyle} source={BackgroundImage} resizeMode="contain" />
+        {/* Displays RECENT and FAVOURITE buttons */}
+        {renderMidButtons()}
 
-          <View style={styles.displaySearch}>
-            {/* Displays search Bar */}
-            {this.renderSearchBar()}
-            <ScrollView showsVerticalScrollIndicator={false} style={{ height: DEVICE_HEIGHT }}>
-              {this.renderAddressList()}
-              <View style={{ height: DEVICE_HEIGHT * 0.3 }} />
-            </ScrollView>
-          </View>
+        <View style={styles.displaySearch}>
+          {/* Displays search Bar */}
+          {renderSearchBar()}
+          <ScrollView showsVerticalScrollIndicator={false} style={{ height: DEVICE_HEIGHT }}>
+            {renderAddressList()}
+            <View style={{ height: DEVICE_HEIGHT * 0.3 }} />
+          </ScrollView>
         </View>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 const mapStateToProps = state => ({
-  addresses: state.addressBookReducer.addresses,
+  addresses: state.addressBook,
 });
 
-const mapDispatchToProps = dispatch => ({
-  addNewAddress: (walletAddress, name) => {
-    dispatch({ type: AddressAction.ADD_ADDRESS, address: walletAddress, name: name || '' });
-  },
-  toggleAddress: walletAddress => {
-    dispatch({ type: AddressAction.FAVOURITE_ADDRESS, address: walletAddress });
-  },
-  deleteAddress: walletAddress => {
-    dispatch({ type: AddressAction.DELETE_ADDRESS, address: walletAddress });
-  },
-});
+const mapDispatchToProps = {
+  addNewAddress: addNewAddressAction,
+  toggleAddress: toggleAddressAction,
+  deleteAddress: deleteAddressAction,
+};
 
 export default connect(
   mapStateToProps,

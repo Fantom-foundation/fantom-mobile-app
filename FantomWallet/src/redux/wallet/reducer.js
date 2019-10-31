@@ -11,7 +11,10 @@ type Wallet = {
 
 type actionType = {
   type: string,
-  payload: Wallet,
+  payload: {
+    ...Wallet,
+    transaction: TransactionT,
+  },
 };
 
 const initialState = {
@@ -48,6 +51,11 @@ export default (state: Wallet = initialState, action: actionType) => {
         sendTransactionIsLoading: action.payload.sendTransactionIsLoading,
       };
     }
+    case types.ADD_TRANSACTION:
+      return {
+        ...state,
+        history: [...state.history, action.payload.transaction],
+      };
 
     default:
       return state;

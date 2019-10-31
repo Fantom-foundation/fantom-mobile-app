@@ -1,92 +1,33 @@
-import * as Actions from './action';
+// @flow
+import { types } from './actions';
 
-function addNewAddress(state, action) {
-  let oldAddresses = state.addresses;
-  const addressKey = action.address;
-  const addressObj = {
-    address: addressKey,
-    name: action.name || '',
-    isFavourite: false,
-  };
-  if (action.timeStamp) {
-    addressObj.timeStamp = action.timeStamp;
-  }
-  const newAddresses = Object.assign({}, oldAddresses, {
-    [addressKey]: addressObj,
-  });
-  return Object.assign({}, state, {
-    addresses: newAddresses,
-  });
-}
+type Contact = {
+  address: string,
+  name: string,
+  isFavourite: boolean,
+  timeStamp: string,
+};
 
-function toggleFavouriteAddress(state, action) {
-  let oldAddresses = state.addresses;
-  const addressKey = action.address;
-  const oldAddress = oldAddresses[addressKey];
-  if (oldAddress) {
-    oldAddress.isFavourite = !oldAddress.isFavourite;
-    const newAddresses = Object.assign({}, oldAddresses, {
-      [addressKey]: oldAddress,
-    });
-    return Object.assign({}, state, {
-      addresses: newAddresses,
-    });
-  }
-  return state;
-}
+type actionType = {
+  type: string,
+  payload: {
+    address: string,
+    name: string,
+    isFavourite: boolean,
+    timeStamp: string,
+    oldWalletAddress: string,
+    newWalletAddress: string,
+  },
+};
 
-function updateAddressTimeStamp(state, action) {
-  let oldAddresses = state.addresses;
-  const addressKey = action.address;
-  const oldAddress = oldAddresses[addressKey];
-  if (oldAddress && action.timeStamp) {
-    oldAddress.timeStamp = action.timeStamp;
-    const newAddresses = Object.assign({}, oldAddresses, {
-      [addressKey]: oldAddress,
-    });
-    return Object.assign({}, state, {
-      addresses: newAddresses,
-    });
-  }
-  return state;
-}
+type State = {
+  [key: string]: Contact,
+};
 
-function deleteAddress(state, action) {
-  let oldAddresses = state.addresses;
-  const addressKey = action.address;
-  const oldAddress = oldAddresses[addressKey];
-  if (oldAddress) {
-    delete oldAddresses[addressKey];
-    const newAddresses = {
-      ...oldAddresses,
-    };
-    return Object.assign({}, state, {
-      addresses: newAddresses,
-    });
-  }
-  return state;
-}
-
-function addUpdateAddressTimeStamp(state, action) {
-  let oldAddresses = state.addresses;
-  const addressKey = action.address;
-  const oldAddress = oldAddresses[addressKey];
-  if (oldAddress && action.timeStamp) {
-    oldAddress.timeStamp = action.timeStamp;
-    const newAddresses = Object.assign({}, oldAddresses, {
-      [addressKey]: oldAddress,
-    });
-    return Object.assign({}, state, {
-      addresses: newAddresses,
-    });
-  }
-  return addNewAddress(state, action);
-
-  // return state;
-}
+const initialState = {};
 
 function updateContact(state, action) {
-  let oldAddresses = state.addresses;
+  let oldAddresses = state;
   const addressKey = action.oldWalletAddress;
   const oldAddress = oldAddresses[addressKey];
   const newAddress = action.newWalletAddress;
@@ -103,26 +44,55 @@ function updateContact(state, action) {
       [newAddress]: updateAddressObject,
     };
     return Object.assign({}, state, {
-      addresses: newAddresses,
+      ...newAddresses,
     });
   }
   return state;
 }
-
-const AddressReducer = (state = { addresses: {} }, action) => {
+const AddressReducer = (state: State = initialState, action: actionType) => {
   switch (action.type) {
-    case Actions.ADD_ADDRESS:
-      return addNewAddress(state, action);
-    case Actions.FAVOURITE_ADDRESS:
-      return toggleFavouriteAddress(state, action);
-    case Actions.TIMESTAMP_ADDRESS:
-      return updateAddressTimeStamp(state, action);
-    case Actions.DELETE_ADDRESS:
-      return deleteAddress(state, action);
-    case Actions.ADD_UPDATE_ADDRESS:
-      return addUpdateAddressTimeStamp(state, action);
-    case Actions.EDIT_CONTACT:
-      return updateContact(state, action);
+    case types.ADD_ADDRESS:
+      return {
+        ...state,
+        [action.payload.address]: {
+          address: action.payload.address,
+          name: action.payload.name,
+          timeStamp: action.payload.timeStamp || 0,
+          isFavourite: false,
+        },
+      };
+    case types.FAVOURITE_ADDRESS:
+      return {
+        ...Object.keys(state).reduce((obj, key): any => {
+          /* eslint-disable no-param-reassign */
+          obj[key] = state[key];
+          if (obj[key].address === action.payload.address)
+            obj[key].isFavourite = !obj[key].isFavourite;
+          return obj;
+        }, {}),
+      };
+    case types.DELETE_ADDRESS:
+      return {
+        ...Object.keys(state)
+          .filter(address => address !== action.payload.address)
+          .reduce((obj, key): any => {
+            obj[key] = state[key];
+            return obj;
+          }, {}),
+      };
+    case types.ADD_UPDATE_ADDRESS:
+      return {
+        ...state,
+        [action.payload.address]: {
+          address: action.payload.address,
+          name: action.payload.name,
+          isFavourite: false,
+          ...state[action.payload.address],
+          timeStamp: action.payload.timeStamp || 0,
+        },
+      };
+    case types.EDIT_CONTACT:
+      return updateContact(state, action.payload);
     default:
       return state;
   }

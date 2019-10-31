@@ -11,6 +11,7 @@ import "~/utils/shim"
 
 import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
+import { StatusBar } from 'react-native'
 import { PersistGate } from 'redux-persist/integration/react';
 import RootNavigator from '~/navigation/RootNavigator';
 import { store, persistor } from '~/redux/store';
@@ -23,7 +24,10 @@ export default () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RootNavigator />
+        <>
+          <StatusBar barStyle="light-content" />
+          <RootNavigator />
+        </>
       </PersistGate>
     </Provider>
   );

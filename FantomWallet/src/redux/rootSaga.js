@@ -8,5 +8,4 @@ const getListeners = (...args) =>
 
 export default function* rootSaga() {
   yield all(getListeners(wallet, keys));
-  // yield [fork(TestApi.watchVerbs)];
 }

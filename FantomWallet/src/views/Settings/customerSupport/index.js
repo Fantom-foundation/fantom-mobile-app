@@ -62,7 +62,7 @@ const CustomerSupport = ({ navigation }: Props) => {
 
       <View style={styles.footerContainerStyle}>
         <Image source={fantomIcon} style={styles.fantomIconStyle} />
-        <Text style={styles.copyRight}>Copyright © 2018 Fantom.</Text>
+        <Text style={styles.copyRight}>Copyright © 2019 Fantom.</Text>
         <Text style={styles.copyRight}>All Rights Reserved.</Text>
       </View>
     </View>

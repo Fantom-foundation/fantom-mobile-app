@@ -19,7 +19,10 @@ import Header from '~/components/Header/index';
 import style from './style';
 import Dialogbox from './dialogBox/index';
 import qrCode from '~/images/QR.png';
-import * as AddressAction from '~/redux/addressBook/action';
+import {
+  addNewAddress as addNewAddressAction,
+  updateContact as updateContactAction,
+} from '~/redux/addressBook/actions';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 /**
  * EditContact: This component is meant for functionality of Contact editing in App.
@@ -245,21 +248,12 @@ class EditContact extends Component {
 }
 
 const mapStateToProps = state => ({
-  addresses: state.addressBookReducer.addresses,
+  addresses: state.addressBook,
 });
-const mapDispatchToProps = dispatch => ({
-  addNewAddress: (walletAddress, name) => {
-    dispatch({ type: AddressAction.ADD_ADDRESS, address: walletAddress, name: name || '' });
-  },
-  updateContact: (oldWalletAddress, newWalletAddress, name) => {
-    dispatch({
-      type: AddressAction.EDIT_CONTACT,
-      oldWalletAddress,
-      newWalletAddress,
-      name: name || '',
-    });
-  },
-});
+const mapDispatchToProps = {
+  addNewAddress: addNewAddressAction,
+  updateContact: updateContactAction,
+};
 
 export default connect(
   mapStateToProps,

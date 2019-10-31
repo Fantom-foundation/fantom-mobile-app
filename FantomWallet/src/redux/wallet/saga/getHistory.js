@@ -1,20 +1,21 @@
 /* eslint-disable no-console */
 // @flow
-import { takeLatest, put, select } from 'redux-saga/effects';
+import {
+  takeLatest,
+  // put, select
+} from 'redux-saga/effects';
 
-import { types, setHistory } from '../actions';
-import type { TransactionT } from '../actions';
+import {
+  types,
+  // setHistory
+} from '../actions';
+// import type { TransactionT } from '../actions';
 
 export function* getHistory(): any {
   try {
-    let history: Array<TransactionT> = [];
-    const { transactions } = yield select(({ transactionReducer }) => transactionReducer);
-
-    history = [...transactions];
-
-    yield put(setHistory({ history }));
+    yield () => {};
   } catch (e) {
-    console.log(e);
+    yield console.log(e);
   }
 }
 

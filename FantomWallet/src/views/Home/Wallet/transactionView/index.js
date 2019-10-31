@@ -159,7 +159,7 @@ TransactionView.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  transactions: state.transactionReducer.transactions,
+  transactions: state.wallet.history,
 });
 
 const mapDispatchToProps = () => ({});

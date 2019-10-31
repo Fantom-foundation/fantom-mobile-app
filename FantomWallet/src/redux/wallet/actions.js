@@ -6,6 +6,7 @@ export const types = {
   SET_HISTORY: 'wallet/SET_HISTORY',
   SEND_TRANSACTION: 'wallet/SEND_TRANSACTION',
   SET_LOADING_SEND: 'wallet/SET_LOADING_SEND',
+  ADD_TRANSACTION: 'wallet/add_transaction',
 };
 
 type Balance = {
@@ -59,4 +60,9 @@ export const sendTransaction = ({ to, value, memo, cbSuccess }: SendTransactionT
 export const setLoadingSendTransaction = (sendTransactionIsLoading: boolean) => ({
   type: types.SET_LOADING_SEND,
   payload: { sendTransactionIsLoading },
+});
+
+export const addTransaction = (transaction: TransactionT) => ({
+  type: types.ADD_TRANSACTION,
+  payload: { transaction },
 });

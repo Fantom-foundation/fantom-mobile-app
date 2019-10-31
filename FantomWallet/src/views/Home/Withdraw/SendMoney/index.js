@@ -17,7 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Header from '~/components/Header/index';
 import Loading from '~/components/general/Loader';
 import { DEVICE_HEIGHT, DEVICE_WIDTH, GAS_PRICE } from '~/common/constants';
-import { addUpdateTimestampAddress } from '~/redux/addressBook/action';
+import { addUpdateTimestampAddress } from '~/redux/addressBook/actions';
 import { sendTransaction as sendTransactionAction } from '~/redux/wallet/actions';
 import { estimationMaxFantomBalance, toFixed } from '~/utils/converts';
 import BackgroundIcon from '~/images/BackgroundIcon.png';
