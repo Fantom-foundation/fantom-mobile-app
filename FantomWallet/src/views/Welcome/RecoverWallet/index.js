@@ -12,6 +12,7 @@ import {
 import { connect } from 'react-redux';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+import routes from '~/navigation/routes';
 import Header from '~/components/Header/index';
 import { generateWallet as generateWalletAction } from '~/redux/keys/actions';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
@@ -47,7 +48,8 @@ const RecoverWallet = ({ generateWallet, navigation }: Props) => {
   const handleRecoverWallet = () => {
     const _mnemonic = mnemonic
       .replace(/' '/g, '') // TODO: flow??? legacy
-      .replace(',', ' ')
+      .replace(',', '')
+      .replace('  ', ' ')
       .trim();
 
     if (!isValidSeed(_mnemonic)) {
@@ -57,7 +59,7 @@ const RecoverWallet = ({ generateWallet, navigation }: Props) => {
     setErrorText('');
     generateWallet({
       mnemonic: _mnemonic,
-      cb: () => navigation.navigate('HomeScreen'),
+      cb: () => navigation.navigate(routes.root.HomeScreen),
     });
   };
 

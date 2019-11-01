@@ -1,6 +1,8 @@
 /* eslint-disable global-require */
 import React from 'react';
 import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
+
+import routes from '~/navigation/routes';
 import styles from './styles';
 
 /**
@@ -9,8 +11,8 @@ import styles from './styles';
  *  through this screen user is navigated to fill captcha verification to generate key.
  */
 const WalletSetup = ({ navigation }) => {
-  const onCreateNewWallet = () => navigation.navigate('CreateMnemonic');
-  const onRestoreWallet = () => navigation.navigate('RecoverWallet');
+  const onCreateNewWallet = () => navigation.navigate(routes.root.CreateMnemonic);
+  const onRestoreWallet = () => navigation.navigate(routes.root.RecoverWallet);
 
   return (
     <View style={styles.backgroundContainer}>

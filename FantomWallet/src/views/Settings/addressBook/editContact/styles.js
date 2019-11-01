@@ -1,11 +1,18 @@
-import { Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 const isIOS = Platform.OS === 'ios';
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  headerComponent: {
+    backgroundColor: 'rgb(44,52,58)',
+    height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+  },
+  headerComponentText: {
+    fontFamily: 'SFProDisplay-Semibold',
   },
   scrollView: {
     backgroundColor: 'rgb(14,14,18)',
@@ -77,6 +84,10 @@ const style = {
     marginTop: DEVICE_HEIGHT * 0.1,
     alignItems: 'center',
   },
+  confirmImage: {
+    height: DEVICE_WIDTH * 0.09,
+    width: DEVICE_WIDTH * 0.09,
+  },
   backgroundImageStyle: {
     width: DEVICE_WIDTH * 0.6,
     height: DEVICE_HEIGHT * 0.6,
@@ -85,6 +96,4 @@ const style = {
     opacity: isIOS ? 0.03 : 0.02,
     right: -((DEVICE_WIDTH * 0.45) / 2),
   },
-};
-
-export default style;
+});

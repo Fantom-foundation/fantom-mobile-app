@@ -1,17 +1,3 @@
-# Fantom Wallet App
-
-Package Installation
-```sh
-yarn
-yarn jetify
-```
-Application launch
-```sh
-yarn ios          # runs ios
-yarn android      # runs android
-```
-
-
 # Coding convention
 - Folder name and file name should be camel case.
 - Common components should be in `src/components` directory.

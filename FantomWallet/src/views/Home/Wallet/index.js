@@ -45,7 +45,7 @@ const WalletScreen = ({
 
   useEffect(() => {
     getData();
-    setInterval(getData, 15000); // FIXME: 5000
+    setInterval(getData, 5000); // FIXME: 5000
   }, []);
 
   return (

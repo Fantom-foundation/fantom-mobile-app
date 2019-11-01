@@ -14,16 +14,18 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Web3 from 'web3';
+
+import routes from '~/navigation/routes';
 // Components
 import Header from '~/components/Header/index';
-import style from './style';
+import styles from './styles';
 import Dialogbox from './dialogBox/index';
 import qrCode from '~/images/QR.png';
 import {
   addNewAddress as addNewAddressAction,
   updateContact as updateContactAction,
 } from '~/redux/addressBook/actions';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
+
 /**
  * EditContact: This component is meant for functionality of Contact editing in App.
  */
@@ -137,7 +139,9 @@ class EditContact extends Component {
    * openScanner(): This function is meant for opening QRScanner to scan the address in QR code.
    */
   openScanner() {
-    this.props.navigation.navigate('QRScanner', { onScanSuccess: this.onScanSuccess.bind(this) });
+    this.props.navigation.navigate(routes.root.QRScanner, {
+      onScanSuccess: this.onScanSuccess.bind(this),
+    });
   }
 
   closeDialogBox() {
@@ -148,30 +152,27 @@ class EditContact extends Component {
 
   renderConfirmButton() {
     return (
-      <View style={style.confirmContainer}>
+      <View style={styles.confirmContainer}>
         <TouchableOpacity
-          style={style.confirmButtonOuterContainer}
+          style={styles.confirmButtonOuterContainer}
           onPress={() => this.onConfirmClick()}
         >
-          <View style={style.confirmButtonInnerContainer}>
+          <View style={styles.confirmButtonInnerContainer}>
             <Image
               source={require('~/images/Tick.png')}
-              style={{
-                height: DEVICE_WIDTH * 0.09,
-                width: DEVICE_WIDTH * 0.09,
-              }}
+              style={styles.confirmImage}
               resizeMode="contain"
             />
           </View>
         </TouchableOpacity>
-        <Text style={style.confirmTextStyle}>Confirm</Text>
+        <Text style={styles.confirmTextStyle}>Confirm</Text>
       </View>
     );
   }
 
   render() {
     return (
-      <View style={style.mainContainerStyle}>
+      <View style={styles.mainContainerStyle}>
         <StatusBar barStyle="light-content" />
         <Header
           text={this.state.headerText}
@@ -179,33 +180,29 @@ class EditContact extends Component {
           leftIconColor="#fff"
           onLeftIconPress={this.onLeftIconPress}
           leftIconSize={30}
-          leftButtonStyle={{ marginLeft: -10 }}
-          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
-          headerStyle={{
-            backgroundColor: 'rgb(44,52,58)',
-            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
-          }}
+          textStyle={styles.headerComponentText}
+          headerStyle={styles.headerComponent}
         />
 
         <ScrollView
           ref={scroll => (this.scrollView = scroll)}
-          style={style.scrollView}
+          style={styles.scrollView}
           scrollEnabled={false}
         >
           {/* Background Image */}
           <Image
-            style={style.backgroundImageStyle}
+            style={styles.backgroundImageStyle}
             source={require('~/images/BackgroundIcon.png')}
             resizeMode="contain"
           />
           {/* Address text Input View */}
-          <View style={style.addressContainer}>
-            <Text style={style.inputTextHeading}>Address</Text>
-            <View style={style.textInputContainer}>
+          <View style={styles.addressContainer}>
+            <Text style={styles.inputTextHeading}>Address</Text>
+            <View style={styles.textInputContainer}>
               <TextInput
                 onChangeText={address => this.setState({ address })}
                 value={this.state.address}
-                style={style.enteredTextStyle}
+                style={styles.enteredTextStyle}
                 placeholder="Enter wallet address"
                 placeholderTextColor="#a7a7a7"
                 autoCorrect={false}
@@ -214,19 +211,19 @@ class EditContact extends Component {
                 autoCapitalize="none"
                 underlineColorAndroid="transparent"
               />
-              <TouchableOpacity style={style.iconContainer} onPress={() => this.openScanner()}>
+              <TouchableOpacity style={styles.iconContainer} onPress={() => this.openScanner()}>
                 <Image source={qrCode} style={{ width: 30, height: 30 }} />
               </TouchableOpacity>
             </View>
           </View>
           {/* Name TextInput View */}
-          <View style={style.nameContainer}>
-            <Text style={style.inputTextHeading}>Name</Text>
-            <View style={style.textInputContainer}>
+          <View style={styles.nameContainer}>
+            <Text style={styles.inputTextHeading}>Name</Text>
+            <View style={styles.textInputContainer}>
               <TextInput
                 onChangeText={name => this.setState({ name })}
                 value={this.state.name}
-                style={style.enteredTextStyle}
+                style={styles.enteredTextStyle}
                 placeholder="Enter name"
                 placeholderTextColor="#a7a7a7"
                 autoCorrect={false}

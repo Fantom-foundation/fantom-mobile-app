@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import DropdownAlert from 'react-native-dropdownalert';
 
+import routes from '~/navigation/routes';
 import { generateWallet as generateWalletAction } from '~/redux/keys/actions';
 import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
@@ -62,7 +63,7 @@ const CheckMnemonic = ({ navigation, generateWallet }) => {
       return;
     }
 
-    generateWallet({ mnemonic, cb: () => navigation.navigate('HomeScreen') });
+    generateWallet({ mnemonic, cb: () => navigation.navigate(routes.root.HomeScreen) });
   };
 
   const select = ({ name, index }) => () => {

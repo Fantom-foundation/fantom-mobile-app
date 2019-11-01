@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { View, BackHandler } from 'react-native';
 
 /** * Active NavigationIcons */
+import routes from '~/navigation/routes';
 import walletWhiteIcon from '~/images/WalletFilled.png';
 import sendWhiteIcon from '~/images/sendWhite.png';
 import depositWhiteIcon from '~/images/downloading_white.png';
@@ -14,11 +15,17 @@ import style from './styles';
 import Tab from './Tab';
 
 const TABS = [
-  { icon: walletWhiteIcon, route: 'Wallet' },
-  { icon: sendWhiteIcon, route: 'Withdraw' },
+  {
+    icon: walletWhiteIcon,
+    route: routes.HomeScreen.Wallet,
+  },
+  {
+    icon: sendWhiteIcon,
+    route: routes.HomeScreen.Withdraw,
+  },
   {
     icon: depositWhiteIcon,
-    route: 'Deposit',
+    route: routes.HomeScreen.Deposit,
   },
 ];
 

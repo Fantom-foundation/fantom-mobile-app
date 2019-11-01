@@ -36,7 +36,7 @@ class Web3Agent {
       from,
       to,
       value: Web3.utils.toHex(Web3.utils.toWei(value, 'ether')),
-      gasLimit: Web3.utils.toHex(22000),
+      gasLimit: Web3.utils.toHex(44000),
       gasPrice: Web3.utils.toHex(gasPrice),
       nonce: Web3.utils.toHex(nonce),
       data: memo,

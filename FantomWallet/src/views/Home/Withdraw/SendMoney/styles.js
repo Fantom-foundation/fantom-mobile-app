@@ -7,6 +7,13 @@ const style = {
     flex: 1,
     backgroundColor: 'rgb(14,14,18)',
   },
+  headerComponent: {
+    backgroundColor: 'rgb(44,52,58)',
+    height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+  },
+  headerComponentText: {
+    fontFamily: 'SFProDisplay-Semibold',
+  },
   topMarginContainer: {
     height: 32,
   },

@@ -16,6 +16,7 @@ import Web3 from 'web3';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import routes from '~/navigation/routes';
 import { DEVICE_HEIGHT, DEVICE_WIDTH, GAS_PRICE } from '~/common/constants';
 import { estimationMaxFantomBalance, toFixed } from '~/utils/converts';
 // Images
@@ -61,7 +62,7 @@ class WithdrawScreen extends Component<Props, State> {
   scrollView: any = null;
 
   onContactPress() {
-    this.props.navigation.navigate('AddressBook', {
+    this.props.navigation.navigate(routes.root.AddressBook, {
       isEditMode: true,
       onSelection: this.onScanSuccess.bind(this),
     });
@@ -89,7 +90,9 @@ class WithdrawScreen extends Component<Props, State> {
   }
 
   onScannerPress() {
-    this.props.navigation.navigate('QRScanner', { onScanSuccess: this.onScanSuccess.bind(this) });
+    this.props.navigation.navigate(routes.root.QRScanner, {
+      onScanSuccess: this.onScanSuccess.bind(this),
+    });
   }
 
   /**
@@ -119,7 +122,7 @@ class WithdrawScreen extends Component<Props, State> {
         Alert.alert('Error', message);
       }
       if (address && Web3.utils.isAddress(address) && amount) {
-        this.props.navigation.navigate('SendMoney', {
+        this.props.navigation.navigate(routes.root.SendMoney, {
           address,
           amount: actualAmount,
           coin,

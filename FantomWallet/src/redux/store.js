@@ -8,7 +8,6 @@ import rootSaga from './rootSaga';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['navigation', 'wallet'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

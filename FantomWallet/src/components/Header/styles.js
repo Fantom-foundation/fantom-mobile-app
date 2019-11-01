@@ -1,8 +1,8 @@
-import { Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 
-const style = {
+export default StyleSheet.create({
   headerStyle: {
     backgroundColor: '#000',
     // marginTop: 25,
@@ -57,5 +57,4 @@ const style = {
   headerIconTextStyle: {
     flexDirection: 'row',
   },
-};
-export default style;
+});

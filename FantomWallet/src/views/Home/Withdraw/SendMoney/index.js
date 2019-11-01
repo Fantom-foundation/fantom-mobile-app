@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+import routes from '~/navigation/routes';
 import Header from '~/components/Header/index';
 import Loading from '~/components/general/Loader';
 import { DEVICE_HEIGHT, DEVICE_WIDTH, GAS_PRICE } from '~/common/constants';
@@ -31,6 +32,7 @@ type Props = {
   sendTransaction: ({ to: string, value: string, memo: string }) => void,
   navigation: {
     goBack: () => void,
+    navigate: string => void,
     state: {
       params: any,
     },
@@ -77,7 +79,7 @@ class SendMoney extends Component<Props, State> {
     this.props.addUpdateAddress(address, '', currentDate.getTime());
 
     if (reload) reload();
-    this.props.navigation.goBack();
+    this.props.navigation.navigate(routes.HomeScreen.Wallet);
   };
 
   // renderPriceContainer(coin, amount) {
@@ -117,13 +119,9 @@ class SendMoney extends Component<Props, State> {
           leftIconColor="#fff"
           leftIconSize={30}
           fantomIcon={fantomIcon}
-          leftButtonStyle={{ marginLeft: -10 }}
           onLeftIconPress={this.onLeftIconPress}
-          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
-          headerStyle={{
-            backgroundColor: 'rgb(44,52,58)',
-            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
-          }}
+          textStyle={styles.headerComponentText}
+          headerStyle={styles.headerComponent}
         />
         <Image style={styles.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
         <ScrollView

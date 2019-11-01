@@ -27,6 +27,14 @@ const styles = StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
   },
+
+  headerComponent: {
+    backgroundColor: 'rgb(44,52,58)',
+    height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
+  },
+  headerComponentText: {
+    fontFamily: 'SFProDisplay-Semibold',
+  },
 });
 
 export default class ScanScreen extends Component {
@@ -67,13 +75,9 @@ export default class ScanScreen extends Component {
           leftButtonIcon="chevron-left"
           leftIconColor="#fff"
           leftIconSize={30}
-          leftButtonStyle={{ marginLeft: -10 }}
           onLeftIconPress={() => this.onLeftIconPress()}
-          textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
-          headerStyle={{
-            backgroundColor: 'rgb(44,52,58)',
-            height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
-          }}
+          textStyle={styles.headerComponentText}
+          headerStyle={styles.headerComponent}
         />
         <QRCodeScanner
           ref={scanner => {

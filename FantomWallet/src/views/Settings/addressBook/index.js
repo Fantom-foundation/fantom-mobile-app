@@ -13,6 +13,7 @@ import {
 import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import routes from '~/navigation/routes';
 import Header from '~/components/Header';
 import styles from './styles';
 import Address from './address/index';
@@ -57,7 +58,7 @@ const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Pr
   };
 
   const onRightIconPress = () => {
-    navigation.navigate('EditContact');
+    navigation.navigate(routes.root.EditContact);
   };
 
   const onSelection = address => {
@@ -73,7 +74,7 @@ const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Pr
   };
 
   const handleEditContact = (name, address) => {
-    navigation.navigate('EditContact', { name, address });
+    navigation.navigate(routes.root.EditContact, { name, address });
   };
 
   const deleteItem = address => {
@@ -225,12 +226,8 @@ const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Pr
         onRightIconPress={() => onRightIconPress()}
         secondaryButtonIcon={whiteSearchIcon}
         onSecondaryIconPress={onSecondaryIconPress}
-        leftButtonStyle={{ marginLeft: -10 }}
-        textStyle={{ fontFamily: 'SFProDisplay-Semibold' }}
-        headerStyle={{
-          backgroundColor: 'rgb(44,52,58)',
-          height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT,
-        }}
+        textStyle={styles.headerComponentText}
+        headerStyle={styles.headerComponent}
       />
 
       <View style={styles.addressList}>

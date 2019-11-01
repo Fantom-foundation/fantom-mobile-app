@@ -14,6 +14,8 @@ import Bip39 from 'react-native-bip39';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import DropdownAlert from 'react-native-dropdownalert';
+
+import routes from '~/navigation/routes';
 // Components
 import styles from './styles';
 import Button from '~/components/general/Button';
@@ -37,7 +39,7 @@ const CreateMnemonic = ({ navigation }) => {
   }, []);
 
   const onConfirmHandler = () => {
-    navigation.navigate('CheckMnemonic', { mnemonic });
+    navigation.navigate(routes.root.CheckMnemonic, { mnemonic });
   };
 
   const copyToClipboard = () => {

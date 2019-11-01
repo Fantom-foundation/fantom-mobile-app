@@ -2,6 +2,7 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
+import routes from '~/navigation/routes';
 import WalletScreen from '~/views/Home/Wallet';
 import WithdrawScreen from '~/views/Home/Withdraw';
 import DepositScreen from '~/views/Home/Deposit';
@@ -38,7 +39,7 @@ const HomeStackNavigator = createStackNavigator(
           store.dispatch(getBalance({ loading: true }));
           store.dispatch(getHistory());
         };
-        const toSettings = () => navigation.navigate('Settings');
+        const toSettings = () => navigation.navigate(routes.root.Settings);
         return (
           <Header
             isRightBtnImage
