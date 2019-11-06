@@ -28,7 +28,7 @@ type Props = {
   },
 };
 
-const RecoverWallet = ({ generateWallet, navigation }: Props) => {
+export const RecoverWallet = ({ generateWallet, navigation }: Props) => {
   const [mnemonic, setMnemonic] = useState('');
   const [errorText, setErrorText] = useState('');
 

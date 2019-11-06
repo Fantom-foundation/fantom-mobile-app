@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -36,6 +37,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B1C0D431ACA94E4CA37763FE /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD91A36B72974B318AF43500 /* libRNCAsyncStorage.a */; };
+		B8D9F9250C914F9896389DCB /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF236D869CB942D6821AF8FB /* libBVLinearGradient.a */; };
 		BC45C16403974CC8B2BC7C39 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEB34175F27F4AED8080B592 /* Foundation.ttf */; };
 		C005D78B41F546709A7E20F1 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F95929CA91DF45B0BB28BD2C /* libRNVectorIcons.a */; };
 		C590FC102121739E0038E020 /* libRNViewShot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C590FC0F212173140038E020 /* libRNViewShot.a */; };
@@ -73,7 +75,6 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		F3DF2EC3DABA48D5907F6F97 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35875473D49346C191F520D9 /* FontAwesome5_Regular.ttf */; };
 		FAD67ADF5EA84990B356982E /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA9F6BED4FC4D3EA6C3AC5B /* libUdpSockets.a */; };
-		B8D9F9250C914F9896389DCB /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF236D869CB942D6821AF8FB /* libBVLinearGradient.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +273,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
 			remoteInfo = "cxxreact-tvOS";
+		};
+		491CD49523717ADC0061E7EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 932C8368BE9F49DF98F5F354 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		491CD49723717ADC0061E7EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 932C8368BE9F49DF98F5F354 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
 		};
 		497CCF002365BBEC00A0A994 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -476,6 +491,7 @@
 		84FBF89A2BCB4F91B2B76B58 /* libRNVersionCheck.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVersionCheck.a; sourceTree = "<group>"; };
 		870F045A16F24F838DEF91B9 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		89F9F117C7DA4471B509B4C1 /* RNVersionCheck.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVersionCheck.xcodeproj; path = "../node_modules/react-native-version-check/ios/RNVersionCheck.xcodeproj"; sourceTree = "<group>"; };
+		932C8368BE9F49DF98F5F354 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		938890880F8C49CE91E8F88F /* RNCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
 		98B6E0319B3A48DEB09044FE /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		9B6733A341874C02926C7481 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -488,6 +504,7 @@
 		BBC08D43A42348D39BC4ADAD /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		BD61B7084DF441039C0885B6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		BD91A36B72974B318AF43500 /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = "<group>"; };
+		BF236D869CB942D6821AF8FB /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		C590FBE2212173140038E020 /* RNViewShot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNViewShot.xcodeproj; path = "../node_modules/react-native-view-shot/ios/RNViewShot.xcodeproj"; sourceTree = "<group>"; };
 		C5C3E88D212F0D620024CA91 /* Segoe-UI-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe-UI-Bold.ttf"; sourceTree = "<group>"; };
 		C5C3E88E212F0D620024CA91 /* Segoe-UI-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe-UI-Italic.ttf"; sourceTree = "<group>"; };
@@ -524,8 +541,6 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F95929CA91DF45B0BB28BD2C /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
-		932C8368BE9F49DF98F5F354 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		BF236D869CB942D6821AF8FB /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -693,6 +708,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		491CD49123717ADC0061E7EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				491CD49623717ADC0061E7EF /* libBVLinearGradient.a */,
+				491CD49823717ADC0061E7EF /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		497CCF122365BBEC00A0A994 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,12 +863,12 @@
 				84FBF89A2BCB4F91B2B76B58 /* libRNVersionCheck.a */,
 				7956A4A483B14206B8B96CB7 /* libRNRandomBytes.a */,
 				DFDD45D585D741509542B654 /* libRNRandomBytes-tvOS.a */,
-				15B473E7EB294DE5AB18B74A /* libBVLinearGradient.a */,
 				DB2F1C3EF8864847B960D31C /* libRNCamera.a */,
 				BD91A36B72974B318AF43500 /* libRNCAsyncStorage.a */,
 				75567D2E13DB4E10B2ABF873 /* libRNOS.a */,
 				B3BE884D892748A0A04572D1 /* libTcpSockets.a */,
 				CEA9F6BED4FC4D3EA6C3AC5B /* libUdpSockets.a */,
+				BF236D869CB942D6821AF8FB /* libBVLinearGradient.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -988,7 +1012,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = Z9Z83R4W7B;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1005,6 +1029,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 491CD49123717ADC0061E7EF /* Products */;
+					ProjectRef = 932C8368BE9F49DF98F5F354 /* BVLinearGradient.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1306,6 +1334,20 @@
 			remoteRef = 3DAD3EAA1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		491CD49623717ADC0061E7EF /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 491CD49523717ADC0061E7EF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		491CD49823717ADC0061E7EF /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 491CD49723717ADC0061E7EF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		497CCF012365BBEC00A0A994 /* libjsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1565,9 +1607,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.20;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Z9Z83R4W7B;
 				HEADER_SEARCH_PATHS = (
@@ -1586,6 +1629,11 @@
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FantomWallet\"",
+				);
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1593,13 +1641,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fantom.payments;
 				PRODUCT_NAME = FantomWallet;
-				PROVISIONING_PROFILE = "6354ef1e-3937-41c5-86d7-6904945b1522";
-				PROVISIONING_PROFILE_SPECIFIER = FantomProvProfile;
 				VERSIONING_SYSTEM = "apple-generic";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/FantomWallet\"",
-				);
 			};
 			name = Debug;
 		};
@@ -1607,9 +1649,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.20;
 				DEVELOPMENT_TEAM = Z9Z83R4W7B;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1627,6 +1670,11 @@
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FantomWallet\"",
+				);
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1634,13 +1682,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fantom.payments;
 				PRODUCT_NAME = FantomWallet;
-				PROVISIONING_PROFILE = "6354ef1e-3937-41c5-86d7-6904945b1522";
-				PROVISIONING_PROFILE_SPECIFIER = FantomProvProfile;
 				VERSIONING_SYSTEM = "apple-generic";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/FantomWallet\"",
-				);
 			};
 			name = Release;
 		};

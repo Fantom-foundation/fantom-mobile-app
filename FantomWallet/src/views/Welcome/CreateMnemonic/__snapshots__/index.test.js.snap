@@ -1,0 +1,320 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#111",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "marginTop": 40.019999999999996,
+      }
+    }
+  >
+    <_default
+      completed="1"
+      remaining="1"
+    />
+  </View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={
+      Object {
+        "marginLeft": 26.68,
+        "marginTop": 26.68,
+      }
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      color="#FFFFFF"
+      name="chevron-left"
+      size={24}
+    />
+  </TouchableOpacity>
+  <ScrollViewMock
+    scrollEnabled={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": 26.68,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Icon
+        allowFontScaling={false}
+        color="rgb(166,225,100)"
+        name="warning"
+        size={30}
+      />
+      <Text
+        style={
+          Object {
+            "color": "rgb(166,225,100)",
+            "fontFamily": "SFProDisplay-Semibold",
+            "fontSize": 20,
+            "marginTop": 10,
+          }
+        }
+      >
+         Secret Mnemonic
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "flexDirection": "row",
+          "height": 333.5,
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#fff"
+        hidesWhenStopped={true}
+        size="small"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "marginBottom": 66.7,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "marginHorizontal": 75,
+            "marginTop": 40.019999999999996,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Thin",
+              "fontSize": 27.75,
+            }
+          }
+        >
+          Please write down this new Secret Mnemonic.
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Thin",
+              "fontSize": 27.75,
+            }
+          }
+        >
+          All previous mnemonics will become invalid.
+        </Text>
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "rgb(33,36,40)",
+            "borderRadius": 93.75,
+            "height": 187.5,
+            "justifyContent": "center",
+            "marginBottom": 10,
+            "marginTop": 53.36,
+            "width": 187.5,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(44,52,58)",
+              "borderRadius": 75,
+              "height": 150,
+              "justifyContent": "center",
+              "width": 150,
+            }
+          }
+        >
+          <Icon
+            allowFontScaling={false}
+            color="#fff"
+            name="content-copy"
+            size={20}
+          />
+        </View>
+      </TouchableOpacity>
+      <Text
+        style={
+          Object {
+            "color": "#fff",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 14,
+          }
+        }
+      >
+         Copy to clipboard
+      </Text>
+    </View>
+    <LinearGradient
+      colors={
+        Array [
+          "rgb(44,52,58)",
+          "rgb(31,38,43)",
+        ]
+      }
+      end={
+        Object {
+          "x": 0.5,
+          "y": 1,
+        }
+      }
+      endPoint={
+        Object {
+          "x": 0,
+          "y": 1,
+        }
+      }
+      start={
+        Object {
+          "x": 0.5,
+          "y": 0,
+        }
+      }
+      startPoint={
+        Object {
+          "x": 1,
+          "y": 0,
+        }
+      }
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "borderRadius": 10,
+          "justifyContent": "center",
+          "paddingVertical": 15,
+          "width": 718,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "borderRadius": 10,
+            "justifyContent": "center",
+            "paddingVertical": 15,
+            "width": 718,
+          }
+        }
+      >
+        <Icon
+          allowFontScaling={false}
+          color="rgb(166,225,100)"
+          name="warning"
+          size={24}
+        />
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "SFProDisplay-Light",
+              "fontSize": 14,
+            }
+          }
+        >
+          You will lose your account if
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "SFProDisplay-Light",
+              "fontSize": 14,
+            }
+          }
+        >
+          you lose your Secret PIN Mnemonic.
+        </Text>
+      </View>
+    </LinearGradient>
+    <View
+      style={
+        Object {
+          "height": 200.1,
+        }
+      }
+    />
+  </ScrollViewMock>
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "height": 1027.18,
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": -168.75,
+        "top": 93.38000000000001,
+        "width": 450,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  >
+    <Button
+      buttonStyle={
+        Object {
+          "backgroundColor": "rgba(0,177,251,0.9)",
+          "fontFamily": "SFProDisplay-Bold",
+        }
+      }
+      onPress={[Function]}
+      text="CONFIRM"
+    />
+  </View>
+  <RNDropDownWallet
+    containerStyle={
+      Object {
+        "backgroundColor": "rgb(0,168,251)",
+      }
+    }
+  />
+</View>
+`;

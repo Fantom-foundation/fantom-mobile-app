@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgb(44,52,58)",
+        "borderRadius": 4,
+        "justifyContent": "center",
+        "marginBottom": 24,
+        "padding": 12,
+        "width": 718,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#FFF",
+          "fontFamily": "SFProDisplay-Semibold",
+          "fontSize": 16,
+        }
+      }
+    >
+       
+       
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "flexDirection": "row",
+          "height": 350,
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#FFF"
+        hidesWhenStopped={true}
+        size="large"
+      />
+    </View>
+  </View>
+  <ViewShot
+    options={
+      Object {
+        "format": "jpg",
+      }
+    }
+    style={
+      Object {
+        "backgroundColor": "white",
+        "left": -3750,
+        "position": "absolute",
+        "top": -6670,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "flexDirection": "row",
+          "height": 350,
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#000"
+        hidesWhenStopped={true}
+        size="large"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgb(50, 50, 50)",
+          "flex": 1,
+          "height": 2,
+          "margin": 10,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "margin": 10,
+          "marginTop": 0,
+          "width": 230,
+        }
+      }
+    >
+      Billing amount: 
+      NaN
+       FTM
+    </Text>
+  </ViewShot>
+</View>
+`;

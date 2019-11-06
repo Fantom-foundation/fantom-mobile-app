@@ -17,7 +17,7 @@ type Props = {
   },
 };
 
-const CustomerSupport = ({ navigation }: Props) => {
+export const CustomerSupport = ({ navigation }: Props) => {
   const websiteLink = 'https://fantom.foundation/';
   const phoneNumber = 'mailto:contact@fantom.foundation';
   const displayPhoneNumber = 'contact@fantom.foundation';

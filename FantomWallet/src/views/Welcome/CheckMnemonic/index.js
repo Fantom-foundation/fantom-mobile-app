@@ -26,7 +26,7 @@ import { ENUM_WORD } from './helpers';
 /**
  * This component is designed to check recorded phrases.
  */
-const CheckMnemonic = ({ navigation, generateWallet }) => {
+export const CheckMnemonic = ({ navigation, generateWallet }) => {
   let dropdown = useRef(null);
   const [mnemonic, setMnemonic] = useState([]);
   const [shuffledMnemonics, setShuffledMnemonic] = useState([]);

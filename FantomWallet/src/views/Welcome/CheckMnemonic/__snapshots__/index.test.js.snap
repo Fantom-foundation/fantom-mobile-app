@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  enabled={true}
+  keyboardVerticalOffset={0}
+  style={
+    Object {
+      "backgroundColor": "#000",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 1334,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginTop": 40.019999999999996,
+        }
+      }
+    >
+      <_default
+        completed="2"
+        remaining="0"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-start",
+          "marginLeft": 8,
+          "marginTop": 8,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Icon
+          allowFontScaling={false}
+          color="#fff"
+          name="chevron-left"
+          size={24}
+        />
+      </TouchableOpacity>
+    </View>
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "testUri": "../../../src/images/BackgroundIcon.png",
+        }
+      }
+      style={
+        Object {
+          "height": 1027.18,
+          "opacity": 0.03,
+          "position": "absolute",
+          "right": -168.75,
+          "top": 93.38000000000001,
+          "width": 450,
+        }
+      }
+    />
+    <ScrollViewMock>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "SFProDisplay-Medium",
+              "fontSize": 24,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          Captcha Verification
+        </Text>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "marginTop": 20,
+              "width": 600,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#fff",
+                "fontFamily": "SFProDisplay-Thin",
+                "fontSize": 33.75,
+                "fontWeight": "300",
+                "paddingHorizontal": 0,
+                "textAlign": "center",
+              }
+            }
+          >
+            Please enter the corresponding phrase out of the 12 back-up phrases
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "marginTop": 106.72,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        >
+          Let's verify your backup phrase
+        </Text>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "backgroundColor": "rgb(27,29,33)",
+              "borderColor": "#fff",
+              "borderRadius": 10,
+              "borderStyle": "dashed",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "justifyContent": "center",
+              "marginTop": 24,
+              "minHeight": 82,
+              "paddingVertical": 15,
+              "width": 718,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "rgb(166,225,100)",
+              "fontSize": 16,
+              "marginTop": 66.7,
+              "textAlign": "center",
+              "width": 375,
+            }
+          }
+        >
+          Please tap each word in the correct order
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "center",
+            "marginTop": 16,
+            "overflow": "hidden",
+            "width": 675,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "height": 160.07999999999998,
+          }
+        }
+      />
+    </ScrollViewMock>
+  </View>
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  >
+    <Button
+      buttonStyle={
+        Object {
+          "backgroundColor": "rgb(0,177,251)",
+        }
+      }
+      onPress={[Function]}
+      text="Verify"
+    />
+  </View>
+  <RNDropDownWallet
+    containerStyle={
+      Object {
+        "backgroundColor": "rgb(251,128,0)",
+      }
+    }
+  />
+</KeyboardAvoidingView>
+`;

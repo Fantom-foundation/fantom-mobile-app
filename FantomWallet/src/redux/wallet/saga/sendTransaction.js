@@ -22,6 +22,7 @@ export function* sendTransaction({ payload: { to, value, memo, cbSuccess } }: Ac
   const date = moment().format('YYYY-MMM-DD hh:mm:ss a');
   const { publicKey, privateKey } = yield select(({ keys }) => keys);
   let transactionStatus = SUCCESS;
+  let transactionId = '';
   yield put(setLoadingSendTransaction(true));
   try {
     const responce = yield Web3Agent.Fantom.transfer({
@@ -34,6 +35,7 @@ export function* sendTransaction({ payload: { to, value, memo, cbSuccess } }: Ac
     // other error
     if (!responce.blockHash) throw Error(otherErrorMessage);
     // success
+    transactionId = responce.blockHash;
     Alert.alert('Success', `Transfer successful with transaction hash: ${responce.blockHash}`, [
       {
         text: 'Ok',
@@ -49,7 +51,7 @@ export function* sendTransaction({ payload: { to, value, memo, cbSuccess } }: Ac
   const transaction: TransactionT = {
     type: SENT,
     amount: value,
-    transactionId: '',
+    transactionId,
     transactionStatus,
     amountUnit: 'FTM',
     from: publicKey,

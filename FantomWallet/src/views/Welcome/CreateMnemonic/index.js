@@ -24,7 +24,7 @@ import ProgressBar from '~/components/general/ProgressBar';
 /**
  * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
  */
-const CreateMnemonic = ({ navigation }) => {
+export const CreateMnemonic = ({ navigation }) => {
   let dropdown = useRef(null);
   const [mnemonic, setMnemonic] = useState([]);
   const loading = !mnemonic.length;

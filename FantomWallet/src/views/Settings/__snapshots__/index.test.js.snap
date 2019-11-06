@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "flex": 1,
+    }
+  }
+>
+  <Header
+    headerStyle={
+      Object {
+        "backgroundColor": "rgb(44,52,58)",
+        "height": 174.14285714285714,
+      }
+    }
+    leftButtonIcon="chevron-left"
+    leftIconColor="#fff"
+    leftIconSize={30}
+    onLeftIconPress={[Function]}
+    text="Settings"
+    textStyle={
+      Object {
+        "fontFamily": "SFProDisplay-Semibold",
+      }
+    }
+  />
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "height": 800.4,
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": -168.75,
+        "top": 333.5,
+        "width": 375,
+      }
+    }
+  />
+  <ScrollViewMock
+    style={
+      Object {
+        "height": 1334,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "justifyContent": "space-between",
+          "paddingTop": 15,
+          "width": 660,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgba(255,255,255,0.05)",
+            "height": 300,
+            "justifyContent": "center",
+            "marginVertical": 14,
+            "width": 300,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(29,33,38)",
+              "borderRadius": 75,
+              "height": 150,
+              "justifyContent": "center",
+              "marginBottom": 22.5,
+              "width": 150,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(44,52,58)",
+                "borderRadius": 60,
+                "height": 120,
+                "justifyContent": "center",
+                "width": 120,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source={
+                Object {
+                  "testUri": "../../../src/images/AddressBook.png",
+                }
+              }
+              style={
+                Object {
+                  "height": 45,
+                  "width": 45,
+                }
+              }
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Semibold",
+              "fontSize": 12,
+            }
+          }
+        >
+          Address Book
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgba(255,255,255,0.05)",
+            "height": 300,
+            "justifyContent": "center",
+            "marginVertical": 14,
+            "width": 300,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(29,33,38)",
+              "borderRadius": 75,
+              "height": 150,
+              "justifyContent": "center",
+              "marginBottom": 22.5,
+              "width": 150,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(44,52,58)",
+                "borderRadius": 60,
+                "height": 120,
+                "justifyContent": "center",
+                "width": 120,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source={
+                Object {
+                  "testUri": "../../../src/images/CustomerSupport.png",
+                }
+              }
+              style={
+                Object {
+                  "height": 45,
+                  "width": 45,
+                }
+              }
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Semibold",
+              "fontSize": 12,
+            }
+          }
+        >
+          Customer Support
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgba(255,255,255,0.05)",
+            "height": 300,
+            "justifyContent": "center",
+            "marginVertical": 14,
+            "width": 300,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(29,33,38)",
+              "borderRadius": 75,
+              "height": 150,
+              "justifyContent": "center",
+              "marginBottom": 22.5,
+              "width": 150,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(44,52,58)",
+                "borderRadius": 60,
+                "height": 120,
+                "justifyContent": "center",
+                "width": 120,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source={
+                Object {
+                  "testUri": "../../../src/images/AboutApp.png",
+                }
+              }
+              style={
+                Object {
+                  "height": 45,
+                  "width": 45,
+                }
+              }
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Semibold",
+              "fontSize": 12,
+            }
+          }
+        >
+          About App
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 106.72,
+        }
+      }
+    />
+  </ScrollViewMock>
+</View>
+`;

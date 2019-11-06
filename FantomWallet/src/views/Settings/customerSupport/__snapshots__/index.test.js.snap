@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "flex": 1,
+    }
+  }
+>
+  <Header
+    headerStyle={
+      Object {
+        "backgroundColor": "rgb(44,52,58)",
+        "height": 174.14285714285714,
+      }
+    }
+    leftButtonIcon="chevron-left"
+    leftIconColor="#fff"
+    leftIconSize={30}
+    onLeftIconPress={[Function]}
+    text="Customer Support"
+    textStyle={
+      Object {
+        "fontFamily": "SFProDisplay-Semibold",
+      }
+    }
+  />
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 1600.8,
+        "justifyContent": "center",
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": -131.25,
+        "top": 0,
+        "width": 337.5,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "rgb(44,52,58)",
+        "borderRadius": 6,
+        "marginTop": 32,
+        "paddingHorizontal": 16,
+        "paddingVertical": 30,
+        "width": 718,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginLeft": 14,
+        }
+      }
+    >
+      <[object Object]
+        color="#FFF"
+        name="globe"
+        size={20}
+        style={Object {}}
+      />
+      <View
+        style={
+          Object {
+            "paddingLeft": 8,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "SFProDisplay-Semibold",
+              "fontSize": 16,
+            }
+          }
+        >
+          Fantom Website
+        </Text>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+        >
+          <Text
+            style={
+              Object {
+                "color": "rgb(0,177,251)",
+                "fontFamily": "SFProDisplay-Semibold",
+                "fontSize": 14,
+              }
+            }
+          >
+            https://fantom.foundation/
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 25,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginLeft": 14,
+        }
+      }
+    >
+      <Icon
+        allowFontScaling={false}
+        color="#FFF"
+        name="email"
+        size={20}
+        style={Object {}}
+      />
+      <View
+        style={
+          Object {
+            "paddingLeft": 8,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "SFProDisplay-Semibold",
+              "fontSize": 16,
+            }
+          }
+        >
+          Help
+        </Text>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+        >
+          <Text
+            style={
+              Object {
+                "color": "rgb(0,177,251)",
+                "fontFamily": "SFProDisplay-Semibold",
+                "fontSize": 14,
+              }
+            }
+          >
+            contact@fantom.foundation
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "bottom": 200.1,
+        "justifyContent": "center",
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/images/fantomWhiteIcon.png",
+        }
+      }
+      style={
+        Object {
+          "height": 45,
+          "marginBottom": 15,
+          "padding": 20,
+          "width": 30,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#rgb(255,255,255)",
+          "fontSize": 12,
+        }
+      }
+    >
+      Copyright © 2019 Fantom.
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#rgb(255,255,255)",
+          "fontSize": 12,
+        }
+      }
+    >
+      All Rights Reserved.
+    </Text>
+  </View>
+</View>
+`;

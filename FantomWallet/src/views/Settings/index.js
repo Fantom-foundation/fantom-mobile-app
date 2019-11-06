@@ -25,7 +25,7 @@ type Props = {
 /**
  * Settings: This component is meant for performing tasks related to app settings.
  */
-const Settings = ({ navigation }: Props) => {
+export const Settings = ({ navigation }: Props) => {
   const onLeftIconPress = () => navigation.goBack();
   const handleItem = navigationRoute => () => navigation.navigate(navigationRoute);
 

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "rgb(63,108,175)",
+      "backgroungColor": "red",
+      "height": 60,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#fff",
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "padding": 2,
+      }
+    }
+  >
+    Click here
+  </Text>
+</TouchableOpacity>
+`;

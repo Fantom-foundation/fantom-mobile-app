@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Header
+    headerStyle={
+      Object {
+        "backgroundColor": "rgb(44,52,58)",
+        "height": 174.14285714285714,
+      }
+    }
+    leftButtonIcon="chevron-left"
+    leftIconColor="#fff"
+    leftIconSize={30}
+    onLeftIconPress={[Function]}
+    text="About App"
+    textStyle={
+      Object {
+        "fontFamily": "SFProDisplay-Semibold",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgb(14,14,18)",
+        "height": 1334,
+        "paddingTop": 32,
+        "width": 750,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginBottom": 22,
+          "width": 718,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(50,59,66)",
+            "borderTopLeftRadius": 10,
+            "borderTopRightRadius": 10,
+            "justifyContent": "center",
+            "paddingHorizontal": 25,
+            "paddingVertical": 15,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "SFProDisplay-Medium",
+              "fontSize": 16,
+            }
+          }
+        >
+          iOS version
+           
+          0.0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(44,52,58)",
+            "borderBottomLeftRadius": 10,
+            "borderBottomRightRadius": 10,
+            "justifyContent": "center",
+            "paddingHorizontal": 25,
+            "paddingVertical": 20,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "SFProDisplay-Medium",
+              "fontSize": 14,
+              "marginBottom": 6,
+            }
+          }
+        >
+          Data information: com.foundation
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "SFProDisplay-Medium",
+              "fontSize": 14,
+              "marginBottom": 6,
+            }
+          }
+        >
+          Build number 0.0
+        </Text>
+      </View>
+    </View>
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "testUri": "../../../src/images/BackgroundIcon.png",
+        }
+      }
+      style={
+        Object {
+          "alignItems": "center",
+          "height": 1200.6000000000001,
+          "justifyContent": "center",
+          "opacity": 0.03,
+          "position": "absolute",
+          "right": -112.5,
+          "top": 0,
+          "width": 300,
+        }
+      }
+    />
+  </View>
+</View>
+`;

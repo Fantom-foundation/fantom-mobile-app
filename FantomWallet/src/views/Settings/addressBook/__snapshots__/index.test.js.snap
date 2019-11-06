@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "flex": 1,
+    }
+  }
+>
+  <StatusBar
+    animated={false}
+    barStyle="light-content"
+    showHideTransition="fade"
+  />
+  <Header
+    headerStyle={
+      Object {
+        "backgroundColor": "rgb(44,52,58)",
+        "height": 174.14285714285714,
+      }
+    }
+    isRightBtnImage={false}
+    leftButtonIcon="chevron-left"
+    leftIconColor="#fff"
+    leftIconSize={30}
+    onLeftIconPress={[Function]}
+    onRightIconPress={[Function]}
+    onSecondaryIconPress={[Function]}
+    rightButtonIcon="add-circle-outline"
+    rightIconColor="#fff"
+    rightIconSize={22}
+    secondaryButtonIcon={
+      Object {
+        "testUri": "../../../src/images/searchWhite.png",
+      }
+    }
+    text="Address Book"
+    textStyle={
+      Object {
+        "fontFamily": "SFProDisplay-Semibold",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "testUri": "../../../src/images/BackgroundIcon.png",
+        }
+      }
+      style={
+        Object {
+          "alignItems": "center",
+          "height": 1067.2,
+          "justifyContent": "center",
+          "opacity": 0.03,
+          "position": "absolute",
+          "right": -150,
+          "top": 0,
+          "width": 375,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "flexDirection": "row",
+          "height": 40,
+          "marginBottom": 15,
+          "marginTop": 32,
+          "width": 718,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgb(0,177,251)",
+            "borderBottomLeftRadius": 4,
+            "borderTopLeftRadius": 4,
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Semibold",
+            }
+          }
+        >
+          Recent
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgb(44,52,58)",
+            "borderBottomRightRadius": 4,
+            "borderTopRightRadius": 4,
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Semibold",
+            }
+          }
+        >
+          Favourites
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "paddingLeft": 10,
+          "paddingRight": 10,
+        }
+      }
+    >
+      <ScrollViewMock
+        showsVerticalScrollIndicator={false}
+        style={
+          Object {
+            "height": 1334,
+          }
+        }
+      >
+        <Address
+          delete={[Function]}
+          handleEditContact={[Function]}
+          id="0x0"
+          index="0x0"
+          isEditMode={true}
+          key="0x0"
+          line1Text="0x0"
+          onSelection={[Function]}
+          rateChange={[Function]}
+        />
+        <View
+          style={
+            Object {
+              "height": 400.2,
+            }
+          }
+        />
+      </ScrollViewMock>
+    </View>
+  </View>
+</View>
+`;

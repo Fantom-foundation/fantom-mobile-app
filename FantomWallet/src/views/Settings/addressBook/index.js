@@ -43,7 +43,7 @@ type Props = {
 /**
  * AddressBook: This component is meant for handling actions related to Address Book in app.
  */
-const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Props) => {
+export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Props) => {
   const [addOrFavorite, setAddOrFavorite] = useState('add');
   const [displaySearch, setDisplaySearch] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -121,7 +121,7 @@ const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Pr
             <Address
               key={key}
               id={tempAddress.address}
-              isEditMode={isEditMode}
+              isEditMode={!!isEditMode}
               onSelection={onSelection}
               index={key}
               name={tempAddress.name}
