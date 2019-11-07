@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollViewMock
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+    showsVerticalScrollIndicator={false}
+    style={
+      Object {
+        "backgroundColor": "rgb(14,14,18)",
+        "height": 1334,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgb(14,14,18)",
+          "height": 32,
+        }
+      }
+    />
+    <BalanceView
+      balance="123.123"
+    />
+    <Connect(TransactionView)
+      isLoading={false}
+    />
+    <View
+      style={
+        Object {
+          "height": 400.2,
+        }
+      }
+    />
+  </ScrollViewMock>
+</View>
+`;

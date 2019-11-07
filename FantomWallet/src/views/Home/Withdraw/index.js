@@ -46,8 +46,8 @@ type State = {
 /**
  * To Display WithdrawTab related tasks
  */
-class WithdrawScreen extends Component<Props, State> {
-  constructor(props) {
+export class WithdrawScreen extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       val: 'FTM',
@@ -83,7 +83,7 @@ class WithdrawScreen extends Component<Props, State> {
   /**
    * onScanSuccess()  : This function is meant to set address when user clicks on scanner button.
    */
-  onScanSuccess(address) {
+  onScanSuccess(address: string) {
     this.setState({
       address,
     });

@@ -27,7 +27,7 @@ type Props = {
 /**
  * To Display WalletTab related tasks
  */
-const WalletScreen = ({
+export const WalletScreen = ({
   balance,
   publicKey,
   history,

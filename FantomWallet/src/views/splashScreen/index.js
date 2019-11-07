@@ -9,9 +9,9 @@ import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 const isIOS = Platform.OS === 'ios';
 
 type Props = {
-  masterKey: string, 
-  privateKey: string, 
-  navigation: { 
+  masterKey: string,
+  privateKey: string,
+  navigation: {
     navigate: (route: string) => {}
   }
 }
@@ -19,14 +19,14 @@ type Props = {
 /**
  * SplashScreen: Splash Screen for app.
  */
-const SplashScreen = ({masterKey, privateKey, navigation}: Props) => {
+export const SplashScreen = ({ masterKey, privateKey, navigation }: Props) => {
   /**
    * Render different screens based on user is already a registered user or not.
    */
-  useEffect(()=> {
+  useEffect(() => {
     const route = (masterKey && privateKey) ? 'HomeScreen' : 'WalletSetup'
     navigation.navigate(route)
-  },[])
+  }, [])
 
   return (
     <View style={styles.imageBackground}>

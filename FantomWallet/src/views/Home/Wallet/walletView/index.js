@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,39 +6,34 @@ import PropTypes from 'prop-types';
 import style from './style';
 import WalletViewInfo from '../walletViewInfo';
 
-class WalletNavigationBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tabRenderInfo: 'Point',
-    };
-  }
+export const WalletNavigationBar = ({
+  balance,
+  transactionData,
+  isLoading,
+  navigation,
+  onRefresh,
+}) => {
+  const tabRenderInfo = 'Point';
 
-  handleSelectedTab(index, tabRenderInfo) {
-    this.setState({
-      tabRenderInfo,
-    });
-  }
+  // coinst handleSelectedTab = (index, tabRenderInfo) => {
+  //   setTabRenderInfo(tabRenderInfo)
+  // }
 
-  render() {
-    const { balance, transactionData, isLoading, navigation, onRefresh } = this.props;
-
-    return (
-      <View style={style.mainContainerStyle}>
-        <View style={style.tabInfoStyle}>
-          <WalletViewInfo
-            navigation={navigation}
-            selectedTab={this.state.tabRenderInfo}
-            transactionData={transactionData}
-            balance={balance}
-            isLoading={isLoading}
-            onRefresh={onRefresh}
-          />
-        </View>
+  return (
+    <View style={style.mainContainerStyle}>
+      <View style={style.tabInfoStyle}>
+        <WalletViewInfo
+          navigation={navigation}
+          selectedTab={tabRenderInfo}
+          transactionData={transactionData}
+          balance={balance}
+          isLoading={isLoading}
+          onRefresh={onRefresh}
+        />
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 const mapStateToProps = state => ({
   publicKey: state.keys.publicKey,

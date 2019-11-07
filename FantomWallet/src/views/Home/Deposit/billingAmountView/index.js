@@ -1,39 +1,33 @@
-import React, { Component } from 'react';
+// @flow
+import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import style from './style';
+
+type Props = {
+  headerText: string,
+  onAmountChange: string => void,
+  onTextFieldFocus: () => void,
+  onTextFieldBlur: () => void,
+};
 
 /**
  * BillingAmountScreen: This component is meant for handling tasks related to billing on deposit screen.
  */
-class BillingAmountScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amount: '',
-    };
-  }
+const BillingAmountScreen = ({
+  headerText,
+  onAmountChange,
+  onTextFieldFocus = () => {},
+  onTextFieldBlur = () => {},
+}: Props) => {
+  const [amount, setAmount] = useState('0');
 
-  onAmountChange(amount) {
-    this.setState({ amount });
-    if (this.props.onAmountChange) {
-      this.props.onAmountChange(amount);
-    }
-  }
+  const _onAmountChange = _amount => {
+    setAmount(_amount);
+    if (onAmountChange) onAmountChange(_amount);
+  };
 
-  onTextFieldFocus() {
-    if (this.props.onTextFieldFocus) {
-      this.props.onTextFieldFocus();
-    }
-  }
-
-  onTextFieldBlur() {
-    if (this.props.onTextFieldBlur) {
-      this.props.onTextFieldBlur();
-    }
-  }
-
-  renderBillingContainer() {
-    return (
+  return (
+    <View style={style.billAmountViewStyle}>
       <View style={style.billingAmtContainer}>
         <View style={{ flexDirection: 'row' }}>
           <Text style={style.inputTextHeading}>Billing Amount</Text>
@@ -43,32 +37,24 @@ class BillingAmountScreen extends Component {
             style={style.enteredTextStyle}
             placeholderTextColor="rgba( 255, 255, 255, 0.2)"
             autoCorrect={false}
-            onChangeText={ammount => this.onAmountChange(ammount)}
-            value={`${this.state.amount}`}
+            onChangeText={_onAmountChange}
+            value={`${amount}`}
             placeholder="0"
             keyboardType="decimal-pad"
-            onFocus={() => this.onTextFieldFocus()}
-            onBlur={() => this.onTextFieldBlur()}
+            onFocus={onTextFieldFocus}
+            onBlur={onTextFieldBlur}
             autoCapitalize="none"
             underlineColorAndroid="transparent"
           />
           <View style={style.ftmViewStyle}>
-            <Text style={style.ftmLabelStyle}>{this.props.headerText}</Text>
+            <Text style={style.ftmLabelStyle}>{headerText}</Text>
           </View>
         </View>
       </View>
-    );
-  }
-
-  render() {
-    return (
-      <View style={style.billAmountViewStyle}>
-        {this.renderBillingContainer()}
-        {/* {Platform.OS === 'ios' && <KeyboardSpacer topSpacing={-180}/>} */}
-        <View style={{ height: 20 }} />
-      </View>
-    );
-  }
-}
+      {/* {Platform.OS === 'ios' && <KeyboardSpacer topSpacing={-180}/>} */}
+      <View style={{ height: 20 }} />
+    </View>
+  );
+};
 
 export default BillingAmountScreen;

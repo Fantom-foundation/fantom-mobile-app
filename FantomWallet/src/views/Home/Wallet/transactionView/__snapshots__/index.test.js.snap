@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "flex": 1,
+        "paddingRight": 16,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../src/images/arrow_With_bar.png",
+          }
+        }
+        style={
+          Object {
+            "height": 23,
+            "marginTop": 16,
+            "tintColor": "grey",
+            "width": 25,
+          }
+        }
+      />
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      Array [
+        "",
+        Object {
+          "backgroundColor": "rgb(14,14,18)",
+        },
+      ]
+    }
+  />
+</View>
+`;

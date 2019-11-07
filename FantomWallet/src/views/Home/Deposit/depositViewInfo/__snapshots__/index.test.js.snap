@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ScrollViewMock
+  showsVerticalScrollIndicator={false}
+  style={
+    Object {
+      "height": 1334,
+    }
+  }
+>
+  <QRCodeShare
+    billingAmount=""
+    copyAddress={[Function]}
+    qrLink=""
+  />
+  <BillingAmountScreen
+    headerText="FTM"
+    onAmountChange={[Function]}
+    onTextFieldBlur={[Function]}
+    onTextFieldFocus={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "marginTop": 40.019999999999996,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "rgb(29,33,38)",
+          "borderRadius": 75,
+          "height": 150,
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "width": 150,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgb(44,52,58)",
+            "borderRadius": 60,
+            "height": 120,
+            "justifyContent": "center",
+            "width": 120,
+          }
+        }
+      >
+        <Icon
+          allowFontScaling={false}
+          color="#FFF"
+          name="share-apple"
+          size={67.5}
+        />
+      </View>
+    </TouchableOpacity>
+    <Text
+      style={
+        Object {
+          "color": "#FFF",
+          "fontFamily": "SFProDisplay-Semibold",
+          "fontSize": 16,
+        }
+      }
+    >
+      Share
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "height": 200.1,
+        "marginBottom": 10,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "position": "absolute",
+        "top": 0,
+        "width": 750,
+      }
+    }
+  >
+    <RNDropDownWallet
+      containerStyle={
+        Object {
+          "backgroundColor": "rgb(0,168,251)",
+        }
+      }
+      style={
+        Object {
+          "backgroundColor": "red",
+        }
+      }
+    />
+  </View>
+</ScrollViewMock>
+`;

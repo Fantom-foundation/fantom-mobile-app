@@ -43,7 +43,7 @@ type State = {
   val: string,
 };
 
-class SendMoney extends Component<Props, State> {
+export class SendMoney extends Component<Props, State> {
   isConfirmationRecieved: boolean = false;
 
   scrollView: any = null;

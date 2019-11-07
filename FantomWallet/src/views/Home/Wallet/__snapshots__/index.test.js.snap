@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "height": 1334,
+      "width": 750,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "white",
+        "flex": 1,
+      }
+    }
+  >
+    <Connect(WalletNavigationBar)
+      balance="123.123"
+      isLoading={false}
+      onRefresh={[Function]}
+    />
+    <View
+      pointerEvents="box-none"
+    >
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/images/BackgroundIcon.png",
+          }
+        }
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 1133.8999999999999,
+            "justifyContent": "center",
+            "opacity": 0.03,
+            "position": "absolute",
+            "right": -112.5,
+            "top": 0,
+            "width": 337.5,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

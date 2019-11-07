@@ -60,7 +60,7 @@ exports[`renders correctly 1`] = `
       />
     </View>
   </View>
-  <ViewShot
+  <RNShare
     options={
       Object {
         "format": "jpg",
@@ -116,6 +116,6 @@ exports[`renders correctly 1`] = `
       NaN
        FTM
     </Text>
-  </ViewShot>
+  </RNShare>
 </View>
 `;

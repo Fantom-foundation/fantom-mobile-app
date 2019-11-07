@@ -1,40 +1,53 @@
-import React, { PureComponent } from 'react';
+// @flow
+import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import style from './style';
+
+type Props = {
+  activeTabIndex: number,
+  index: number,
+  tabIfo: { tabRenderInfo: string },
+  tabTextStyle: { [string]: string },
+  tabStyle: { [string]: string },
+  activeTabColor: string,
+  inActiveTabColor: string,
+  handleSelectedTab: (number, string) => void,
+};
 
 /**
  * WalletNavigationTab: This component is meant for displaying navigation tab bar on wallet screen containing list of tab.
  */
-class WalletNavigationTab extends PureComponent {
-  render() {
-    let {
-      activeTabIndex,
-      index,
-      tabIfo,
-      tabTextStyle,
-      tabStyle,
-      activeTabColor,
-      inActiveTabColor,
-    } = this.props;
-    tabStyle = {
-      ...style.tabStyle,
-      ...tabStyle,
-      borderBottomColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
-    };
+export const WalletNavigationTab = ({
+  activeTabIndex,
+  index,
+  tabIfo,
+  tabTextStyle,
+  tabStyle,
+  activeTabColor,
+  inActiveTabColor,
+  handleSelectedTab,
+}: Props) => {
+  const handleTab = () => handleSelectedTab(index, tabIfo.tabRenderInfo);
 
-    tabTextStyle = {
-      ...style.tabTextStyle,
-      ...tabTextStyle,
-      fontWeight: activeTabIndex === index ? 'bold' : 'normal',
-    };
-    return (
-      <TouchableOpacity
-        style={tabStyle}
-        onPress={() => this.props.handleSelectedTab(index, tabIfo.tabRenderInfo)}
+  return (
+    <TouchableOpacity
+      style={{
+        ...style.tabStyle,
+        ...tabStyle,
+        borderBottomColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
+      }}
+      onPress={handleTab}
+    >
+      <Text
+        style={{
+          ...style.tabTextStyle,
+          ...tabTextStyle,
+          fontWeight: activeTabIndex === index ? 'bold' : 'normal',
+        }}
       >
-        <Text style={tabTextStyle}>{tabIfo.tabRenderInfo}</Text>
-      </TouchableOpacity>
-    );
-  }
-}
+        {tabIfo.tabRenderInfo}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 export default WalletNavigationTab;

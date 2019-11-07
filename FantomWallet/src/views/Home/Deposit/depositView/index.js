@@ -1,36 +1,23 @@
+// @flow
 // Library
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import PropTypes from 'prop-types';
 // Components
 import style from './style';
 import DepositViewInfo from '../depositViewInfo';
 
+type Props = {
+  renderToastNotification: () => void,
+  navigation: any,
+};
+
 /**
  * DepositNavigationBar: This component is meant for handling deposit screen.
  */
-class DepositNavigationBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { navigation } = this.props;
-
-    return (
-      <View style={style.mainContainerStyle}>
-        <DepositViewInfo
-          renderToastNotification={this.props.renderToastNotification}
-          navigation={navigation}
-        />
-      </View>
-    );
-  }
-}
-
-DepositNavigationBar.propTypes = {
-  navigation: PropTypes.object,
-};
+const DepositNavigationBar = ({ navigation, renderToastNotification }: Props) => (
+  <View style={style.mainContainerStyle}>
+    <DepositViewInfo renderToastNotification={renderToastNotification} navigation={navigation} />
+  </View>
+);
 
 export default DepositNavigationBar;

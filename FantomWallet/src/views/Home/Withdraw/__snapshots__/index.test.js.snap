@@ -1,0 +1,469 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "height": 1334,
+      "width": 750,
+    }
+  }
+>
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 1133.8999999999999,
+        "justifyContent": "center",
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": -112.5,
+        "top": 0,
+        "width": 337.5,
+      }
+    }
+  />
+  <ScrollViewMock
+    showsVerticalScrollIndicator={false}
+    style={
+      Object {
+        "height": 1334,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "height": 32,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgb(44,52,58)",
+          "borderRadius": 10,
+          "height": 120,
+          "marginBottom": 12,
+          "width": 718,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(50,59,66)",
+            "borderTopLeftRadius": 10,
+            "borderTopRightRadius": 10,
+            "height": 40,
+            "justifyContent": "center",
+            "paddingLeft": 28,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "rgb(166,225,100)",
+              "fontFamily": "SFProDisplay-Medium",
+              "fontSize": 14,
+            }
+          }
+        >
+          Balance
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Bold",
+              "fontSize": 24,
+              "textAlign": "center",
+            }
+          }
+        >
+          123.123
+           
+          FTM
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 16,
+            "paddingLeft": 12,
+          }
+        }
+      >
+        Address to send
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(32,37,42)",
+            "borderBottomColor": "rgb(56,65,71)",
+            "borderBottomWidth": 1.5,
+            "borderRadius": 4,
+            "flexDirection": "row",
+            "height": 50,
+            "marginTop": 10,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          autoCorrect={false}
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          placeholder="Enter Address"
+          placeholderTextColor="rgba( 255, 255, 255, 0.2)"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Regular",
+              "fontSize": 12,
+              "paddingLeft": 12,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "paddingHorizontal": 5,
+              "paddingVertical": 5,
+            }
+          }
+        >
+          <Image
+            resizeMode="contain"
+            source={
+              Object {
+                "testUri": "../../../src/images/QR.png",
+              }
+            }
+            style={
+              Object {
+                "height": 25,
+                "width": 25,
+              }
+            }
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "paddingHorizontal": 5,
+              "paddingVertical": 5,
+            }
+          }
+        >
+          <Image
+            resizeMode="contain"
+            source={
+              Object {
+                "testUri": "../../../src/images/person_whiteOutline.png",
+              }
+            }
+            style={
+              Object {
+                "height": 22,
+                "marginRight": 3,
+                "width": 22,
+              }
+            }
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 16,
+            "paddingLeft": 12,
+          }
+        }
+      >
+        Amount
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(32,37,42)",
+            "borderBottomColor": "rgb(56,65,71)",
+            "borderBottomWidth": 1.5,
+            "borderRadius": 4,
+            "flexDirection": "row",
+            "height": 50,
+            "marginTop": 10,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="decimal-pad"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          placeholder="Enter Amount"
+          placeholderTextColor="rgba( 255, 255, 255, 0.2)"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Regular",
+              "fontSize": 12,
+              "paddingLeft": 12,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+              "width": 50,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#FFF",
+                "fontFamily": "SFProDisplay-Regular",
+                "fontSize": 14,
+                "textAlign": "center",
+              }
+            }
+          >
+            FTM
+          </Text>
+        </View>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": 50,
+              },
+              Object {
+                "backgroundColor": "rgb(0,177,251)",
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFF",
+                  "fontFamily": "SFProDisplay-Regular",
+                  "fontSize": 14,
+                  "textAlign": "center",
+                },
+                Object {
+                  "fontFamily": "SFProDisplay-Semibold",
+                },
+              ]
+            }
+          >
+            ALL
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 16,
+            "paddingLeft": 12,
+          }
+        }
+      >
+        Memo
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(32,37,42)",
+            "borderBottomColor": "rgb(56,65,71)",
+            "borderBottomWidth": 1.5,
+            "borderRadius": 4,
+            "height": 80,
+            "marginTop": 10,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          multiline={true}
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          onFocus={[Function]}
+          placeholder="Enter Memo"
+          placeholderTextColor="rgba( 255, 255, 255, 0.2)"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Regular",
+              "fontSize": 12,
+              "paddingLeft": 12,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "marginTop": 133.4,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "rgb(29,33,38)",
+            "borderRadius": 75,
+            "height": 150,
+            "justifyContent": "center",
+            "marginBottom": 10,
+            "width": 150,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(44,52,58)",
+              "borderRadius": 60,
+              "height": 120,
+              "justifyContent": "center",
+              "width": 120,
+            }
+          }
+        >
+          <Image
+            resizeMode="contain"
+            source={
+              Object {
+                "testUri": "../../../src/images/sendWhite.png",
+              }
+            }
+            style={
+              Object {
+                "height": 67.5,
+                "width": 67.5,
+              }
+            }
+          />
+        </View>
+      </TouchableOpacity>
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "SFProDisplay-Semibold",
+            "fontSize": 16,
+          }
+        }
+      >
+        Send
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 400.2,
+        }
+      }
+    />
+  </ScrollViewMock>
+</View>
+`;
