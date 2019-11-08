@@ -13,7 +13,8 @@ import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native'
 import { PersistGate } from 'redux-persist/integration/react';
-import RootNavigator from '~/navigation/RootNavigator';
+
+import { RootNavigator, NavigationService } from '~/navigation'
 import { store, persistor } from '~/redux/store';
 
 // from debug network
@@ -26,7 +27,7 @@ export default () => {
       <PersistGate loading={null} persistor={persistor}>
         <>
           <StatusBar barStyle="light-content" />
-          <RootNavigator />
+          <RootNavigator ref={navigatorRef => NavigationService.setTopLevelNavigator(navigatorRef)} />
         </>
       </PersistGate>
     </Provider>

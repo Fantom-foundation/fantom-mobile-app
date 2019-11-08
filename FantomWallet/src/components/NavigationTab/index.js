@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { View, BackHandler } from 'react-native';
 
 /** * Active NavigationIcons */
-import routes from '~/navigation/routes';
+import { routes } from '~/navigation';
 import walletWhiteIcon from '~/images/WalletFilled.png';
 import sendWhiteIcon from '~/images/sendWhite.png';
 import depositWhiteIcon from '~/images/downloading_white.png';

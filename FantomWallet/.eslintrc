@@ -32,14 +32,7 @@
     "no-prototype-builtins": 0,
     "linebreak-style": 0,
     "import/no-extraneous-dependencies": 0,
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "printWidth": 100
-      }
-    ]
+    "import/no-cycle": 0
   },
   "plugins": [
     "prettier",
@@ -53,9 +46,16 @@
     "import/resolver": {
       "alias": {
         "map": [
-          ["~", "./src"]
+          [
+            "~",
+            "./src"
+          ]
         ],
-        "extensions": [".js", ".jsx", ".json"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".json"
+        ]
       }
     }
   }

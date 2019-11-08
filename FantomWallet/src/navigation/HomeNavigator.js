@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import routes from '~/navigation/routes';
+import { routes } from '~/navigation';
 import WalletScreen from '~/views/Home/Wallet';
 import WithdrawScreen from '~/views/Home/Withdraw';
 import DepositScreen from '~/views/Home/Deposit';
@@ -33,7 +33,7 @@ const HomeStackNavigator = createStackNavigator(
     HomeStack: HomeTabNavigator,
   },
   {
-    navigationOptions: {
+    defaultNavigationOptions: {
       header: ({ navigation }) => {
         const onRefresh = () => {
           store.dispatch(getBalance({ loading: true }));

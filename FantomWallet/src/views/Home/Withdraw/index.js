@@ -16,7 +16,7 @@ import Web3 from 'web3';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import routes from '~/navigation/routes';
+import { routes } from '~/navigation';
 import { DEVICE_HEIGHT, DEVICE_WIDTH, GAS_PRICE } from '~/common/constants';
 import { estimationMaxFantomBalance, toFixed } from '~/utils/converts';
 // Images

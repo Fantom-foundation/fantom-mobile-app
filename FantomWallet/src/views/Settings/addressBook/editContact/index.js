@@ -15,7 +15,7 @@ import {
 import { connect } from 'react-redux';
 import Web3 from 'web3';
 
-import routes from '~/navigation/routes';
+import { routes } from '~/navigation';
 // Components
 import Header from '~/components/Header/index';
 import styles from './styles';

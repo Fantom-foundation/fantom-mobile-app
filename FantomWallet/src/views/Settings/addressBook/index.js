@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import routes from '~/navigation/routes';
+import { routes } from '~/navigation';
 import Header from '~/components/Header';
 import styles from './styles';
 import Address from './address/index';
@@ -79,7 +79,7 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
 
   const deleteItem = address => {
     Alert.alert('Confirm Dialog', 'Are you sure you want to delete this contact.', [
-      { text: 'Cancel', onPress: () => {}, style: 'cancel' },
+      { text: 'Cancel', onPress: () => { }, style: 'cancel' },
       {
         text: 'Yes',
         onPress: () => {

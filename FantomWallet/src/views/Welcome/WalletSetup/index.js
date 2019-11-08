@@ -2,7 +2,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
 
-import routes from '~/navigation/routes';
+import { routes } from '~/navigation';
 import styles from './styles';
 
 /**

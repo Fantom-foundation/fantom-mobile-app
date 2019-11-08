@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import DropdownAlert from 'react-native-dropdownalert';
 
-import routes from '~/navigation/routes';
+import { routes } from '~/navigation';
 // Components
 import styles from './styles';
 import Button from '~/components/general/Button';
@@ -68,16 +68,16 @@ export const CreateMnemonic = ({ navigation }) => {
             <ActivityIndicator size="small" color="#fff" />
           </View>
         ) : (
-          mnemonic.length && (
-            <View style={styles.textContainer}>
-              {mnemonic.map((textValue, i) => (
-                <View key={i} style={styles.wordWrap}>
-                  <Text style={styles.text}>{textValue}</Text>
-                </View>
-              ))}
-            </View>
-          )
-        )}
+            mnemonic.length && (
+              <View style={styles.textContainer}>
+                {mnemonic.map((textValue, i) => (
+                  <View key={i} style={styles.wordWrap}>
+                    <Text style={styles.text}>{textValue}</Text>
+                  </View>
+                ))}
+              </View>
+            )
+          )}
         <View style={styles.infoContainer}>
           <View style={styles.messageContainer}>
             <Text style={styles.instructionTextStyle}>
@@ -117,7 +117,7 @@ export const CreateMnemonic = ({ navigation }) => {
       <View style={styles.footerStyle}>
         <Button
           text="CONFIRM"
-          onPress={loading ? () => {} : onConfirmHandler}
+          onPress={loading ? () => { } : onConfirmHandler}
           buttonStyle={{
             backgroundColor: loading ? 'rgba(0,177,251,0.9)' : 'rgb(0,177,251)',
             fontFamily: 'SFProDisplay-Bold',
