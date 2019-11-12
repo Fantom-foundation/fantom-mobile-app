@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import DropdownAlert from 'react-native-dropdownalert';
 
-import { routes } from '~/navigation';
+import { routes } from '~/navigation/helpers';
 // Components
 import styles from './styles';
 import Button from '~/components/general/Button';

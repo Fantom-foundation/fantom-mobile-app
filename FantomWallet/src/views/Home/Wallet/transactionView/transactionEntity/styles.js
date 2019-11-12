@@ -1,4 +1,6 @@
-const style = {
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
     flexDirection: 'row',
@@ -64,6 +66,4 @@ const style = {
     color: 'rgb(255,255,255)',
     fontSize: 10,
   },
-};
-
-export default style;
+});

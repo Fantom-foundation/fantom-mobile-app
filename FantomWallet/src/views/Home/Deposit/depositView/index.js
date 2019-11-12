@@ -3,7 +3,7 @@
 import React from 'react';
 import { View } from 'react-native';
 // Components
-import style from './style';
+import styles from './styles';
 import DepositViewInfo from '../depositViewInfo';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
  * DepositNavigationBar: This component is meant for handling deposit screen.
  */
 const DepositNavigationBar = ({ navigation, renderToastNotification }: Props) => (
-  <View style={style.mainContainerStyle}>
+  <View style={styles.mainContainerStyle}>
     <DepositViewInfo renderToastNotification={renderToastNotification} navigation={navigation} />
   </View>
 );

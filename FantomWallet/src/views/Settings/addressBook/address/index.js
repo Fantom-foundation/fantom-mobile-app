@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
-import style from './style';
+import styles from './styles';
 
 /**
  * Address: This component is meant for rendering list of address saved in address book.
@@ -39,32 +39,32 @@ class Address extends Component {
       propsToMainView.onPress = this.onAddressSelection.bind(this);
     }
     return (
-      <MainView style={style.container} {...propsToMainView}>
-        <View style={style.subContainer}>
-          <View style={style.subSubContainer}>
+      <MainView style={styles.container} {...propsToMainView}>
+        <View style={styles.subContainer}>
+          <View style={styles.subSubContainer}>
             {/* Left container */}
-            <View style={style.leftContainerStyle}>
+            <View style={styles.leftContainerStyle}>
               <TouchableOpacity onPress={() => this.props.rateChange(this.props.id)}>
                 <Icon name={starIcon} size={25} color="rgb(0,177,251)" />
               </TouchableOpacity>
             </View>
-            <View style={style.lineSeparatorStyle} />
+            <View style={styles.lineSeparatorStyle} />
             {/* Middle container */}
-            <View style={style.mid}>
-              <Text style={style.nameContainer}>{this.props.name || 'Anonymous'}</Text>
-              <Text style={style.addressTextStyle}>{this.props.line1Text}</Text>
+            <View style={styles.mid}>
+              <Text style={styles.nameContainer}>{this.props.name || 'Anonymous'}</Text>
+              <Text style={styles.addressTextStyle}>{this.props.line1Text}</Text>
             </View>
             {/* Rightcontainer */}
-            <View style={style.iconsContainer}>
+            <View style={styles.iconsContainer}>
               <TouchableOpacity
                 onPress={() => this.handleEditContact(this.props.name, this.props.line1Text)}
-                style={style.optionButtonStyle}
+                style={styles.optionButtonStyle}
               >
                 <MaterialCommunityIcons name="pencil" size={16} color="#FFF" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => this.props.delete(this.props.id)}
-                style={style.optionButtonStyle}
+                style={styles.optionButtonStyle}
               >
                 <FontAwesomeIcons style={{ color: '#FFF' }} name="trash" size={16} />
               </TouchableOpacity>

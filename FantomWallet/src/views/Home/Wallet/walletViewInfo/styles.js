@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native'
 import { DEVICE_HEIGHT } from '~/common/constants';
 
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
   },
@@ -8,5 +9,4 @@ const style = {
     height: DEVICE_HEIGHT,
     backgroundColor: 'rgb(14,14,18)',
   },
-};
-export default style;
+})

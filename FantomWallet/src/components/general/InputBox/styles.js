@@ -1,9 +1,9 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
-const style = {
+export default StyleSheet.create({
   textBox: {
     width: deviceWidth * 0.9,
     height: 44,
@@ -22,6 +22,4 @@ const style = {
     fontSize: 12,
     fontFamily: 'SegoeUI',
   },
-};
-
-export default style;
+});

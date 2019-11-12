@@ -1,14 +1,15 @@
+/* eslint-disable react/jsx-props-no-spreading */
 // @flow
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import type {
   ViewStyleProp,
-  TextStyleProp,
-  ImageStyleProp,
+    TextStyleProp,
+    ImageStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import style from './styles';
+import styles from './styles';
 
 type Props = {
   text?: string,
@@ -61,71 +62,71 @@ const Header = ({
   rightIconColor = '',
   rightImageStyling,
 }: Props) => (
-  <View style={[style.headerStyle, headerStyle]}>
-    <View style={style.mainViewStyle}>
-      <View style={style.headerIconTextStyle}>
-        {fantomIcon && (
-          <Image source={fantomIcon} style={style.fantomIconStyle} resizeMode="contain" />
-        )}
-        {text && <Text style={[style.textStyle, textStyle]}>{text}</Text>}
-      </View>
+    <View style={[styles.headerStyle, headerStyle]}>
+      <View style={styles.mainViewStyle}>
+        <View style={styles.headerIconTextStyle}>
+          {fantomIcon && (
+            <Image source={fantomIcon} style={styles.fantomIconStyle} resizeMode="contain" />
+          )}
+          {text && <Text style={[styles.textStyle, textStyle]}>{text}</Text>}
+        </View>
 
-      {!isShowSecondaryButtonIcon && secondaryButtonIcon && (
-        <TouchableOpacity style={style.secondaryButtonStyle} onPress={onSecondaryIconPress}>
-          <Image
-            source={secondaryButtonIcon}
-            style={style.secondaryImageStyle}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      )}
-      {!isShowRightButtonIcon && rightButtonIcon && (
-        <TouchableOpacity
-          style={[style.rightButtonStyle, rightButtonStyle]}
-          activeOpacity={activeOpacity}
-          onPress={onRightIconPress}
-        >
-          {isRightBtnImage ? (
+        {!isShowSecondaryButtonIcon && secondaryButtonIcon && (
+          <TouchableOpacity style={styles.secondaryButtonStyle} onPress={onSecondaryIconPress}>
             <Image
-              source={rightButtonIcon}
-              style={[style.rightImageStyle, rightImageStyling]}
+              source={secondaryButtonIcon}
+              style={styles.secondaryImageStyle}
               resizeMode="contain"
             />
-          ) : (
-            <Icon
-              {...(rightButtonIcon ? { name: `${rightButtonIcon}` } : {})}
-              {...(rightIconColor ? { color: `${rightIconColor}` } : {})}
-              size={rightIconSize}
-            />
-          )}
-        </TouchableOpacity>
-      )}
+          </TouchableOpacity>
+        )}
+        {!isShowRightButtonIcon && rightButtonIcon && (
+          <TouchableOpacity
+            style={[styles.rightButtonStyle, rightButtonStyle]}
+            activeOpacity={activeOpacity}
+            onPress={onRightIconPress}
+          >
+            {isRightBtnImage ? (
+              <Image
+                source={rightButtonIcon}
+                style={[styles.rightImageStyle, rightImageStyling]}
+                resizeMode="contain"
+              />
+            ) : (
+                <Icon
+                  {...(rightButtonIcon ? { name: `${rightButtonIcon}` } : {})}
+                  {...(rightIconColor ? { color: `${rightIconColor}` } : {})}
+                  size={rightIconSize}
+                />
+              )}
+          </TouchableOpacity>
+        )}
 
-      {/* {!isShowRightButtonIcon &&
+        {/* {!isShowRightButtonIcon &&
             rightIcon !== '' && (
               <TouchableOpacity
                 style={rightButtonStyle}
                 activeOpacity={activeOpacity}
                 onPress={() => this.onRightIconPress()}
               > */}
-      {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
-      {/* <Image source={rightIcon} style={style.rightImageStyle} resizeMode="contain" />
+        {/* <Icon name={`${rightIcon}`} size={rightIconSize} color={`${rightIconColor}`} /> */}
+        {/* <Image source={rightIcon} style={styles.rightImageStyle} resizeMode="contain" />
               </TouchableOpacity>
             )} */}
 
-      {!isShowLeftButtonIcon && leftButtonIcon !== '' && (
-        <TouchableOpacity
-          style={[style.leftButtonStyle, leftButtonStyle]}
-          activeOpacity={activeOpacity}
-          onPress={onLeftIconPress}
-        >
-          <Icon name={leftButtonIcon} size={leftIconSize} color={leftIconColor} />
-          {/* <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} /> */}
-          {/* <Image source={leftIcon} style={style.leftImageStyle} resizeMode="contain" /> */}
-        </TouchableOpacity>
-      )}
+        {!isShowLeftButtonIcon && leftButtonIcon !== '' && (
+          <TouchableOpacity
+            style={[styles.leftButtonStyle, leftButtonStyle]}
+            activeOpacity={activeOpacity}
+            onPress={onLeftIconPress}
+          >
+            <Icon name={leftButtonIcon} size={leftIconSize} color={leftIconColor} />
+            {/* <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} /> */}
+            {/* <Image source={leftIcon} style={styles.leftImageStyle} resizeMode="contain" /> */}
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
-  </View>
-);
+  );
 
 export default Header;

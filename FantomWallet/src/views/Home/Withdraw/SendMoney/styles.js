@@ -1,8 +1,8 @@
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 const isAndroid = Platform.OS === 'android';
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
     backgroundColor: 'rgb(14,14,18)',
@@ -236,6 +236,4 @@ const style = {
   //   fontSize: 14,
   //   color: 'rgb(101,101,101)',
   // },
-};
-
-export default style;
+});

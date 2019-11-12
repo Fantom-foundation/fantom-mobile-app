@@ -1,8 +1,8 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 
-const style = {
+export default StyleSheet.create({
   container: {
     width: deviceWidth - 32,
     alignSelf: 'center',
@@ -79,6 +79,4 @@ const style = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-};
-
-export default style;
+});

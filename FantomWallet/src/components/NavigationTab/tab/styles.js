@@ -1,8 +1,9 @@
+import { StyleSheet } from 'react-native';
 import { DEVICE_HEIGHT, iPhoneXHeight } from '~/common/constants';
 
 const isPhoneX = DEVICE_HEIGHT >= iPhoneXHeight;
 
-const style = {
+export default StyleSheet.create({
   tabStyle: {
     flex: 1,
     height: isPhoneX ? 60 : 48,
@@ -13,5 +14,4 @@ const style = {
     width: 30,
     height: 30,
   },
-};
-export default style;
+});

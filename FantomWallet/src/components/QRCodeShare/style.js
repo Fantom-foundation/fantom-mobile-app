@@ -1,6 +1,7 @@
+import { StyleSheet } from 'react-native';
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants/index';
 
-const style = {
+export default StyleSheet.create({
   containerViewStyle: {
     flex: 1,
     marginBottom: DEVICE_HEIGHT * 0.02,
@@ -28,5 +29,4 @@ const style = {
     fontSize: 14,
     paddingLeft: 5,
   },
-};
-export default style;
+});

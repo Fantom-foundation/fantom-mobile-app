@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import style from './style';
+import styles from './styles';
 
 /**
  * SortMenuCard: A generic component for displaying a list of sort menu.
@@ -30,17 +30,17 @@ class SortMenuCard extends Component {
     return (
       <View
         style={
-          this.props.type === 'withDraw' ? style.listContainerStyle : style.altListContainerStyle
+          this.props.type === 'withDraw' ? styles.listContainerStyle : styles.altListContainerStyle
         }
       >
-        <View style={style.listStyle}>
+        <View style={styles.listStyle}>
           <FlatList
             data={this.state.data}
             renderItem={({ item, index }) => (
-              <View style={style.listItemStyle}>
+              <View style={styles.listItemStyle}>
                 <Text>{item.key}</Text>
                 <TouchableOpacity
-                  style={style.listButtonStyle}
+                  style={styles.listButtonStyle}
                   onPress={() => this.toggleHandler(index, item)}
                 >
                   <MaterialIcons
@@ -51,8 +51,8 @@ class SortMenuCard extends Component {
                     }
                     style={
                       this.state.selectedIndex === index
-                        ? style.checkedButtonStyle
-                        : style.uncheckedButtonStyle
+                        ? styles.checkedButtonStyle
+                        : styles.uncheckedButtonStyle
                     }
                   />
                 </TouchableOpacity>

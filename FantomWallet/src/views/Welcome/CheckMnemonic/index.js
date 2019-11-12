@@ -1,3 +1,5 @@
+// @flow
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState, useRef } from 'react';
 import {
   Text,
@@ -13,7 +15,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import DropdownAlert from 'react-native-dropdownalert';
 
-import { routes } from '~/navigation';
+import { routes } from '~/navigation/helpers';
 import { generateWallet as generateWalletAction } from '~/redux/keys/actions';
 import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
@@ -23,11 +25,16 @@ import BackgroundFantomIcon from '~/images/BackgroundIcon.png';
 import { DEVICE_HEIGHT } from '~/common/constants';
 import { ENUM_WORD } from './helpers';
 
+type Props = {
+  navigation: any,
+  generateWallet: (string) => void
+}
+
 /**
  * This component is designed to check recorded phrases.
  */
-export const CheckMnemonic = ({ navigation, generateWallet }) => {
-  let dropdown = useRef(null);
+export const CheckMnemonic = ({ navigation, generateWallet }: Props) => {
+  const dropdown = useRef(null);
   const [mnemonic, setMnemonic] = useState([]);
   const [shuffledMnemonics, setShuffledMnemonic] = useState([]);
   const [verifyMnemonic, setVerifyMnemonic] = useState([]);
@@ -40,7 +47,7 @@ export const CheckMnemonic = ({ navigation, generateWallet }) => {
         name: word,
         index,
         isClickable: true,
-      }))
+      })),
     );
   }, []);
 
@@ -55,15 +62,19 @@ export const CheckMnemonic = ({ navigation, generateWallet }) => {
     const verifyMnemonicArr = arr.map(obj => obj.name);
     mnemonic.some((word, index) => {
       if (word === verifyMnemonicArr[index]) return false;
-      return (inconsistency = ENUM_WORD[index]);
+      inconsistency = ENUM_WORD[index];
+      return true;
     });
 
     if (inconsistency) {
-      dropdown.alertWithType('custom', `The ${inconsistency} word does not match.`, '');
+      dropdown.current.alertWithType('custom', `The ${inconsistency} word does not match.`, '');
       return;
     }
 
-    generateWallet({ mnemonic, cb: () => navigation.navigate(routes.root.HomeScreen) });
+    generateWallet({
+      mnemonic: mnemonic.join(' ').toLowerCase(),
+      cb: () => navigation.navigate(routes.root.HomeScreen),
+    });
   };
 
   const select = ({ name, index }) => () => {
@@ -72,7 +83,7 @@ export const CheckMnemonic = ({ navigation, generateWallet }) => {
       shuffledMnemonics.map(item => ({
         ...item,
         isClickable: item.name !== name ? item.isClickable : false,
-      }))
+      })),
     );
   };
 
@@ -82,7 +93,7 @@ export const CheckMnemonic = ({ navigation, generateWallet }) => {
       shuffledMnemonics.map(word => ({
         ...word,
         ...(name === word.name ? { isClickable: true } : {}),
-      }))
+      })),
     );
   };
 
@@ -120,7 +131,7 @@ export const CheckMnemonic = ({ navigation, generateWallet }) => {
             <Text style={styles.backupPhrase}>Let&apos;s verify your backup phrase</Text>
             <View style={styles.textContainer}>
               {verifyMnemonic.map((val, i) => (
-                <WordItem {...val} key={i} onClick={unSelect} isTop />
+                <WordItem {...val} key={`${val.name}_${i + 2}`} onClick={unSelect} isTop />
               ))}
             </View>
           </View>
@@ -130,7 +141,7 @@ export const CheckMnemonic = ({ navigation, generateWallet }) => {
           </View>
           <View style={styles.mnemonicBtnMainView}>
             {shuffledMnemonics.map((item, index) => (
-              <WordItem {...item} key={index} onClick={select} />
+              <WordItem {...item} key={`${item.name}_${index + 2}`} onClick={select} />
             ))}
           </View>
           <View style={{ height: DEVICE_HEIGHT * 0.12 }} />
@@ -144,7 +155,7 @@ export const CheckMnemonic = ({ navigation, generateWallet }) => {
           buttonStyle={{ backgroundColor: 'rgb(0,177,251)' }}
         />
       </View>
-      <DropdownAlert containerStyle={styles.dropdown} ref={ref => (dropdown = ref)} />
+      <DropdownAlert containerStyle={styles.dropdown} ref={dropdown} />
     </KeyboardAvoidingView>
   );
 };
@@ -156,5 +167,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CheckMnemonic);

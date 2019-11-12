@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import style from './style';
+import styles from './styles';
 
 /**
  * DialogBox: This component displays a dialog, when user clicks on confirm button after contact editing.
@@ -8,15 +8,15 @@ import style from './style';
 class DialogBox extends PureComponent {
   render() {
     return (
-      <View style={style.container}>
-        <View style={style.subContainer}>
-          <View style={style.addressTextContainer}>
+      <View style={styles.container}>
+        <View style={styles.subContainer}>
+          <View style={styles.addressTextContainer}>
             <Text>This address already exists.</Text>
             <Text>Please re- enter your wallet address.</Text>
           </View>
-          <View style={style.confirmContainer}>
+          <View style={styles.confirmContainer}>
             <TouchableOpacity onPress={this.props.onConfirm}>
-              <Text style={style.confirmText}>Confirm</Text>
+              <Text style={styles.confirmText}>Confirm</Text>
             </TouchableOpacity>
           </View>
         </View>

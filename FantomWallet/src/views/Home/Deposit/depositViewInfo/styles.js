@@ -1,6 +1,8 @@
+import { StyleSheet } from 'react-native';
+
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
-const style = {
+export default StyleSheet.create({
   fantomViewStyle: {
     height: DEVICE_HEIGHT,
   },
@@ -45,5 +47,4 @@ const style = {
     marginTop: DEVICE_HEIGHT * 0.03,
     alignItems: 'center',
   },
-};
-export default style;
+});

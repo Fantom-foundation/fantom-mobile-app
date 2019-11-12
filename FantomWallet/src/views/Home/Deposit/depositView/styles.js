@@ -1,6 +1,6 @@
-// import { WHITE_COLOR, DEVICE_WIDTH } from '~/common/constants';
+import { StyleSheet } from 'react-native';
 
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -15,5 +15,4 @@ const style = {
   //   height: 44,
   //   alignItems: 'center',
   // },
-};
-export default style;
+});

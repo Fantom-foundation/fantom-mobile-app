@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import styles from './styles';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
-import { NavigationService } from '~/navigation';
+import NavigationService from '~/navigation/helpers/NavigationService';
 
 const isIOS = Platform.OS === 'ios';
 

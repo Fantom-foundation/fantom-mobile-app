@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import { routes } from '~/navigation';
+import { routes } from '~/navigation/helpers';
 import Header from '~/components/Header/index';
 import { generateWallet as generateWalletAction } from '~/redux/keys/actions';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';

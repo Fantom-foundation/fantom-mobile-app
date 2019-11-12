@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { View, Image } from 'react-native';
 import DropdownAlert from 'react-native-dropdownalert';
 // Style
-import style from './style';
+import styles from './styles';
 // Component
 import DepositView from './depositView/index';
 // Image
@@ -17,16 +17,16 @@ export default () => {
   }
   const dropdown = useRef(null);
   return (
-    <View style={style.depositViewStyle}>
-      <View style={style.depositScreenStyle}>
-        <Image style={style.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
+    <View style={styles.depositViewStyle}>
+      <View style={styles.depositScreenStyle}>
+        <Image style={styles.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
         <DepositView renderToastNotification={renderToastNotification} />
       </View>
       <DropdownAlert
-          containerStyle={{ backgroundColor: 'rgb(0,168,251)' }}
-          ref={ref => (this.dropdown = ref)}
-          style={{ backgroundColor: 'red' }}
-        />
+        containerStyle={{ backgroundColor: 'rgb(0,168,251)' }}
+        ref={ref => (this.dropdown = ref)}
+        style={{ backgroundColor: 'red' }}
+      />
     </View>
   );
 }

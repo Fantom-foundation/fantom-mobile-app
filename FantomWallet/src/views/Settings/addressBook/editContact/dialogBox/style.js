@@ -1,4 +1,6 @@
-const style = {
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,
@@ -34,6 +36,4 @@ const style = {
     color: 'white',
     fontSize: 24,
   },
-};
-
-export default style;
+});

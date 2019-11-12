@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-import style from './style';
+import styles from './styles';
 
 type Props = {
   activeTabIndex: number,
@@ -32,7 +32,7 @@ export const WalletNavigationTab = ({
   return (
     <TouchableOpacity
       style={{
-        ...style.tabStyle,
+        ...styles.tabStyle,
         ...tabStyle,
         borderBottomColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
       }}
@@ -40,7 +40,7 @@ export const WalletNavigationTab = ({
     >
       <Text
         style={{
-          ...style.tabTextStyle,
+          ...styles.tabTextStyle,
           ...tabTextStyle,
           fontWeight: activeTabIndex === index ? 'bold' : 'normal',
         }}

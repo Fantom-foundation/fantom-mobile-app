@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { View, BackHandler } from 'react-native';
 
 /** * Active NavigationIcons */
-import { routes } from '~/navigation';
+import { routes } from '~/navigation/helpers';
 import walletWhiteIcon from '~/images/WalletFilled.png';
 import sendWhiteIcon from '~/images/sendWhite.png';
 import depositWhiteIcon from '~/images/downloading_white.png';
@@ -11,7 +11,7 @@ import depositWhiteIcon from '~/images/downloading_white.png';
 /** * Color Constants */
 import { INACTIVE_TAB_COLOR } from '~/common/constants';
 
-import style from './styles';
+import styles from './styles';
 import Tab from './Tab';
 
 const TABS = [
@@ -59,7 +59,7 @@ const HomeNavigationBar = ({ navigation }: Props) => {
   const { index: activeTabIndex } = navigation.state;
 
   return (
-    <View style={style.navigationTabStyle}>
+    <View style={styles.navigationTabStyle}>
       {TABS.map((tabIfo, index) => (
         <Tab
           key={index}

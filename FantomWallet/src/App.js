@@ -14,7 +14,8 @@ import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native'
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { RootNavigator, NavigationService } from '~/navigation'
+import RootNavigator from '~/navigation/RootNavigator';
+import { NavigationService } from '~/navigation/helpers'
 import { store, persistor } from '~/redux/store';
 
 // from debug network

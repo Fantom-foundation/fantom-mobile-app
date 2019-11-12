@@ -1,6 +1,8 @@
+import { StyleSheet } from 'react-native';
+
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
-const style = {
+export default StyleSheet.create({
   billAmountViewStyle: {
     backgroundColor: 'transparent',
   },
@@ -62,5 +64,4 @@ const style = {
     color: '#fff',
     fontFamily: 'SFProDisplay-Regular',
   },
-};
-export default style;
+});

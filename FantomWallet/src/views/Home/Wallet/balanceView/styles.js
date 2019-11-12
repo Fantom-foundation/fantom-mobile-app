@@ -1,7 +1,8 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
-const style = {
+
+export default StyleSheet.create({
   fantomBalanceView: {
     backgroundColor: 'rgb(44,52,58)',
     height: 150,
@@ -36,5 +37,4 @@ const style = {
     alignSelf: 'center',
     color: '#fff',
   },
-};
-export default style;
+});

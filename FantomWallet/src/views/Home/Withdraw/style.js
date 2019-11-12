@@ -1,9 +1,9 @@
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 const isAndroid = Platform.OS === 'android';
 
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     height: DEVICE_HEIGHT,
     width: DEVICE_WIDTH,
@@ -136,5 +136,4 @@ const style = {
     marginTop: DEVICE_HEIGHT * 0.1,
     alignItems: 'center',
   },
-};
-export default style;
+});

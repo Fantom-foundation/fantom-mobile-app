@@ -1,8 +1,8 @@
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 
 const isIOS = Platform.OS === 'ios';
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
     backgroundColor: 'rgb(14,14,18)',
@@ -72,6 +72,4 @@ const style = {
     opacity: isIOS ? 0.03 : 0.02,
     right: -((DEVICE_WIDTH * 0.4) / 2),
   },
-};
-
-export default style;
+});

@@ -1,6 +1,8 @@
+import { StyleSheet } from 'react-native';
+
 import { DEVICE_WIDTH } from '~/common/constants/index';
 
-const style = {
+export default StyleSheet.create({
   tabStyle: {
     flex: 1,
     height: 44,
@@ -10,5 +12,4 @@ const style = {
     borderBottomWidth: 3,
   },
   tabTextStyle: { fontSize: DEVICE_WIDTH < 320 ? 12 : 16 },
-};
-export default style;
+});

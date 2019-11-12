@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
-import style from './style';
+import styles from './styles';
 
 import BalanceView from '../balanceView';
 import TransactionView from '../transactionView';
@@ -38,9 +38,9 @@ export const WalletFantomScreen = ({
   };
 
   return (
-    <View style={style.mainContainerStyle}>
+    <View style={styles.mainContainerStyle}>
       <ScrollView
-        style={style.fantomViewStyle}
+        style={styles.fantomViewStyle}
         showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />}
       >

@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import {
   StyleSheet,
@@ -14,6 +14,23 @@ import {
 
 import Permissions from 'react-native-permissions';
 import { RNCamera as Camera } from 'react-native-camera';
+
+type Props = {
+  onRead?: () => void,
+  reactivate?: boolean,
+  reactivateTimeout?: number,
+  fadeIn?: boolean,
+  showMarker?: boolean,
+  cameraType?: 'front' | 'back',
+  customMarker?: any,
+  containerStyle?: any,
+  cameraStyle?: any,
+  notAuthorizedView?: any,
+  permissionDialogTitle?: string,
+  permissionDialogMessage?: string,
+  checkAndroid6Permissions?: boolean,
+  pendingAuthorizationView?: any,
+}
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -54,7 +71,7 @@ const styles = StyleSheet.create({
 const PERMISSION_AUTHORIZED = 'authorized';
 const CAMERA_PERMISSION = 'camera';
 
-export default class QRCodeScanner extends Component {
+export default class QRCodeScanner extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,6 +86,7 @@ export default class QRCodeScanner extends Component {
   }
 
   componentWillMount() {
+    const { checkAndroid6Permissions, permissionDialogTitle, permissionDialogMessage } = this.props;
     if (Platform.OS === 'ios') {
       Permissions.request(CAMERA_PERMISSION).then(response => {
         this.setState({
@@ -76,10 +94,10 @@ export default class QRCodeScanner extends Component {
           isAuthorizationChecked: true,
         });
       });
-    } else if (Platform.OS === 'android' && this.props.checkAndroid6Permissions) {
+    } else if (Platform.OS === 'android' && checkAndroid6Permissions) {
       PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
-        title: this.props.permissionDialogTitle,
-        message: this.props.permissionDialogMessage,
+        title: permissionDialogTitle,
+        message: permissionDialogMessage,
       }).then(granted => {
         const isAuthorized =
           Platform.Version >= 23
@@ -94,10 +112,12 @@ export default class QRCodeScanner extends Component {
   }
 
   componentDidMount() {
-    if (this.props.fadeIn) {
+    const { fadeIn } = this.props;
+    const { fadeInOpacity } = this.state;
+    if (fadeIn) {
       Animated.sequence([
         Animated.delay(1000),
-        Animated.timing(this.state.fadeInOpacity, {
+        Animated.timing(fadeInOpacity, {
           toValue: 1,
           easing: Easing.inOut(Easing.quad),
         }),
@@ -110,20 +130,23 @@ export default class QRCodeScanner extends Component {
   }
 
   _handleBarCodeRead(e) {
-    if (!this.state.scanning) {
+    const { onRead, reactivateTimeout, reactivate } = this.props;
+    const { scanning } = this.state;
+    if (!scanning) {
       // Vibration.vibrate();
       this._setScanning(true);
-      this.props.onRead(e);
-      if (this.props.reactivate) {
-        setTimeout(() => this._setScanning(false), this.props.reactivateTimeout);
+      onRead(e);
+      if (reactivate) {
+        setTimeout(() => this._setScanning(false), reactivateTimeout);
       }
     }
   }
 
   _renderCameraMarker() {
-    if (this.props.showMarker) {
-      if (this.props.customMarker) {
-        return this.props.customMarker;
+    const { showMarker, customMarker } = this.props;
+    if (showMarker) {
+      if (customMarker) {
+        return customMarker;
       }
       return (
         <View style={styles.rectangleContainer}>
@@ -135,21 +158,22 @@ export default class QRCodeScanner extends Component {
   }
 
   _renderCamera() {
-    const { notAuthorizedView, pendingAuthorizationView, cameraType } = this.props;
-    const { isAuthorized, isAuthorizationChecked } = this.state;
+    const { notAuthorizedView, pendingAuthorizationView,
+      cameraType, fadeIn, cameraStyle } = this.props;
+    const { isAuthorized, isAuthorizationChecked, fadeInOpacity } = this.state;
     if (isAuthorized) {
-      if (this.props.fadeIn) {
+      if (fadeIn) {
         return (
           <Animated.View
             style={{
-              opacity: this.state.fadeInOpacity,
+              opacity: fadeInOpacity,
               backgroundColor: 'transparent',
             }}
           >
             <Camera
-              style={[styles.camera, this.props.cameraStyle]}
+              style={[styles.camera, cameraStyle]}
               onBarCodeRead={e => this._handleBarCodeRead(e)}
-              type={this.props.cameraType}
+              type={cameraType}
             >
               {this._renderCameraMarker()}
             </Camera>
@@ -159,7 +183,7 @@ export default class QRCodeScanner extends Component {
       return (
         <Camera
           type={cameraType}
-          style={[styles.camera, this.props.cameraStyle]}
+          style={[styles.camera, cameraStyle]}
           onBarCodeRead={e => this._handleBarCodeRead(e)}
         >
           {this._renderCameraMarker()}
@@ -177,33 +201,15 @@ export default class QRCodeScanner extends Component {
   }
 
   render() {
+    const { containerStyle } = this.props;
     return (
-      <View style={[styles.mainContainer, this.props.containerStyle]}>{this._renderCamera()}</View>
+      <View style={[styles.mainContainer, containerStyle]}>{this._renderCamera()}</View>
     );
   }
 }
 
-QRCodeScanner.propTypes = {
-  onRead: PropTypes.func,
-  reactivate: PropTypes.bool,
-  reactivateTimeout: PropTypes.number,
-  fadeIn: PropTypes.bool,
-  showMarker: PropTypes.bool,
-  cameraType: PropTypes.oneOf(['front', 'back']),
-  customMarker: PropTypes.element,
-  containerStyle: PropTypes.any,
-  cameraStyle: PropTypes.any,
-  topContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]), // eslint-disable-line
-  bottomContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]), // eslint-disable-line
-  notAuthorizedView: PropTypes.element,
-  permissionDialogTitle: PropTypes.string,
-  permissionDialogMessage: PropTypes.string,
-  checkAndroid6Permissions: PropTypes.bool,
-  pendingAuthorizationView: PropTypes.node,
-};
-
 QRCodeScanner.defaultProps = {
-  onRead: () => {},
+  onRead: () => { },
   reactivate: false,
   reactivateTimeout: 0,
   fadeIn: true,

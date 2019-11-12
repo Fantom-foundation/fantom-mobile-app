@@ -1,4 +1,6 @@
-const style = {
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
   buttonStyle: {
     backgroundColor: 'rgb(63,108,175)',
     // padding: 10,
@@ -13,5 +15,4 @@ const style = {
     // fontFamily: 'Times New Roman',
     fontWeight: 'bold',
   },
-};
-export default style;
+});

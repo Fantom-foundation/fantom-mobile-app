@@ -1,6 +1,8 @@
+import { StyleSheet } from 'react-native'
+
 import { WHITE_COLOR, DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     height: DEVICE_HEIGHT,
     backgroundColor: WHITE_COLOR,
@@ -16,5 +18,4 @@ const style = {
     height: 44,
     alignItems: 'center',
   },
-};
-export default style;
+})

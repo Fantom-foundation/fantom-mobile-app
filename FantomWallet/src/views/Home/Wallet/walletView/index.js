@@ -1,10 +1,19 @@
+// @flow
 import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
-import style from './style';
+import type { TransactionT } from '~/redux/wallet/actions';
+import styles from './styles';
 import WalletViewInfo from '../walletViewInfo';
+
+type Props = {
+  balance: string,
+  transactionData: Array<TransactionT>,
+  isLoading: boolean,
+  navigation: any,
+  onRefresh: () => void,
+}
 
 export const WalletNavigationBar = ({
   balance,
@@ -12,7 +21,7 @@ export const WalletNavigationBar = ({
   isLoading,
   navigation,
   onRefresh,
-}) => {
+}: Props) => {
   const tabRenderInfo = 'Point';
 
   // coinst handleSelectedTab = (index, tabRenderInfo) => {
@@ -20,8 +29,8 @@ export const WalletNavigationBar = ({
   // }
 
   return (
-    <View style={style.mainContainerStyle}>
-      <View style={style.tabInfoStyle}>
+    <View style={styles.mainContainerStyle}>
+      <View style={styles.tabInfoStyle}>
         <WalletViewInfo
           navigation={navigation}
           selectedTab={tabRenderInfo}
@@ -39,11 +48,4 @@ const mapStateToProps = state => ({
   publicKey: state.keys.publicKey,
 });
 
-WalletNavigationBar.propTypes = {
-  balance: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  transactionData: PropTypes.array,
-  isLoading: PropTypes.bool,
-  navigation: PropTypes.object,
-  onRefresh: PropTypes.func,
-};
 export default connect(mapStateToProps)(WalletNavigationBar);

@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { routes } from '~/navigation';
+import { routes } from '~/navigation/helpers';
 import Header from '~/components/Header';
 import styles from './styles';
 import Address from './address/index';

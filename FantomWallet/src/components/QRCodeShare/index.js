@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import style from './style';
+import styles from './styles';
 import QRGenerator from '~/components/QRCodeGenerator';
 
 /**
@@ -23,9 +23,9 @@ class QRCodeShare extends PureComponent {
   renderQRLinkContainer(qrLink) {
     if (qrLink && qrLink !== '' && qrLink !== undefined && qrLink !== null) {
       return (
-        <TouchableOpacity onPress={() => this.props.copyAddress()} style={style.qrLinkViewStyle}>
+        <TouchableOpacity onPress={() => this.props.copyAddress()} style={styles.qrLinkViewStyle}>
           <MaterialIcons name="content-copy" color="rgb(0,177,251)" size={16} />
-          <Text style={style.qrLinkTextStyle}> {qrLink}</Text>
+          <Text style={styles.qrLinkTextStyle}> {qrLink}</Text>
         </TouchableOpacity>
       );
     }
@@ -37,9 +37,9 @@ class QRCodeShare extends PureComponent {
 
     const titleText = 'Address QR Code';
     return (
-      <View style={style.containerViewStyle}>
+      <View style={styles.containerViewStyle}>
         {/* QR code */}
-        <View style={style.qrGeneratorstyle}>
+        <View style={styles.qrGeneratorstyle}>
           <QRGenerator
             ref={refObj => (this.generator = refObj)}
             titleText={titleText}

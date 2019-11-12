@@ -1,9 +1,9 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
-const style = {
+export default StyleSheet.create({
   wrapper: {
     height: 7,
     width: deviceWidth,
@@ -11,6 +11,4 @@ const style = {
     marginTop: deviceHeight * 0.01,
     borderWidth: 0.1,
   },
-};
-
-export default style;
+});

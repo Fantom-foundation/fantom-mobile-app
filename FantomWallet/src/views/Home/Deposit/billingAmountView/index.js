@@ -1,7 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import style from './style';
+import styles from './styles';
 
 type Props = {
   headerText: string,
@@ -16,8 +16,8 @@ type Props = {
 const BillingAmountScreen = ({
   headerText,
   onAmountChange,
-  onTextFieldFocus = () => {},
-  onTextFieldBlur = () => {},
+  onTextFieldFocus = () => { },
+  onTextFieldBlur = () => { },
 }: Props) => {
   const [amount, setAmount] = useState('0');
 
@@ -27,14 +27,14 @@ const BillingAmountScreen = ({
   };
 
   return (
-    <View style={style.billAmountViewStyle}>
-      <View style={style.billingAmtContainer}>
+    <View style={styles.billAmountViewStyle}>
+      <View style={styles.billingAmtContainer}>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={style.inputTextHeading}>Billing Amount</Text>
+          <Text style={styles.inputTextHeading}>Billing Amount</Text>
         </View>
-        <View style={style.textInputContainer}>
+        <View style={styles.textInputContainer}>
           <TextInput
-            style={style.enteredTextStyle}
+            style={styles.enteredTextStyle}
             placeholderTextColor="rgba( 255, 255, 255, 0.2)"
             autoCorrect={false}
             onChangeText={_onAmountChange}
@@ -46,8 +46,8 @@ const BillingAmountScreen = ({
             autoCapitalize="none"
             underlineColorAndroid="transparent"
           />
-          <View style={style.ftmViewStyle}>
-            <Text style={style.ftmLabelStyle}>{headerText}</Text>
+          <View style={styles.ftmViewStyle}>
+            <Text style={styles.ftmLabelStyle}>{headerText}</Text>
           </View>
         </View>
       </View>

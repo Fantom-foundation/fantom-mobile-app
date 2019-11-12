@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-import style from './style';
+import styles from './styles';
 
 type Props = {
   activeTabIndex: number,
@@ -29,24 +29,24 @@ const DepositNavigationTab = ({
   inActiveTabColor,
   handleSelectedTab,
 }: Props) => (
-  <TouchableOpacity
-    style={{
-      ...style.tabStyle,
-      ...tabStyle,
-      borderBottomColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
-    }}
-    onPress={() => handleSelectedTab(index, tabIfo.tabRenderInfo)}
-  >
-    <Text
+    <TouchableOpacity
       style={{
-        ...style.tabTextStyle,
-        ...tabTextStyle,
-        fontWeight: activeTabIndex === index ? 'bold' : 'normal',
+        ...styles.tabStyle,
+        ...tabStyle,
+        borderBottomColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
       }}
+      onPress={() => handleSelectedTab(index, tabIfo.tabRenderInfo)}
     >
-      {tabIfo.tabRenderInfo}
-    </Text>
-  </TouchableOpacity>
-);
+      <Text
+        style={{
+          ...styles.tabTextStyle,
+          ...tabTextStyle,
+          fontWeight: activeTabIndex === index ? 'bold' : 'normal',
+        }}
+      >
+        {tabIfo.tabRenderInfo}
+      </Text>
+    </TouchableOpacity>
+  );
 
 export default DepositNavigationTab;

@@ -1,4 +1,6 @@
-const styles = {
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
   mainViewStyle: {
     flex: 1,
   },
@@ -26,6 +28,4 @@ const styles = {
     height: 23,
     tintColor: 'grey',
   },
-};
-
-export default styles;
+});

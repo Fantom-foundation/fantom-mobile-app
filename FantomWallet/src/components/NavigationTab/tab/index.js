@@ -2,7 +2,7 @@
 import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
 
-import style from './styles';
+import styles from './styles';
 
 type Props = {
   activeTabIndex: number,
@@ -26,15 +26,15 @@ const Tab = ({
   tabIfo,
   handleSelectedTab,
 }: Props) => (
-  <TouchableOpacity
-    style={{
-      ...style.tabStyle,
-      backgroundColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
-    }}
-    onPress={() => handleSelectedTab(tabIfo.route)}
-  >
-    <Image source={tabIfo.icon} resizeMode="contain" style={style.tabIconStyle} />
-  </TouchableOpacity>
-);
+    <TouchableOpacity
+      style={{
+        ...styles.tabStyle,
+        backgroundColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
+      }}
+      onPress={() => handleSelectedTab(tabIfo.route)}
+    >
+      <Image source={tabIfo.icon} resizeMode="contain" style={styles.tabIconStyle} />
+    </TouchableOpacity>
+  );
 
 export default Tab;

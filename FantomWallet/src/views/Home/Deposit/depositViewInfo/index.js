@@ -1,3 +1,5 @@
+// @flow
+/* eslint-disable no-return-assign */
 // Library
 import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, View, Text, Keyboard, Clipboard, TouchableOpacity } from 'react-native';
@@ -6,16 +8,21 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import DropdownAlert from 'react-native-dropdownalert';
 
 // Style
-import style from './style';
+import styles from './styles';
 // Components
 import QRCodeShare from '~/components/QRCodeShare';
 import BillingAmountScreen from '../billingAmountView/index';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
+type Props = {
+  publicKey: string,
+  renderToastNotification: (string) => void,
+}
+
 /**
  * DepositViewInfo: This component is meant for redering deposit screen related information.
  */
-export const DepositViewInfo = ({ publicKey, renderToastNotification }) => {
+export const DepositViewInfo = ({ publicKey, renderToastNotification }: Props) => {
   const [amount, setAmount] = useState('');
   const [qrAddress, setQrAddress] = useState('');
   let scrollView = useRef(null);
@@ -37,7 +44,7 @@ export const DepositViewInfo = ({ publicKey, renderToastNotification }) => {
   };
 
   const onTextFieldFocus = () => {
-    let moveBy = 930 - DEVICE_HEIGHT;
+    const moveBy = 930 - DEVICE_HEIGHT;
     if (moveBy > 0) {
       scrollView.scrollTo({ x: 0, y: moveBy, animated: true });
     }
@@ -52,12 +59,12 @@ export const DepositViewInfo = ({ publicKey, renderToastNotification }) => {
   const onShare = () => qrcode.shareQR();
 
   const qrLink = qrAddress;
-  let headerText = 'FTM';
+  const headerText = 'FTM';
 
   return (
     <ScrollView
       ref={scroll => (scrollView = scroll)}
-      style={style.fantomViewStyle}
+      style={styles.fantomViewStyle}
       showsVerticalScrollIndicator={false}
     >
       <QRCodeShare
@@ -72,13 +79,13 @@ export const DepositViewInfo = ({ publicKey, renderToastNotification }) => {
         onTextFieldBlur={onTextFieldBlur}
         headerText={headerText}
       />
-      <View style={style.confirmContainer}>
-        <TouchableOpacity style={style.confirmButtonOuterContainer} onPress={onShare}>
-          <View style={style.confirmButtonInnerContainer}>
+      <View style={styles.confirmContainer}>
+        <TouchableOpacity style={styles.confirmButtonOuterContainer} onPress={onShare}>
+          <View style={styles.confirmButtonInnerContainer}>
             <EvilIcons name="share-apple" color="#FFF" size={DEVICE_WIDTH * 0.09} />
           </View>
         </TouchableOpacity>
-        <Text style={style.confirmTextStyle}>Share</Text>
+        <Text style={styles.confirmTextStyle}>Share</Text>
       </View>
 
       <View style={{ height: DEVICE_HEIGHT * 0.15, marginBottom: 10 }} />

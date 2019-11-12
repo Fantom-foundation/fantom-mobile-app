@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import { routes } from '~/navigation';
+import { routes } from '~/navigation/helpers';
 import Header from '~/components/Header/index';
 import Loading from '~/components/general/Loader';
 import { DEVICE_HEIGHT, DEVICE_WIDTH, GAS_PRICE } from '~/common/constants';

@@ -1,7 +1,7 @@
-// Components
+import { StyleSheet } from 'react-native';
 import { DEVICE_HEIGHT } from '~/common/constants';
 
-const style = {
+export default StyleSheet.create({
   mainViewStyle: {
     flex: 1,
     marginTop: 45,
@@ -36,6 +36,4 @@ const style = {
     fontFamily: 'SFProDisplay-Regular',
     fontSize: 12,
   },
-};
-
-export default style;
+});

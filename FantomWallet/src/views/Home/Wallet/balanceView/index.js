@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { toFixed } from '~/utils/converts';
-import style from './style';
+import styles from './styles';
 
 type Props = {
   balance: string,
@@ -16,12 +16,12 @@ export const BalanceView = ({ balance }: Props) => {
   const ftmBalance = toFixed(balance, 4);
 
   return (
-    <View style={style.fantomBalanceView}>
-      <View style={style.balanceContainer}>
-        <Text style={style.amountHeadingStyle}>Amount</Text>
+    <View style={styles.fantomBalanceView}>
+      <View style={styles.balanceContainer}>
+        <Text style={styles.amountHeadingStyle}>Amount</Text>
       </View>
-      <View style={style.balanceViewText}>
-        <Text numberOfLines={1} style={style.balanceUnitTextStyle}>
+      <View style={styles.balanceViewText}>
+        <Text numberOfLines={1} style={styles.balanceUnitTextStyle}>
           {ftmBalance} FTM
         </Text>
       </View>

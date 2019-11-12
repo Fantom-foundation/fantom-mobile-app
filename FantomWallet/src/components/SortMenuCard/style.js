@@ -1,8 +1,8 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
-const style = {
+export default StyleSheet.create({
   listContainerStyle: {
     position: 'absolute',
     backgroundColor: 'white',
@@ -61,6 +61,4 @@ const style = {
     color: '#EEBD12',
     fontSize: 28,
   },
-};
-
-export default style;
+});

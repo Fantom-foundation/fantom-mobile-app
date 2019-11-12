@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import { routes } from '~/navigation';
+import { routes } from '~/navigation/helpers';
 import WalletScreen from '~/views/Home/Wallet';
 import WithdrawScreen from '~/views/Home/Withdraw';
 import DepositScreen from '~/views/Home/Deposit';

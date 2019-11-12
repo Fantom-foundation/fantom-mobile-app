@@ -1,8 +1,9 @@
+import { StyleSheet } from 'react-native';
 import { DEVICE_HEIGHT, DEVICE_WIDTH, iPhoneXHeight } from '~/common/constants';
 
 const isPhoneX = DEVICE_HEIGHT >= iPhoneXHeight;
 
-const style = {
+export default StyleSheet.create({
   mainContainerStyle: {
     flex: 1,
     backgroundColor: 'black',
@@ -23,5 +24,4 @@ const style = {
     alignItems: 'center',
     backgroundColor: 'black',
   },
-};
-export default style;
+});
