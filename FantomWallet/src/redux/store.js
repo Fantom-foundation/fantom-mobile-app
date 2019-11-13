@@ -13,13 +13,14 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const composeEnhancers =
+  // eslint-disable-next-line no-undef
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || window.__REDUX_DEVTOOLS_EXTENSION__ || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(
   persistedReducer,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
+  composeEnhancers(applyMiddleware(sagaMiddleware)),
 );
 
 export const persistor = persistStore(store, { timeout: 1000 });

@@ -35,7 +35,7 @@ const RootNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-  }
+  },
 );
 
 export default createAppContainer(RootNavigator);

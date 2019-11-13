@@ -30,8 +30,8 @@ const QRGenerator = ({ qrLink, titleText, billingAmount }: Props, ref) => {
       viewShot.capture().then(uri => {
         const message = '';
         Share.open({ url: uri, title: 'Fantom', message })
-          .then(() => {})
-          .catch(() => {});
+          .then(() => { })
+          .catch(() => { });
       });
     },
   }));
@@ -51,7 +51,7 @@ const QRGenerator = ({ qrLink, titleText, billingAmount }: Props, ref) => {
         padding: 15,
         backgroundColor: 'rgb(14,14,18)',
       };
-      let logoImgStyle = {
+      const logoImgStyle = {
         alignSelf: 'center',
         backgroundColor: 'rgb(14,14,18)',
         flex: 1,

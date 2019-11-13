@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 // eslint-disable-next-line import/first
-import { CheckMnemonic } from './index';
+import { CheckMnemonicContainer } from './index';
 
 test('renders correctly', () => {
-  const wrapper = shallow(<CheckMnemonic generateWallet={() => {}} />);
+  const wrapper = shallow(<CheckMnemonicContainer generateWallet={() => { }} />);
   expect(wrapper).toMatchSnapshot();
 });

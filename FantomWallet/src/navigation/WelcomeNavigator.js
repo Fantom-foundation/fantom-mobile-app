@@ -22,7 +22,7 @@ const WelcomeNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-  }
+  },
 );
 
 export default WelcomeNavigator;

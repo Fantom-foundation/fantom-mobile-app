@@ -13,7 +13,7 @@ test('renders correctly', () => {
       tabIfo={{
         tabRenderInfo: 'text',
       }}
-    />
+    />,
   );
   expect(wrapper).toMatchSnapshot();
 });

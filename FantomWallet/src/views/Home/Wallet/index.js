@@ -27,7 +27,7 @@ type Props = {
 /**
  * To Display WalletTab related tasks
  */
-export const WalletScreen = ({
+export const Wallet = ({
   balance,
   publicKey,
   history,
@@ -80,5 +80,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(WalletScreen);
+  mapDispatchToProps,
+)(Wallet);

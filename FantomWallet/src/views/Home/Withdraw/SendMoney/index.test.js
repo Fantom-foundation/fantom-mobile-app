@@ -2,11 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 // eslint-disable-next-line import/first
-import { SendMoney } from './index';
+import { SendMoneyContainer } from './index';
 
 test('renders correctly', () => {
   const wrapper = shallow(
-    <SendMoney
+    <SendMoneyContainer
       balance="123.123"
       isLoading={false}
       navigation={{
@@ -20,7 +20,7 @@ test('renders correctly', () => {
           },
         },
       }}
-    />
+    />,
   );
   expect(wrapper).toMatchSnapshot();
 });

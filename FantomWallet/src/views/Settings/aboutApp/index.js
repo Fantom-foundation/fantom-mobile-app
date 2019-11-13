@@ -1,13 +1,15 @@
+// @flow
 /* eslint-disable global-require */
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Platform } from 'react-native';
-
 import VersionCheck from 'react-native-version-check';
+
+import { NavigationService } from '~/navigation/helpers';
 import Header from '~/components/Header/index';
 
 import styles from './styles';
 
-const AboutApp = ({ navigation }) => {
+const AboutApp = () => {
   const [version, setVersion] = useState('0.0');
   const [build, setBuild] = useState('0.0');
   const [packageName, setPackageName] = useState('com.foundation');
@@ -18,7 +20,7 @@ const AboutApp = ({ navigation }) => {
     setPackageName(VersionCheck.getPackageName());
   });
 
-  const onLeftIconPress = () => navigation.goBack();
+  const onLeftIconPress = () => NavigationService.pop();
 
   return (
     <View style={styles.container}>

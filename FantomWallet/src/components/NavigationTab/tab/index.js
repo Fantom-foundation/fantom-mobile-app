@@ -9,7 +9,7 @@ type Props = {
   index: number,
   activeTabColor: string,
   inActiveTabColor: string,
-  tabIfo: {
+  tabInfo: {
     route: string,
     icon: string,
   },
@@ -23,7 +23,7 @@ const Tab = ({
   index,
   activeTabColor,
   inActiveTabColor,
-  tabIfo,
+  tabInfo,
   handleSelectedTab,
 }: Props) => (
     <TouchableOpacity
@@ -31,9 +31,9 @@ const Tab = ({
         ...styles.tabStyle,
         backgroundColor: activeTabIndex === index ? activeTabColor : inActiveTabColor,
       }}
-      onPress={() => handleSelectedTab(tabIfo.route)}
+      onPress={() => handleSelectedTab(tabInfo.route)}
     >
-      <Image source={tabIfo.icon} resizeMode="contain" style={styles.tabIconStyle} />
+      <Image source={tabInfo.icon} resizeMode="contain" style={styles.tabIconStyle} />
     </TouchableOpacity>
   );
 

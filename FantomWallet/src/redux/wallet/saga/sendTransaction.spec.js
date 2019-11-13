@@ -25,7 +25,7 @@ const payload = {
   to: '0x4D36Be89CB8A3869C6003d0405408457B55954f2',
   value: '0.1',
   memo: 'test',
-  cbSuccess: () => {},
+  cbSuccess: () => { },
 };
 
 const transaction = {
@@ -48,7 +48,7 @@ it('just works!', () => {
         ...transaction,
         transactionId: '0x719fA54b602b811fBBeC3cEa2eb61f4d4E994576',
         transactionStatus: 'SUCCESS',
-      })
+      }),
     )
     .put(setLoadingSendTransaction(false))
     .run();
@@ -70,7 +70,7 @@ it('throw error', () => {
         ...transaction,
         transactionId: '',
         transactionStatus: 'FAILED',
-      })
+      }),
     )
     .put(setLoadingSendTransaction(false))
     .run();

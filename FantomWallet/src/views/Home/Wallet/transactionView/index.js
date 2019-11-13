@@ -23,7 +23,7 @@ type Props = {
 /**
  * TransactionView: This component is meant for rendering transactions done on particuler wallet.
  */
-export const TransactionView = ({ publicKey, isLoading, fantomTransactionArr = [] }: Props) => {
+export const TransactionViewContainer = ({ publicKey, isLoading, fantomTransactionArr = [] }: Props) => {
   const [openSortMenu, setOpenSortMenu] = useState(false);
   const data = [
     { key: 'All Payments', id: 0, sc: ALL_TRANSACTION },
@@ -119,5 +119,5 @@ const mapDispatchToProps = () => ({});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(TransactionView);
+  mapDispatchToProps,
+)(TransactionViewContainer);

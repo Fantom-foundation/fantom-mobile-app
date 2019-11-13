@@ -22,7 +22,7 @@ describe('scientificToDecimal correctly', () => {
 
 describe('maximum balance that a user can send', () => {
   jest.unmock('mathjs');
-  let math = require('mathjs');
+  const math = require('mathjs');
   math.subtract = jest.fn((subtractor, number) => subtractor - number);
   math.bignumber = jest.fn(number => number);
   test('in correct', () => {

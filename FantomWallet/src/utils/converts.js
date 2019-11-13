@@ -1,4 +1,4 @@
-let math = require('mathjs');
+const math = require('mathjs');
 const Web3 = require('web3');
 
 math.config({

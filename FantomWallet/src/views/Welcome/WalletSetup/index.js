@@ -2,7 +2,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
 
-import { routes } from '~/navigation/helpers';
+import { NavigationService, routes } from '~/navigation/helpers';
 import styles from './styles';
 
 /**
@@ -10,9 +10,9 @@ import styles from './styles';
  *  this component is rendered only if the user first time uses the app on Phone,
  *  through this screen user is navigated to fill captcha verification to generate key.
  */
-const WalletSetup = ({ navigation }) => {
-  const onCreateNewWallet = () => navigation.navigate(routes.root.CreateMnemonic);
-  const onRestoreWallet = () => navigation.navigate(routes.root.RecoverWallet);
+const WalletSetup = () => {
+  const onCreateNewWallet = () => NavigationService.navigate(routes.root.CreateMnemonic);
+  const onRestoreWallet = () => NavigationService.navigate(routes.root.RecoverWallet);
 
   return (
     <View style={styles.backgroundContainer}>
@@ -45,7 +45,7 @@ const WalletSetup = ({ navigation }) => {
               <TouchableOpacity
                 style={{ height: '100%', justifyContent: 'center' }}
                 onPress={() => {
-                  navigation.navigate('Terms');
+                  NavigationService.navigate('Terms');
                 }}
               >
                 <Text style={styles.footerText2}>Term of Service</Text>
@@ -54,7 +54,7 @@ const WalletSetup = ({ navigation }) => {
 
               <TouchableOpacity
                 style={{ height: '100%', justifyContent: 'center' }}
-                onPress={() => navigation.navigate('PrivacyPolicy')}
+                onPress={() => NavigationService.navigate('PrivacyPolicy')}
               >
                 <Text style={styles.footerText2}>Privacy Policy</Text>
               </TouchableOpacity>

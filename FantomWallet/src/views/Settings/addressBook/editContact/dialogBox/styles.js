@@ -8,7 +8,7 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'rgba(242,242,242,0.9)',
-    background: 'transparent',
+    // background: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
   },

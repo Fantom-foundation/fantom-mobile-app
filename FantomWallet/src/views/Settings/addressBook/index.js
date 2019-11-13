@@ -1,26 +1,20 @@
+/* eslint-disable no-restricted-syntax */
 // @flow
 import React, { useState } from 'react';
 import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  TextInput,
-  Alert,
-  StatusBar,
+  Text, View, TouchableOpacity,
+  Image, ScrollView, TextInput,
+  Alert, StatusBar,
 } from 'react-native';
 import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { routes } from '~/navigation/helpers';
+import { NavigationService, routes } from '~/navigation/helpers';
 import Header from '~/components/Header';
 import styles from './styles';
 import Address from './address/index';
-
 import whiteSearchIcon from '~/images/searchWhite.png';
 import BackgroundImage from '~/images/BackgroundIcon.png';
-
 import {
   addNewAddress as addNewAddressAction,
   toggleAddress as toggleAddressAction,
@@ -43,7 +37,7 @@ type Props = {
 /**
  * AddressBook: This component is meant for handling actions related to Address Book in app.
  */
-export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigation }: Props) => {
+export const AddressBookContainer = ({ addresses, toggleAddress, deleteAddress, navigation }: Props) => {
   const [addOrFavorite, setAddOrFavorite] = useState('add');
   const [displaySearch, setDisplaySearch] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -57,9 +51,8 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
     setSearchText('');
   };
 
-  const onRightIconPress = () => {
-    navigation.navigate(routes.root.EditContact);
-  };
+  const onRightIconPress = () => NavigationService.navigate(routes.root.EditContact);
+
 
   const onSelection = address => {
     const callbackFunc = navigation.getParam('onSelection', null);
@@ -69,15 +62,13 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
     }
   };
 
-  const rateChange = address => {
-    toggleAddress(address);
-  };
+  const rateChange = (address: string) => toggleAddress(address);
 
   const handleEditContact = (name, address) => {
-    navigation.navigate(routes.root.EditContact, { name, address });
+    NavigationService.navigate(routes.root.EditContact, { name, address });
   };
 
-  const deleteItem = address => {
+  const deleteItem = (address: string) => {
     Alert.alert('Confirm Dialog', 'Are you sure you want to delete this contact.', [
       { text: 'Cancel', onPress: () => { }, style: 'cancel' },
       {
@@ -91,8 +82,8 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
 
   const renderAddressList = () => {
     const isEditMode = navigation.getParam('isEditMode', false);
-    let addressListView = [];
-    let favoriteListView = [];
+    const addressListView = [];
+    const favoriteListView = [];
     const addressesStored = addresses;
     if (addressesStored) {
       const _addresses = {};
@@ -107,7 +98,7 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
         _addresses[obj.address] = obj;
       }
       for (const key in _addresses) {
-        if (_addresses.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(_addresses, key)) {
           const tempAddress = addresses[key];
           if (displaySearch && searchText !== '') {
             const _searchText = searchText.toLowerCase();
@@ -130,14 +121,14 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
               rateChange={rateChange}
               delete={deleteItem}
               handleEditContact={handleEditContact}
-            />
+            />,
           );
           if (tempAddress.isFavourite) {
             favoriteListView.push(
               <Address
                 key={key}
                 id={tempAddress.address}
-                isEditMode={isEditMode}
+                isEditMode={!!isEditMode}
                 onSelection={onSelection}
                 index={key}
                 name={tempAddress.name}
@@ -146,7 +137,7 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
                 rateChange={rateChange}
                 delete={deleteItem}
                 handleEditContact={handleEditContact}
-              />
+              />,
             );
           }
         }
@@ -161,7 +152,7 @@ export const AddressBook = ({ addresses, toggleAddress, deleteAddress, navigatio
   const renderMidButtons = () => {
     let addColor = styles.add;
     let favColor = styles.favorites;
-    let textStyle = { color: '#FFF', fontFamily: 'SFProDisplay-Semibold' };
+    const textStyle = { color: '#FFF', fontFamily: 'SFProDisplay-Semibold' };
 
     if (addOrFavorite === 'add') {
       addColor = { ...styles.add, backgroundColor: 'rgb(0,177,251)' };
@@ -261,5 +252,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(AddressBook);
+  mapDispatchToProps,
+)(AddressBookContainer);

@@ -8,7 +8,7 @@ type Props = {
   name: string,
   index: number,
   isClickable: boolean,
-  onClick: ({ name: string, index: number, isClickable: boolean }) => void,
+  onClick: ({ name: string, index: number, isClickable: boolean }) => () => void,
   isTop: boolean,
 };
 

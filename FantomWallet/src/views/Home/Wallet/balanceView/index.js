@@ -12,7 +12,7 @@ type Props = {
 /**
  * BalanceView: This component is meant for rendering balance of wallet on wallet screen.
  */
-export const BalanceView = ({ balance }: Props) => {
+export const BalanceViewContainer = ({ balance }: Props) => {
   const ftmBalance = toFixed(balance, 4);
 
   return (
@@ -29,4 +29,4 @@ export const BalanceView = ({ balance }: Props) => {
   );
 };
 
-export default BalanceView;
+export default BalanceViewContainer;

@@ -27,12 +27,12 @@ type State = {
 const initialState = {};
 
 function updateContact(state, action) {
-  let oldAddresses = state;
+  const oldAddresses = state;
   const addressKey = action.oldWalletAddress;
   const oldAddress = oldAddresses[addressKey];
   const newAddress = action.newWalletAddress;
   if (oldAddress) {
-    let updateAddressObject = {
+    const updateAddressObject = {
       ...oldAddress,
       address: action.newWalletAddress,
       name: action.name,
@@ -43,9 +43,7 @@ function updateContact(state, action) {
       ...oldAddresses,
       [newAddress]: updateAddressObject,
     };
-    return Object.assign({}, state, {
-      ...newAddresses,
-    });
+    return { ...state, ...newAddresses };
   }
   return state;
 }

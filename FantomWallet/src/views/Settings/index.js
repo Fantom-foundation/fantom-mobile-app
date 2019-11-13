@@ -12,6 +12,7 @@ import CustomerSupport from '~/images/CustomerSupport.png';
 import BackgroundIcon from '~/images/BackgroundIcon.png';
 // import PrivacyPolicy from '~/images/PrivacyPolicy.png';
 // import TermsOfServices from '~/images/TermsOfServices.png';
+import { NavigationService } from '~/navigation/helpers';
 // Styling
 import styles from './styles';
 
@@ -25,9 +26,9 @@ type Props = {
 /**
  * Settings: This component is meant for performing tasks related to app settings.
  */
-export const Settings = ({ navigation }: Props) => {
+export const SettingsContainer = ({ navigation }: Props) => {
   const onLeftIconPress = () => navigation.goBack();
-  const handleItem = navigationRoute => () => navigation.navigate(navigationRoute);
+  const handleItem = navigationRoute => () => NavigationService.navigate(navigationRoute);
 
   const renderOptionCard = (name, IconName, navigationRoute) => (
     <TouchableOpacity style={styles.cardContainer} onPress={handleItem(navigationRoute)}>
@@ -71,4 +72,4 @@ export const Settings = ({ navigation }: Props) => {
   );
 };
 
-export default Settings;
+export default SettingsContainer;

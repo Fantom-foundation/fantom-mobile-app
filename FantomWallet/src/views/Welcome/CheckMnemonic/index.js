@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import DropdownAlert from 'react-native-dropdownalert';
 
-import { routes } from '~/navigation/helpers';
+import { NavigationService, routes } from '~/navigation/helpers';
 import { generateWallet as generateWalletAction } from '~/redux/keys/actions';
 import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
@@ -27,14 +27,17 @@ import { ENUM_WORD } from './helpers';
 
 type Props = {
   navigation: any,
-  generateWallet: (string) => void
+  generateWallet: ({
+    mnemonic: string,
+    cb: () => void,
+  }) => any
 }
 
 /**
  * This component is designed to check recorded phrases.
  */
-export const CheckMnemonic = ({ navigation, generateWallet }: Props) => {
-  const dropdown = useRef(null);
+export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) => {
+  const dropdown = useRef<any>(null);
   const [mnemonic, setMnemonic] = useState([]);
   const [shuffledMnemonics, setShuffledMnemonic] = useState([]);
   const [verifyMnemonic, setVerifyMnemonic] = useState([]);
@@ -73,7 +76,7 @@ export const CheckMnemonic = ({ navigation, generateWallet }: Props) => {
 
     generateWallet({
       mnemonic: mnemonic.join(' ').toLowerCase(),
-      cb: () => navigation.navigate(routes.root.HomeScreen),
+      cb: () => NavigationService.navigate(routes.root.HomeScreen),
     });
   };
 
@@ -168,4 +171,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CheckMnemonic);
+)(CheckMnemonicContainer);

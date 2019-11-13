@@ -92,10 +92,10 @@ export const Helper = {
     });
   },
   uiRemoveItem(key) {
-    SInfo.removeItem(key, error => {}); //eslint-disable-line
+    SInfo.removeItem(key, error => { }); //eslint-disable-line
   },
   *removeItem(key) {
-    const removed = yield SInfo.removeItem(key, error => {}); //eslint-disable-line
+    const removed = yield SInfo.removeItem(key, error => { }); //eslint-disable-line
 
     return removed;
   },
@@ -108,7 +108,7 @@ export const Helper = {
       SInfo.multiGet(keys, stores => {
         stores.forEach((i, store) => {
           // get at each store's key/value so you can work with it
-          let key = store[i][0];
+          const key = store[i][0];
           //   let value = store[i][1];
           if (key !== 'userCredentials' && key !== 'isInitialSetupDone') {
             SInfo.removeItem(key);

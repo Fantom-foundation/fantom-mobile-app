@@ -6,7 +6,7 @@ import { WalletNavigationBar } from './index';
 
 test('renders correctly', () => {
   const wrapper = shallow(
-    <WalletNavigationBar balance="123.123" isLoading={false} onRefresh={() => {}} />
+    <WalletNavigationBar balance="123.123" isLoading={false} onRefresh={() => { }} />,
   );
   expect(wrapper).toMatchSnapshot();
 });

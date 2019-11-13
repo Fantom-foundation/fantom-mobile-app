@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { View, BackHandler } from 'react-native';
 
 /** * Active NavigationIcons */
-import { routes } from '~/navigation/helpers';
+import { NavigationService, routes } from '~/navigation/helpers';
 import walletWhiteIcon from '~/images/WalletFilled.png';
 import sendWhiteIcon from '~/images/sendWhite.png';
 import depositWhiteIcon from '~/images/downloading_white.png';
@@ -53,21 +53,21 @@ const HomeNavigationBar = ({ navigation }: Props) => {
   }, []);
 
   const handleSelectedTab = route => {
-    navigation.navigate(route);
+    NavigationService.navigate(route);
   };
 
   const { index: activeTabIndex } = navigation.state;
 
   return (
     <View style={styles.navigationTabStyle}>
-      {TABS.map((tabIfo, index) => (
+      {TABS.map((tabInfo, index) => (
         <Tab
-          key={index}
+          key={tabInfo.route}
           activeTabIndex={activeTabIndex}
           index={index}
           activeTabColor="rgb(0,177,251)"
           inActiveTabColor={INACTIVE_TAB_COLOR}
-          tabIfo={tabIfo}
+          tabInfo={tabInfo}
           handleSelectedTab={handleSelectedTab}
         />
       ))}

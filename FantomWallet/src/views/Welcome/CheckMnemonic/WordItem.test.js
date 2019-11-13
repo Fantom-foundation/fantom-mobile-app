@@ -6,7 +6,7 @@ import WordItem from './WordItem';
 
 test('renders correctly', () => {
   const wrapper = shallow(
-    <WordItem name="test" index={3} isClickable={false} onClick={() => {}} isTop={false} />
+    <WordItem name="test" index={3} isClickable={false} onClick={() => { }} isTop={false} />,
   );
   expect(wrapper).toMatchSnapshot();
 });

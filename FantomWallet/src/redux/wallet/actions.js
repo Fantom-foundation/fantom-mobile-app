@@ -11,7 +11,7 @@ export const types = {
 
 type Balance = {
   loading: boolean,
-  balance: string,
+  balance?: string,
 };
 
 export type TransactionT = {

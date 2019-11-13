@@ -4,6 +4,9 @@ import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 const isAndroid = Platform.OS === 'android';
 
 export default StyleSheet.create({
+  scroll: {
+    height: DEVICE_HEIGHT,
+  },
   mainContainerStyle: {
     height: DEVICE_HEIGHT,
     width: DEVICE_WIDTH,
@@ -95,11 +98,20 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  priceSubContainerColor: {
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(0,177,251)',
+  },
   priceTextStyle: {
     color: '#FFF',
     textAlign: 'center',
     fontFamily: 'SFProDisplay-Regular',
     fontSize: 14,
+  },
+  priceTextStyleAll: {
+    fontFamily: 'SFProDisplay-Semibold',
   },
   memoTextInputContainer: {
     height: 80,
@@ -136,4 +148,20 @@ export default StyleSheet.create({
     marginTop: DEVICE_HEIGHT * 0.1,
     alignItems: 'center',
   },
+
+  sendImage: {
+    height: DEVICE_WIDTH * 0.09,
+    width: DEVICE_WIDTH * 0.09,
+  },
+
+  qrCode: {
+    width: 25,
+    height: 25,
+  },
+  iconContact: {
+    width: 22,
+    height: 22,
+    marginRight: 3,
+  },
+
 });

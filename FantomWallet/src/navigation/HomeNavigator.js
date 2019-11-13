@@ -1,8 +1,10 @@
+// @flow
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import type { NavigationScreenProp, NavigationState } from 'react-navigation';
 
-import { routes } from '~/navigation/helpers';
+import { NavigationService, routes } from '~/navigation/helpers';
 import WalletScreen from '~/views/Home/Wallet';
 import WithdrawScreen from '~/views/Home/Withdraw';
 import DepositScreen from '~/views/Home/Deposit';
@@ -25,7 +27,7 @@ const HomeTabNavigator = createBottomTabNavigator(
   },
   {
     tabBarComponent: NavigationTab,
-  }
+  },
 );
 
 const HomeStackNavigator = createStackNavigator(
@@ -34,12 +36,12 @@ const HomeStackNavigator = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      header: ({ navigation }) => {
+      header: ({ navigation }: { navigation: NavigationScreenProp<NavigationState, *> }) => {
         const onRefresh = () => {
           store.dispatch(getBalance({ loading: true }));
           store.dispatch(getHistory());
         };
-        const toSettings = () => navigation.navigate(routes.root.Settings);
+        const toSettings = () => NavigationService.navigate(routes.root.Settings);
         return (
           <Header
             isRightBtnImage
@@ -62,7 +64,7 @@ const HomeStackNavigator = createStackNavigator(
         );
       },
     },
-  }
+  },
 );
 
 export default HomeStackNavigator;

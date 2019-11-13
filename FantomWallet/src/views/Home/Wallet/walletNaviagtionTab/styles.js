@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 import { DEVICE_WIDTH } from '~/common/constants';
 
 export default StyleSheet.create({
@@ -11,4 +11,4 @@ export default StyleSheet.create({
     borderBottomWidth: 3,
   },
   tabTextStyle: { fontSize: DEVICE_WIDTH < 320 ? 12 : 16 },
-})
+});

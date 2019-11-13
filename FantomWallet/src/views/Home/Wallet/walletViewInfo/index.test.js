@@ -6,7 +6,7 @@ import { WalletFantomScreen } from './index';
 
 test('renders correctly', () => {
   const wrapper = shallow(
-    <WalletFantomScreen balance="123.123" isLoading={false} onRefresh={() => {}} />
+    <WalletFantomScreen balance="123.123" isLoading={false} onRefresh={() => { }} />,
   );
   expect(wrapper).toMatchSnapshot();
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 // eslint-disable-next-line import/first
-import { AddressBook } from './index';
+import { AddressBookContainer } from './index';
 
 const navigation = {
   getParam: () => ({
@@ -12,12 +12,12 @@ const navigation = {
 
 test('renders correctly', () => {
   const wrapper = shallow(
-    <AddressBook
+    <AddressBookContainer
       addresses={{ '0x0': { address: '0x0' } }}
-      toggleAddress={() => {}}
-      deleteAddress={() => {}}
+      toggleAddress={() => { }}
+      deleteAddress={() => { }}
       navigation={navigation}
-    />
+    />,
   );
   expect(wrapper).toMatchSnapshot();
 });

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 import { DEVICE_HEIGHT } from '~/common/constants';
 
 export default StyleSheet.create({
@@ -9,4 +9,4 @@ export default StyleSheet.create({
     height: DEVICE_HEIGHT,
     backgroundColor: 'rgb(14,14,18)',
   },
-})
+});

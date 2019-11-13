@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable global-require */
 // Library
 import React, { useEffect, useState, useRef } from 'react';
@@ -15,17 +16,20 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import DropdownAlert from 'react-native-dropdownalert';
 
-import { routes } from '~/navigation/helpers';
+import { NavigationService, routes } from '~/navigation/helpers';
 // Components
 import styles from './styles';
 import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
 
+type Props = {
+  navigation: any
+}
 /**
  * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
  */
-export const CreateMnemonic = ({ navigation }) => {
-  let dropdown = useRef(null);
+export const CreateMnemonicContainer = ({ navigation }: Props) => {
+  const dropdown = useRef<any>(null);
   const [mnemonic, setMnemonic] = useState([]);
   const loading = !mnemonic.length;
 
@@ -39,13 +43,13 @@ export const CreateMnemonic = ({ navigation }) => {
   }, []);
 
   const onConfirmHandler = () => {
-    navigation.navigate(routes.root.CheckMnemonic, { mnemonic });
+    NavigationService.navigate(routes.root.CheckMnemonic, { mnemonic });
   };
 
   const copyToClipboard = () => {
     const string = mnemonic.join(', ').toLowerCase();
     Clipboard.setString(string);
-    dropdown.alertWithType('custom', 'COPIED', '');
+    dropdown.current.alertWithType('custom', 'COPIED', '');
   };
 
   return (
@@ -71,7 +75,7 @@ export const CreateMnemonic = ({ navigation }) => {
             mnemonic.length && (
               <View style={styles.textContainer}>
                 {mnemonic.map((textValue, i) => (
-                  <View key={i} style={styles.wordWrap}>
+                  <View key={`${i + 2}_${textValue}`} style={styles.wordWrap}>
                     <Text style={styles.text}>{textValue}</Text>
                   </View>
                 ))}
@@ -124,9 +128,9 @@ export const CreateMnemonic = ({ navigation }) => {
           }}
         />
       </View>
-      <DropdownAlert containerStyle={styles.dropdown} ref={ref => (dropdown = ref)} />
+      <DropdownAlert containerStyle={styles.dropdown} ref={dropdown} />
     </View>
   );
 };
 
-export default CreateMnemonic;
+export default CreateMnemonicContainer;

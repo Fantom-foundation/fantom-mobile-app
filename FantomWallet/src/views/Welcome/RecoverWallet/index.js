@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import { routes } from '~/navigation/helpers';
+import { NavigationService, routes } from '~/navigation/helpers';
 import Header from '~/components/Header/index';
 import { generateWallet as generateWalletAction } from '~/redux/keys/actions';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
@@ -28,7 +28,7 @@ type Props = {
   },
 };
 
-export const RecoverWallet = ({ generateWallet, navigation }: Props) => {
+export const RecoverWalletContainer = ({ generateWallet, navigation }: Props) => {
   const [mnemonic, setMnemonic] = useState('');
   const [errorText, setErrorText] = useState('');
 
@@ -59,7 +59,7 @@ export const RecoverWallet = ({ generateWallet, navigation }: Props) => {
     setErrorText('');
     generateWallet({
       mnemonic: _mnemonic,
-      cb: () => navigation.navigate(routes.root.HomeScreen),
+      cb: () => NavigationService.navigate(routes.root.HomeScreen),
     });
   };
 
@@ -142,5 +142,5 @@ export const RecoverWallet = ({ generateWallet, navigation }: Props) => {
 
 export default connect(
   null,
-  { generateWallet: generateWalletAction }
-)(RecoverWallet);
+  { generateWallet: generateWalletAction },
+)(RecoverWalletContainer);

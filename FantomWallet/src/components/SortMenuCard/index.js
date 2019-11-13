@@ -1,84 +1,58 @@
-import React, { Component } from 'react';
+// @flow
+import React from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
 
-/**
- * SortMenuCard: A generic component for displaying a list of sort menu.
- */
-class SortMenuCard extends Component {
-  constructor(props) {
-    super(props);
-    let dataObj;
-    if (this.props.data) {
-      dataObj = this.props.data;
-    }
-    this.state = {
-      selectedIndex: this.props.index || 0,
-      data: dataObj,
-    };
-    this.toggleHandler = this.toggleHandler.bind(this);
-  }
-
-  toggleHandler(index, item) {
-    this.props.handleSortMenu(item);
-  }
-
-  render() {
-    return (
-      <View
-        style={
-          this.props.type === 'withDraw' ? styles.listContainerStyle : styles.altListContainerStyle
-        }
-      >
-        <View style={styles.listStyle}>
-          <FlatList
-            data={this.state.data}
-            renderItem={({ item, index }) => (
-              <View style={styles.listItemStyle}>
-                <Text>{item.key}</Text>
-                <TouchableOpacity
-                  style={styles.listButtonStyle}
-                  onPress={() => this.toggleHandler(index, item)}
-                >
-                  <MaterialIcons
-                    name={
-                      this.state.selectedIndex === index
-                        ? 'radio-button-checked'
-                        : 'radio-button-unchecked'
-                    }
-                    style={
-                      this.state.selectedIndex === index
-                        ? styles.checkedButtonStyle
-                        : styles.uncheckedButtonStyle
-                    }
-                  />
-                </TouchableOpacity>
-              </View>
-            )}
-          />
-        </View>
-      </View>
-    );
-  }
+type Props = {
+  type: string,
+  data: Array<any>,
+  index: number,
+  handleSortMenu: (any) => void,
 }
 
 /**
- * Custom setting props to be passed for SortMenuCard display changes:
- *
+ * SortMenuCard: A generic component for displaying a list of sort menu.
  * type: Contains information of type of SortMenuCard.
  * data: Contains list of sort menu for SortMenuCard.
  * index: Contains number value for selected value from SortMenuCard.
  * handleSortMenu: Callback function to handle sorting opertion.
- *
  */
+const SortMenuCard = ({ data, index = 0, handleSortMenu, type }: Props) => (
+  <View
+    style={
+      type === 'withDraw' ? styles.listContainerStyle : styles.altListContainerStyle
+    }
+  >
+    <View style={styles.listStyle}>
+      <FlatList
+        data={data}
+        renderItem={({ item, index: _index }) => (
+          <View style={styles.listItemStyle}>
+            <Text>{item.key}</Text>
+            <TouchableOpacity
+              style={styles.listButtonStyle}
+              onPress={() => handleSortMenu(item)}
+            >
+              <MaterialIcons
+                name={
+                  index === _index
+                    ? 'radio-button-checked'
+                    : 'radio-button-unchecked'
+                }
+                style={
+                  index === _index
+                    ? styles.checkedButtonStyle
+                    : styles.uncheckedButtonStyle
+                }
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+      />
+    </View>
+  </View>
+);
 
-SortMenuCard.propTypes = {
-  type: PropTypes.string,
-  data: PropTypes.array,
-  index: PropTypes.number,
-  handleSortMenu: PropTypes.func,
-};
 export default SortMenuCard;

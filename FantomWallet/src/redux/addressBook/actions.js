@@ -10,7 +10,7 @@ export const types = {
 export const addUpdateTimestampAddress = (
   address: string,
   name: string = '',
-  timeStamp: string
+  timeStamp: string,
 ) => ({
   type: types.ADD_UPDATE_ADDRESS,
   payload: {

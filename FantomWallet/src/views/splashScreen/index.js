@@ -21,7 +21,7 @@ type Props = {
 /**
  * SplashScreen: Splash Screen for app.
  */
-export const SplashScreen = ({ masterKey, privateKey, navigation }: Props) => {
+export const SplashScreenContainer = ({ masterKey, privateKey, navigation }: Props) => {
   /**
    * Render different screens based on user is already a registered user or not.
    */
@@ -58,4 +58,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-)(SplashScreen);
+)(SplashScreenContainer);

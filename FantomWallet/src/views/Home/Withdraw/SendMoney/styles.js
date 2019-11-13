@@ -160,6 +160,10 @@ export default StyleSheet.create({
     marginTop: DEVICE_HEIGHT * 0.06,
     alignItems: 'center',
   },
+
+  scpace: {
+    height: DEVICE_HEIGHT * 0.1,
+  },
   // mainContainerStyle: {
   //   flex: 1,
   //   backgroundColor: 'white',

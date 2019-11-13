@@ -54,7 +54,8 @@ module.exports = {
     "react/require-default-props": 0,
     "import/no-cycle": 0,
     "comma-dangle": 1,
-    "semi": 1
+    "semi": 1,
+    "react/no-unused-prop-types": 0
   },
   settings: {
     "import/resolver": {
@@ -73,4 +74,7 @@ module.exports = {
       }
     }
   },
+  env: {
+    "jest": true
+  }
 };

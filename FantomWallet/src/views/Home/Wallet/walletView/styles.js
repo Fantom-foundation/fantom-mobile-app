@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 import { WHITE_COLOR, DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 
@@ -18,4 +18,4 @@ export default StyleSheet.create({
     height: 44,
     alignItems: 'center',
   },
-})
+});

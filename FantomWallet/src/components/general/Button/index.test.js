@@ -8,10 +8,10 @@ test('renders correctly', () => {
     <Button
       activeOpacity={1}
       text="Click here"
-      onPress={() => {}}
+      onPress={() => { }}
       buttonStyle={{ backgroungColor: 'red' }}
       textStyle={{ padding: 2 }}
-    />
+    />,
   );
   expect(wrapper).toMatchSnapshot();
 });
