@@ -5,12 +5,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, View, Text, Keyboard, Clipboard, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 // Style
 import styles from './styles';
 // Components
-import QRCodeShare from '~/components/QRCodeShare';
-import BillingAmountScreen from '../BillingAmountView';
+import QRGenerator from '~/components/QRCode/QRCodeGenerator';
+import QRCodeSave from '~/components/QRCode/QRCodeSave';
+import BillingAmountScreen from '../BillingAmountView/index';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 type Props = {
@@ -54,7 +56,7 @@ export const DepositViewInfoContainer = ({ publicKey, renderToastNotification }:
   };
 
   // called on click of share button
-  const onShare = () => qrcode.current.shareQR();
+  const onShare = () => qrcode.current.onPress();
 
   const qrLink = qrAddress;
   const headerText = 'FTM';
@@ -65,12 +67,22 @@ export const DepositViewInfoContainer = ({ publicKey, renderToastNotification }:
       style={styles.fantomViewStyle}
       showsVerticalScrollIndicator={false}
     >
-      <QRCodeShare
-        ref={qrcode}
-        copyAddress={() => onCopyAddress()}
-        qrLink={qrLink}
-        billingAmount={amount}
-      />
+      {/* QR code */}
+      <View style={styles.qrGeneratorstyle}>
+        <QRGenerator
+          titleText="Address QR Code"
+          qrLink={qrLink}
+          billingAmount={amount}
+
+        />
+        <QRCodeSave content={qrLink} amount={amount} ref={qrcode} />
+      </View>
+      {qrLink ? (
+        <TouchableOpacity onPress={onCopyAddress} style={styles.qrLinkViewStyle}>
+          <MaterialIcons name="content-copy" color="rgb(0,177,251)" size={16} />
+          <Text style={styles.qrLinkTextStyle}>{qrLink}</Text>
+        </TouchableOpacity>
+      ) : null}
       <BillingAmountScreen
         onAmountChange={onAmountChange}
         onTextFieldFocus={onTextFieldFocus}
