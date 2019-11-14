@@ -16,7 +16,7 @@
     "ethereumjs-wallet": "^0.6.2",
     "expo": "^26.1.1",
     "hdkey": "^1.1.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.13",
     "node-libs-browser": "2.1.0",
     "react": "16.4.1",
     "react-native": "0.56.0",
