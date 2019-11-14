@@ -26,8 +26,8 @@ exports[`renders correctly 1`] = `
     handleSelectedTab={[Function]}
     inActiveTabColor="rgb(38,44,50)"
     index={0}
-    key="0"
-    tabIfo={
+    key="Wallet"
+    tabInfo={
       Object {
         "icon": Object {
           "testUri": "../../../src/images/WalletFilled.png",
@@ -42,8 +42,8 @@ exports[`renders correctly 1`] = `
     handleSelectedTab={[Function]}
     inActiveTabColor="rgb(38,44,50)"
     index={1}
-    key="1"
-    tabIfo={
+    key="Withdraw"
+    tabInfo={
       Object {
         "icon": Object {
           "testUri": "../../../src/images/sendWhite.png",
@@ -58,8 +58,8 @@ exports[`renders correctly 1`] = `
     handleSelectedTab={[Function]}
     inActiveTabColor="rgb(38,44,50)"
     index={2}
-    key="2"
-    tabIfo={
+    key="Deposit"
+    tabInfo={
       Object {
         "icon": Object {
           "testUri": "../../../src/images/downloading_white.png",
