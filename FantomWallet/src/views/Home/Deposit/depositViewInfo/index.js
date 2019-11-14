@@ -10,7 +10,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import styles from './styles';
 // Components
 import QRCodeShare from '~/components/QRCodeShare';
-import BillingAmountScreen from '../billingAmountView/index';
+import BillingAmountScreen from '../BillingAmountView';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 type Props = {

@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 // style
 import styles from './styles';
 // components
-import EmptyTransactionEntity from './transactionEntity/emptyTransactionEntity';
+import EmptyTransactionEntity from './EmptyTransactionEntity';
 import SortMenuCard from '~/components/SortMenuCard';
-import DisplayTransaction from './displayTransactions';
+import DisplayTransaction from './DisplayTransactions';
 import Loader from '~/components/general/Loader';
 import sortMenuIcon from '~/images/arrow_With_bar.png';
 

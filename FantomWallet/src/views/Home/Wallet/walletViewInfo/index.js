@@ -4,8 +4,8 @@ import { ScrollView, View, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 
-import BalanceView from '../balanceView';
-import TransactionView from '../transactionView';
+import BalanceView from '../BalanceView';
+import TransactionView from '../TransactionView';
 import { DEVICE_HEIGHT } from '~/common/constants';
 import type { TransactionT } from '~/redux/wallet/actions';
 

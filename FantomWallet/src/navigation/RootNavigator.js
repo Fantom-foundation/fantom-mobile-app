@@ -7,7 +7,7 @@ import TermsConditions from '~/views/Other/TermsConditions';
 import AddressBook from '~/views/Settings/AddressBook';
 import QRScanner from '~/components/QRCodeScanner/view';
 import QRGenerator from '~/components/QRCodeGenerator';
-import EditContact from '~/views/Settings/AddressBook/editContact';
+import EditContact from '~/views/Settings/AddressBook/EditContact';
 import SendMoney from '~/views/Home/Withdraw/SendMoney';
 import Settings from '~/views/Settings';
 import AboutApp from '~/views/Settings/AboutApp';

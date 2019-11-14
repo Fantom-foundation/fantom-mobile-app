@@ -9,7 +9,7 @@ import {
 } from '~/redux/wallet/actions';
 import styles from './styles';
 // components
-import WalletView from './walletView';
+import WalletView from './WalletView';
 import BackgroundImage from '~/images/BackgroundIcon.png';
 
 type Props = {

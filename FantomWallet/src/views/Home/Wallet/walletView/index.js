@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import type { TransactionT } from '~/redux/wallet/actions';
 import styles from './styles';
-import WalletViewInfo from '../walletViewInfo';
+import WalletViewInfo from '../WalletViewInfo';
 
 type Props = {
   balance: string,

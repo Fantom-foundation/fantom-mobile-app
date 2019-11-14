@@ -12,7 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { NavigationService, routes } from '~/navigation/helpers';
 import Header from '~/components/Header';
 import styles from './styles';
-import Address from './address/index';
+import Address from './Address';
 import whiteSearchIcon from '~/images/searchWhite.png';
 import BackgroundImage from '~/images/BackgroundIcon.png';
 import {

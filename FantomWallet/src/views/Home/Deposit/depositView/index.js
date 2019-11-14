@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 // Components
 import styles from './styles';
-import DepositViewInfo from '../depositViewInfo';
+import DepositViewInfo from '../DepositViewInfo';
 
 type Props = {
   renderToastNotification: () => void,
