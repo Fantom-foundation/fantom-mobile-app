@@ -10,7 +10,6 @@ import {
   KeyboardAvoidingView,
   Image,
 } from 'react-native';
-import _ from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import DropdownAlert from 'react-native-dropdownalert';
@@ -46,9 +45,9 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
     const _mnemonic = navigation.getParam('mnemonic', '');
     setMnemonic(_mnemonic);
     setShuffledMnemonic(
-      _.shuffle(_mnemonic).map((word, index) => ({
+      [..._mnemonic].sort(() => Math.random() - 0.5).map((word, index) => ({
         name: word,
-        index,
+        index: `${word}_${index}`,
         isClickable: true,
       })),
     );
@@ -61,8 +60,7 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
     if (!verifyMnemonic) return;
     let inconsistency = false;
 
-    const arr = verifyMnemonic;
-    const verifyMnemonicArr = arr.map(obj => obj.name);
+    const verifyMnemonicArr = verifyMnemonic.map(obj => obj.name);
     mnemonic.some((word, index) => {
       if (word === verifyMnemonicArr[index]) return false;
       inconsistency = ENUM_WORD[index];
@@ -134,7 +132,7 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
             <Text style={styles.backupPhrase}>Let&apos;s verify your backup phrase</Text>
             <View style={styles.textContainer}>
               {verifyMnemonic.map((val, i) => (
-                <WordItem {...val} key={`${val.name}_${i + 2}`} onClick={unSelect} isTop />
+                <WordItem {...val} key={val.index} onClick={unSelect} isTop />
               ))}
             </View>
           </View>
@@ -143,8 +141,8 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
             <Text style={styles.orderTextStyle}>Please tap each word in the correct order</Text>
           </View>
           <View style={styles.mnemonicBtnMainView}>
-            {shuffledMnemonics.map((item, index) => (
-              <WordItem {...item} key={`${item.name}_${index + 2}`} onClick={select} />
+            {shuffledMnemonics.map((item) => (
+              <WordItem {...item} key={item.index} onClick={select} />
             ))}
           </View>
           <View style={{ height: DEVICE_HEIGHT * 0.12 }} />
