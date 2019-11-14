@@ -1,13 +1,9 @@
 // @flow
-import React, { Component } from 'react';
-
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import {
-  StyleSheet,
-  Dimensions,
   Animated,
   Easing,
   View,
-  Text,
   Platform,
   PermissionsAndroid,
 } from 'react-native';
@@ -15,8 +11,13 @@ import {
 import Permissions from 'react-native-permissions';
 import { RNCamera as Camera } from 'react-native-camera';
 
+import NotAuthorizedView from './AuthorizedView/NotAuthorizedView';
+import PendingAuthorizationView from './AuthorizedView/PendingAuthorizationView';
+
+import styles from './styles';
+
 type Props = {
-  onRead?: () => void,
+  onRead: (any) => void,
   reactivate?: boolean,
   reactivateTimeout?: number,
   fadeIn?: boolean,
@@ -25,95 +26,53 @@ type Props = {
   customMarker?: any,
   containerStyle?: any,
   cameraStyle?: any,
-  notAuthorizedView?: any,
   permissionDialogTitle?: string,
   permissionDialogMessage?: string,
   checkAndroid6Permissions?: boolean,
-  pendingAuthorizationView?: any,
 }
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
-  infoView: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: Dimensions.get('window').width,
-  },
-
-  camera: {
-    flex: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-  },
-
-  rectangleContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-  },
-
-  rectangle: {
-    height: 250,
-    width: 250,
-    borderWidth: 2,
-    borderColor: '#00FF00',
-    backgroundColor: 'transparent',
-  },
-});
 
 const PERMISSION_AUTHORIZED = 'authorized';
 const CAMERA_PERMISSION = 'camera';
 
-export default class QRCodeScanner extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      scanning: false,
-      fadeInOpacity: new Animated.Value(0),
-      isAuthorized: false,
-      isAuthorizationChecked: false,
-    };
+const QRCodeScanner = ({
+  onRead,
+  reactivate = false,
+  reactivateTimeout = 0,
+  fadeIn = true,
+  showMarker = false,
+  cameraType = 'back',
+  permissionDialogTitle = 'Info',
+  permissionDialogMessage = 'Need camera permission',
+  checkAndroid6Permissions,
+  customMarker,
+  containerStyle,
+  cameraStyle,
+}: Props, ref) => {
+  const fadeInOpacity = new Animated.Value(0);
+  const [scanning, setScanning] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthorizationChecked, setIsAuthorizationChecked] = useState();
 
-    this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
-    this._setScanning = this._setScanning.bind(this);
-  }
-
-  componentWillMount() {
-    const { checkAndroid6Permissions, permissionDialogTitle, permissionDialogMessage } = this.props;
+  useEffect(() => {
+    let isAuthorizedStatus = true;
     if (Platform.OS === 'ios') {
       Permissions.request(CAMERA_PERMISSION).then(response => {
-        this.setState({
-          isAuthorized: response === PERMISSION_AUTHORIZED,
-          isAuthorizationChecked: true,
-        });
+        isAuthorizedStatus = response === PERMISSION_AUTHORIZED;
       });
     } else if (Platform.OS === 'android' && checkAndroid6Permissions) {
       PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
         title: permissionDialogTitle,
         message: permissionDialogMessage,
       }).then(granted => {
-        const isAuthorized =
+        isAuthorizedStatus =
           Platform.Version >= 23
             ? granted === PermissionsAndroid.RESULTS.GRANTED
             : granted === true;
-
-        this.setState({ isAuthorized, isAuthorizationChecked: true });
       });
-    } else {
-      this.setState({ isAuthorized: true, isAuthorizationChecked: true });
     }
-  }
+    setIsAuthorized(isAuthorizedStatus);
+    setIsAuthorizationChecked(true);
 
-  componentDidMount() {
-    const { fadeIn } = this.props;
-    const { fadeInOpacity } = this.state;
     if (fadeIn) {
       Animated.sequence([
         Animated.delay(1000),
@@ -123,31 +82,26 @@ export default class QRCodeScanner extends Component<Props> {
         }),
       ]).start();
     }
-  }
+  });
 
-  _setScanning(value) {
-    this.setState({ scanning: value });
-  }
+  const _setScanning = (value: boolean) => setScanning(value);
 
-  _handleBarCodeRead(e) {
-    const { onRead, reactivateTimeout, reactivate } = this.props;
-    const { scanning } = this.state;
+  useImperativeHandle(ref, () => ({
+    _setScanning,
+  }));
+
+  const _handleBarCodeRead = (e) => {
     if (!scanning) {
-      // Vibration.vibrate();
-      this._setScanning(true);
+      _setScanning(true);
       onRead(e);
-      if (reactivate) {
-        setTimeout(() => this._setScanning(false), reactivateTimeout);
-      }
+      if (!reactivate) return;
+      setTimeout(() => _setScanning(false), reactivateTimeout);
     }
-  }
+  };
 
-  _renderCameraMarker() {
-    const { showMarker, customMarker } = this.props;
+  const _renderCameraMarker = () => {
     if (showMarker) {
-      if (customMarker) {
-        return customMarker;
-      }
+      if (customMarker) return customMarker;
       return (
         <View style={styles.rectangleContainer}>
           <View style={styles.rectangle} />
@@ -155,12 +109,9 @@ export default class QRCodeScanner extends Component<Props> {
       );
     }
     return null;
-  }
+  };
 
-  _renderCamera() {
-    const { notAuthorizedView, pendingAuthorizationView,
-      cameraType, fadeIn, cameraStyle } = this.props;
-    const { isAuthorized, isAuthorizationChecked, fadeInOpacity } = this.state;
+  const _renderCamera = () => {
     if (isAuthorized) {
       if (fadeIn) {
         return (
@@ -172,10 +123,10 @@ export default class QRCodeScanner extends Component<Props> {
           >
             <Camera
               style={[styles.camera, cameraStyle]}
-              onBarCodeRead={e => this._handleBarCodeRead(e)}
+              onBarCodeRead={_handleBarCodeRead}
               type={cameraType}
             >
-              {this._renderCameraMarker()}
+              {_renderCameraMarker()}
             </Camera>
           </Animated.View>
         );
@@ -184,74 +135,22 @@ export default class QRCodeScanner extends Component<Props> {
         <Camera
           type={cameraType}
           style={[styles.camera, cameraStyle]}
-          onBarCodeRead={e => this._handleBarCodeRead(e)}
+          onBarCodeRead={_handleBarCodeRead}
         >
-          {this._renderCameraMarker()}
+          {_renderCameraMarker()}
         </Camera>
       );
     }
-    if (!isAuthorizationChecked) {
-      return pendingAuthorizationView;
-    }
-    return notAuthorizedView;
-  }
+    if (!isAuthorizationChecked) return <PendingAuthorizationView />;
+    return <NotAuthorizedView />;
+  };
 
-  reactivate() {
-    this._setScanning(false);
-  }
+  // const reactivate = () => _setScanning(false);
 
-  render() {
-    const { containerStyle } = this.props;
-    return (
-      <View style={[styles.mainContainer, containerStyle]}>{this._renderCamera()}</View>
-    );
-  }
-}
-
-QRCodeScanner.defaultProps = {
-  onRead: () => { },
-  reactivate: false,
-  reactivateTimeout: 0,
-  fadeIn: true,
-  showMarker: false,
-  cameraType: 'back',
-  notAuthorizedView: (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 16,
-        }}
-      >
-        Camera not authorized
-      </Text>
-    </View>
-  ),
-  pendingAuthorizationView: (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 16,
-        }}
-      >
-        ...
-      </Text>
-    </View>
-  ),
-  permissionDialogTitle: 'Info',
-  permissionDialogMessage: 'Need camera permission',
-  checkAndroid6Permissions: false,
+  return (
+    <View style={[styles.mainContainer, containerStyle]}>{_renderCamera()}</View>
+  );
 };
+
+// $FlowFixMe
+export default forwardRef(QRCodeScanner);
