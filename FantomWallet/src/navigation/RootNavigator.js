@@ -35,6 +35,9 @@ const RootNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
+    cardStyle: {
+      backgroundColor: '#111',
+    },
   },
 );
 

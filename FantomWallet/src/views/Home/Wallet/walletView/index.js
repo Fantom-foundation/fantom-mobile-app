@@ -21,19 +21,11 @@ export const WalletNavigationBar = ({
   isLoading,
   navigation,
   onRefresh,
-}: Props) => {
-  const tabRenderInfo = 'Point';
-
-  // coinst handleSelectedTab = (index, tabRenderInfo) => {
-  //   setTabRenderInfo(tabRenderInfo)
-  // }
-
-  return (
+}: Props) => (
     <View style={styles.mainContainerStyle}>
       <View style={styles.tabInfoStyle}>
         <WalletViewInfo
           navigation={navigation}
-          selectedTab={tabRenderInfo}
           transactionData={transactionData}
           balance={balance}
           isLoading={isLoading}
@@ -42,7 +34,6 @@ export const WalletNavigationBar = ({
       </View>
     </View>
   );
-};
 
 const mapStateToProps = state => ({
   publicKey: state.keys.publicKey,

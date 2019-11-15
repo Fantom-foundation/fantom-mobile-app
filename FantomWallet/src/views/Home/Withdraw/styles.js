@@ -5,9 +5,13 @@ const isAndroid = Platform.OS === 'android';
 
 export default StyleSheet.create({
   scroll: {
-    height: DEVICE_HEIGHT,
+    height: '100%',
+  },
+  scrollContent: {
+    paddingBottom: 100,
   },
   mainContainerStyle: {
+    flex: 1,
     height: DEVICE_HEIGHT,
     width: DEVICE_WIDTH,
     backgroundColor: 'rgb(14,14,18)',
@@ -16,18 +20,17 @@ export default StyleSheet.create({
     height: 32,
   },
   backgroundIconStyle: {
-    width: DEVICE_WIDTH * 0.45,
-    height: DEVICE_HEIGHT * 0.85,
+    position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    top: 0,
-    position: 'absolute',
+    width: '45%',
+    height: '85%',
     opacity: !isAndroid ? 0.03 : 0.02,
-    right: -((DEVICE_WIDTH * 0.3) / 2),
+    right: '-15%',
   },
   amtContainer: {
     backgroundColor: 'rgb(44,52,58)',
-    height: 120,
+    height: 150,
     width: DEVICE_WIDTH - 32,
     alignSelf: 'center',
     borderRadius: 10,

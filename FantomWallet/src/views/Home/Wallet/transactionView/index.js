@@ -84,7 +84,7 @@ export const TransactionViewContainer = ({ publicKey, isLoading, fantomTransacti
         </TouchableOpacity>
       </View>
 
-      <View style={[openSortMenu ? { opacity: 0.2 } : '', { backgroundColor: 'rgb(14,14,18)' }]}>
+      <View style={openSortMenu ? { opacity: 0.2 } : ''}>
         {isLoading === false && fantomTransactionArr.length === 0 && (
           <EmptyTransactionEntity
             title="No Transactions"

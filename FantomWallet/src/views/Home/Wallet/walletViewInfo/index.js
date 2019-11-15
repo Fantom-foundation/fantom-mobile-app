@@ -44,7 +44,7 @@ export const WalletFantomScreen = ({
         showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />}
       >
-        <View style={{ height: 32, backgroundColor: 'rgb(14,14,18)' }} />
+        <View style={{ height: 32 }} />
         <BalanceView fantomTransactionArr={transactionData} balance={balance} />
         <TransactionView
           fantomTransactionArr={transactionData}

@@ -11,11 +11,10 @@ import BackgroundIcon from '~/images/BackgroundIcon.png';
  * To Display DepositTab related tasks
  */
 export default () => (
-  <View style={styles.depositViewStyle}>
-    <View style={styles.depositScreenStyle}>
-      <Image style={styles.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
-      <DepositViewInfo />
-    </View>
+  <View style={styles.depositScreenStyle}>
+    <Image style={styles.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
+    <DepositViewInfo />
   </View>
+
 );
 

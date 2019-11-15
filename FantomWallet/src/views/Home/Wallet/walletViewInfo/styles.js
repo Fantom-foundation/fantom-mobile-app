@@ -7,6 +7,5 @@ export default StyleSheet.create({
   },
   fantomViewStyle: {
     height: DEVICE_HEIGHT,
-    backgroundColor: 'rgb(14,14,18)',
   },
 });

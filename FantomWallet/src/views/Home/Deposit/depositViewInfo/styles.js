@@ -3,8 +3,11 @@ import { StyleSheet } from 'react-native';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 
 export default StyleSheet.create({
-  fantomViewStyle: {
-    height: DEVICE_HEIGHT,
+  scroll: {
+    height: '100%',
+  },
+  scrollContent: {
+    paddingBottom: 100,
   },
   amountDisplayStyle: {
     backgroundColor: '#fff',

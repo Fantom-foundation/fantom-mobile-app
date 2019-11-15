@@ -1704,7 +1704,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.20;
+				CURRENT_PROJECT_VERSION = 1.0.21;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Z9Z83R4W7B;
 				HEADER_SEARCH_PATHS = (
@@ -1750,7 +1750,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.20;
+				CURRENT_PROJECT_VERSION = 1.0.21;
 				DEVELOPMENT_TEAM = Z9Z83R4W7B;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

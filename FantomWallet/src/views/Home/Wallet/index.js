@@ -49,19 +49,16 @@ export const Wallet = ({
   }, []);
 
   return (
-    <View style={styles.walletViewStyle}>
-      <View style={styles.walletScreenStyle}>
-        <WalletView
-          balance={balance}
-          navigation={navigation}
-          transactionData={history}
-          isLoading={isLoading}
-          onRefresh={getData}
-        />
-        <View pointerEvents="box-none">
-          <Image style={styles.backgroundImgStyle} source={BackgroundImage} resizeMode="contain" />
-        </View>
-      </View>
+    <View style={styles.walletScreenStyle}>
+      <Image style={styles.backgroundImgStyle} source={BackgroundImage} resizeMode="contain" />
+      <WalletView
+        balance={balance}
+        navigation={navigation}
+        transactionData={history}
+        isLoading={isLoading}
+        onRefresh={getData}
+      />
+      <View pointerEvents="box-none" />
     </View>
   );
 };

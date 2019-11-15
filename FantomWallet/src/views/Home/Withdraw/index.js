@@ -132,6 +132,7 @@ export const Withdraw = ({ balance }: Props) => {
       <ScrollView
         ref={scrollView}
         style={styles.scroll}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.topMarginContainer} />
@@ -235,7 +236,6 @@ export const Withdraw = ({ balance }: Props) => {
           </TouchableOpacity>
           <Text style={styles.confirmTextStyle}>Send</Text>
         </View>
-        <View style={{ height: DEVICE_HEIGHT * 0.3 }} />
       </ScrollView>
     </View>
   );

@@ -135,8 +135,5 @@ export default StyleSheet.create({
     bottom: 0,
     width: DEVICE_WIDTH,
   },
-  dropdown: {
-    backgroundColor: 'rgb(0,168,251)',
-  },
   empty: { height: DEVICE_HEIGHT * 0.15 },
 });

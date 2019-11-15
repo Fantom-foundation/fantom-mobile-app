@@ -65,7 +65,8 @@ export const DepositViewInfoContainer = ({ publicKey, setAlert }: Props) => {
   return (
     <ScrollView
       ref={scrollView}
-      style={styles.fantomViewStyle}
+      style={styles.scroll}
+      contentContainerStyle={styles.scrollContent}
       showsVerticalScrollIndicator={false}
     >
       {/* QR code */}
@@ -98,8 +99,6 @@ export const DepositViewInfoContainer = ({ publicKey, setAlert }: Props) => {
         </TouchableOpacity>
         <Text style={styles.confirmTextStyle}>Share</Text>
       </View>
-
-      <View style={{ height: DEVICE_HEIGHT * 0.15, marginBottom: 10 }} />
     </ScrollView >
   );
 };
