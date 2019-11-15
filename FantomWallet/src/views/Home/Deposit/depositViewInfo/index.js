@@ -14,16 +14,17 @@ import QRGenerator from '~/components/QRCode/QRCodeGenerator';
 import QRCodeSave from '~/components/QRCode/QRCodeSave';
 import BillingAmountScreen from '../BillingAmountView/index';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
+import { setDopdownAlert } from '~/redux/notification/actions';
 
 type Props = {
   publicKey: string,
-  renderToastNotification: (string) => void,
+  setAlert: (string, string) => void,
 }
 
 /**
  * DepositViewInfo: This component is meant for redering deposit screen related information.
  */
-export const DepositViewInfoContainer = ({ publicKey, renderToastNotification }: Props) => {
+export const DepositViewInfoContainer = ({ publicKey, setAlert }: Props) => {
   const [amount, setAmount] = useState('');
   const [qrAddress, setQrAddress] = useState('');
   const scrollView = useRef<any>(null);
@@ -40,7 +41,7 @@ export const DepositViewInfoContainer = ({ publicKey, renderToastNotification }:
   const onCopyAddress = async () => {
     // Copies address to clipboard
     await Clipboard.setString(qrAddress);
-    renderToastNotification('Copied');
+    setAlert('custom', 'Copied');
   };
 
   const onTextFieldFocus = () => {
@@ -103,8 +104,8 @@ export const DepositViewInfoContainer = ({ publicKey, renderToastNotification }:
   );
 };
 
-const mapStateToProps = state => ({
+export default connect(state => ({
   publicKey: state.keys.publicKey,
-});
-
-export default connect(mapStateToProps)(DepositViewInfoContainer);
+}), ({
+  setAlert: setDopdownAlert,
+}))(DepositViewInfoContainer);

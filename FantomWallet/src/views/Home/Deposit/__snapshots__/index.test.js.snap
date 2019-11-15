@@ -39,21 +39,7 @@ exports[`renders correctly 1`] = `
         }
       }
     />
-    <DepositNavigationBar
-      renderToastNotification={[Function]}
-    />
+    <DepositNavigationBar />
   </View>
-  <RNDropDownWallet
-    containerStyle={
-      Object {
-        "backgroundColor": "rgb(0,168,251)",
-      }
-    }
-    style={
-      Object {
-        "backgroundColor": "red",
-      }
-    }
-  />
 </View>
 `;

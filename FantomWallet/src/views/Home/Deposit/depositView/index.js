@@ -6,17 +6,12 @@ import { View } from 'react-native';
 import styles from './styles';
 import DepositViewInfo from '../DepositViewInfo';
 
-type Props = {
-  renderToastNotification: () => void,
-  navigation: any,
-};
-
 /**
  * DepositNavigationBar: This component is meant for handling deposit screen.
  */
-const DepositNavigationBar = ({ navigation, renderToastNotification }: Props) => (
+const DepositNavigationBar = () => (
   <View style={styles.mainContainerStyle}>
-    <DepositViewInfo renderToastNotification={renderToastNotification} navigation={navigation} />
+    <DepositViewInfo />
   </View>
 );
 

@@ -130,9 +130,7 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          123.123
-           
-          FTM
+          123.123 FTM
         </Text>
       </View>
     </View>
@@ -411,13 +409,7 @@ exports[`renders correctly 1`] = `
         Confirm
       </Text>
     </View>
-    <View
-      style={
-        Object {
-          "height": 133.4,
-        }
-      }
-    />
+    <View />
   </ScrollViewMock>
 </View>
 `;

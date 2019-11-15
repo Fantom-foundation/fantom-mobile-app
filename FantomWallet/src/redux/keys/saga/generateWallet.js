@@ -5,6 +5,7 @@ import EthUtil from 'ethereumjs-util';
 import Hdkey from 'hdkey';
 
 import { types, setKeys } from '../actions';
+import { setDopdownAlert } from '~/redux/notification/actions';
 
 type Action = {
   payload: {
@@ -26,7 +27,7 @@ export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
     yield put(setKeys({ masterKey, privateKey, publicKey }));
     cb();
   } catch (e) {
-    console.log(e);
+    yield put(setDopdownAlert('error', e.message));
   }
 }
 

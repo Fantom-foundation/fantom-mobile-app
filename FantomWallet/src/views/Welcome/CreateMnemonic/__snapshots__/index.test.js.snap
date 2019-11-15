@@ -309,12 +309,5 @@ exports[`renders correctly 1`] = `
       text="CONFIRM"
     />
   </View>
-  <RNDropDownWallet
-    containerStyle={
-      Object {
-        "backgroundColor": "rgb(0,168,251)",
-      }
-    }
-  />
 </View>
 `;

@@ -216,12 +216,5 @@ exports[`renders correctly 1`] = `
       text="Verify"
     />
   </View>
-  <RNDropDownWallet
-    containerStyle={
-      Object {
-        "backgroundColor": "rgb(251,128,0)",
-      }
-    }
-  />
 </KeyboardAvoidingView>
 `;

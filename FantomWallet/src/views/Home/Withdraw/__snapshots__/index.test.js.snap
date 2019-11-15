@@ -104,7 +104,7 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          123.123
+          123123
            
           FTM
         </Text>
@@ -210,13 +210,6 @@ exports[`renders correctly 1`] = `
                 "testUri": "../../../src/images/person_whiteOutline.png",
               }
             }
-            style={
-              Object {
-                "height": 22,
-                "marginRight": 3,
-                "width": 22,
-              }
-            }
           />
         </TouchableOpacity>
       </View>
@@ -279,11 +272,19 @@ exports[`renders correctly 1`] = `
         />
         <View
           style={
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "width": 50,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": 50,
+              },
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(0,177,251)",
+                "justifyContent": "center",
+                "width": 50,
+              },
+            ]
           }
         >
           <Text
@@ -303,16 +304,11 @@ exports[`renders correctly 1`] = `
           activeOpacity={0.2}
           onPress={[Function]}
           style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "justifyContent": "center",
-                "width": 50,
-              },
-              Object {
-                "backgroundColor": "rgb(0,177,251)",
-              },
-            ]
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+              "width": 50,
+            }
           }
         >
           <Text

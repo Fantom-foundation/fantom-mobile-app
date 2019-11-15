@@ -5,6 +5,6 @@ import { shallow } from 'enzyme';
 import { Withdraw } from './index';
 
 test('renders correctly', () => {
-  const wrapper = shallow(<Withdraw balance="123.123" />);
+  const wrapper = shallow(<Withdraw balance="123123" />);
   expect(wrapper).toMatchSnapshot();
 });

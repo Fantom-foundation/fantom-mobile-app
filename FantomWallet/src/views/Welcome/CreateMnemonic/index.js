@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable global-require */
 // Library
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -11,11 +11,12 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import { connect } from 'react-redux';
 import Bip39 from 'react-native-bip39';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
-import DropdownAlert from 'react-native-dropdownalert';
 
+import { setDopdownAlert as setDopdownAlertAction } from '~/redux/notification/actions';
 import { NavigationService, routes } from '~/navigation/helpers';
 // Components
 import styles from './styles';
@@ -23,13 +24,13 @@ import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
 
 type Props = {
-  navigation: any
+  navigation: any,
+  setDopdownAlert: (string, string) => void
 }
 /**
  * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
  */
-export const CreateMnemonicContainer = ({ navigation }: Props) => {
-  const dropdown = useRef<any>(null);
+export const CreateMnemonicContainer = ({ navigation, setDopdownAlert }: Props) => {
   const [mnemonic, setMnemonic] = useState([]);
   const loading = !mnemonic.length;
 
@@ -49,7 +50,7 @@ export const CreateMnemonicContainer = ({ navigation }: Props) => {
   const copyToClipboard = () => {
     const string = mnemonic.join(', ').toLowerCase();
     Clipboard.setString(string);
-    dropdown.current.alertWithType('custom', 'COPIED', '');
+    setDopdownAlert('custom', 'COPIED');
   };
 
   return (
@@ -128,9 +129,10 @@ export const CreateMnemonicContainer = ({ navigation }: Props) => {
           }}
         />
       </View>
-      <DropdownAlert containerStyle={styles.dropdown} ref={dropdown} />
     </View>
   );
 };
 
-export default CreateMnemonicContainer;
+export default connect(null, ({
+  setDopdownAlert: setDopdownAlertAction,
+}))(CreateMnemonicContainer);

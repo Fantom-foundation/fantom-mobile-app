@@ -3,6 +3,7 @@ import { takeLatest, put, select } from 'redux-saga/effects';
 import Web3 from 'web3';
 
 import { types, setBalance } from '../actions';
+import { setDopdownAlert } from '~/redux/notification/actions';
 import Web3Agent from '~/services/api/web3';
 import { scientificToDecimal } from '../../../utils/converts';
 
@@ -16,6 +17,7 @@ export function* getBalance(): any {
 
     yield put(setBalance({ balance, loading: false }));
   } catch (e) {
+    yield put(setDopdownAlert('error', e.message));
     yield put(setBalance({ balance: '0', loading: false }));
   }
 }

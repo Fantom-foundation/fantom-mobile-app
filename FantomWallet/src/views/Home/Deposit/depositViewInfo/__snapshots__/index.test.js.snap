@@ -9,11 +9,25 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <QRCodeShare
-    billingAmount=""
-    copyAddress={[Function]}
-    qrLink=""
-  />
+  <View
+    style={
+      Object {
+        "marginBottom": 26.68,
+        "marginTop": 12,
+        "padding": 16,
+      }
+    }
+  >
+    <QRGenerator
+      billingAmount=""
+      qrLink=""
+      titleText="Address QR Code"
+    />
+    <ForwardRef(QRCodeSave)
+      amount=""
+      content=""
+    />
+  </View>
   <BillingAmountScreen
     headerText="FTM"
     onAmountChange={[Function]}
@@ -84,28 +98,5 @@ exports[`renders correctly 1`] = `
       }
     }
   />
-  <View
-    style={
-      Object {
-        "flex": 1,
-        "position": "absolute",
-        "top": 0,
-        "width": 750,
-      }
-    }
-  >
-    <RNDropDownWallet
-      containerStyle={
-        Object {
-          "backgroundColor": "rgb(0,168,251)",
-        }
-      }
-      style={
-        Object {
-          "backgroundColor": "red",
-        }
-      }
-    />
-  </View>
 </ScrollViewMock>
 `;

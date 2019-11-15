@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -12,12 +12,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
-import DropdownAlert from 'react-native-dropdownalert';
 
 import { NavigationService, routes } from '~/navigation/helpers';
 import { generateWallet as generateWalletAction } from '~/redux/keys/actions';
 import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
+import { setDopdownAlert as setDopdownAlertAction } from '~/redux/notification/actions';
 import WordItem from './WordItem';
 import styles from './styles';
 import BackgroundFantomIcon from '~/images/BackgroundIcon.png';
@@ -29,14 +29,14 @@ type Props = {
   generateWallet: ({
     mnemonic: string,
     cb: () => void,
-  }) => any
+  }) => any,
+  setDopdownAlert: (string, string, { [string]: string }) => void
 }
 
 /**
  * This component is designed to check recorded phrases.
  */
-export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) => {
-  const dropdown = useRef<any>(null);
+export const CheckMnemonicContainer = ({ navigation, generateWallet, setDopdownAlert }: Props) => {
   const [mnemonic, setMnemonic] = useState([]);
   const [shuffledMnemonics, setShuffledMnemonic] = useState([]);
   const [verifyMnemonic, setVerifyMnemonic] = useState([]);
@@ -68,7 +68,11 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
     });
 
     if (inconsistency) {
-      dropdown.current.alertWithType('custom', `The ${inconsistency} word does not match.`, '');
+      setDopdownAlert(
+        'custom',
+        `The ${inconsistency} word does not match.`,
+        { backgroundColor: 'rgb(251,128,0)' },
+      );
       return;
     }
 
@@ -131,7 +135,7 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
           <View style={styles.displayMnemonicView}>
             <Text style={styles.backupPhrase}>Let&apos;s verify your backup phrase</Text>
             <View style={styles.textContainer}>
-              {verifyMnemonic.map((val, i) => (
+              {verifyMnemonic.map((val) => (
                 <WordItem {...val} key={val.index} onClick={unSelect} isTop />
               ))}
             </View>
@@ -156,7 +160,6 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
           buttonStyle={{ backgroundColor: 'rgb(0,177,251)' }}
         />
       </View>
-      <DropdownAlert containerStyle={styles.dropdown} ref={dropdown} />
     </KeyboardAvoidingView>
   );
 };
@@ -164,6 +167,7 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet }: Props) =>
 const mapStateToProps = () => ({});
 const mapDispatchToProps = {
   generateWallet: generateWalletAction,
+  setDopdownAlert: setDopdownAlertAction,
 };
 
 export default connect(

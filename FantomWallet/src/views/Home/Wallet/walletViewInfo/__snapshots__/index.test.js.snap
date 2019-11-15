@@ -31,10 +31,10 @@ exports[`renders correctly 1`] = `
         }
       }
     />
-    <BalanceView
+    <BalanceViewContainer
       balance="123.123"
     />
-    <Connect(TransactionView)
+    <Connect(TransactionViewContainer)
       isLoading={false}
     />
     <View
