@@ -4,7 +4,7 @@ import { View, Image } from 'react-native';
 // Style
 import styles from './styles';
 // Component
-import DepositView from './DepositView';
+import DepositViewInfo from './DepositViewInfo';
 // Image
 import BackgroundIcon from '~/images/BackgroundIcon.png';
 /**
@@ -14,7 +14,7 @@ export default () => (
   <View style={styles.depositViewStyle}>
     <View style={styles.depositScreenStyle}>
       <Image style={styles.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
-      <DepositView />
+      <DepositViewInfo />
     </View>
   </View>
 );
