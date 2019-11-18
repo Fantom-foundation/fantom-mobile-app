@@ -39,14 +39,7 @@ exports[`renders correctly 1`] = `
     </TouchableOpacity>
   </View>
   <View
-    style={
-      Array [
-        "",
-        Object {
-          "backgroundColor": "rgb(14,14,18)",
-        },
-      ]
-    }
+    style=""
   />
 </View>
 `;

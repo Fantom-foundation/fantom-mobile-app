@@ -5,6 +5,7 @@ exports[`renders correctly 1`] = `
   style={
     Object {
       "backgroundColor": "rgb(14,14,18)",
+      "flex": 1,
       "height": 1334,
       "width": 750,
     }
@@ -20,21 +21,25 @@ exports[`renders correctly 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "height": 1133.8999999999999,
+        "height": "85%",
         "justifyContent": "center",
         "opacity": 0.03,
         "position": "absolute",
-        "right": -112.5,
-        "top": 0,
-        "width": 337.5,
+        "right": "-15%",
+        "width": "45%",
       }
     }
   />
   <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
     showsVerticalScrollIndicator={false}
     style={
       Object {
-        "height": 1334,
+        "height": "100%",
       }
     }
   >
@@ -51,7 +56,7 @@ exports[`renders correctly 1`] = `
           "alignSelf": "center",
           "backgroundColor": "rgb(44,52,58)",
           "borderRadius": 10,
-          "height": 120,
+          "height": 150,
           "marginBottom": 12,
           "width": 718,
         }
@@ -453,13 +458,6 @@ exports[`renders correctly 1`] = `
         Send
       </Text>
     </View>
-    <View
-      style={
-        Object {
-          "height": 400.2,
-        }
-      }
-    />
   </ScrollViewMock>
 </View>
 `;

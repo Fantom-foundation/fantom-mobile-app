@@ -6,10 +6,10 @@ import styles from './styles';
 
 type Props = {
   name: string,
-  index: number,
+  index: string,
   isClickable: boolean,
-  onClick: ({ name: string, index: number, isClickable: boolean }) => () => void,
-  isTop: boolean,
+  onClick: ({ name: string, index: string, isClickable: boolean }) => () => void,
+  isTop?: boolean,
 };
 
 const containerStyle = (isClickable: boolean, isTop: boolean) => ({

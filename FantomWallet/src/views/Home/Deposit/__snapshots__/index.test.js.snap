@@ -5,41 +5,30 @@ exports[`renders correctly 1`] = `
   style={
     Object {
       "backgroundColor": "rgb(14,14,18)",
-      "height": 1334,
-      "width": 750,
+      "flex": 1,
     }
   }
 >
-  <View
-    style={
+  <Image
+    resizeMode="contain"
+    source={
       Object {
-        "backgroundColor": "rgb(14,14,18)",
-        "height": 1120.56,
-        "width": 750,
+        "testUri": "../../../src/images/BackgroundIcon.png",
       }
     }
-  >
-    <Image
-      resizeMode="contain"
-      source={
-        Object {
-          "testUri": "../../../src/images/BackgroundIcon.png",
-        }
+    style={
+      Object {
+        "alignItems": "center",
+        "height": "85%",
+        "justifyContent": "center",
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": "-15%",
+        "top": 0,
+        "width": "45%",
       }
-      style={
-        Object {
-          "alignItems": "center",
-          "height": 1133.8999999999999,
-          "justifyContent": "center",
-          "opacity": 0.03,
-          "position": "absolute",
-          "right": -112.5,
-          "top": 0,
-          "width": 337.5,
-        }
-      }
-    />
-    <DepositNavigationBar />
-  </View>
+    }
+  />
+  <Connect(DepositViewInfoContainer) />
 </View>
 `;

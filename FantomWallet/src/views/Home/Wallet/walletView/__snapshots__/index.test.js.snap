@@ -4,7 +4,6 @@ exports[`renders correctly 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#fff",
       "height": 1334,
       "justifyContent": "flex-end",
     }
@@ -21,7 +20,6 @@ exports[`renders correctly 1`] = `
       balance="123.123"
       isLoading={false}
       onRefresh={[Function]}
-      selectedTab="Point"
     />
   </View>
 </View>

@@ -24,7 +24,14 @@ import BackgroundFantomIcon from '~/images/BackgroundIcon.png';
 import { DEVICE_HEIGHT } from '~/common/constants';
 import { ENUM_WORD } from './helpers';
 
+type ShuffleItem = {
+  name: string,
+  index: string,
+  isClickable: boolean,
+}
+
 type Props = {
+  mnemonic: string,
   navigation: any,
   generateWallet: ({
     mnemonic: string,
@@ -36,20 +43,19 @@ type Props = {
 /**
  * This component is designed to check recorded phrases.
  */
-export const CheckMnemonicContainer = ({ navigation, generateWallet, setDopdownAlert }: Props) => {
-  const [mnemonic, setMnemonic] = useState([]);
-  const [shuffledMnemonics, setShuffledMnemonic] = useState([]);
+export const CheckMnemonicContainer = ({ navigation, generateWallet, setDopdownAlert, mnemonic }: Props) => {
+  const [shuffledMnemonics, setShuffledMnemonic] = useState<Array<ShuffleItem>>([]);
   const [verifyMnemonic, setVerifyMnemonic] = useState([]);
 
   useEffect(() => {
-    const _mnemonic = navigation.getParam('mnemonic', '');
-    setMnemonic(_mnemonic);
     setShuffledMnemonic(
-      [..._mnemonic].sort(() => Math.random() - 0.5).map((word, index) => ({
-        name: word,
-        index: `${word}_${index}`,
-        isClickable: true,
-      })),
+      mnemonic.split(' ')
+        .sort(() => Math.random() - 0.5)
+        .map((word, index) => ({
+          name: word[0].toUpperCase() + word.slice(1),
+          index: `${word}_${index}`,
+          isClickable: true,
+        })),
     );
   }, []);
 
@@ -60,8 +66,9 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet, setDopdownA
     if (!verifyMnemonic) return;
     let inconsistency = false;
 
-    const verifyMnemonicArr = verifyMnemonic.map(obj => obj.name);
-    mnemonic.some((word, index) => {
+    const verifyMnemonicArr = verifyMnemonic.map(obj => obj.name.toLowerCase());
+
+    mnemonic.split(' ').some((word, index) => {
       if (word === verifyMnemonicArr[index]) return false;
       inconsistency = ENUM_WORD[index];
       return true;
@@ -77,7 +84,7 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet, setDopdownA
     }
 
     generateWallet({
-      mnemonic: mnemonic.join(' ').toLowerCase(),
+      mnemonic,
       cb: () => NavigationService.navigate(routes.root.HomeScreen),
     });
   };
@@ -164,13 +171,13 @@ export const CheckMnemonicContainer = ({ navigation, generateWallet, setDopdownA
   );
 };
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = {
-  generateWallet: generateWalletAction,
-  setDopdownAlert: setDopdownAlertAction,
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default connect(state =>
+  ({
+    mnemonic: state.keys.mnemonic,
+  }),
+  ({
+    generateWallet: generateWalletAction,
+    setDopdownAlert: setDopdownAlertAction,
+  }),
 )(CheckMnemonicContainer);

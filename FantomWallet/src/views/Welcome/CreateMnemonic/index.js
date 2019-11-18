@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { setDopdownAlert as setDopdownAlertAction } from '~/redux/notification/actions';
+import { setMnemonic as setMnemonicAction } from '~/redux/keys/actions';
 import { NavigationService, routes } from '~/navigation/helpers';
 // Components
 import styles from './styles';
@@ -24,19 +25,19 @@ import Button from '~/components/general/Button';
 import ProgressBar from '~/components/general/ProgressBar';
 
 type Props = {
-  navigation: any,
-  setDopdownAlert: (string, string) => void
+  setDopdownAlert: (string, string) => void,
+  setReduxMnemonic: ({ mnemonic: string }) => void
 }
 /**
  * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
  */
-export const CreateMnemonicContainer = ({ navigation, setDopdownAlert }: Props) => {
-  const [mnemonic, setMnemonic] = useState([]);
+export const CreateMnemonicContainer = ({ setReduxMnemonic, setDopdownAlert }: Props) => {
+  const [mnemonic, setMnemonic] = useState<string>('');
   const loading = !mnemonic.length;
 
   const generateMnemonic = async () => {
     const _menmonic = await Bip39.generateMnemonic();
-    setMnemonic(_menmonic.split(' ').map(word => word[0].toUpperCase() + word.slice(1)));
+    setMnemonic(_menmonic);
   };
 
   useEffect(() => {
@@ -44,21 +45,25 @@ export const CreateMnemonicContainer = ({ navigation, setDopdownAlert }: Props) 
   }, []);
 
   const onConfirmHandler = () => {
-    NavigationService.navigate(routes.root.CheckMnemonic, { mnemonic });
+    setReduxMnemonic({ mnemonic });
+    NavigationService.navigate(routes.root.CheckMnemonic);
   };
 
   const copyToClipboard = () => {
-    const string = mnemonic.join(', ').toLowerCase();
-    Clipboard.setString(string);
+    Clipboard.setString(mnemonic);
     setDopdownAlert('custom', 'COPIED');
   };
+
+  const handleGoBack = () => NavigationService.pop();
+
+  const mnemonicArray: Array<string> = mnemonic.length ? mnemonic.split(' ').map(word => word[0].toUpperCase() + word.slice(1)) : [];
 
   return (
     <View style={styles.mainContainer}>
       <View style={styles.progressContainer}>
         <ProgressBar completed="1" remaining="1" />
       </View>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.arrowContainer}>
+      <TouchableOpacity onPress={handleGoBack} style={styles.arrowContainer}>
         <Icon name="chevron-left" size={24} color="#FFFFFF" />
       </TouchableOpacity>
 
@@ -73,9 +78,9 @@ export const CreateMnemonicContainer = ({ navigation, setDopdownAlert }: Props) 
             <ActivityIndicator size="small" color="#fff" />
           </View>
         ) : (
-            mnemonic.length && (
+            mnemonicArray.length && (
               <View style={styles.textContainer}>
-                {mnemonic.map((textValue, i) => (
+                {mnemonicArray.map((textValue, i) => (
                   <View key={`${i + 2}_${textValue}`} style={styles.wordWrap}>
                     <Text style={styles.text}>{textValue}</Text>
                   </View>
@@ -135,4 +140,5 @@ export const CreateMnemonicContainer = ({ navigation, setDopdownAlert }: Props) 
 
 export default connect(null, ({
   setDopdownAlert: setDopdownAlertAction,
+  setReduxMnemonic: setMnemonicAction,
 }))(CreateMnemonicContainer);

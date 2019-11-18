@@ -2,10 +2,15 @@
 
 exports[`renders correctly 1`] = `
 <ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "paddingBottom": 100,
+    }
+  }
   showsVerticalScrollIndicator={false}
   style={
     Object {
-      "height": 1334,
+      "height": "100%",
     }
   }
 >
@@ -90,13 +95,5 @@ exports[`renders correctly 1`] = `
       Share
     </Text>
   </View>
-  <View
-    style={
-      Object {
-        "height": 200.1,
-        "marginBottom": 10,
-      }
-    }
-  />
 </ScrollViewMock>
 `;
