@@ -3,6 +3,8 @@
 import React, { useEffect } from 'react';
 import { Image, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen'
+
 
 import styles from './styles';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
@@ -26,27 +28,13 @@ export const SplashScreenContainer = ({ masterKey, privateKey, navigation }: Pro
    * Render different screens based on user is already a registered user or not.
    */
   useEffect(() => {
-    const route = (masterKey && privateKey) ? 'HomeScreen' : 'WalletSetup'
-    NavigationService.navigate(route)
+    const route = (masterKey && privateKey) ? 'HomeScreen' : 'WalletSetup';
+    NavigationService.navigate(route);
+    SplashScreen.hide()
   }, [])
 
   return (
-    <View style={styles.imageBackground}>
-      <Image source={require('~/images/fantomWhiteIcon.png')} resizeMode="contain" />
-      <Image
-        style={{
-          width: DEVICE_WIDTH * 0.6,
-          height: DEVICE_HEIGHT * 0.77,
-          justifyContent: 'center',
-          alignItems: 'center',
-          opacity: isIOS ? 0.03 : 0.02,
-          right: -((DEVICE_WIDTH * 0.45) / 2),
-          position: 'absolute',
-        }}
-        source={require('~/images/BackgroundIcon.png')}
-        resizeMode="contain"
-      />
-    </View>
+    <View style={styles.imageBackground} />
   );
 }
 

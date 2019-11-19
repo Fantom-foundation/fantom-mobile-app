@@ -67,6 +67,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-splash-screen')
     implementation project(':react-native-gesture-handler')
     implementation project(':react-native-reanimated')
     compile project(':react-native-udp')
