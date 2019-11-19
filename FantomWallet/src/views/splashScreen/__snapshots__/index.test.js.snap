@@ -11,33 +11,5 @@ exports[`renders correctly 1`] = `
       "width": 750,
     }
   }
->
-  <Image
-    resizeMode="contain"
-    source={
-      Object {
-        "testUri": "../../../src/images/fantomWhiteIcon.png",
-      }
-    }
-  />
-  <Image
-    resizeMode="contain"
-    source={
-      Object {
-        "testUri": "../../../src/images/BackgroundIcon.png",
-      }
-    }
-    style={
-      Object {
-        "alignItems": "center",
-        "height": 1027.18,
-        "justifyContent": "center",
-        "opacity": 0.03,
-        "position": "absolute",
-        "right": -168.75,
-        "width": 450,
-      }
-    }
-  />
-</View>
+/>
 `;
