@@ -9,6 +9,11 @@ exports[`renders correctly 1`] = `
   }
 >
   <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 180,
+      }
+    }
     refreshControl={
       <RefreshControlMock
         onRefresh={[Function]}
@@ -16,11 +21,6 @@ exports[`renders correctly 1`] = `
       />
     }
     showsVerticalScrollIndicator={false}
-    style={
-      Object {
-        "height": 1334,
-      }
-    }
   >
     <View
       style={
@@ -34,13 +34,6 @@ exports[`renders correctly 1`] = `
     />
     <Connect(TransactionViewContainer)
       isLoading={false}
-    />
-    <View
-      style={
-        Object {
-          "height": 400.2,
-        }
-      }
     />
   </ScrollViewMock>
 </View>

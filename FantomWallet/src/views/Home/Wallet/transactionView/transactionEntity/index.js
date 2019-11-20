@@ -118,6 +118,8 @@ const TransacationEntity = ({ transaction, publicKey }: Props) => {
     transactionAmountUnit = transaction.amountUnit;
   }
 
+  if (transaction.transactionStatus === 'FAILED') iconColor = 'grey';
+
   return (
     <View style={styles.mainContainerStyle}>
       {renderDateContainer(date, month)}

@@ -47,7 +47,7 @@ export const TransactionViewContainer = ({ publicKey, isLoading, fantomTransacti
 
   return (
     <View style={styles.mainViewStyle}>
-      {fantomTransactionArr.length && (
+      {fantomTransactionArr.length > 0 && (
         <View
           style={{
             marginTop: 20,
@@ -82,6 +82,21 @@ export const TransactionViewContainer = ({ publicKey, isLoading, fantomTransacti
         <TouchableOpacity onPress={toggleSortMenu}>
           <Image source={sortMenuIcon} style={styles.sortMenuIcon} />
         </TouchableOpacity>
+        {openSortMenu && (
+          <>
+            <TouchableOpacity
+              style={{
+                width: DEVICE_WIDTH,
+                height: DEVICE_HEIGHT,
+                zIndex: 1,
+                top: -DEVICE_HEIGHT * 0.5,
+                position: 'absolute',
+              }}
+              onPress={handleClickOnScreen}
+            />
+            <SortMenuCard data={data} type="wallet" index={index} handleSortMenu={handleSortMenu} />
+          </>
+        )}
       </View>
 
       <View style={openSortMenu ? { opacity: 0.2 } : ''}>
@@ -92,21 +107,7 @@ export const TransactionViewContainer = ({ publicKey, isLoading, fantomTransacti
           />
         )}
       </View>
-      {openSortMenu && (
-        <>
-          <TouchableOpacity
-            style={{
-              width: DEVICE_WIDTH,
-              height: DEVICE_HEIGHT,
-              zIndex: 1,
-              top: -DEVICE_HEIGHT * 0.5,
-              position: 'absolute',
-            }}
-            onPress={handleClickOnScreen}
-          />
-          <SortMenuCard data={data} type="wallet" index={index} handleSortMenu={handleSortMenu} />
-        </>
-      )}
+
     </View>
   );
 };

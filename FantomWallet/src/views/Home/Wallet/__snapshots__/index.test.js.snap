@@ -29,13 +29,11 @@ exports[`renders correctly 1`] = `
       }
     }
   />
-  <Connect(WalletNavigationBar)
+  <WalletFantomScreen
     balance="123.123"
     isLoading={false}
     onRefresh={[Function]}
-  />
-  <View
-    pointerEvents="box-none"
+    publicKey="0x00000123"
   />
 </View>
 `;

@@ -9,7 +9,7 @@ import {
 } from '~/redux/wallet/actions';
 import styles from './styles';
 // components
-import WalletView from './WalletView';
+import WalletViewInfo from './WalletViewInfo';
 import BackgroundImage from '~/images/BackgroundIcon.png';
 
 type Props = {
@@ -34,7 +34,6 @@ export const Wallet = ({
   getBalance,
   getHistory,
   isLoading,
-  navigation,
 }: Props) => {
   const getData = (loading: boolean = false) => {
     if (publicKey && !isLoading) {
@@ -45,20 +44,19 @@ export const Wallet = ({
 
   useEffect(() => {
     getData();
-    setInterval(getData, 5000); // FIXME: 5000
+    setInterval(getData, 5000);
   }, []);
 
   return (
     <View style={styles.walletScreenStyle}>
       <Image style={styles.backgroundImgStyle} source={BackgroundImage} resizeMode="contain" />
-      <WalletView
-        balance={balance}
-        navigation={navigation}
+      <WalletViewInfo
         transactionData={history}
+        balance={balance}
         isLoading={isLoading}
         onRefresh={getData}
+        publicKey={publicKey}
       />
-      <View pointerEvents="box-none" />
     </View>
   );
 };

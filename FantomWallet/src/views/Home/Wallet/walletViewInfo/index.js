@@ -1,12 +1,10 @@
 // @flow
 import React, { useState } from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
-import { connect } from 'react-redux';
 import styles from './styles';
 
 import BalanceView from '../BalanceView';
 import TransactionView from '../TransactionView';
-import { DEVICE_HEIGHT } from '~/common/constants';
 import type { TransactionT } from '~/redux/wallet/actions';
 
 type Props = {
@@ -38,9 +36,9 @@ export const WalletFantomScreen = ({
   };
 
   return (
-    <View style={styles.mainContainerStyle}>
+    <View style={styles.container}>
       <ScrollView
-        style={styles.fantomViewStyle}
+        contentContainerStyle={styles.contentStyle}
         showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />}
       >
@@ -51,14 +49,8 @@ export const WalletFantomScreen = ({
           publicKey={publicKey}
           isLoading={isLoading}
         />
-        <View style={{ height: DEVICE_HEIGHT * 0.3 }} />
       </ScrollView>
     </View>
   );
 };
-
-const mapStateToProps = state => ({
-  publicKey: state.keys.publicKey,
-});
-
-export default connect(mapStateToProps)(WalletFantomScreen);
+export default WalletFantomScreen;
