@@ -5,7 +5,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  StatusBar,
   ScrollView,
   Image,
 } from 'react-native';
@@ -70,7 +69,6 @@ export const RecoverWalletContainer = ({ generateWallet, navigation }: Props) =>
 
   return (
     <View style={styles.containerStyle}>
-      <StatusBar barStyle="light-content" />
       <Header
         leftButtonIcon="chevron-left"
         leftIconColor="#fff"

@@ -4,7 +4,6 @@ import {
   Text,
   View,
   Alert,
-  StatusBar,
   Image,
   TextInput,
   TouchableOpacity,
@@ -90,7 +89,6 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
 
   return (
     <View style={styles.mainContainerStyle}>
-      <StatusBar barStyle="light-content" />
       <Header
         leftButtonIcon="chevron-left"
         leftIconColor="#fff"

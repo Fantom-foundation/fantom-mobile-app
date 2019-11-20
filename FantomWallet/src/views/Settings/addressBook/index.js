@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import {
   Text, View, TouchableOpacity,
   Image, ScrollView, TextInput,
-  Alert, StatusBar,
+  Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -202,7 +202,6 @@ export const AddressBookContainer = ({ addresses, toggleAddress, deleteAddress, 
 
   return (
     <View style={styles.mainContainerStyle}>
-      <StatusBar barStyle="light-content" />
       {/* add-circle-outline */}
       <Header
         text="Address Book"

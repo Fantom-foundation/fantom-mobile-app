@@ -46,8 +46,8 @@ export const TransactionViewContainer = ({ publicKey, isLoading, fantomTransacti
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      {fantomTransactionArr.length > 0 && (
+    <View style={styles.mainViewStyle}>
+      {fantomTransactionArr.length && (
         <View
           style={{
             marginTop: 20,

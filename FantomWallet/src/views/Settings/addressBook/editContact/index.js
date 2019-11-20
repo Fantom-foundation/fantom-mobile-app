@@ -11,7 +11,6 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  StatusBar,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Web3 from 'web3';
@@ -133,7 +132,6 @@ const EditContact = ({ navigation, addresses, updateContact, addNewAddress }: Pr
 
   return (
     <View style={styles.mainContainerStyle}>
-      <StatusBar barStyle="light-content" />
       <Header
         text={headerText}
         leftButtonIcon="chevron-left"

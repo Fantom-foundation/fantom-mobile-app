@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Text, View, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 import { NavigationService, routes } from '~/navigation/helpers';
 import styles from './styles';
@@ -16,7 +16,6 @@ const WalletSetup = () => {
 
   return (
     <View style={styles.backgroundContainer}>
-      <StatusBar barStyle="light-content" />
       <Image
         style={styles.backgroundImage}
         source={require('~/images/BackgroundIcon.png')}

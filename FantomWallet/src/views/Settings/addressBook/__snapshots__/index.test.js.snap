@@ -9,11 +9,6 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <StatusBar
-    animated={false}
-    barStyle="light-content"
-    showHideTransition="fade"
-  />
   <Header
     headerStyle={
       Object {

@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { View, WebView, StatusBar, ActivityIndicator } from 'react-native';
+import { View, WebView, ActivityIndicator } from 'react-native';
 
 import Header from '~/components/Header';
 import styles from './styles';
@@ -24,7 +24,6 @@ const TermsConditions = ({ navigation }: Props) => {
 
   return (
     <View style={styles.mainContainerStyle}>
-      <StatusBar barStyle="light-content" />
       <Header
         text="Terms of Service"
         rightButtonIcon={crossButton}

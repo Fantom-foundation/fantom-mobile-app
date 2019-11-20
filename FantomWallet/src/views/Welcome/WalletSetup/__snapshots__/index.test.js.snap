@@ -10,11 +10,6 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <StatusBar
-    animated={false}
-    barStyle="light-content"
-    showHideTransition="fade"
-  />
   <Image
     resizeMode="contain"
     source={
