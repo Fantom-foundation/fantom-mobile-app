@@ -3,12 +3,20 @@ package com.fantomwallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
+import com.tradle.react.UdpSocketsModule;
+import com.peel.react.TcpSocketsModule;
+import com.peel.react.rnos.RNOSModule;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import org.reactnative.camera.RNCameraPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.horcrux.svg.SvgPackage;
 import cl.json.RNSharePackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -31,12 +39,20 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
+            new RNGestureHandlerPackage(),
+            new ReanimatedPackage(),
+            new UdpSocketsModule(),
+            new TcpSocketsModule(),
+            new RNOSModule(),
+            new AsyncStoragePackage(),
+            new RNCameraPackage(),
+            new LinearGradientPackage(),
             new RandomBytesPackage(),
             new RNVersionCheckPackage(),
             new SvgPackage(),
             new RNSharePackage(),
             new RNViewShotPackage(),
-            new RNCameraPackage(),
             new VectorIconsPackage()
       );
     }

@@ -10,7 +10,7 @@ export const ALL_TRANSACTION = 'All';
 /** ***************** COLOR VALUE CONSTANTS **************** */
 export const WHITE_COLOR = '#fff';
 export const BLACK_COLOR = '#000';
-export const ACTIVE_TAB_COLOR = '#EEBD12';
+export const INACTIVE_TAB_COLOR = 'rgb(38,44,50)';
 export const ACTIVE_SUB_TAB_COLOR = '#FF0000';
 
 /** *****************    DEVICE DIMENSIONS ***************** */
@@ -22,3 +22,6 @@ export const iPhoneXHeight = 812;
 /** ************************************************** */
 export const POINT = 'Point';
 export const FANTOM = 'Fantom';
+
+/** TRANSACTION */
+export const GAS_PRICE = 0x000000000001;

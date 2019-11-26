@@ -8,6 +8,8 @@
 	<string>Fantom Payments - Testnet</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.12</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -54,6 +56,8 @@
 	<string>Please allow access to calendar.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow camera permission for QR code scanning.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow access to location.</string>
 	<key>NSMotionUsageDescription</key>
@@ -64,6 +68,16 @@
 	<string>Please allow access to speech.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SF-Pro-Display-Light.ttf</string>
+		<string>SF-Pro-Display-Regular.ttf</string>
+		<string>Roboto-Light.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>SF-Pro-Display-Thin.ttf</string>
+		<string>SF-Pro-Display-Medium.ttf</string>
+		<string>SF-Pro-Display-Bold.ttf</string>
+		<string>Lato-Regular.ttf</string>
+		<string>Roboto-Black.ttf</string>
+		<string>Lato-Black.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>Feather.ttf</string>

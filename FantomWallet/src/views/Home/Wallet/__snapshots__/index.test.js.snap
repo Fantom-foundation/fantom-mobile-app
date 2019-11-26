@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "alignItems": "center",
+        "height": "85%",
+        "justifyContent": "center",
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": "-15%",
+        "top": 0,
+        "width": "45%",
+      }
+    }
+  />
+  <WalletFantomScreen
+    balance="123.123"
+    isLoading={false}
+    onRefresh={[Function]}
+    publicKey="0x00000123"
+  />
+</View>
+`;

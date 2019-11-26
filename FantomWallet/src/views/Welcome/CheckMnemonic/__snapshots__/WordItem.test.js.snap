@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderColor": "rgb(0,177,251)",
+        "opacity": 0.6,
+      },
+      Object {
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "margin": 10,
+      },
+    ]
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    disabled={true}
+    key="touch_3_test"
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "rgb(0,177,251)",
+          "borderRadius": 4,
+          "height": 30,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "paddingHorizontal": 5,
+        },
+        Object {
+          "opacity": 0.3,
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontWeight": "600",
+          "textAlign": "center",
+        }
+      }
+    >
+      test
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

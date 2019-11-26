@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 180,
+      }
+    }
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+    showsVerticalScrollIndicator={false}
+  >
+    <View
+      style={
+        Object {
+          "height": 32,
+        }
+      }
+    />
+    <BalanceViewContainer
+      balance="123.123"
+    />
+    <Connect(TransactionViewContainer)
+      isLoading={false}
+    />
+  </ScrollViewMock>
+</View>
+`;

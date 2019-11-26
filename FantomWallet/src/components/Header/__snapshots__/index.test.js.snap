@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#000",
+        "height": 64,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "bottom": 20,
+        "justifyContent": "center",
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#fff",
+              "fontSize": 20,
+              "fontWeight": "bold",
+            },
+            undefined,
+          ]
+        }
+      >
+        Head text
+      </Text>
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "left": 5,
+            "padding": 8,
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Icon
+        allowFontScaling={false}
+        color=""
+        size={12}
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;

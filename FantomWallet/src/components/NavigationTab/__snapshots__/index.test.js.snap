@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "black",
+      "bottom": 0,
+      "elevation": 12,
+      "flexDirection": "row",
+      "position": "absolute",
+      "shadowColor": "black",
+      "shadowOffset": Object {
+        "height": -5,
+        "width": 0,
+      },
+      "shadowOpacity": 0.1,
+      "width": 750,
+    }
+  }
+>
+  <Tab
+    activeTabColor="rgb(0,177,251)"
+    activeTabIndex={5}
+    handleSelectedTab={[Function]}
+    inActiveTabColor="rgb(38,44,50)"
+    index={0}
+    key="Wallet"
+    tabInfo={
+      Object {
+        "icon": Object {
+          "testUri": "../../../src/images/WalletFilled.png",
+        },
+        "route": "Wallet",
+      }
+    }
+  />
+  <Tab
+    activeTabColor="rgb(0,177,251)"
+    activeTabIndex={5}
+    handleSelectedTab={[Function]}
+    inActiveTabColor="rgb(38,44,50)"
+    index={1}
+    key="Withdraw"
+    tabInfo={
+      Object {
+        "icon": Object {
+          "testUri": "../../../src/images/sendWhite.png",
+        },
+        "route": "Withdraw",
+      }
+    }
+  />
+  <Tab
+    activeTabColor="rgb(0,177,251)"
+    activeTabIndex={5}
+    handleSelectedTab={[Function]}
+    inActiveTabColor="rgb(38,44,50)"
+    index={2}
+    key="Deposit"
+    tabInfo={
+      Object {
+        "icon": Object {
+          "testUri": "../../../src/images/downloading_white.png",
+        },
+        "route": "Deposit",
+      }
+    }
+  />
+</View>
+`;

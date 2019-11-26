@@ -1,0 +1,263 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "flex": 1,
+    }
+  }
+>
+  <Header
+    fantomIcon={
+      Object {
+        "testUri": "../../../src/images/FantomWalletWhiteIcon.png",
+      }
+    }
+    headerStyle={
+      Object {
+        "backgroundColor": "rgb(44,52,58)",
+        "height": 174.14285714285714,
+      }
+    }
+    leftButtonIcon="chevron-left"
+    leftButtonStyle={Object {}}
+    leftIconColor="#fff"
+    leftIconSize={30}
+    onLeftIconPress={[Function]}
+    textStyle={
+      Object {
+        "fontFamily": "SFProDisplay-Semibold",
+      }
+    }
+  />
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "height": 1133.8999999999999,
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": -180,
+        "top": 133.4,
+        "width": 450,
+      }
+    }
+  />
+  <ScrollViewMock
+    scrollEnabled={false}
+    style={
+      Object {
+        "height": 1334,
+        "width": 750,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "height": 32,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "SFProDisplay-Medium",
+            "fontSize": 24,
+          }
+        }
+      >
+        Restore Wallet
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 80.03999999999999,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 16,
+            "paddingLeft": 12,
+          }
+        }
+      >
+        Wallet Seed
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(38,44,50)",
+            "borderColor": "#fff",
+            "borderRadius": 6,
+            "borderStyle": "dashed",
+            "borderWidth": 0.7,
+            "height": 120,
+            "marginTop": 26.68,
+            "padding": 8,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          autoCorrect={false}
+          blurOnSubmit={true}
+          multiline={true}
+          numberOfLines={4}
+          onChangeText={[Function]}
+          placeholder="Enter Secret Mnemonic Codes."
+          placeholderTextColor="rgba( 255, 255, 255, 0.2)"
+          rejectResponderTermination={true}
+          returnKeyType="done"
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "SFProDisplay-Regular",
+              "fontSize": 12,
+              "paddingLeft": 12,
+              "textAlignVertical": "top",
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 66.7,
+          "paddingHorizontal": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "rgb(246,246,246)",
+            "fontFamily": "SFProDisplay-Semibold",
+            "fontSize": 14,
+            "textAlign": "center",
+          }
+        }
+      >
+        Enter your secret twelve word phrase here to restore your wallet.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "rgb(44,52,58)",
+          "borderRadius": 6,
+          "justifyContent": "center",
+          "marginTop": 66.7,
+          "padding": 12,
+          "paddingHorizontal": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "rgb(255,0,0)",
+            "fontFamily": "SFProDisplay-Medium",
+            "fontSize": 14,
+          }
+        }
+      >
+        Seprate each word with a single space
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "marginTop": 80.03999999999999,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "rgb(29,33,38)",
+            "borderRadius": 75,
+            "height": 150,
+            "justifyContent": "center",
+            "marginBottom": 10,
+            "width": 150,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(44,52,58)",
+              "borderRadius": 60,
+              "height": 120,
+              "justifyContent": "center",
+              "width": 120,
+            }
+          }
+        >
+          <[object Object]
+            color="#FFF"
+            name="check"
+            size={67.5}
+          />
+        </View>
+      </TouchableOpacity>
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "SFProDisplay-Semibold",
+            "fontSize": 16,
+          }
+        }
+      >
+        Confirm
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 106.72,
+        }
+      }
+    />
+  </ScrollViewMock>
+</View>
+`;

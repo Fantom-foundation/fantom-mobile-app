@@ -1,0 +1,410 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(14,14,18)",
+      "flex": 1,
+    }
+  }
+>
+  <Header
+    fantomIcon={
+      Object {
+        "testUri": "../../../src/images/FantomWalletWhiteIcon.png",
+      }
+    }
+    headerStyle={
+      Object {
+        "backgroundColor": "rgb(44,52,58)",
+        "height": 174.14285714285714,
+      }
+    }
+    leftButtonIcon="chevron-left"
+    leftIconColor="#fff"
+    leftIconSize={30}
+    onLeftIconPress={[Function]}
+    textStyle={
+      Object {
+        "fontFamily": "SFProDisplay-Semibold",
+      }
+    }
+  />
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 800.4,
+        "justifyContent": "center",
+        "opacity": 0.03,
+        "position": "absolute",
+        "right": -112.5,
+        "top": 400.2,
+        "width": 375,
+      }
+    }
+  />
+  <ScrollViewMock
+    showsVerticalScrollIndicator={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "height": 32,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgb(44,52,58)",
+          "borderRadius": 10,
+          "height": 120,
+          "marginBottom": 12,
+          "width": 718,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(50,59,66)",
+            "borderTopLeftRadius": 10,
+            "borderTopRightRadius": 10,
+            "height": 40,
+            "justifyContent": "center",
+            "paddingLeft": 28,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "rgb(166,225,100)",
+              "fontFamily": "SFProDisplay-Medium",
+              "fontSize": 14,
+            }
+          }
+        >
+          Balance
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Bold",
+              "fontSize": 24,
+              "textAlign": "center",
+            }
+          }
+        >
+          123.123 FTM
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 16,
+            "paddingLeft": 12,
+          }
+        }
+      >
+        Address to send
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(32,37,42)",
+            "borderBottomColor": "rgb(56,65,71)",
+            "borderBottomWidth": 1.5,
+            "borderRadius": 4,
+            "flexDirection": "row",
+            "marginTop": 10,
+            "maxHeight": 80,
+            "minHeight": 50,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          editable={false}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Regular",
+              "fontSize": 12,
+              "paddingLeft": 12,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value="0x0001"
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 16,
+            "paddingLeft": 12,
+          }
+        }
+      >
+        Amount
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(32,37,42)",
+            "borderBottomColor": "rgb(56,65,71)",
+            "borderBottomWidth": 1.5,
+            "borderRadius": 4,
+            "flexDirection": "row",
+            "marginTop": 10,
+            "maxHeight": 80,
+            "minHeight": 50,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          editable={false}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Regular",
+              "fontSize": 12,
+              "paddingLeft": 12,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value="123"
+        />
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+              "width": 50,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#FFF",
+                "fontFamily": "SFProDisplay-Regular",
+                "fontSize": 14,
+                "textAlign": "center",
+              }
+            }
+          >
+            ftm
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": 40.019999999999996,
+          "width": 718,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 16,
+            "paddingLeft": 12,
+          }
+        }
+      >
+        Memo
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(32,37,42)",
+            "borderBottomColor": "rgb(56,65,71)",
+            "borderBottomWidth": 1.5,
+            "borderRadius": 4,
+            "marginTop": 10,
+            "minHeight": 50,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          editable={false}
+          multiline={false}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "color": "#fff",
+              "flex": 1,
+              "fontFamily": "SFProDisplay-Regular",
+              "fontSize": 12,
+              "paddingLeft": 12,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value="text there"
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "marginTop": 66.7,
+        }
+      }
+    >
+      <Icon
+        allowFontScaling={false}
+        color="rgb(245, 206, 0)"
+        name="warning"
+        size={24}
+      />
+      <Text
+        style={
+          Object {
+            "color": "rgb(245, 206, 0)",
+            "fontFamily": "SFProDisplay-Bold",
+            "fontSize": 12,
+            "paddingTop": 2,
+          }
+        }
+      >
+        Attention
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "rgba(255, 255, 255,0.9)",
+            "fontFamily": "SFProDisplay-Regular",
+            "fontSize": 12,
+            "paddingTop": 8,
+          }
+        }
+      >
+        Please make sure the above information is correct.
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "marginTop": 80.03999999999999,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "rgb(29,33,38)",
+            "borderRadius": 75,
+            "height": 150,
+            "justifyContent": "center",
+            "marginBottom": 10,
+            "width": 150,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(44,52,58)",
+              "borderRadius": 60,
+              "height": 120,
+              "justifyContent": "center",
+              "width": 120,
+            }
+          }
+        >
+          <[object Object]
+            color="#FFF"
+            name="check"
+            size={67.5}
+          />
+        </View>
+      </TouchableOpacity>
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "SFProDisplay-Semibold",
+            "fontSize": 16,
+          }
+        }
+      >
+        Confirm
+      </Text>
+    </View>
+    <View />
+  </ScrollViewMock>
+</View>
+`;

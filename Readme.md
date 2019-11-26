@@ -18,19 +18,12 @@ This is the repository for the Fantom Wallet mobile application.
   We recommend installing Node and Watchman using [Homebrew](http://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
   
 ```
-brew install node
+brew install node@10
 brew install watchman
 ```
 
 The React Native CLI 
 Node.js comes with npm, which lets you install the React Native command line interface.
-
-## Run the following command in a Terminal:
-
-```
-npm install -g create-react-native-app
-```
-If you get an error like Cannot find module 'npmlog', try installing npm directly: curl -0 -L http://npmjs.org/install.sh | sudo sh.
 
 
 ## Setup
@@ -39,6 +32,7 @@ If you get an error like Cannot find module 'npmlog', try installing npm directl
 * cd FantomWallet
 ```
 npm install
+npm run jetify
 ```
 
 ## iOS SETUP
@@ -94,4 +88,4 @@ react-native run-android
 ```
 
 ## Running on Device
-To run the app on device, please follow instructions [here](https://facebook.github.io/react-native/docs/0.56/running-on-device)
+To run the app on device, please follow instructions [here](https://facebook.github.io/react-native/docs/0.59/running-on-device)

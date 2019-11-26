@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "black",
+      "flex": 1,
+      "width": 750,
+    }
+  }
+>
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/images/BackgroundIcon.png",
+      }
+    }
+    style={
+      Object {
+        "height": 1027.18,
+        "opacity": 0.05,
+        "position": "absolute",
+        "right": -168.75,
+        "top": 133.4,
+        "width": 450,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "padding": 66.7,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/images/FantomWalletWhiteIcon.png",
+          }
+        }
+        style={
+          Object {
+            "width": 300,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "rgb(35,39,40)",
+          "borderRadius": 10,
+          "marginTop": 160.07999999999998,
+          "paddingVertical": 106.72,
+          "width": 675,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "SFProDisplay-Thin",
+            "fontSize": 32,
+            "fontWeight": "400",
+            "marginBottom": 26.68,
+          }
+        }
+      >
+        Beyond Blockchain
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "bottom": 0,
+          "position": "absolute",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgb(35,39,40)",
+            "flexDirection": "row",
+            "height": 50,
+            "justifyContent": "center",
+            "paddingHorizontal": 15,
+            "width": 750,
+          }
+        }
+      >
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": "100%",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#00B1FF",
+                "fontFamily": "Montserrat-SemiBold",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "justifyContent": "center",
+              }
+            }
+          >
+            Restore Wallet
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#00B1FF",
+            "width": 750,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#FFF",
+              "fontFamily": "SFProDisplay-Bold",
+              "fontSize": 37.5,
+              "fontWeight": "bold",
+              "marginBottom": 26.68,
+              "marginTop": 26.68,
+            }
+          }
+        >
+          CREATE WALLET
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</View>
+`;

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "marginBottom": 13.34,
+      }
+    }
+  >
+     
+    2
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    autoCapitalize="none"
+    autoCorrect={false}
+    onChangeText={[MockFunction]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "borderColor": "rgb(223,224,224)",
+        "borderWidth": 1,
+        "fontFamily": "SegoeUI-SemiBold",
+        "height": 44,
+        "padding": 10,
+        "width": 675,
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="first second"
+  />
+</View>
+`;

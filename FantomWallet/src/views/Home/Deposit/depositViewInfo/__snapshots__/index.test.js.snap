@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "paddingBottom": 100,
+    }
+  }
+  showsVerticalScrollIndicator={false}
+  style={
+    Object {
+      "height": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "marginBottom": 26.68,
+        "marginTop": 12,
+        "padding": 16,
+      }
+    }
+  >
+    <QRGenerator
+      billingAmount=""
+      qrLink=""
+      titleText="Address QR Code"
+    />
+    <ForwardRef(QRCodeSave)
+      amount=""
+      content=""
+    />
+  </View>
+  <BillingAmountScreen
+    headerText="FTM"
+    onAmountChange={[Function]}
+    onTextFieldBlur={[Function]}
+    onTextFieldFocus={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "marginTop": 40.019999999999996,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "rgb(29,33,38)",
+          "borderRadius": 75,
+          "height": 150,
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "width": 150,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgb(44,52,58)",
+            "borderRadius": 60,
+            "height": 120,
+            "justifyContent": "center",
+            "width": 120,
+          }
+        }
+      >
+        <Icon
+          allowFontScaling={false}
+          color="#FFF"
+          name="share-apple"
+          size={67.5}
+        />
+      </View>
+    </TouchableOpacity>
+    <Text
+      style={
+        Object {
+          "color": "#FFF",
+          "fontFamily": "SFProDisplay-Semibold",
+          "fontSize": 16,
+        }
+      }
+    >
+      Share
+    </Text>
+  </View>
+</ScrollViewMock>
+`;

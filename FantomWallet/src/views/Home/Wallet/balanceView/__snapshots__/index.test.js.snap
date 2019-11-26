@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "center",
+      "backgroundColor": "rgb(44,52,58)",
+      "borderRadius": 10,
+      "height": 150,
+      "width": 718,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgb(50,59,66)",
+        "borderTopLeftRadius": 10,
+        "borderTopRightRadius": 10,
+        "height": 40,
+        "justifyContent": "center",
+        "paddingLeft": 28,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgb(166,225,100)",
+          "fontFamily": "SFProDisplay-Medium",
+          "fontSize": 14,
+        }
+      }
+    >
+      Amount
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#fff",
+          "flex": 1,
+          "fontFamily": "SFProDisplay-Bold",
+          "fontSize": 24,
+          "textAlign": "center",
+        }
+      }
+    >
+      123.123
+       FTM
+    </Text>
+  </View>
+</View>
+`;

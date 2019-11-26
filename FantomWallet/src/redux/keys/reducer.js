@@ -1,21 +1,39 @@
-import * as Actions from './action';
+// @flow
+import { types } from './actions';
 
-const KeyReducer = (state = { masterKey: '', publicKey: '', privateKey: '' }, action) => {
+type KeyReducerT = {
+  mnemonic: string,
+  masterKey: string,
+  publicKey: string,
+  privateKey: string,
+}
+
+type Action = {
+  type: string,
+  payload: KeyReducerT
+}
+
+const initialState = {
+  mnemonic: '',
+  masterKey: '',
+  publicKey: '',
+  privateKey: '',
+};
+
+const KeyReducer = (state: KeyReducerT = initialState, action: Action) => {
   switch (action.type) {
-    case Actions.MASTER_KEY:
-      return Object.assign({}, state, {
-        masterKey: action.key,
-      });
-    case Actions.PUBLIC_KEY:
-      return Object.assign({}, state, {
-        publicKey: action.key,
-      });
-    case Actions.MASTER_PUBLIC_PRIVATE_KEY:
-      return Object.assign({}, state, {
-        publicKey: action.publicKey,
-        masterKey: action.masterKey,
-        privateKey: action.privateKey,
-      });
+    case types.SET_KEYS:
+      return {
+        ...state,
+        publicKey: action.payload.publicKey,
+        masterKey: action.payload.masterKey,
+        privateKey: action.payload.privateKey,
+      };
+    case types.SET_MNEMONIC:
+      return {
+        ...state,
+        mnemonic: action.payload.mnemonic,
+      };
     default:
       return state;
   }
