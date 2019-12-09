@@ -71,7 +71,7 @@ const styles = {
         fontSize: FontSize.mediumlarge,
         marginTop: deviceHeight * 0.02,
         marginBottom: deviceHeight * 0.02,
-        fontFamily: 'SegoeUI-SemiBold',
+        fontFamily: fonts.WorkSansSemiBold,
         color:Colors.royalBlue
     },
     footer: {
@@ -85,7 +85,7 @@ const styles = {
     footerText1: {
         // marginLeft: deviceWidth * 0.2,
         color: Colors.white,
-        fontWeight: 'bold',
+        fontFamily:fonts.WorkSansBold,
         fontSize:FontSize.base
     },
     division: {
