@@ -87,7 +87,7 @@ const phraseView = {
     paddingBottom: 6
   },
   textInput: {
-    width: getWidth(256)
+    width: getWidth(270)
   },
 
   pasteButton: {
