@@ -24,6 +24,7 @@
     "react-native-camera": "^1.2.0",
     "react-native-custom-qr-codes": "^1.0.2",
     "react-native-keyboard-spacer": "^0.4.1",
+    "react-native-modalbox": "^2.0.0",
     "react-native-permissions": "^1.1.1",
     "react-native-qrcode": "^0.2.7",
     "react-native-randombytes": "^3.5.0",

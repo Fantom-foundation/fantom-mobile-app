@@ -17,11 +17,11 @@ import Settings from './src/views/homeScreen/settings/index';
 import AboutApp from './src/views/homeScreen/settings/aboutApp/index';
 import CustomerSupport from './src/views/homeScreen/settings/customerSupport/index';
 import RecoverWallet from './src/views/recoverWallet/';
-
+import WalletInfo from './src/views/WalletInfo'
 const Routing = createStackNavigator({
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
-        screen: WalletSetup,
+        screen: WalletInfo,
         navigationOptions: {
             gesturesEnabled: false,
         },
@@ -36,6 +36,7 @@ const Routing = createStackNavigator({
         },
     },
     CaptchaVerification: { screen: CaptchaVerification },
+    WalletInfo: { screen: WalletInfo },
     AddressBook: { screen: AddressBook },
     QRScanner: { screen: QRScanner },
     QRGenerator: { screen: QRGenerator },
