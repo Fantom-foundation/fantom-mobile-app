@@ -38,8 +38,13 @@ class WalletSetup extends Component {
                     <Text style={style.walletSetupText}>CREATE A NEW WALLET</Text>
                 </TouchableOpacity>
                 {/* <View > */}
+<<<<<<< Updated upstream
                     <TouchableOpacity style={style.recoverWalletStyle} onPress={() => { this.props.navigation.navigate('RecoverWallet') }} >
                         <Text style={style.footerText1}>i already have a wallet</Text>
+=======
+                    <TouchableOpacity style={styles.recoverWalletStyle} onPress={() => { this.props.navigation.navigate('RecoverWallet') }} >
+                        <Text style={styles.footerText1}>I already have a wallet</Text>
+>>>>>>> Stashed changes
                     </TouchableOpacity>
                 {/* </View> */}
 
