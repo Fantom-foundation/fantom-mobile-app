@@ -1,6 +1,8 @@
 import { Dimensions } from 'react-native';
 import { getHeight } from '../../utils/pixelResolver';
-
+import {Colors} from '../../theme/colors'
+import { FontSize } from '../../theme/fontSize'
+import {fonts} from '../../theme/font'
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
@@ -8,21 +10,21 @@ const styles = {
     mainContainer: {
         padding: deviceHeight * 0.05,
         flex: 1,
-        backgroundColor:'rgb(56,99,207)'
+        backgroundColor:Colors.royalBlue
     },
     imageBackground: {
         width: deviceWidth,
         height: deviceHeight,
-        backgroundColor: 'black'
+        backgroundColor: Colors.black
     },
     headerContainer: {
         alignItems: 'center',
         marginTop: getHeight(98),
     },
     fantomText: {
-        fontSize: 45,
-        fontFamily: 'SegoeUI-SemiBold',
-        color:'white'
+        fontSize: FontSize.massive+9,
+        fontFamily: fonts.MuliBold,
+        color: Colors.white,
     },
     fantomLogo: {
         width: 250,
@@ -33,22 +35,22 @@ const styles = {
         alignItems: 'center',
     },
     subHeaderText1: {
-        color: 'white',
+        color: Colors.white,
         fontWeight: 'bold',
-        fontSize: 32,
+        fontSize: FontSize.huge,
         marginTop: deviceHeight * 0.05,
         fontFamily: 'SegoeUI'
     },
     subHeaderText2: {
         marginTop: deviceHeight * 0.02,
-        fontSize: 18,
+        fontSize: FontSize.mediumlarge,
         fontWeight: 'bold',
         color: 'rgb(158,162,166)',
         fontFamily: 'SegoeUI'
 
     },
     subHeaderText3: {
-        fontSize: 18,
+        fontSize:FontSize.mediumlarge ,
         color: 'rgb(158,162,166)',
         fontFamily: 'SegoeUI',
         fontWeight: 'bold',
@@ -60,17 +62,17 @@ const styles = {
         alignItems: 'center',
         alignSelf: 'center',
         marginTop: deviceHeight * 0.1,
-        backgroundColor: 'white',
+        backgroundColor: Colors.white,
         width: deviceWidth * 0.8,
         alignSelf: 'center',
         borderRadius:25
     },
     walletSetupText: {
-        fontSize: 18,
+        fontSize: FontSize.mediumlarge,
         marginTop: deviceHeight * 0.02,
         marginBottom: deviceHeight * 0.02,
         fontFamily: 'SegoeUI-SemiBold',
-        color:'rgb(56,99,207)'
+        color:Colors.royalBlue
     },
     footer: {
         position: 'absolute',
@@ -82,22 +84,19 @@ const styles = {
     },
     footerText1: {
         // marginLeft: deviceWidth * 0.2,
-        color: 'white',
+        color: Colors.white,
         fontWeight: 'bold',
-        fontSize:16
+        fontSize:FontSize.base
     },
     division: {
-
         width: 1,
-        backgroundColor: 'white'
+        backgroundColor: Colors.white
     },
     footerText2: {
-        // marginLeft: deviceWidth * 0.1,
-        color: 'white',
+        color: Colors.white,
         fontWeight: 'bold',
     },
     recoverWalletStyle: {
-        // padding: 4,
         alignItems: 'center',
         position: 'absolute',
         bottom: deviceHeight * 0.10,
