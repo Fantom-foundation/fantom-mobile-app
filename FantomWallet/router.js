@@ -17,7 +17,8 @@ import Settings from './src/views/homeScreen/settings/index';
 import AboutApp from './src/views/homeScreen/settings/aboutApp/index';
 import CustomerSupport from './src/views/homeScreen/settings/customerSupport/index';
 import RecoverWallet from './src/views/recoverWallet/';
-
+import WalletImported from './src/views/WalletImported';
+import WalletCreated from './src/views/WalletCreated';
 const Routing = createStackNavigator({
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
@@ -37,6 +38,8 @@ const Routing = createStackNavigator({
     },
     CaptchaVerification: { screen: CaptchaVerification },
     AddressBook: { screen: AddressBook },
+    WalletImported: { screen: WalletImported },
+    WalletCreated: { screen: WalletCreated },
     QRScanner: { screen: QRScanner },
     QRGenerator: { screen: QRGenerator },
     EditContact: { screen: EditContact },
