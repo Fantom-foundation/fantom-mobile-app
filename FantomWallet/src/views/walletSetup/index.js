@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
-import style from './style';
 import styles from './style';
 import FantomLogo from '../../images/fantomWhiteIcon.png'
 //CaptchaVerification
@@ -17,29 +16,29 @@ class WalletSetup extends Component {
     }
     render() {
         return (<ImageBackground
-            style={style.imageBackground}
+            style={styles.imageBackground}
             source={require('../../images/background.png')}
             imageStyle={{ resizeMode: 'cover' }}
         >
             <StatusBar barStyle="light-content" />
-            <View style={style.mainContainer}>
-                <View style={style.headerContainer}>
+            <View style={styles.mainContainer}>
+                <View style={styles.headerContainer}>
                     {/* <Image source={require('../../images/fantom-logo.png')} style={style.headerImage}
                         resizeMode='contain' /> */}
                     <Text style={styles.fantomText}>fantom</Text>
                 </View>
-                <View style={style.subHeaderContainer}>
+                <View style={styles.subHeaderContainer}>
                     {/* <Text style={style.subHeaderText1}>Beyond Blockchain</Text>
                     <Text style={style.subHeaderText2}>The Future of Decentralized </Text>
                     <Text style={style.subHeaderText3}>Ecosystem</Text> */}
                     <Image source={FantomLogo} style={styles.fantomLogo} resizeMode="contain"/>
                 </View>
-                <TouchableOpacity style={style.walletSetup} onPress={this.onCreateNewWallet.bind(this)} >
-                    <Text style={style.walletSetupText}>CREATE A NEW WALLET</Text>
+                <TouchableOpacity style={styles.walletSetup} onPress={this.onCreateNewWallet.bind(this)} >
+                    <Text style={styles.walletSetupText}>CREATE A NEW WALLET</Text>
                 </TouchableOpacity>
                 {/* <View > */}
-                    <TouchableOpacity style={style.recoverWalletStyle} onPress={() => { this.props.navigation.navigate('RecoverWallet') }} >
-                        <Text style={style.footerText1}>i already have a wallet</Text>
+                    <TouchableOpacity style={styles.recoverWalletStyle} onPress={() => { this.props.navigation.navigate('RecoverWallet') }} >
+                        <Text style={styles.footerText1}>i already have a wallet</Text>
                     </TouchableOpacity>
                 {/* </View> */}
 
