@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Platform,
+  Keyboard
+} from "react-native";
 import Button from "../../general/button";
 import EthUtil from "ethereumjs-util";
 import Hdkey from "hdkey";
@@ -124,59 +133,68 @@ class RecoverWallet extends Component {
       //     </View>
       // </View>
 
-      <View style={styles.container}>
-        <HeaderView
-          onLeftIconPress={() => this.props.navigation.goBack()}
-          active={active}
-          onChangeView={this.onChangeView}
-        />
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <View style={styles.container}>
+          <HeaderView
+            onLeftIconPress={() => this.props.navigation.goBack()}
+            active={active}
+            onChangeView={this.onChangeView}
+          />
 
-        {active && (
-          <View style={styles.phraseContainer}>
-            <Text style={styles.phraseHeading}>Phrase</Text>
-            <View style={styles.inputView}>
-              <TextInput
-                value={this.state.seed}
-                multiline={true}
-                onChangeText={text =>
-                  this.setState({ mnemonic: text, errorText: "" })
-                }
-                style={styles.textInput}
-              ></TextInput>
-              <TouchableOpacity style={styles.pasteButton}>
-                <Text style={styles.pasterText}>Paste</Text>
-              </TouchableOpacity>
-            </View>
+          {active && (
+            <View style={styles.phraseContainer}>
+              <Text style={styles.phraseHeading}>Phrase</Text>
+              <View style={styles.inputView}>
+                <TextInput
+                  value={this.state.seed}
+                  multiline={true}
+                  onChangeText={text =>
+                    this.setState({ mnemonic: text, errorText: "" })
+                  }
+                  style={styles.textInput}
+                ></TextInput>
+                <TouchableOpacity style={styles.pasteButton}>
+                  <Text style={styles.pasterText}>Paste</Text>
+                </TouchableOpacity>
+              </View>
 
-            <Text style={styles.noteText}>
-              12 or 24 words separated by single spaces
-            </Text>
-            <Button
-              onPress={this.handleRecoverWallet.bind(this)}
-              buttonStyle={styles.buttonStyle}
-              buttonText={styles.buttonText}
-              text="Import"
-            />
-          </View>
-        )}
-        {!active && (
-          <View style={styles.phraseContainer}>
-            <Text style={styles.phraseHeading}>Private key</Text>
-            <View style={styles.privateInputView}>
-              <TextInput multiline={true} style={styles.textInput}></TextInput>
-              <TouchableOpacity style={styles.pasteButton}>
-                <Text style={styles.pasterText}>Paste</Text>
-              </TouchableOpacity>
+              <Text style={styles.noteText}>
+                12 or 24 words separated by single spaces
+              </Text>
+              <Button
+                onPress={this.handleRecoverWallet.bind(this)}
+                buttonStyle={styles.buttonStyle}
+                buttonText={styles.buttonText}
+                text="Import"
+              />
             </View>
-            <Text style={styles.noteText}>64 aplhanumeric characters</Text>
-            <Button
-              buttonStyle={styles.buttonStyle}
-              buttonText={styles.buttonText}
-              text="Import"
-            />
-          </View>
-        )}
-      </View>
+          )}
+          {!active && (
+            <View style={styles.phraseContainer}>
+              <Text style={styles.phraseHeading}>Private key</Text>
+              <View style={styles.privateInputView}>
+                <TextInput
+                  multiline={true}
+                  style={styles.textInput}
+                ></TextInput>
+                <TouchableOpacity style={styles.pasteButton}>
+                  <Text style={styles.pasterText}>Paste</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.noteText}>64 aplhanumeric characters</Text>
+              <Button
+                buttonStyle={styles.buttonStyle}
+                buttonText={styles.buttonText}
+                text="Import"
+              />
+            </View>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
