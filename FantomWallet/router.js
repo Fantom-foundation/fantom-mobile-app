@@ -17,23 +17,31 @@ import Settings from './src/views/homeScreen/settings/index';
 import AboutApp from './src/views/homeScreen/settings/aboutApp/index';
 import CustomerSupport from './src/views/homeScreen/settings/customerSupport/index';
 import RecoverWallet from './src/views/recoverWallet/';
+import BackupWallet from './src/views/backupWallet';
+import VerifyRecoveryWords from "./src/views/verifyRecoveryWords";
+import RecoveryWords from "./src/views/recoveryWords";
 
-const Routing = createStackNavigator({
+const Routing = createStackNavigator(
+  {
     SplashScreen: { screen: SplashScreen },
+    RecoveryWords,
+    VerifyRecoveryWords,
+    BackupWallet,
+
     WalletSetup: {
-        screen: WalletSetup,
-        navigationOptions: {
-            gesturesEnabled: false,
-        },
+      screen: WalletSetup,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
     },
     Terms: { screen: TermsConditions },
     PrivacyPolicy: { screen: PrivacyPolicy },
     CaptionOutput: { screen: CaptionOutput },
     HomeScreen: {
-        screen: HomeScreen,
-        navigationOptions: {
-            gesturesEnabled: false,
-        },
+      screen: HomeScreen,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
     },
     CaptchaVerification: { screen: CaptchaVerification },
     AddressBook: { screen: AddressBook },
@@ -44,11 +52,12 @@ const Routing = createStackNavigator({
     Settings: { screen: Settings },
     AboutApp: { screen: AboutApp },
     CustomerSupport: { screen: CustomerSupport },
-    RecoverWallet:{screen: RecoverWallet},
-},
-    {
-        headerMode: 'none',
-    });
+    RecoverWallet: { screen: RecoverWallet }
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 export default class Router extends React.Component {
     render() {

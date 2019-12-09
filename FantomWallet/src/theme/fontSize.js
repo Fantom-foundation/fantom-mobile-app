@@ -1,4 +1,5 @@
-const base = 16;
+import {getWidth} from "../utils/pixelResolver"
+const base = getWidth(16);
 
 export const FontSize = {
   tiny: base * 0.5, // 8
