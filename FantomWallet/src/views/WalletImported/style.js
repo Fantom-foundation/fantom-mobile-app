@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 import { getHeight } from '../../utils/pixelResolver';
-
+import {fonts} from '../../theme/font'
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
@@ -19,7 +19,7 @@ const style = {
     },
     walletText: {
         fontSize: 28,
-        fontWeight:'bold'
+        fontFamily:fonts.WorkSansBold
     },
     checkedIcon: {
         width: 120,
