@@ -21,7 +21,7 @@ import WalletImported from './src/views/WalletImported';
 const Routing = createStackNavigator({
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
-        screen: WalletSetup,
+        screen: WalletImported,
         navigationOptions: {
             gesturesEnabled: false,
         },
