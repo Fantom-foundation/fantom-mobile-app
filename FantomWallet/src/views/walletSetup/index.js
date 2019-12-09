@@ -38,7 +38,11 @@ class WalletSetup extends Component {
                 </TouchableOpacity>
                 {/* <View > */}
                     <TouchableOpacity style={styles.recoverWalletStyle} onPress={() => { this.props.navigation.navigate('RecoverWallet') }} >
+<<<<<<< Updated upstream
                         <Text style={styles.footerText1}>i already have a wallet</Text>
+=======
+                        <Text style={styles.footerText1}>I already have a wallet</Text>
+>>>>>>> Stashed changes
                     </TouchableOpacity>
                 {/* </View> */}
 
