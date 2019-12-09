@@ -3,6 +3,7 @@ package com.fantomwallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.horcrux.svg.SvgPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AsyncStoragePackage(),
             new RandomBytesPackage(),
             new RNVersionCheckPackage(),
             new SvgPackage(),
