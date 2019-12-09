@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import { getHeight } from '../../utils/pixelResolver';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -7,6 +8,7 @@ const styles = {
     mainContainer: {
         padding: deviceHeight * 0.05,
         flex: 1,
+        backgroundColor:'rgb(56,99,207)'
     },
     imageBackground: {
         width: deviceWidth,
@@ -15,10 +17,19 @@ const styles = {
     },
     headerContainer: {
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: getHeight(98),
+    },
+    fantomText: {
+        fontSize: 45,
+        fontFamily: 'SegoeUI-SemiBold',
+        color:'white'
+    },
+    fantomLogo: {
+        width: 250,
+        height: 200,
     },
     subHeaderContainer: {
-        marginTop: deviceHeight * 0.25,
+        marginTop: getHeight(84),
         alignItems: 'center',
     },
     subHeaderText1: {
@@ -49,16 +60,17 @@ const styles = {
         alignItems: 'center',
         alignSelf: 'center',
         marginTop: deviceHeight * 0.1,
-        borderWidth: 1,
-        backgroundColor: 'rgb(235,187,17)',
-        width: deviceWidth * 0.7,
-        alignSelf: 'center'
+        backgroundColor: 'white',
+        width: deviceWidth * 0.8,
+        alignSelf: 'center',
+        borderRadius:25
     },
     walletSetupText: {
-        fontSize: deviceWidth * 0.05,
+        fontSize: 18,
         marginTop: deviceHeight * 0.02,
         marginBottom: deviceHeight * 0.02,
-        fontFamily: 'SegoeUI-SemiBold'
+        fontFamily: 'SegoeUI-SemiBold',
+        color:'rgb(56,99,207)'
     },
     footer: {
         position: 'absolute',
@@ -72,6 +84,7 @@ const styles = {
         // marginLeft: deviceWidth * 0.2,
         color: 'white',
         fontWeight: 'bold',
+        fontSize:16
     },
     division: {
 
@@ -84,12 +97,11 @@ const styles = {
         fontWeight: 'bold',
     },
     recoverWalletStyle: {
-        // backgroundColor: 'green', 
-        padding: 4,
+        // padding: 4,
         alignItems: 'center',
         position: 'absolute',
-        bottom: deviceHeight * 0.11,
-        width: deviceWidth
+        bottom: deviceHeight * 0.10,
+        width: deviceWidth,
     },
     recoverWalletTextStyle:{
 
