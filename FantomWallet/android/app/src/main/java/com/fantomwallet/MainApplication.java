@@ -3,12 +3,13 @@ package com.fantomwallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.horcrux.svg.SvgPackage;
 import cl.json.RNSharePackage;
-import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -32,12 +33,13 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNViewShotPackage(),
+            new AsyncStoragePackage(),
             new AsyncStoragePackage(),
             new RandomBytesPackage(),
             new RNVersionCheckPackage(),
             new SvgPackage(),
             new RNSharePackage(),
-            new RNViewShotPackage(),
             new RNCameraPackage(),
             new VectorIconsPackage()
       );

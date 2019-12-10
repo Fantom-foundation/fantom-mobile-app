@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.3",
     "Base64": "^1.0.1",
     "axios": "^0.18.1",
     "bip39": "^2.5.0",
@@ -30,7 +31,7 @@
     "react-native-share": "^1.1.1",
     "react-native-vector-icons": "^5.0.0",
     "react-native-version-check": "^3.0.0",
-    "react-native-view-shot": "^2.4.0",
+    "react-native-view-shot": "^3.0.2",
     "react-navigation": "^2.12.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>
@@ -47,7 +47,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow camera permission for QR code scanning.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Please allow access for library.</string>
 	<key>UIAppFonts</key>
@@ -81,38 +81,37 @@
 		<string>Segoe-UI-SemiBold.ttf</string>
 		<string>Segoe-UI.ttf</string>
 		<string>WorkSans-Black.otf</string>
-<string>Muli-Bold.ttf</string>
-<string>Muli-BoldItalic.ttf</string>
-<string>Muli-ExtraLight.ttf</string>
-<string>Muli-ExtraLightItalic.ttf</string>
-<string>Muli-Italic.ttf</string>
-<string>Muli-Light.ttf</string>
-<string>Muli-LightItalic.ttf</string>
-<string>Muli-Semi-BoldItalic.ttf</string>
-<string>Muli-SemiBold.ttf</string>
-<string>Muli.ttf</string>
-<string>WorkSans-Black.otf</string>
-<string>WorkSans-BlackItalic.otf</string>
-<string>WorkSans-Bold.otf</string>
-<string>WorkSans-BoldItalic.otf</string>
-<string>WorkSans-ExtraBold.otf</string>
-<string>WorkSans-ExtraBoldItalic.otf</string>
-<string>WorkSans-ExtraLight.otf</string>
-<string>WorkSans-ExtraLightItalic.otf</string>
-<string>WorkSans-Hairline.otf</string>
-<string>worksans-italic-vf.ttf</string>
-<string>WorkSans-Italic.otf</string>
-<string>WorkSans-Light.otf</string>
-<string>WorkSans-LightItalic.otf</string>
-<string>WorkSans-Medium.otf</string>
-<string>WorkSans-MediumItalic.otf</string>
-<string>WorkSans-Regular.otf</string>
-<string>worksans-roman-vf.ttf</string>
-<string>WorkSans-SemiBold.otf</string>
-<string>WorkSans-SemiBoldItalic.otf</string>
-<string>WorkSans-Thin.otf</string>
-<string>WorkSans-ThinItalic.otf</string>
-		<string></string>
+		<string>Muli-Bold.ttf</string>
+		<string>Muli-BoldItalic.ttf</string>
+		<string>Muli-ExtraLight.ttf</string>
+		<string>Muli-ExtraLightItalic.ttf</string>
+		<string>Muli-Italic.ttf</string>
+		<string>Muli-Light.ttf</string>
+		<string>Muli-LightItalic.ttf</string>
+		<string>Muli-Semi-BoldItalic.ttf</string>
+		<string>Muli-SemiBold.ttf</string>
+		<string>Muli.ttf</string>
+		<string>WorkSans-BlackItalic.otf</string>
+		<string>WorkSans-Bold.otf</string>
+		<string>WorkSans-BoldItalic.otf</string>
+		<string>WorkSans-ExtraBold.otf</string>
+		<string>WorkSans-ExtraBoldItalic.otf</string>
+		<string>WorkSans-ExtraLight.otf</string>
+		<string>WorkSans-ExtraLightItalic.otf</string>
+		<string>WorkSans-Hairline.otf</string>
+		<string>worksans-italic-vf.ttf</string>
+		<string>WorkSans-Italic.otf</string>
+		<string>WorkSans-Light.otf</string>
+		<string>WorkSans-LightItalic.otf</string>
+		<string>WorkSans-Medium.otf</string>
+		<string>WorkSans-MediumItalic.otf</string>
+		<string>WorkSans-Regular.otf</string>
+		<string>worksans-roman-vf.ttf</string>
+		<string>WorkSans-SemiBold.otf</string>
+		<string>WorkSans-SemiBoldItalic.otf</string>
+		<string>WorkSans-Thin.otf</string>
+		<string>WorkSans-ThinItalic.otf</string>
+		<string/>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
