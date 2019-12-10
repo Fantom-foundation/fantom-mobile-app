@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
 import styles from './styles';
 
-import BalanceView from '../BalanceView';
-import TransactionView from '../TransactionView';
+import BalanceView from '../balanceView';
+import TransactionView from '../transactionView';
 import type { TransactionT } from '~/redux/wallet/actions';
 
 type Props = {

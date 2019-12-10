@@ -4,14 +4,14 @@ import WellecomeNavigator from './WelcomeNavigator';
 import HomeNavigator from './HomeNavigator';
 import PrivacyPolicy from '~/views/Other/PrivacyPolicy';
 import TermsConditions from '~/views/Other/TermsConditions';
-import AddressBook from '~/views/Settings/AddressBook';
+import AddressBook from '~/views/Settings/addressBook';
 import QRScanner from '~/components/QRCode/QRCodeScanner/view';
 import QRGenerator from '~/components/QRCode/QRCodeGenerator';
-import EditContact from '~/views/Settings/AddressBook/EditContact';
+import EditContact from '~/views/Settings/addressBook/editContact';
 import SendMoney from '~/views/Home/Withdraw/SendMoney';
 import Settings from '~/views/Settings';
-import AboutApp from '~/views/Settings/AboutApp';
-import CustomerSupport from '~/views/Settings/CustomerSupport';
+import AboutApp from '~/views/Settings/aboutApp';
+import CustomerSupport from '~/views/Settings/customerSupport';
 
 const RootNavigator = createStackNavigator(
   {

@@ -2,7 +2,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import TransactionEntity from './TransactionEntity';
+import TransactionEntity from './transactionEntity';
 
 type Props = {
   fantomTransactionArr: any;

@@ -12,7 +12,7 @@ import styles from './styles';
 // Components
 import QRGenerator from '~/components/QRCode/QRCodeGenerator';
 import QRCodeSave from '~/components/QRCode/QRCodeSave';
-import BillingAmountScreen from '../BillingAmountView/index';
+import BillingAmountScreen from '../billingAmountView/index';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
 import { setDopdownAlert } from '~/redux/notification/actions';
 

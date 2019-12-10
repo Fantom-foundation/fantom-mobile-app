@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 
 // eslint-disable-next-line import/no-cycle
-import SplashScreen from '~/views/SplashScreen';
+import SplashScreen from '~/views/splashScreen';
 import WalletSetup from '~/views/Welcome/WalletSetup';
 import CreateMnemonic from '~/views/Welcome/CreateMnemonic';
 import CheckMnemonic from '~/views/Welcome/CheckMnemonic';

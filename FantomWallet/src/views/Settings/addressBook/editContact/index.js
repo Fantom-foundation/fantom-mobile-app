@@ -19,7 +19,7 @@ import { NavigationService, routes } from '~/navigation/helpers';
 // Components
 import Header from '~/components/Header/index';
 import styles from './styles';
-import Dialogbox from './DialogBox';
+import Dialogbox from './dialogBox';
 import qrCode from '~/images/QR.png';
 import {
   addNewAddress as addNewAddressAction,

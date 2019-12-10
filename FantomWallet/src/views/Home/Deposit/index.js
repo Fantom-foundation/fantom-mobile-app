@@ -4,7 +4,7 @@ import { View, Image } from 'react-native';
 // Style
 import styles from './styles';
 // Component
-import DepositViewInfo from './DepositViewInfo';
+import DepositViewInfo from './depositViewInfo';
 // Image
 import BackgroundIcon from '~/images/BackgroundIcon.png';
 /**

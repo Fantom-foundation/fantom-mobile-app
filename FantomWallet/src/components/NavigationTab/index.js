@@ -12,7 +12,7 @@ import depositWhiteIcon from '~/images/downloading_white.png';
 import { INACTIVE_TAB_COLOR } from '~/common/constants';
 
 import styles from './styles';
-import Tab from './Tab';
+import Tab from './tab';
 
 const TABS = [
   {

@@ -36,6 +36,10 @@ module.exports = {
         ]
       }
     ],
+  //    "import/no-unresolved": [
+  //     2, 
+  //     { "caseSensitive": false }
+  //  ]
     // "react/destructuring-assignment": 0,
     // "react/forbid-prop-types": 0,
     // "import/no-named-as-default": 0,
@@ -71,7 +75,8 @@ module.exports = {
           ".jsx",
           ".json"
         ]
-      }
+      },
+      ""
     }
   },
   env: {
