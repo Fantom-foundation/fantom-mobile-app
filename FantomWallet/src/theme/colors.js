@@ -6,5 +6,7 @@ export const Colors = {
   lightGrey: "rgb(138,163,228)",
   shadowGrey: "#19000000",
   blackOpacity: "#2b3954",
-  greyHeading: "rgb(139,147,161)"
+  greyHeading: "rgb(139,147,161)",
+  whiteOpacity: "rgba(255,255,255,0.75)",
+  red: "#ff0000"
 };

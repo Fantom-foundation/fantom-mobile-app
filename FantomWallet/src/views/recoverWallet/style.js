@@ -68,6 +68,49 @@ const headerStyles = {
   }
 };
 
+const error = {
+  errorView: {
+    position: "absolute",
+    top: Metrics.getStatusBarHeight(),
+    right: 0,
+    left: 0,
+    bottom: 0,
+    backgroundColor: Colors.whiteOpacity,
+
+    paddingHorizontal: 22
+  },
+  errorModalView: {
+    backgroundColor: Colors.white,
+    paddingVertical: getHeight(35),
+    borderRadius: 22,
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: Colors.red,
+    marginTop: getHeight(270)
+  },
+  errorTextHeading: {
+    fontSize: FontSize.base,
+    color: Colors.blackOpacity,
+    fontFamily: fonts.WorkSansSemiBold
+  },
+  backButton: {
+    marginTop: getHeight(36),
+    width: getWidth(130),
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: Colors.white,
+    borderWidth: 2,
+    borderColor: Colors.blackOpacity,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  backText: {
+    fontSize: FontSize.base,
+    color: Colors.blackOpacity,
+    fontFamily: fonts.WorkSansSemiBold
+  }
+};
+
 const phraseView = {
   phraseContainer: {
     flex: 1,
@@ -139,5 +182,6 @@ export default StyleSheet.create({
   },
   ...headerStyles,
   ...phraseView,
-  ...privateKeyStyles
+  ...privateKeyStyles,
+  ...error
 });

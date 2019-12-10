@@ -96,6 +96,19 @@ class RecoverWallet extends Component {
     this.setState({ active: value });
   };
 
+  getErrorView = text => {
+    return (
+      <View style={styles.errorView}>
+        <View style={styles.errorModalView}>
+          <Text style={styles.errorTextHeading}>{text}</Text>
+          <TouchableOpacity style={styles.backButton}>
+            <Text style={styles.backText}>Back</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   render() {
     const { active } = this.state;
     return (
@@ -193,6 +206,16 @@ class RecoverWallet extends Component {
               />
             </View>
           )}
+
+          {/*
+          function call for the error in Private key
+          {this.getErrorView("Incorrect private key")} 
+          */}
+
+          {/*
+          function call for the error in Phrase
+           {this.getErrorView("Incorrect passphrase")}
+          */}
         </View>
       </TouchableWithoutFeedback>
     );
