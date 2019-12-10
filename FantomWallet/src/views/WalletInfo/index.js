@@ -28,8 +28,10 @@ class WalletInfo extends Component {
   };
   render() {
     const { renameIconPressed, walletName, modalVisible } = this.state;
-    const colors = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6'];
+    const colors = ['#416ed5', '#fe9d8b', '#59c5dd', '#cdd4d8', '#e6fc88', '#fcd3ff', '#fff666', '#7bc5ff', '#40c49d', '#8959dd',
+    '#ffb966','#e32c2c','#a650a6','#78dd59','#4649fd','#5f5f7c'];
     const arrayOfColors = [1, 2, 3, 4];
+    let colorIndex = -1;
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={styles.mainContainer}>
@@ -85,20 +87,6 @@ class WalletInfo extends Component {
             isOpen={modalVisible}
             onClosed={() => this.setState({ modalVisible: false })}
           >
-            {/* <View>
-              {arrayOfColors.map(item => {
-                return (
-                    <View style={{ backgroundColor: 'blue' }}>
-                        {arrayOfColors.map(i => {
-                        return(
-                      <View style={styles.colorModalView}>
-                        <TouchableOpacity style={styles.colorsView} />
-                        </View>);
-                    })}
-                  </View>
-                );
-              })}
-            </View> */}
 
                     <View style={{marginHorizontal: 30}}>
                     <Text style={styles.codeText}>Select a color</Text>
@@ -111,14 +99,15 @@ class WalletInfo extends Component {
                       justifyContent: 'space-between'
                     }}
                   >
-                    {arrayOfColors.map((i, j) => {
+                    {arrayOfColors.map((item, index) => {
+                      colorIndex += 1;
                       return (
                         <TouchableOpacity
                           style={{
                             width: getWidth(50),
                             height: getWidth(50),
                             borderRadius: getWidth(25),
-                            backgroundColor: colors[j]
+                            backgroundColor: colors[colorIndex]
                               }}
                               />
                       );
