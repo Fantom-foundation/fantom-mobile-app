@@ -13,7 +13,9 @@ const HeaderView = props => {
         onLeftIconPress={onLeftIconPress}
         text="Import Fantom wallet"
         headerStyle={styles.headerStyle}
-        leftButtonIcon={leftArrowIcon}
+        leftButtonIcon="chevron-left"
+        leftIconColor="#fff"
+        leftIconSize={30}
       />
       <View style={styles.buttonView}>
         <TouchableOpacity
