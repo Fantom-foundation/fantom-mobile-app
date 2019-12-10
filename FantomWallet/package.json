@@ -14,7 +14,7 @@
     "jetify": "rm -rf ./node_modules/react-native-http/example && npx jetify"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.6.2",
+    "@react-native-community/async-storage": "^1.6.3",
     "@tradle/react-native-http": "^2.0.0",
     "Base64": "^1.0.1",
     "axios": "^0.18.1",

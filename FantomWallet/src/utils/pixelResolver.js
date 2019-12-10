@@ -1,30 +1,35 @@
 // @flow
-import { Dimensions, PixelRatio, Platform, StatusBar } from 'react-native';
+import { Dimensions, PixelRatio, Platform, StatusBar } from "react-native";
 
 const designSizeWidth = 375;
 const designSizeHeight = 812;
 // $FlowFixMe Map is not recognised by Flow, why?
 const cacheMap = new Map();
 
-const { width: deviceScreenWidth, height: deviceHeight } = Dimensions.get('window');
+const { width: deviceScreenWidth, height: deviceHeight } = Dimensions.get(
+  "window"
+);
 
 /**
  * @method isIphoneX: Return true if device is Iphone X.
  */
 function isIphoneX() {
-  const dimen = Dimensions.get('window');
+  const dimen = Dimensions.get("window");
   return (
-    Platform.OS === 'ios' &&
+    Platform.OS === "ios" &&
     !Platform.isPad &&
     !Platform.isTVOS &&
-    (dimen.height === 812 || dimen.width === 812 || (dimen.height === 896 || dimen.width === 896))
+    (dimen.height === 812 ||
+      dimen.width === 812 ||
+      dimen.height === 896 ||
+      dimen.width === 896)
   );
 }
 
 // eslint-disable-next-line no-nested-ternary
 const deviceScreenHeight = isIphoneX()
   ? deviceHeight * 0.9
-  : Platform.OS === 'android'
+  : Platform.OS === "android"
   ? deviceHeight - StatusBar.currentHeight
   : deviceHeight;
 
@@ -42,6 +47,24 @@ export const getWidth = function getWidth(imgWidth: number) {
   );
   cacheMap.set(`w${imgWidth}`, requiredWidth);
   return requiredWidth;
+};
+
+export const Metrics = {
+  screenHeight: Dimensions.get("window").height,
+  screenWidth: Dimensions.get("window").width,
+
+  getiPhoneX_Dimensions() {
+    return { height: 812, width: 375 };
+  },
+  getStatusBarHeight() {
+    if (Platform.OS === "android") {
+      return 0;
+    }
+    if (deviceHeight === Metrics.getiPhoneX_Dimensions().height) {
+      return 44;
+    }
+    return 20;
+  }
 };
 
 /**

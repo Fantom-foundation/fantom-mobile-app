@@ -1,111 +1,106 @@
-import { StyleSheet } from 'react-native';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
+import { Dimensions } from "react-native";
+import { getHeight } from "../../../utils/pixelResolver";
+import { Colors } from "../../../theme/colors";
+import { FontSize } from "../../../theme/fontSize";
+import { fonts } from "../../../theme/font";
+const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height;
 
-export default StyleSheet.create({
+const styles = {
   mainContainer: {
-    padding: DEVICE_HEIGHT * 0.05,
+    padding: deviceHeight * 0.05,
     flex: 1,
+    backgroundColor: Colors.royalBlue
   },
-  backgroundContainer: {
-    width: DEVICE_WIDTH,
-    // height: DEVICE_HEIGHT,
-    flex: 1,
-    backgroundColor: 'black',
+  imageBackground: {
+    width: deviceWidth,
+    height: deviceHeight,
+    backgroundColor: Colors.black
   },
-  backgroundImage: {
-    width: DEVICE_WIDTH * 0.6,
-    height: DEVICE_HEIGHT * 0.77,
-    opacity: 0.05,
-    top: DEVICE_HEIGHT * 0.1,
-    right: -((DEVICE_WIDTH * 0.45) / 2),
-    position: 'absolute',
-  },
-  // Header image styles
   headerContainer: {
-    alignItems: 'center',
+    alignItems: "center",
+    marginTop: getHeight(98)
   },
-  headerImage: {
-    width: DEVICE_WIDTH * 0.4,
+  fantomText: {
+    fontSize: FontSize.massive + 9,
+    fontFamily: fonts.MuliBold,
+    color: Colors.white
   },
-  // Mid Container style
+  fantomLogo: {
+    width: 250,
+    height: 200
+  },
   subHeaderContainer: {
-    marginTop: DEVICE_HEIGHT * 0.12,
-    width: DEVICE_WIDTH * 0.9,
-    paddingVertical: DEVICE_HEIGHT * 0.08,
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(35,39,40)',
-    borderRadius: 10,
+    marginTop: getHeight(84),
+    alignItems: "center"
   },
   subHeaderText1: {
-    color: '#FFF',
-    fontSize: 32,
-    fontFamily: 'SFProDisplay-Thin',
-    fontWeight: '400',
-    marginBottom: DEVICE_HEIGHT * 0.02,
+    color: Colors.white,
+    fontWeight: "bold",
+    fontSize: FontSize.huge,
+    marginTop: deviceHeight * 0.05,
+    fontFamily: "SegoeUI"
   },
   subHeaderText2: {
-    fontSize: 18,
-    color: '#fff',
-    fontFamily: 'SFProDisplay-Thin',
+    marginTop: deviceHeight * 0.02,
+    fontSize: FontSize.mediumlarge,
+    fontWeight: "bold",
+    color: "rgb(158,162,166)",
+    fontFamily: "SegoeUI"
   },
-  // Footer button Styles
-  bottomButtonContainer: {
-    position: 'absolute',
-    bottom: 0,
+  subHeaderText3: {
+    fontSize: FontSize.mediumlarge,
+    color: "rgb(158,162,166)",
+    fontFamily: "SegoeUI",
+    fontWeight: "bold"
   },
-  upperButtonContainer: {
-    width: DEVICE_WIDTH,
-    height: 50,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: 'rgb(35,39,40)',
-    paddingHorizontal: 15,
+  walletSetup: {
+    position: "absolute",
+    // bottom: deviceHeight * 0.13,
+    bottom: deviceHeight * 0.16,
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: deviceHeight * 0.1,
+    backgroundColor: Colors.white,
+    width: deviceWidth * 0.8,
+    alignSelf: "center",
+    borderRadius: 25
   },
-  recoverWalletStyle: {
-    alignItems: 'center',
-    height: '100%',
-    justifyContent: 'center',
-  },
-  footerText1: {
-    color: '#00B1FF',
-    fontWeight: 'bold',
-    fontFamily: 'Montserrat-SemiBold',
-    fontSize: 16,
-    justifyContent: 'center',
+  walletSetupText: {
+    fontSize: FontSize.mediumlarge,
+    marginTop: deviceHeight * 0.02,
+    marginBottom: deviceHeight * 0.02,
+    fontFamily: fonts.WorkSansSemiBold,
+    color: Colors.royalBlue
   },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-    alignItems: 'center',
-    paddingVertical: 5,
-    height: '100%',
+    position: "absolute",
+    bottom: deviceHeight * 0.05,
+    flexDirection: "row",
+    width: deviceWidth - 40,
+    justifyContent: "space-between",
+    alignSelf: "center"
   },
-  footerText2: {
-    color: 'white',
-    fontFamily: 'SFProDisplay-Light',
-    fontSize: 14,
+  footerText1: {
+    // marginLeft: deviceWidth * 0.2,
+    color: Colors.white,
+    fontFamily: fonts.WorkSansBold,
+    fontSize: FontSize.base
   },
   division: {
     width: 1,
-    backgroundColor: 'white',
-    marginHorizontal: 5,
-    height: '60%',
+    backgroundColor: Colors.white
   },
-  walletSetup: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    backgroundColor: '#00B1FF',
-    width: DEVICE_WIDTH,
+  footerText2: {
+    color: Colors.white,
+    fontWeight: "bold"
   },
-  walletSetupText: {
-    fontSize: DEVICE_WIDTH * 0.05,
-    marginTop: DEVICE_HEIGHT * 0.02,
-    marginBottom: DEVICE_HEIGHT * 0.02,
-    fontFamily: 'SFProDisplay-Bold',
-    fontWeight: 'bold',
-    color: '#FFF',
+  recoverWalletStyle: {
+    alignItems: "center",
+    position: "absolute",
+    bottom: deviceHeight * 0.1,
+    width: deviceWidth
   },
-});
+  recoverWalletTextStyle: {}
+};
+export default styles;
