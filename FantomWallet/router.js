@@ -22,6 +22,11 @@ const Routing = createStackNavigator({
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
         screen: WalletImported,
+import WalletInfo from './src/views/WalletInfo'
+const Routing = createStackNavigator({
+    SplashScreen: { screen: SplashScreen },
+    WalletSetup: {
+        screen: WalletInfo,
         navigationOptions: {
             gesturesEnabled: false,
         },
@@ -37,6 +42,7 @@ const Routing = createStackNavigator({
     },
     CaptchaVerification: { screen: CaptchaVerification },
     WalletImported: { screen: WalletImported },
+    WalletInfo: { screen: WalletInfo },
     AddressBook: { screen: AddressBook },
     QRScanner: { screen: QRScanner },
     QRGenerator: { screen: QRGenerator },
