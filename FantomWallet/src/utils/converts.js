@@ -1,4 +1,4 @@
-const math = require('mathjs');
+const math = require('../../__mocks__/mathjs');
 const Web3 = require('web3');
 
 math.config({
