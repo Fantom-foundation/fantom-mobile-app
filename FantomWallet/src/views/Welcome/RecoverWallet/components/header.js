@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import styles from "../../../recoverWallet/style";
+import styles from "../styles";
 import Header from "../../../../components/Header";
 import { Colors } from "../../../../theme";
 import leftArrowIcon from "../../../../images/arrowLeft_White.png";
