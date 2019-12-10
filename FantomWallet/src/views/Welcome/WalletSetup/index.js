@@ -19,7 +19,8 @@ import styles from "./styles";
  */
 const WalletSetup = () => {
   const onCreateNewWallet = () =>
-    NavigationService.navigate(routes.root.CreateMnemonic);
+    NavigationService.navigate(routes.root.BackupWallet);
+   // NavigationService.navigate(routes.root.CreateMnemonic);
   const onRestoreWallet = () =>
     NavigationService.navigate(routes.root.RecoverWallet);
   return (

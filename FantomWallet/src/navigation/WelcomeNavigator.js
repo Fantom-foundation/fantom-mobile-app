@@ -6,12 +6,14 @@ import WalletSetup from '~/views/Welcome/WalletSetup';
 import CreateMnemonic from '~/views/Welcome/CreateMnemonic';
 import CheckMnemonic from '~/views/Welcome/CheckMnemonic';
 import RecoverWallet from '~/views/Welcome/RecoverWallet';
-
+import CaptionOutput from "~/views/captionOutput";
+import BackupWallet from "~/views/backupWallet";
+import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 const WelcomeNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
-      screen: WalletSetup,
+      screen: WalletSetup
       // navigationOptions: {
       //   gesturesEnabled: false,
       // },
@@ -19,10 +21,13 @@ const WelcomeNavigator = createStackNavigator(
     CreateMnemonic: { screen: CreateMnemonic },
     CheckMnemonic: { screen: CheckMnemonic },
     RecoverWallet: { screen: RecoverWallet },
+    CaptionOutput,
+    BackupWallet,
+    VerifyRecoveryWords
   },
   {
-    headerMode: 'none',
-  },
+    headerMode: "none"
+  }
 );
 
 export default WelcomeNavigator;
