@@ -44,6 +44,8 @@ const Routing = createStackNavigator(
       }
     },
     CaptchaVerification: { screen: CaptchaVerification },
+    WalletImported: { screen: WalletImported },
+    WalletInfo: { screen: WalletInfo },
     AddressBook: { screen: AddressBook },
     QRScanner: { screen: QRScanner },
     QRGenerator: { screen: QRGenerator },
