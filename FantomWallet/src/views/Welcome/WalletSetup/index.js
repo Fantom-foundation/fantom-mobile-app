@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-
+import FantomLogo from "../../../images/fantomWhiteIcon.png";
 import { NavigationService, routes } from '~/navigation/helpers';
 import styles from './styles';
 

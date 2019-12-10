@@ -2,7 +2,7 @@ import { createStackNavigator } from 'react-navigation';
 
 // eslint-disable-next-line import/no-cycle
 import SplashScreen from '~/views/splashScreen';
-import WalletSetup from '~/views/Welcome/WalletSetup';
+import WalletSetup from '~/views/walletSetup';
 import CreateMnemonic from '~/views/Welcome/CreateMnemonic';
 import CheckMnemonic from '~/views/Welcome/CheckMnemonic';
 import RecoverWallet from '~/views/Welcome/RecoverWallet';
@@ -21,9 +21,9 @@ const WelcomeNavigator = createStackNavigator(
     CreateMnemonic: { screen: CreateMnemonic },
     CheckMnemonic: { screen: CheckMnemonic },
     RecoverWallet: { screen: RecoverWallet },
-    CaptionOutput,
-    BackupWallet,
-    VerifyRecoveryWords
+    CaptionOutput: { screen: CaptionOutput},
+    BackupWallet: { screen: BackupWallet},
+    VerifyRecoveryWords: { screen: VerifyRecoveryWords }
   },
   {
     headerMode: "none"
