@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import styles from "../style";
-import Header from "../../../general/header/index";
-import { Colors } from "../../../theme";
-import leftArrowIcon from "../../../images/arrowLeft_White.png";
+import styles from "../../../recoverWallet/style";
+import Header from "../../../../components/Header";
+import { Colors } from "../../../../theme";
+import leftArrowIcon from "../../../../images/arrowLeft_White.png";
 
 const HeaderView = props => {
   const { onChangeView, active, onLeftIconPress } = props;
