@@ -9,8 +9,13 @@ import RecoverWallet from '~/views/Welcome/RecoverWallet';
 import CaptionOutput from "~/views/captionOutput";
 import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
+import SettingsContainer from "~/views/Settings"
+
+
 const WelcomeNavigator = createStackNavigator(
   {
+    
+    SettingsContainer: { screen: SettingsContainer },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup

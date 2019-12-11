@@ -11,5 +11,7 @@ export const Colors = {
   blackOpacity: "#2b3954",
   greyHeading: "rgb(139,147,161)",
   whiteOpacity: "rgba(255,255,255,0.75)",
-  red: "#ff0000"
+  red: "#ff0000",
+  lightGreen: '#00cd91',
+  grey:'rgb(207,210,216)'
 };

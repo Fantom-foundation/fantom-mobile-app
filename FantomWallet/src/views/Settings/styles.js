@@ -1,12 +1,18 @@
 import { StyleSheet, Platform } from 'react-native';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
+import { Colors } from '../../theme/colors';
+import { FontSize } from '../../theme/fontSize';
+import { fonts } from '../../theme/font';
+import { getWidth, getHeight, Metrics } from '../../utils/pixelResolver';
 
 const isIOS = Platform.OS === 'ios';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(14,14,18)',
+    backgroundColor: Colors.white,
+    paddingHorizontal: getWidth(15),
+    // backgroundColor:'yellow'
   },
   mainContainer: {
     flex: 1,
@@ -103,6 +109,64 @@ export default StyleSheet.create({
     opacity: isIOS ? 0.03 : 0.02,
     right: -((DEVICE_WIDTH * 0.45) / 2),
   },
-
   empty: { height: DEVICE_HEIGHT * 0.08 },
+  mainView: {
+    flex:1, 
+  },
+  settingView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: getHeight(20),
+    alignItems: 'center',
+  },
+  settingText: {
+    color: Colors.textBlack,
+    fontSize: FontSize.large + 1,
+    fontFamily: fonts.WorkSansBold,
+    marginLeft:getWidth(33)
+  },
+  crossIcon: {
+    width: 16,
+    height: 16,
+    tintColor: Colors.textBlack,
+  },
+  mainContainer: {
+    flex: 1,
+    // backgroundColor:'yellow',
+  },
+  rowsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // marginVertical: getHeight(21),
+  },
+  leftView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textStyle: {
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    marginLeft: 18,
+    width: getWidth(216),
+  },
+  bottomView: {
+    flexDirection: 'row',
+    flex: 1,
+    width: getWidth(150),
+    alignSelf:'center',
+    justifyContent: 'space-between',
+    marginTop: getHeight(60),
+    marginBottom:10
+  },
+  imageStyle: {
+    marginHorizontal:getWidth(10)
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+    tintColor: Colors.textBlack,
+    // backgroundColor:'red'
+  }
+  
 });
