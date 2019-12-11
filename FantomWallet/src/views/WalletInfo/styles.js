@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     flexWrap: "wrap"
   },
   textInput: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.3,
     borderBottomColor: Colors.grey,
     width: Metrics.screenWidth * 0.72,
-    height: Metrics.screenHeight * 0.04,
+    height: getHeight(50),
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.mediumlarge
   },
@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
       height: 11,
       width: 0
     },
-    shadowRadius: 8
+    shadowRadius: 8,
+    elevation: 7
   },
   colorsView: {
     width: getWidth(50),
@@ -69,11 +70,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row"
   },
-  buttonContainer:{
-flex:1,
-//alignSelf:"flex-end",
-marginVertical:getHeight(30),
-justifyContent:"flex-end"
+  buttonContainer: {
+    flex: 1,
+    //alignSelf:"flex-end",
+    marginVertical: getHeight(30),
+    justifyContent: "flex-end"
   },
   buttonStyle: {
     borderRadius: 25,

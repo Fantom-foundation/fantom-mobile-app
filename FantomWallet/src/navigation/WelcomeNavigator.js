@@ -14,6 +14,7 @@ import WalletInfo from "~/views/WalletInfo";
 
 const WelcomeNavigator = createStackNavigator(
   {
+    
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup
@@ -28,7 +29,7 @@ const WelcomeNavigator = createStackNavigator(
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
     WalletCreated,
-    WalletInfo
+   WalletInfo
   },
   {
     headerMode: "none"
