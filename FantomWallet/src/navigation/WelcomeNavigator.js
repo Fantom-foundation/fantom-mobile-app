@@ -11,11 +11,11 @@ import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
-
+import NewWallet from "~/views/Home/NewWallet";
 const WelcomeNavigator = createStackNavigator(
   {
-    
     SplashScreen: { screen: SplashScreen },
+    NewWallet,
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {
@@ -29,7 +29,7 @@ const WelcomeNavigator = createStackNavigator(
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
     WalletCreated,
-   WalletInfo
+    WalletInfo
   },
   {
     headerMode: "none"

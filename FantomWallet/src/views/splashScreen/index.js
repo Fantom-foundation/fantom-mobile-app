@@ -29,7 +29,7 @@ export const SplashScreenContainer = ({ masterKey, privateKey, navigation }: Pro
    */
   useEffect(() => {
     const route = (masterKey && privateKey) ? 'HomeScreen' : 'WalletSetup';
-    NavigationService.navigate(route);
+    NavigationService.navigate("NewWallet");
     SplashScreen.hide()
   }, [])
 
