@@ -5,7 +5,6 @@ import { FontSize } from "../../../theme/fontSize";
 import { fonts } from "../../../theme/font";
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
-
 const styles = {
   mainContainer: {
     padding: deviceHeight * 0.05,

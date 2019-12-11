@@ -37,6 +37,21 @@ export default class VerifyRecoveryWords extends Component {
     }
   };
 
+   handleSelectedWordClick = selected => {
+    
+    const { selectedWords, mnemonicWords, realWord } = this.state;
+    let newWords = mnemonicWords;
+    let remainingWords = selectedWords;
+    const index = remainingWords.findIndex(item => item === selected);
+    remainingWords.splice(index, 1);
+    newWords.push(selected);
+    this.setState({
+      selectedWords: remainingWords,
+      mnemonicWords: newWords
+    });
+
+  };
+
   render() {
     const { isEnable, selectedWords, mnemonicWords } = this.state;
 
@@ -66,7 +81,12 @@ export default class VerifyRecoveryWords extends Component {
                     selectedWords.map((val, i) => {
                       return (
                         <View key={i} style={styles.wordWrap}>
-                          <Text style={styles.selectedTextView}>{val}</Text>
+                          <Text
+                            onPress={() => this.handleSelectedWordClick(val)}
+                            style={styles.selectedTextView}
+                          >
+                            {val}
+                          </Text>
                         </View>
                       );
                     })
@@ -98,7 +118,7 @@ export default class VerifyRecoveryWords extends Component {
                   );
                 })
               ) : (
-                <Text style={styles.selectedTextView}>No Data</Text>
+                <Text style={styles.selectedTextView} />
               )}
             </View>
 
@@ -110,6 +130,9 @@ export default class VerifyRecoveryWords extends Component {
                   ? Colors.royalBlue
                   : Colors.greyOpacity
               }}
+              onPress={() =>
+                this.props.navigation.navigate("WalletCreated")
+              }
               textStyle={styles.buttonText}
               text={"CONTINUE"}
             />
