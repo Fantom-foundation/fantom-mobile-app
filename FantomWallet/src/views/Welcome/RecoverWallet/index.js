@@ -207,7 +207,7 @@ export const RecoverWalletContainer = ({
                 <Text style={styles.pasterText}>Paste</Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.noteText}>64 aplhanumeric characters</Text>
+            <Text style={styles.noteText}>64 alphanumeric characters</Text>
             <Button
               buttonStyle={styles.buttonStyle}
               buttonText={styles.buttonText}

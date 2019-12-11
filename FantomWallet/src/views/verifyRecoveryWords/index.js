@@ -30,11 +30,9 @@ export default class VerifyRecoveryWords extends Component {
     remainingWords.splice(index, 1);
     newWords.push(selected);
     this.setState({ selectedWords: newWords, mnemonicWords: remainingWords });
-    if (selectedWords.length === realWord.length) {
-      this.setState({ isEnable: true });
-    } else {
+
       this.setState({ isEnable: false });
-    }
+
   };
 
    handleSelectedWordClick = selected => {
@@ -49,6 +47,7 @@ export default class VerifyRecoveryWords extends Component {
       selectedWords: remainingWords,
       mnemonicWords: newWords
     });
+   this.setState({ isEnable: false });
 
   };
 
@@ -73,7 +72,7 @@ export default class VerifyRecoveryWords extends Component {
               <View
                 style={{
                   ...styles.verfiyContainer,
-                  borderColor: !isEnable ? "transparent" : Colors.red
+                  borderColor: isEnable ? "transparent" : Colors.red
                 }}
               >
                 <View style={styles.textContainer}>

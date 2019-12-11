@@ -10,6 +10,8 @@ import CaptionOutput from "~/views/captionOutput";
 import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
+import WalletInfo from "~/views/WalletInfo";
+
 const WelcomeNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
@@ -25,7 +27,8 @@ const WelcomeNavigator = createStackNavigator(
     CaptionOutput: { screen: CaptionOutput },
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
-    WalletCreated
+    WalletCreated,
+    WalletInfo
   },
   {
     headerMode: "none"
