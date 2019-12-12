@@ -1,20 +1,20 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from "react-navigation";
 
 // eslint-disable-next-line import/no-cycle
-import SplashScreen from '~/views/splashScreen';
+import SplashScreen from "~/views/splashScreen";
 import WalletSetup from "~/views/Welcome/WalletSetup";
-import CreateMnemonic from '~/views/Welcome/CreateMnemonic';
-import CheckMnemonic from '~/views/Welcome/CheckMnemonic';
-import RecoverWallet from '~/views/Welcome/RecoverWallet';
+import CreateMnemonic from "~/views/Welcome/CreateMnemonic";
+import CheckMnemonic from "~/views/Welcome/CheckMnemonic";
+import RecoverWallet from "~/views/Welcome/RecoverWallet";
 import CaptionOutput from "~/views/captionOutput";
 import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
-
+import SendReceive from "../views/sendReceive";
 const WelcomeNavigator = createStackNavigator(
   {
-    
+    SendReceive: { screen: SendReceive },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup
@@ -29,7 +29,7 @@ const WelcomeNavigator = createStackNavigator(
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
     WalletCreated,
-   WalletInfo
+    WalletInfo
   },
   {
     headerMode: "none"
