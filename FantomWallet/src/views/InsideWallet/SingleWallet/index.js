@@ -64,7 +64,7 @@ const sendTransaction = {
   transactionNumber:
     "0x7485a8be8324ba03553a40f1f9d4503c1bed5793cd2467ae1801c7a43ace960a",
   date: "November 16 2019, 11:11 AM",
-  transactionFee: "0.001585839 ETH ($0.30)"
+  transactionFee: "0.001585839 FTM ($0.30)"
 };
 
 export default class SingleWallet extends React.Component<any, any> {
@@ -420,7 +420,7 @@ export default class SingleWallet extends React.Component<any, any> {
             <View style={styles.detailsContainer}>
               <Text style={styles.modalText}>You sent</Text>
               <Text style={styles.modalAmount}>
-                {`${sendTransaction.hot} HOT`}
+                {`${sendTransaction.hot} FTM`}
               </Text>
               <Text style={styles.modalTransaction}>Recipient</Text>
               <Text style={styles.modalTransactionText}>
