@@ -57,75 +57,95 @@ type Props = {
 
 const settingData = [
   {
-    Icon: FontAwesome,
-    iconName: 'plus-square',
+    // Icon: FontAwesome,
+    // iconName: 'plus-square',
     text: 'Add wallet',
     rightArrowIcon: RightArrowIcon,
-    source: PlusIcon
+    source: PlusIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: false
   },
   {
     Icon: Entypo,
     iconName: 'wallet',
     text: 'Manage wallets',
     rightArrowIcon: RightArrowIcon,
-    source: WalletIcon
+    source: WalletIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: false
   },
   {
     Icon: Ionicons,
     iconName: 'md-moon',
     text: 'Dark Mode',
     rightArrowIcon: '',
-    source: MoonIcon
+    source: MoonIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: true
   },
   {
     Icon: MaterialIcons,
     iconName: 'security',
     text: 'Privacy and security',
     rightArrowIcon: RightArrowIcon,
-    source: ShieldIcon
+    source: ShieldIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: false
   },
   {
     Icon: Entypo,
     iconName: 'notification',
     text: 'Push notifications',
     rightArrowIcon: '',
-    source: NotificationIcon
+    source: NotificationIcon,
+    notificationsToggleButton: true,
+    darkToggleButton: false
   },
   {
     Icon: FontAwesome,
     iconName: 'dollar',
     text: 'Currency',
     rightArrowIcon: RightArrowIcon,
-    source: DollarIcon
+    source: DollarIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: false
   },
   {
     Icon: Entypo,
     iconName: 'share',
     text: 'Share with your friends',
     rightArrowIcon: RightArrowIcon,
-    source: ShareIcon
+    source: ShareIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: false
   },
   {
     Icon: FontAwesome,
     iconName: 'question-circle',
     text: 'About',
     rightArrowIcon: RightArrowIcon,
-    source: AboutIcon
+    source: AboutIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: false
   },
   {
     Icon: Entypo,
     iconName: 'heart',
     text: 'Leave a review',
     rightArrowIcon: RightArrowIcon,
-    source: ReviewIcon
+    source: ReviewIcon,
+    notificationsToggleButton: false,
+    darkToggleButton: false
   }
 ];
 
 class SettingsContainer extends Component {
   state = {
-    switchValue: null
+    notificationSwitchValue: false,
+    darkSwitchValue: false
   };
   render() {
+    const { notificationSwitchValue, darkSwitchValue } = this.state;
     return (
       <View style={styles.container}>
         <SafeAreaView style={styles.container}>
@@ -145,6 +165,7 @@ class SettingsContainer extends Component {
               </View>
               <FlatList
                 data={settingData}
+                extraData={this.state}
                 renderItem={({ item, index }) => {
                   // const { Icon } = item;
                   return (
@@ -178,19 +199,29 @@ class SettingsContainer extends Component {
                             }}
                             resizeMode="contain"
                           ></Image>
-                        ) : (
-                            <Switch
-                              ios_backgroundColor={Colors.blackOpacity}
-                              value={this.state.switchValue}
-                              onTintColor={Colors.blackOpacity}
-                              thumbColor={Colors.grey}
-                              tintColor={Colors.blackOpacity}
-                              trackColor={Colors.blackOpacity}
-              
-                            // value={this.state.switchValue}
-                            onValueChange={switchValue => {
-                              this.setState({ switchValue })}
-                            }
+                        ) : null}
+                        {item.notificationsToggleButton && (
+                          <Switch
+                            value={notificationSwitchValue}
+                            onTintColor={Colors.blackOpacity}
+                            thumbColor={Colors.grey}
+                            tintColor={Colors.grey}
+                            trackColor={Colors.grey}
+                            onValueChange={notificationSwitchValue => {
+                              this.setState({ notificationSwitchValue });
+                            }}
+                          />
+                        )}
+                        {item.darkToggleButton && (
+                          <Switch
+                            value={darkSwitchValue}
+                            onTintColor={Colors.blackOpacity}
+                            thumbColor={Colors.grey}
+                            tintColor={Colors.grey}
+                            trackColor={Colors.grey}
+                            onValueChange={darkSwitchValue => {
+                              this.setState({ darkSwitchValue });
+                            }}
                           />
                         )}
                       </TouchableOpacity>
