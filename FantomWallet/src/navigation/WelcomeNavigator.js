@@ -10,9 +10,17 @@ import CaptionOutput from "~/views/captionOutput";
 import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
+import SingleWallet from '~/views/InsideWallet/SingleWallet';
+import SendFTM from '~/views/InsideWallet/SendFTM';
+import ScanQR from '~/views/InsideWallet/ScanQR';
+import ReceiveMyQcCode from '~/views/InsideWallet/ReceiveMyQcCode';
 const WelcomeNavigator = createStackNavigator(
   {
+    ReceiveMyQcCode:{screen:ReceiveMyQcCode},
+    ScanQR: { screen: ScanQR },
     SplashScreen: { screen: SplashScreen },
+    SingleWallet: { screen: SingleWallet },
+    SendFTM: { screen: SendFTM },
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {
