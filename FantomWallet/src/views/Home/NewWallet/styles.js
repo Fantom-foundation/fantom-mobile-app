@@ -8,7 +8,7 @@ const cardStyles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: 22,
     backgroundColor: Colors.orange,
-   padding: getWidth(20)
+    padding: getWidth(20),
   },
   cardHeaderText: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -88,6 +88,31 @@ const cardListItemStyles = StyleSheet.create({
   }
 });
 
+const listViewStyles = StyleSheet.create({
+  listViewContainer: {
+    height: getHeight(56),
+    marginVertical:getHeight(4),
+    backgroundColor: Colors.orange,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderRadius: 10,
+    paddingHorizontal: getWidth(14),
+    alignItems: "center"
+  },
+  listTitleText: {
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.small,
+    color: Colors.textBlack
+  },
+  rightTextStyle: {
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    color: Colors.white,
+    lineHeight:getHeight(24)
+
+  }
+});
+
 export default StyleSheet.create({
   mainContainer: {
     flex: 1
@@ -122,7 +147,8 @@ export default StyleSheet.create({
     height: getHeight(44),
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: getWidth(22)
+    paddingHorizontal: getWidth(22),
+
   },
   listContainer: {
     marginHorizontal: getWidth(22)
@@ -130,7 +156,7 @@ export default StyleSheet.create({
   listScrollView: {
     //flex: 1,
 
-    width: getWidth(330)
+   // width: getWidth(336)
   },
   itemSeperatorStyle: {
     marginHorizontal: getWidth(10)
@@ -146,5 +172,6 @@ export default StyleSheet.create({
     // borderLeftColor: "red"
   },
   ...cardStyles,
-  ...cardListItemStyles
+  ...cardListItemStyles,
+  ...listViewStyles
 });
