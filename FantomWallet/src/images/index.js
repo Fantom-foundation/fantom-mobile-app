@@ -13,3 +13,4 @@ export { default as DollarIcon } from './dollar-symbol.png';
 export { default as HeartIcon } from './Heart.png';
 export { default as QuestionIcon } from './question.png';
 export { default as ShieldIcon } from './shield.png';
+export { default as EqualIcon } from './equal.png';

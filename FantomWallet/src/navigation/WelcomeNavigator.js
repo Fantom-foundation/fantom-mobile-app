@@ -10,12 +10,14 @@ import CaptionOutput from "~/views/captionOutput";
 import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import SettingsContainer from "~/views/Settings"
-
+import ManageWallet from '~/views/Settings/ManageWallet'
+import AddWallet from '~/views/Settings/AddWallet'
 
 const WelcomeNavigator = createStackNavigator(
   {
-    
-    SettingsContainer: { screen: SettingsContainer },
+    // AddWallet:{screen:AddWallet},
+    ManageWallet:{screen:ManageWallet},
+    // SettingsContainer: { screen: SettingsContainer },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup
