@@ -22,6 +22,7 @@ import { getWidth } from "../../utils/pixelResolver";
 import Button from "../../components/general/Button";
 import Entypo from "react-native-vector-icons/Entypo";
 import { Colors } from "../../theme";
+import KeyPad from "../../components/general/keyPad";
 
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
@@ -81,32 +82,14 @@ export const SendReceive = ({ navigation }: Props) => {
           </View>
 
           {/* KeyPad */}
-          <View style={styles.keyPadView}>
-            <FlatList
-              data={keyPad}
-              renderItem={({ item, index }) => {
-                let marginLeft = getWidth(58);
-                let marginTop = index <= 2 ? 0 : 10;
-                if (index === 0 || index === 3 || index === 6 || index === 9)
-                  marginLeft = 0;
 
-                return (
-                  <TouchableOpacity
-                    style={[
-                      styles.numberButton,
-                      { marginLeft: marginLeft, marginTop: marginTop }
-                    ]}
-                    onPress={() => handleInputNumber(item)}
-                  >
-                    <Text style={styles.numberText}>{item}</Text>
-                  </TouchableOpacity>
-                );
-              }}
-              //Setting the number of column
-              numColumns={3}
-              keyExtractor={index => index.toString()}
-            />
-          </View>
+          <KeyPad
+            buttonStyle={styles.numberButton}
+            textStyle={styles.numberText}
+            keyPad={keyPad}
+            keyPadStyle={styles.keyPadView}
+            handleInputNumber={item => handleInputNumber(item)}
+          />
 
           {/* Buttons */}
           <View style={styles.sendReceiveView}>
