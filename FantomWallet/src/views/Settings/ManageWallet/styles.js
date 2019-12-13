@@ -113,7 +113,7 @@ const styles = {
   },
   renameModalStyle: {
     width: Metrics.screenWidth - 40,
-    height: Metrics.screenHeight * 0.5,
+    height: Metrics.screenHeight * 0.55,
     position: 'absolute',
     bottom:0,
     shadowColor: Colors.blackOpacity,
