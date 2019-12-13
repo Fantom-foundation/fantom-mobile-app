@@ -20,7 +20,7 @@ const priceText = {
     fontFamily: fonts.WorkSansBold,
     color: Colors.white,
     flexWrap: "wrap",
-    width: getWidth(250),
+    width: getWidth(200),
     textAlign: "center",
     marginTop: getHeight(142),
     alignSelf: "center"
@@ -119,7 +119,8 @@ const modalStyles = {
     marginLeft: 3,
     flexWrap: "wrap",
     fontSize: FontSize.base,
-    fontFamily: fonts.WorkSansRegular
+    fontFamily: fonts.WorkSansRegular,
+    marginTop: -5
   },
   pasteButton: {
     width: getWidth(60),

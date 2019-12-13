@@ -1,6 +1,6 @@
 // @flow
 // Library
-import React from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   View,
@@ -9,7 +9,8 @@ import {
   SafeAreaView,
   FlatList,
   Image,
-  TextInput
+  TextInput,
+  Clipboard
 } from "react-native";
 
 //Assets
@@ -27,6 +28,35 @@ import { Colors } from "../../theme";
  */
 export const SendReceive = ({ navigation }: Props) => {
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
+  const [number, setNumber] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [sendTo, setSendTo] = useState("");
+
+  //  function for entered number from KeyPad
+  const handleInputNumber = item => {
+    if (item === "<") {
+      let num = number.slice(0, -1);
+      setNumber(num);
+    } else {
+      setNumber(number.concat(item));
+    }
+  };
+
+  //formating Number
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  }
+
+  const handleSendOption = () => {
+    // for open Modal for Send Option
+    setOpenModal(true);
+  };
+
+  const readFromClipboard = async () => {
+    const clipboardContent = await Clipboard.getString();
+
+    setSendTo(clipboardContent);
+  };
 
   return (
     <View style={styles.container}>
@@ -39,7 +69,9 @@ export const SendReceive = ({ navigation }: Props) => {
           </TouchableOpacity>
 
           {/* Price and Wallet View */}
-          <Text style={styles.sendPrice}>0</Text>
+          <Text style={styles.sendPrice}>
+            {number ? formatNumber(number) : 0}
+          </Text>
           <Text style={styles.sendPriceExample}>($0)</Text>
           <View style={styles.walletButton}>
             <TouchableOpacity>
@@ -54,17 +86,17 @@ export const SendReceive = ({ navigation }: Props) => {
               data={keyPad}
               renderItem={({ item, index }) => {
                 let marginLeft = getWidth(58);
-                let marginTop = 10;
+                let marginTop = index <= 2 ? 0 : 10;
                 if (index === 0 || index === 3 || index === 6 || index === 9)
                   marginLeft = 0;
 
-                if (index === 0 || index === 1 || index === 2) marginTop = 10;
                 return (
                   <TouchableOpacity
                     style={[
                       styles.numberButton,
                       { marginLeft: marginLeft, marginTop: marginTop }
                     ]}
+                    onPress={() => handleInputNumber(item)}
                   >
                     <Text style={styles.numberText}>{item}</Text>
                   </TouchableOpacity>
@@ -87,39 +119,45 @@ export const SendReceive = ({ navigation }: Props) => {
               text={"Send"}
               buttonStyle={styles.buttonStyle}
               textStyle={styles.buttonText}
+              onPress={() => handleSendOption()}
             />
           </View>
         </SafeAreaView>
       </ScrollView>
       {/* Modal View */}
-      <View style={styles.modalView}>
-        <View style={styles.crossSendView}>
-          <TouchableOpacity>
-            <Entypo name="cross" size={25} color={Colors.blackOpacity} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.sendText}>Send</Text>
-          </TouchableOpacity>
+      {openModal && (
+        <View style={styles.modalView}>
+          <View style={styles.crossSendView}>
+            <TouchableOpacity onPress={() => setOpenModal(false)}>
+              <Entypo name="cross" size={25} color={Colors.blackOpacity} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.sendText}>Send</Text>
+            </TouchableOpacity>
+          </View>
+          {/* To Option */}
+          <View style={styles.toView}>
+            <Text style={styles.toText}>To:</Text>
+            <TextInput
+              multiline={2}
+              style={styles.sendTo}
+              value={sendTo}
+              onChangeText={text => setSendTo(text)}
+            ></TextInput>
+            {/* Paste Option */}
+            <TouchableOpacity
+              style={styles.pasteButton}
+              onPress={() => readFromClipboard()}
+            >
+              <Text style={styles.pasteText}>Paste</Text>
+            </TouchableOpacity>
+            {/* QR Button */}
+            <TouchableOpacity style={styles.qrButton}>
+              <Image source={QRCode} style={styles.qrSendImage} />
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* To Option */}
-        <View style={styles.toView}>
-          <Text style={styles.toText}>To:</Text>
-          <TextInput multiline={2} style={styles.sendTo}></TextInput>
-          {/* Paste Option */}
-          <TouchableOpacity style={styles.pasteButton}>
-            <Text style={styles.pasteText}>Paste</Text>
-          </TouchableOpacity>
-          {/* QR Button */}
-          <TouchableOpacity style={styles.qrButton}>
-            <Image source={QRCode} style={styles.qrSendImage} />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.crossSendView}>
-          <Text style={styles.toText}>Memo:</Text>
-          <TextInput multiline={2} style={styles.memoTextInput}></TextInput>
-        </View>
-      </View>
+      )}
     </View>
   );
 };
