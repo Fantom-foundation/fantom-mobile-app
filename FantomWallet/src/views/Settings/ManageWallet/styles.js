@@ -81,6 +81,30 @@ const styles = {
     elevation: 5,
     backgroundColor:'green'
   },
+  colorModalStyle: {
+    width: Metrics.screenWidth,
+    height: Metrics.screenHeight * 0.52,
+    position: 'absolute',
+    bottom: 0,
+    shadowColor: Colors.blackOpacity,
+    shadowOpacity: 0.4,
+    shadowOffset: {
+      height: 5,
+      width: 0
+    },
+    shadowRadius: 4,
+    elevation: 5,
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
+    padding: 20
+  },
+  codeText: {
+    fontSize: FontSize.mediumlarge,
+    fontFamily: fonts.WorkSansBold,
+    color: Colors.textBlack,
+    width: Metrics.screenWidth * 0.72,
+    flexWrap: 'wrap',
+},
   modalText: {
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.mediumSmall,

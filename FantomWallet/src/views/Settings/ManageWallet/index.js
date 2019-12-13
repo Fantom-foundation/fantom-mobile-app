@@ -52,23 +52,31 @@ const walletData = [
     id: '0x1111…3a6454'
   }
 ];
-let data = [
-  {
-    value: 'Banana'
-  },
-  {
-    value: 'Mango'
-  },
-  {
-    value: 'Pear'
-  }
+const colors = [
+  '#416ed5',
+  '#fe9d8b',
+  '#59c5dd',
+  '#cdd4d8',
+  '#e6fc88',
+  '#fcd3ff',
+  '#fff666',
+  '#7bc5ff',
+  '#40c49d',
+  '#8959dd',
+  '#ffb966',
+  '#e32c2c',
+  '#a650a6',
+  '#78dd59',
+  '#4649fd',
+  '#5f5f7c'
 ];
 class ManageWallet extends Component {
   state = {
     showModal: false,
     renameModal: false,
     isModalOpened: [],
-    openColorPalette: false
+    openColorPalette: false,
+    selectedColor: ''
   };
 
   componentDidMount() {
@@ -80,7 +88,7 @@ class ManageWallet extends Component {
   }
 
   render() {
-    const { showModal, renameModal, openColorPalette } = this.state;
+    const { selectedColor, renameModal, openColorPalette } = this.state;
 
     return (
       <View style={styles.mainView}>
@@ -142,7 +150,6 @@ class ManageWallet extends Component {
                   <TouchableOpacity
                     onPress={() => {
                       const modalVal = this.state.showModal;
-                      console.log(modalVal, 'modalVal ********');
                     }}
                   >
                     <Entypo
@@ -151,7 +158,7 @@ class ManageWallet extends Component {
                       color={Colors.textGrey}
                     ></Entypo>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{ position: 'absolute', right: 0}}>
+                  <TouchableOpacity style={{ position: 'absolute', right: 0 }}>
                     <Dropdown
                       data={[
                         {
@@ -183,14 +190,15 @@ class ManageWallet extends Component {
                         color: Colors.textBlack,
                         fontFamily: fonts.WorkSansBold,
                         fontSize: FontSize.mediumSmall,
-                        textAlign:'center'
+                        textAlign: 'center'
                       }}
-                      onChangeText={(value) => {
-                        if (value === "Rename") {
-                          this.setState({renameModal:!renameModal})
-                        }
-                        else {
-                          this.setState({openColorPalette:!openColorPalette})
+                      onChangeText={value => {
+                        if (value === 'Rename') {
+                          this.setState({ renameModal: !renameModal });
+                        } else {
+                          this.setState({
+                            openColorPalette: !openColorPalette
+                          });
                         }
                       }}
                     />
@@ -199,7 +207,7 @@ class ManageWallet extends Component {
               );
             }}
           />
-          {renameModal && (
+          {renameModal ? (
             <ModalView
               backdrop={false}
               style={styles.renameModalStyle}
@@ -214,6 +222,52 @@ class ManageWallet extends Component {
                 style={styles.textInput}
                 onChangeText={value => this.setState({ walletName: value })}
               />
+            </ModalView>
+          ) : (
+            <ModalView
+              backdropOpacity={0.7}
+              backdropColor={'white'}
+              backdrop={true}
+              style={styles.colorModalStyle}
+              position="up"
+              isOpen={openColorPalette}
+              onClosed={() => this.setState({ openColorPalette: false })}
+            >
+              <View style={{ marginHorizontal: 30 }}>
+                <Text style={styles.codeText}>Select a color</Text>
+
+                <View
+                  style={{
+                    flex: 1,
+                    top: getHeight(12),
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between'
+                  }}
+                >
+                  {colors.map(item => {
+                    return (
+                      <TouchableOpacity
+                        key={item}
+                        onPress={() => {
+                          this.setState({
+                            selectedColor: item,
+                            openColorPalette: false
+                          });
+                        }}
+                        style={{
+                          width: getWidth(50),
+                          height: getWidth(50),
+                          marginVertical: getHeight(12),
+                          marginRight: getHeight(10),
+                          borderRadius: getWidth(25),
+                          backgroundColor: item
+                        }}
+                      />
+                    );
+                  })}
+                </View>
+              </View>
             </ModalView>
           )}
         </SafeAreaView>
