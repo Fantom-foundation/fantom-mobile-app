@@ -1,8 +1,9 @@
 // @flow
 import React from "react";
 import { TouchableOpacity, Text, View, FlatList } from "react-native";
-import styles from "./styles";
 import { getWidth } from "../../../utils/pixelResolver";
+import styles from "./styles";
+
 type Props = {
   keyPad?: [],
   handleInputNumber: () => {},
@@ -20,7 +21,7 @@ const KeyPad = ({
   textStyle,
   keyPadStyle
 }: Props) => (
-  <View style={keyPadStyle}>
+  <View style={{ ...styles.keyPadView, ...keyPadStyle }}>
     <FlatList
       data={keyPad}
       renderItem={({ item, index }) => {
@@ -32,13 +33,14 @@ const KeyPad = ({
         return (
           <TouchableOpacity
             style={{
+              ...styles.numberButton,
               ...buttonStyle,
               marginLeft: marginLeft,
               marginTop: marginTop
             }}
             onPress={() => handleInputNumber(item)}
           >
-            <Text style={textStyle}>{item}</Text>
+            <Text style={{ ...styles.numberText, ...textStyle }}>{item}</Text>
           </TouchableOpacity>
         );
       }}
