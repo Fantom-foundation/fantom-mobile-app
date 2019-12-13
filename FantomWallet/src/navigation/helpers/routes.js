@@ -20,8 +20,10 @@ export default {
     BackupWallet: "BackupWallet"
   },
   HomeScreen: {
+    Home: "Home",
     Wallet: "Wallet",
-    Withdraw: "Withdraw",
-    Deposit: "Deposit"
+    ReceiveSend: "ReceiveSend",
+    Staking: "Staking",
+    Settings: "Settings"
   }
 };

@@ -1,41 +1,50 @@
 // @flow
-import React, { useEffect } from 'react';
-import { View, BackHandler } from 'react-native';
+import React, { useEffect } from "react";
+import { View, BackHandler } from "react-native";
 
 /** * Active NavigationIcons */
-import { NavigationService, routes } from '~/navigation/helpers';
-import walletWhiteIcon from '~/images/WalletFilled.png';
-import sendWhiteIcon from '~/images/sendWhite.png';
-import depositWhiteIcon from '~/images/downloading_white.png';
+import { NavigationService, routes } from "~/navigation/helpers";
+import homeIcon from "~/images/tabHome.png";
+import prefrencesIcon from "~/images/tabPrefrences.png";
+import stakeIcon from "~/images/tabStake.png";
+import walletIcon from "~/images/tabWallet.png";
+import arrowIcon from "../../images/gripLines.png";
+import { Colors } from "../../theme";
 
-/** * Color Constants */
-import { INACTIVE_TAB_COLOR } from '~/common/constants';
-
-import styles from './styles';
-import Tab from './tab';
+import styles from "./styles";
+import Tab from "./tab";
 
 const TABS = [
   {
-    icon: walletWhiteIcon,
-    route: routes.HomeScreen.Wallet,
+    icon: homeIcon,
+    route: routes.HomeScreen.Home
   },
   {
-    icon: sendWhiteIcon,
-    route: routes.HomeScreen.Withdraw,
+    icon: walletIcon,
+    route: routes.HomeScreen.Wallet
   },
   {
-    icon: depositWhiteIcon,
-    route: routes.HomeScreen.Deposit,
+    icon: arrowIcon,
+    route: routes.HomeScreen.ReceiveSend
   },
+
+  {
+    icon: stakeIcon,
+    route: routes.HomeScreen.Staking
+  },
+  {
+    icon: prefrencesIcon,
+    route: routes.HomeScreen.Settings
+  }
 ];
 
 type Props = {
   navigation: {
     navigate: string => void,
     state: {
-      index: number,
-    },
-  },
+      index: number
+    }
+  }
 };
 
 /**
@@ -48,8 +57,9 @@ const HomeNavigationBar = ({ navigation }: Props) => {
   };
 
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', backAndroidPress);
-    return () => BackHandler.removeEventListener('hardwareBackPress', backAndroidPress);
+    BackHandler.addEventListener("hardwareBackPress", backAndroidPress);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAndroidPress);
   }, []);
 
   const handleSelectedTab = route => {
@@ -65,8 +75,7 @@ const HomeNavigationBar = ({ navigation }: Props) => {
           key={tabInfo.route}
           activeTabIndex={activeTabIndex}
           index={index}
-          activeTabColor="rgb(0,177,251)"
-          inActiveTabColor={INACTIVE_TAB_COLOR}
+          inActiveTabColor={Colors.royalBlue}
           tabInfo={tabInfo}
           handleSelectedTab={handleSelectedTab}
         />
