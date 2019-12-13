@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   View,
-  WebView,
   StatusBar,
   Text,
   ScrollView,
@@ -14,145 +13,123 @@ import {
 import { SafeAreaView } from "react-navigation";
 import styles from "./styles";
 import Button from "../../../components/general/Button";
-import { Colors } from "../../../theme";
 import Icon from "react-native-vector-icons/FontAwesome";
-import CardImage from "../../../images/Binance_logo.png";
 import GridIcon from "../../../images/card-01.png";
 import CardView from "./components/cardView";
 import ListView from "./components/listView";
+
+import StickyHeader from "./components/stickyHeader";
 import ParallaxScrollView from "react-native-parallax-scroll-view";
+// import ParallaxScrollView from "@monterosa/react-native-parallax-scroll";
 import Carousel from "react-native-snap-carousel";
+import { getHeight, getWidth } from "../../../utils/pixelResolver";
+import { Colors, FontSize, fonts } from "../../../theme";
+import WalletMenu from "./components/walletMenu";
+import CardHeader from "./components/cardListHeader";
+
+const rawData = [
+  {
+    cardTitle: "OrangeWallet",
+    cardKey: "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
+    totalBalance: 150,
+    color: "orange",
+    tokenType: "ETH",
+    tokenPoint: 1.03,
+    tokenBalance: 180.46,
+
+    transactions: [
+      {
+        walletType: "Ethereum",
+        cointType: "ETH",
+        tokenPoint: 0.3,
+        tokenBalance: 180.46,
+        converionRate: 145.39
+      },
+      {
+        walletType: "Fantom",
+        cointType: "FTM",
+        tokenPoint: 500,
+        tokenBalance: 500,
+        converionRate: 1
+      }
+    ]
+  },
+  {
+    cardTitle: "My Fantom Wallet",
+    cardKey: "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
+    totalBalance: 150,
+    color: "blue",
+    tokenType: "ETH",
+    tokenPoint: 1.03,
+    tokenBalance: 180.46,
+
+    transactions: [
+      {
+        walletType: "Ethereum",
+        cointType: "ETH",
+        tokenPoint: 0.3,
+        tokenBalance: 180.46,
+        converionRate: 145.39
+      },
+      {
+        walletType: "Fantom",
+        cointType: "FTM",
+        tokenPoint: 500,
+        tokenBalance: 500,
+        converionRate: 1
+      }
+    ]
+  }
+];
+
 export default class Wallet extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isListView: false,
       activeSlide: 0,
-      isEnableSnap:true
+      headerHeight:1
     };
     this.carousel = React.createRef();
   }
 
-  renderHeader = (showCard) => {
-    const { isListView } = this.state;
-    return (
-      <View >
-        <View style={styles.headerContainer}>
-          <View style={styles.headerItems}>
-            <Text style={styles.headerText}>$0</Text>
-            <Icon
-              style={styles.iconStyle}
-              name={"eye"}
-              size={18}
-              color={Colors.grey}
-            />
-          </View>
-          <Text style={styles.subHeading}>Total balance</Text>
-        </View>
-        <View style={styles.listHeader}>
-          <Text style={styles.headerText}>Wallets</Text>
-          {isListView ? (
-            <TouchableOpacity
-              //style={styles.iconStyle}
-              style={{
-                top: 6,
-                justifyContent: "center",
-                alignSelf: "center"
-              }}
-              onPress={() => this.setState({ isListView: !isListView })}
-            >
-              <Image
-                // style={styles.iconStyle}
-                height={16}
-                width={16}
-                source={GridIcon}
-              ></Image>
-            </TouchableOpacity>
-          ) : (
-            <Icon
-              onPress={() => this.setState({ isListView: !isListView })}
-              style={styles.iconStyle}
-              name={isListView ? "list-ol" : "list-ul"}
-              size={16}
-              color={Colors.grey}
-            />
-          )}
-        </View>
-      {showCard &&<CardView showCard={true} showList={false}/>}
-      </View>
-    );
+  changeView = isListView => {
+    this.setState({ isListView, activeSlide: 0 });
   };
 
   render() {
-    const { isListView, activeSlide, isEnableSnap } = this.state;
+    const { isListView, activeSlide, headerHeight } = this.state;
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar barStyle="light-content" />
-
-          {/* <View style={styles.headerContainer}>
-            <View style={styles.headerItems}>
-              <Text style={styles.headerText}>$0</Text>
-              <Icon
-                style={styles.iconStyle}
-                name={"eye"}
-                size={18}
-                color={Colors.grey}
-              />
-            </View>
-            <Text style={styles.subHeading}>Total balance</Text>
-          </View>
-          <View style={styles.listHeader}>
-            <Text style={styles.headerText}>Wallets</Text>
-            {isListView ? (
-              <TouchableOpacity
-                //style={styles.iconStyle}
-                style={{
-                  top: 6,
-                  justifyContent: "center",
-                  alignSelf: "center"
-                }}
-                onPress={() => this.setState({ isListView: !isListView })}
-              >
-                <Image
-                  // style={styles.iconStyle}
-                  height={16}
-                  width={16}
-                  source={GridIcon}
-                ></Image>
-              </TouchableOpacity>
-            ) : (
-              <Icon
-                onPress={() => this.setState({ isListView: !isListView })}
-                style={styles.iconStyle}
-                name={isListView ? "list-ol" : "list-ul"}
-                size={16}
-                color={Colors.grey}
-              />
-            )}
-          </View> */}
+          <StatusBar barStyle="dark-content" />
           {isListView ? (
             <View>
-              {this.renderHeader(false)}
-            <FlatList
-              style={styles.listContainer}
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              ItemSeparatorComponent={() => (
-                <View style={styles.itemSeperatorStyle} />
-              )}
-              data={[1, 2, 3, 4]}
-              renderItem={({ item }) => {
-                return (
-                  <ScrollView
-                    style={styles.listScrollView}
-                    showsVerticalScrollIndicator={false}
-                  >
-                    <ListView />
-                  </ScrollView>
-                );
-              }}
-            />
+              <CardHeader
+                margin={22}
+                isListView={isListView}
+                changeView={this.changeView}
+                showCard={false}
+              />
+              <ScrollView
+                style={[
+                  { height: getHeight(542), marginHorizontal: getWidth(22) }
+                ]}
+                showsVerticalScrollIndicator={false}
+              >
+                <FlatList
+                  //  style={styles.listContainer}
+                  showsHorizontalScrollIndicator={false}
+                  showsVerticalScrollIndicator={false}
+                  ItemSeparatorComponent={() => (
+                    <View style={styles.itemSeperatorStyle} />
+                  )}
+                  data={rawData}
+                  renderItem={({ item }) => {
+                    return <ListView data={item} />;
+                  }}
+                />
+              </ScrollView>
             </View>
           ) : (
             <Carousel
@@ -162,55 +139,104 @@ export default class Wallet extends Component {
                 this.carousel = c;
               }}
               contentContainerCustomStyle={{
-                justifyContent: "center",
-                //  backgroundColor: "red",
-                padding: 50
-                // height: 380
+                justifyContent: "center"
+                // paddingHorizontal: getHeight(22)
+              }}
+              onSnapToItem={index => {
+                this.setState({ activeSlide: index });
               }}
               activeSlideOffset={20}
               inactiveSlideScale={1}
-              enableSnap={true}
+              //inactiveSlideShift={50}
+              //  enableSnap={false}
               lockScrollWhileSnapping={true}
               useScrollView={true}
               activeSlideAlignment={"center"}
               pagingEnabled={true}
               swipeThreshold={150}
-              onBeforeSnapToItem={index => {
-                this.setState({ activeSlide: index });
-              }}
-              // layoutCardOffset={50}
-              itemWidth={Dimensions.get("window").width}
+              itemWidth={Dimensions.get("window").width - 40}
               renderItem={({ item, index }) => {
                 return (
                   <ParallaxScrollView
-                    onChangeHeaderVisibility={isVisible => {
-                      this.setState({ isEnableSnap: isVisible });
+                    onScroll={event => {
+                      const threshold = 30;
+
+                      if (
+                        event.nativeEvent.contentOffset.y <= threshold &&
+                        headerHeight > 1
+                      ) {
+                        this.setState({ headerHeight: 1 });
+                      } else if (
+                        event.nativeEvent.contentOffset.y > threshold &&
+                        headerHeight === 1
+                      ) {
+                        this.setState({ headerHeight: 150 });
+                      }
                     }}
-                    backgroundColor="white"
+                    isForegroundTouchable={true}
+                    backgroundColor={Colors.white}
                     showsVerticalScrollIndicator={false}
-                    // contentBackgroundColor="pink"
-                    stickyHeaderHeight={80}
-                    parallaxHeaderHeight={400}
+                    stickyHeaderHeight={getHeight(headerHeight)}
+                    parallaxHeaderHeight={getHeight(444)}
+                    onChangeHeaderVisibility={data =>
+                      console.log(data, "asdasda")
+                    }
                     renderStickyHeader={() => (
-                      <View style={{ height: 60 }}>
-                        <ListView />
+                      <View style={styles.stickyHeaderContainer}>
+                        <WalletMenu
+                          isListView={isListView}
+                          changeView={this.changeView}
+                          customStyle={{ marginBottom: getHeight(10) }}
+                        />
+                        <StickyHeader data={item} />
                       </View>
                     )}
-                    renderForeground={() => this.renderHeader(true)}
+                    renderForeground={() => (
+                      <View>
+                        {index === activeSlide ? (
+                          <CardHeader
+                            margin={0}
+                            isListView={isListView}
+                            changeView={this.changeView}
+                            showCard={true}
+                          >
+                            <CardView
+                              data={item}
+                              showCard={true}
+                              showList={false}
+                            />
+                          </CardHeader>
+                        ) : (
+                          <View
+                            style={{
+                              height: getHeight(670),
+                              justifyContent: "center"
+                            }}
+                          >
+                            <CardView
+                              data={item}
+                              showCard={true}
+                              showList={false}
+                            />
+                          </View>
+                        )}
+                      </View>
+                    )}
                   >
                     <ScrollView
                       style={styles.listScrollView}
                       showsVerticalScrollIndicator={false}
                     >
                       <CardView
+                        data={item}
                         showCard={false}
-                        showList={true}
+                        showList={index === activeSlide}
                       />
                     </ScrollView>
                   </ParallaxScrollView>
                 );
               }}
-              data={[1, 2, 3, 4]}
+              data={rawData}
             />
           )}
         </SafeAreaView>

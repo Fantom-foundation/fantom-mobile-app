@@ -7,8 +7,8 @@ const cardStyles = StyleSheet.create({
     height: getHeight(200),
     overflow: "hidden",
     borderRadius: 22,
-    backgroundColor: Colors.orange,
     padding: getWidth(20),
+    marginHorizontal: getWidth(6)
   },
   cardHeaderText: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -45,6 +45,13 @@ const cardStyles = StyleSheet.create({
     bottom: -10,
     left: getWidth(20),
     position: "absolute"
+  },
+  cardIndicatorStyle: {
+    width: getWidth(12),
+    height: getHeight(140),
+    position: "absolute",
+    justifyContent: "center",
+    borderWidth: 3,
   }
 });
 
@@ -88,11 +95,29 @@ const cardListItemStyles = StyleSheet.create({
   }
 });
 
+const stickyHeaderStyles = StyleSheet.create({
+  stickyHeaderStyle: {
+    height: getHeight(80),
+    borderRadius: 12,
+    overflow: "hidden",
+
+    paddingHorizontal: getWidth(22),
+    //marginHorizontal:getWidth(22),
+    paddingVertical:getHeight(10)
+  },
+  stickyHeaderImageStyle: {
+    height: getHeight(100),
+    width: getWidth(80),
+    top: 15,
+    left: getWidth(20),
+    //position: "absolute"
+  }
+});
+
 const listViewStyles = StyleSheet.create({
   listViewContainer: {
     height: getHeight(56),
-    marginVertical:getHeight(4),
-    backgroundColor: Colors.orange,
+    marginVertical: getHeight(4),
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: 10,
@@ -108,8 +133,7 @@ const listViewStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    lineHeight:getHeight(24)
-
+    lineHeight: getHeight(24)
   }
 });
 
@@ -121,7 +145,7 @@ export default StyleSheet.create({
   headerContainer: {
     height: getHeight(70),
     marginTop: getHeight(40),
-    paddingHorizontal: getWidth(22)
+ 
   },
   headerItems: {
     flex: 1,
@@ -143,35 +167,28 @@ export default StyleSheet.create({
     opacity: 0.5
   },
   listHeader: {
-    marginVertical: getHeight(40),
+    // marginVertical: getHeight(40),
     height: getHeight(44),
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: getWidth(22),
-
+    //paddingHorizontal: getWidth(22),
+   //marginHorizontal: getWidth(22)
   },
   listContainer: {
-    marginHorizontal: getWidth(22)
+    // marginHorizontal: getWidth(22)
   },
   listScrollView: {
-    //flex: 1,
-
-   // width: getWidth(336)
+    // marginHorizontal: getWidth(22)
   },
   itemSeperatorStyle: {
     marginHorizontal: getWidth(10)
-    // marginVertical: getHeight(30),
-    // height: getHeight(140),
-    // overflow: "hidden",
-    // borderBottomLeftRadius: 22,
-    // borderTopStartRadius: 22,
-    // marginRight: -getWidth(12),
-    // marginLeft: getWidth(12),
-    // //  backgroundColor: Colors.orange,
-    // borderLeftWidth: getWidth(24),
-    // borderLeftColor: "red"
+  },
+  stickyHeaderContainer: {
+    height: getHeight(150),
+    marginTop: getHeight(12),
   },
   ...cardStyles,
   ...cardListItemStyles,
-  ...listViewStyles
+  ...listViewStyles,
+  ...stickyHeaderStyles
 });
