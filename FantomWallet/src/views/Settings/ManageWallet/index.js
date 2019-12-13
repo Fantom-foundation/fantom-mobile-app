@@ -124,11 +124,7 @@ class ManageWallet extends Component {
                       }}
                     ></View>
                     <View style={styles.centerTextView}>
-                      {/* {walletName ? (
-                        <Text style={styles.rowsText}>{walletName}</Text>
-                      ) : ( */}
                       <Text style={styles.rowsText}>{item.text}</Text>
-                      {/* )} */}
                       <View style={styles.centerBottomText}>
                         <Text style={styles.centerText}>{item.code}</Text>
                         <Text style={{ ...styles.centerText, marginLeft: 10 }}>

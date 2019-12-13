@@ -14,5 +14,6 @@ export const Colors = {
   red: "#ff0000",
   lightGreen: '#00cd91',
   grey: 'rgb(207,210,216)',
-  textGrey:'rgb(166,172,182)'
+  textGrey: 'rgb(166,172,182)',
+  silverGrey:'rgb(137,145,159)'
 };

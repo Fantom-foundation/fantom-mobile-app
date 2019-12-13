@@ -12,11 +12,16 @@ import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import SettingsContainer from "~/views/Settings"
 import ManageWallet from '~/views/Settings/ManageWallet'
 import AddWallet from '~/views/Settings/AddWallet'
-
+import PrivacyAndSecurity from '~/views/Settings/PrivacyAndSecurity'
+import EnterPasscode from '~/views/Settings/EnterPasscode'
+import Currency from '~/views/Settings/Currency'
 const WelcomeNavigator = createStackNavigator(
   {
+    Currency:{screen:Currency},
+    // EnterPasscode:{screen:EnterPasscode},
+    // PrivacyAndSecurity:{screen:PrivacyAndSecurity},
     // AddWallet:{screen:AddWallet},
-    ManageWallet:{screen:ManageWallet},
+    // ManageWallet:{screen:ManageWallet},
     // SettingsContainer: { screen: SettingsContainer },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
