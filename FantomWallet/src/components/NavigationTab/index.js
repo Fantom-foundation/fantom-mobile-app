@@ -25,7 +25,7 @@ const TABS = [
   },
   {
     icon: quickPayIcon,
-    route: routes.HomeScreen.ReceiveSend
+    route: routes.HomeScreen.SendReceive
   },
 
   {

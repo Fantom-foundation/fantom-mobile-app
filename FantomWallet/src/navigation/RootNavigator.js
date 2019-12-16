@@ -12,16 +12,9 @@ import SendMoney from "~/views/Home/Withdraw/SendMoney";
 import Settings from "~/views/Settings";
 import AboutApp from "~/views/Settings/aboutApp";
 import CustomerSupport from "~/views/Settings/customerSupport";
-import WalletInfo from "~/views/WalletInfo";
 
 const RootNavigator = createStackNavigator(
   {
-    // HomeScreen: {
-    //   screen: HomeNavigator,
-    //   navigationOptions: {
-    //     gesturesEnabled: false
-    //   }
-    // },
     Wellcome: { screen: WellecomeNavigator },
     Terms: { screen: TermsConditions },
     PrivacyPolicy: { screen: PrivacyPolicy },

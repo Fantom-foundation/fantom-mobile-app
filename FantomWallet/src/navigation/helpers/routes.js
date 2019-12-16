@@ -23,7 +23,7 @@ export default {
   HomeScreen: {
     Home: "Home",
     Wallet: "Wallet",
-    ReceiveSend: "ReceiveSend",
+    SendReceive: "SendReceive",
     Staking: "Staking",
     Settings: "Settings"
   }

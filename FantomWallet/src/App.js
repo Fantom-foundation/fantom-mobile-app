@@ -16,7 +16,7 @@ import RootNavigator from '~/navigation/RootNavigator';
 import { NavigationService } from '~/navigation/helpers';
 import { store, persistor } from '~/redux/store';
 import DropdownNotification from '~/components/DropdownNotification';
-
+console.disableYellowBox = true; 
 export default () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
