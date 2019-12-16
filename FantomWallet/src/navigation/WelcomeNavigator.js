@@ -18,6 +18,7 @@ import PrivacyAndSecurity from "~/views/Settings/PrivacyAndSecurity";
 import EnterPasscode from "~/views/Settings/EnterPasscode";
 import Currency from "~/views/Settings/Currency";
 
+
 const WelcomeNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },

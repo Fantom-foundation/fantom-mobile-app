@@ -11,7 +11,9 @@ import Settings from "../views/Settings";
 import SendReceive from "~/views/SendReceive"; 
 import NavigationTab from "~/components/NavigationTab";
 import NewWallet from "~/views/Home/NewWallet"
-import Wallet from "~/views/Home/Wallet"; 
+import SingleWallet from "~/views/InsideWallet/SingleWallet";
+import SendFTM from "~/views/InsideWallet/SendFTM";
+import ScanQR from "~/views/InsideWallet/ScanQR";
 // import { store } from "~/redux/store";
 // import { getBalance, getHistory } from "~/redux/wallet/actions";
 
@@ -20,7 +22,7 @@ const deviceHeight = Dimensions.get("window").height;
 const HomeTabNavigator = createBottomTabNavigator(
   {
     Home: { screen: NewWallet },
-    Wallet: { screen: Wallet },
+    Wallet: { screen: SingleWallet },
     SendReceive: { screen: SendReceive },
     Staking: { screen: Settings },
     Settings: { screen: Settings }
