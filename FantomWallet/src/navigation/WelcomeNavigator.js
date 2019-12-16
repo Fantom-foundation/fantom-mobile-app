@@ -11,7 +11,6 @@ import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
-import SendReceive from "../views/sendReceive";
 import SettingsContainer from "~/views/Settings";
 import ManageWallet from "~/views/Settings/ManageWallet";
 import AddWallet from "~/views/Settings/AddWallet";
@@ -21,7 +20,6 @@ import Currency from "~/views/Settings/Currency";
 
 const WelcomeNavigator = createStackNavigator(
   {
-   // SendReceive: { screen: SendReceive },
     SplashScreen: { screen: SplashScreen },
     SettingsContainer: { screen: SettingsContainer },
     Currency: { screen: Currency },

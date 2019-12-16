@@ -130,7 +130,7 @@ export default StyleSheet.create({
   wordText: {
     fontSize: FontSize.base,
     color: Colors.textBlack,
-    lineHeight: getHeight(24),
+    //lineHeight: getHeight(24),
     fontFamily: fonts.WorkSansMedium
   },
   buttonText: {
