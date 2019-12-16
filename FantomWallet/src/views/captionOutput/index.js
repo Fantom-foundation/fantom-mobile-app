@@ -13,6 +13,7 @@ import styles from "./style";
 import Button from "../../components/general/Button";
 // import "../../../global";
 import Bip39 from "react-native-bip39";
+import { NavigationService, routes } from "../../navigation/helpers";
 // import ProgressBar from "../../../general/progressBar/index";
 // import Icon from "react-native-vector-icons/MaterialIcons";
 // import dangerIcon from "../../images/warning.png";
@@ -100,11 +101,16 @@ class CaptionOutput extends Component {
           </View>
           <View style={styles.flex1}>
             <Button
-              onPress={() =>
-                this.props.navigation.navigate("VerifyRecoveryWords", {
-                  mnemonicWords: this.state.mnemonicWords,
-                  seed: this.state.seed
-                })
+              onPress={
+                () =>
+                  NavigationService.navigate(routes.root.CheckMnemonic, {
+                    mnemonicWords: this.state.mnemonicWords,
+                    seed: this.state.seed
+                  })
+                // this.props.navigation.navigate("VerifyRecoveryWords", {
+                //   mnemonicWords: this.state.mnemonicWords,
+                //   seed: this.state.seed
+                // })
               }
               buttonStyle={styles.buttonStyle}
               textStyle={styles.buttonText}

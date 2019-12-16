@@ -9,11 +9,11 @@ import {
 } from "react-native";
 import styles from "./styles";
 import FantomLogo from "../../../images/fantomWhiteIcon.png";
+import { NavigationService, routes } from "../../../navigation/helpers";
 
 class WalletSetup extends Component {
   onCreateNewWallet = () => {
-    this.props.navigation.navigate("BackupWallet");
-    // NavigationService.navigate(routes.root.CreateMnemonic);
+    NavigationService.navigate(routes.root.BackupWallet);
   };
   onRestoreWallet = () => {
     this.props.navigation.navigate("RecoverWallet");

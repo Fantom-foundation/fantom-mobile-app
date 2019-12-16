@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import { View, WebView, StatusBar, Text } from "react-native";
 import { SafeAreaView } from "react-navigation";
-import CheckBox from "../../general/checkBox"
+import CheckBox from "../../general/checkBox";
 import styles from "./style";
 import Button from "../../components/general/Button";
 import { Colors } from "../../theme";
+import { NavigationService, routes } from "../../navigation/helpers";
 export default class BackupWallet extends Component {
   constructor(props) {
     super(props);
-    this.state={
-        isEnable:false
-    }
+    this.state = {
+      isEnable: false
+    };
   }
 
   render() {
-      const {isEnable}=this.state
+    const { isEnable } = this.state;
 
     return (
       <View style={styles.mainContainerStyle}>
@@ -57,7 +58,9 @@ export default class BackupWallet extends Component {
               }}
               textStyle={styles.buttonText}
               text={"CONTINUE"}
-              onPress={() => this.props.navigation.navigate("CaptionOutput")}
+              onPress={() =>
+                NavigationService.navigate(routes.root.CreateMnemonic)
+              }
             />
           </View>
         </SafeAreaView>
