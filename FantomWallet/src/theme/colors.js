@@ -13,5 +13,9 @@ export const Colors = {
   whiteOpacity: "rgba(255,255,255,0.75)",
   red: "#ff0000",
   lightBlue: "rgb(106,138,219)",
-  borderGrey: "rgb(224,227 ,230)"
+  borderGrey: "rgb(224,227 ,230)",
+  lightGreen: '#00cd91',
+  grey: 'rgb(207,210,216)',
+  textGrey: 'rgb(166,172,182)',
+  silverGrey:'rgb(137,145,159)'
 };

@@ -12,10 +12,23 @@ import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
 import SendReceive from "../views/sendReceive";
+import SettingsContainer from "~/views/Settings";
+import ManageWallet from "~/views/Settings/ManageWallet";
+import AddWallet from "~/views/Settings/AddWallet";
+import PrivacyAndSecurity from "~/views/Settings/PrivacyAndSecurity";
+import EnterPasscode from "~/views/Settings/EnterPasscode";
+import Currency from "~/views/Settings/Currency";
+
 const WelcomeNavigator = createStackNavigator(
   {
    // SendReceive: { screen: SendReceive },
     SplashScreen: { screen: SplashScreen },
+    SettingsContainer: { screen: SettingsContainer },
+    Currency: { screen: Currency },
+    EnterPasscode: { screen: EnterPasscode },
+    PrivacyAndSecurity: { screen: PrivacyAndSecurity },
+    AddWallet: { screen: AddWallet },
+    ManageWallet: { screen: ManageWallet },
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {
