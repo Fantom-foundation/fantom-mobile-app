@@ -20,7 +20,6 @@ import ListView from "./components/listView";
 
 import StickyHeader from "./components/stickyHeader";
 import ParallaxScrollView from "react-native-parallax-scroll-view";
-// import ParallaxScrollView from "@monterosa/react-native-parallax-scroll";
 import Carousel from "react-native-snap-carousel";
 import { getHeight, getWidth } from "../../../utils/pixelResolver";
 import { Colors, FontSize, fonts } from "../../../theme";
