@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Text,
   View,
@@ -6,17 +6,18 @@ import {
   Image,
   SafeAreaView,
   StatusBar
-} from 'react-native';
-import styles from './styles';
-import { CrossIcon, RightArrowIcon } from '../../../images';
+} from "react-native";
+import styles from "./styles";
+import { CrossIcon, RightArrowIcon } from "../../../images";
 class AddWallet extends Component {
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.mainView}>
         <SafeAreaView style={styles.mainView}>
           <StatusBar barStyle="dark-content" />
           <View style={styles.headingView}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 source={CrossIcon}
                 style={styles.crossIcon}
