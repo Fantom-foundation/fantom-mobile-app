@@ -11,11 +11,10 @@ import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
-import HomeNavigator from "./HomeNavigator";
-
+import SendReceive from "../views/sendReceive";
 const WelcomeNavigator = createStackNavigator(
   {
-    HomeNavigator: { screen: HomeNavigator },
+   // SendReceive: { screen: SendReceive },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup
