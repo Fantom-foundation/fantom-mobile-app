@@ -12,9 +12,11 @@ import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
 import HomeNavigator from "./HomeNavigator";
+import Staking from "~/views/staking";
 
 const WelcomeNavigator = createStackNavigator(
   {
+    Staking: { screen: Staking },
     HomeNavigator: { screen: HomeNavigator },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
