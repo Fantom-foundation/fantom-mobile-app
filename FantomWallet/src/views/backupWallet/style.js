@@ -57,6 +57,7 @@ export default StyleSheet.create({
     marginTop: getHeight(25)
   },
   checkBoxContainer:{
-flexDirection:"row"
+flexDirection:"row",
+alignItems:"center"
   }
 });

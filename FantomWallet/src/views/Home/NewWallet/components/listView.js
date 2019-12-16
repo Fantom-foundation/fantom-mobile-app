@@ -14,7 +14,7 @@ const ListView = (props) => {
         <Text style={styles.listTitleText}>My Fantom Wallet</Text>
         <Text style={styles.rightTextStyle}>90,680 FTM</Text>
       </TouchableOpacity>
-      {isOpen && <CardListItem />}
+      {isOpen && <CardListItem data={data} />}
     </View>
   );
 };

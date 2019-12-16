@@ -65,7 +65,7 @@ const cardListItemStyles = StyleSheet.create({
     padding: getWidth(6),
     paddingHorizontal: getWidth(8),
     borderLeftWidth: getWidth(8),
-    borderLeftColor: Colors.orange,
+
     justifyContent: "space-between",
     shadowColor: Colors.blackOpacity,
     backgroundColor: Colors.white,
@@ -109,8 +109,8 @@ const stickyHeaderStyles = StyleSheet.create({
     height: getHeight(100),
     width: getWidth(80),
     top: 15,
-    left: getWidth(20),
-    //position: "absolute"
+   left: getWidth(20),
+    position: "absolute"
   }
 });
 
@@ -184,8 +184,7 @@ export default StyleSheet.create({
     marginHorizontal: getWidth(10)
   },
   stickyHeaderContainer: {
-    height: getHeight(150),
-    marginTop: getHeight(12),
+    height: getHeight(220)
   },
   ...cardStyles,
   ...cardListItemStyles,

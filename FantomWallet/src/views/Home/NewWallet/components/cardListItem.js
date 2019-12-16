@@ -3,18 +3,21 @@ import { View, Text} from "react-native";
 import styles from "../styles";
 
 
-const CardListItem = () => {
+const CardListItem = (props) => {
+  const { isHiddenText,data } = props;
   return (
 [0,1,2,3,4].map(item=>{
     return (
-      <View style={styles.listItemContainer}>
+      <View style={[styles.listItemContainer, { borderLeftColor: data.color }]}>
         <View style={styles.titleContainer}>
           <Text style={styles.listItemTitle}>Ethereum</Text>
-          <Text style={styles.listItemTitle}>0.3 ETH</Text>
+          <Text style={styles.listItemTitle}>
+            {isHiddenText ? "********" : "0.03 ETH"}
+          </Text>
         </View>
         <View style={styles.titleContainer}>
           <Text style={styles.balanceText}>$145.39</Text>
-          <Text style={styles.balanceText}>$48.80</Text>
+          <Text style={styles.balanceText}>{isHiddenText ? "" : "$48.80"}</Text>
         </View>
       </View>
     );

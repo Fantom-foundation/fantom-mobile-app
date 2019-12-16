@@ -8,9 +8,16 @@ import WalletMenu from "./walletMenu";
 import CardView from "./cardView"
 
 const CardHeader = props => {
-  const { showCard, isListView, changeView,children,margin } = props;
+  const {
+    showCard,
+    isListView,
+    changeView,
+    children,
+    margin,
+    setCardHiddenView
+  } = props;
   return (
-    <View >
+    <View>
       <View
         style={[
           styles.headerContainer,
@@ -19,7 +26,7 @@ const CardHeader = props => {
       >
         <View style={styles.headerItems}>
           <Text style={styles.headerText}>$0</Text>
-          <TouchableOpacity onPress={() => console.log("called")}>
+          <TouchableOpacity onPress={() => setCardHiddenView()}>
             <Icon
               style={styles.iconStyle}
               name={"eye"}

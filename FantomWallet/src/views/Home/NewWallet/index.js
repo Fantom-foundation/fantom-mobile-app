@@ -58,7 +58,7 @@ const rawData = [
     cardTitle: "My Fantom Wallet",
     cardKey: "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
     totalBalance: 150,
-    color: "blue",
+    color: "#cdd4d8",
     tokenType: "ETH",
     tokenPoint: 1.03,
     tokenBalance: 180.46,
@@ -87,8 +87,10 @@ export default class Wallet extends Component {
     super(props);
     this.state = {
       isListView: false,
+      isHiddenText:false,
       activeSlide: 0,
-      headerHeight:1
+      headerHeight: 1,
+      isScaleView:1
     };
     this.carousel = React.createRef();
   }
@@ -96,9 +98,19 @@ export default class Wallet extends Component {
   changeView = isListView => {
     this.setState({ isListView, activeSlide: 0 });
   };
+  setCardHiddenView=()=>{
+    const {isHiddenText}=this.state
+     this.setState({ isHiddenText: !isHiddenText });
+  }
 
   render() {
-    const { isListView, activeSlide, headerHeight } = this.state;
+    const {
+      isListView,
+      activeSlide,
+      headerHeight,
+      isScaleView,
+      isHiddenText
+    } = this.state;
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={{ flex: 1 }}>
@@ -106,6 +118,7 @@ export default class Wallet extends Component {
           {isListView ? (
             <View>
               <CardHeader
+                setCardHiddenView={this.setCardHiddenView}
                 margin={22}
                 isListView={isListView}
                 changeView={this.changeView}
@@ -165,12 +178,12 @@ export default class Wallet extends Component {
                         event.nativeEvent.contentOffset.y <= threshold &&
                         headerHeight > 1
                       ) {
-                        this.setState({ headerHeight: 1 });
+                        this.setState({ headerHeight: 1, isScaleView: 1 });
                       } else if (
                         event.nativeEvent.contentOffset.y > threshold &&
                         headerHeight === 1
                       ) {
-                        this.setState({ headerHeight: 150 });
+                        this.setState({ headerHeight: 220, isScaleView: 0 });
                       }
                     }}
                     isForegroundTouchable={true}
@@ -186,7 +199,10 @@ export default class Wallet extends Component {
                         <WalletMenu
                           isListView={isListView}
                           changeView={this.changeView}
-                          customStyle={{ marginBottom: getHeight(10) }}
+                          customStyle={{
+                            //marginBottom: getHeight(10),
+                            marginVertical: getHeight(40)
+                          }}
                         />
                         <StickyHeader data={item} />
                       </View>
@@ -196,11 +212,13 @@ export default class Wallet extends Component {
                         {index === activeSlide ? (
                           <CardHeader
                             margin={0}
+                            setCardHiddenView={this.setCardHiddenView}
                             isListView={isListView}
                             changeView={this.changeView}
                             showCard={true}
                           >
                             <CardView
+                              isHiddenText={isHiddenText}
                               data={item}
                               showCard={true}
                               showList={false}
@@ -214,6 +232,7 @@ export default class Wallet extends Component {
                             }}
                           >
                             <CardView
+                              isHiddenText={isHiddenText}
                               data={item}
                               showCard={true}
                               showList={false}
@@ -228,6 +247,7 @@ export default class Wallet extends Component {
                       showsVerticalScrollIndicator={false}
                     >
                       <CardView
+                        isHiddenText={isHiddenText}
                         data={item}
                         showCard={false}
                         showList={index === activeSlide}
