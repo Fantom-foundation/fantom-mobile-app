@@ -19,7 +19,8 @@ export default {
     CaptionOutput: "CaptionOutput",
     BackupWallet: "BackupWallet",
     WalletCreated: "WalletCreated",
-    WalletInfo: "WalletInfo"
+    WalletInfo: "WalletInfo",
+    AddWallet: "AddWallet"
   },
   HomeScreen: {
     Home: "Home",

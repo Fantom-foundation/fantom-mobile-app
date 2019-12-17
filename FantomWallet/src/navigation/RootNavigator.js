@@ -12,6 +12,11 @@ import SendMoney from "~/views/Home/Withdraw/SendMoney";
 import Settings from "~/views/Settings";
 import AboutApp from "~/views/Settings/aboutApp";
 import CustomerSupport from "~/views/Settings/customerSupport";
+import AddWallet from "~/views/Settings/AddWallet";
+import PrivacyAndSecurity from "~/views/Settings/PrivacyAndSecurity";
+import EnterPasscode from "~/views/Settings/EnterPasscode";
+import Currency from "~/views/Settings/Currency";
+import ManageWallet from "~/views/Settings/ManageWallet";
 
 const RootNavigator = createStackNavigator(
   {
@@ -31,7 +36,12 @@ const RootNavigator = createStackNavigator(
     EditContact: { screen: EditContact },
     Settings: { screen: Settings },
     AboutApp: { screen: AboutApp },
-    CustomerSupport: { screen: CustomerSupport }
+    CustomerSupport: { screen: CustomerSupport },
+    Currency: { screen: Currency },
+    EnterPasscode: { screen: EnterPasscode },
+    PrivacyAndSecurity: { screen: PrivacyAndSecurity },
+    AddWallet: { screen: AddWallet },
+    ManageWallet: { screen: ManageWallet }
   },
   {
     headerMode: "none",

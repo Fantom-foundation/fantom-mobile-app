@@ -226,9 +226,9 @@ export const CheckMnemonicContainer = ({
 
     <View style={styles.mainContainerStyle}>
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <ScrollView showsVerticalScrollIndicator={false}> */}
           {/* <StatusBar barStyle="light-content" /> */}
-          <View style={{ flex: 0.5 }}>
+          <View style={{ flex: 0.5}}>
             <View style={styles.mainHeadingContainer}>
               <Text style={styles.mainHeading}>Verify recovery words</Text>
             </View>
@@ -321,7 +321,7 @@ export const CheckMnemonicContainer = ({
             <View style={{ height: 40 }}></View>
             {/* </View> */}
           </View>
-        </ScrollView>
+        {/* </ScrollView> */}
       </SafeAreaView>
     </View>
   );

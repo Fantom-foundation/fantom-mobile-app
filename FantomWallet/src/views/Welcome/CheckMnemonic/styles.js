@@ -203,8 +203,8 @@ export default StyleSheet.create({
     borderRadius: 25,
     height: getHeight(60),
     marginTop: getHeight(25),
-    position: "absolute",
-    top: getHeight(590)
+    // position: "absolute",
+    // top: getHeight(590),
   },
   checkBoxContainer: {
     flexDirection: "row"
@@ -213,7 +213,7 @@ export default StyleSheet.create({
     marginTop: deviceHeight * 0.03,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   wordWrap: {
     width: deviceWidth * 0.25,
