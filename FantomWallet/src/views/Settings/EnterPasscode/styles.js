@@ -8,7 +8,7 @@ const styles = {
     paddingHorizontal: getWidth(22)
   },
   headingView: {
-    marginTop: getHeight(25),
+    marginTop: getHeight(25)
     // backgroundColor:'red'
   },
   crossIcon: {
@@ -20,46 +20,48 @@ const styles = {
     color: Colors.textBlack,
     fontSize: FontSize.base,
     fontFamily: fonts.WorkSansMedium,
-      textAlign: 'center',
-    marginTop:getHeight(60)
+    textAlign: 'center',
+    marginTop: getHeight(60)
   },
-    keyPadView: {
-      marginTop: getHeight(49),
-        paddingHorizontal: getWidth(41),
+  keyPadView: {
+    marginTop: getHeight(49),
+    paddingHorizontal: getWidth(41)
     //   backgroundColor:'yellow'
-    },
-    numberButton: {
-      flex: 1,
-      margin: 1,
-      flexDirection: "column",
-      width: getWidth(54),
-      height: getHeight(54),
-        justifyContent: "center",
-    },
-    numberText: {
-      fontSize: FontSize.large + 1,
-      color: Colors.black,
-      fontFamily: fonts.WorkSansBold,
-      textAlign: "center"
-    },
-    inputView: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: getWidth(76),
-        marginTop:getHeight(170)
-    },
-    circleView: {
-        width: getHeight(18),
-        height: getHeight(18),
-        borderRadius: getHeight(9),
-        borderWidth: 2,
-        borderColor:Colors.textBlack
-    },
-    filedCircleView: {
-        width: getHeight(18),
-        height: getHeight(18),
-        borderRadius: getHeight(9),
-        backgroundColor:Colors.royalBlue
-    }
+  },
+  numberButton: {
+    flex: 1,
+    margin: 1,
+    flexDirection: 'column',
+    width: getWidth(54),
+    height: getHeight(54),
+    justifyContent: 'center'
+  },
+  numberText: {
+    fontSize: FontSize.large + 1,
+    color: Colors.black,
+    fontFamily: fonts.WorkSansBold,
+    textAlign: 'center'
+  },
+  inputView: {
+    paddingHorizontal: getWidth(70),
+    marginTop: getHeight(170),
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  circleView: {
+    width: getHeight(18),
+    height: getHeight(18),
+    borderRadius: getHeight(9),
+    borderWidth: 2,
+    borderColor: Colors.textBlack,
+    marginRight: 15
+  },
+  filedCircleView: {
+    width: getHeight(18),
+    height: getHeight(18),
+    borderRadius: getHeight(9),
+    backgroundColor: Colors.royalBlue,
+    marginRight: 15
+  }
 };
 export default styles;

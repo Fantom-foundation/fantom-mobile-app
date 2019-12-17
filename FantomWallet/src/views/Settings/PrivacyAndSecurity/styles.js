@@ -5,7 +5,7 @@ const style = {
   mainContainer: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: getWidth(22)
+    paddingHorizontal: getWidth(20)
   },
   headingView: {
     marginTop: getHeight(18),
@@ -22,17 +22,15 @@ const style = {
     color: Colors.textBlack,
     fontSize: FontSize.large + 1,
     fontFamily: fonts.WorkSansBold,
-    marginLeft: getWidth(20)
+    marginLeft: getWidth(15)
     },
     mainView: {
         marginTop: getHeight(55),
-        // backgroundColor:'red'
     },
     rowsView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft: getWidth(35),
-        // backgroundColor: 'green',
+        marginLeft: getWidth(28),
         alignItems:'center'
     },
     rowsText: {

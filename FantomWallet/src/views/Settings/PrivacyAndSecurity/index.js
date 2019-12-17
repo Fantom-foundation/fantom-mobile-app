@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -8,18 +8,18 @@ import {
   StatusBar,
   TouchableOpacity,
   FlatList
-} from "react-native";
-import styles from "./styles";
-import { CrossIcon, EqualIcon } from "../../../images";
-import { Colors } from "../../../theme";
-import _ from "lodash";
+} from 'react-native';
+import styles from './styles';
+import { CrossIcon, EqualIcon } from '../../../images';
+import { Colors } from '../../../theme';
+import _ from 'lodash';
 class PrivacyAndSecurity extends Component {
   state = {
     listKeys: [
-      { key: "Passcode", switch: false },
-      { key: "Fingerprint authentication", switch: false },
-      { key: "Show total balance on home", switch: false },
-      { key: "Hide all balances by default", switch: false }
+      { key: 'Passcode', switch: false },
+      { key: 'Fingerprint authentication', switch: false },
+      { key: 'Show total balance on home', switch: false },
+      { key: 'Hide all balances by default', switch: false }
     ]
   };
   render() {
@@ -29,7 +29,9 @@ class PrivacyAndSecurity extends Component {
         <SafeAreaView style={styles.mainContainer}>
           <StatusBar barStyle="dark-content" />
           <View style={styles.headingView}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('SettingsContainer')}
+            >
               <Image
                 source={CrossIcon}
                 style={styles.crossIcon}
@@ -66,9 +68,13 @@ class PrivacyAndSecurity extends Component {
     );
   };
   setSwitchValue = (val, ind) => {
+    const { navigation } = this.props;
     const tempData = _.cloneDeep(this.state.listKeys);
     tempData[ind].switch = val;
     this.setState({ listKeys: tempData });
+    if (ind === 0 && val === true) {
+      navigation.navigate('EnterPasscode');
+    }
   };
 }
 

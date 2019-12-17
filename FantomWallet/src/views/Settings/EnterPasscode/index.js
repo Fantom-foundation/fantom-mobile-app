@@ -22,15 +22,21 @@ class EnterPasscode extends Component {
   };
   render() {
     const { numberClicked } = this.state;
-    handleInputNumber = item => {
+    const { navigation } = this.props;
+    handleInputNumber = (item, index) => {
+      const { navigation } = this.props;
       const { numberClicked } = this.state;
       if (numberClicked.length <= 6) {
-        this.setState(
-          {
-            numberClicked: numberClicked.concat(item)
-          },
-          console.log('Numbers', numberClicked)
-        );
+        this.setState({
+          numberClicked: numberClicked.concat(item)
+        });
+      }
+      if (numberClicked.concat(item).length === 6) {
+        navigation.navigate('PrivacyAndSecurity');
+      }
+      if (item === '<') {
+        let num = numberClicked.slice(0, -1);
+        this.setState({ numberClicked: num });
       }
     };
     return (
@@ -38,7 +44,7 @@ class EnterPasscode extends Component {
         <SafeAreaView style={styles.mainContainer}>
           <StatusBar barStyle="dark-content" />
           <View style={styles.headingView}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 source={CrossIcon}
                 style={styles.crossIcon}
@@ -48,36 +54,23 @@ class EnterPasscode extends Component {
             <Text style={styles.headingText}>Enter your passcode</Text>
           </View>
           <View style={styles.inputView}>
-            {numberClicked.length >= 1 ? (
-              <View style={styles.filedCircleView} />
-            ) : (
-              <View style={styles.circleView} />
-            )}
-            {numberClicked.length >= 2 ? (
-              <View style={styles.filedCircleView} />
-            ) : (
-              <View style={styles.circleView} />
-            )}
-            {numberClicked.length >= 3 ? (
-              <View style={styles.filedCircleView} />
-            ) : (
-              <View style={styles.circleView} />
-            )}
-            {numberClicked.length >= 4 ? (
-              <View style={styles.filedCircleView} />
-            ) : (
-              <View style={styles.circleView} />
-            )}
-            {numberClicked.length >= 5 ? (
-              <View style={styles.filedCircleView} />
-            ) : (
-              <View style={styles.circleView} />
-            )}
-            {numberClicked.length >= 6 ? (
-              <View style={styles.filedCircleView} />
-            ) : (
-              <View style={styles.circleView} />
-            )}
+            <FlatList
+              data={[1, 2, 3, 4, 5, 6]}
+              extraData={this.state.numberClicked}
+              renderItem={({ item, index }) => {
+                return (
+                  <View
+                    style={
+                      numberClicked.length <= index
+                        ? styles.circleView
+                        : styles.filedCircleView
+                    }
+                  />
+                );
+              }}
+              keyExtractor={item => item.id}
+              numColumns={6}
+            />
           </View>
           <View style={styles.keyPadView}>
             <FlatList
@@ -93,7 +86,7 @@ class EnterPasscode extends Component {
                       styles.numberButton,
                       { marginLeft: marginLeft, marginTop: marginTop }
                     ]}
-                    onPress={() => handleInputNumber(item)}
+                    onPress={() => handleInputNumber(item, index)}
                   >
                     <Text style={styles.numberText}>{item}</Text>
                   </TouchableOpacity>

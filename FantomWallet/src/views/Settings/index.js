@@ -153,7 +153,7 @@ class SettingsContainer extends Component {
     const { notificationSwitchValue, darkSwitchValue } = this.state;
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="dark-content"/>
+        <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <ScrollView
             style={styles.scrollView}
@@ -162,11 +162,13 @@ class SettingsContainer extends Component {
             <View style={styles.mainView}>
               <View style={styles.settingView}>
                 <Text style={styles.settingText}>Settings</Text>
-                <Image
-                  source={CrossIcon}
-                  style={styles.crossIcon}
-                  resizeMode="contain"
-                ></Image>
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                  <Image
+                    source={CrossIcon}
+                    style={styles.crossIcon}
+                    resizeMode="contain"
+                  ></Image>
+                </TouchableOpacity>
               </View>
               <FlatList
                 data={settingData}

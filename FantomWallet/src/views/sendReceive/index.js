@@ -122,7 +122,7 @@ export const SendReceive = ({ navigation }: Props) => {
           <View style={styles.toView}>
             <Text style={styles.toText}>To:</Text>
             <TextInput
-              multiline={2}
+              multiline
               style={styles.sendTo}
               value={sendTo}
               onChangeText={text => setSendTo(text)}
