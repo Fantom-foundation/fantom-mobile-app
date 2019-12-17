@@ -139,7 +139,8 @@ const listViewStyles = StyleSheet.create({
 
 export default StyleSheet.create({
   mainContainer: {
-    flex: 1
+    flex: 1,
+    paddingBottom:getHeight(50)
     // paddingHorizontal: getWidth(22)
   },
   headerContainer: {
@@ -158,7 +159,8 @@ export default StyleSheet.create({
     color: Colors.textBlack
   },
   iconStyle: {
-    top: getHeight(15)
+    top: getHeight(15),
+    opacity:0.7
   },
   subHeading: {
     fontFamily: fonts.WorkSansSemiBold,

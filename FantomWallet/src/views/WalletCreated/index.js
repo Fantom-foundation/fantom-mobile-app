@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, ImageBackground, StatusBar } from 'react-native';
-import styles from './style';
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import SuccessScreen from '../../general/SuccessScreen';
+import React, { Component } from "react";
+import SuccessScreen from "../../general/SuccessScreen";
+import { NavigationService, routes } from "~/navigation/helpers";
 class WalletCreated extends Component {
-    render() {
-        return (
-            <SuccessScreen text="Wallet created!"></SuccessScreen>
-        );
-    }
+  handleOnPress = () => {
+    NavigationService.navigate(routes.root.WalletInfo);
+  };
+  render() {
+    return (
+      <SuccessScreen
+        onPress={this.handleOnPress}
+        text="Wallet created!"
+      ></SuccessScreen>
+    );
+  }
 }
 
 export default WalletCreated;

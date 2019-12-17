@@ -25,6 +25,12 @@ import { getHeight, getWidth } from "../../../utils/pixelResolver";
 import { Colors, FontSize, fonts } from "../../../theme";
 import WalletMenu from "./components/walletMenu";
 import CardHeader from "./components/cardListHeader";
+import { connect } from "react-redux";
+import {
+  getBalance as getBalanceAction,
+  getHistory as getHistoryAction
+} from "~/redux/wallet/actions";
+import Loader from "~/components/general/Loader";
 
 const rawData = [
   {
@@ -81,26 +87,33 @@ const rawData = [
   }
 ];
 
-export default class Wallet extends Component {
+class Wallet extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isListView: false,
-      isHiddenText:false,
+      isHiddenText: false,
       activeSlide: 0,
       headerHeight: 1,
-      isScaleView:1
+      isScaleView: 1
     };
     this.carousel = React.createRef();
+  }
+  componentDidMount() {
+    const { getBalance, getHistory, isLoading, publicKey } = this.props;
+ if (publicKey && !isLoading) {
+   getBalance({ loading: isLoading });
+   getHistory();
+ }
   }
 
   changeView = isListView => {
     this.setState({ isListView, activeSlide: 0 });
   };
-  setCardHiddenView=()=>{
-    const {isHiddenText}=this.state
-     this.setState({ isHiddenText: !isHiddenText });
-  }
+  setCardHiddenView = () => {
+    const { isHiddenText } = this.state;
+    this.setState({ isHiddenText: !isHiddenText });
+  };
 
   render() {
     const {
@@ -110,10 +123,20 @@ export default class Wallet extends Component {
       isScaleView,
       isHiddenText
     } = this.state;
+    
+    const { balance, publicKey, isLoading, history } = this.props;
+    
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={{ flex: 1 }}>
           <StatusBar barStyle="dark-content" />
+          {isLoading && (
+            <Loader
+              isLoading={isLoading}
+              loaderStyle={0.25}
+              loaderColor="#fff"
+            />
+          )}
           {isListView ? (
             <View>
               <CardHeader
@@ -125,7 +148,7 @@ export default class Wallet extends Component {
               />
               <ScrollView
                 style={[
-                  { height: getHeight(542), marginHorizontal: getWidth(22) }
+                  { height: getHeight(500), marginHorizontal: getWidth(22) }
                 ]}
                 showsVerticalScrollIndicator={false}
               >
@@ -158,7 +181,6 @@ export default class Wallet extends Component {
               }}
               activeSlideOffset={20}
               inactiveSlideScale={isScaleView}
-  
               lockScrollWhileSnapping={true}
               useScrollView={true}
               activeSlideAlignment={"center"}
@@ -188,9 +210,7 @@ export default class Wallet extends Component {
                     showsVerticalScrollIndicator={false}
                     stickyHeaderHeight={getHeight(headerHeight)}
                     parallaxHeaderHeight={getHeight(444)}
-                    onChangeHeaderVisibility={data =>
-                      console.log(data, "asdasda")
-                    }
+                 
                     renderStickyHeader={() => (
                       <View style={styles.stickyHeaderContainer}>
                         <WalletMenu
@@ -261,3 +281,17 @@ export default class Wallet extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  publicKey: state.keys.publicKey,
+  balance: state.wallet.balance,
+  isLoading: state.wallet.loading,
+  history: state.wallet.history
+});
+
+const mapDispatchToProps = {
+  getBalance: getBalanceAction,
+  getHistory: getHistoryAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

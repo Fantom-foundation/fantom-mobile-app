@@ -16,8 +16,10 @@ import SendFTM from "~/views/InsideWallet/SendFTM";
 import ScanQR from "~/views/InsideWallet/ScanQR";
 // import { store } from "~/redux/store";
 // import { getBalance, getHistory } from "~/redux/wallet/actions";
+import WalletScreen from "~/views/Home/Wallet";
+import WithdrawScreen from "~/views/Home/Withdraw";
+import DepositScreen from "~/views/Home/Deposit";
 
-const deviceHeight = Dimensions.get("window").height;
 
 const HomeTabNavigator = createBottomTabNavigator(
   {

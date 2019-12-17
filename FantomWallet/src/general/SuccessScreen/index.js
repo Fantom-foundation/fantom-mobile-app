@@ -8,17 +8,20 @@ class SuccessScreen extends Component {
         super(props);
     }
     render() {
-        const { text} = this.props;
-        return (<View
-            style={styles.imageBackground}
-        >
+        const { text,onPress} = this.props;
+        return (
+          <TouchableOpacity onPress={()=>onPress()} style={styles.imageBackground}>
             <StatusBar barStyle="light-content" />
             <View style={styles.mainContainer}>
-                <Text style={styles.walletText}>{text}</Text>
-                <FontAwesome name="check" size={120} color={Colors.lightGreen}
-                    style={styles.checkIcon} />
+              <Text style={styles.walletText}>{text}</Text>
+              <FontAwesome
+                name="check"
+                size={120}
+                color={Colors.lightGreen}
+                style={styles.checkIcon}
+              />
             </View>
-        </View >
+          </TouchableOpacity>
         );
     }
 }
