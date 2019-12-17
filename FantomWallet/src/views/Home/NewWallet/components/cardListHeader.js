@@ -31,7 +31,7 @@ const CardHeader = props => {
               style={styles.iconStyle}
               name={"eye"}
               size={18}
-              color={Colors.grey}
+              color={Colors.textBlack}
             />
           </TouchableOpacity>
         </View>

@@ -42,7 +42,7 @@ const WalletMenu = (props) => {
               style={styles.iconStyle}
               name={isListView ? "list-ol" : "list-ul"}
               size={16}
-              color={Colors.grey}
+              color={Colors.textBlack}
             />
           </TouchableOpacity>
         )}

@@ -18,7 +18,9 @@ export default {
     CustomerSupport: "CustomerSupport",
     CaptionOutput: "CaptionOutput",
     BackupWallet: "BackupWallet",
-    WalletCreated: "WalletCreated"
+    WalletCreated: "WalletCreated",
+    WalletInfo: "WalletInfo",
+    AddWallet: "AddWallet"
   },
   HomeScreen: {
     Home: "Home",

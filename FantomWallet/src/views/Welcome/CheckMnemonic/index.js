@@ -125,10 +125,10 @@ export const CheckMnemonicContainer = ({
       });
       return;
     }
-
+ 
     generateWallet({
       mnemonic,
-      cb: () => NavigationService.navigate(routes.root.HomeScreen)
+      cb: () => NavigationService.navigate(routes.root.WalletCreated)
     });
   };
 

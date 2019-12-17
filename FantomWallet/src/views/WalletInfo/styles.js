@@ -1,6 +1,6 @@
-import { Dimensions,StyleSheet } from 'react-native';
-import {Colors,FontSize,fonts} from '../../theme'
-import {Metrics, getHeight, getWidth} from '../../utils/pixelResolver'
+import { Dimensions, StyleSheet } from "react-native";
+import { Colors, FontSize, fonts } from "../../theme";
+import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -64,6 +64,20 @@ const styles = StyleSheet.create({
     height: getWidth(50),
     borderRadius: getWidth(25),
     backgroundColor: "green"
+  },
+  colorsListContiner: {
+    flex: 1,
+    top: getHeight(12),
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between"
+  },
+  colorItemStyle: {
+    width: getWidth(50),
+    height: getWidth(50),
+    marginVertical: getHeight(12),
+    marginRight: getHeight(10),
+    borderRadius: getWidth(25)
   },
   colorModalView: {
     backgroundColor: "red",

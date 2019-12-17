@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
+import { DEVICE_HEIGHT, iPhoneXHeight } from "../../common/constants";
+const isPhoneX = DEVICE_HEIGHT >= iPhoneXHeight;
 
 const qrCode = {
   qrCodeButton: {
@@ -81,6 +83,7 @@ const modalStyles = {
     backgroundColor: Colors.white,
     width: Metrics.screenWidth,
     top: Metrics.screenHeight * 0.4,
+    bottom: 0,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20
   },
@@ -178,9 +181,14 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.royalBlue
   },
+  keyBoardAvoidingView: {
+    height: getHeight(750)
+  },
+
   safeAreaView: {
     flex: 1,
-    backgroundColor: Colors.transparent
+    backgroundColor: Colors.transparent,
+    paddingBottom: isPhoneX ? 60 : 48
   },
   ...priceText,
   ...keyPadStyle,

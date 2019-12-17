@@ -58,8 +58,11 @@ export default class BackupWallet extends Component {
               }}
               textStyle={styles.buttonText}
               text={"CONTINUE"}
-              onPress={() =>
+              onPress={() =>{
+                if(isEnable){
                 NavigationService.navigate(routes.root.CreateMnemonic)
+                }
+              }
               }
             />
           </View>
