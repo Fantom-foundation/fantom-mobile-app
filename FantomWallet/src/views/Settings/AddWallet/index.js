@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -6,9 +6,9 @@ import {
   Image,
   SafeAreaView,
   StatusBar
-} from "react-native";
-import styles from "./styles";
-import { CrossIcon, RightArrowIcon } from "../../../images";
+} from 'react-native';
+import styles from './styles';
+import { CrossIcon, RightArrowIcon } from '../../../images';
 class AddWallet extends Component {
   render() {
     const { navigation } = this.props;
@@ -27,7 +27,10 @@ class AddWallet extends Component {
 
             <Text style={styles.headingText}>Add wallet</Text>
           </View>
-          <View style={styles.middleView}>
+          <TouchableOpacity
+            style={styles.middleView}
+            onPress={() => navigation.navigate('BackupWallet')}
+          >
             <Text style={styles.rowsText}>Create wallet</Text>
             <TouchableOpacity>
               <Image
@@ -36,8 +39,11 @@ class AddWallet extends Component {
                 resizeMode="contain"
               ></Image>
             </TouchableOpacity>
-          </View>
-          <View style={styles.middleView}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.middleView}
+            onPress={() => navigation.navigate('RecoverWallet')}
+          >
             <Text style={styles.rowsText}>Import wallet</Text>
             <TouchableOpacity>
               <Image
@@ -46,7 +52,7 @@ class AddWallet extends Component {
                 resizeMode="contain"
               ></Image>
             </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         </SafeAreaView>
       </View>
     );
