@@ -153,7 +153,7 @@ class SettingsContainer extends Component {
     const { notificationSwitchValue, darkSwitchValue } = this.state;
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content"/>
         <SafeAreaView style={styles.container}>
           <ScrollView
             style={styles.scrollView}
