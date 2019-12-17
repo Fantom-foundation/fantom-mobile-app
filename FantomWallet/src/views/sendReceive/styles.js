@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
+import { DEVICE_HEIGHT, iPhoneXHeight } from "../../common/constants";
+const isPhoneX = DEVICE_HEIGHT >= iPhoneXHeight;
 
 const qrCode = {
   qrCodeButton: {
@@ -180,7 +182,8 @@ export default StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: Colors.transparent
+    backgroundColor: Colors.transparent,
+    paddingBottom: isPhoneX ? 60 : 48
   },
   ...priceText,
   ...keyPadStyle,

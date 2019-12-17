@@ -18,16 +18,15 @@ import PrivacyAndSecurity from "~/views/Settings/PrivacyAndSecurity";
 import EnterPasscode from "~/views/Settings/EnterPasscode";
 import Currency from "~/views/Settings/Currency";
 
-
 const WelcomeNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
     SettingsContainer: { screen: SettingsContainer },
-    Currency: { screen: Currency },
-    EnterPasscode: { screen: EnterPasscode },
-    PrivacyAndSecurity: { screen: PrivacyAndSecurity },
-    AddWallet: { screen: AddWallet },
-    ManageWallet: { screen: ManageWallet },
+    // Currency: { screen: Currency },
+    // EnterPasscode: { screen: EnterPasscode },
+    // PrivacyAndSecurity: { screen: PrivacyAndSecurity },
+    // AddWallet: { screen: AddWallet },
+    // ManageWallet: { screen: ManageWallet },
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {

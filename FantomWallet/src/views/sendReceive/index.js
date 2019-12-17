@@ -12,35 +12,48 @@ import {
   TextInput,
   Clipboard
 } from "react-native";
+import Web3 from "web3";
+import { connect } from "react-redux";
 
 //Assets
 import QRCode from "../../images/scanQR.png";
 
 // Styling
+import { GAS_PRICE } from "~/common/constants";
+import { addUpdateTimestampAddress } from "~/redux/addressBook/actions";
+import { sendTransaction as sendTransactionAction } from "~/redux/wallet/actions";
 import styles from "./styles";
 import { getWidth } from "../../utils/pixelResolver";
 import Button from "../../components/general/Button";
 import Entypo from "react-native-vector-icons/Entypo";
 import { Colors } from "../../theme";
 import KeyPad from "../../components/general/keyPad";
+import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
 
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
-export const SendReceive = ({ navigation }: Props) => {
+export const SendReceive = ({ navigation, balance }: Props) => {
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
-  const [number, setNumber] = useState("");
+  const [address, setSendTo] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const [sendTo, setSendTo] = useState("");
+  const [amount, setAmount] = useState("");
+  const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
 
-  //  function for entered number from KeyPad
+  //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     if (item === "<") {
-      let num = number.slice(0, -1);
-      setNumber(num);
+      let num = amount.slice(0, -1);
+      setAmount(num);
     } else {
-      setNumber(number.concat(item));
+      setAmount(amount.concat(item));
     }
+  };
+
+  const alertSuccessfulButtonPressed = () => {
+    addUpdateAddress(address, "", new Date().getTime());
+    clearState();
+    NavigationService.navigate(routes.HomeScreen.Wallet);
   };
 
   //formating Number
@@ -53,6 +66,58 @@ export const SendReceive = ({ navigation }: Props) => {
     setOpenModal(true);
   };
 
+  /**
+   *  handleSendMoney()  : This function is meant for handling input box validations ,
+   *  and navigate to SendMoney screen if all fields are filled.
+   */
+  const handleSendMoney = () => {
+    if (Number(amount) === 0) {
+      Alert.alert("Error", "Please enter valid amount");
+    } else if (amount > maxFantomBalance) {
+      Alert.alert("Error", "Insufficient balance");
+    } else {
+      const coin = val;
+      let message = "";
+      if (address === "") message = "Please enter address.";
+      else if (!Web3.utils.isAddress(address))
+        message = "Please enter valid address.";
+      else if (amount === "") message = "Please enter valid amount";
+
+      if (message !== "") Alert.alert("Error", message);
+      if (address && Web3.utils.isAddress(address) && amount) {
+        const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+        if (amount === 0 || amount > maxFantomBalance) {
+          Alert.alert("Error", "Please enter valid amount.");
+        } else {
+          sendTransaction({
+            to: address,
+            value: amount,
+            memo,
+            cbSuccess: alertSuccessfulButtonPressed
+          });
+        }
+        // NavigationService.navigate(routes.root.SendMoney, {
+        //   address,
+        //   amount,
+        //   coin,
+        //   memo,
+        //   fees,
+        //   reload,
+        //   balance
+        // });
+      }
+    }
+  };
+
+  /**
+   * clearState() : reset the fields.
+   */
+  const clearState = () => {
+    setSendTo("");
+    setOpenModal(false);
+    setAmount("");
+  };
+
   const readFromClipboard = async () => {
     const clipboardContent = await Clipboard.getString();
 
@@ -61,8 +126,8 @@ export const SendReceive = ({ navigation }: Props) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <SafeAreaView style={styles.safeAreaView}>
+      <SafeAreaView style={styles.safeAreaView}>
+        <ScrollView>
           {/* Scan Button */}
 
           <TouchableOpacity style={styles.qrCodeButton}>
@@ -71,7 +136,7 @@ export const SendReceive = ({ navigation }: Props) => {
 
           {/* Price and Wallet View */}
           <Text style={styles.sendPrice}>
-            {number ? formatNumber(number) : 0}
+            {amount ? formatNumber(amount) : 0}
           </Text>
           <Text style={styles.sendPriceExample}>($0)</Text>
           <View style={styles.walletButton}>
@@ -105,8 +170,9 @@ export const SendReceive = ({ navigation }: Props) => {
               onPress={() => handleSendOption()}
             />
           </View>
-        </SafeAreaView>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
+
       {/* Modal View */}
       {openModal && (
         <View style={styles.modalView}>
@@ -114,7 +180,7 @@ export const SendReceive = ({ navigation }: Props) => {
             <TouchableOpacity onPress={() => setOpenModal(false)}>
               <Entypo name="cross" size={25} color={Colors.blackOpacity} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleSendMoney}>
               <Text style={styles.sendText}>Send</Text>
             </TouchableOpacity>
           </View>
@@ -124,7 +190,7 @@ export const SendReceive = ({ navigation }: Props) => {
             <TextInput
               multiline={2}
               style={styles.sendTo}
-              value={sendTo}
+              value={address}
               onChangeText={text => setSendTo(text)}
             ></TextInput>
             {/* Paste Option */}
@@ -145,4 +211,14 @@ export const SendReceive = ({ navigation }: Props) => {
   );
 };
 
-export default SendReceive;
+const mapStateToProps = state => ({
+  isLoading: state.wallet.sendTransactionIsLoading,
+  balance: state.wallet.balance
+});
+
+const mapDispatchToProps = {
+  addUpdateAddress: addUpdateTimestampAddress,
+  sendTransaction: sendTransactionAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SendReceive);

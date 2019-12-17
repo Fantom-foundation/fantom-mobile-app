@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React from "react";
 import {
   Text,
   View,
@@ -7,24 +7,23 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import { connect } from 'react-redux';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import type { NavigationScreenProp } from 'react-navigation';
+  ScrollView
+} from "react-native";
+import { connect } from "react-redux";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import type { NavigationScreenProp } from "react-navigation";
 
-
-import { NavigationService, routes } from '~/navigation/helpers';
-import Header from '~/components/Header/index';
-import Loading from '~/components/general/Loader';
-import { DEVICE_WIDTH, GAS_PRICE } from '~/common/constants';
-import { addUpdateTimestampAddress } from '~/redux/addressBook/actions';
-import { sendTransaction as sendTransactionAction } from '~/redux/wallet/actions';
-import { estimationMaxFantomBalance, toFixed } from '~/utils/converts';
-import BackgroundIcon from '~/images/BackgroundIcon.png';
-import fantomIcon from '~/images/FantomWalletWhiteIcon.png';
-import styles from './styles';
+import { NavigationService, routes } from "~/navigation/helpers";
+import Header from "~/components/Header/index";
+import Loading from "~/components/general/Loader";
+import { DEVICE_WIDTH, GAS_PRICE } from "~/common/constants";
+import { addUpdateTimestampAddress } from "~/redux/addressBook/actions";
+import { sendTransaction as sendTransactionAction } from "~/redux/wallet/actions";
+import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
+import BackgroundIcon from "~/images/BackgroundIcon.png";
+import fantomIcon from "~/images/FantomWalletWhiteIcon.png";
+import styles from "./styles";
 
 type Props = {
   balance: string,
@@ -34,15 +33,25 @@ type Props = {
   navigation: NavigationScreenProp
 };
 
-export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress, navigation, isLoading }: Props) => {
+export const SendMoneyContainer = ({
+  balance,
+  sendTransaction,
+  addUpdateAddress,
+  navigation,
+  isLoading
+}: Props) => {
   const {
-    address, reload, memo,
-    amount, coin, balance: balanceInNav,
+    address,
+    reload,
+    memo,
+    amount,
+    coin,
+    balance: balanceInNav
   } = navigation.state.params;
 
   const onLeftIconPress = () => NavigationService.pop();
   const alertSuccessfulButtonPressed = () => {
-    addUpdateAddress(address, '', new Date().getTime());
+    addUpdateAddress(address, "", new Date().getTime());
     if (reload) reload();
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
@@ -50,17 +59,16 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
   const onConfirmHandler = () => {
     const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
     if (amount === 0 || amount > maxFantomBalance) {
-      Alert.alert('Error', 'Please enter valid amount.');
+      Alert.alert("Error", "Please enter valid amount.");
     } else {
       sendTransaction({
         to: address,
         value: amount,
         memo,
-        cbSuccess: alertSuccessfulButtonPressed,
+        cbSuccess: alertSuccessfulButtonPressed
       });
     }
   };
-
 
   // renderPriceContainer(coin, amount) {
   //   let amountValue = '0';
@@ -98,11 +106,12 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
         textStyle={styles.headerComponentText}
         headerStyle={styles.headerComponent}
       />
-      <Image style={styles.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
-      <ScrollView
-        style={{ flex: 1 }}
-        showsVerticalScrollIndicator={false}
-      >
+      <Image
+        style={styles.backgroundIconStyle}
+        source={BackgroundIcon}
+        resizeMode="contain"
+      />
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={styles.topMarginContainer} />
         <View style={styles.amtContainer}>
           <View style={styles.balanceHeadingContainer}>
@@ -118,7 +127,11 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
         <View style={styles.addressContainer}>
           <Text style={styles.inputTextHeading}>Address to send</Text>
           <View style={styles.textInputContainer}>
-            <TextInput value={address} style={styles.valueTextStyle} editable={false} />
+            <TextInput
+              value={address}
+              style={styles.valueTextStyle}
+              editable={false}
+            />
           </View>
         </View>
         {/* Price container */}
@@ -127,7 +140,7 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
           <View style={styles.textInputContainer}>
             <TextInput
               style={styles.valueTextStyle}
-              value={amount ? amount.toString() : '0'}
+              value={amount ? amount.toString() : "0"}
               editable={false}
             />
             <View style={styles.priceSubContainer}>
@@ -139,7 +152,11 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
         <View style={styles.addressContainer}>
           <Text style={styles.inputTextHeading}>Memo</Text>
           <View
-            style={multilineCheck ? styles.textInputContainer : styles.memoTextInputContainer}
+            style={
+              multilineCheck
+                ? styles.textInputContainer
+                : styles.memoTextInputContainer
+            }
           >
             <TextInput
               style={styles.valueTextStyle}
@@ -155,7 +172,7 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
           <Text style={styles.attentionTextStyle}>Attention</Text>
           <Text style={styles.warningTextStyle}>
             Please make sure the above information is correct.
-            </Text>
+          </Text>
         </View>
         {/* Confirm container */}
         <View style={styles.confirmContainer}>
@@ -164,7 +181,11 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
             onPress={onConfirmHandler}
           >
             <View style={styles.confirmButtonInnerContainer}>
-              <FontAwesome5 name="check" color="#FFF" size={DEVICE_WIDTH * 0.09} />
+              <FontAwesome5
+                name="check"
+                color="#FFF"
+                size={DEVICE_WIDTH * 0.09}
+              />
             </View>
           </TouchableOpacity>
           <Text style={styles.confirmTextStyle}>Confirm</Text>
@@ -178,15 +199,12 @@ export const SendMoneyContainer = ({ balance, sendTransaction, addUpdateAddress,
 
 const mapStateToProps = state => ({
   isLoading: state.wallet.sendTransactionIsLoading,
-  balance: state.wallet.balance,
+  balance: state.wallet.balance
 });
 
 const mapDispatchToProps = {
   addUpdateAddress: addUpdateTimestampAddress,
-  sendTransaction: sendTransactionAction,
+  sendTransaction: sendTransactionAction
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SendMoneyContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SendMoneyContainer);
