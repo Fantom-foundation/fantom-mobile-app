@@ -128,93 +128,87 @@ export const SendReceive = ({ navigation, balance }: Props) => {
 
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView
-        contentContainerStyle={styles.keyBoardAvoidingView}
-        behavior="position"
-        enabled
-      >
-        <SafeAreaView style={styles.safeAreaView}>
-          <ScrollView>
-            {/* Scan Button */}
+      <SafeAreaView style={styles.safeAreaView}>
+        <ScrollView>
+          {/* Scan Button */}
 
-            <TouchableOpacity style={styles.qrCodeButton}>
-              <Image source={QRCode} style={styles.qrImage} />
+          <TouchableOpacity style={styles.qrCodeButton}>
+            <Image source={QRCode} style={styles.qrImage} />
+          </TouchableOpacity>
+
+          {/* Price and Wallet View */}
+          <Text style={styles.sendPrice}>
+            {amount ? formatNumber(amount) : 0}
+          </Text>
+          <Text style={styles.sendPriceExample}>($0)</Text>
+          <View style={styles.walletButton}>
+            <TouchableOpacity>
+              <Text style={styles.walletText}>FTM</Text>
             </TouchableOpacity>
-
-            {/* Price and Wallet View */}
-            <Text style={styles.sendPrice}>
-              {amount ? formatNumber(amount) : 0}
-            </Text>
-            <Text style={styles.sendPriceExample}>($0)</Text>
-            <View style={styles.walletButton}>
-              <TouchableOpacity>
-                <Text style={styles.walletText}>FTM</Text>
-              </TouchableOpacity>
-              <Text style={styles.walletAmountText}>(43,680)</Text>
-            </View>
-
-            {/* KeyPad */}
-
-            <KeyPad
-              buttonStyle={styles.numberButton}
-              textStyle={styles.numberText}
-              keyPad={keyPad}
-              keyPadStyle={styles.keyPadView}
-              handleInputNumber={item => handleInputNumber(item)}
-            />
-
-            {/* Buttons */}
-            <View style={styles.sendReceiveView}>
-              <Button
-                text={"Receive"}
-                buttonStyle={styles.buttonStyle}
-                textStyle={styles.buttonText}
-              />
-              <Button
-                text={"Send"}
-                buttonStyle={styles.buttonStyle}
-                textStyle={styles.buttonText}
-                onPress={() => handleSendOption()}
-              />
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-
-        {/* Modal View */}
-        {openModal && (
-          <View style={styles.modalView}>
-            <View style={styles.crossSendView}>
-              <TouchableOpacity onPress={() => setOpenModal(false)}>
-                <Entypo name="cross" size={25} color={Colors.blackOpacity} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleSendMoney}>
-                <Text style={styles.sendText}>Send</Text>
-              </TouchableOpacity>
-            </View>
-            {/* To Option */}
-            <View style={styles.toView}>
-              <Text style={styles.toText}>To:</Text>
-              <TextInput
-                multiline
-                style={styles.sendTo}
-                value={address}
-                onChangeText={text => setSendTo(text)}
-              ></TextInput>
-              {/* Paste Option */}
-              <TouchableOpacity
-                style={styles.pasteButton}
-                onPress={() => readFromClipboard()}
-              >
-                <Text style={styles.pasteText}>Paste</Text>
-              </TouchableOpacity>
-              {/* QR Button */}
-              <TouchableOpacity style={styles.qrButton}>
-                <Image source={QRCode} style={styles.qrSendImage} />
-              </TouchableOpacity>
-            </View>
+            <Text style={styles.walletAmountText}>(43,680)</Text>
           </View>
-        )}
-      </KeyboardAvoidingView>
+
+          {/* KeyPad */}
+
+          <KeyPad
+            buttonStyle={styles.numberButton}
+            textStyle={styles.numberText}
+            keyPad={keyPad}
+            keyPadStyle={styles.keyPadView}
+            handleInputNumber={item => handleInputNumber(item)}
+          />
+
+          {/* Buttons */}
+          <View style={styles.sendReceiveView}>
+            <Button
+              text={"Receive"}
+              buttonStyle={styles.buttonStyle}
+              textStyle={styles.buttonText}
+            />
+            <Button
+              text={"Send"}
+              buttonStyle={styles.buttonStyle}
+              textStyle={styles.buttonText}
+              onPress={() => handleSendOption()}
+            />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+
+      {/* Modal View */}
+      {openModal && (
+        <View style={styles.modalView}>
+          <View style={styles.crossSendView}>
+            <TouchableOpacity onPress={() => setOpenModal(false)}>
+              <Entypo name="cross" size={25} color={Colors.blackOpacity} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleSendMoney}>
+              <Text style={styles.sendText}>Send</Text>
+            </TouchableOpacity>
+          </View>
+          {/* To Option */}
+          <View style={styles.toView}>
+            <Text style={styles.toText}>To:</Text>
+            <TextInput
+              multiline
+              style={styles.sendTo}
+              value={address}
+              onChangeText={text => setSendTo(text)}
+            ></TextInput>
+            {/* Paste Option */}
+            <TouchableOpacity
+              style={styles.pasteButton}
+              onPress={() => readFromClipboard()}
+            >
+              <Text style={styles.pasteText}>Paste</Text>
+            </TouchableOpacity>
+            {/* QR Button */}
+            <TouchableOpacity style={styles.qrButton}>
+              <Image source={QRCode} style={styles.qrSendImage} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
