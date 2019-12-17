@@ -1,18 +1,17 @@
 import { StyleSheet, Platform } from "react-native";
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from "~/common/constants";
+import { DEVICE_HEIGHT, DEVICE_WIDTH,iPhoneXHeight } from "~/common/constants";
 import { Colors } from "../../theme/colors";
 import { FontSize } from "../../theme/fontSize";
 import { fonts } from "../../theme/font";
 import { getWidth, getHeight, Metrics } from "../../utils/pixelResolver";
-
+const isPhoneX = DEVICE_HEIGHT >= iPhoneXHeight;
 const isIOS = Platform.OS === "ios";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: getWidth(15)
-    // backgroundColor:'yellow'
+    paddingHorizontal: getWidth(15),
   },
   mainContainer: {
     flex: 1,
@@ -23,7 +22,11 @@ export default StyleSheet.create({
     alignSelf: "center",
     justifyContent: "space-between"
   },
-
+  scrollView: {
+    flex: 1,
+    // backgroundColor: 'red',
+    marginBottom: isPhoneX ? 60 : 48,
+  },
   headerComponent: {
     backgroundColor: "rgb(44,52,58)",
     height: DEVICE_HEIGHT < 810 ? 84 : (106 / 812) * DEVICE_HEIGHT

@@ -1,6 +1,6 @@
 // @flow
 // Library
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -11,26 +11,26 @@ import {
   StatusBar,
   FlatList,
   Switch
-} from "react-native";
+} from 'react-native';
 
 // Components
-import Header from "~/components/Header/index";
+import Header from '~/components/Header/index';
 // Images
-import AboutApp from "~/images/AboutApp.png";
-import AddressBook from "~/images/AddressBook.png";
-import CustomerSupport from "~/images/CustomerSupport.png";
-import BackgroundIcon from "~/images/BackgroundIcon.png";
+import AboutApp from '~/images/AboutApp.png';
+import AddressBook from '~/images/AddressBook.png';
+import CustomerSupport from '~/images/CustomerSupport.png';
+import BackgroundIcon from '~/images/BackgroundIcon.png';
 // import PrivacyPolicy from '~/images/PrivacyPolicy.png';
 // import TermsOfServices from '~/images/TermsOfServices.png';
-import { NavigationService } from "~/navigation/helpers";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import Entypo from "react-native-vector-icons/Entypo";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { NavigationService } from '~/navigation/helpers';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 // import { Switch } from 'react-native-switch';
 // Styling
-import styles from "./styles";
+import styles from './styles';
 import {
   CrossIcon,
   ShareIcon,
@@ -45,9 +45,9 @@ import {
   RightArrowIcon,
   PlusIcon,
   ShieldIcon
-} from "../../images";
-import { Colors } from "../../theme";
-import { getHeight } from "../../utils/pixelResolver";
+} from '../../images';
+import { Colors } from '../../theme';
+import { getHeight } from '../../utils/pixelResolver';
 type Props = {
   navigation: {
     navigate: string => void,
@@ -59,65 +59,65 @@ const settingData = [
   {
     // Icon: FontAwesome,
     // iconName: 'plus-square',
-    text: "Add wallet",
+    text: 'Add wallet',
     rightArrowIcon: RightArrowIcon,
     source: PlusIcon,
     notificationsToggleButton: false,
     darkToggleButton: false,
-    to: "AddWallet"
+    to: 'AddWallet'
   },
   {
     Icon: Entypo,
-    iconName: "wallet",
-    text: "Manage wallets",
+    iconName: 'wallet',
+    text: 'Manage wallets',
     rightArrowIcon: RightArrowIcon,
     source: WalletIcon,
     notificationsToggleButton: false,
     darkToggleButton: false,
-    to: "ManageWallet"
+    to: 'ManageWallet'
   },
   {
     Icon: Ionicons,
-    iconName: "md-moon",
-    text: "Dark Mode",
-    rightArrowIcon: "",
+    iconName: 'md-moon',
+    text: 'Dark Mode',
+    rightArrowIcon: '',
     source: MoonIcon,
     notificationsToggleButton: false,
     darkToggleButton: true
   },
   {
     Icon: MaterialIcons,
-    iconName: "security",
-    text: "Privacy and security",
+    iconName: 'security',
+    text: 'Privacy and security',
     rightArrowIcon: RightArrowIcon,
     source: ShieldIcon,
     notificationsToggleButton: false,
     darkToggleButton: false,
-    to: "PrivacyAndSecurity"
+    to: 'PrivacyAndSecurity'
   },
   {
     Icon: Entypo,
-    iconName: "notification",
-    text: "Push notifications",
-    rightArrowIcon: "",
+    iconName: 'notification',
+    text: 'Push notifications',
+    rightArrowIcon: '',
     source: NotificationIcon,
     notificationsToggleButton: true,
     darkToggleButton: false
   },
   {
     Icon: FontAwesome,
-    iconName: "dollar",
-    text: "Currency",
+    iconName: 'dollar',
+    text: 'Currency',
     rightArrowIcon: RightArrowIcon,
     source: DollarIcon,
     notificationsToggleButton: false,
     darkToggleButton: false,
-    to: "Currency"
+    to: 'Currency'
   },
   {
     Icon: Entypo,
-    iconName: "share",
-    text: "Share with your friends",
+    iconName: 'share',
+    text: 'Share with your friends',
     rightArrowIcon: RightArrowIcon,
     source: ShareIcon,
     notificationsToggleButton: false,
@@ -125,8 +125,8 @@ const settingData = [
   },
   {
     Icon: FontAwesome,
-    iconName: "question-circle",
-    text: "About",
+    iconName: 'question-circle',
+    text: 'About',
     rightArrowIcon: RightArrowIcon,
     source: AboutIcon,
     notificationsToggleButton: false,
@@ -134,8 +134,8 @@ const settingData = [
   },
   {
     Icon: Entypo,
-    iconName: "heart",
-    text: "Leave a review",
+    iconName: 'heart',
+    text: 'Leave a review',
     rightArrowIcon: RightArrowIcon,
     source: ReviewIcon,
     notificationsToggleButton: false,
@@ -153,10 +153,10 @@ class SettingsContainer extends Component {
     const { notificationSwitchValue, darkSwitchValue } = this.state;
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-          <StatusBar barStyle="dark-content" />
           <ScrollView
-            style={styles.container}
+            style={styles.scrollView}
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.mainView}>
