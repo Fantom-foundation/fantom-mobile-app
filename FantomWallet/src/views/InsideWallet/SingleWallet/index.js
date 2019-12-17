@@ -9,13 +9,15 @@ import {
   StatusBar
 } from "react-native";
 import { Colors } from "~/theme";
-import { getHeight } from "~/utils/pixelResolver";
+import { getHeight, Metrics } from "~/utils/pixelResolver";
+import { NavigationService, routes } from '~/navigation/helpers';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
 import Button from "~/components/general/Button";
 import styles from "./styles";
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 const walletID = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7";
@@ -178,7 +180,11 @@ export default class SingleWallet extends React.Component<any, any> {
         <View
           style={{ backgroundColor: colorTheme, ...styles.colorThemeBox }}
         />
-        <SafeAreaView style={styles.safeAreaView}>
+        <SafeAreaView style={{ ...styles.safeAreaView, marginBottom:
+              Metrics.getiPhoneX_Dimensions().height === DEVICE_HEIGHT &&
+              Metrics.getiPhoneX_Dimensions().width === DEVICE_WIDTH
+                ? getHeight(60)
+                : getHeight(48)}}>
           <View style={styles.safeAreaViewContainer}>
             <Text style={{ ...styles.walletTitle, color: textColor }}>
               {walletTitle}
@@ -218,7 +224,10 @@ export default class SingleWallet extends React.Component<any, any> {
                 <Button
                   activeOpacity={0.5}
                   text="Receive"
-                  onPress={() => this.setState({ showReceiveModal: true })}
+                  onPress={() => {
+                    // this.setState({ showReceiveModal: true });
+                    NavigationService.navigate(routes.root.ScanQR);
+                  }}
                   buttonStyle={{
                     backgroundColor: this.hexToRGB(colorTheme, 0.1),
                     ...styles.buttonStyle
@@ -228,7 +237,10 @@ export default class SingleWallet extends React.Component<any, any> {
                 <Button
                   activeOpacity={0.5}
                   text="Send"
-                  onPress={() => this.setState({ showSendModal: true })}
+                  onPress={() => {
+                    // this.setState({ showSendModal: true });
+                    NavigationService.navigate(routes.root.SendFTM);
+                  }}
                   buttonStyle={{
                     backgroundColor: this.hexToRGB(colorTheme, 0.1),
                     ...styles.buttonStyle

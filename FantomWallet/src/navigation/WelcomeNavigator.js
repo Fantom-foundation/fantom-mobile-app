@@ -13,13 +13,15 @@ import WalletCreated from "~/views/WalletCreated";
 import SingleWallet from '~/views/InsideWallet/SingleWallet';
 import SendFTM from '~/views/InsideWallet/SendFTM';
 import ScanQR from '~/views/InsideWallet/ScanQR';
+import ReceiveMyQcCode from '~/views/InsideWallet/ReceiveMyQcCode';
 
 const WelcomeNavigator = createStackNavigator(
   {
-    SplashScreen: { screen: SplashScreen },
     SingleWallet: { screen: SingleWallet },
+    SplashScreen: { screen: SplashScreen },
     SendFTM: { screen: SendFTM },
     ScanQR: { screen: ScanQR },
+    ReceiveMyQcCode: { screen: ReceiveMyQcCode },
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {

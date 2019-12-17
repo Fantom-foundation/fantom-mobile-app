@@ -7,16 +7,16 @@ import {
   SafeAreaView,
   StatusBar
 } from "react-native";
-import { Colors, fonts, FontSize } from "~/theme";
-import { getHeight, getWidth } from "~/utils/pixelResolver";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Colors } from "~/theme";
+import { getHeight } from "~/utils/pixelResolver";
+import { NavigationService, routes } from '~/navigation/helpers';
 import Entypo from "react-native-vector-icons/Entypo";
-import Button from "~/components/general/Button";
 import { DEVICE_WIDTH } from "~/common/constants";
 import styles from "./styles";
 import FlashIcon from "../../../images/flash.png";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import QRIcon from "../../../images/QR-01.png";
+
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 export default class ScanQR extends React.Component<any, any> {
@@ -59,7 +59,7 @@ export default class ScanQR extends React.Component<any, any> {
             }}
           >
             <View style={styles.buttonContainer}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => NavigationService.pop()}>
                 <Entypo name="cross" size={25} color={Colors.white} />
               </TouchableOpacity>
               <Image
@@ -78,6 +78,7 @@ export default class ScanQR extends React.Component<any, any> {
               ></FontAwesome>
             </View>
             <TouchableOpacity
+            onPress={() => NavigationService.navigate(routes.root.ReceiveMyQcCode)}
               style={{
                 marginTop: getHeight(90),
                 alignItems: "center",

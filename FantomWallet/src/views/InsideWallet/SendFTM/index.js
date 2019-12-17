@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Colors } from "~/theme";
 import { getHeight, getWidth } from "~/utils/pixelResolver";
+import { NavigationService, routes } from '~/navigation/helpers';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
 import Button from "~/components/general/Button";
@@ -37,12 +38,16 @@ export default class SendFTM extends React.Component<any, any> {
         <SafeAreaView style={styles.safeAreaView}>
           <View style={styles.buttonsWrapper}>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={{}}>
+              <TouchableOpacity onPress={() => { NavigationService.pop(); }}>
                 <Entypo name="cross" size={25} color={Colors.textBlack} />
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={toId === "" ? 1 : 0.5}
-                onPress={() => {}}
+                onPress={() => {
+                  if(toId !== "") {
+                    NavigationService.navigate(routes.root.ScanQR);
+                  }
+                }}
               >
                 <Text
                   style={{ ...styles.sendText, opacity: toId === "" ? 0.5 : 1 }}
@@ -66,7 +71,7 @@ export default class SendFTM extends React.Component<any, any> {
                     buttonStyle={styles.buttonStyle}
                     textStyle={styles.textStyle}
                   />
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => NavigationService.navigate(routes.root.ScanQR)}>
                     <MaterialCommunityIcons
                       name="qrcode-scan"
                       size={25}

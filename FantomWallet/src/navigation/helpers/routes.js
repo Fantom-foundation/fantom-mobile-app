@@ -17,7 +17,11 @@ export default {
     AboutApp: "AboutApp",
     CustomerSupport: "CustomerSupport",
     CaptionOutput: "CaptionOutput",
-    BackupWallet: "BackupWallet"
+    BackupWallet: "BackupWallet",
+    ReceiveMyQcCode: "ReceiveMyQcCode",
+    ScanQR: "ScanQR",
+    SendFTM: "SendFTM",
+    SingleWallet: "SingleWallet",
   },
   HomeScreen: {
     Wallet: "Wallet",
