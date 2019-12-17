@@ -83,6 +83,7 @@ const modalStyles = {
     backgroundColor: Colors.white,
     width: Metrics.screenWidth,
     top: Metrics.screenHeight * 0.4,
+    bottom: 0,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20
   },
@@ -180,6 +181,10 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.royalBlue
   },
+  keyBoardAvoidingView: {
+    height: getHeight(750)
+  },
+
   safeAreaView: {
     flex: 1,
     backgroundColor: Colors.transparent,

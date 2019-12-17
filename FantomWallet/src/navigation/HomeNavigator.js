@@ -7,8 +7,7 @@ import {
 } from "react-navigation";
 import type { NavigationScreenProp, NavigationState } from "react-navigation";
 import { NavigationService, routes } from "~/navigation/helpers";
-import Settings from "~/views/Settings";
-
+import Settings from "../views/Settings";
 import SendReceive from "~/views/sendReceive";
 import NavigationTab from "~/components/NavigationTab";
 import NewWallet from "~/views/Home/NewWallet";
