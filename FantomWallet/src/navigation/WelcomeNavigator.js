@@ -17,8 +17,8 @@ import ReceiveMyQcCode from '~/views/InsideWallet/ReceiveMyQcCode';
 
 const WelcomeNavigator = createStackNavigator(
   {
-    SingleWallet: { screen: SingleWallet },
     SplashScreen: { screen: SplashScreen },
+    SingleWallet: { screen: SingleWallet },
     SendFTM: { screen: SendFTM },
     ScanQR: { screen: ScanQR },
     ReceiveMyQcCode: { screen: ReceiveMyQcCode },
