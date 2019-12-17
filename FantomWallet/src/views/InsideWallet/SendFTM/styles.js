@@ -15,7 +15,8 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: getHeight(17)
+    marginTop: getHeight(27),
+    marginBottom: getHeight(20),
   },
   sendText: {
     color: Colors.royalBlue,
@@ -107,5 +108,10 @@ export default StyleSheet.create({
     fontSize: FontSize.large + 1,
     textAlign: "center",
     color: Colors.textBlack
-  }
+  },
+  modalStyle: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

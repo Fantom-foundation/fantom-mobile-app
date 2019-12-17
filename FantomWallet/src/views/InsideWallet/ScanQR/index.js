@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -6,16 +6,16 @@ import {
   View,
   SafeAreaView,
   StatusBar
-} from "react-native";
-import { Colors } from "~/theme";
-import { getHeight } from "~/utils/pixelResolver";
+} from 'react-native';
+import { Colors } from '~/theme';
+import { getHeight } from '~/utils/pixelResolver';
 import { NavigationService, routes } from '~/navigation/helpers';
-import Entypo from "react-native-vector-icons/Entypo";
-import { DEVICE_WIDTH } from "~/common/constants";
-import styles from "./styles";
-import FlashIcon from "../../../images/flash.png";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import QRIcon from "../../../images/QR-01.png";
+import Entypo from 'react-native-vector-icons/Entypo';
+import { DEVICE_WIDTH } from '~/common/constants';
+import styles from './styles';
+import FlashIcon from '../../../images/flash.png';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import QRIcon from '../../../images/QR-01.png';
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
@@ -26,13 +26,13 @@ export default class ScanQR extends React.Component<any, any> {
         <StatusBar
           barStyle={
             colorTheme === Colors.royalBlue ||
-            colorTheme === "#8959DD" ||
-            colorTheme === "#A650A6" ||
-            colorTheme === "#4649FD" ||
-            colorTheme === "#E32C2C" ||
-            colorTheme === "#5F5F7C"
-              ? "light-content"
-              : "dark-content"
+            colorTheme === '#8959DD' ||
+            colorTheme === '#A650A6' ||
+            colorTheme === '#4649FD' ||
+            colorTheme === '#E32C2C' ||
+            colorTheme === '#5F5F7C'
+              ? 'light-content'
+              : 'dark-content'
           }
         />
         {/* <View
@@ -54,7 +54,7 @@ export default class ScanQR extends React.Component<any, any> {
               width: DEVICE_WIDTH,
               borderBottomLeftRadius: getHeight(22),
               borderBottomRightRadius: getHeight(22),
-              position: "absolute",
+              position: 'absolute',
               top: 0
             }}
           >
@@ -68,7 +68,7 @@ export default class ScanQR extends React.Component<any, any> {
                 resizeMode="contain"
               ></Image>
             </View>
-            <View style={styles.middleView}/>
+            <View style={styles.middleView} />
             <View style={styles.imageView}>
               <FontAwesome
                 name="image"
@@ -77,15 +77,20 @@ export default class ScanQR extends React.Component<any, any> {
                 style={{ marginRight: 10 }}
               ></FontAwesome>
             </View>
+
             <TouchableOpacity
-            onPress={() => NavigationService.navigate(routes.root.ReceiveMyQcCode)}
               style={{
                 marginTop: getHeight(90),
-                alignItems: "center",
-                justifyContent: "center",
-                alignSelf:"center",
-                marginBottom:getHeight(70)
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                marginBottom: getHeight(70),
+                width: 100,
+                height: 100
               }}
+              onPress={() =>
+                NavigationService.navigate(routes.root.ReceiveMyQcCode)
+              }
             >
               <Image
                 source={QRIcon}

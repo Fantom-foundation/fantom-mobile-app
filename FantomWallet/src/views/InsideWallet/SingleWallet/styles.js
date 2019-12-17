@@ -1,14 +1,14 @@
-import { StyleSheet } from "react-native";
-import { Colors, fonts, FontSize } from "~/theme";
-import { getHeight, getWidth } from "~/utils/pixelResolver";
-import { DEVICE_WIDTH } from "~/common/constants";
+import { StyleSheet } from 'react-native';
+import { Colors, fonts, FontSize } from '~/theme';
+import { getHeight, getWidth } from '~/utils/pixelResolver';
+import { DEVICE_WIDTH } from '~/common/constants';
 
 export default StyleSheet.create({
   containerStyle: { backgroundColor: Colors.white, flex: 1 },
   colorThemeBox: {
     height: getHeight(150),
     width: DEVICE_WIDTH,
-    position: "absolute",
+    position: 'absolute',
     top: 0
   },
   safeAreaView: { flex: 1 },
@@ -22,8 +22,8 @@ export default StyleSheet.create({
     fontFamily: fonts.WorkSansBold
   },
   walletIDWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: getHeight(5)
   },
   walletID: {
@@ -32,7 +32,7 @@ export default StyleSheet.create({
     opacity: 0.5
   },
   copyIcon: { marginRight: getWidth(21), opacity: 0.5 },
-  activityContainer: { flex: 1, justifyContent: "flex-end" },
+  activityContainer: { flex: 1, justifyContent: 'flex-end' },
   activityWrapper: {
     backgroundColor: Colors.white,
     marginHorizontal: getWidth(10),
@@ -50,24 +50,24 @@ export default StyleSheet.create({
     flex: 1,
     marginBottom: 10
   },
-  lineOnEye: { marginRight: getWidth(18), alignSelf: "flex-end" },
+  lineOnEye: { marginRight: getWidth(18), alignSelf: 'flex-end' },
   ftmText: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: getHeight(16),
     color: Colors.textBlack,
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.huge - 4
   },
   amountText: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: getHeight(11),
-    color: "rgb(140, 149, 162)",
+    color: 'rgb(140, 149, 162)',
     fontFamily: fonts.WorkSansMedium,
     fontSize: FontSize.base
   },
   buttonWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: getHeight(46)
   },
   buttonStyle: {
@@ -86,7 +86,7 @@ export default StyleSheet.create({
     marginTop: getHeight(46)
   },
   activityText: {
-    color: "rgb(137, 145, 159)",
+    color: 'rgb(137, 145, 159)',
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.small - 1
   },
@@ -96,17 +96,17 @@ export default StyleSheet.create({
   },
   emptyListWrapper: {
     marginTop: getHeight(14),
-    alignItems: "center",
+    alignItems: 'center',
     flex: 1
   },
   emptyListText: {
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: getHeight(60),
     fontFamily: fonts.WorkSansMedium,
     fontSize: FontSize.base,
     color: Colors.textBlack
   },
-  listWrapper: { flexDirection: "row", justifyContent: "space-between" },
+  listWrapper: { flexDirection: 'row', justifyContent: 'space-between' },
   dateText: {
     fontFamily: fonts.WorkSansMedium,
     fontSize: FontSize.small,
@@ -117,10 +117,14 @@ export default StyleSheet.create({
     fontSize: FontSize.mediumSmall,
     color: Colors.textBlack
   },
-  modalStyle: { flex: 1, alignItems: "center", justifyContent: "center" },
+  modalStyle: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   modalBackground: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
     backgroundColor: Colors.whiteOpacity
   },
@@ -138,7 +142,7 @@ export default StyleSheet.create({
   modalWrapper: {
     backgroundColor: Colors.white,
     borderRadius: getHeight(22),
-    overflow: "hidden"
+    overflow: 'hidden'
   },
   themeStripe: {
     height: getHeight(14)
@@ -151,14 +155,14 @@ export default StyleSheet.create({
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.textBlack,
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: getHeight(10)
   },
   modalAmount: {
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.xLarge,
     color: Colors.textBlack,
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: getHeight(32)
   },
   modalTransaction: {
@@ -174,6 +178,6 @@ export default StyleSheet.create({
     color: Colors.textBlack,
     marginBottom: getHeight(30)
   },
-  shareIconWrapper: { marginBottom: getHeight(30), alignSelf: "center" },
-  shareIcon: { alignSelf: "center" }
+  shareIconWrapper: { marginBottom: getHeight(30), alignSelf: 'center' },
+  shareIcon: { alignSelf: 'center' }
 });

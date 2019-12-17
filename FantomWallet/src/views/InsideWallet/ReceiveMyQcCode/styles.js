@@ -4,19 +4,22 @@ import { getHeight, getWidth } from "~/utils/pixelResolver";
 import { DEVICE_WIDTH } from "~/common/constants";
 
 export default StyleSheet.create({
-  containerStyle: { flex: 1 },
-  safeAreaView: { flex: 1},
+  containerStyle: {
+    flex: 1,
+  },
+  safeAreaView: {
+    flex: 1,},
   backButton: { marginHorizontal: getWidth(24), marginTop: getHeight(20) },
   qrContainer: {
-    backgroundColor: Colors.white,
     paddingTop: getHeight(43),
     paddingBottom: getHeight(19),
     width: DEVICE_WIDTH - getWidth(44),
     marginHorizontal: getWidth(22),
     borderRadius: getHeight(19),
     marginVertical: getHeight(35),
+    backgroundColor:Colors.white
   },
-  qrWrapper: { alignSelf: "center" },
+  qrWrapper: { alignSelf: "center"},
   textWrapper: { width: getWidth(230), alignSelf: "center" },
   qrText: {
     fontFamily: fonts.WorkSansMedium,
@@ -29,7 +32,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.white,
     flex: 1,
     borderTopLeftRadius: getHeight(22),
-    borderTopRightRadius: getHeight(22)
+    borderTopRightRadius: getHeight(22),
   },
   actionsWrapper: {
     flexDirection: "row",

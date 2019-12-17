@@ -5,7 +5,8 @@ import {
   FlatList,
   View,
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  ToastAndroid
 } from "react-native";
 import { Colors } from "~/theme";
 import { getHeight, getWidth } from "~/utils/pixelResolver";
@@ -28,6 +29,7 @@ export default class SendFTM extends React.Component<any, any> {
 
   render() {
     const { unit, amount, amountText, toId, memoId } = this.state;
+    const { navigation } = this.props;
     return (
       <View style={styles.containerStyle}>
         <StatusBar
@@ -38,19 +40,21 @@ export default class SendFTM extends React.Component<any, any> {
         <SafeAreaView style={styles.safeAreaView}>
           <View style={styles.buttonsWrapper}>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => { NavigationService.pop(); }}>
+              <TouchableOpacity onPress={() => navigation.navigate('SingleWallet')}>
                 <Entypo name="cross" size={25} color={Colors.textBlack} />
               </TouchableOpacity>
               <TouchableOpacity
-                activeOpacity={toId === "" ? 1 : 0.5}
+               
                 onPress={() => {
                   if(toId !== "") {
                     NavigationService.navigate(routes.root.ScanQR);
                   }
+
                 }}
+        
               >
                 <Text
-                  style={{ ...styles.sendText, opacity: toId === "" ? 0.5 : 1 }}
+                  style={{ ...styles.sendText, opacity: toId === "" ? 0.5 : 1}}
                 >
                   Send
                 </Text>
