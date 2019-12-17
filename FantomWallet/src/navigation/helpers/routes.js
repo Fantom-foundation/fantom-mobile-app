@@ -20,7 +20,11 @@ export default {
     BackupWallet: "BackupWallet",
     WalletCreated: "WalletCreated",
     WalletInfo: "WalletInfo",
-    AddWallet: "AddWallet"
+    AddWallet: "AddWallet",
+    ReceiveMyQcCode: "ReceiveMyQcCode",
+    ScanQR: "ScanQR",
+    SendFTM: "SendFTM",
+    SingleWallet: "SingleWallet",
   },
   HomeScreen: {
     Home: "Home",
