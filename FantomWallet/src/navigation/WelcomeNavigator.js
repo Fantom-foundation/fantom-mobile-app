@@ -23,7 +23,7 @@ const WelcomeNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
     SettingsContainer: { screen: SettingsContainer },
-    Currency: { screen: Currency },
+    // Currency: { screen: Currency },
     EnterPasscode: { screen: EnterPasscode },
     PrivacyAndSecurity: { screen: PrivacyAndSecurity },
     AddWallet: { screen: AddWallet },
