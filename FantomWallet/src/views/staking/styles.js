@@ -7,10 +7,61 @@ const crauselStyle = {
     marginTop: getHeight(58)
   },
   walletView: {
-    backgroundColor: "pink",
     paddingTop: getHeight(22),
     paddingBottom: getHeight(51),
-    borderRadius: getWidth(22)
+    borderRadius: getWidth(22),
+    width: getWidth(260)
+  },
+  titleView: {
+    fontSize: FontSize.base,
+    fontFamily: fonts.WorkSansSemiBold,
+    paddingHorizontal: getWidth(22)
+  },
+  amountStyle: {
+    textAlign: "right",
+    marginTop: 40,
+    width: getWidth(150),
+    alignSelf: "flex-end",
+    fontFamily: fonts.WorkSansBold,
+    fontSize: FontSize.large + 1
+  },
+  walletTextStyle: {
+    textAlign: "right",
+    marginTop: 4,
+    width: getWidth(150),
+    alignSelf: "flex-end",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.small
+  },
+  buttonStakeView: {
+    width: getWidth(121),
+    height: getHeight(50),
+    backgroundColor: Colors.white,
+    borderBottomRightRadius: getHeight(25),
+    borderTopRightRadius: getHeight(25),
+    marginRight: -2,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonUnstakeView: {
+    width: getWidth(121),
+    height: getHeight(50),
+    backgroundColor: Colors.white,
+    borderBottomLeftRadius: getHeight(25),
+    borderTopLeftRadius: getHeight(25),
+    right: -1,
+    borderColor: "white",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonView: {
+    marginTop: getHeight(31),
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  buttonText: {
+    fontSize: FontSize.mediumlarge,
+    fontFamily: fonts.WorkSansSemiBold
   }
 };
 

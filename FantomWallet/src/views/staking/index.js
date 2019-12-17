@@ -1,6 +1,12 @@
 // @flow
 import React from "react";
-import { View, SafeAreaView, Text, Image } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Text,
+  Image,
+  TouchableOpacity
+} from "react-native";
 import styles from "./styles";
 import question from "../../images/question.png";
 import Carousel from "react-native-snap-carousel";
@@ -16,7 +22,7 @@ const data = [
     earnedRewards: "3,206 FTM",
     earnedRewardsText: "Earned rewards",
     backgroundColor: "#416ed5",
-    tittleColor: "#ffffff"
+    titleColor: "#ffffff"
   },
   {
     title: "Aqua Wallet",
@@ -27,7 +33,7 @@ const data = [
     earnedRewards: "0 FTM",
     earnedRewardsText: "Earned rewards",
     backgroundColor: "#59c5dd",
-    tittleColor: "#2b3954"
+    titleColor: "#2b3954"
   }
 ];
 
@@ -40,7 +46,54 @@ const Staking = ({}: Props) => {
           marginLeft: index !== 0 ? 20 : 0,
           backgroundColor: item.backgroundColor
         }}
-      ></View>
+      >
+        <View style={{ paddingHorizontal: 22 }}>
+          <Text style={{ ...styles.titleView, color: item.titleColor }}>
+            {item.title}
+          </Text>
+          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
+            {item.availableAmount}
+          </Text>
+          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
+            {item.availableText}
+          </Text>
+
+          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
+            {item.currenrtStaking}
+          </Text>
+          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
+            {item.currenrtStakingText}
+          </Text>
+          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
+            {item.earnedRewards}
+          </Text>
+          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
+            {item.earnedRewardsText}
+          </Text>
+        </View>
+        <View style={styles.buttonView}>
+          <TouchableOpacity style={styles.buttonStakeView}>
+            <Text
+              style={{
+                ...styles.buttonText,
+                color: index === 0 ? item.backgroundColor : item.titleColor
+              }}
+            >
+              Unstake
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonUnstakeView}>
+            <Text
+              style={{
+                ...styles.buttonText,
+                color: index === 0 ? item.backgroundColor : item.titleColor
+              }}
+            >
+              Stake
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   };
 
@@ -61,6 +114,7 @@ const Staking = ({}: Props) => {
           sliderWidth={Metrics.screenWidth}
           itemWidth={getWidth(260)}
           inactiveSlideScale={1}
+          inactiveSlideOpacity={1}
         />
       </View>
     </SafeAreaView>
