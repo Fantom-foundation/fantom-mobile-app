@@ -202,7 +202,7 @@ export default StyleSheet.create({
   buttonStyle: {
     borderRadius: 25,
     height: getHeight(60),
-    marginTop: getHeight(25),
+    marginTop: getHeight(25)
     // position: "absolute",
     // top: getHeight(590),
   },
@@ -213,16 +213,16 @@ export default StyleSheet.create({
     marginTop: deviceHeight * 0.03,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   wordWrap: {
     width: deviceWidth * 0.25,
     height: deviceHeight * 0.05,
     marginLeft: deviceWidth * 0.01,
     marginBottom: deviceWidth * 0.03,
-    flexDirection: "row"
-    //alignItems: "center",
-    //justifyContent: "center"
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   },
   errorText: {
     fontSize: FontSize.base,
