@@ -39,11 +39,11 @@ const RootNavigator = createStackNavigator(
     AboutApp: { screen: AboutApp },
     CustomerSupport: { screen: CustomerSupport },
     Currency: { screen: Currency },
+    StakingAmount: { screen: StakingAmount },
     EnterPasscode: { screen: EnterPasscode },
     PrivacyAndSecurity: { screen: PrivacyAndSecurity },
     AddWallet: { screen: AddWallet },
-    ManageWallet: { screen: ManageWallet },
-    StakingAmount: { screen: StakingAmount }
+    ManageWallet: { screen: ManageWallet }
   },
   {
     headerMode: "none",

@@ -34,6 +34,7 @@ const WelcomeNavigator = createStackNavigator(
       //   gesturesEnabled: false,
       // },
     },
+    StakingAmount: { screen: StakingAmount },
     CreateMnemonic: { screen: CreateMnemonic },
     CheckMnemonic: { screen: CheckMnemonic },
     RecoverWallet: { screen: RecoverWallet },
@@ -43,7 +44,7 @@ const WelcomeNavigator = createStackNavigator(
     WalletCreated: { screen: WalletCreated },
     WalletInfo: { screen: WalletInfo },
     Success: { screen: Success },
-    StakingAmount: { screen: StakingAmount },
+
     ValidatorNode: { screen: ValidatorNode }
   },
   {

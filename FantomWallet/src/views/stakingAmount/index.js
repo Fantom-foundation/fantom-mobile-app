@@ -11,7 +11,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 import KeyPad from "../../components/general/keyPad";
 import { Colors } from "../../theme/colors";
-import { NavigationService } from "../../navigation/helpers";
+import { NavigationService, routes } from "../../navigation/helpers";
 
 const StakingAmount = ({}: Props) => {
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
@@ -64,7 +64,12 @@ const StakingAmount = ({}: Props) => {
           />
 
           {/* Stake Button */}
-          <TouchableOpacity style={styles.stakeButton}>
+          <TouchableOpacity
+            style={styles.stakeButton}
+            onPress={() =>
+              NavigationService.navigate(routes.root.ValidatorNode)
+            }
+          >
             <Text style={styles.stakeText}>Stake</Text>
           </TouchableOpacity>
         </ScrollView>

@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import SuccessScreen from '../../general/SuccessScreen';
+import React, { Component } from "react";
+import SuccessScreen from "../../general/SuccessScreen";
+import { NavigationService, routes } from "~/navigation/helpers";
 class Success extends Component {
-  onWalletImported() {}
+  handleOnPress = () => {
+    NavigationService.navigate(routes.root.HomeScreen);
+  };
   render() {
     return (
       <SuccessScreen
-        onPress={this.onWalletImported}
+        onPress={this.handleOnPress}
         text="Tokens staked succesfully!"
       ></SuccessScreen>
     );
