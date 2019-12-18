@@ -23,11 +23,11 @@ import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
-    SettingsContainer: { screen: SettingsContainer },
     SingleWallet: { screen: SingleWallet },
     SendFTM: { screen: SendFTM },
     ScanQR: { screen: ScanQR },
     ReceiveMyQcCode: { screen: ReceiveMyQcCode },
+    // SettingsContainer: { screen: SettingsContainer },
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {
