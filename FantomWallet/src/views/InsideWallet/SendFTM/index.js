@@ -40,7 +40,7 @@ export default class SendFTM extends React.Component<any, any> {
         <SafeAreaView style={styles.safeAreaView}>
           <View style={styles.buttonsWrapper}>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate('SingleWallet')}>
+              <TouchableOpacity onPress={() =>  NavigationService.pop()}>
                 <Entypo name="cross" size={25} color={Colors.textBlack} />
               </TouchableOpacity>
               <TouchableOpacity

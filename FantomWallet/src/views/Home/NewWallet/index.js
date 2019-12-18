@@ -34,18 +34,18 @@ import Loader from "~/components/general/Loader";
 
 const rawData = [
   {
-    cardTitle: "OrangeWallet",
+    cardTitle: "My Fantom Wallet 1",
     cardKey: "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
     totalBalance: 150,
-    color: "orange",
-    tokenType: "ETH",
+    color: "#416ed5",
+    tokenType: "FTM",
     tokenPoint: 1.03,
     tokenBalance: 180.46,
 
     transactions: [
       {
         walletType: "Ethereum",
-        cointType: "ETH",
+        cointType: "FTM",
         tokenPoint: 0.3,
         tokenBalance: 180.46,
         converionRate: 145.39
@@ -60,18 +60,18 @@ const rawData = [
     ]
   },
   {
-    cardTitle: "My Fantom Wallet",
+    cardTitle: "My Fantom Wallet 2",
     cardKey: "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
     totalBalance: 150,
-    color: "#cdd4d8",
-    tokenType: "ETH",
+    color: "#416ed5",
+    tokenType: "FTM",
     tokenPoint: 1.03,
     tokenBalance: 180.46,
 
     transactions: [
       {
-        walletType: "Ethereum",
-        cointType: "ETH",
+        walletType: "Fantom",
+        cointType: "FTM",
         tokenPoint: 0.3,
         tokenBalance: 180.46,
         converionRate: 145.39

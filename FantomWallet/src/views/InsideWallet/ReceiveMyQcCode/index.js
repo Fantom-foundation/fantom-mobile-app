@@ -58,7 +58,7 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => {
-              navigation.goBack()
+               NavigationService.pop();
             }}
           >
             <Ionicons name="ios-arrow-back" size={25} color={Colors.white} />
@@ -90,9 +90,7 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
                   marginHorizontal: getWidth(28)
                 }}
                 onPress={() =>
-                  NavigationService.navigate(routes.root.SingleWallet, {
-                    showReceiveModal: true
-                  })
+                  NavigationService.pop()
                 }
               >
                 <View style={styles.actionIconBackground}>

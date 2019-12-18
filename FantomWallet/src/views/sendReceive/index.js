@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import Web3 from "web3";
 import { connect } from "react-redux";
-
+import { NavigationService, routes } from "~/navigation/helpers";
 //Assets
 import QRCode from "../../images/scanQR.png";
 
@@ -135,7 +135,10 @@ export const SendReceive = (props: Props) => {
         <ScrollView>
           {/* Scan Button */}
 
-          <TouchableOpacity style={styles.qrCodeButton}>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate(routes.root.ScanQR)}
+            style={styles.qrCodeButton}
+          >
             <Image source={QRCode} style={styles.qrImage} />
           </TouchableOpacity>
 
@@ -207,7 +210,10 @@ export const SendReceive = (props: Props) => {
                 <Text style={styles.pasteText}>Paste</Text>
               </TouchableOpacity>
               {/* QR Button */}
-              <TouchableOpacity style={styles.qrButton}>
+              <TouchableOpacity
+                onPress={() => NavigationService.navigate(routes.root.ScanQR)}
+                style={styles.qrButton}
+              >
                 <Image source={QRCode} style={styles.qrSendImage} />
               </TouchableOpacity>
             </View>

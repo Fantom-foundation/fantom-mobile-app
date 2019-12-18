@@ -13,25 +13,25 @@ const cardStyles = StyleSheet.create({
   cardHeaderText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
-    color: Colors.textBlack
+    color: Colors.white
   },
   cardSecretText: {
     fontFamily: fonts.WorkSansMedium,
     fontSize: FontSize.xSmall,
-    color: Colors.textBlack,
+    color: Colors.white,
     opacity: 0.5,
     marginVertical: getHeight(6)
   },
   bottomCardText: {
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.xLarge,
-    color: Colors.textBlack,
+    color: Colors.white,
     textAlign: "right"
   },
   bottomCardSubText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.small,
-    color: Colors.textBlack,
+    color: Colors.white,
     textAlign: "right",
     opacity: 0.5
   },
@@ -44,14 +44,15 @@ const cardStyles = StyleSheet.create({
     width: getWidth(80),
     bottom: -10,
     left: getWidth(20),
-    position: "absolute"
+    position: "absolute",
+    opacity: 0.2
   },
   cardIndicatorStyle: {
     width: getWidth(12),
     height: getHeight(140),
     position: "absolute",
     justifyContent: "center",
-    borderWidth: 3,
+    borderWidth: 3
   }
 });
 
@@ -80,7 +81,9 @@ const cardListItemStyles = StyleSheet.create({
   },
 
   listItemTitle: {
-    ...cardStyles.cardHeaderText,
+ fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    color: Colors.textBlack,
     lineHeight: getHeight(24)
   },
   titleContainer: {
@@ -110,7 +113,8 @@ const stickyHeaderStyles = StyleSheet.create({
     width: getWidth(80),
     top: 15,
    left: getWidth(20),
-    position: "absolute"
+    position: "absolute",
+    opacity:0.2
   }
 });
 
@@ -127,7 +131,7 @@ const listViewStyles = StyleSheet.create({
   listTitleText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.small,
-    color: Colors.textBlack
+    color: Colors.white
   },
   rightTextStyle: {
     fontFamily: fonts.WorkSansSemiBold,
