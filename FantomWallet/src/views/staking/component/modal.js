@@ -19,6 +19,7 @@ const ModalView = props => {
             buttons.map(b => {
               return (
                 <TouchableOpacity
+                  onPress={b.onPress}
                   style={{ ...styles.backButtonStyle, ...b.style }}
                 >
                   <Text style={{ ...b.textStyle }}>{b.name}</Text>

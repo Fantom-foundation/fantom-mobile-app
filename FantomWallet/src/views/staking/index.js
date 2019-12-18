@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -46,6 +46,7 @@ const unstakeText =
   "Are you sure you want to withdraw \n your tokens from staking?\n\nThe tokens will be immediately\navailable in your wallet.";
 
 const Staking = ({}: Props) => {
+  const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const _renderItem = ({ item, index }) => {
     return (
       <View
@@ -80,7 +81,10 @@ const Staking = ({}: Props) => {
           </Text>
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.buttonStakeView}>
+          <TouchableOpacity
+            style={styles.buttonStakeView}
+            onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
+          >
             <Text
               style={{
                 ...styles.buttonText,
@@ -169,26 +173,28 @@ const Staking = ({}: Props) => {
 
       {/* Unstake Confirm */}
 
-      {/* <Modal
-        modalText={unstakeText}
-        stakingView={styles.unstakeOuterView}
-        modalTextStyle={styles.modalTextStyle}
-        buttonViewStyle={styles.unstakeView}
-        buttons={[
-          {
-            name: "Back",
-            style: styles.backButtonStyle,
-            onPress: handleBackPress,
-            textStyle: styles.backButton
-          },
-          {
-            name: "Unstake",
-            style: styles.unstakeButton,
-            onPress: handleUnstakePress,
-            textStyle: styles.unStakeText
-          }
-        ]}
-      /> */}
+      {isUnstakeModalOpened && (
+        <Modal
+          modalText={unstakeText}
+          stakingView={styles.unstakeOuterView}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.unstakeView}
+          buttons={[
+            {
+              name: "Back",
+              style: styles.backButtonStyle,
+              onPress: () => openUnstakingModal(!isUnstakeModalOpened),
+              textStyle: styles.backButton
+            },
+            {
+              name: "Unstake",
+              style: styles.unstakeButton,
+              onPress: handleUnstakePress,
+              textStyle: styles.unStakeText
+            }
+          ]}
+        />
+      )}
     </SafeAreaView>
   );
 };
