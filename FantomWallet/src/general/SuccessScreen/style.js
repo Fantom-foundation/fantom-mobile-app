@@ -21,7 +21,8 @@ const style = {
     walletText: {
         fontSize: 28,
         color:Colors.textBlack,
-        fontFamily:fonts.WorkSansBold
+        fontFamily: fonts.WorkSansBold,
+        textAlign:'center'
     },
     checkedIcon: {
         width: 120,
