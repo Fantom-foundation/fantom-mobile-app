@@ -11,14 +11,20 @@ import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
-import HomeNavigator from "./HomeNavigator";
-import Staking from "~/views/staking";
+import SettingsContainer from "~/views/Settings";
+import SingleWallet from "~/views/InsideWallet/SingleWallet";
+import SendFTM from "~/views/InsideWallet/SendFTM";
+import ScanQR from "~/views/InsideWallet/ScanQR";
+import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
 
 const WelcomeNavigator = createStackNavigator(
   {
-    Staking: { screen: Staking },
-    HomeNavigator: { screen: HomeNavigator },
     SplashScreen: { screen: SplashScreen },
+    SettingsContainer: { screen: SettingsContainer },
+    SingleWallet: { screen: SingleWallet },
+    SendFTM: { screen: SendFTM },
+    ScanQR: { screen: ScanQR },
+    ReceiveMyQcCode: { screen: ReceiveMyQcCode },
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {

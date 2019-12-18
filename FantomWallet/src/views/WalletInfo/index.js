@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Text,
   View,
@@ -6,27 +6,31 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView
-} from 'react-native';
-import styles from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import Feather from 'react-native-vector-icons/Feather';
-import { Colors } from '../../theme/colors';
-import ModalView from 'react-native-modalbox';
-import { getWidth, Metrics, getHeight } from '../../utils/pixelResolver';
+} from "react-native";
+import styles from "./styles";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import Feather from "react-native-vector-icons/Feather";
+import { Colors } from "../../theme/colors";
+import ModalView from "react-native-modalbox";
+import { getWidth, Metrics, getHeight } from "../../utils/pixelResolver";
 import Button from "../../components/general/Button";
+import { NavigationService, routes } from "~/navigation/helpers";
 class WalletInfo extends Component {
   state = {
     renameIconPressed: false,
     walletName: "",
     modalVisible: false,
-    selectedColor:null
+    selectedColor: null
   };
   renameWallet = () => {
     const { renameIconPressed } = this.state;
     this.setState({
       renameIconPressed: !renameIconPressed
     });
+  };
+  handleContinue = () => {
+    NavigationService.navigate(routes.root.HomeScreen);
   };
   render() {
     const {
@@ -120,7 +124,7 @@ class WalletInfo extends Component {
           <View style={styles.buttonContainer}>
             <Button
               buttonStyle={styles.buttonStyle}
-              onPress={() => {}}
+              onPress={() => this.handleContinue()}
               textStyle={styles.buttonText}
               text={"CONTINUE"}
             />
@@ -137,39 +141,22 @@ class WalletInfo extends Component {
             <View style={{ marginHorizontal: 30 }}>
               <Text style={styles.codeText}>Select a color</Text>
 
-                <View
-                  style={{
-                    flex: 1,
-                    top:getHeight(12),
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between"
-                  }}
-                >
-                  {colors.map(item => {
-                    return (
-                      <TouchableOpacity
-                        key={item}
-                        onPress={() => {
-                          this.setState({
-                            selectedColor: item,
-                            modalVisible: false
-                          });
-                        }}
-                        style={{
-                          width: getWidth(50),
-                          height: getWidth(50),
-                          marginVertical: getHeight(12),
-                          marginRight: getHeight(10),
-                          borderRadius: getWidth(25),
-                          backgroundColor: item
-                        }}
-                      />
-                    );
-                  })}
-              
+              <View style={styles.colorsListContiner}>
+                {colors.map(item => {
+                  return (
+                    <TouchableOpacity
+                      key={item}
+                      onPress={() => {
+                        this.setState({
+                          selectedColor: item,
+                          modalVisible: false
+                        });
+                      }}
+                      style={[styles.colorItemStyle, { backgroundColor: item }]}
+                    />
+                  );
+                })}
               </View>
-            
             </View>
           </ModalView>
         </SafeAreaView>

@@ -8,7 +8,7 @@ import homeIcon from "~/images/tabHome.png";
 import prefrencesIcon from "~/images/tabPrefrences.png";
 import stakeIcon from "~/images/tabStake.png";
 import walletIcon from "~/images/tabWallet.png";
-import arrowIcon from "../../images/gripLines.png";
+import quickPayIcon from "~/images/tabQuickPay.png";
 import { Colors } from "../../theme";
 
 import styles from "./styles";
@@ -24,8 +24,8 @@ const TABS = [
     route: routes.HomeScreen.Wallet
   },
   {
-    icon: arrowIcon,
-    route: routes.HomeScreen.ReceiveSend
+    icon: quickPayIcon,
+    route: routes.HomeScreen.SendReceive
   },
 
   {
