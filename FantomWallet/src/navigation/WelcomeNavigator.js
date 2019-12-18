@@ -16,9 +16,12 @@ import SingleWallet from "~/views/InsideWallet/SingleWallet";
 import SendFTM from "~/views/InsideWallet/SendFTM";
 import ScanQR from "~/views/InsideWallet/ScanQR";
 import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
-
+import ValidatorNode from '~/views/ValidatorNode';
+import Success from '~/views/Success'
 const WelcomeNavigator = createStackNavigator(
   {
+    Success: { screen: Success },
+    ValidatorNode: { screen: ValidatorNode },
     SplashScreen: { screen: SplashScreen },
     SettingsContainer: { screen: SettingsContainer },
     SingleWallet: { screen: SingleWallet },
