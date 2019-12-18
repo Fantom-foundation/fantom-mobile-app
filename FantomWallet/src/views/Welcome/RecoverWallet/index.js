@@ -13,9 +13,7 @@ import Button from "../../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
 
 import { generateWallet as generateWalletAction } from "~/redux/keys/actions";
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from "~/common/constants";
-import BackgroundImage from "~/images/BackgroundIcon.png";
-import fantomIcon from "~/images/FantomWalletWhiteIcon.png";
+
 import styles from "./styles";
 import HeaderView from "./components/header";
 

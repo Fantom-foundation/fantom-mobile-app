@@ -23,6 +23,7 @@ const KeyPad = ({
 }: Props) => (
   <View style={{ ...styles.keyPadView, ...keyPadStyle }}>
     <FlatList
+      scrollEnabled={false}
       data={keyPad}
       renderItem={({ item, index }) => {
         let marginLeft = getWidth(58);
