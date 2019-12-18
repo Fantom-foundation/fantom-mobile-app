@@ -25,6 +25,7 @@ export default {
     ScanQR: "ScanQR",
     SendFTM: "SendFTM",
     SingleWallet: "SingleWallet",
+    StakingAmount: "StakingAmount"
   },
   HomeScreen: {
     Home: "Home",

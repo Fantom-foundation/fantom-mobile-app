@@ -16,6 +16,7 @@ import SingleWallet from "~/views/InsideWallet/SingleWallet";
 import SendFTM from "~/views/InsideWallet/SendFTM";
 import ScanQR from "~/views/InsideWallet/ScanQR";
 import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
+import StakingAmount from "~/views/stakingAmount";
 
 const WelcomeNavigator = createStackNavigator(
   {
@@ -38,7 +39,8 @@ const WelcomeNavigator = createStackNavigator(
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
     WalletCreated,
-    WalletInfo
+    WalletInfo,
+    StakingAmount: { screen: StakingAmount }
   },
   {
     headerMode: "none"
