@@ -11,6 +11,7 @@ import styles from "./styles";
 import question from "../../images/question.png";
 import Carousel from "react-native-snap-carousel";
 import { Metrics, getWidth } from "../../utils/pixelResolver";
+import Modal from "./component/modal";
 
 const data = [
   {
@@ -37,6 +38,11 @@ const data = [
   }
 ];
 
+const modalText = "You need at least 1 FTM to \n stake.";
+const amountHightModalText =
+  "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
+const unstakeText =
+  "Are you sure you want to withdraw \n your tokens from staking?\n\nThe tokens will be immediately\navailable in your wallet.";
 const Staking = ({}: Props) => {
   const _renderItem = ({ item, index }) => {
     return (
@@ -96,6 +102,11 @@ const Staking = ({}: Props) => {
       </View>
     );
   };
+  // onbackButtonPress
+  const handleBackPress = () => {};
+
+  //onUnstake Button
+  const handleUnstakePress = () => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -117,6 +128,58 @@ const Staking = ({}: Props) => {
           inactiveSlideOpacity={1}
         />
       </View>
+
+      {/* Not Enought Ftm to Stake */}
+      {/* <Modal
+        modalText={modalText}
+        modalTextStyle={styles.modalTextStyle}
+        buttonViewStyle={styles.notEnoughSpaceButtonView}
+        buttons={[
+          {
+            name: "Back",
+            style: styles.backButtonStyle,
+            onPress: handleBackPress
+          }
+        ]}
+      /> */}
+
+      {/* Modal For Amount Too High */}
+      {/* <Modal
+        modalText={amountHightModalText}
+        modalTextStyle={styles.modalTextStyle}
+        buttonViewStyle={styles.notEnoughSpaceButtonView}
+        buttons={[
+          {
+            name: "Back",
+            style: styles.backButtonStyle,
+            onPress: handleBackPress,
+            textStyle: styles.backButton
+          }
+        ]}
+      /> */}
+
+      {/* Unstake Confirm */}
+      {/* 
+      <Modal
+        modalText={unstakeText}
+        stakingView={styles.unstakeOuterView}
+        modalTextStyle={styles.modalTextStyle}
+        buttonViewStyle={styles.unstakeView}
+        buttons={[
+          {
+            name: "Back",
+            style: styles.backButtonStyle,
+            onPress: handleBackPress,
+            textStyle: styles.backButton
+          },
+          {
+            name: "Unstake",
+            style: styles.unstakeButton,
+            onPress: handleUnstakePress,
+            textStyle: styles.unStakeText
+          }
+        ]}
+      /> */}
     </SafeAreaView>
   );
 };
