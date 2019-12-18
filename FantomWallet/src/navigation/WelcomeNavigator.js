@@ -18,6 +18,8 @@ import ScanQR from "~/views/InsideWallet/ScanQR";
 import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
 import StakingAmount from "~/views/stakingAmount";
 
+import ValidatorNode from "~/views/ValidatorNode";
+import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
@@ -38,9 +40,11 @@ const WelcomeNavigator = createStackNavigator(
     CaptionOutput: { screen: CaptionOutput },
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
-    WalletCreated,
-    WalletInfo,
-    StakingAmount: { screen: StakingAmount }
+    WalletCreated: { screen: WalletCreated },
+    WalletInfo: { screen: WalletInfo },
+    Success: { screen: Success },
+    StakingAmount: { screen: StakingAmount },
+    ValidatorNode: { screen: ValidatorNode }
   },
   {
     headerMode: "none"

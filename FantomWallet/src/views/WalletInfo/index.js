@@ -5,11 +5,14 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Clipboard
 } from "react-native";
 import styles from "./styles";
+import { connect } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
+import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../theme/colors";
 import ModalView from "react-native-modalbox";
@@ -19,7 +22,7 @@ import { NavigationService, routes } from "~/navigation/helpers";
 class WalletInfo extends Component {
   state = {
     renameIconPressed: false,
-    walletName: "",
+    walletName: "My Fantom Wallet",
     modalVisible: false,
     selectedColor: null
   };
@@ -32,6 +35,13 @@ class WalletInfo extends Component {
   handleContinue = () => {
     NavigationService.navigate(routes.root.HomeScreen);
   };
+
+  copyToClipboard = address => {
+    const { setDopdownAlert } = this.props;
+    Clipboard.setString(address);
+    setDopdownAlert("custom", "COPIED");
+  };
+
   render() {
     const {
       renameIconPressed,
@@ -59,6 +69,7 @@ class WalletInfo extends Component {
     ];
     const arrayOfColors = [1, 2, 3, 4];
     let colorIndex = -1;
+    const walletAddress = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7";
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={styles.mainContainer}>
@@ -67,10 +78,10 @@ class WalletInfo extends Component {
           </View>
           <Text style={styles.addressText}>Address</Text>
           <View style={styles.codeView}>
-            <Text style={styles.codeText}>
-              0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7
-            </Text>
-            <TouchableOpacity>
+            <Text style={styles.codeText}>{walletAddress}</Text>
+            <TouchableOpacity
+              onPress={() => this.copyToClipboard(walletAddress)}
+            >
               <Ionicons name="ios-copy" size={16} color={Colors.textBlack} />
             </TouchableOpacity>
           </View>
@@ -79,15 +90,14 @@ class WalletInfo extends Component {
             {renameIconPressed ? (
               <TextInput
                 style={styles.textInput}
+                value={walletName}
                 onChangeText={value => this.setState({ walletName: value })}
               />
             ) : (
-              <Text style={styles.codeText}>
-                {walletName ? walletName : "My Fantom Wallet"}
-              </Text>
+              <Text style={styles.codeText}>{walletName}</Text>
             )}
             <TouchableOpacity onPress={() => this.renameWallet()}>
-              {walletName !== "" ? (
+              {walletName !== "" && renameIconPressed ? (
                 <Feather
                   name="check"
                   size={20}
@@ -165,4 +175,6 @@ class WalletInfo extends Component {
   }
 }
 
-export default WalletInfo;
+export default connect(null, {
+  setDopdownAlert: setDopdownAlertAction
+})(WalletInfo);
