@@ -125,7 +125,7 @@ export const CheckMnemonicContainer = ({
       });
       return;
     }
- 
+
     generateWallet({
       mnemonic,
       cb: () => NavigationService.navigate(routes.root.WalletCreated)
@@ -141,7 +141,7 @@ export const CheckMnemonicContainer = ({
     setShuffledMnemonic(
       shuffledMnemonics.map(item => ({
         ...item,
-        isClickable: item.name !== name ? item.isClickable : false
+        isClickable: item.index !== index ? item.isClickable : false
       }))
     );
   };
@@ -227,34 +227,29 @@ export const CheckMnemonicContainer = ({
     <View style={styles.mainContainerStyle}>
       <SafeAreaView style={{ flex: 1 }}>
         {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-          {/* <StatusBar barStyle="light-content" /> */}
-          <View style={{ flex: 0.5}}>
-            <View style={styles.mainHeadingContainer}>
-              <Text style={styles.mainHeading}>Verify recovery words</Text>
-            </View>
-            <View style={styles.subHeadingContainer}>
-              <Text style={styles.subHeading}>
-                Tap the words to put them in the
-              </Text>
-              <Text style={styles.subHeading}> correct order.</Text>
-            </View>
-            <View>
-              <View
-                style={{
-                  ...styles.verfiyContainer,
-                  borderColor: isEnable ? Colors.red : "transparent"
-                }}
-              >
-                <View style={styles.textContainer}>
-                  {verifyMnemonic.map(val => (
-                    <WordItem
-                      {...val}
-                      key={val.index}
-                      onClick={unSelect}
-                      isTop
-                    />
-                  ))}
-                  {/* {selectedWords && selectedWords.length ? (
+        {/* <StatusBar barStyle="light-content" /> */}
+        <View style={{ flex: 0.5 }}>
+          <View style={styles.mainHeadingContainer}>
+            <Text style={styles.mainHeading}>Verify recovery words</Text>
+          </View>
+          <View style={styles.subHeadingContainer}>
+            <Text style={styles.subHeading}>
+              Tap the words to put them in the
+            </Text>
+            <Text style={styles.subHeading}> correct order.</Text>
+          </View>
+          <View>
+            <View
+              style={{
+                ...styles.verfiyContainer,
+                borderColor: isEnable ? Colors.red : "transparent"
+              }}
+            >
+              <View style={styles.textContainer}>
+                {verifyMnemonic.map(val => (
+                  <WordItem {...val} key={val.index} onClick={unSelect} isTop />
+                ))}
+                {/* {selectedWords && selectedWords.length ? (
                   selectedWords.map((val, i) => {
                     return (
                       <View key={i} style={styles.wordWrap}>
@@ -270,24 +265,22 @@ export const CheckMnemonicContainer = ({
                 ) : (
                   <Text style={styles.selectedTextView} />
                 )} */}
-                </View>
-                {isEnable && (
-                  <Text style={styles.errorText}>
-                    Incorrect order. Try again!
-                  </Text>
-                )}
               </View>
+              {isEnable && (
+                <Text style={styles.errorText}>
+                  Incorrect order. Try again!
+                </Text>
+              )}
             </View>
+          </View>
 
-            {/* <View style={styles.flex1}> */}
-            <View style={styles.textContainer}>
-              {shuffledMnemonics.map(item => {
-                if (item.isClickable)
-                  return (
-                    <WordItem {...item} key={item.index} onClick={select} />
-                  );
-              })}
-              {/* {shuffledMnemonics && shuffledMnemonics.length ? (
+          {/* <View style={styles.flex1}> */}
+          <View style={styles.textContainer}>
+            {shuffledMnemonics.map(item => {
+              if (item.isClickable)
+                return <WordItem {...item} key={item.index} onClick={select} />;
+            })}
+            {/* {shuffledMnemonics && shuffledMnemonics.length ? (
               shuffledMnemonics.map((val, i) => {
                 return (
                   <View key={i} style={styles.wordWrap}>
@@ -303,24 +296,24 @@ export const CheckMnemonicContainer = ({
             ) : (
               <Text style={styles.selectedTextView} />
             )} */}
-            </View>
-
-            {/* <View style={{ flex: 0.5 }}> */}
-            <Button
-              buttonStyle={{
-                ...styles.buttonStyle,
-                backgroundColor:
-                  !isEnable && verifyMnemonic.length === 12
-                    ? Colors.royalBlue
-                    : Colors.greyOpacity
-              }}
-              onPress={handleVerify}
-              textStyle={styles.buttonText}
-              text={"CONTINUE"}
-            />
-            <View style={{ height: 40 }}></View>
-            {/* </View> */}
           </View>
+
+          {/* <View style={{ flex: 0.5 }}> */}
+          <Button
+            buttonStyle={{
+              ...styles.buttonStyle,
+              backgroundColor:
+                !isEnable && verifyMnemonic.length === 12
+                  ? Colors.royalBlue
+                  : Colors.greyOpacity
+            }}
+            onPress={handleVerify}
+            textStyle={styles.buttonText}
+            text={"CONTINUE"}
+          />
+          <View style={{ height: 40 }}></View>
+          {/* </View> */}
+        </View>
         {/* </ScrollView> */}
       </SafeAreaView>
     </View>
