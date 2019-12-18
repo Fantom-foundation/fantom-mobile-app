@@ -1,27 +1,27 @@
-import React from 'react';
+import React from "react";
 import {
   TouchableOpacity,
   Text,
   View,
   SafeAreaView,
   StatusBar
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, getWidth, Metrics } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Feather from 'react-native-vector-icons/Feather';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
-import styles from './styles';
-import QRCode from 'react-native-qrcode';
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, getWidth, Metrics } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Feather from "react-native-vector-icons/Feather";
+import Entypo from "react-native-vector-icons/Entypo";
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
+import styles from "./styles";
+import QRCode from "react-native-qrcode";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 export default class ReceiveMyQcCode extends React.Component<any, any> {
   state = {
-    text: '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
+    text: "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
   };
   render() {
     const { text } = this.state;
@@ -30,19 +30,19 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
       <View
         style={{
           ...styles.containerStyle,
-          backgroundColor: colorTheme,
+          backgroundColor: colorTheme
         }}
       >
         <StatusBar
           barStyle={
             colorTheme === Colors.royalBlue ||
-            colorTheme === '#8959DD' ||
-            colorTheme === '#A650A6' ||
-            colorTheme === '#4649FD' ||
-            colorTheme === '#E32C2C' ||
-            colorTheme === '#5F5F7C'
-              ? 'light-content'
-              : 'dark-content'
+            colorTheme === "#8959DD" ||
+            colorTheme === "#A650A6" ||
+            colorTheme === "#4649FD" ||
+            colorTheme === "#E32C2C" ||
+            colorTheme === "#5F5F7C"
+              ? "light-content"
+              : "dark-content"
           }
         />
         <SafeAreaView
@@ -84,7 +84,7 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
                 </View>
                 <Text style={styles.actionText}>Copy</Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{
                   ...styles.actionItemWrapper,
                   marginHorizontal: getWidth(28)
@@ -97,7 +97,7 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
                   <Feather name="edit" size={20} color={Colors.white} />
                 </View>
                 <Text style={styles.actionText}>Set Amount</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity style={styles.actionItemWrapper}>
                 <View style={styles.actionIconBackground}>
                   <Entypo name="share" size={20} color={Colors.white} />
