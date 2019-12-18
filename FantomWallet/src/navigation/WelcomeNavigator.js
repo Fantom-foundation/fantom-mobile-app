@@ -16,6 +16,8 @@ import SingleWallet from "~/views/InsideWallet/SingleWallet";
 import SendFTM from "~/views/InsideWallet/SendFTM";
 import ScanQR from "~/views/InsideWallet/ScanQR";
 import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
+import StakingAmount from "~/views/stakingAmount";
+
 import ValidatorNode from "~/views/ValidatorNode";
 import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
@@ -32,6 +34,7 @@ const WelcomeNavigator = createStackNavigator(
       //   gesturesEnabled: false,
       // },
     },
+    StakingAmount: { screen: StakingAmount },
     CreateMnemonic: { screen: CreateMnemonic },
     CheckMnemonic: { screen: CheckMnemonic },
     RecoverWallet: { screen: RecoverWallet },
@@ -41,6 +44,7 @@ const WelcomeNavigator = createStackNavigator(
     WalletCreated: { screen: WalletCreated },
     WalletInfo: { screen: WalletInfo },
     Success: { screen: Success },
+
     ValidatorNode: { screen: ValidatorNode }
   },
   {

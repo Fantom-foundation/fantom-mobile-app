@@ -25,6 +25,9 @@ export default {
     ScanQR: "ScanQR",
     SendFTM: "SendFTM",
     SingleWallet: "SingleWallet",
+    ValidatorNode: "ValidatorNode",
+    StakingAmount: "StakingAmount",
+    Success: "Success"
   },
   HomeScreen: {
     Home: "Home",

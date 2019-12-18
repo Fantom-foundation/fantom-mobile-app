@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Text,
   FlatList,
@@ -7,60 +7,61 @@ import {
   StatusBar,
   TouchableOpacity,
   ScrollView
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, getWidth } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import styles from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, getWidth } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import styles from "./styles";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+
 const validatorData = [
   {
-    text: 'Validator node 1',
-    status: 'Active',
-    amount: '230,000,000',
+    text: "Validator node 1",
+    status: "Active",
+    amount: "230,000,000",
     id: 0
   },
   {
-    text: 'Fantom validator',
-    status: 'Active',
-    amount: '215,735,250',
+    text: "Fantom validator",
+    status: "Active",
+    amount: "215,735,250",
     id: 1
   },
   {
-    text: 'Europe validator',
-    status: 'Active',
-    amount: '195,199,366',
+    text: "Europe validator",
+    status: "Active",
+    amount: "195,199,366",
     id: 2
   },
   {
-    text: 'Satoshi node',
-    status: 'Active',
-    amount: '170,345,678',
+    text: "Satoshi node",
+    status: "Active",
+    amount: "170,345,678",
     id: 3
   },
   {
-    text: 'Node validator',
-    status: 'Offline',
-    amount: '112,654,100',
+    text: "Node validator",
+    status: "Offline",
+    amount: "112,654,100",
     id: 4
   },
   {
-    text: 'Validator node 2',
-    status: 'Active',
-    amount: '99,135,717',
+    text: "Validator node 2",
+    status: "Active",
+    amount: "99,135,717",
     id: 5
   }
 ];
 export default class ValidatorNode extends React.Component<any, any> {
   state = {
-    nodeExpanded: ''
+    nodeExpanded: ""
   };
   selectItem = (item, index) => {
     const { nodeExpanded } = this.state;
     const ind = validatorData.findIndex(i => index === i.id);
     if (nodeExpanded && nodeExpanded.id === item.id) {
-      this.setState({ nodeExpanded: '' });
+      this.setState({ nodeExpanded: "" });
     } else {
       this.setState({ nodeExpanded: validatorData[ind] });
     }
@@ -75,7 +76,10 @@ export default class ValidatorNode extends React.Component<any, any> {
             style={{ flex: 1, marginBottom: 30 }}
             showsVerticalScrollIndicator={false}
           >
-            <TouchableOpacity style={styles.backIconView}>
+            <TouchableOpacity
+              style={styles.backIconView}
+              onPress={() => NavigationService.pop()}
+            >
               <Ionicons
                 name="ios-arrow-back"
                 size={25}
@@ -107,7 +111,7 @@ export default class ValidatorNode extends React.Component<any, any> {
                             name="circle"
                             size={12}
                             color={
-                              item.status === 'Active'
+                              item.status === "Active"
                                 ? Colors.activeGreen
                                 : Colors.offlinePink
                             }
@@ -139,7 +143,7 @@ export default class ValidatorNode extends React.Component<any, any> {
                             <Text style={styles.nameText}>100%</Text>
                             <Text style={styles.nameText}>0</Text>
                           </View>
-                          {item.text.toLowerCase().includes('validator') ? (
+                          {item.text.toLowerCase().includes("validator") ? (
                             <View style={styles.descView}>
                               <Text style={styles.descText}>
                                 This node is full at the moment.
@@ -150,7 +154,14 @@ export default class ValidatorNode extends React.Component<any, any> {
                             </View>
                           ) : (
                             <View style={styles.selectButtonView}>
-                              <TouchableOpacity style={styles.selectButton}>
+                              <TouchableOpacity
+                                style={styles.selectButton}
+                                onPress={() =>
+                                  NavigationService.navigate(
+                                    routes.root.Success
+                                  )
+                                }
+                              >
                                 <Text style={styles.selectText}>Select</Text>
                               </TouchableOpacity>
                             </View>

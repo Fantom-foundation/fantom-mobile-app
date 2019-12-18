@@ -17,6 +17,7 @@ import PrivacyAndSecurity from "~/views/Settings/PrivacyAndSecurity";
 import EnterPasscode from "~/views/Settings/EnterPasscode";
 import Currency from "~/views/Settings/Currency";
 import ManageWallet from "~/views/Settings/ManageWallet";
+import StakingAmount from "~/views/stakingAmount";
 
 const RootNavigator = createStackNavigator(
   {
@@ -38,6 +39,7 @@ const RootNavigator = createStackNavigator(
     AboutApp: { screen: AboutApp },
     CustomerSupport: { screen: CustomerSupport },
     Currency: { screen: Currency },
+    StakingAmount: { screen: StakingAmount },
     EnterPasscode: { screen: EnterPasscode },
     PrivacyAndSecurity: { screen: PrivacyAndSecurity },
     AddWallet: { screen: AddWallet },
