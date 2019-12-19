@@ -3,10 +3,10 @@ import { View, Text, ImageBackground } from "react-native";
 import styles from "../styles";
 import CardImage from "../../../../images/fantomWhiteIcon.png";
 
-const StickyHeader = (props) => {
-  const {data}=props
+const StickyHeader = ({data}) => {
+  const { name, balance } = data;
   return (
-    <View style={[styles.stickyHeaderStyle, { backgroundColor: data.color}]}>
+    <View style={styles.stickyHeaderStyle}>
       <View
         style={{
           flexDirection: "row",
@@ -14,11 +14,11 @@ const StickyHeader = (props) => {
           alignItems: "center"
         }}
       >
-        <Text style={styles.cardHeaderText}>My Fantom Wallet</Text>
-        <Text style={styles.bottomCardText}>1.03 FTM</Text>
+        <Text style={styles.cardHeaderText}>{name || ""}</Text>
+        <Text style={styles.bottomCardText}>{`${balance} FTM`}</Text>
       </View>
       <View style={styles.cardBottomTextContainer}>
-        <Text style={styles.bottomCardSubText}>$180.46</Text>
+        <Text style={styles.bottomCardSubText}>{`$${balance}`}</Text>
       </View>
       <ImageBackground
         style={styles.stickyHeaderImageStyle}

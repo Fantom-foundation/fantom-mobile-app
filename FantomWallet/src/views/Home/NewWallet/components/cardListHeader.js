@@ -14,7 +14,8 @@ const CardHeader = props => {
     changeView,
     children,
     margin,
-    setCardHiddenView
+    setCardHiddenView,
+    totalBalance
   } = props;
   return (
     <View>
@@ -25,7 +26,7 @@ const CardHeader = props => {
         ]}
       >
         <View style={styles.headerItems}>
-          <Text style={styles.headerText}>$0</Text>
+          <Text style={styles.headerText}>$ {totalBalance}</Text>
           <TouchableOpacity onPress={() => setCardHiddenView()}>
             <Icon
               style={styles.iconStyle}

@@ -8,7 +8,8 @@ const cardStyles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: 22,
     padding: getWidth(20),
-    marginHorizontal: getWidth(6)
+    marginHorizontal: getWidth(6),
+    backgroundColor: "#416ed5"
   },
   cardHeaderText: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -66,7 +67,7 @@ const cardListItemStyles = StyleSheet.create({
     padding: getWidth(6),
     paddingHorizontal: getWidth(8),
     borderLeftWidth: getWidth(8),
-
+ backgroundColor: "#416ed5",
     justifyContent: "space-between",
     shadowColor: Colors.blackOpacity,
     backgroundColor: Colors.white,
@@ -103,7 +104,7 @@ const stickyHeaderStyles = StyleSheet.create({
     height: getHeight(80),
     borderRadius: 12,
     overflow: "hidden",
-
+ backgroundColor: "#416ed5",
     paddingHorizontal: getWidth(22),
     //marginHorizontal:getWidth(22),
     paddingVertical:getHeight(10)
@@ -126,7 +127,8 @@ const listViewStyles = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 10,
     paddingHorizontal: getWidth(14),
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#416ed5"
   },
   listTitleText: {
     fontFamily: fonts.WorkSansSemiBold,

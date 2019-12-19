@@ -28,6 +28,19 @@ type Props = {
   }
 };
 
+ const getErrorView = (text, dismiss) => {
+   return (
+     <View style={styles.errorView}>
+       <View style={styles.errorModalView}>
+         <Text style={styles.errorTextHeading}>{text}</Text>
+         <TouchableOpacity onPress={() => dismiss("")} style={styles.backButton}>
+           <Text style={styles.backText}>Back</Text>
+         </TouchableOpacity>
+       </View>
+     </View>
+   );
+ };
+
 export const RecoverWalletContainer = ({
   generateWallet,
   navigation,
@@ -35,11 +48,11 @@ export const RecoverWalletContainer = ({
 }: Props) => {
   const [mnemonic, setMnemonic] = useState("");
   const [privateKey, setPrivateKey] = useState("");
-  const [errorText, setErrorText] = useState("");
+  const [errorType, setErrorType] = useState("");
   const [active, setActive] = useState(true);
 
   const onLeftIconPress = () => {
-    navigation.goBack();
+    NavigationService.pop();
   };
 
   const onChangeView = value => {
@@ -63,41 +76,30 @@ export const RecoverWalletContainer = ({
       .trim();
 
     if (!isValidSeed(_mnemonic)) {
-      setErrorText("Invalid Credentials !!");
+      setErrorType('phrase');
       return;
     }
-    setErrorText("");
+    setErrorType("");
     generateWallet({
       mnemonic: _mnemonic,
-      // cb: () => NavigationService.navigate(routes.root.HomeScreen)
-      cb: () => {}
+      cb: (publicKey: string) =>
+        NavigationService.navigate(routes.root.WalletImported, { publicKey })
     });
   };
 
   const handleRecoverWalletUsingPrivateKey = () => {
     generateWalletUsingPrivateKey({
       privateKey,
-      cb: () => NavigationService.navigate(routes.root.HomeScreen)
+      cb: () => NavigationService.navigate(routes.root.WalletImported)
     });
   };
 
   const changeMnemonic = text => {
     setMnemonic(text);
-    setErrorText("");
+    setErrorType("");
   };
 
-  const getErrorView = text => {
-    return (
-      <View style={styles.errorView}>
-        <View style={styles.errorModalView}>
-          <Text style={styles.errorTextHeading}>{text}</Text>
-          <TouchableOpacity style={styles.backButton}>
-            <Text style={styles.backText}>Back</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
+ 
 
   const readMnemonicFromClipboard = async () => {
     const clipboardContent = await Clipboard.getString();
@@ -110,74 +112,6 @@ export const RecoverWalletContainer = ({
   };
 
   return (
-    // <View style={styles.containerStyle}>
-    //   <Header
-    //     leftButtonIcon="chevron-left"
-    //     leftIconColor="#fff"
-    //     leftIconSize={30}
-    //     fantomIcon={fantomIcon}
-    //     leftButtonStyle={styles.headerComponentIcon}
-    //     onLeftIconPress={onLeftIconPress}
-    //     textStyle={styles.headerComponentText}
-    //     headerStyle={styles.headerComponent}
-    //   />
-    //   <Image style={styles.backgroundImageStyle} source={BackgroundImage} resizeMode="contain" />
-    //   <ScrollView style={styles.mainViewStyle} scrollEnabled={DEVICE_HEIGHT < 667}>
-    //     <View style={styles.empty} />
-    //     {/* Heading */}
-    //     <View style={styles.headingContainer}>
-    //       <Text style={styles.headingTextStyle}>Restore Wallet</Text>
-    //     </View>
-    //     {/* TextInput container */}
-    //     <View style={styles.detailsContainerStyle}>
-    //       <Text style={styles.containerHeadingText}>Wallet Seed</Text>
-    //       <View style={styles.textFieldStyle}>
-    //         <TextInput
-    //           underlineColorAndroid="transparent"
-    //           style={styles.enteredTextStyle}
-    //           value={mnemonic}
-    //           multiline
-    //           autoCorrect={false}
-    //           numberOfLines={4}
-    //           blurOnSubmit
-    //           returnKeyType="done"
-    //           placeholder="Enter Secret Mnemonic Codes."
-    //           placeholderTextColor="rgba( 255, 255, 255, 0.2)"
-    //           onChangeText={changeMnemonic}
-    //         />
-    //       </View>
-    //       {/* Displays error on incorrect codes */}
-    //       {errorText !== '' && <Text style={styles.errorTextStyle}>{errorText}</Text>}
-    //     </View>
-
-    //     {/* Instructions container */}
-    //     <View style={styles.instructionsContainer}>
-    //       <Text style={styles.instructionTextStyle}>
-    //         Enter your secret twelve word phrase here to restore your wallet.
-    //       </Text>
-    //     </View>
-
-    //     {/* Warning */}
-    //     <View style={styles.warningContainer}>
-    //       <Text style={styles.warningTextStyle}>Seprate each word with a single space</Text>
-    //     </View>
-
-    //     {/* Confirm container */}
-    //     <View style={styles.confirmContainer}>
-    //       <TouchableOpacity
-    //         style={styles.confirmButtonOuterContainer}
-    //         onPress={handleRecoverWallet}
-    //       >
-    //         <View style={styles.confirmButtonInnerContainer}>
-    //           <FontAwesome5 name="check" color="#FFF" size={DEVICE_WIDTH * 0.09} />
-    //         </View>
-    //       </TouchableOpacity>
-    //       <Text style={styles.confirmTextStyle}>Confirm</Text>
-    //     </View>
-    //     <View style={styles.emptyRate} />
-    //   </ScrollView>
-    // </View>
-
     <TouchableWithoutFeedback
       onPress={() => {
         Keyboard.dismiss();
@@ -249,15 +183,9 @@ export const RecoverWalletContainer = ({
           </View>
         )}
 
-        {/*
-      function call for the error in Private key
-      {getErrorView("Incorrect private key")} 
-      */}
+        {/* {getErrorView("Incorrect private key")}  */}
 
-        {/*
-      function call for the error in Phrase
-        {getErrorView("Incorrect passphrase")}
-      */}
+        {errorType === 'phrase' && getErrorView("Incorrect passphrase",setErrorType)}
       </View>
     </TouchableWithoutFeedback>
   );

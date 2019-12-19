@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -13,102 +13,91 @@ import { connect } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
+import { setWalletName as setWalletNameAction } from "~/redux/wallet/actions";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../theme/colors";
 import ModalView from "react-native-modalbox";
 import { getWidth, Metrics, getHeight } from "../../utils/pixelResolver";
 import Button from "../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
-class WalletInfo extends Component {
-  state = {
-    renameIconPressed: false,
-    walletName: "My Fantom Wallet",
-    modalVisible: false,
-    selectedColor: null
-  };
-  renameWallet = () => {
-    const { renameIconPressed } = this.state;
-    this.setState({
-      renameIconPressed: !renameIconPressed
-    });
-  };
+
+const WalletInfo = props => {
+  const { navigation, setWalletName, setDopdownAlert } = props;
+  const publicKey = navigation.getParam("publicKey", "");
+  const [renameIconPressed, setRenameIconPressed] = useState(false);
+  const [name, setName] = useState("My Fantom Wallet");
+
   handleContinue = () => {
+    setWalletName({ name: name || "My Fantom Wallet", publicKey });
+    
     NavigationService.navigate(routes.root.HomeScreen);
   };
 
-  copyToClipboard = address => {
-    const { setDopdownAlert } = this.props;
+  const copyToClipboard = address => {
     Clipboard.setString(address);
     setDopdownAlert("custom", "COPIED");
   };
 
-  render() {
-    const {
-      renameIconPressed,
-      walletName,
-      modalVisible,
-      selectedColor
-    } = this.state;
-    const colors = [
-      "#416ed5",
-      "#fe9d8b",
-      "#59c5dd",
-      "#cdd4d8",
-      "#e6fc88",
-      "#fcd3ff",
-      "#fff666",
-      "#7bc5ff",
-      "#40c49d",
-      "#8959dd",
-      "#ffb966",
-      "#e32c2c",
-      "#a650a6",
-      "#78dd59",
-      "#4649fd",
-      "#5f5f7c"
-    ];
-    const arrayOfColors = [1, 2, 3, 4];
-    let colorIndex = -1;
-    const walletAddress = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7";
-    return (
-      <View style={styles.mainContainer}>
-        <SafeAreaView style={styles.mainContainer}>
-          <View style={styles.headingView}>
-            <Text style={styles.headingText}>Wallet info</Text>
-          </View>
-          <Text style={styles.addressText}>Address</Text>
-          <View style={styles.codeView}>
-            <Text style={styles.codeText}>{walletAddress}</Text>
-            <TouchableOpacity
-              onPress={() => this.copyToClipboard(walletAddress)}
-            >
-              <Ionicons name="ios-copy" size={16} color={Colors.textBlack} />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.addressText}>Name</Text>
-          <View style={styles.codeView}>
-            {renameIconPressed ? (
-              <TextInput
-                style={styles.textInput}
-                value={walletName}
-                onChangeText={value => this.setState({ walletName: value })}
-              />
+  // const colors = [
+  //   "#416ed5",
+  //   "#fe9d8b",
+  //   "#59c5dd",
+  //   "#cdd4d8",
+  //   "#e6fc88",
+  //   "#fcd3ff",
+  //   "#fff666",
+  //   "#7bc5ff",
+  //   "#40c49d",
+  //   "#8959dd",
+  //   "#ffb966",
+  //   "#e32c2c",
+  //   "#a650a6",
+  //   "#78dd59",
+  //   "#4649fd",
+  //   "#5f5f7c"
+  // ];
+  // const arrayOfColors = [1, 2, 3, 4];
+  // let colorIndex = -1;
+  // const walletAddress = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7";
+  return (
+    <View style={styles.mainContainer}>
+      <SafeAreaView style={styles.mainContainer}>
+        <View style={styles.headingView}>
+          <Text style={styles.headingText}>Wallet info</Text>
+        </View>
+        <Text style={styles.addressText}>Address</Text>
+        <View style={styles.codeView}>
+          <Text style={styles.codeText}>{publicKey}</Text>
+          <TouchableOpacity onPress={() => copyToClipboard(publicKey)}>
+            <Ionicons name="ios-copy" size={16} color={Colors.textBlack} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.addressText}>Name</Text>
+        <View style={styles.codeView}>
+          {renameIconPressed ? (
+            <TextInput
+              style={styles.textInput}
+              value={name}
+              onChangeText={value => setName(value)}
+            />
+          ) : (
+            <Text style={styles.codeText}>{name}</Text>
+          )}
+          <TouchableOpacity
+            onPress={() => setRenameIconPressed(!renameIconPressed)}
+          >
+            {name !== "" && renameIconPressed ? (
+              <Feather
+                name="check"
+                size={20}
+                color={Colors.textBlack}
+              ></Feather>
             ) : (
-              <Text style={styles.codeText}>{walletName}</Text>
+              <EvilIcons name="pencil" size={20} color={Colors.textBlack} />
             )}
-            <TouchableOpacity onPress={() => this.renameWallet()}>
-              {walletName !== "" && renameIconPressed ? (
-                <Feather
-                  name="check"
-                  size={20}
-                  color={Colors.textBlack}
-                ></Feather>
-              ) : (
-                <EvilIcons name="pencil" size={20} color={Colors.textBlack} />
-              )}
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.addressText}>Color</Text>
+          </TouchableOpacity>
+        </View>
+        {/* <Text style={styles.addressText}>Color</Text>
           <View style={styles.codeView}>
             {selectedColor ? (
               <TouchableOpacity
@@ -130,16 +119,16 @@ class WalletInfo extends Component {
             >
               <EvilIcons name="pencil" size={20} color={Colors.textBlack} />
             </TouchableOpacity>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              buttonStyle={styles.buttonStyle}
-              onPress={() => this.handleContinue()}
-              textStyle={styles.buttonText}
-              text={"CONTINUE"}
-            />
-          </View>
-          <ModalView
+          </View> */}
+        <View style={styles.buttonContainer}>
+          <Button
+            buttonStyle={styles.buttonStyle}
+            onPress={() => this.handleContinue()}
+            textStyle={styles.buttonText}
+            text={"CONTINUE"}
+          />
+        </View>
+        {/* <ModalView
             backdropOpacity={0.7}
             backdropColor={"white"}
             backdrop={true}
@@ -168,13 +157,19 @@ class WalletInfo extends Component {
                 })}
               </View>
             </View>
-          </ModalView>
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+          </ModalView> */}
+      </SafeAreaView>
+    </View>
+  );
+};
 
-export default connect(null, {
-  setDopdownAlert: setDopdownAlertAction
-})(WalletInfo);
+const mapStateToProps = state => ({
+  state
+});
+
+const mapDispatchToProps = {
+  setDopdownAlert: setDopdownAlertAction,
+  setWalletName: setWalletNameAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletInfo);

@@ -37,7 +37,7 @@ type Props = {
   navigation: any,
   generateWallet: ({
     mnemonic: string,
-    cb: () => void
+    cb: (publicKey:string) => void
   }) => any,
   setDopdownAlert: (string, string, { [string]: string }) => void
 };
@@ -75,7 +75,6 @@ export const CheckMnemonicContainer = ({
 
   useEffect(() => {
     if (verifyMnemonic && verifyMnemonic.length > 0) {
-      console.log(verifyMnemonic, "*******verifyMnemonic ****");
       let inconsistency = false;
 
       const verifyMnemonicArr = verifyMnemonic.map(obj =>
@@ -85,24 +84,10 @@ export const CheckMnemonicContainer = ({
         .split(" ")
         .slice(0, verifyMnemonicArr.length)
         .join();
-      console.log(mnemonicString, verifyMnemonicArr.join(), "asdasd");
+    
       if (mnemonicString === verifyMnemonicArr.join()) setEnable(false);
       else setEnable(true);
       return;
-      // mnemonic.split(" ").some((word, index) => {
-      //   if (word.toLowerCase() === verifyMnemonicArr[index]) {
-      //     console.log("Matched");
-      //     setEnable(false);
-      //     return true;
-      //   }
-      //   inconsistency = ENUM_WORD[index];
-      //   return false;
-      // });
-
-      // if (inconsistency) {
-      //   setEnable(true);
-      // }
-      // return;
     }
     setEnable(false);
   }, [verifyMnemonic]);
@@ -128,7 +113,8 @@ export const CheckMnemonicContainer = ({
 
     generateWallet({
       mnemonic,
-      cb: () => NavigationService.navigate(routes.root.WalletCreated)
+      cb: (publicKey: string) =>
+        NavigationService.navigate(routes.root.WalletCreated, { publicKey })
     });
   };
 
@@ -159,75 +145,10 @@ export const CheckMnemonicContainer = ({
   const behaviour = Platform.OS === "ios" ? "padding" : null;
 
   return (
-    // <KeyboardAvoidingView
-    //   behavior={behaviour}
-    //   style={styles.mainContainerStyle}
-    // >
-    //   <View style={styles.mid}>
-    //     <View style={styles.progressContainer}>
-    //       <ProgressBar completed="2" remaining="0" />
-    //     </View>
-    //     {/* Go Back icon */}
-    //     <View style={styles.arrowContainer}>
-    //       <TouchableOpacity onPress={() => navigation.goBack()}>
-    //         <Icon name="chevron-left" size={24} color="#fff" />
-    //       </TouchableOpacity>
-    //     </View>
-    //     {/* Background Image */}
-    //     <Image
-    //       style={styles.backgroundImageStyle}
-    //       source={BackgroundFantomIcon}
-    //       resizeMode="contain"
-    //     />
-
-    //     <ScrollView>
-    //       <View style={styles.headerContainer}>
-    //         <Text style={styles.captchaText}>Captcha Verification</Text>
-    //         <View style={styles.subHeadContainer}>
-    //           <Text style={styles.pleaseText}>
-    //             Please enter the corresponding phrase out of the 12 back-up
-    //             phrases
-    //           </Text>
-    //         </View>
-    //       </View>
-    //       <View style={styles.displayMnemonicView}>
-    //         <Text style={styles.backupPhrase}>
-    //           Let&apos;s verify your backup phrase
-    //         </Text>
-    //         <View style={styles.textContainer}>
-    //           {verifyMnemonic.map(val => (
-    //             <WordItem {...val} key={val.index} onClick={unSelect} isTop />
-    //           ))}
-    //         </View>
-    //       </View>
-
-    //       <View style={{ alignItems: "center" }}>
-    //         <Text style={styles.orderTextStyle}>
-    //           Please tap each word in the correct order
-    //         </Text>
-    //       </View>
-    //       <View style={styles.mnemonicBtnMainView}>
-    //         {shuffledMnemonics.map(item => (
-    //           <WordItem {...item} key={item.index} onClick={select} />
-    //         ))}
-    //       </View>
-    //       <View style={{ height: DEVICE_HEIGHT * 0.12 }} />
-    //     </ScrollView>
-    //   </View>
-    //   {/* Button container */}
-    //   <View style={styles.footerStyle}>
-    //     <Button
-    //       text="Verify"
-    //       onPress={handleVerify}
-    //       buttonStyle={{ backgroundColor: "rgb(0,177,251)" }}
-    //     />
-    //   </View>
-    // </KeyboardAvoidingView>
 
     <View style={styles.mainContainerStyle}>
       <SafeAreaView style={{ flex: 1 }}>
-        {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-        {/* <StatusBar barStyle="light-content" /> */}
+
         <View style={{ flex: 0.5 }}>
           <View style={styles.mainHeadingContainer}>
             <Text style={styles.mainHeading}>Verify recovery words</Text>
@@ -249,22 +170,7 @@ export const CheckMnemonicContainer = ({
                 {verifyMnemonic.map(val => (
                   <WordItem {...val} key={val.index} onClick={unSelect} isTop />
                 ))}
-                {/* {selectedWords && selectedWords.length ? (
-                  selectedWords.map((val, i) => {
-                    return (
-                      <View key={i} style={styles.wordWrap}>
-                        <Text
-                          onPress={() => handleSelectedWordClick(val)}
-                          style={styles.selectedTextView}
-                        >
-                          {val}
-                        </Text>
-                      </View>
-                    );
-                  })
-                ) : (
-                  <Text style={styles.selectedTextView} />
-                )} */}
+
               </View>
               {isEnable && (
                 <Text style={styles.errorText}>
@@ -274,31 +180,14 @@ export const CheckMnemonicContainer = ({
             </View>
           </View>
 
-          {/* <View style={styles.flex1}> */}
           <View style={styles.textContainer}>
             {shuffledMnemonics.map(item => {
               if (item.isClickable)
                 return <WordItem {...item} key={item.index} onClick={select} />;
             })}
-            {/* {shuffledMnemonics && shuffledMnemonics.length ? (
-              shuffledMnemonics.map((val, i) => {
-                return (
-                  <View key={i} style={styles.wordWrap}>
-                    <Text
-                      onPress={() => select(val.name, val.index)}
-                      style={styles.selectedTextView}
-                    >
-                      {val.name}
-                    </Text>
-                  </View>
-                );
-              })
-            ) : (
-              <Text style={styles.selectedTextView} />
-            )} */}
+
           </View>
 
-          {/* <View style={{ flex: 0.5 }}> */}
           <Button
             buttonStyle={{
               ...styles.buttonStyle,
@@ -312,9 +201,9 @@ export const CheckMnemonicContainer = ({
             text={"CONTINUE"}
           />
           <View style={{ height: 40 }}></View>
-          {/* </View> */}
+ 
         </View>
-        {/* </ScrollView> */}
+  
       </SafeAreaView>
     </View>
   );

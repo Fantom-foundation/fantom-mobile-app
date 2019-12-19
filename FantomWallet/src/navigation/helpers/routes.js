@@ -19,6 +19,7 @@ export default {
     CaptionOutput: "CaptionOutput",
     BackupWallet: "BackupWallet",
     WalletCreated: "WalletCreated",
+    WalletImported:"WalletImported",
     WalletInfo: "WalletInfo",
     AddWallet: "AddWallet",
     ReceiveMyQcCode: "ReceiveMyQcCode",

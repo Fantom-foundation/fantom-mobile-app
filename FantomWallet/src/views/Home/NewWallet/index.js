@@ -28,64 +28,10 @@ import CardHeader from "./components/cardListHeader";
 import { connect } from "react-redux";
 import {
   getBalance as getBalanceAction,
-  getHistory as getHistoryAction
+  getHistory as getHistoryAction,
+  setCurrentWallet as setCurrentWalletAction
 } from "~/redux/wallet/actions";
 import Loader from "~/components/general/Loader";
-
-const rawData = [
-  {
-    cardTitle: "My Fantom Wallet 1",
-    cardKey: "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
-    totalBalance: 150,
-    color: "#416ed5",
-    tokenType: "FTM",
-    tokenPoint: 1.03,
-    tokenBalance: 180.46,
-
-    transactions: [
-      {
-        walletType: "Ethereum",
-        cointType: "FTM",
-        tokenPoint: 0.3,
-        tokenBalance: 180.46,
-        converionRate: 145.39
-      },
-      {
-        walletType: "Fantom",
-        cointType: "FTM",
-        tokenPoint: 500,
-        tokenBalance: 500,
-        converionRate: 1
-      }
-    ]
-  },
-  {
-    cardTitle: "My Fantom Wallet 2",
-    cardKey: "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
-    totalBalance: 150,
-    color: "#416ed5",
-    tokenType: "FTM",
-    tokenPoint: 1.03,
-    tokenBalance: 180.46,
-
-    transactions: [
-      {
-        walletType: "Fantom",
-        cointType: "FTM",
-        tokenPoint: 0.3,
-        tokenBalance: 180.46,
-        converionRate: 145.39
-      },
-      {
-        walletType: "Fantom",
-        cointType: "FTM",
-        tokenPoint: 500,
-        tokenBalance: 500,
-        converionRate: 1
-      }
-    ]
-  }
-];
 
 class Wallet extends Component {
   constructor(props) {
@@ -101,10 +47,10 @@ class Wallet extends Component {
   }
   componentDidMount() {
     const { getBalance, getHistory, isLoading, publicKey } = this.props;
- if (publicKey && !isLoading) {
-   getBalance({ loading: isLoading });
-   getHistory();
- }
+    if (publicKey && !isLoading) {
+      getBalance({ loading: isLoading });
+      getHistory();
+    }
   }
 
   changeView = isListView => {
@@ -115,6 +61,16 @@ class Wallet extends Component {
     this.setState({ isHiddenText: !isHiddenText });
   };
 
+  getTotalCount = walletsData => {
+    let totalBalance = 0;
+    if (walletsData && walletsData.length > 0) {
+      walletsData.forEach(item => {
+        totalBalance += Number(item.balance);
+      });
+    }
+    return totalBalance;
+  };
+
   render() {
     const {
       isListView,
@@ -123,9 +79,9 @@ class Wallet extends Component {
       isScaleView,
       isHiddenText
     } = this.state;
-    
-    const { balance, publicKey, isLoading, history } = this.props;
-    
+
+    const { isLoading, wallets, walletsData, setCurrentWallet } = this.props;
+
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={{ flex: 1 }}>
@@ -140,6 +96,7 @@ class Wallet extends Component {
           {isListView ? (
             <View>
               <CardHeader
+                totalBalance={getTotalCount(walletsData)}
                 setCardHiddenView={this.setCardHiddenView}
                 margin={22}
                 isListView={isListView}
@@ -159,9 +116,14 @@ class Wallet extends Component {
                   ItemSeparatorComponent={() => (
                     <View style={styles.itemSeperatorStyle} />
                   )}
-                  data={rawData}
+                  data={walletsData}
                   renderItem={({ item }) => {
-                    return <ListView data={item} />;
+                    return (
+                      <ListView
+                        setCurrentWallet={setCurrentWallet}
+                        data={item}
+                      />
+                    );
                   }}
                 />
               </ScrollView>
@@ -210,7 +172,6 @@ class Wallet extends Component {
                     showsVerticalScrollIndicator={false}
                     stickyHeaderHeight={getHeight(headerHeight)}
                     parallaxHeaderHeight={getHeight(444)}
-                 
                     renderStickyHeader={() => (
                       <View style={styles.stickyHeaderContainer}>
                         <WalletMenu
@@ -228,6 +189,7 @@ class Wallet extends Component {
                       <View>
                         {index === activeSlide ? (
                           <CardHeader
+                            totalBalance={getTotalCount(walletsData)}
                             margin={0}
                             setCardHiddenView={this.setCardHiddenView}
                             isListView={isListView}
@@ -235,6 +197,7 @@ class Wallet extends Component {
                             showCard={true}
                           >
                             <CardView
+                              setCurrentWallet={setCurrentWallet}
                               isHiddenText={isHiddenText}
                               data={item}
                               showCard={true}
@@ -249,6 +212,7 @@ class Wallet extends Component {
                             }}
                           >
                             <CardView
+                              setCurrentWallet={setCurrentWallet}
                               isHiddenText={isHiddenText}
                               data={item}
                               showCard={true}
@@ -273,7 +237,7 @@ class Wallet extends Component {
                   </ParallaxScrollView>
                 );
               }}
-              data={rawData}
+              data={walletsData}
             />
           )}
         </SafeAreaView>
@@ -283,15 +247,15 @@ class Wallet extends Component {
 }
 
 const mapStateToProps = state => ({
-  publicKey: state.keys.publicKey,
-  balance: state.wallet.balance,
-  isLoading: state.wallet.loading,
-  history: state.wallet.history
+  wallets: state.keys.wallets,
+  walletsData: state.wallet.walletsData,
+  isLoading: state.wallet.loading
 });
 
 const mapDispatchToProps = {
   getBalance: getBalanceAction,
-  getHistory: getHistoryAction
+  getHistory: getHistoryAction,
+  setCurrentWallet: setCurrentWalletAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

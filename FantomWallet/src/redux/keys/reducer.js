@@ -1,38 +1,48 @@
 // @flow
-import { types } from './actions';
+import { types } from "./actions";
 
-type KeyReducerT = {
-  mnemonic: string,
+export type KeyReducerT = {
   masterKey: string,
   publicKey: string,
-  privateKey: string,
-}
+  privateKey: string
+};
 
+type KeyStateT = {
+  wallets: Array<KeyReducerT>,
+  mnemonic: string
+};
 type Action = {
   type: string,
   payload: KeyReducerT
-}
-
-const initialState = {
-  mnemonic: '',
-  masterKey: '',
-  publicKey: '',
-  privateKey: '',
 };
 
-const KeyReducer = (state: KeyReducerT = initialState, action: Action) => {
+const initialState = {
+  mnemonic: "",
+  wallets: []
+};
+
+const KeyReducer = (state: KeyStateT = initialState, action: Action) => {
   switch (action.type) {
     case types.SET_KEYS:
+      let oldWallets = state.wallets || [];
+      const { privateKey } = action.payload;
+      const index = oldWallets.findIndex(
+        item => item.privateKey === privateKey
+      );
+
+      if (index > -1) {
+        oldWallets.splice(index, 1, action.payload);
+      } else {
+        oldWallets.push(action.payload);
+      }
       return {
         ...state,
-        publicKey: action.payload.publicKey,
-        masterKey: action.payload.masterKey,
-        privateKey: action.payload.privateKey,
+        wallets: oldWallets
       };
     case types.SET_MNEMONIC:
       return {
         ...state,
-        mnemonic: action.payload.mnemonic,
+        mnemonic: action.payload.mnemonic
       };
     default:
       return state;

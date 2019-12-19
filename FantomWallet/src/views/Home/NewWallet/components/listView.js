@@ -2,19 +2,22 @@ import React,{useState} from "react";
 import { View, Text, ImageBackground,TouchableOpacity } from "react-native";
 import styles from "../styles";
 import CardListItem from "./cardListItem";
-const ListView = (props) => {
+
+const ListView = ({data}) => {
   const [isOpen,setIsOpen]=useState(false)
-  const {data}=props
+  const { name,  history, balance } = data;
   return (
     <View>
       <TouchableOpacity
         onPress={() => setIsOpen(!isOpen)}
-        style={[styles.listViewContainer, { backgroundColor: data.color }]}
+        style={styles.listViewContainer}
       >
-        <Text style={styles.listTitleText}>My Fantom Wallet</Text>
-        <Text style={styles.rightTextStyle}>90,680 FTM</Text>
+        <Text style={styles.listTitleText}>{name || ""}</Text>
+        <Text style={styles.rightTextStyle}>{`${balance} FTM`}</Text>
       </TouchableOpacity>
-      {isOpen && <CardListItem data={data} />}
+      {isOpen && history && history.length > 0 && (
+        <CardListItem data={history} />
+      )}
     </View>
   );
 };

@@ -5,10 +5,9 @@ import styles from "../styles";
 
 const CardListItem = (props) => {
   const { isHiddenText,data } = props;
-  return (
-[0,1,2,3,4].map(item=>{
+  return data.map(item => {
     return (
-      <View style={[styles.listItemContainer, { borderLeftColor: data.color }]}>
+      <View style={styles.listItemContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.listItemTitle}>Fantom</Text>
           <Text style={styles.listItemTitle}>
@@ -21,9 +20,6 @@ const CardListItem = (props) => {
         </View>
       </View>
     );
-})
-      
-
-  );
+  });
 };
 export default CardListItem;

@@ -10,32 +10,41 @@ import { Colors, FontSize, fonts } from "../../../../theme";
 
 
 
-const CardView = ({ showList, showCard, data, isHiddenText }) => {
+const CardView = ({
+  showList,
+  showCard,
+  data,
+  isHiddenText,
+  setCurrentWallet
+}) => {
+  const { name, publicKey, history, balance } = data;
+  const handleCardClick=()=>{
+    setCurrentWallet(data);
+    NavigationService.navigate(routes.HomeScreen.Wallet)
+  }
   return (
     <View style={{ justifyContent: "center" }}>
       {showCard && data && (
         <TouchableOpacity
-          onPress={() =>
-            NavigationService.navigate(routes.HomeScreen.Wallet)
-          }
-          style={[styles.cardStyle, { backgroundColor: data.color }]}
+          onPress={() => handleCardClick()}
+          style={styles.cardStyle}
         >
-          <Text style={styles.cardHeaderText}>My Fantom Wallet</Text>
-          <Text style={styles.cardSecretText}>
-            0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7
-          </Text>
+          <Text style={styles.cardHeaderText}>{name || ""}</Text>
+          <Text style={styles.cardSecretText}>{publicKey || ""}</Text>
           <View style={styles.cardBottomTextContainer}>
             <Text style={styles.bottomCardText}>
-              {isHiddenText ? "********" : "1.03 FTM"}
+              {isHiddenText ? "********" : balance + " FTM"}
             </Text>
             <Text style={styles.bottomCardSubText}>
-              {isHiddenText ? "" : "$180.46"}
+              {isHiddenText ? "" : "$" + balance}
             </Text>
           </View>
           <ImageBackground style={styles.cardImageStyle} source={CardImage} />
         </TouchableOpacity>
       )}
-      {showList && <CardListItem data={data} isHiddenText={isHiddenText} />}
+      {showList && history && history.length > 0 && (
+        <CardListItem data={history} isHiddenText={isHiddenText} />
+      )}
     </View>
   );
 };
