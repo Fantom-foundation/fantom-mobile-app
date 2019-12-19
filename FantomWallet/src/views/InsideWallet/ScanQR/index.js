@@ -8,7 +8,7 @@ import {
   StatusBar
 } from 'react-native';
 import { Colors } from '~/theme';
-import { getHeight } from '~/utils/pixelResolver';
+import { getHeight, getWidth } from '~/utils/pixelResolver';
 import { NavigationService, routes } from '~/navigation/helpers';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { DEVICE_WIDTH } from '~/common/constants';
@@ -16,10 +16,41 @@ import styles from './styles';
 import FlashIcon from '../../../images/flash.png';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import QRIcon from '../../../images/QR-01.png';
+import ImagePicker from 'react-native-image-picker';
+import { RNCamera } from 'react-native-camera';
+// import QRCodeScanner from 'react-native-qrcode-scanner';
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
-
+let options = {
+  title: 'Select Image',
+  customButtons: [
+    { name: 'customOptionKey', title: 'Choose Photo from Custom Option' }
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 export default class ScanQR extends React.Component<any, any> {
+  openGallery = () => {
+    ImagePicker.launchImageLibrary(options, response => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = { uri: response.uri };
+
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  };
   render() {
     return (
       <View style={styles.containerStyle}>
@@ -68,15 +99,25 @@ export default class ScanQR extends React.Component<any, any> {
                 resizeMode="contain"
               ></Image>
             </View>
-            <View style={styles.middleView} />
-            <View style={styles.imageView}>
+            <View style={styles.middleView}>
+              <RNCamera
+                ref={ref => {
+                  this.camera = ref;
+                }}
+                style={styles.cameraStyle}
+              ></RNCamera>
+            </View>
+            <TouchableOpacity
+              style={styles.imageView}
+              onPress={() => this.openGallery()}
+            >
               <FontAwesome
                 name="image"
                 size={20}
                 color={Colors.white}
                 style={{ marginRight: 10 }}
               ></FontAwesome>
-            </View>
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={{

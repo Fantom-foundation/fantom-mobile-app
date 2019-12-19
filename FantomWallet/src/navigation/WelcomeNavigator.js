@@ -20,13 +20,14 @@ import ValidatorNode from '~/views/ValidatorNode';
 import Success from '~/views/Success'
 const WelcomeNavigator = createStackNavigator(
   {
+    // ScanQR: { screen: ScanQR },
+    SplashScreen: { screen: SplashScreen },
     Success: { screen: Success },
     ValidatorNode: { screen: ValidatorNode },
-    SplashScreen: { screen: SplashScreen },
+    
     SettingsContainer: { screen: SettingsContainer },
     SingleWallet: { screen: SingleWallet },
     SendFTM: { screen: SendFTM },
-    ScanQR: { screen: ScanQR },
     ReceiveMyQcCode: { screen: ReceiveMyQcCode },
     WalletSetup: {
       screen: WalletSetup
