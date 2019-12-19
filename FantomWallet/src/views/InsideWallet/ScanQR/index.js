@@ -1,148 +1,165 @@
-import React from 'react';
+import React, { useState, createRef } from "react";
 import {
   TouchableOpacity,
   Text,
   Image,
   View,
   SafeAreaView,
-  StatusBar
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, getWidth } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { DEVICE_WIDTH } from '~/common/constants';
-import styles from './styles';
-import FlashIcon from '../../../images/flash.png';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import QRIcon from '../../../images/QR-01.png';
-import ImagePicker from 'react-native-image-picker';
-// import { RNCamera } from 'react-native-camera';
-// import QRCodeScanner from 'react-native-qrcode-scanner';
+  StatusBar,
+  Alert
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, getWidth } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Entypo from "react-native-vector-icons/Entypo";
+import { DEVICE_WIDTH } from "~/common/constants";
+import styles from "./styles";
+import FlashIcon from "../../../images/flash.png";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import QRIcon from "../../../images/QR-01.png";
+import ImagePicker from "react-native-image-picker";
+import { RNCamera } from "react-native-camera";
+import { QRreader } from "react-native-qr-scanner";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 let options = {
-  title: 'Select Image',
+  title: "Select Image",
   customButtons: [
-    { name: 'customOptionKey', title: 'Choose Photo from Custom Option' }
+    { name: "customOptionKey", title: "Choose Photo from Custom Option" }
   ],
   storageOptions: {
     skipBackup: true,
-    path: 'images'
+    path: "images"
   }
 };
-export default class ScanQR extends React.Component<any, any> {
-  openGallery = () => {
+const ScanQR = () => {
+  const [torch, setTorch] = useState(false);
+  const [barcodeCodes, setbarCodes] = useState([]);
+  const [qrImage, setqrImage] = useState("");
+  let camera = createRef(null);
+  const openGallery = () => {
     ImagePicker.launchImageLibrary(options, response => {
-      console.log('Response = ', response);
+      console.log("Response = ", response);
 
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        console.log("User cancelled image picker");
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.log("ImagePicker Error: ", response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        console.log("User tapped custom button: ", response.customButton);
       } else {
-        const source = { uri: response.uri };
-
-        this.setState({
-          avatarSource: source
-        });
+        if (response.uri) {
+          setqrImage(response.uri);
+          QRreader(response.uri)
+            .then(data => {
+              let copybarCodes = barcodeCodes.slice();
+              copybarCodes.push(scanResult.data);
+              setbarCodes(copybarCodes);
+              Alert.alert("Correct", "A Valid QrCode");
+            })
+            .catch(err => {
+              Alert.alert("Error", "Not a Valid QrCode");
+            });
+        }
       }
     });
   };
-  render() {
-    return (
-      <View style={styles.containerStyle}>
-        <StatusBar
-          barStyle={
-            colorTheme === Colors.royalBlue ||
-            colorTheme === '#8959DD' ||
-            colorTheme === '#A650A6' ||
-            colorTheme === '#4649FD' ||
-            colorTheme === '#E32C2C' ||
-            colorTheme === '#5F5F7C'
-              ? 'light-content'
-              : 'dark-content'
-          }
-        />
-        {/* <View
+
+  async function onBarCodeRead(scanResult) {
+    let copybarCodes = barcodeCodes.slice();
+    if (scanResult.data != null) {
+      if (camera) {
+        const options = { quality: 1, base64: true };
+        const data = await camera.takePictureAsync(options);
+        if (data && data.uri) {
+          copybarCodes.push(scanResult.data);
+          setbarCodes(copybarCodes);
+          setqrImage(data.uri);
+        }
+      }
+    }
+
+    return;
+  }
+
+  return (
+    <View style={styles.containerStyle}>
+      <StatusBar barStyle={colorTheme === Colors.royalBlue} />
+
+      <SafeAreaView style={styles.safeAreaView}>
+        <View
           style={{
             backgroundColor: colorTheme,
-            height: getHeight(500),
+            height: getHeight(480),
             width: DEVICE_WIDTH,
             borderBottomLeftRadius: getHeight(22),
             borderBottomRightRadius: getHeight(22),
             position: "absolute",
             top: 0
           }}
-        /> */}
-        <SafeAreaView style={styles.safeAreaView}>
-          <View
-            style={{
-              backgroundColor: colorTheme,
-              height: getHeight(480),
-              width: DEVICE_WIDTH,
-              borderBottomLeftRadius: getHeight(22),
-              borderBottomRightRadius: getHeight(22),
-              position: 'absolute',
-              top: 0
-            }}
-          >
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => NavigationService.pop()}>
-                <Entypo name="cross" size={25} color={Colors.white} />
-              </TouchableOpacity>
+        >
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => NavigationService.pop()}>
+              <Entypo name="cross" size={25} color={Colors.white} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setTorch(!torch)}>
               <Image
                 source={FlashIcon}
                 style={styles.flashImage}
                 resizeMode="contain"
               ></Image>
-            </View>
-            <View style={styles.middleView}>
-              {/* <RNCamera
-                ref={ref => {
-                  this.camera = ref;
-                }}
-                style={styles.cameraStyle}
-              ></RNCamera> */}
-            </View>
-            <TouchableOpacity
-              style={styles.imageView}
-              onPress={() => this.openGallery()}
-            >
-              <FontAwesome
-                name="image"
-                size={20}
-                color={Colors.white}
-                style={{ marginRight: 10 }}
-              ></FontAwesome>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                marginTop: getHeight(90),
-                alignItems: 'center',
-                justifyContent: 'center',
-                alignSelf: 'center',
-                marginBottom: getHeight(70),
-                width: 100,
-                height: 100
-              }}
-              onPress={() =>
-                NavigationService.navigate(routes.root.ReceiveMyQcCode)
-              }
-            >
-              <Image
-                source={QRIcon}
-                style={styles.qrImage}
-                resizeMode="contain"
-              ></Image>
-              <Text style={styles.myCodeText}>My code</Text>
             </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+          <View style={styles.middleView}>
+            {!qrImage && (
+              <RNCamera
+                flashMode={
+                  torch
+                    ? RNCamera.Constants.FlashMode.on
+                    : RNCamera.Constants.FlashMode.off
+                }
+                onBarCodeRead={onBarCodeRead}
+                onPictureSaved={() => console.log("onPictureSaved")}
+                type={RNCamera.Constants.Type.back}
+                mirrorImage={false}
+                ref={cam => (camera = cam)}
+                style={styles.cameraStyle}
+              ></RNCamera>
+            )}
+            {!!qrImage && (
+              <Image
+                style={styles.cameraStyle}
+                source={{
+                  uri: qrImage
+                }}
+              />
+            )}
+          </View>
+          <TouchableOpacity style={styles.imageView} onPress={openGallery}>
+            <FontAwesome
+              name="image"
+              size={20}
+              color={Colors.white}
+              style={styles.openGallery}
+            ></FontAwesome>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.qrButton}
+            onPress={() =>
+              NavigationService.navigate(routes.root.ReceiveMyQcCode)
+            }
+          >
+            <Image
+              source={QRIcon}
+              style={styles.qrImage}
+              resizeMode="contain"
+            ></Image>
+            <Text style={styles.myCodeText}>My code</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </View>
+  );
+};
+export default ScanQR;
