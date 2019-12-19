@@ -15,6 +15,7 @@ const isIOS = Platform.OS === "ios";
 type Props = {
   wallets: Array<KeyReducerT>,
   walletsData: any,
+  setCurrentWallet: any,
   navigation: {
     navigate: (route: string) => {}
   }
@@ -23,7 +24,11 @@ type Props = {
 /**
  * SplashScreen: Splash Screen for app.
  */
-export const SplashScreenContainer = ({ wallets, walletsData }: Props) => {
+export const SplashScreenContainer = ({
+  wallets,
+  walletsData,
+  setCurrentWallet
+}: Props) => {
   /**
    * Render different screens based on user is already a registered user or not.
    */

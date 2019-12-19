@@ -96,7 +96,7 @@ class Wallet extends Component {
           {isListView ? (
             <View>
               <CardHeader
-                totalBalance={getTotalCount(walletsData)}
+                totalBalance={this.getTotalCount(walletsData)}
                 setCardHiddenView={this.setCardHiddenView}
                 margin={22}
                 isListView={isListView}
@@ -189,7 +189,7 @@ class Wallet extends Component {
                       <View>
                         {index === activeSlide ? (
                           <CardHeader
-                            totalBalance={getTotalCount(walletsData)}
+                            totalBalance={this.getTotalCount(walletsData)}
                             margin={0}
                             setCardHiddenView={this.setCardHiddenView}
                             isListView={isListView}
