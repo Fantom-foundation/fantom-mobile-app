@@ -8,7 +8,7 @@ import {
   StatusBar
 } from "react-native";
 import styles from "./styles";
-import FantomLogo from "../../../images/fantomWhiteIcon.png";
+import {FantomLogo} from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
 class WalletSetup extends Component {
   onCreateNewWallet = () => {

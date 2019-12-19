@@ -15,3 +15,4 @@ export { default as QuestionIcon } from './question.png';
 export { default as ShieldIcon } from './shield.png';
 export { default as EqualIcon } from './equal.png';
 export { default as TickIcon } from './Tick.png';
+export {default as FantomLogo } from './fantomLogo-01.png'

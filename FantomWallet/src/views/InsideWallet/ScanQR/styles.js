@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    marginTop:getHeight(40),
+    marginTop: getHeight(40),
   },
   flashImage:{
     width:20,
@@ -19,14 +19,17 @@ export default StyleSheet.create({
     tintColor:Colors.white
   },
   middleView:{
-    marginTop:getHeight(34),
-    marginHorizontal:getWidth(20),
-    backgroundColor:Colors.white,
-    width:getWidth(316),
-    height:getHeight(316),
-    borderRadius:19,
-    padding:20,
-    alignSelf:'center'
+    borderRadius:20,
+  },
+  cameraStyle:{
+    marginTop: getHeight(20),
+    marginHorizontal: getWidth(20),
+    backgroundColor: Colors.white,
+    width: getWidth(316),
+    height: getHeight(316),
+    borderRadius: 19,
+    overflow:'hidden',
+    alignSelf: 'center'
   },
   imageView:{
     marginTop:getHeight(20),
