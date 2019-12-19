@@ -46,7 +46,7 @@ const cardStyles = StyleSheet.create({
     bottom: -10,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.2
+    opacity: 0.8
   },
   cardIndicatorStyle: {
     width: getWidth(12),
@@ -157,12 +157,18 @@ export default StyleSheet.create({
   headerItems: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems:'center'
   },
   headerText: {
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.huge - 4,
     color: Colors.textBlack
+  },
+  eyeIcon:{
+    width: getWidth(21),
+    height: getHeight(21),
+    tintColor:Colors.textBlack
   },
   iconStyle: {
     top: getHeight(15),

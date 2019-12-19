@@ -5,42 +5,57 @@ import { DEVICE_WIDTH } from "~/common/constants";
 
 export default StyleSheet.create({
   containerStyle: { backgroundColor: Colors.white, flex: 1 },
-  safeAreaView: { flex: 1},
-  buttonContainer:{
-    paddingHorizontal:getWidth(20),
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    marginTop:getHeight(40),
+  safeAreaView: { flex: 1 },
+  buttonContainer: {
+    paddingHorizontal: getWidth(20),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: getHeight(40)
   },
-  flashImage:{
-    width:20,
-    height:20,
-    tintColor:Colors.white
+  flashImage: {
+    width: 20,
+    height: 20,
+    tintColor: Colors.white
   },
-  middleView:{
-    marginTop:getHeight(34),
-    marginHorizontal:getWidth(20),
-    backgroundColor:Colors.white,
-    width:getWidth(316),
-    height:getHeight(316),
-    borderRadius:19,
-    padding:20,
-    alignSelf:'center'
+  middleView: {
+    borderRadius: 20
   },
-  imageView:{
-    marginTop:getHeight(20),
-    paddingHorizontal:getWidth(22),
-    flexDirection:'row',
-    justifyContent:'flex-end'
+  cameraStyle: {
+    marginTop: getHeight(20),
+    marginHorizontal: getWidth(20),
+    backgroundColor: Colors.white,
+    width: getWidth(316),
+    height: getHeight(316),
+    borderRadius: 19,
+    overflow: "hidden",
+    alignSelf: "center"
   },
-  qrImage:{
-    width:100,
-    height:50,
+  imageView: {
+    marginTop: getHeight(20),
+    paddingHorizontal: getWidth(22),
+    flexDirection: "row",
+    justifyContent: "flex-end"
   },
-  myCodeText:{
-    marginTop:getHeight(13),
-    fontFamily:fonts.WorkSansMedium,
-    fontSize:FontSize.base
+  qrImage: {
+    width: 100,
+    height: 50
+  },
+  openGallery: {
+    marginRight: 10
+  },
+  myCodeText: {
+    marginTop: getHeight(13),
+    fontFamily: fonts.WorkSansMedium,
+    fontSize: FontSize.base
+  },
+  qrButton: {
+    marginTop: getHeight(90),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    marginBottom: getHeight(70),
+    width: getWidth(100),
+    height: getHeight(100)
   }
 });

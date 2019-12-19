@@ -1,11 +1,12 @@
-import React from "react";
-import { View, Text,TouchableOpacity } from "react-native";
-import styles from "../styles";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { getHeight, getWidth } from "../../../../utils/pixelResolver";
-import { Colors, FontSize, fonts } from "../../../../theme";
-import WalletMenu from "./walletMenu";
-import CardView from "./cardView"
+import React from 'react';
+import { View, Text, TouchableOpacity,Image } from 'react-native';
+import styles from '../styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { getHeight, getWidth } from '../../../../utils/pixelResolver';
+import { Colors, FontSize, fonts } from '../../../../theme';
+import WalletMenu from './walletMenu';
+import CardView from './cardView';
+import {EyeIcon} from '../../../../images'
 
 const CardHeader = props => {
   const {
@@ -28,12 +29,17 @@ const CardHeader = props => {
         <View style={styles.headerItems}>
           <Text style={styles.headerText}>$ {totalBalance}</Text>
           <TouchableOpacity onPress={() => setCardHiddenView()}>
-            <Icon
+            {/* <Icon
               style={styles.iconStyle}
               name={"eye"}
               size={18}
               color={Colors.textBlack}
-            />
+            /> */}
+            <Image
+              source={EyeIcon}
+              resizeMode="contain"
+              style={styles.eyeIcon}
+            ></Image>
           </TouchableOpacity>
         </View>
         <Text style={styles.subHeading}>Total balance</Text>

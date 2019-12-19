@@ -31,7 +31,7 @@ export default StyleSheet.create({
     fontFamily: fonts.WorkSansRegular,
     opacity: 0.5
   },
-  copyIcon: { marginRight: getWidth(21), opacity: 0.5 },
+  copyIcon: { marginRight: getWidth(21), opacity: 0.5},
   activityContainer: { flex: 1, justifyContent: 'flex-end' },
   activityWrapper: {
     backgroundColor: Colors.white,
@@ -120,7 +120,7 @@ export default StyleSheet.create({
   modalStyle: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   modalBackground: {
     alignItems: 'center',

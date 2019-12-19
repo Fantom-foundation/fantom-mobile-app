@@ -35,7 +35,7 @@ const WalletInfo = props => {
 
   const copyToClipboard = address => {
     Clipboard.setString(address);
-    setDopdownAlert("custom", "COPIED");
+    setDopdownAlert('custom', 'COPIED');
   };
 
   // const colors = [
@@ -117,9 +117,14 @@ const WalletInfo = props => {
             <TouchableOpacity
               onPress={() => this.setState({ modalVisible: !modalVisible })}
             >
-              <EvilIcons name="pencil" size={20} color={Colors.textBlack} />
+              {/* <EvilIcons name="pencil" size={20} color={Colors.textBlack} /> */}
+              {/* <Image
+                source={PenIcon}
+                resizeMode="contain"
+                style={styles.penIcon}
+              ></Image>
             </TouchableOpacity>
-          </View> */}
+          </View> */} 
         <View style={styles.buttonContainer}>
           <Button
             buttonStyle={styles.buttonStyle}
@@ -130,7 +135,7 @@ const WalletInfo = props => {
         </View>
         {/* <ModalView
             backdropOpacity={0.7}
-            backdropColor={"white"}
+            backdropColor={'white'}
             backdrop={true}
             style={styles.modalStyle}
             position="up"
