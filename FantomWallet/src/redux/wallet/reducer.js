@@ -28,16 +28,28 @@ const initialState = {
   loading: false,
   walletsData: [],
   sendTransactionIsLoading: false,
-  currentWallet:{}
+  currentWallet: {}
 };
 
 export default (state: Wallet = initialState, action: actionType) => {
   switch (action.type) {
     case types.SET_BALANCE: {
+      const { publicKey, balance, name } = action.payload;
+      let oldData = state.walletsData || [];
+      const index = oldData.findIndex(item => item.publicKey === publicKey);
+      if (index > -1) {
+        const newData = {
+          ...oldData[index],
+          balance
+        };
+        oldData.splice(index, 1, newData);
+      } else {
+        oldData.push({ name, publicKey, history: [], balance });
+      }
       return {
         ...state,
-        balance: action.payload.balance,
-        loading: action.payload.loading
+        loading: action.payload.loading,
+        walletsData: oldData
       };
     }
     case types.GET_BALANCE: {
@@ -81,11 +93,11 @@ export default (state: Wallet = initialState, action: actionType) => {
         ...state,
         walletsData: oldData
       };
-      case types.SET_CURRENT_WALLET:
-        return {
-          ...state,
-          currentWallet:action.payload
-        };
+    case types.SET_CURRENT_WALLET:
+      return {
+        ...state,
+        currentWallet: action.payload
+      };
     default:
       return state;
   }
