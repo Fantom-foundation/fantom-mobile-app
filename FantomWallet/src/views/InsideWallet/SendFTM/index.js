@@ -44,7 +44,6 @@ export default class SendFTM extends React.Component<any, any> {
                 <Entypo name="cross" size={25} color={Colors.textBlack} />
               </TouchableOpacity>
               <TouchableOpacity
-               
                 onPress={() => {
                   if(toId !== "") {
                     NavigationService.navigate(routes.root.ScanQR);

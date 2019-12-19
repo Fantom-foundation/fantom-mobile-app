@@ -17,7 +17,7 @@ import FlashIcon from '../../../images/flash.png';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import QRIcon from '../../../images/QR-01.png';
 import ImagePicker from 'react-native-image-picker';
-import { RNCamera } from 'react-native-camera';
+// import { RNCamera } from 'react-native-camera';
 // import QRCodeScanner from 'react-native-qrcode-scanner';
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
@@ -100,12 +100,12 @@ export default class ScanQR extends React.Component<any, any> {
               ></Image>
             </View>
             <View style={styles.middleView}>
-              <RNCamera
+              {/* <RNCamera
                 ref={ref => {
                   this.camera = ref;
                 }}
                 style={styles.cameraStyle}
-              ></RNCamera>
+              ></RNCamera> */}
             </View>
             <TouchableOpacity
               style={styles.imageView}

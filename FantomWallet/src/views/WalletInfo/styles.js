@@ -99,6 +99,10 @@ const styles = StyleSheet.create({
     fontSize: FontSize.base,
     color: Colors.white,
     fontFamily: fonts.WorkSansBold
+  },
+  penIcon: {
+    width: 14,
+    height:14
   }
 });
 export default styles;

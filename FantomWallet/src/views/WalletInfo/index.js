@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -6,23 +6,25 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
-  Clipboard
-} from "react-native";
-import styles from "./styles";
-import { connect } from "react-redux";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
-import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
-import Feather from "react-native-vector-icons/Feather";
-import { Colors } from "../../theme/colors";
-import ModalView from "react-native-modalbox";
-import { getWidth, Metrics, getHeight } from "../../utils/pixelResolver";
-import Button from "../../components/general/Button";
-import { NavigationService, routes } from "~/navigation/helpers";
+  Clipboard,
+  Image
+} from 'react-native';
+import styles from './styles';
+import { connect } from 'react-redux';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import { setDopdownAlert as setDopdownAlertAction } from '~/redux/notification/actions';
+import Feather from 'react-native-vector-icons/Feather';
+import { Colors } from '../../theme/colors';
+import ModalView from 'react-native-modalbox';
+import { getWidth, Metrics, getHeight } from '../../utils/pixelResolver';
+import Button from '../../components/general/Button';
+import { NavigationService, routes } from '~/navigation/helpers';
+import { PenIcon } from '../../images';
 class WalletInfo extends Component {
   state = {
     renameIconPressed: false,
-    walletName: "My Fantom Wallet",
+    walletName: 'My Fantom Wallet',
     modalVisible: false,
     selectedColor: null
   };
@@ -39,7 +41,7 @@ class WalletInfo extends Component {
   copyToClipboard = address => {
     const { setDopdownAlert } = this.props;
     Clipboard.setString(address);
-    setDopdownAlert("custom", "COPIED");
+    setDopdownAlert('custom', 'COPIED');
   };
 
   render() {
@@ -50,26 +52,26 @@ class WalletInfo extends Component {
       selectedColor
     } = this.state;
     const colors = [
-      "#416ed5",
-      "#fe9d8b",
-      "#59c5dd",
-      "#cdd4d8",
-      "#e6fc88",
-      "#fcd3ff",
-      "#fff666",
-      "#7bc5ff",
-      "#40c49d",
-      "#8959dd",
-      "#ffb966",
-      "#e32c2c",
-      "#a650a6",
-      "#78dd59",
-      "#4649fd",
-      "#5f5f7c"
+      '#416ed5',
+      '#fe9d8b',
+      '#59c5dd',
+      '#cdd4d8',
+      '#e6fc88',
+      '#fcd3ff',
+      '#fff666',
+      '#7bc5ff',
+      '#40c49d',
+      '#8959dd',
+      '#ffb966',
+      '#e32c2c',
+      '#a650a6',
+      '#78dd59',
+      '#4649fd',
+      '#5f5f7c'
     ];
     const arrayOfColors = [1, 2, 3, 4];
     let colorIndex = -1;
-    const walletAddress = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7";
+    const walletAddress = '0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7';
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={styles.mainContainer}>
@@ -97,14 +99,19 @@ class WalletInfo extends Component {
               <Text style={styles.codeText}>{walletName}</Text>
             )}
             <TouchableOpacity onPress={() => this.renameWallet()}>
-              {walletName !== "" && renameIconPressed ? (
+              {walletName !== '' && renameIconPressed ? (
                 <Feather
                   name="check"
                   size={20}
                   color={Colors.textBlack}
                 ></Feather>
               ) : (
-                <EvilIcons name="pencil" size={20} color={Colors.textBlack} />
+                // <EvilIcons name="pencil" size={20} color={Colors.textBlack} />
+                <Image
+                  source={PenIcon}
+                  resizeMode="contain"
+                  style={styles.penIcon}
+                ></Image>
               )}
             </TouchableOpacity>
           </View>
@@ -128,7 +135,12 @@ class WalletInfo extends Component {
             <TouchableOpacity
               onPress={() => this.setState({ modalVisible: !modalVisible })}
             >
-              <EvilIcons name="pencil" size={20} color={Colors.textBlack} />
+              {/* <EvilIcons name="pencil" size={20} color={Colors.textBlack} /> */}
+              <Image
+                source={PenIcon}
+                resizeMode="contain"
+                style={styles.penIcon}
+              ></Image>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonContainer}>
@@ -136,12 +148,12 @@ class WalletInfo extends Component {
               buttonStyle={styles.buttonStyle}
               onPress={() => this.handleContinue()}
               textStyle={styles.buttonText}
-              text={"CONTINUE"}
+              text={'CONTINUE'}
             />
           </View>
           <ModalView
             backdropOpacity={0.7}
-            backdropColor={"white"}
+            backdropColor={'white'}
             backdrop={true}
             style={styles.modalStyle}
             position="up"

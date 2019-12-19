@@ -19,16 +19,17 @@ import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
 
 
 
-
 import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
   {
+    // RecoverWallet: { screen: RecoverWallet },
     // ScanQR: { screen: ScanQR },
+    SingleWallet: { screen: SingleWallet },
     SplashScreen: { screen: SplashScreen },
     Success: { screen: Success },
     ValidatorNode: { screen: ValidatorNode },
     SettingsContainer: { screen: SettingsContainer },
-    SingleWallet: { screen: SingleWallet },
+    // SingleWallet: { screen: SingleWallet },
     SendFTM: { screen: SendFTM },
     ReceiveMyQcCode: { screen: ReceiveMyQcCode },
     SplashScreen: { screen: SplashScreen },

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground,TouchableOpacity } from "react-native";
 import styles from "../styles";
-import CardImage from "../../../../images/fantomWhiteIcon.png";
+import {BackLogo} from "../../../../images";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { getHeight, getWidth } from "../../../../utils/pixelResolver";
@@ -32,7 +32,7 @@ const CardView = ({ showList, showCard, data, isHiddenText }) => {
               {isHiddenText ? "" : "$180.46"}
             </Text>
           </View>
-          <ImageBackground style={styles.cardImageStyle} source={CardImage} />
+          <ImageBackground style={styles.cardImageStyle} source={BackLogo} />
         </TouchableOpacity>
       )}
       {showList && <CardListItem data={data} isHiddenText={isHiddenText} />}
