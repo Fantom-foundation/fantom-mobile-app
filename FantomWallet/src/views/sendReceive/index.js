@@ -37,12 +37,12 @@ import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
 export const SendReceive = (props: Props) => {
-  const { navigation, balance } = props;
+  const { navigation, addUpdateAddress, currentWallet } = props;
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [address, setSendTo] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [amount, setAmount] = useState("");
-  const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+  //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
 
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
@@ -90,7 +90,10 @@ export const SendReceive = (props: Props) => {
 
       if (message !== "") Alert.alert("Error", message);
       if (address && Web3.utils.isAddress(address) && amount) {
-        const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+        const maxFantomBalance = estimationMaxFantomBalance(
+          Number(currentWallet.balance),
+          GAS_PRICE
+        );
         if (amount === 0 || amount > maxFantomBalance) {
           Alert.alert("Error", "Please enter valid amount.");
         } else {
@@ -146,12 +149,14 @@ export const SendReceive = (props: Props) => {
           <Text style={styles.sendPrice}>
             {amount ? formatNumber(amount) : 0}
           </Text>
-          <Text style={styles.sendPriceExample}>($0)</Text>
+          <Text style={styles.sendPriceExample}>(${amount})</Text>
           <View style={styles.walletButton}>
             <TouchableOpacity>
               <Text style={styles.walletText}>FTM</Text>
             </TouchableOpacity>
-            <Text style={styles.walletAmountText}>(43,680)</Text>
+            <Text style={styles.walletAmountText}>
+              {currentWallet.balance || 0}
+            </Text>
           </View>
 
           {/* KeyPad */}
@@ -168,6 +173,11 @@ export const SendReceive = (props: Props) => {
           <View style={styles.sendReceiveView}>
             <Button
               text={"Receive"}
+              onPress={() =>
+                NavigationService.navigate(routes.root.ReceiveMyQcCode, {
+                  publicKey: currentWallet.publicKey
+                })
+              }
               buttonStyle={styles.buttonStyle}
               textStyle={styles.buttonText}
             />
@@ -226,7 +236,7 @@ export const SendReceive = (props: Props) => {
 
 const mapStateToProps = state => ({
   isLoading: state.wallet.sendTransactionIsLoading,
-  balance: state.wallet.balance
+  currentWallet: state.wallet.currentWallet
 });
 
 const mapDispatchToProps = {

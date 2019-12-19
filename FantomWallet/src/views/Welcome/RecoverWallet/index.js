@@ -28,18 +28,18 @@ type Props = {
   }
 };
 
- const getErrorView = (text, dismiss) => {
-   return (
-     <View style={styles.errorView}>
-       <View style={styles.errorModalView}>
-         <Text style={styles.errorTextHeading}>{text}</Text>
-         <TouchableOpacity onPress={() => dismiss("")} style={styles.backButton}>
-           <Text style={styles.backText}>Back</Text>
-         </TouchableOpacity>
-       </View>
-     </View>
-   );
- };
+const getErrorView = (text, dismiss) => {
+  return (
+    <View style={styles.errorView}>
+      <View style={styles.errorModalView}>
+        <Text style={styles.errorTextHeading}>{text}</Text>
+        <TouchableOpacity onPress={() => dismiss("")} style={styles.backButton}>
+          <Text style={styles.backText}>Back</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 export const RecoverWalletContainer = ({
   generateWallet,
@@ -52,7 +52,10 @@ export const RecoverWalletContainer = ({
   const [active, setActive] = useState(true);
 
   const onLeftIconPress = () => {
-    NavigationService.pop();
+    const backToHome = navigation.getParam("backToHome", false);
+    if (backToHome) {
+      NavigationService.navigate(routes.HomeScreen.Settings);
+    } else NavigationService.pop();
   };
 
   const onChangeView = value => {
@@ -76,7 +79,7 @@ export const RecoverWalletContainer = ({
       .trim();
 
     if (!isValidSeed(_mnemonic)) {
-      setErrorType('phrase');
+      setErrorType("phrase");
       return;
     }
     setErrorType("");
@@ -98,8 +101,6 @@ export const RecoverWalletContainer = ({
     setMnemonic(text);
     setErrorType("");
   };
-
- 
 
   const readMnemonicFromClipboard = async () => {
     const clipboardContent = await Clipboard.getString();
@@ -185,7 +186,8 @@ export const RecoverWalletContainer = ({
 
         {/* {getErrorView("Incorrect private key")}  */}
 
-        {errorType === 'phrase' && getErrorView("Incorrect passphrase",setErrorType)}
+        {errorType === "phrase" &&
+          getErrorView("Incorrect passphrase", setErrorType)}
       </View>
     </TouchableWithoutFeedback>
   );

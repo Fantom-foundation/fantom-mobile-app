@@ -21,20 +21,19 @@ import QRCode from 'react-native-qrcode';
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 export default class ReceiveMyQcCode extends React.Component<any, any> {
-  state = {
-    text: '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
-  };
+
   onShare = async () => {
-    const { text } = this.state;
+    const publicKey = navigation.getParam("publicKey", "");
     Share.share({
-      message: text.toString()
+      message: publicKey.toString()
     })
       .then(result => console.log(result))
       .catch(errorMsg => console.log(errorMsg));
   };
   render() {
-    const { text } = this.state;
+
     const { navigation } = this.props;
+    const publicKey = navigation.getParam("publicKey", "");
     return (
       <View
         style={{
@@ -75,14 +74,14 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
           <View style={styles.qrContainer}>
             <View style={styles.qrWrapper}>
               <QRCode
-                value={text}
+                value={publicKey}
                 size={getWidth(230)}
                 bgColor={Colors.black}
                 fgColor={Colors.white}
               />
             </View>
             <View style={styles.textWrapper}>
-              <Text style={styles.qrText}>{text}</Text>
+              <Text style={styles.qrText}>{publicKey}</Text>
             </View>
           </View>
           <View style={styles.actionsView}>

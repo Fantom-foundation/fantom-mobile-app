@@ -85,16 +85,16 @@ const settingData = [
     notificationsToggleButton: false,
     darkToggleButton: true
   },
-  {
-    Icon: MaterialIcons,
-    iconName: 'security',
-    text: 'Privacy and security',
-    rightArrowIcon: RightArrowIcon,
-    source: ShieldIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    to: 'PrivacyAndSecurity'
-  },
+  // {
+  //   Icon: MaterialIcons,
+  //   iconName: 'security',
+  //   text: 'Privacy and security',
+  //   rightArrowIcon: RightArrowIcon,
+  //   source: ShieldIcon,
+  //   notificationsToggleButton: false,
+  //   darkToggleButton: false,
+  //   to: 'PrivacyAndSecurity'
+  // },
   {
     Icon: Entypo,
     iconName: 'notification',
@@ -104,16 +104,16 @@ const settingData = [
     notificationsToggleButton: true,
     darkToggleButton: false
   },
-  {
-    Icon: FontAwesome,
-    iconName: 'dollar',
-    text: 'Currency',
-    rightArrowIcon: RightArrowIcon,
-    source: DollarIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    to: 'Currency'
-  },
+  // {
+  //   Icon: FontAwesome,
+  //   iconName: 'dollar',
+  //   text: 'Currency',
+  //   rightArrowIcon: RightArrowIcon,
+  //   source: DollarIcon,
+  //   notificationsToggleButton: false,
+  //   darkToggleButton: false,
+  //   to: 'Currency'
+  // },
   {
     Icon: Entypo,
     iconName: 'share',

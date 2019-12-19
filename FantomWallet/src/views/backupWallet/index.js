@@ -5,7 +5,8 @@ import CheckBox from "../../general/checkBox";
 import styles from "./style";
 import Button from "../../components/general/Button";
 import { Colors } from "../../theme";
-import { NavigationService, routes } from "../../navigation/helpers";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Header from "~/components/Header";
 export default class BackupWallet extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,13 @@ export default class BackupWallet extends Component {
       isEnable: false
     };
   }
+  onLeftIconPress = () => {
+    const {navigation}=this.props
+    const backToHome = navigation.getParam("backToHome", false);
+    if (backToHome) {
+      NavigationService.navigate(routes.HomeScreen.Settings);
+    } else NavigationService.pop();
+  };
 
   render() {
     const { isEnable } = this.state;
@@ -21,7 +29,14 @@ export default class BackupWallet extends Component {
       <View style={styles.mainContainerStyle}>
         <SafeAreaView style={{ flex: 1 }}>
           {/* <StatusBar barStyle="light-content" /> */}
-          <View style={styles.flex1}>
+          <Header
+            onLeftIconPress={this.onLeftIconPress}
+            headerStyle={styles.headerStyle}
+            leftButtonIcon="chevron-left"
+            leftIconColor="black"
+            leftIconSize={30}
+          />
+          <View style={styles.headerTextView}>
             <View style={styles.mainHeadingContainer}>
               <Text style={styles.mainHeading}>Back up your wallet now!</Text>
             </View>
@@ -58,12 +73,11 @@ export default class BackupWallet extends Component {
               }}
               textStyle={styles.buttonText}
               text={"CONTINUE"}
-              onPress={() =>{
-                if(isEnable){
-                NavigationService.navigate(routes.root.CreateMnemonic)
+              onPress={() => {
+                if (isEnable) {
+                  NavigationService.navigate(routes.root.CreateMnemonic);
                 }
-              }
-              }
+              }}
             />
           </View>
         </SafeAreaView>
