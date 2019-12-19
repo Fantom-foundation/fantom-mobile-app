@@ -9,6 +9,7 @@ import type { NavigationScreenProp, NavigationState } from "react-navigation";
 import { NavigationService, routes } from "~/navigation/helpers";
 import Settings from "../views/Settings";
 import SendReceive from "~/views/sendReceive";
+import Staking from "../views/staking";
 import NavigationTab from "~/components/NavigationTab";
 import NewWallet from "~/views/Home/NewWallet";
 import SingleWallet from "~/views/InsideWallet/SingleWallet";
@@ -21,13 +22,12 @@ import WalletScreen from "~/views/Home/Wallet";
 import WithdrawScreen from "~/views/Home/Withdraw";
 import DepositScreen from "~/views/Home/Deposit";
 
-
 const HomeTabNavigator = createBottomTabNavigator(
   {
     Home: { screen: NewWallet },
     Wallet: { screen: SingleWallet },
     SendReceive: { screen: SendReceive },
-    Staking: { screen: Settings },
+    Staking: { screen: Staking },
     Settings: { screen: Settings }
   },
   {

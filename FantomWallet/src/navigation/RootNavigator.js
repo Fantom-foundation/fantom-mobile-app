@@ -17,6 +17,14 @@ import PrivacyAndSecurity from "~/views/Settings/PrivacyAndSecurity";
 import EnterPasscode from "~/views/Settings/EnterPasscode";
 import Currency from "~/views/Settings/Currency";
 import ManageWallet from "~/views/Settings/ManageWallet";
+import StakingAmount from "~/views/stakingAmount";
+import SingleWallet from "~/views/InsideWallet/SingleWallet";
+import SendFTM from "~/views/InsideWallet/SendFTM";
+import ScanQR from "~/views/InsideWallet/ScanQR";
+import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
+import SettingsContainer from "~/views/Settings";
+import ValidatorNode from "~/views/ValidatorNode";
+
 
 const RootNavigator = createStackNavigator(
   {
@@ -38,10 +46,19 @@ const RootNavigator = createStackNavigator(
     AboutApp: { screen: AboutApp },
     CustomerSupport: { screen: CustomerSupport },
     Currency: { screen: Currency },
+    StakingAmount: { screen: StakingAmount },
     EnterPasscode: { screen: EnterPasscode },
     PrivacyAndSecurity: { screen: PrivacyAndSecurity },
     AddWallet: { screen: AddWallet },
-    ManageWallet: { screen: ManageWallet }
+    ManageWallet: { screen: ManageWallet },
+    SingleWallet: { screen: SingleWallet },
+    SendFTM: { screen: SendFTM },
+    ScanQR: { screen: ScanQR },
+    ReceiveMyQcCode: { screen: ReceiveMyQcCode },
+    StakingAmount: { screen: StakingAmount },
+    SettingsContainer: { screen: SettingsContainer },
+    ValidatorNode: { screen: ValidatorNode },
+    
   },
   {
     headerMode: "none",

@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -12,6 +12,7 @@ import question from "../../images/question.png";
 import Carousel from "react-native-snap-carousel";
 import { Metrics, getWidth } from "../../utils/pixelResolver";
 import Modal from "./component/modal";
+import { NavigationService, routes } from "../../navigation/helpers";
 
 const data = [
   {
@@ -43,7 +44,9 @@ const amountHightModalText =
   "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
 const unstakeText =
   "Are you sure you want to withdraw \n your tokens from staking?\n\nThe tokens will be immediately\navailable in your wallet.";
+
 const Staking = ({}: Props) => {
+  const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const _renderItem = ({ item, index }) => {
     return (
       <View
@@ -78,7 +81,10 @@ const Staking = ({}: Props) => {
           </Text>
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.buttonStakeView}>
+          <TouchableOpacity
+            style={styles.buttonStakeView}
+            onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
+          >
             <Text
               style={{
                 ...styles.buttonText,
@@ -88,7 +94,10 @@ const Staking = ({}: Props) => {
               Unstake
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonUnstakeView}>
+          <TouchableOpacity
+            style={styles.buttonUnstakeView}
+            onPress={handleStakeButton}
+          >
             <Text
               style={{
                 ...styles.buttonText,
@@ -107,6 +116,10 @@ const Staking = ({}: Props) => {
 
   //onUnstake Button
   const handleUnstakePress = () => {};
+
+  const handleStakeButton = () => {
+    NavigationService.navigate(routes.root.StakingAmount);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -155,31 +168,33 @@ const Staking = ({}: Props) => {
             onPress: handleBackPress,
             textStyle: styles.backButton
           }
-        ]}
-      /> */}
+        ]} 
+      />*/}
 
       {/* Unstake Confirm */}
-      {/* 
-      <Modal
-        modalText={unstakeText}
-        stakingView={styles.unstakeOuterView}
-        modalTextStyle={styles.modalTextStyle}
-        buttonViewStyle={styles.unstakeView}
-        buttons={[
-          {
-            name: "Back",
-            style: styles.backButtonStyle,
-            onPress: handleBackPress,
-            textStyle: styles.backButton
-          },
-          {
-            name: "Unstake",
-            style: styles.unstakeButton,
-            onPress: handleUnstakePress,
-            textStyle: styles.unStakeText
-          }
-        ]}
-      /> */}
+
+      {isUnstakeModalOpened && (
+        <Modal
+          modalText={unstakeText}
+          stakingView={styles.unstakeOuterView}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.unstakeView}
+          buttons={[
+            {
+              name: "Back",
+              style: styles.backButtonStyle,
+              onPress: () => openUnstakingModal(!isUnstakeModalOpened),
+              textStyle: styles.backButton
+            },
+            {
+              name: "Unstake",
+              style: styles.unstakeButton,
+              onPress: handleUnstakePress,
+              textStyle: styles.unStakeText
+            }
+          ]}
+        />
+      )}
     </SafeAreaView>
   );
 };

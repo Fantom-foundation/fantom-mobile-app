@@ -10,9 +10,9 @@ const CardListItem = (props) => {
     return (
       <View style={[styles.listItemContainer, { borderLeftColor: data.color }]}>
         <View style={styles.titleContainer}>
-          <Text style={styles.listItemTitle}>Ethereum</Text>
+          <Text style={styles.listItemTitle}>Fantom</Text>
           <Text style={styles.listItemTitle}>
-            {isHiddenText ? "********" : "0.03 ETH"}
+            {isHiddenText ? "********" : "0.03 FTM"}
           </Text>
         </View>
         <View style={styles.titleContainer}>

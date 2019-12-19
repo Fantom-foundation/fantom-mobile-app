@@ -11,24 +11,27 @@ import BackupWallet from "~/views/backupWallet";
 import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletInfo from "~/views/WalletInfo";
+import ValidatorNode from "~/views/ValidatorNode";
 import SettingsContainer from "~/views/Settings";
 import SingleWallet from "~/views/InsideWallet/SingleWallet";
 import SendFTM from "~/views/InsideWallet/SendFTM";
-import ScanQR from "~/views/InsideWallet/ScanQR";
 import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
-import ValidatorNode from '~/views/ValidatorNode';
-import Success from '~/views/Success'
+
+
+
+
+import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
   {
     // ScanQR: { screen: ScanQR },
     SplashScreen: { screen: SplashScreen },
     Success: { screen: Success },
     ValidatorNode: { screen: ValidatorNode },
-    
     SettingsContainer: { screen: SettingsContainer },
     SingleWallet: { screen: SingleWallet },
     SendFTM: { screen: SendFTM },
     ReceiveMyQcCode: { screen: ReceiveMyQcCode },
+    SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup
       // navigationOptions: {
@@ -41,8 +44,11 @@ const WelcomeNavigator = createStackNavigator(
     CaptionOutput: { screen: CaptionOutput },
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
-    WalletCreated,
-    WalletInfo
+    WalletCreated: { screen: WalletCreated },
+    WalletInfo: { screen: WalletInfo },
+    Success: { screen: Success },
+
+   
   },
   {
     headerMode: "none"

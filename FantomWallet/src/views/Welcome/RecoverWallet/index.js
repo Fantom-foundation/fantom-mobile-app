@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  Clipboard,
   TouchableWithoutFeedback
 } from "react-native";
 import { connect } from "react-redux";
@@ -13,12 +14,14 @@ import Button from "../../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
 
 import { generateWallet as generateWalletAction } from "~/redux/keys/actions";
+import { generateWalletUsingPrivateKey as generateWalletUsingPrivateKeyAction } from "~/redux/keys/actions";
 
 import styles from "./styles";
 import HeaderView from "./components/header";
 
 type Props = {
   generateWallet: ({ mnemonic: string }) => void,
+  generateWalletUsingPrivateKey: ({ privateKey: string }) => void,
   navigation: {
     navigate: string => void,
     goBack: () => void
@@ -27,9 +30,11 @@ type Props = {
 
 export const RecoverWalletContainer = ({
   generateWallet,
-  navigation
+  navigation,
+  generateWalletUsingPrivateKey
 }: Props) => {
   const [mnemonic, setMnemonic] = useState("");
+  const [privateKey, setPrivateKey] = useState("");
   const [errorText, setErrorText] = useState("");
   const [active, setActive] = useState(true);
 
@@ -64,6 +69,14 @@ export const RecoverWalletContainer = ({
     setErrorText("");
     generateWallet({
       mnemonic: _mnemonic,
+      // cb: () => NavigationService.navigate(routes.root.HomeScreen)
+      cb: () => {}
+    });
+  };
+
+  const handleRecoverWalletUsingPrivateKey = () => {
+    generateWalletUsingPrivateKey({
+      privateKey,
       cb: () => NavigationService.navigate(routes.root.HomeScreen)
     });
   };
@@ -84,6 +97,16 @@ export const RecoverWalletContainer = ({
         </View>
       </View>
     );
+  };
+
+  const readMnemonicFromClipboard = async () => {
+    const clipboardContent = await Clipboard.getString();
+    setMnemonic(clipboardContent);
+  };
+
+  const readPrivateKeyFromClipboard = async () => {
+    const clipboardContent = await Clipboard.getString();
+    setPrivateKey(clipboardContent);
   };
 
   return (
@@ -178,7 +201,10 @@ export const RecoverWalletContainer = ({
                 onChangeText={changeMnemonic}
                 style={styles.textInput}
               ></TextInput>
-              <TouchableOpacity style={styles.pasteButton}>
+              <TouchableOpacity
+                style={styles.pasteButton}
+                onPress={() => readMnemonicFromClipboard()}
+              >
                 <Text style={styles.pasterText}>Paste</Text>
               </TouchableOpacity>
             </View>
@@ -200,8 +226,16 @@ export const RecoverWalletContainer = ({
           <View style={styles.phraseContainer}>
             <Text style={styles.phraseHeading}>Private key</Text>
             <View style={styles.privateInputView}>
-              <TextInput multiline={true} style={styles.textInput}></TextInput>
-              <TouchableOpacity style={styles.pasteButton}>
+              <TextInput
+                multiline={true}
+                style={styles.textInput}
+                value={privateKey}
+                onChangeText={text => setPrivateKey(text)}
+              ></TextInput>
+              <TouchableOpacity
+                style={styles.pasteButton}
+                onPress={() => readPrivateKeyFromClipboard()}
+              >
                 <Text style={styles.pasterText}>Paste</Text>
               </TouchableOpacity>
             </View>
@@ -209,6 +243,7 @@ export const RecoverWalletContainer = ({
             <Button
               buttonStyle={styles.buttonStyle}
               buttonText={styles.buttonText}
+              onPress={handleRecoverWalletUsingPrivateKey}
               text="Import"
             />
           </View>
@@ -228,6 +263,7 @@ export const RecoverWalletContainer = ({
   );
 };
 
-export default connect(null, { generateWallet: generateWalletAction })(
-  RecoverWalletContainer
-);
+export default connect(null, {
+  generateWallet: generateWalletAction,
+  generateWalletUsingPrivateKey: generateWalletUsingPrivateKeyAction
+})(RecoverWalletContainer);

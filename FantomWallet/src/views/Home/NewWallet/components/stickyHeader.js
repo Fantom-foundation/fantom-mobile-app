@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground } from "react-native";
 import styles from "../styles";
-import CardImage from "../../../../images/Binance_logo.png";
+import CardImage from "../../../../images/fantomWhiteIcon.png";
 
 const StickyHeader = (props) => {
   const {data}=props
@@ -14,8 +14,8 @@ const StickyHeader = (props) => {
           alignItems: "center"
         }}
       >
-        <Text style={styles.cardHeaderText}>Orange Wallet</Text>
-        <Text style={styles.bottomCardText}>1.03 ETH</Text>
+        <Text style={styles.cardHeaderText}>My Fantom Wallet</Text>
+        <Text style={styles.bottomCardText}>1.03 FTM</Text>
       </View>
       <View style={styles.cardBottomTextContainer}>
         <Text style={styles.bottomCardSubText}>$180.46</Text>

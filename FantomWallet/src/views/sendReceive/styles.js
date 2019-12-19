@@ -77,17 +77,18 @@ const keyPadStyle = {
 
 const modalStyles = {
   modalView: {
-    position: "absolute",
-    bottom: 0,
+    // position: "absolute",
+    // bottom: 0,
     zIndex: 100,
     backgroundColor: Colors.white,
     width: Metrics.screenWidth,
-    top: Metrics.screenHeight * 0.4,
-    bottom: 0,
+    //flex: 1,
+    height: Metrics.screenHeight,
+    //bottom: 0,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20
+    // paddingTop: getHeight(400)
   },
-
   crossSendView: {
     paddingVertical: getHeight(14),
     width: Metrics.screenWidth,

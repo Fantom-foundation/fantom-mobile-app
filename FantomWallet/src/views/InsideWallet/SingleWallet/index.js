@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   TouchableOpacity,
   Text,
@@ -7,150 +7,157 @@ import {
   SafeAreaView,
   Modal,
   StatusBar
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, Metrics } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import moment from 'moment';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Button from '~/components/general/Button';
-import styles from './styles';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, Metrics } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import moment from "moment";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Entypo from "react-native-vector-icons/Entypo";
+import Button from "~/components/general/Button";
+import styles from "./styles";
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
-const walletID = '0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7';
-const ftm = '43,680 FTM';
+const walletID = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7";
+const ftm = "43,680 FTM";
 const amount = 567.84;
 let activity = [
   {
-    date: 'Oct 28, 2019 11:23PM',
-    amount: '-22,418'
+    date: "Oct 28, 2019 11:23PM",
+    amount: "-22,418",
+    type: "Send"
   },
   {
-    date: 'Dec 10, 2019 09:44AM',
-    amount: '-211,650'
+    date: "Dec 10, 2019 09:44AM",
+    amount: "-211,650",
+    type: "Send"
   },
   {
-    date: 'Dec 11, 2019 12:16PM',
-    amount: '3,680'
+    date: "Dec 11, 2019 12:16PM",
+    amount: "3,680",
+    type: "Receive"
   },
   {
-    date: 'Oct 20, 2019 04:42AM',
-    amount: '230,001'
+    date: "Oct 20, 2019 04:42AM",
+    amount: "230,001",
+    type: "Receive"
   },
   {
-    date: 'Oct 20, 2019 04:42AM',
-    amount: '21,312'
+    date: "Oct 20, 2019 04:42AM",
+    amount: "21,312",
+    type: "Receive"
   },
   {
-    date: 'Oct 20, 2019 04:40AM',
-    amount: '33,200'
+    date: "Oct 20, 2019 04:40AM",
+    amount: "33,200",
+    type: "Receive"
   },
   {
-    date: 'Oct 12, 2019 10:12PM',
-    amount: '-43,203'
+    date: "Oct 12, 2019 10:12PM",
+    amount: "-43,203",
+    type: "Send"
   }
 ];
 const receiveTransaction = {
   ftm: 3680,
-  senderId: '0xbe0eb53f46cd790cd13851d5eff43d12404d33e8',
+  senderId: "0xbe0eb53f46cd790cd13851d5eff43d12404d33e8",
   transactionNumber:
-    '0x7485a8be8324ba03553a40f1f9d4503c1bed5793cd2467ae1801c7a43ace960a',
-  date: 'November 16 2019, 12:16 PM'
+    "0x7485a8be8324ba03553a40f1f9d4503c1bed5793cd2467ae1801c7a43ace960a",
+  date: "November 16 2019, 12:16 PM"
 };
 const sendTransaction = {
-  hot: '209,538',
-  recipientId: '0xbe0eb53f46cd790cd13851d5eff43d12404d33e8',
+  hot: "209,538",
+  recipientId: "0xbe0eb53f46cd790cd13851d5eff43d12404d33e8",
   transactionNumber:
-    '0x7485a8be8324ba03553a40f1f9d4503c1bed5793cd2467ae1801c7a43ace960a',
-  date: 'November 16 2019, 11:11 AM',
-  transactionFee: '0.001585839 FTM ($0.30)'
+    "0x7485a8be8324ba03553a40f1f9d4503c1bed5793cd2467ae1801c7a43ace960a",
+  date: "November 16 2019, 11:11 AM",
+  transactionFee: "0.001585839 FTM ($0.30)"
 };
 
 export default class SingleWallet extends React.Component<any, any> {
   state = {
-    walletTitle: 'My Fantom Wallet',
+    walletTitle: "My Fantom Wallet",
     textColor: Colors.white,
     showReceiveModal: false,
     showSendModal: false
   };
 
   componentDidMount() {
-    if (colorTheme === '#fe9d8b')
+    if (colorTheme === "#fe9d8b")
       this.setState({
-        walletTitle: 'Orange Wallet',
+        walletTitle: "Orange Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#e6fc88')
+    if (colorTheme === "#e6fc88")
       this.setState({
-        walletTitle: 'Yellow Wallet',
+        walletTitle: "Yellow Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#59C5DD')
+    if (colorTheme === "#59C5DD")
       this.setState({
-        walletTitle: 'Aqua Wallet',
+        walletTitle: "Aqua Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#FCD3FF')
+    if (colorTheme === "#FCD3FF")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#FFF666')
+    if (colorTheme === "#FFF666")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#40C49D')
+    if (colorTheme === "#40C49D")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#8959DD')
+    if (colorTheme === "#8959DD")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.white
       });
-    if (colorTheme === '#FFB966')
+    if (colorTheme === "#FFB966")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#A650A6')
+    if (colorTheme === "#A650A6")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.white
       });
-    if (colorTheme === '#78DD59')
+    if (colorTheme === "#78DD59")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#4649FD')
+    if (colorTheme === "#4649FD")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.white
       });
-    if (colorTheme === '#7BC5FF')
+    if (colorTheme === "#7BC5FF")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.textBlack
       });
-    if (colorTheme === '#E32C2C')
+    if (colorTheme === "#E32C2C")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.white
       });
-    if (colorTheme === '#5F5F7C')
+    if (colorTheme === "#5F5F7C")
       this.setState({
-        walletTitle: 'My Fantom Wallet',
+        walletTitle: "My Fantom Wallet",
         textColor: Colors.white
       });
-    if (colorTheme === '#CDD4D8')
+    if (colorTheme === "#CDD4D8")
       this.setState({
-        walletTitle: 'Grey Wallet',
+        walletTitle: "Grey Wallet",
         textColor: Colors.textBlack
       });
   }
@@ -168,13 +175,13 @@ export default class SingleWallet extends React.Component<any, any> {
         <StatusBar
           barStyle={
             colorTheme === Colors.royalBlue ||
-            colorTheme === '#8959DD' ||
-            colorTheme === '#A650A6' ||
-            colorTheme === '#4649FD' ||
-            colorTheme === '#E32C2C' ||
-            colorTheme === '#5F5F7C'
-              ? 'light-content'
-              : 'dark-content'
+            colorTheme === "#8959DD" ||
+            colorTheme === "#A650A6" ||
+            colorTheme === "#4649FD" ||
+            colorTheme === "#E32C2C" ||
+            colorTheme === "#5F5F7C"
+              ? "light-content"
+              : "dark-content"
           }
         />
         <View
@@ -229,10 +236,9 @@ export default class SingleWallet extends React.Component<any, any> {
                 <Button
                   activeOpacity={0.5}
                   text="Receive"
-                  onPress={() => {
-                    this.setState({ showReceiveModal: true });
-                    // NavigationService.navigate(routes.root.ScanQR);
-                  }}
+                  onPress={() =>
+                    NavigationService.navigate(routes.root.ReceiveMyQcCode)
+                  }
                   buttonStyle={{
                     backgroundColor: this.hexToRGB(colorTheme, 0.1),
                     ...styles.buttonStyle
@@ -242,9 +248,9 @@ export default class SingleWallet extends React.Component<any, any> {
                 <Button
                   activeOpacity={0.5}
                   text="Send"
-                  onPress={() => {
-                    this.setState({ showSendModal: true }); 
-                  }}
+                  onPress={() =>
+                    NavigationService.navigate(routes.root.SendFTM)
+                  }
                   buttonStyle={{
                     backgroundColor: this.hexToRGB(colorTheme, 0.1),
                     ...styles.buttonStyle
@@ -279,7 +285,14 @@ export default class SingleWallet extends React.Component<any, any> {
                     renderItem={({ item, index }) => {
                       const newDate = this.formatActivities(item.date);
                       return (
-                        <View
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (item.type === "Send") {
+                                this.setState({ showSendModal: true });
+                            } else {
+                              this.setState({ showReceiveModal: true });
+                            }
+                          }}
                           style={{
                             ...styles.listWrapper,
                             marginTop: index === 0 ? 0 : getHeight(32)
@@ -289,7 +302,7 @@ export default class SingleWallet extends React.Component<any, any> {
                           <Text style={styles.activityAmountText}>
                             {item.amount}
                           </Text>
-                        </View>
+                        </TouchableOpacity>
                       );
                     }}
                   />
@@ -321,13 +334,13 @@ export default class SingleWallet extends React.Component<any, any> {
   sortActivities = (activityObject: any) => {
     return activityObject.sort((a, b) => {
       if (
-        moment(a.date, 'MMM DD, YYYY hh:mmA') <
-        moment(b.date, 'MMM DD, YYYY hh:mmA')
+        moment(a.date, "MMM DD, YYYY hh:mmA") <
+        moment(b.date, "MMM DD, YYYY hh:mmA")
       )
         return 1;
       if (
-        moment(a.date, 'MMM DD, YYYY hh:mmA') >
-        moment(b.date, 'MMM DD, YYYY hh:mmA')
+        moment(a.date, "MMM DD, YYYY hh:mmA") >
+        moment(b.date, "MMM DD, YYYY hh:mmA")
       )
         return -1;
       return 0;
@@ -335,18 +348,18 @@ export default class SingleWallet extends React.Component<any, any> {
   };
 
   formatActivities = (activityDate: any) => {
-    if (moment(activityDate, 'MMM DD, YYYY hh:mmA').diff(moment(), 'day') === 0)
-      return 'Today, '.concat(
-        moment(activityDate, 'MMM DD, YYYY hh:mmA').format('hh:mm A')
+    if (moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === 0)
+      return "Today, ".concat(
+        moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
       );
     if (
-      moment(activityDate, 'MMM DD, YYYY hh:mmA').diff(moment(), 'day') === -1
+      moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === -1
     )
-      return 'Yesterday, '.concat(
-        moment(activityDate, 'MMM DD, YYYY hh:mmA').format('hh:mm A')
+      return "Yesterday, ".concat(
+        moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
       );
-    return moment(activityDate, 'MMM DD, YYYY hh:mmA').format(
-      'MMM DD, hh:mm A'
+    return moment(activityDate, "MMM DD, YYYY hh:mmA").format(
+      "MMM DD, hh:mm A"
     );
   };
 
@@ -355,9 +368,9 @@ export default class SingleWallet extends React.Component<any, any> {
     const g = parseInt(hex.slice(3, 5), 16);
     const b = parseInt(hex.slice(5, 7), 16);
     if (alpha) {
-      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+      return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
     } else {
-      return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+      return "rgb(" + r + ", " + g + ", " + b + ")";
     }
   }
 
@@ -370,7 +383,7 @@ export default class SingleWallet extends React.Component<any, any> {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {NavigationService.navigate(routes.root.ReceiveMyQcCode)}}
+          //   onPress={() => NavigationService.navigate(routes.root.ReceiveMyQcCode)}
           style={styles.modalShadow}
         >
           <View style={styles.modalWrapper}>
@@ -423,7 +436,7 @@ export default class SingleWallet extends React.Component<any, any> {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {NavigationService.navigate(routes.root.SendFTM);}}
+          //  onPress={() => NavigationService.navigate(routes.root.SendFTM)}
           style={styles.modalShadow}
         >
           <View style={styles.modalWrapper}>

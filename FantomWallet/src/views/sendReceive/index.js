@@ -12,11 +12,12 @@ import {
   TextInput,
   Clipboard,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  Alert
 } from "react-native";
 import Web3 from "web3";
 import { connect } from "react-redux";
-
+import { NavigationService, routes } from "~/navigation/helpers";
 //Assets
 import QRCode from "../../images/scanQR.png";
 
@@ -35,7 +36,8 @@ import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
-export const SendReceive = ({ navigation, balance }: Props) => {
+export const SendReceive = (props: Props) => {
+  const { navigation, balance } = props;
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [address, setSendTo] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -73,9 +75,10 @@ export const SendReceive = ({ navigation, balance }: Props) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
+    const { sendTransaction } = props;
     if (Number(amount) === 0) {
       Alert.alert("Error", "Please enter valid amount");
-    } else if (amount > maxFantomBalance) {
+    } else if (amount > 0) {
       Alert.alert("Error", "Insufficient balance");
     } else {
       const coin = val;
@@ -94,7 +97,7 @@ export const SendReceive = ({ navigation, balance }: Props) => {
           sendTransaction({
             to: address,
             value: amount,
-            memo,
+            memo: "",
             cbSuccess: alertSuccessfulButtonPressed
           });
         }
@@ -132,7 +135,10 @@ export const SendReceive = ({ navigation, balance }: Props) => {
         <ScrollView>
           {/* Scan Button */}
 
-          <TouchableOpacity style={styles.qrCodeButton}>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate(routes.root.ScanQR)}
+            style={styles.qrCodeButton}
+          >
             <Image source={QRCode} style={styles.qrImage} />
           </TouchableOpacity>
 
@@ -177,37 +183,42 @@ export const SendReceive = ({ navigation, balance }: Props) => {
 
       {/* Modal View */}
       {openModal && (
-        <View style={styles.modalView}>
-          <View style={styles.crossSendView}>
-            <TouchableOpacity onPress={() => setOpenModal(false)}>
-              <Entypo name="cross" size={25} color={Colors.blackOpacity} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleSendMoney}>
-              <Text style={styles.sendText}>Send</Text>
-            </TouchableOpacity>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+          <View style={styles.modalView}>
+            <View style={styles.crossSendView}>
+              <TouchableOpacity onPress={() => setOpenModal(false)}>
+                <Entypo name="cross" size={25} color={Colors.blackOpacity} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleSendMoney}>
+                <Text style={styles.sendText}>Send</Text>
+              </TouchableOpacity>
+            </View>
+            {/* To Option */}
+            <View style={styles.toView}>
+              <Text style={styles.toText}>To:</Text>
+              <TextInput
+                multiline
+                style={styles.sendTo}
+                value={address}
+                onChangeText={text => setSendTo(text)}
+              ></TextInput>
+              {/* Paste Option */}
+              <TouchableOpacity
+                style={styles.pasteButton}
+                onPress={() => readFromClipboard()}
+              >
+                <Text style={styles.pasteText}>Paste</Text>
+              </TouchableOpacity>
+              {/* QR Button */}
+              <TouchableOpacity
+                onPress={() => NavigationService.navigate(routes.root.ScanQR)}
+                style={styles.qrButton}
+              >
+                <Image source={QRCode} style={styles.qrSendImage} />
+              </TouchableOpacity>
+            </View>
           </View>
-          {/* To Option */}
-          <View style={styles.toView}>
-            <Text style={styles.toText}>To:</Text>
-            <TextInput
-              multiline
-              style={styles.sendTo}
-              value={address}
-              onChangeText={text => setSendTo(text)}
-            ></TextInput>
-            {/* Paste Option */}
-            <TouchableOpacity
-              style={styles.pasteButton}
-              onPress={() => readFromClipboard()}
-            >
-              <Text style={styles.pasteText}>Paste</Text>
-            </TouchableOpacity>
-            {/* QR Button */}
-            <TouchableOpacity style={styles.qrButton}>
-              <Image source={QRCode} style={styles.qrSendImage} />
-            </TouchableOpacity>
-          </View>
-        </View>
+        </KeyboardAvoidingView>
       )}
     </View>
   );
