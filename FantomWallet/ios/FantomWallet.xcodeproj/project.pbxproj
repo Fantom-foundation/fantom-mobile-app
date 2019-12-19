@@ -55,6 +55,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		165D07031271488A88ADDAC5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 870F045A16F24F838DEF91B9 /* FontAwesome.ttf */; };
+		16FBB630F6B74D4ABA8B6B47 /* libQRCode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D88731CFD03452D87A74790 /* libQRCode.a */; };
 		1F6BE60F19CB4DF38B721A9E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF072991A44B3E9F01F31B /* Entypo.ttf */; };
 		21348E11A6A64268AA66453F /* libRNVersionCheck.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FBF89A2BCB4F91B2B76B58 /* libRNVersionCheck.a */; };
 		3C26DDFF406D4CD2B670BCA1 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2F1C3EF8864847B960D31C /* libRNCamera.a */; };
@@ -154,6 +155,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
 			remoteInfo = RNImagePicker;
+		};
+		0960009523AB90F500191CB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC991AB180414219891D511C /* QrCode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 07FD4BE520874AB3002FBD31;
+			remoteInfo = QRCode;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -582,6 +590,7 @@
 		1D36C36F6ACB452AAE6E24AF /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		24E3BF6698DF4D8E92968DC7 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D88731CFD03452D87A74790 /* libQRCode.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libQRCode.a; sourceTree = "<group>"; };
 		2DF95A4A88D5488FB4BE9C44 /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
 		35875473D49346C191F520D9 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		388AD0BE85E8439FA40A854B /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
@@ -635,6 +644,7 @@
 		C5C3E899212F0D630024CA91 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		C5C3E89A212F0D630024CA91 /* SF-Pro-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		C5E564B6211D81BB0028C173 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
+		CC991AB180414219891D511C /* QrCode.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = QrCode.xcodeproj; path = "../node_modules/react-native-qr-scanner/ios/QrCode.xcodeproj"; sourceTree = "<group>"; };
 		CEA9F6BED4FC4D3EA6C3AC5B /* libUdpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libUdpSockets.a; sourceTree = "<group>"; };
 		CEB34175F27F4AED8080B592 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		D127198B21B9002F0081DF44 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
@@ -694,6 +704,7 @@
 				E49E2E5143234BCFAC8C71F5 /* libRNGestureHandler.a in Frameworks */,
 				593C1632ACB9404EB9B67989 /* libSplashScreen.a in Frameworks */,
 				56ADE71D6F584E8D933A921D /* libRNImagePicker.a in Frameworks */,
+				16FBB630F6B74D4ABA8B6B47 /* libQRCode.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +774,14 @@
 			isa = PBXGroup;
 			children = (
 				0422811023AA436E0062B1B5 /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0960009223AB90F500191CB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0960009623AB90F500191CB2 /* libQRCode.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -952,6 +971,7 @@
 				987234B687934EB7AC7DD789 /* RNGestureHandler.xcodeproj */,
 				388AD0BE85E8439FA40A854B /* SplashScreen.xcodeproj */,
 				5461F1EDA2A54CE0A9403C12 /* RNImagePicker.xcodeproj */,
+				CC991AB180414219891D511C /* QrCode.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1030,6 +1050,7 @@
 				24E3BF6698DF4D8E92968DC7 /* libRNGestureHandler.a */,
 				6A1BEB340A24451BAFB41F9D /* libSplashScreen.a */,
 				1D36C36F6ACB452AAE6E24AF /* libRNImagePicker.a */,
+				2D88731CFD03452D87A74790 /* libQRCode.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1203,7 +1224,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = Z9Z83R4W7B;
+						DevelopmentTeam = KU8657JE49;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1224,6 +1245,10 @@
 				{
 					ProductGroup = 491CD49123717ADC0061E7EF /* Products */;
 					ProjectRef = 932C8368BE9F49DF98F5F354 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = 0960009223AB90F500191CB2 /* Products */;
+					ProjectRef = CC991AB180414219891D511C /* QrCode.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1386,6 +1411,13 @@
 			fileType = archive.ar;
 			path = libRNImagePicker.a;
 			remoteRef = 0422810F23AA436E0062B1B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0960009623AB90F500191CB2 /* libQRCode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libQRCode.a;
+			remoteRef = 0960009523AB90F500191CB2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
@@ -1893,7 +1925,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.21;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = Z9Z83R4W7B;
+				DEVELOPMENT_TEAM = KU8657JE49;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1911,11 +1943,13 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
@@ -1942,7 +1976,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.21;
-				DEVELOPMENT_TEAM = Z9Z83R4W7B;
+				DEVELOPMENT_TEAM = KU8657JE49;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1960,11 +1994,13 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",

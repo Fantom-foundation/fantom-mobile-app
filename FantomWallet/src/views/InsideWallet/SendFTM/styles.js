@@ -16,7 +16,17 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: getHeight(27),
-    marginBottom: getHeight(20),
+    marginBottom: getHeight(20)
+  },
+  sendPrice: {
+    fontSize: getHeight(72),
+    fontFamily: fonts.WorkSansBold,
+    color: Colors.white,
+    flexWrap: "wrap",
+    width: getWidth(200),
+    textAlign: "center",
+    marginTop: getHeight(142),
+    alignSelf: "center"
   },
   sendText: {
     color: Colors.royalBlue,
@@ -72,8 +82,8 @@ export default StyleSheet.create({
     color: Colors.textBlack,
     flex: 1,
     flexWrap: "wrap",
-    textAlign: "right",
-    paddingRight: getWidth(20)
+
+    textAlign: "center"
   },
   unit: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -111,7 +121,7 @@ export default StyleSheet.create({
   },
   modalStyle: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
