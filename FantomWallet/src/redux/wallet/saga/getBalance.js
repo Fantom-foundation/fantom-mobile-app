@@ -9,13 +9,16 @@ import { scientificToDecimal } from "../../../utils/converts";
 
 export function* getBalance(): any {
   try {
-    const { walletsData } = yield select(({ keys, walletsData }) => {
-      keys, walletsData;
-    });
+    const { walletsData } = yield select(({ keys, wallet }) => ({
+      keys,
+      walletsData: wallet.walletsData
+    }));
+
     if (walletsData && walletsData.length > 0) {
       for (let i = 0; i < walletsData.length; i++) {
         const wallet = walletsData[i];
         const { publicKey, name } = wallet;
+        console.log("publicKey__-publicKey", publicKey);
         const response = yield Web3Agent.Fantom.getBalance(publicKey);
         const balanceWei = scientificToDecimal(response);
         const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
@@ -24,6 +27,7 @@ export function* getBalance(): any {
       }
     }
   } catch (e) {
+    console.log("eroormessage", e.message);
     yield put(setDopdownAlert("error", e.message));
     // yield put(setBalance({ publicKey, balance: "0", loading: false }));
   }

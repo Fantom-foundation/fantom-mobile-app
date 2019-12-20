@@ -219,7 +219,11 @@ export const SendReceive = (props: TSendReceiveTypes) => {
               </TouchableOpacity>
               {/* QR Button */}
               <TouchableOpacity
-                onPress={() => NavigationService.navigate(routes.root.ScanQR)}
+                onPress={() =>
+                  NavigationService.navigate(routes.root.ScanQR, {
+                    publicKey: currentWallet.publicKey
+                  })
+                }
                 style={styles.qrButton}
               >
                 <Image source={QRCode} style={styles.qrSendImage} />

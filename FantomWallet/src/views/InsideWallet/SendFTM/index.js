@@ -33,7 +33,8 @@ const SendFTM = (props: Props) => {
   const [toId, setToId] = useState("");
   const [amountText, setAmountText] = useState("");
   const [amount, setAmountInDollar] = useState(27.46);
-  const { addUpdateAddress, currentWallet } = props;
+  const { addUpdateAddress, currentWallet, navigation } = props;
+  const publicKey = navigation.getParam("publicKey", "");
   // state = {
   //   unit: "FTM", //FTM, BNB, ETA
   //   toId: "", // Use 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
@@ -45,8 +46,6 @@ const SendFTM = (props: Props) => {
   const formatNumber = num => {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
-
-  //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     if (item === "<") {
       setAmountText(prev => prev.slice(0, -1));
@@ -164,7 +163,9 @@ const SendFTM = (props: Props) => {
                   />
                   <TouchableOpacity
                     onPress={() =>
-                      NavigationService.navigate(routes.root.ScanQR)
+                      NavigationService.navigate(routes.root.ScanQR, {
+                        publicKey
+                      })
                     }
                   >
                     <MaterialCommunityIcons

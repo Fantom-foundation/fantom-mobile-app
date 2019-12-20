@@ -10,7 +10,7 @@ import {
   FlatList
 } from 'react-native';
 import styles from './styles';
-import { CrossIcon, EqualIcon } from '../../../images';
+import { CrossIcon } from '../../../images';
 import { Colors } from '../../../theme';
 import _ from 'lodash';
 class PrivacyAndSecurity extends Component {
@@ -42,7 +42,6 @@ class PrivacyAndSecurity extends Component {
           </View>
           <FlatList
             data={this.state.listKeys}
-            // extraData={toggleButton}
             renderItem={this.listItem}
           />
         </SafeAreaView>

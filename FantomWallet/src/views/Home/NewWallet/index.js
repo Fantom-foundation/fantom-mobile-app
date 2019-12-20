@@ -46,8 +46,8 @@ class Wallet extends Component {
     this.carousel = React.createRef();
   }
   componentDidMount() {
-    const { getBalance, getHistory, isLoading, publicKey } = this.props;
-    if (publicKey && !isLoading) {
+    const { getBalance, getHistory, isLoading, walletsData } = this.props;
+    if (walletsData && walletsData.length > 0 && !isLoading) {
       getBalance({ loading: isLoading });
       getHistory();
     }
@@ -81,7 +81,7 @@ class Wallet extends Component {
     } = this.state;
 
     const { isLoading, wallets, walletsData, setCurrentWallet } = this.props;
-
+    console.log("all walllets", walletsData, wallets);
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={{ flex: 1 }}>
@@ -182,7 +182,10 @@ class Wallet extends Component {
                             marginVertical: getHeight(40)
                           }}
                         />
-                        <StickyHeader data={item} />
+                        <StickyHeader
+                          setCurrentWallet={setCurrentWallet}
+                          data={item}
+                        />
                       </View>
                     )}
                     renderForeground={() => (
