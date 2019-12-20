@@ -75,6 +75,7 @@ const SingleWallet = props => {
     await Clipboard.getString()
       .then(clipBoardText => {
         setClipboardText(clipBoardText);
+        // console.log('****Text is',clipBoardText)
       })
       .catch(err => console.error("error: " + err));
   };

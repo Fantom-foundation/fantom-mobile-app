@@ -5,7 +5,8 @@ import {
   View,
   SafeAreaView,
   StatusBar,
-  Share
+  Share,
+  Clipboard
 } from 'react-native';
 import { Colors } from '~/theme';
 import { getHeight, getWidth, Metrics } from '~/utils/pixelResolver';
@@ -16,15 +17,20 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 import styles from './styles';
 import QRCode from 'react-native-qrcode';
+import { connect } from "react-redux";
+import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
-const ReceiveMyQcCode = () => {
+const ReceiveMyQcCode = (props: TReceiveQcCode) => {
+  const { setDopdownAlert } = props;
+  const { navigation } = props;
+  const publicKey = navigation.getParam('publicKey', '');
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message:
-          'React Native | A framework for building native apps using React'
+        message:publicKey
+          
       });
 
       if (result.action === Share.sharedAction) {
@@ -40,8 +46,10 @@ const ReceiveMyQcCode = () => {
       alert(error.message);
     }
   };
-  const { navigation } = this.props;
-  const publicKey = navigation.getParam('publicKey', '');
+  const copyToClipboard = (publicKey) => {
+    Clipboard.setString(publicKey);
+    setDopdownAlert('custom', 'COPIED');
+  }
   return (
     <View
       style={{
@@ -94,7 +102,10 @@ const ReceiveMyQcCode = () => {
         </View>
         <View style={styles.actionsView}>
           <View style={styles.actionsWrapper}>
-            <TouchableOpacity style={styles.actionItemWrapper}>
+            <TouchableOpacity
+              style={styles.actionItemWrapper}
+              onPress={() => copyToClipboard(publicKey)}
+            >
               <View style={styles.actionIconBackground}>
                 <FontAwesome5 name="copy" size={20} color={Colors.white} />
               </View>
@@ -129,4 +140,12 @@ const ReceiveMyQcCode = () => {
     </View>
   );
 };
-export default ReceiveMyQcCode;
+const mapStateToProps = state => ({
+  state
+});
+
+const mapDispatchToProps = {
+  setDopdownAlert: setDopdownAlertAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiveMyQcCode);
