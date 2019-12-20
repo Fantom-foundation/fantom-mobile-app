@@ -12,7 +12,6 @@ import { getHeight, getWidth, Metrics } from '~/utils/pixelResolver';
 import { NavigationService, routes } from '~/navigation/helpers';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 import styles from './styles';
@@ -20,13 +19,12 @@ import QRCode from 'react-native-qrcode';
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
-export default class ReceiveMyQcCode extends React.Component<any, any> {
-
-  onShare = async () => {
+const ReceiveMyQcCode = () => {
+  const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'React Native | A framework for building native apps using React'
       });
 
       if (result.action === Share.sharedAction) {
@@ -41,70 +39,68 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
     } catch (error) {
       alert(error.message);
     }
-  }
-  render() {
-
-    const { navigation } = this.props;
-    const publicKey = navigation.getParam("publicKey", "");
-    return (
-      <View
+  };
+  const { navigation } = this.props;
+  const publicKey = navigation.getParam('publicKey', '');
+  return (
+    <View
+      style={{
+        ...styles.containerStyle,
+        backgroundColor: colorTheme
+      }}
+    >
+      <StatusBar
+        barStyle={
+          colorTheme === Colors.royalBlue ||
+          colorTheme === '#8959DD' ||
+          colorTheme === '#A650A6' ||
+          colorTheme === '#4649FD' ||
+          colorTheme === '#E32C2C' ||
+          colorTheme === '#5F5F7C'
+            ? 'light-content'
+            : 'dark-content'
+        }
+      />
+      <SafeAreaView
         style={{
-          ...styles.containerStyle,
-          backgroundColor: colorTheme
+          ...styles.safeAreaView,
+          marginBottom:
+            Metrics.getiPhoneX_Dimensions().height === DEVICE_HEIGHT &&
+            Metrics.getiPhoneX_Dimensions().width === DEVICE_WIDTH
+              ? getHeight(60)
+              : getHeight(48)
         }}
       >
-        <StatusBar
-          barStyle={
-            colorTheme === Colors.royalBlue ||
-            colorTheme === '#8959DD' ||
-            colorTheme === '#A650A6' ||
-            colorTheme === '#4649FD' ||
-            colorTheme === '#E32C2C' ||
-            colorTheme === '#5F5F7C'
-              ? 'light-content'
-              : 'dark-content'
-          }
-        />
-        <SafeAreaView
-          style={{
-            ...styles.safeAreaView,
-            marginBottom:
-              Metrics.getiPhoneX_Dimensions().height === DEVICE_HEIGHT &&
-              Metrics.getiPhoneX_Dimensions().width === DEVICE_WIDTH
-                ? getHeight(60)
-                : getHeight(48)
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => {
+            NavigationService.pop();
           }}
         >
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => {
-              NavigationService.pop();
-            }}
-          >
-            <Ionicons name="ios-arrow-back" size={25} color={Colors.white} />
-          </TouchableOpacity>
-          <View style={styles.qrContainer}>
-            <View style={styles.qrWrapper}>
-              <QRCode
-                value={publicKey}
-                size={getWidth(230)}
-                bgColor={Colors.black}
-                fgColor={Colors.white}
-              />
-            </View>
-            <View style={styles.textWrapper}>
-              <Text style={styles.qrText}>{publicKey}</Text>
-            </View>
+          <Ionicons name="ios-arrow-back" size={25} color={Colors.white} />
+        </TouchableOpacity>
+        <View style={styles.qrContainer}>
+          <View style={styles.qrWrapper}>
+            <QRCode
+              value={publicKey}
+              size={getWidth(230)}
+              bgColor={Colors.black}
+              fgColor={Colors.white}
+            />
           </View>
-          <View style={styles.actionsView}>
-            <View style={styles.actionsWrapper}>
-              <TouchableOpacity style={styles.actionItemWrapper}>
-                <View style={styles.actionIconBackground}>
-                  <FontAwesome5 name="copy" size={20} color={Colors.white} />
-                </View>
-                <Text style={styles.actionText}>Copy</Text>
-              </TouchableOpacity>
-              {/* <TouchableOpacity
+          <View style={styles.textWrapper}>
+            <Text style={styles.qrText}>{publicKey}</Text>
+          </View>
+        </View>
+        <View style={styles.actionsView}>
+          <View style={styles.actionsWrapper}>
+            <TouchableOpacity style={styles.actionItemWrapper}>
+              <View style={styles.actionIconBackground}>
+                <FontAwesome5 name="copy" size={20} color={Colors.white} />
+              </View>
+              <Text style={styles.actionText}>Copy</Text>
+            </TouchableOpacity>
+            {/* <TouchableOpacity
                 style={{
                   ...styles.actionItemWrapper,
                   marginHorizontal: getWidth(28)
@@ -118,19 +114,19 @@ export default class ReceiveMyQcCode extends React.Component<any, any> {
                 </View>
                 <Text style={styles.actionText}>Set Amount</Text>
               </TouchableOpacity> */}
-              <TouchableOpacity
-                style={styles.actionItemWrapper}
-                onPress={() => this.onShare()}
-              >
-                <View style={styles.actionIconBackground}>
-                  <Entypo name="share" size={20} color={Colors.white} />
-                </View>
-                <Text style={styles.actionText}>Share</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              style={styles.actionItemWrapper}
+              onPress={() => onShare()}
+            >
+              <View style={styles.actionIconBackground}>
+                <Entypo name="share" size={20} color={Colors.white} />
+              </View>
+              <Text style={styles.actionText}>Share</Text>
+            </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+        </View>
+      </SafeAreaView>
+    </View>
+  );
+};
+export default ReceiveMyQcCode;

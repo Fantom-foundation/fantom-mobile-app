@@ -12,13 +12,12 @@ import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletImported from "~/views/WalletImported";
 import WalletInfo from "~/views/WalletInfo";
-import EnterPasscode from "~/views/Settings/EnterPasscode";
 
 
 import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
   {
-    EnterPasscode: { screen: EnterPasscode },
+    // VerifyRecoveryWords: { screen: VerifyRecoveryWords },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup

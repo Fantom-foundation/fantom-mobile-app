@@ -10,7 +10,7 @@ import {
 import styles from "./styles";
 import {FantomLogo} from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
-const WalletSetup =(props)=> {
+const WalletSetup =()=> {
   const onCreateNewWallet = () => {
     NavigationService.navigate(routes.root.BackupWallet);
   };

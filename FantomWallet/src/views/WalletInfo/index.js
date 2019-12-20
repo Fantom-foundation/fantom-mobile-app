@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
-  ScrollView,
   Clipboard
 } from "react-native";
 import styles from "./styles";
@@ -16,8 +15,6 @@ import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/a
 import { setWalletName as setWalletNameAction } from "~/redux/wallet/actions";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../theme/colors";
-import ModalView from "react-native-modalbox";
-import { getWidth, Metrics, getHeight } from "../../utils/pixelResolver";
 import Button from "../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
 
