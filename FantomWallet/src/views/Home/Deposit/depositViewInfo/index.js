@@ -24,7 +24,8 @@ type Props = {
 /**
  * DepositViewInfo: This component is meant for redering deposit screen related information.
  */
-export const DepositViewInfoContainer = ({ publicKey, setAlert }: Props) => {
+export const DepositViewInfoContainer = (props:TDepositViewInfoTypes) => {
+  const { publicKey, setAlert } = props;
   const [amount, setAmount] = useState('');
   const [qrAddress, setQrAddress] = useState('');
   const scrollView = useRef<any>(null);

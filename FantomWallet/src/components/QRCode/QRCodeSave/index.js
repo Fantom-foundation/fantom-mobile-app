@@ -7,12 +7,9 @@ import ViewShot from 'react-native-view-shot';
 import QRCodeWithLogo from '~/components/QRCode/QRCodeWithLogo';
 import styles from './styles';
 
-type Props = {
-  content: string,
-  amount: string
-}
 
-const QRCodeSave = ({ content, amount }: Props, ref: any) => {
+const QRCodeSave = (props: TQrCodeSaveTypes, ref: any) => {
+  const { content, amount } = props;
   const viewShot: any = useRef(null);
 
   const renderLoader = (color: string = "#FFF") => (

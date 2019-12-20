@@ -14,8 +14,12 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center"
   },
+  headerTextView:{
+      flex: 1,
+      paddingTop:getHeight(20)
+  },
   mainHeadingContainer: {
-    // marginTop: getHeight(40)
+   // top:0
   },
   mainHeading: {
     textAlign: "center",
@@ -56,8 +60,14 @@ export default StyleSheet.create({
     height: getHeight(60),
     marginTop: getHeight(25)
   },
-  checkBoxContainer:{
-flexDirection:"row",
-alignItems:"center"
+  checkBoxContainer: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  headerStyle:{
+    backgroundColor:Colors.transparent,
+    top:getHeight(0),
+    padding:0,
+    height:getHeight(40)
   }
 });

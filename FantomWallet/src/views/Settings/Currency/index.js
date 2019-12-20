@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -55,17 +55,12 @@ const currencyData = [
     id: 9
   }
 ];
-class Currency extends Component {
-  state = {
-    textClicked: "US Dollar - $"
+const Currency =(props)=>{
+  const [textClicked,setTextClicked]=useState("US Dollar - $")
+  const selectItem = (item, index) => {
+    setTextClicked(item.text)
   };
-  selectItem = (item, index) => {
-    const ind = currencyData.findIndex(i => index === i.id);
-    this.setState({ textClicked: item.text });
-  };
-  render() {
-    const { navigation } = this.props;
-    const { textClicked } = this.state;
+    const { navigation } = props;
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={styles.mainContainer}>
@@ -95,7 +90,7 @@ class Currency extends Component {
                   >
                     <TouchableOpacity
                       style={styles.rowsTextView}
-                      onPress={() => this.selectItem(item, index)}
+                      onPress={() => selectItem(item, index)}
                     >
                       <Text
                         style={
@@ -123,7 +118,6 @@ class Currency extends Component {
         </SafeAreaView>
       </View>
     );
-  }
 }
 
 export default Currency;

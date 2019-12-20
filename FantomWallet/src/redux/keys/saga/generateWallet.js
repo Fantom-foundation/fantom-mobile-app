@@ -7,12 +7,10 @@ import Hdkey from "hdkey";
 import { types, setKeys, setMnemonic } from "../actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
 
-
-
 type Action = {
   payload: {
     mnemonic: string,
-    cb: (publicKey:string) => void
+    cb: (publicKey: string) => void
   }
 };
 
@@ -26,10 +24,19 @@ export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
     const addr = yield EthUtil.publicToAddress(pubKey).toString("hex");
     const publicKey = yield EthUtil.toChecksumAddress(addr);
     const privateKey = yield EthUtil.bufferToHex(addrNode._privateKey); //eslint-disable-line
-    
+
     yield put(setMnemonic({ mnemonic: "" }));
+    console.log(
+      masterKey,
+      "masterKey",
+      privateKey,
+      "privateKey",
+      publicKey,
+      "publicKey"
+    );
     yield put(setKeys({ masterKey, privateKey, publicKey }));
-    cb(publicKey );
+
+    cb(publicKey);
   } catch (e) {
     yield put(setDopdownAlert("error", e.message));
   }

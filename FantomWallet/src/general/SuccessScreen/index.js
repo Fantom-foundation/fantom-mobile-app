@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import styles from './style';
 import { CheckIcon } from '../../images';
-class SuccessScreen extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { text, onPress } = this.props;
+const SuccessScreen =(props:TSuccessScreenTypes)=> {
+  // constructor(props) {
+  //   super(props);
+  // }
+  // render() {
+    const { text, onPress } = props;
     return (
       <TouchableOpacity
         onPress={() => onPress()}
@@ -32,6 +32,6 @@ class SuccessScreen extends Component {
       </TouchableOpacity>
     );
   }
-}
+// }
 
 export default SuccessScreen;

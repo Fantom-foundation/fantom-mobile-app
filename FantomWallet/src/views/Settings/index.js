@@ -1,6 +1,6 @@
 // @flow
 // Library
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -48,17 +48,9 @@ import {
 } from '../../images';
 import { Colors } from '../../theme';
 import { getHeight } from '../../utils/pixelResolver';
-type Props = {
-  navigation: {
-    navigate: string => void,
-    goBack: () => void
-  }
-};
 
 const settingData = [
   {
-    // Icon: FontAwesome,
-    // iconName: 'plus-square',
     text: 'Add wallet',
     rightArrowIcon: RightArrowIcon,
     source: PlusIcon,
@@ -67,8 +59,6 @@ const settingData = [
     to: 'AddWallet'
   },
   {
-    Icon: Entypo,
-    iconName: 'wallet',
     text: 'Manage wallets',
     rightArrowIcon: RightArrowIcon,
     source: WalletIcon,
@@ -77,46 +67,36 @@ const settingData = [
     to: 'ManageWallet'
   },
   {
-    Icon: Ionicons,
-    iconName: 'md-moon',
     text: 'Dark Mode',
     rightArrowIcon: '',
     source: MoonIcon,
     notificationsToggleButton: false,
     darkToggleButton: true
   },
+  // {
+  //   text: 'Privacy and security',
+  //   rightArrowIcon: RightArrowIcon,
+  //   source: ShieldIcon,
+  //   notificationsToggleButton: false,
+  //   darkToggleButton: false,
+  //   to: 'PrivacyAndSecurity'
+  // },
   {
-    Icon: MaterialIcons,
-    iconName: 'security',
-    text: 'Privacy and security',
-    rightArrowIcon: RightArrowIcon,
-    source: ShieldIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    to: 'PrivacyAndSecurity'
-  },
-  {
-    Icon: Entypo,
-    iconName: 'notification',
     text: 'Push notifications',
     rightArrowIcon: '',
     source: NotificationIcon,
     notificationsToggleButton: true,
     darkToggleButton: false
   },
+  // {
+  //   text: 'Currency',
+  //   rightArrowIcon: RightArrowIcon,
+  //   source: DollarIcon,
+  //   notificationsToggleButton: false,
+  //   darkToggleButton: false,
+  //   to: 'Currency'
+  // },
   {
-    Icon: FontAwesome,
-    iconName: 'dollar',
-    text: 'Currency',
-    rightArrowIcon: RightArrowIcon,
-    source: DollarIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    to: 'Currency'
-  },
-  {
-    Icon: Entypo,
-    iconName: 'share',
     text: 'Share with your friends',
     rightArrowIcon: RightArrowIcon,
     source: ShareIcon,
@@ -124,8 +104,6 @@ const settingData = [
     darkToggleButton: false
   },
   {
-    Icon: FontAwesome,
-    iconName: 'question-circle',
     text: 'About',
     rightArrowIcon: RightArrowIcon,
     source: AboutIcon,
@@ -133,8 +111,6 @@ const settingData = [
     darkToggleButton: false
   },
   {
-    Icon: Entypo,
-    iconName: 'heart',
     text: 'Leave a review',
     rightArrowIcon: RightArrowIcon,
     source: ReviewIcon,
@@ -143,121 +119,110 @@ const settingData = [
   }
 ];
 
-class SettingsContainer extends Component {
-  state = {
-    notificationSwitchValue: false,
-    darkSwitchValue: false
-  };
-  render() {
-    const { navigation } = this.props;
-    const { notificationSwitchValue, darkSwitchValue } = this.state;
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView style={styles.container}>
-          <ScrollView
-            style={styles.scrollView}
-            showsVerticalScrollIndicator={false}
-          >
-            <View style={styles.mainView}>
-              <View style={styles.settingView}>
-                <Text style={styles.settingText}>Settings</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                  <Image
-                    source={CrossIcon}
-                    style={styles.crossIcon}
-                    resizeMode="contain"
-                  ></Image>
-                </TouchableOpacity>
-              </View>
-              <FlatList
-                data={settingData}
-                extraData={this.state}
-                renderItem={({ item, index }) => {
-                  // const { Icon } = item;
-                  return (
-                    <View style={styles.mainContainer}>
-                      <TouchableOpacity
-                        onPress={() => item.to && navigation.navigate(item.to)}
-                        style={{
-                          ...styles.rowsView,
-                          marginTop: index === 0 ? getHeight(55) : getHeight(42)
-                        }}
-                      >
-                        <View style={styles.leftView}>
-                          {/* <Icon
-                            name={item.iconName}
-                            size={18}
-                            color={Colors.black}
-                            style={{height: 20, width: 20}}
-                          /> */}
-                          <Image
-                            source={item.source}
-                            style={styles.iconStyle}
-                            resizeMode="contain"
-                          ></Image>
-                          <Text style={styles.textStyle}>{item.text}</Text>
-                        </View>
-                        {item.rightArrowIcon ? (
-                          <Image
-                            source={item.rightArrowIcon}
-                            style={{
-                              ...styles.iconStyle,
-                              tintColor: Colors.grey
-                            }}
-                            resizeMode="contain"
-                          ></Image>
-                        ) : null}
-                        {item.notificationsToggleButton && (
-                          <Switch
-                            value={notificationSwitchValue}
-                            onTintColor={Colors.blackOpacity}
-                            thumbColor={Colors.grey}
-                            tintColor={Colors.grey}
-                            trackColor={Colors.grey}
-                            onValueChange={notificationSwitchValue => {
-                              this.setState({ notificationSwitchValue });
-                            }}
-                          />
-                        )}
-                        {item.darkToggleButton && (
-                          <Switch
-                            value={darkSwitchValue}
-                            onTintColor={Colors.blackOpacity}
-                            thumbColor={Colors.grey}
-                            tintColor={Colors.grey}
-                            trackColor={Colors.grey}
-                            onValueChange={darkSwitchValue => {
-                              this.setState({ darkSwitchValue });
-                            }}
-                          />
-                        )}
-                      </TouchableOpacity>
-                    </View>
-                  );
-                }}
-              />
-              <View style={styles.bottomView}>
-                <TouchableOpacity>
-                  <Image
-                    source={TwitterIcon}
-                    style={styles.imageStyle}
-                    resizeMode="contain"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Image
-                    source={TelegramIcon}
-                    style={styles.imageStyle}
-                    resizeMode="contain"
-                  />
-                </TouchableOpacity>
-              </View>
+const SettingsContainer = (props: TSettingsScreenTypes) => {
+  const { navigation } = props;
+  const [notificationSwitchValue, setNotificationSwitchValue] = useState(false);
+  const [darkSwitchValue, setDarkSwitchValue] = useState(false);
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.mainView}>
+            <View style={styles.settingView}>
+              <Text style={styles.settingText}>Settings</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <Image
+                  source={CrossIcon}
+                  style={styles.crossIcon}
+                  resizeMode="contain"
+                ></Image>
+              </TouchableOpacity>
             </View>
-          </ScrollView>
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+            <FlatList
+              data={settingData}
+              extraData={[notificationSwitchValue,darkSwitchValue]}
+              renderItem={({ item, index }) => {
+                return (
+                  <View style={styles.mainContainer}>
+                    <TouchableOpacity
+                      onPress={() => item.to && navigation.navigate(item.to)}
+                      style={{
+                        ...styles.rowsView,
+                        marginTop: index === 0 ? getHeight(55) : getHeight(42)
+                      }}
+                    >
+                      <View style={styles.leftView}>
+                        <Image
+                          source={item.source}
+                          style={styles.iconStyle}
+                          resizeMode="contain"
+                        ></Image>
+                        <Text style={styles.textStyle}>{item.text}</Text>
+                      </View>
+                      {item.rightArrowIcon ? (
+                        <Image
+                          source={item.rightArrowIcon}
+                          style={{
+                            ...styles.iconStyle,
+                            tintColor: Colors.grey
+                          }}
+                          resizeMode="contain"
+                        ></Image>
+                      ) : null}
+                      {item.notificationsToggleButton && (
+                        <Switch
+                          value={notificationSwitchValue}
+                          onTintColor={Colors.blackOpacity}
+                          thumbColor={Colors.grey}
+                          tintColor={Colors.grey}
+                          trackColor={Colors.grey}
+                          onValueChange={notificationSwitchValue => {
+                            setNotificationSwitchValue(notificationSwitchValue);
+                          }}
+                        />
+                      )}
+                      {item.darkToggleButton && (
+                        <Switch
+                          value={darkSwitchValue}
+                          onTintColor={Colors.blackOpacity}
+                          thumbColor={Colors.grey}
+                          tintColor={Colors.grey}
+                          trackColor={Colors.grey}
+                          onValueChange={darkSwitchValue => {
+                            setDarkSwitchValue(darkSwitchValue);
+                          }}
+                        />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                );
+              }}
+            />
+            <View style={styles.bottomView}>
+              <TouchableOpacity>
+                <Image
+                  source={TwitterIcon}
+                  style={styles.imageStyle}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Image
+                  source={TelegramIcon}
+                  style={styles.imageStyle}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </View>
+  );
+  // }
+};
 export default SettingsContainer;

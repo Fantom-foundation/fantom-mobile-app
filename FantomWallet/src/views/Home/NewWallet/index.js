@@ -22,7 +22,7 @@ import StickyHeader from "./components/stickyHeader";
 import ParallaxScrollView from "react-native-parallax-scroll-view";
 import Carousel from "react-native-snap-carousel";
 import { getHeight, getWidth } from "../../../utils/pixelResolver";
-import { Colors, FontSize, fonts } from "../../../theme";
+import { Colors } from "../../../theme";
 import WalletMenu from "./components/walletMenu";
 import CardHeader from "./components/cardListHeader";
 import { connect } from "react-redux";

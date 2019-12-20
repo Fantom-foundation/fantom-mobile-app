@@ -5,17 +5,11 @@ import { View, WebView, ActivityIndicator } from 'react-native';
 import Header from '~/components/Header';
 import crossButton from '~/images/crossButtonWhite.png';
 import styles from './styles';
-
-type Props = {
-  navigation: {
-    goBack: () => void,
-  },
-};
-
 /**
  * PrivacyPolicy :  This component is meant for displaying Privacy Policy for users of the application.
  */
-const PrivacyPolicy = ({ navigation }: Props) => {
+const PrivacyPolicy = (props: TPrivacyPolicyTypes) => {
+  const { navigation } = props;
   const [visible, setVisible] = useState(true);
   const uri = 'http://fantom.foundation';
 

@@ -26,12 +26,11 @@ const logoImgStyle = {
   height: logoHeight,
 };
 
-type Props = {
-  content: string,
-}
 
-export default ({ content }: Props) => (
-  <View style={{ flex: 1 }}>
+export default (props: TQrCodeLogoTypes) => {
+  const { content } = props;
+  return (
+    <View style={{ flex: 1 }}>
     <QRCode content={content} ecl="M" backgroundColor="white" color="rgb(14,14,18)" />
     <View style={logoConatinerStyle}>
       <Image
@@ -41,4 +40,6 @@ export default ({ content }: Props) => (
       />
     </View>
   </View>
-);
+  )
+  
+}

@@ -19,40 +19,35 @@ import { generateWalletUsingPrivateKey as generateWalletUsingPrivateKeyAction } 
 import styles from "./styles";
 import HeaderView from "./components/header";
 
-type Props = {
-  generateWallet: ({ mnemonic: string }) => void,
-  generateWalletUsingPrivateKey: ({ privateKey: string }) => void,
-  navigation: {
-    navigate: string => void,
-    goBack: () => void
-  }
+const getErrorView = (text, dismiss) => {
+  return (
+    <View style={styles.errorView}>
+      <View style={styles.errorModalView}>
+        <Text style={styles.errorTextHeading}>{text}</Text>
+        <TouchableOpacity onPress={() => dismiss("")} style={styles.backButton}>
+          <Text style={styles.backText}>Back</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
 
- const getErrorView = (text, dismiss) => {
-   return (
-     <View style={styles.errorView}>
-       <View style={styles.errorModalView}>
-         <Text style={styles.errorTextHeading}>{text}</Text>
-         <TouchableOpacity onPress={() => dismiss("")} style={styles.backButton}>
-           <Text style={styles.backText}>Back</Text>
-         </TouchableOpacity>
-       </View>
-     </View>
-   );
- };
-
-export const RecoverWalletContainer = ({
-  generateWallet,
-  navigation,
-  generateWalletUsingPrivateKey
-}: Props) => {
+export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
+  const {
+    generateWallet,
+    navigation,
+    generateWalletUsingPrivateKey
+  } = props;
   const [mnemonic, setMnemonic] = useState("");
   const [privateKey, setPrivateKey] = useState("");
   const [errorType, setErrorType] = useState("");
   const [active, setActive] = useState(true);
 
   const onLeftIconPress = () => {
-    NavigationService.pop();
+    const backToHome = navigation.getParam("backToHome", false);
+    if (backToHome) {
+      NavigationService.navigate(routes.HomeScreen.Settings);
+    } else NavigationService.pop();
   };
 
   const onChangeView = value => {
@@ -76,7 +71,7 @@ export const RecoverWalletContainer = ({
       .trim();
 
     if (!isValidSeed(_mnemonic)) {
-      setErrorType('phrase');
+      setErrorType("phrase");
       return;
     }
     setErrorType("");
@@ -98,8 +93,6 @@ export const RecoverWalletContainer = ({
     setMnemonic(text);
     setErrorType("");
   };
-
- 
 
   const readMnemonicFromClipboard = async () => {
     const clipboardContent = await Clipboard.getString();
@@ -185,7 +178,8 @@ export const RecoverWalletContainer = ({
 
         {/* {getErrorView("Incorrect private key")}  */}
 
-        {errorType === 'phrase' && getErrorView("Incorrect passphrase",setErrorType)}
+        {errorType === "phrase" &&
+          getErrorView("Incorrect passphrase", setErrorType)}
       </View>
     </TouchableWithoutFeedback>
   );

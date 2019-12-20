@@ -3,6 +3,8 @@ import { View, Text, ImageBackground } from "react-native";
 import styles from "../styles";
 import CardImage from "../../../../images/fantomWhiteIcon.png";
 
+
+
 const StickyHeader = ({data}) => {
   const { name, balance } = data;
   return (

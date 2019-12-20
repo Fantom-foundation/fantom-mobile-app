@@ -53,7 +53,7 @@ const ScanQR = () => {
           QRreader(response.uri)
             .then(data => {
               let copybarCodes = barcodeCodes.slice();
-              copybarCodes.push(scanResult.data);
+              copybarCodes.push(data);
               setbarCodes(copybarCodes);
               Alert.alert("Correct", "A Valid QrCode");
             })
@@ -75,6 +75,8 @@ const ScanQR = () => {
           copybarCodes.push(scanResult.data);
           setbarCodes(copybarCodes);
           setqrImage(data.uri);
+
+          NavigationService.pop();
         }
       }
     }
@@ -119,7 +121,6 @@ const ScanQR = () => {
                     : RNCamera.Constants.FlashMode.off
                 }
                 onBarCodeRead={onBarCodeRead}
-                onPictureSaved={() => console.log("onPictureSaved")}
                 type={RNCamera.Constants.Type.back}
                 mirrorImage={false}
                 ref={cam => (camera = cam)}

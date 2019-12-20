@@ -70,12 +70,25 @@ export default (state: Wallet = initialState, action: actionType) => {
         sendTransactionIsLoading: action.payload.sendTransactionIsLoading
       };
     }
-    case types.ADD_TRANSACTION:
+    case types.ADD_TRANSACTION: {
+      const { from } = action.payload.transaction;
+      let oldData = state.walletsData || [];
+      let history = [];
+      const index = oldData.findIndex(item => item.publicKey === from);
+      if (index > -1) {
+        history = oldData[index].history;
+        history.push(action.payload.transaction);
+        const newData = {
+          ...oldData[index]
+        };
+        oldData.splice(index, 1, newData);
+      }
       return {
         ...state,
-        history: [...state.history, action.payload.transaction]
+        walletsData: oldData
       };
-    case types.SET_WALLET_NAME:
+    }
+    case types.SET_WALLET_NAME: {
       const { publicKey, name } = action.payload;
       let oldData = state.walletsData || [];
       const index = oldData.findIndex(item => item.publicKey === publicKey);
@@ -93,6 +106,7 @@ export default (state: Wallet = initialState, action: actionType) => {
         ...state,
         walletsData: oldData
       };
+    }
     case types.SET_CURRENT_WALLET:
       return {
         ...state,

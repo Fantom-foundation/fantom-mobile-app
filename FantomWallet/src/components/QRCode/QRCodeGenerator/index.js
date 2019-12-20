@@ -9,12 +9,10 @@ import styles from './styles';
 export const DEVICE_WIDTH = Dimensions.get('window').width;
 export const DEVICE_HEIGHT = Dimensions.get('window').height;
 
-type Props = {
-  qrLink: ?string,
-  titleText: string,
-};
 
-const QRGenerator = ({ qrLink, titleText }: Props) => {
+
+const QRGenerator = (props: TQrCodeGeneratorTypes) => {
+  const {qrLink, titleText}=props
   const renderLoader = (color: string = "#FFF") => (
     <View style={styles.loaderStyle}>
       <ActivityIndicator size="large" color={color} />

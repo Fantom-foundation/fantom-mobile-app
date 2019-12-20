@@ -4,9 +4,6 @@ import styles from "../styles";
 import {BackLogo} from "../../../../images";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
-import { getHeight, getWidth } from "../../../../utils/pixelResolver";
-import { Colors, FontSize, fonts } from "../../../../theme";
-
 
 
 

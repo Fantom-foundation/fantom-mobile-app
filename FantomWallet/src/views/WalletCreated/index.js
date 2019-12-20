@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SuccessScreen from "../../general/SuccessScreen";
 import { NavigationService, routes } from "~/navigation/helpers";
 
-const WalletCreated = props => {
+const WalletCreated = (props:TSettingsScreenTypes) => {
   const { navigation } = props;
   const publicKey = navigation.getParam("publicKey", "");
   return (

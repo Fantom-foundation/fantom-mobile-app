@@ -5,27 +5,18 @@ import { TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
 import { Colors } from "../../../theme";
 
-type Props = {
-  activeTabIndex: number,
-  index: number,
-  activeTabColor: string,
-  inActiveTabColor: string,
-  tabInfo: {
-    route: string,
-    icon: string
-  },
-  handleSelectedTab: string => void
-};
+
 /**
  * Tab : This component is meant for rendering diffrent tabs on home screen navigation tab bar.
  */
-const Tab = ({
-  activeTabIndex,
-  index,
-  inActiveTabColor,
-  tabInfo,
-  handleSelectedTab
-}: Props) => {
+const Tab = (props: TNavigationTabTypes) => {
+  const {
+    activeTabIndex,
+    index,
+    inActiveTabColor,
+    tabInfo,
+    handleSelectedTab
+  }=props
   return (
     <TouchableOpacity
       style={{
