@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // @flow
-import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React from "react";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import type {
   ViewStyleProp,
-    TextStyleProp,
-    ImageStyleProp,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+  TextStyleProp,
+  ImageStyleProp
+} from "react-native/Libraries/StyleSheet/StyleSheet";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-import styles from './styles';
+import styles from "./styles";
 
 /**
  * Header : This component is meant for rendering Header Bar on any screen.
@@ -19,7 +19,7 @@ const Header = (props: THeaderTypes) => {
     text,
     leftButtonIcon,
     leftIconSize,
-    leftIconColor = '',
+    leftIconColor = "",
     isShowLeftButtonIcon,
     headerStyle,
     textStyle,
@@ -36,21 +36,28 @@ const Header = (props: THeaderTypes) => {
     rightButtonStyle = {},
     isShowRightButtonIcon,
     rightIconSize,
-    rightIconColor = '',
-    rightImageStyling,
-  }=props
+    rightIconColor = "",
+    rightImageStyling
+  } = props;
   return (
     <View style={[styles.headerStyle, headerStyle]}>
       <View style={styles.mainViewStyle}>
         <View style={styles.headerIconTextStyle}>
           {fantomIcon && (
-            <Image source={fantomIcon} style={styles.fantomIconStyle} resizeMode="contain" />
+            <Image
+              source={fantomIcon}
+              style={styles.fantomIconStyle}
+              resizeMode="contain"
+            />
           )}
           {text && <Text style={[styles.textStyle, textStyle]}>{text}</Text>}
         </View>
 
         {!isShowSecondaryButtonIcon && secondaryButtonIcon && (
-          <TouchableOpacity style={styles.secondaryButtonStyle} onPress={onSecondaryIconPress}>
+          <TouchableOpacity
+            style={styles.secondaryButtonStyle}
+            onPress={onSecondaryIconPress}
+          >
             <Image
               source={secondaryButtonIcon}
               style={styles.secondaryImageStyle}
@@ -62,7 +69,7 @@ const Header = (props: THeaderTypes) => {
           <TouchableOpacity
             style={[styles.rightButtonStyle, rightButtonStyle]}
             activeOpacity={activeOpacity}
-            onPress={onRightIconPress}
+            onPress={() => onRightIconPress()}
           >
             {isRightBtnImage ? (
               <Image
@@ -71,12 +78,12 @@ const Header = (props: THeaderTypes) => {
                 resizeMode="contain"
               />
             ) : (
-                <Icon
-                  {...(rightButtonIcon ? { name: `${rightButtonIcon}` } : {})}
-                  {...(rightIconColor ? { color: `${rightIconColor}` } : {})}
-                  size={rightIconSize}
-                />
-              )}
+              <Icon
+                {...(rightButtonIcon ? { name: `${rightButtonIcon}` } : {})}
+                {...(rightIconColor ? { color: `${rightIconColor}` } : {})}
+                size={rightIconSize}
+              />
+            )}
           </TouchableOpacity>
         )}
 
@@ -92,13 +99,17 @@ const Header = (props: THeaderTypes) => {
               </TouchableOpacity>
             )} */}
 
-        {!isShowLeftButtonIcon && leftButtonIcon !== '' && (
+        {!isShowLeftButtonIcon && leftButtonIcon !== "" && (
           <TouchableOpacity
             style={[styles.leftButtonStyle, leftButtonStyle]}
             activeOpacity={activeOpacity}
             onPress={onLeftIconPress}
           >
-            <Icon name={leftButtonIcon} size={leftIconSize} color={leftIconColor} />
+            <Icon
+              name={leftButtonIcon}
+              size={leftIconSize}
+              color={leftIconColor}
+            />
             {/* <Icon name={`${leftIcon}`} size={leftIconSize} color={`${leftIconColor}`} /> */}
             {/* <Image source={leftIcon} style={styles.leftImageStyle} resizeMode="contain" /> */}
           </TouchableOpacity>
@@ -106,5 +117,5 @@ const Header = (props: THeaderTypes) => {
       </View>
     </View>
   );
-}
+};
 export default Header;

@@ -1,33 +1,40 @@
 // @flow
 /* eslint-disable no-return-assign */
 // Library
-import React, { useState, useEffect, useRef } from 'react';
-import { ScrollView, View, Text, Keyboard, Clipboard, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  ScrollView,
+  View,
+  Text,
+  Keyboard,
+  Clipboard,
+  TouchableOpacity
+} from "react-native";
+import { connect } from "react-redux";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 // Style
-import styles from './styles';
+import styles from "./styles";
 // Components
-import QRGenerator from '~/components/QRCode/QRCodeGenerator';
-import QRCodeSave from '~/components/QRCode/QRCodeSave';
-import BillingAmountScreen from '../billingAmountView/index';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '~/common/constants';
-import { setDopdownAlert } from '~/redux/notification/actions';
+import QRGenerator from "~/components/QRCode/QRCodeGenerator";
+import QRCodeSave from "~/components/QRCode/QRCodeSave";
+import BillingAmountScreen from "../billingAmountView/index";
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from "~/common/constants";
+import { setDopdownAlert } from "~/redux/notification/actions";
 
 type Props = {
   publicKey: string,
-  setAlert: (string, string) => void,
-}
+  setAlert: (string, string) => void
+};
 
 /**
  * DepositViewInfo: This component is meant for redering deposit screen related information.
  */
-export const DepositViewInfoContainer = (props:TDepositViewInfoTypes) => {
+export const DepositViewInfoContainer = (props: TDepositViewInfoTypes) => {
   const { publicKey, setAlert } = props;
-  const [amount, setAmount] = useState('');
-  const [qrAddress, setQrAddress] = useState('');
+  const [amount, setAmount] = useState("");
+  const [qrAddress, setQrAddress] = useState("");
   const scrollView = useRef<any>(null);
   const qrcode = useRef<any>(null);
   // eslint-disable-next-line no-unused-vars
@@ -42,7 +49,7 @@ export const DepositViewInfoContainer = (props:TDepositViewInfoTypes) => {
   const onCopyAddress = async () => {
     // Copies address to clipboard
     await Clipboard.setString(qrAddress);
-    setAlert('custom', 'Copied');
+    setAlert("custom", "Copied");
   };
 
   const onTextFieldFocus = () => {
@@ -61,7 +68,7 @@ export const DepositViewInfoContainer = (props:TDepositViewInfoTypes) => {
   const onShare = () => qrcode.current.onPress();
 
   const qrLink = qrAddress;
-  const headerText = 'FTM';
+  const headerText = "FTM";
 
   return (
     <ScrollView
@@ -76,12 +83,14 @@ export const DepositViewInfoContainer = (props:TDepositViewInfoTypes) => {
           titleText="Address QR Code"
           qrLink={qrLink}
           billingAmount={amount}
-
         />
         <QRCodeSave content={qrLink} amount={amount} ref={qrcode} />
       </View>
       {qrLink ? (
-        <TouchableOpacity onPress={onCopyAddress} style={styles.qrLinkViewStyle}>
+        <TouchableOpacity
+          onPress={() => onCopyAddress()}
+          style={styles.qrLinkViewStyle}
+        >
           <MaterialIcons name="content-copy" color="rgb(0,177,251)" size={16} />
           <Text style={styles.qrLinkTextStyle}>{qrLink}</Text>
         </TouchableOpacity>
@@ -93,19 +102,29 @@ export const DepositViewInfoContainer = (props:TDepositViewInfoTypes) => {
         headerText={headerText}
       />
       <View style={styles.confirmContainer}>
-        <TouchableOpacity style={styles.confirmButtonOuterContainer} onPress={onShare}>
+        <TouchableOpacity
+          style={styles.confirmButtonOuterContainer}
+          onPress={onShare}
+        >
           <View style={styles.confirmButtonInnerContainer}>
-            <EvilIcons name="share-apple" color="#FFF" size={DEVICE_WIDTH * 0.09} />
+            <EvilIcons
+              name="share-apple"
+              color="#FFF"
+              size={DEVICE_WIDTH * 0.09}
+            />
           </View>
         </TouchableOpacity>
         <Text style={styles.confirmTextStyle}>Share</Text>
       </View>
-    </ScrollView >
+    </ScrollView>
   );
 };
 
-export default connect(state => ({
-  publicKey: state.keys.publicKey,
-}), ({
-  setAlert: setDopdownAlert,
-}))(DepositViewInfoContainer);
+export default connect(
+  state => ({
+    publicKey: state.keys.publicKey
+  }),
+  {
+    setAlert: setDopdownAlert
+  }
+)(DepositViewInfoContainer);

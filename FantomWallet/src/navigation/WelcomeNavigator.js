@@ -12,13 +12,10 @@ import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletImported from "~/views/WalletImported";
 import WalletInfo from "~/views/WalletInfo";
-import EnterPasscode from "~/views/Settings/EnterPasscode";
-
 
 import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
   {
-    EnterPasscode: { screen: EnterPasscode },
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup
@@ -33,11 +30,9 @@ const WelcomeNavigator = createStackNavigator(
     BackupWallet: { screen: BackupWallet },
     VerifyRecoveryWords: { screen: VerifyRecoveryWords },
     WalletCreated: { screen: WalletCreated },
-    WalletImported:{screen:WalletImported},
+    WalletImported: { screen: WalletImported },
     WalletInfo: { screen: WalletInfo },
-    Success: { screen: Success },
-
-   
+    Success: { screen: Success }
   },
   {
     headerMode: "none"
