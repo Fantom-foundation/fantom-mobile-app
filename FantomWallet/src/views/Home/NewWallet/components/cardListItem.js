@@ -14,7 +14,7 @@ const CardListItem = ({ data, isHiddenText }) => {
           </Text>
         </View>
         <View style={styles.titleContainer}>
-          <Text style={styles.balanceText}>{`$${amount}`}</Text>
+          <Text style={styles.balanceText}>{`$${1}`}</Text>
           <Text style={styles.balanceText}>
             {isHiddenText ? "" : `$${amount}`}
           </Text>

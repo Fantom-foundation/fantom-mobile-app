@@ -79,6 +79,8 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     const { sendTransaction } = props;
     if (Number(amount) === 0) {
       Alert.alert("Error", "Please enter valid amount");
+    } else if (currentWallet.balance < amount) {
+      Alert.alert("Error", "Insufficient balance");
     } else {
       let message = "";
       if (address === "") message = "Please enter address.";
@@ -101,16 +103,6 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           memo: "",
           cbSuccess: alertSuccessfulButtonPressed
         });
-        // }
-        // NavigationService.navigate(routes.root.SendMoney, {
-        //   address,
-        //   amount,
-        //   coin,
-        //   memo,
-        //   fees,
-        //   reload,
-        //   balance
-        // });
       }
     }
   };

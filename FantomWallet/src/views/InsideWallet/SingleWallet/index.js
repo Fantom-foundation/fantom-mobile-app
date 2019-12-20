@@ -173,6 +173,7 @@ const SingleWallet = props => {
                       >
                         <Text style={styles.dateText}>{newDate}</Text>
                         <Text style={styles.activityAmountText}>
+                          {item.type === "Sent" ? "-" : ""}
                           {item.amount}
                         </Text>
                       </TouchableOpacity>

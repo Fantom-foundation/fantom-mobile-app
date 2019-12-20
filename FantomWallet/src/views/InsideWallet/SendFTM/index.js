@@ -76,9 +76,10 @@ const SendFTM = (props: Props) => {
    */
   const handleSendMoney = () => {
     const { sendTransaction } = props;
+
     if (Number(amountText) === 0) {
       Alert.alert("Error", "Please enter valid amount");
-    } else if (amountText < 0) {
+    } else if (currentWallet.balance < amountText) {
       Alert.alert("Error", "Insufficient balance");
     } else {
       let message = "";
