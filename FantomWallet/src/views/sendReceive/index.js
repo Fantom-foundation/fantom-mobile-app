@@ -151,9 +151,7 @@ export const SendReceive = (props: Props) => {
           </Text>
           <Text style={styles.sendPriceExample}>(${amount})</Text>
           <View style={styles.walletButton}>
-            <TouchableOpacity>
-              <Text style={styles.walletText}>FTM</Text>
-            </TouchableOpacity>
+            <Text style={styles.walletText}>FTM</Text>
             <Text style={styles.walletAmountText}>
               {currentWallet.balance || 0}
             </Text>

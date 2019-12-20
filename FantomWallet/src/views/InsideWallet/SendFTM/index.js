@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import {
   TouchableOpacity,
   Text,
@@ -7,158 +7,210 @@ import {
   SafeAreaView,
   StatusBar,
   ToastAndroid,
-  ScrollView
+  ScrollView,
+  TextInput,
+  Clipboard,
+  Alert
 } from "react-native";
 import { Colors } from "~/theme";
+import KeyPad from "../../../components/general/keyPad";
 import { getHeight, getWidth } from "~/utils/pixelResolver";
 import { NavigationService, routes } from "~/navigation/helpers";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
 import Button from "~/components/general/Button";
 import styles from "./styles";
+import { GAS_PRICE } from "../../../common/constants";
+import Web3 from "web3";
+import { connect } from "react-redux";
+import { addUpdateTimestampAddress } from "../../../redux/addressBook/actions";
+import { sendTransaction as sendTransactionAction } from "../../../redux/wallet/actions";
+import { estimationMaxFantomBalance, toFixed } from "../../../utils/converts";
 
 const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
 
-export default class SendFTM extends React.Component<any, any> {
-  state = {
-    unit: "FTM", //FTM, BNB, ETA
-    toId: "", // Use 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
-    memoId: "",
-    amountText: "",
-    amount: 27.46
-  };
+const SendFTM = (props: Props) => {
+  const [toId, setToId] = useState("");
+  const [amountText, setAmountText] = useState("");
+  const [amount, setAmountInDollar] = useState(27.46);
+  const { addUpdateAddress, currentWallet } = props;
+  // state = {
+  //   unit: "FTM", //FTM, BNB, ETA
+  //   toId: "", // Use 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
+  //   memoId: "",
+  //   amountText: "",
+  //   amount: 27.46
+  // };
   //formating Number
-  formatNumber = num => {
+  const formatNumber = num => {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
 
   //  function for entered amount from KeyPad
-  handleInputNumber = item => {
-    const { amountText } = this.state;
+  const handleInputNumber = item => {
     if (item === "<") {
-      let num = amountText.slice(0, -1);
-      this.setState({ amountText: num });
+      setAmountText(prev => prev.slice(0, -1));
     } else {
-      this.setState({ amountText: amountText.concat(item) });
+      setAmountText(prev => prev.concat(item));
+    }
+  };
+  const alertSuccessfulButtonPressed = () => {
+    addUpdateAddress(toId, "", new Date().getTime());
+    clearState();
+    NavigationService.navigate(routes.HomeScreen.Wallet);
+  };
+
+  const clearState = () => {
+    setToId("");
+    setAmountText("");
+  };
+
+  const readFromClipboard = async () => {
+    const clipboardContent = await Clipboard.getString();
+    setToId(clipboardContent);
+  };
+
+  /**
+   *  handleSendMoney()  : This function is meant for handling input box validations ,
+   *  and navigate to SendMoney screen if all fields are filled.
+   */
+  const handleSendMoney = () => {
+    const { sendTransaction } = props;
+    if (Number(amountText) === 0) {
+      Alert.alert("Error", "Please enter valid amount");
+    } else if (amountText > 0) {
+      Alert.alert("Error", "Insufficient balance");
+    } else {
+      const coin = val;
+      let message = "";
+      if (toId === "") message = "Please enter address.";
+      else if (!Web3.utils.isAddress(toId))
+        message = "Please enter valid address.";
+      else if (amountText === "") message = "Please enter valid amount";
+
+      if (message !== "") Alert.alert("Error", message);
+      if (toId && Web3.utils.isAddress(toId) && amount) {
+        const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+        if (amountText === 0 || amountText > maxFantomBalance) {
+          Alert.alert("Error", "Please enter valid amount.");
+        } else {
+          sendTransaction({
+            to: toId,
+            value: amountText,
+            memo: "",
+            cbSuccess: alertSuccessfulButtonPressed
+          });
+        }
+        // NavigationService.navigate(routes.root.SendMoney, {
+        //   address,
+        //   amount,
+        //   coin,
+        //   memo,
+        //   fees,
+        //   reload,
+        //   balance
+        // });
+      }
     }
   };
 
-  render() {
-    const { unit, amount, amountText, toId, memoId } = this.state;
-    const { navigation } = this.props;
-    return (
-      <View style={styles.containerStyle}>
-        <StatusBar
-          backgroundColor={Colors.white}
-          barStyle="dark-content"
-          translucent
-        />
-        <SafeAreaView style={styles.safeAreaView}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.buttonsWrapper}>
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={() => NavigationService.pop()}>
-                  <Entypo name="cross" size={25} color={Colors.textBlack} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    if (toId !== "") {
-                      NavigationService.navigate(routes.root.ScanQR);
-                    }
+  return (
+    <View style={styles.containerStyle}>
+      <StatusBar
+        backgroundColor={Colors.white}
+        barStyle="dark-content"
+        translucent
+      />
+      <SafeAreaView style={styles.safeAreaView}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.buttonsWrapper}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={() => NavigationService.pop()}>
+                <Entypo name="cross" size={25} color={Colors.textBlack} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleSendMoney}>
+                <Text
+                  style={{
+                    ...styles.sendText,
+                    opacity: toId === "" ? 0.5 : 1
                   }}
                 >
-                  <Text
-                    style={{
-                      ...styles.sendText,
-                      opacity: toId === "" ? 0.5 : 1
-                    }}
-                  >
-                    Send
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.horizontalRow} />
-
-              <View style={styles.toWrapper}>
-                <View style={styles.flexDirectionRow}>
-                  <Text style={styles.toText}>To:</Text>
-                  <Text style={styles.toId}>{toId}</Text>
-                </View>
-                {toId === "" && (
-                  <View style={styles.flexDirectionRow}>
-                    <Button
-                      activeOpacity={0.5}
-                      text="Paste"
-                      onPress={() => {}}
-                      buttonStyle={styles.buttonStyle}
-                      textStyle={styles.textStyle}
-                    />
-                    <TouchableOpacity
-                      onPress={() =>
-                        NavigationService.navigate(routes.root.ScanQR)
-                      }
-                    >
-                      <MaterialCommunityIcons
-                        name="qrcode-scan"
-                        size={25}
-                        color={Colors.textBlack}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                )}
-              </View>
-              <View style={styles.horizontalRow} />
-              {unit === "BNB" && (
-                <>
-                  <View style={styles.toWrapper}>
-                    <View style={styles.flexDirectionRow}>
-                      <Text style={styles.toText}>Memo:</Text>
-                      <Text style={styles.toId}>{memoId}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.horizontalRow} />
-                </>
-              )}
-              <View
-                style={{
-                  marginTop: unit === "BNB" ? getHeight(25) : getHeight(64),
-                  ...styles.flexDirectionRow
-                }}
-              >
-                <Text style={styles.amountText}>
-                  {amountText ? this.formatNumber(amountText) : 0}
+                  Send
                 </Text>
-                <Text style={styles.unit}>{unit}</Text>
-              </View>
-              <Text style={styles.amount}>{`($${amount})`}</Text>
-              <FlatList
-                data={keypadText}
-                keyExtractor={(item, index) => index.toString()}
-                showsVerticalScrollIndicator={false}
-                style={styles.flex}
-                contentContainerStyle={styles.centerContent}
-                numColumns={3}
-                bounces={false}
-                horizontal={false}
-                scrollEnabled
-                renderItem={({ item, index }) => {
-                  return (
-                    <TouchableOpacity
-                      style={{
-                        ...styles.keypadButtonWrapper,
-                        marginHorizontal: index % 3 === 1 ? getWidth(58) : 0
-                      }}
-                      onPress={() => this.handleInputNumber(item)}
-                    >
-                      <Text style={styles.keypadItem}>{item}</Text>
-                    </TouchableOpacity>
-                  );
-                }}
-              />
+              </TouchableOpacity>
             </View>
-          </ScrollView>
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+            <View style={styles.horizontalRow} />
+
+            <View style={styles.toWrapper}>
+              <View style={styles.flexDirectionRow}>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={styles.toText}>To:</Text>
+                  <TextInput
+                    multiline
+                    style={styles.toId}
+                    value={toId}
+                    onChangeText={text => setToId(text)}
+                  ></TextInput>
+                </View>
+              </View>
+              {toId === "" && (
+                <View style={styles.flexDirectionRow}>
+                  <Button
+                    activeOpacity={0.5}
+                    text="Paste"
+                    onPress={() => readFromClipboard()}
+                    buttonStyle={styles.buttonStyle}
+                    textStyle={styles.textStyle}
+                  />
+                  <TouchableOpacity
+                    onPress={() =>
+                      NavigationService.navigate(routes.root.ScanQR)
+                    }
+                  >
+                    <MaterialCommunityIcons
+                      name="qrcode-scan"
+                      size={25}
+                      color={Colors.textBlack}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+            <View style={styles.horizontalRow} />
+
+            <View style={styles.flexDirectionRow}>
+              <Text style={styles.amountText}>
+                {amountText ? formatNumber(amountText) : 0}
+              </Text>
+              <Text style={styles.unit}>FTM</Text>
+            </View>
+
+            <Text style={styles.amount}>
+              {amountText ? `($${formatNumber(amountText)})` : `($${0})`}
+            </Text>
+
+            {/* KeyPad */}
+
+            <KeyPad
+              textStyle={styles.keypadItem}
+              keyPad={keypadText}
+              handleInputNumber={handleInputNumber}
+            />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </View>
+  );
+};
+
+const mapStateToProps = state => ({
+  isLoading: state.wallet.sendTransactionIsLoading,
+  balance: state.wallet.balance
+});
+
+const mapDispatchToProps = {
+  addUpdateAddress: addUpdateTimestampAddress,
+  sendTransaction: sendTransactionAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SendFTM);
