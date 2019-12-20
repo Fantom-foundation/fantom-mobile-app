@@ -4,16 +4,11 @@ import {
   View,
   TouchableOpacity,
   Image,
-  ImageBackground,
   StatusBar
 } from 'react-native';
 import styles from './style';
 import { CheckIcon } from '../../images';
 const SuccessScreen =(props:TSuccessScreenTypes)=> {
-  // constructor(props) {
-  //   super(props);
-  // }
-  // render() {
     const { text, onPress } = props;
     return (
       <TouchableOpacity
@@ -32,6 +27,5 @@ const SuccessScreen =(props:TSuccessScreenTypes)=> {
       </TouchableOpacity>
     );
   }
-// }
 
 export default SuccessScreen;

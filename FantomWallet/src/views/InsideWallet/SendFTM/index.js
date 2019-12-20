@@ -46,8 +46,6 @@ const SendFTM = (props: Props) => {
   const formatNumber = num => {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
-
-  //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     if (item === "<") {
       setAmountText(prev => prev.slice(0, -1));
