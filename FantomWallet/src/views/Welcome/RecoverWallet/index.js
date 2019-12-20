@@ -33,11 +33,7 @@ const getErrorView = (text, dismiss) => {
 };
 
 export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
-  const {
-    generateWallet,
-    navigation,
-    generateWalletUsingPrivateKey
-  } = props;
+  const { generateWallet, navigation, generateWalletUsingPrivateKey } = props;
   const [mnemonic, setMnemonic] = useState("");
   const [privateKey, setPrivateKey] = useState("");
   const [errorType, setErrorType] = useState("");
@@ -80,6 +76,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
       cb: (publicKey: string) =>
         NavigationService.navigate(routes.root.WalletImported, { publicKey })
     });
+    setMnemonic("");
   };
 
   const handleRecoverWalletUsingPrivateKey = () => {

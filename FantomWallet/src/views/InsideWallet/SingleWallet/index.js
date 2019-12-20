@@ -23,52 +23,14 @@ import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
-const walletID = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7";
-const ftm = "43,680 FTM";
-const amount = 567.84;
-let activity = [
-  {
-    date: "Oct 28, 2019 11:23PM",
-    amount: "-22,418",
-    type: "Send"
-  },
-  {
-    date: "Dec 10, 2019 09:44AM",
-    amount: "-211,650",
-    type: "Send"
-  },
-  {
-    date: "Dec 11, 2019 12:16PM",
-    amount: "3,680",
-    type: "Receive"
-  },
-  {
-    date: "Oct 20, 2019 04:42AM",
-    amount: "230,001",
-    type: "Receive"
-  },
-  {
-    date: "Oct 20, 2019 04:42AM",
-    amount: "21,312",
-    type: "Receive"
-  },
-  {
-    date: "Oct 20, 2019 04:40AM",
-    amount: "33,200",
-    type: "Receive"
-  },
-  {
-    date: "Oct 12, 2019 10:12PM",
-    amount: "-43,203",
-    type: "Send"
-  }
-];
+
 const SingleWallet = props => {
   const { currentWallet } = props;
   const [textColor, setTextColor] = useState(Colors.white);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
   const [clipBoardContent, setClipboardText] = useState("");
+  const [transactionData, setTransactionData] = useState(null);
 
   history = sortActivities(currentWallet.history);
   const readFromClipboard = async () => {
@@ -167,7 +129,7 @@ const SingleWallet = props => {
               />
             </View>
             <View style={styles.activityListWrapper}>
-              {activity.length > 0 && (
+              {history.length > 0 && (
                 <Text style={styles.activityText}>ACTIVITY</Text>
               )}
               <View style={styles.activityListView}>
@@ -195,9 +157,11 @@ const SingleWallet = props => {
                     return (
                       <TouchableOpacity
                         onPress={() => {
-                          if (item.type === "Send") {
+                          if (item.type === "Sent") {
+                            setTransactionData(item);
                             setShowSendModal(true);
                           } else {
+                            setTransactionData(item);
                             setShowReceiveModal(true);
                           }
                         }}
@@ -225,6 +189,7 @@ const SingleWallet = props => {
           onRequestClose={() => setShowReceiveModal(false)}
         >
           <ReceiveModal
+            transactionData={transactionData}
             showReceiveModal={showReceiveModal}
             closeReceiveModal={() => setShowReceiveModal(false)}
           />
@@ -236,6 +201,7 @@ const SingleWallet = props => {
           onRequestClose={() => setShowSendModal(false)}
         >
           <SendModal
+            transactionData={transactionData}
             showSendModal={showSendModal}
             closeSendModal={() => setShowSendModal(false)}
           />
@@ -247,7 +213,7 @@ const SingleWallet = props => {
 
 const writeToClipboard = async () => {
   //To copy the text to clipboard
-  await Clipboard.setString(walletID);
+  await Clipboard.setString(currentWallet.publicKey);
   alert("Copied to Clipboard!");
 };
 const sortActivities = (activityObject: any) => {

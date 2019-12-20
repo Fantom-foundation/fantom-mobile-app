@@ -57,6 +57,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const alertSuccessfulButtonPressed = () => {
     addUpdateAddress(address, "", new Date().getTime());
     clearState();
+    setOpenModal(false);
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
 
@@ -78,10 +79,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     const { sendTransaction } = props;
     if (Number(amount) === 0) {
       Alert.alert("Error", "Please enter valid amount");
-    } else if (amount > 0) {
-      Alert.alert("Error", "Insufficient balance");
     } else {
-      const coin = val;
       let message = "";
       if (address === "") message = "Please enter address.";
       else if (!Web3.utils.isAddress(address))
@@ -90,20 +88,20 @@ export const SendReceive = (props: TSendReceiveTypes) => {
 
       if (message !== "") Alert.alert("Error", message);
       if (address && Web3.utils.isAddress(address) && amount) {
-        const maxFantomBalance = estimationMaxFantomBalance(
-          Number(currentWallet.balance),
-          GAS_PRICE
-        );
-        if (amount === 0 || amount > maxFantomBalance) {
-          Alert.alert("Error", "Please enter valid amount.");
-        } else {
-          sendTransaction({
-            to: address,
-            value: amount,
-            memo: "",
-            cbSuccess: alertSuccessfulButtonPressed
-          });
-        }
+        // const maxFantomBalance = estimationMaxFantomBalance(
+        //   Number(currentWallet.balance),
+        //   GAS_PRICE
+        // );
+        // if (amount === 0 || amount > maxFantomBalance) {
+        //   Alert.alert("Error", "Please enter valid amount.");
+        // } else {
+        sendTransaction({
+          to: address,
+          value: amount,
+          memo: "",
+          cbSuccess: alertSuccessfulButtonPressed
+        });
+        // }
         // NavigationService.navigate(routes.root.SendMoney, {
         //   address,
         //   amount,

@@ -18,12 +18,14 @@ export function* getBalance(): any {
       for (let i = 0; i < walletsData.length; i++) {
         const wallet = walletsData[i];
         const { publicKey, name } = wallet;
-        console.log("publicKey__-publicKey", publicKey);
-        const response = yield Web3Agent.Fantom.getBalance(publicKey);
-        const balanceWei = scientificToDecimal(response);
-        const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
-
-        yield put(setBalance({ name, publicKey, balance, loading: false }));
+        if (publicKey) {
+          console.log("publicKey__-publicKey", publicKey);
+          const response = yield Web3Agent.Fantom.getBalance(publicKey);
+          const balanceWei = scientificToDecimal(response);
+          const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
+          console.log("balancebalancebalancebalancebalance", balance);
+          yield put(setBalance({ name, publicKey, balance, loading: false }));
+        }
       }
     }
   } catch (e) {

@@ -77,10 +77,9 @@ const SendFTM = (props: Props) => {
     const { sendTransaction } = props;
     if (Number(amountText) === 0) {
       Alert.alert("Error", "Please enter valid amount");
-    } else if (amountText > 0) {
+    } else if (amountText < 0) {
       Alert.alert("Error", "Insufficient balance");
     } else {
-      const coin = val;
       let message = "";
       if (toId === "") message = "Please enter address.";
       else if (!Web3.utils.isAddress(toId))
@@ -88,18 +87,30 @@ const SendFTM = (props: Props) => {
       else if (amountText === "") message = "Please enter valid amount";
 
       if (message !== "") Alert.alert("Error", message);
-      if (toId && Web3.utils.isAddress(toId) && amount) {
-        const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
-        if (amountText === 0 || amountText > maxFantomBalance) {
-          Alert.alert("Error", "Please enter valid amount.");
-        } else {
-          sendTransaction({
-            to: toId,
-            value: amountText,
-            memo: "",
-            cbSuccess: alertSuccessfulButtonPressed
-          });
-        }
+      if (toId && Web3.utils.isAddress(toId) && amountText) {
+        //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+        // if (amountText === 0 || amountText > maxFantomBalance) {
+        //   Alert.alert("Error", "Please enter valid amount.");
+        // } else {
+        //   sendTransaction({
+        //     to: toId,
+        //     value: amountText,
+        //     memo: "",
+        //     cbSuccess: alertSuccessfulButtonPressed
+        //   });
+        // }
+        console.log("trass", {
+          to: toId,
+          value: amountText,
+          memo: "",
+          cbSuccess: alertSuccessfulButtonPressed
+        });
+        sendTransaction({
+          to: toId,
+          value: amountText,
+          memo: "",
+          cbSuccess: alertSuccessfulButtonPressed
+        });
         // NavigationService.navigate(routes.root.SendMoney, {
         //   address,
         //   amount,

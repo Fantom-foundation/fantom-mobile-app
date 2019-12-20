@@ -36,15 +36,14 @@ export default (state: Wallet = initialState, action: actionType) => {
     case types.SET_BALANCE: {
       const { publicKey, balance, name } = action.payload;
       let oldData = state.walletsData || [];
+
       const index = oldData.findIndex(item => item.publicKey === publicKey);
-      if (index > -1) {
+      if (publicKey && index > -1) {
         const newData = {
           ...oldData[index],
           balance
         };
         oldData.splice(index, 1, newData);
-      } else {
-        oldData.push({ name, publicKey, history: [], balance });
       }
       return {
         ...state,

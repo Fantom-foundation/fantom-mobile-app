@@ -1,13 +1,10 @@
 import React from "react";
-import { View, Text} from "react-native";
+import { View, Text } from "react-native";
 import styles from "../styles";
 
-
-
-
-const CardListItem = ({data,isHiddenText}) => {
-  const { amount,amountUnit } = data;
+const CardListItem = ({ data, isHiddenText }) => {
   return data.map(item => {
+    const { amount, amountUnit } = item;
     return (
       <View style={styles.listItemContainer}>
         <View style={styles.titleContainer}>
@@ -18,10 +15,12 @@ const CardListItem = ({data,isHiddenText}) => {
         </View>
         <View style={styles.titleContainer}>
           <Text style={styles.balanceText}>{`$${amount}`}</Text>
-          <Text style={styles.balanceText}>{isHiddenText ? "" : `$${amount}`}</Text>
+          <Text style={styles.balanceText}>
+            {isHiddenText ? "" : `$${amount}`}
+          </Text>
         </View>
       </View>
     );
-  }); 
+  });
 };
 export default CardListItem;

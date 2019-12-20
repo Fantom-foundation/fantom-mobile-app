@@ -55,7 +55,7 @@ const cardStyles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 3
   },
-  gridIcon:{
+  gridIcon: {
     top: getHeight(6),
     justifyContent: "center",
     alignSelf: "center"
@@ -72,7 +72,7 @@ const cardListItemStyles = StyleSheet.create({
     padding: getWidth(6),
     paddingHorizontal: getWidth(8),
     borderLeftWidth: getWidth(8),
- backgroundColor: "#416ed5",
+    borderLeftColor: Colors.royalBlue,
     justifyContent: "space-between",
     shadowColor: Colors.blackOpacity,
     backgroundColor: Colors.white,
@@ -87,7 +87,7 @@ const cardListItemStyles = StyleSheet.create({
   },
 
   listItemTitle: {
- fontFamily: fonts.WorkSansSemiBold,
+    fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.textBlack,
     lineHeight: getHeight(24)
@@ -109,18 +109,18 @@ const stickyHeaderStyles = StyleSheet.create({
     height: getHeight(80),
     borderRadius: 12,
     overflow: "hidden",
- backgroundColor: "#416ed5",
+    backgroundColor: "#416ed5",
     paddingHorizontal: getWidth(22),
     //marginHorizontal:getWidth(22),
-    paddingVertical:getHeight(10)
+    paddingVertical: getHeight(10)
   },
   stickyHeaderImageStyle: {
     height: getHeight(100),
     width: getWidth(80),
     top: 15,
-   left: getWidth(20),
+    left: getWidth(20),
     position: "absolute",
-    opacity:0.2
+    opacity: 0.2
   }
 });
 
@@ -151,33 +151,32 @@ const listViewStyles = StyleSheet.create({
 export default StyleSheet.create({
   mainContainer: {
     flex: 1,
-    paddingBottom:getHeight(50)
+    paddingBottom: getHeight(50)
     // paddingHorizontal: getWidth(22)
   },
   headerContainer: {
     height: getHeight(70),
-    marginTop: getHeight(40),
- 
+    marginTop: getHeight(40)
   },
   headerItems: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems:'center'
+    alignItems: "center"
   },
   headerText: {
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.huge - 4,
     color: Colors.textBlack
   },
-  eyeIcon:{
+  eyeIcon: {
     width: getWidth(21),
     height: getHeight(21),
-    tintColor:Colors.textBlack
+    tintColor: Colors.textBlack
   },
   iconStyle: {
     top: getHeight(15),
-    opacity:0.7
+    opacity: 0.7
   },
   subHeading: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -189,9 +188,9 @@ export default StyleSheet.create({
     // marginVertical: getHeight(40),
     height: getHeight(44),
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
     //paddingHorizontal: getWidth(22),
-   //marginHorizontal: getWidth(22)
+    //marginHorizontal: getWidth(22)
   },
   listContainer: {
     // marginHorizontal: getWidth(22)

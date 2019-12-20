@@ -8,7 +8,7 @@ export const types = {
   SET_LOADING_SEND: "wallet/SET_LOADING_SEND",
   ADD_TRANSACTION: "wallet/add_transaction",
   SET_WALLET_NAME: "wallet/SET_WALLET_NAME",
-  SET_CURRENT_WALLET:"wallet/SET_CURRENT_WALLET"
+  SET_CURRENT_WALLET: "wallet/SET_CURRENT_WALLET"
 };
 
 type Balance = {
@@ -45,9 +45,9 @@ export const getBalance = ({ loading }: Balance) => ({
   payload: { loading }
 });
 
-export const setBalance = ({ balance }: Balance) => ({
+export const setBalance = ({ name, publicKey, balance, loading }: Balance) => ({
   type: types.SET_BALANCE,
-  payload: { balance, loading: false }
+  payload: { name, publicKey, balance, loading }
 });
 
 export const getHistory = () => ({
@@ -87,6 +87,6 @@ export const setWalletName = (walletInfo: WalletInfoT) => ({
 });
 
 export const setCurrentWallet = (walletData: any) => ({
-         type: types.SET_CURRENT_WALLET,
-         payload: walletData
-       });
+  type: types.SET_CURRENT_WALLET,
+  payload: walletData
+});

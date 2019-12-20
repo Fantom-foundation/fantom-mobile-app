@@ -23,9 +23,18 @@ export function* sendTransaction({
   const otherErrorMessage =
     "Invalid error. Please check the data and try again.";
   const date = moment().format("YYYY-MMM-DD hh:mm:ss a");
-  const { publicKey, privateKey } = yield select(
-    ({ wallet }) => wallet.currentWallet
-  );
+
+  const { publicKey, keys } = yield select(({ wallet, keys }) => ({
+    publicKey: wallet.currentWallet.publicKey,
+    keys
+  }));
+  let privateKey = "";
+  if (keys && keys.wallets.length > 0) {
+    const data = keys.wallets.find(item => item.publicKey === publicKey);
+    if (data) {
+      privateKey = data.privateKey;
+    }
+  }
   let transactionStatus = SUCCESS;
   let transactionId = "";
   yield put(setLoadingSendTransaction(true));
