@@ -36,7 +36,7 @@ import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
-export const SendReceive = (props: Props) => {
+export const SendReceive = (props: TSendReceiveTypes) => {
   const { navigation, addUpdateAddress, currentWallet } = props;
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [address, setSendTo] = useState("");

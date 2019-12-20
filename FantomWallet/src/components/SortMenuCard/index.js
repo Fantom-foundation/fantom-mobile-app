@@ -5,13 +5,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
 
-type Props = {
-  type: string,
-  data: Array<any>,
-  index: number,
-  handleSortMenu: (any) => void,
-}
-
 /**
  * SortMenuCard: A generic component for displaying a list of sort menu.
  * type: Contains information of type of SortMenuCard.
@@ -19,7 +12,8 @@ type Props = {
  * index: Contains number value for selected value from SortMenuCard.
  * handleSortMenu: Callback function to handle sorting opertion.
  */
-const SortMenuCard = ({ data, index = 0, handleSortMenu, type }: Props) => (
+const SortMenuCard = (props: TSortMenuCardTypes) => {
+  const { data, index = 0, handleSortMenu, type } = props;
   <View
     style={
       type === 'withDraw' ? styles.listContainerStyle : styles.altListContainerStyle
@@ -53,6 +47,6 @@ const SortMenuCard = ({ data, index = 0, handleSortMenu, type }: Props) => (
       />
     </View>
   </View>
-);
+};
 
 export default SortMenuCard;

@@ -5,14 +5,8 @@ import DropdownAlert from 'react-native-dropdownalert';
 
 import { setDopdownAlert as setDopdownAlertAction } from '~/redux/notification/actions';
 
-type Props = {
-  type: string,
-  text: string | false,
-  style: { [string]: string },
-  setDopdownAlert: (string, false) => void
-}
-
-const DropdownNotification = ({ type, text, style = {}, setDopdownAlert }: Props) => {
+const DropdownNotification = (props: TDropDownNotificationTypes) => {
+  const { type, text, style = {}, setDopdownAlert } = props;
   const _dropdown: any = useRef(null);
   const close = () => setDopdownAlert('', false);
   useEffect(() => {
@@ -29,10 +23,13 @@ const DropdownNotification = ({ type, text, style = {}, setDopdownAlert }: Props
   );
 };
 
-export default connect(state => ({
-  type: state.notification.type,
-  text: state.notification.text,
-  style: state.notification.style,
-}), ({
-  setDopdownAlert: setDopdownAlertAction,
-}))(DropdownNotification);
+export default connect(
+  state => ({
+    type: state.notification.type,
+    text: state.notification.text,
+    style: state.notification.style
+  }),
+  {
+    setDopdownAlert: setDopdownAlertAction
+  }
+)(DropdownNotification);

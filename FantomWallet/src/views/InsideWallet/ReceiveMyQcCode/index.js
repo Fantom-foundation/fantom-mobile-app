@@ -23,13 +23,25 @@ const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette them
 export default class ReceiveMyQcCode extends React.Component<any, any> {
 
   onShare = async () => {
-    const publicKey = navigation.getParam("publicKey", "");
-    Share.share({
-      message: publicKey.toString()
-    })
-      .then(result => console.log(result))
-      .catch(errorMsg => console.log(errorMsg));
-  };
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
   render() {
 
     const { navigation } = this.props;

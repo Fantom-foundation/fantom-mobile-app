@@ -54,6 +54,11 @@ const cardStyles = StyleSheet.create({
     position: "absolute",
     justifyContent: "center",
     borderWidth: 3
+  },
+  gridIcon:{
+    top: getHeight(6),
+    justifyContent: "center",
+    alignSelf: "center"
   }
 });
 

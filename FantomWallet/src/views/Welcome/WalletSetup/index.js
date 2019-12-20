@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Text,
   View,
@@ -10,16 +10,13 @@ import {
 import styles from "./styles";
 import {FantomLogo} from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
-class WalletSetup extends Component {
-  onCreateNewWallet = () => {
-    //this.props.navigation.navigate("BackupWallet");
+const WalletSetup =(props)=> {
+  const onCreateNewWallet = () => {
     NavigationService.navigate(routes.root.BackupWallet);
   };
-  onRestoreWallet = () => {
-    this.props.navigation.navigate("RecoverWallet");
+  const onRestoreWallet = () => {
+    NavigationService.navigate(routes.root.RecoverWallet);
   };
-
-  render() {
     return (
       <ImageBackground
         style={styles.imageBackground}
@@ -40,19 +37,18 @@ class WalletSetup extends Component {
           </View>
           <TouchableOpacity
             style={styles.walletSetup}
-            onPress={this.onCreateNewWallet.bind(this)}
+            onPress={onCreateNewWallet()}
           >
             <Text style={styles.walletSetupText}>CREATE A NEW WALLET</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.recoverWalletStyle}
-            onPress={this.onRestoreWallet.bind(this)}
+            onPress={onRestoreWallet()}
           >
             <Text style={styles.footerText1}>I already have a wallet</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
     );
-  }
 }
 export default WalletSetup;

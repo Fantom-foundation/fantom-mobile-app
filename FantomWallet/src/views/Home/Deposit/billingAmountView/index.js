@@ -3,22 +3,16 @@ import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import styles from './styles';
 
-type Props = {
-  headerText: string,
-  onAmountChange: string => void,
-  onTextFieldFocus: () => void,
-  onTextFieldBlur: () => void,
-};
-
 /**
  * BillingAmountScreen: This component is meant for handling tasks related to billing on deposit screen.
  */
-const BillingAmountScreen = ({
-  headerText,
-  onAmountChange,
-  onTextFieldFocus = () => { },
-  onTextFieldBlur = () => { },
-}: Props) => {
+const BillingAmountScreen = (props:TBillingAmountViewTypes ) => {
+  const {
+    headerText,
+    onAmountChange,
+    onTextFieldFocus = () => { },
+    onTextFieldBlur = () => { },
+  }=props
   const [amount, setAmount] = useState('0');
 
   const _onAmountChange = _amount => {

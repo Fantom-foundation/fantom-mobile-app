@@ -11,9 +11,8 @@ import styles from './styles';
 import { CrossIcon, RightArrowIcon } from '../../../images';
 import { NavigationService,routes } from "~/navigation/helpers";
 
-class AddWallet extends Component {
-  render() {
-    const { navigation } = this.props;
+const AddWallet = (props)=>{
+    const { navigation } = props;
     return (
       <View style={styles.mainView}>
         <SafeAreaView style={styles.mainView}>
@@ -62,7 +61,6 @@ class AddWallet extends Component {
         </SafeAreaView>
       </View>
     );
-  }
 }
 
 export default AddWallet;

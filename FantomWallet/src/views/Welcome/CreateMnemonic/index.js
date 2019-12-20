@@ -26,17 +26,14 @@ import Button from "~/components/general/Button";
 import ProgressBar from "~/components/general/ProgressBar";
 import { Metrics } from "../../../utils/pixelResolver";
 
-type Props = {
-  setDopdownAlert: (string, string) => void,
-  setReduxMnemonic: ({ mnemonic: string }) => void
-};
 /**
  * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
  */
-export const CreateMnemonicContainer = ({
-  setReduxMnemonic,
-  setDopdownAlert
-}: Props) => {
+export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
+  const {
+    setReduxMnemonic,
+    setDopdownAlert
+  } = props;
   const [mnemonic, setMnemonic] = useState<string>("");
 
   const loading = !mnemonic.length;

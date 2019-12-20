@@ -6,16 +6,13 @@ import Header from '~/components/Header';
 import styles from './styles';
 import crossButton from '~/images/crossButtonWhite.png';
 
-type Props = {
-  navigation: {
-    goBack: () => void,
-  },
-};
+
 
 /**
  * TermsConditions :  This component is meant for displaying legal requirements of the application.
  */
-const TermsConditions = ({ navigation }: Props) => {
+const TermsConditions = (props: TTermsConditionsTypes) => {
+  const { navigation } = props;
   const [visible, setVisible] = useState(true);
   const uri = 'http://fantom.foundation';
 

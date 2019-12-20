@@ -11,57 +11,35 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
 
-type Props = {
-  text?: string,
-  headerStyle?: ViewStyleProp,
-  textStyle?: TextStyleProp,
-  activeOpacity?: 0 | 1,
-  fantomIcon?: string,
-  isShowSecondaryButtonIcon?: string,
-  onSecondaryIconPress?: () => void,
-  secondaryButtonIcon?: string,
-  isShowLeftButtonIcon?: string,
-  onLeftIconPress?: () => void,
-  leftButtonStyle?: ViewStyleProp,
-  leftButtonIcon?: string,
-  leftIconSize?: number,
-  leftIconColor?: string,
-  onRightIconPress?: () => void,
-  isShowRightButtonIcon?: string,
-  isRightBtnImage?: boolean,
-  rightButtonIcon?: string,
-  rightButtonStyle?: ViewStyleProp,
-  rightIconSize?: number,
-  rightIconColor?: string,
-  rightImageStyling?: ImageStyleProp,
-};
 /**
  * Header : This component is meant for rendering Header Bar on any screen.
  */
-const Header = ({
-  text,
-  leftButtonIcon,
-  leftIconSize,
-  leftIconColor = '',
-  isShowLeftButtonIcon,
-  headerStyle,
-  textStyle,
-  activeOpacity,
-  leftButtonStyle,
-  secondaryButtonIcon,
-  isShowSecondaryButtonIcon,
-  fantomIcon,
-  isRightBtnImage,
-  onLeftIconPress,
-  onSecondaryIconPress,
-  onRightIconPress,
-  rightButtonIcon,
-  rightButtonStyle = {},
-  isShowRightButtonIcon,
-  rightIconSize,
-  rightIconColor = '',
-  rightImageStyling,
-}: Props) => (
+const Header = (props: THeaderTypes) => {
+  const {
+    text,
+    leftButtonIcon,
+    leftIconSize,
+    leftIconColor = '',
+    isShowLeftButtonIcon,
+    headerStyle,
+    textStyle,
+    activeOpacity,
+    leftButtonStyle,
+    secondaryButtonIcon,
+    isShowSecondaryButtonIcon,
+    fantomIcon,
+    isRightBtnImage,
+    onLeftIconPress,
+    onSecondaryIconPress,
+    onRightIconPress,
+    rightButtonIcon,
+    rightButtonStyle = {},
+    isShowRightButtonIcon,
+    rightIconSize,
+    rightIconColor = '',
+    rightImageStyling,
+  }=props
+  return (
     <View style={[styles.headerStyle, headerStyle]}>
       <View style={styles.mainViewStyle}>
         <View style={styles.headerIconTextStyle}>
@@ -128,5 +106,5 @@ const Header = ({
       </View>
     </View>
   );
-
+}
 export default Header;

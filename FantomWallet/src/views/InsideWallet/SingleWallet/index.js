@@ -62,7 +62,7 @@ let activity = [
     type: 'Send'
   }
 ];
-const SingleWallet = props => {
+const SingleWallet = () => {
   const [walletTitle, setWalletTitle] = useState('My Fantom Wallet');
   const [textColor, setTextColor] = useState(Colors.white);
   const [showReceiveModal, setShowReceiveModal] = useState(false);

@@ -16,38 +16,25 @@ import PendingAuthorizationView from './AuthorizedView/PendingAuthorizationView'
 
 import styles from './styles';
 
-type Props = {
-  onRead: (any) => void,
-  reactivate?: boolean,
-  reactivateTimeout?: number,
-  fadeIn?: boolean,
-  showMarker?: boolean,
-  cameraType?: 'front' | 'back',
-  customMarker?: any,
-  containerStyle?: any,
-  cameraStyle?: any,
-  permissionDialogTitle?: string,
-  permissionDialogMessage?: string,
-  checkAndroid6Permissions?: boolean,
-}
 
 const PERMISSION_AUTHORIZED = 'authorized';
 const CAMERA_PERMISSION = 'camera';
 
-const QRCodeScanner = ({
-  onRead,
-  reactivate = false,
-  reactivateTimeout = 0,
-  fadeIn = true,
-  showMarker = false,
-  cameraType = 'back',
-  permissionDialogTitle = 'Info',
-  permissionDialogMessage = 'Need camera permission',
-  checkAndroid6Permissions,
-  customMarker,
-  containerStyle,
-  cameraStyle,
-}: Props, ref) => {
+const QRCodeScanner = (props: TQrCodeScannerTypes, ref) => {
+  const {
+    onRead,
+    reactivate = false,
+    reactivateTimeout = 0,
+    fadeIn = true,
+    showMarker = false,
+    cameraType = 'back',
+    permissionDialogTitle = 'Info',
+    permissionDialogMessage = 'Need camera permission',
+    checkAndroid6Permissions,
+    customMarker,
+    containerStyle,
+    cameraStyle,
+  }=props
   const fadeInOpacity = new Animated.Value(0);
   const [scanning, setScanning] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);

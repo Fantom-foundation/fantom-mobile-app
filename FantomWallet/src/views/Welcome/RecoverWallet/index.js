@@ -19,15 +19,6 @@ import { generateWalletUsingPrivateKey as generateWalletUsingPrivateKeyAction } 
 import styles from "./styles";
 import HeaderView from "./components/header";
 
-type Props = {
-  generateWallet: ({ mnemonic: string }) => void,
-  generateWalletUsingPrivateKey: ({ privateKey: string }) => void,
-  navigation: {
-    navigate: string => void,
-    goBack: () => void
-  }
-};
-
 const getErrorView = (text, dismiss) => {
   return (
     <View style={styles.errorView}>
@@ -41,11 +32,12 @@ const getErrorView = (text, dismiss) => {
   );
 };
 
-export const RecoverWalletContainer = ({
-  generateWallet,
-  navigation,
-  generateWalletUsingPrivateKey
-}: Props) => {
+export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
+  const {
+    generateWallet,
+    navigation,
+    generateWalletUsingPrivateKey
+  } = props;
   const [mnemonic, setMnemonic] = useState("");
   const [privateKey, setPrivateKey] = useState("");
   const [errorType, setErrorType] = useState("");

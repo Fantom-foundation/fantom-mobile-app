@@ -21,7 +21,7 @@ import { getWidth, Metrics, getHeight } from "../../utils/pixelResolver";
 import Button from "../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
 
-const WalletInfo = props => {
+const WalletInfo = (props:TWalletInfoTypes) => {
   const { navigation, setWalletName, setDopdownAlert } = props;
   const publicKey = navigation.getParam("publicKey", "");
   const [renameIconPressed, setRenameIconPressed] = useState(false);
