@@ -35,6 +35,7 @@ const SendFTM = (props: Props) => {
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation } = props;
   const publicKey = navigation.getParam("publicKey", "");
+  // console.log('****Public key is',publicKey)
   // state = {
   //   unit: "FTM", //FTM, BNB, ETA
   //   toId: "", // Use 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2

@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   Keyboard,
   Clipboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import Button from "../../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
-
+import WalletUtils from "../../../utils/wallet";
 import { generateWallet as generateWalletAction } from "~/redux/keys/actions";
 import { generateWalletUsingPrivateKey as generateWalletUsingPrivateKeyAction } from "~/redux/keys/actions";
 
@@ -80,10 +81,22 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   };
 
   const handleRecoverWalletUsingPrivateKey = () => {
-    generateWalletUsingPrivateKey({
-      privateKey,
-      cb: () => NavigationService.navigate(routes.root.WalletImported)
-    });
+    if (privateKey) {
+      const address = WalletUtils.restoreWallet(privateKey);
+
+      if (address && address.address) {
+        generateWalletUsingPrivateKey({
+          privateKey,
+          publicKey: address.address,
+          cb: () =>
+            NavigationService.navigate(routes.root.WalletImported, {
+              publicKey: address.address
+            })
+        });
+      }
+    } else {
+      Alert.alert("Warning", "Please enter the Private Key");
+    }
   };
 
   const changeMnemonic = text => {
