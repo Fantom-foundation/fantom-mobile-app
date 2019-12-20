@@ -219,7 +219,7 @@ const SendFTM = (props: Props) => {
 
 const mapStateToProps = state => ({
   isLoading: state.wallet.sendTransactionIsLoading,
-  balance: state.wallet.balance
+  currentWallet: state.wallet.currentWallet
 });
 
 const mapDispatchToProps = {
