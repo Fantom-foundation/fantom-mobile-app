@@ -46,7 +46,10 @@ export default StyleSheet.create({
     alignItems: "center",
     marginVertical: getHeight(18)
   },
-  flexDirectionRow: { flexDirection: "row" },
+  flexDirectionRow: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
   toText: {
     color: Colors.royalBlue,
     fontFamily: fonts.WorkSansSemiBold,
@@ -56,7 +59,9 @@ export default StyleSheet.create({
     color: Colors.textBlack,
     fontFamily: fonts.WorkSansRegular,
     fontSize: FontSize.small,
-    marginLeft: 5
+    marginLeft: 5,
+    width: getWidth(190),
+    marginTop: -4
   },
   buttonStyle: {
     height: null,
@@ -81,9 +86,12 @@ export default StyleSheet.create({
     fontSize: FontSize.massive * 2,
     color: Colors.textBlack,
     flex: 1,
+    paddingLeft: getWidth(25),
     flexWrap: "wrap",
+    textAlign: "center",
+    marginTop: getHeight(44),
 
-    textAlign: "center"
+    alignSelf: "center"
   },
   unit: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -91,13 +99,14 @@ export default StyleSheet.create({
     alignSelf: "flex-end",
     paddingBottom: getHeight(20)
   },
+
   amount: {
     fontFamily: fonts.MuliBold,
     fontSize: FontSize.mediumSmall,
     alignSelf: "center",
     color: Colors.textBlack,
     opacity: 0.5,
-    marginBottom: getHeight(66)
+    marginBottom: getHeight(44)
   },
   centerContent: {
     alignItems: "center",
