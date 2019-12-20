@@ -30,10 +30,12 @@ export const generateWallet = ({ mnemonic, cb }: MnemonicT) => ({
 export const generateWalletUsingPrivateKey = ({
   privateKey,
   cb
-}: MnemonicT) => ({
-  type: types.GENERATE_WALLET_USING_PRIVATE_KEY,
-  payload: { privateKey, cb }
-});
+}: MnemonicT) => {
+  return {
+    type: types.GENERATE_WALLET_USING_PRIVATE_KEY,
+    payload: { privateKey, cb }
+  };
+};
 
 export const setMnemonic = ({ mnemonic }: MnemonicT) => ({
   type: types.SET_MNEMONIC,
