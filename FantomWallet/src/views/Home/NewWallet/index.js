@@ -81,7 +81,7 @@ class Wallet extends Component {
     } = this.state;
 
     const { isLoading, wallets, walletsData, setCurrentWallet } = this.props;
-
+    console.log("all walllets", walletsData, wallets);
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={{ flex: 1 }}>

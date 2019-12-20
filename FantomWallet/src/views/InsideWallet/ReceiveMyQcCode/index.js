@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   TouchableOpacity,
   Text,
@@ -6,25 +6,25 @@ import {
   SafeAreaView,
   StatusBar,
   Share
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, getWidth, Metrics } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
-import styles from './styles';
-import QRCode from 'react-native-qrcode';
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, getWidth, Metrics } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Entypo from "react-native-vector-icons/Entypo";
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
+import styles from "./styles";
+import QRCode from "react-native-qrcode";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
-const ReceiveMyQcCode = () => {
+const ReceiveMyQcCode = props => {
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React'
+          "React Native | A framework for building native apps using React"
       });
 
       if (result.action === Share.sharedAction) {
@@ -40,8 +40,8 @@ const ReceiveMyQcCode = () => {
       alert(error.message);
     }
   };
-  const { navigation } = this.props;
-  const publicKey = navigation.getParam('publicKey', '');
+  const { navigation } = props;
+  const publicKey = navigation.getParam("publicKey", "");
   return (
     <View
       style={{
@@ -52,13 +52,13 @@ const ReceiveMyQcCode = () => {
       <StatusBar
         barStyle={
           colorTheme === Colors.royalBlue ||
-          colorTheme === '#8959DD' ||
-          colorTheme === '#A650A6' ||
-          colorTheme === '#4649FD' ||
-          colorTheme === '#E32C2C' ||
-          colorTheme === '#5F5F7C'
-            ? 'light-content'
-            : 'dark-content'
+          colorTheme === "#8959DD" ||
+          colorTheme === "#A650A6" ||
+          colorTheme === "#4649FD" ||
+          colorTheme === "#E32C2C" ||
+          colorTheme === "#5F5F7C"
+            ? "light-content"
+            : "dark-content"
         }
       />
       <SafeAreaView
