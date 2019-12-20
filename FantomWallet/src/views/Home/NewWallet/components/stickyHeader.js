@@ -1,14 +1,20 @@
 import React from "react";
-import { View, Text, ImageBackground } from "react-native";
+import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import CardImage from "../../../../images/fantomWhiteIcon.png";
+import { NavigationService, routes } from "~/navigation/helpers";
 
-
-
-const StickyHeader = ({data}) => {
+const StickyHeader = ({ data, setCurrentWallet }) => {
   const { name, balance } = data;
+  const handleCardClick = () => {
+    setCurrentWallet(data);
+    NavigationService.navigate(routes.HomeScreen.Wallet);
+  };
   return (
-    <View style={styles.stickyHeaderStyle}>
+    <TouchableOpacity
+      onPress={() => handleCardClick()}
+      style={styles.stickyHeaderStyle}
+    >
       <View
         style={{
           flexDirection: "row",
@@ -26,7 +32,7 @@ const StickyHeader = ({data}) => {
         style={styles.stickyHeaderImageStyle}
         source={CardImage}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 export default StickyHeader;

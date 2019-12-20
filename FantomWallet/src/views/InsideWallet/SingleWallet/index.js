@@ -140,7 +140,9 @@ const SingleWallet = props => {
                 activeOpacity={0.5}
                 text="Receive"
                 onPress={() =>
-                  NavigationService.navigate(routes.root.ReceiveMyQcCode)
+                  NavigationService.navigate(routes.root.ReceiveMyQcCode, {
+                    publicKey: currentWallet.publicKey
+                  })
                 }
                 buttonStyle={{
                   backgroundColor: hexToRGB(colorTheme, 0.1),
@@ -153,7 +155,9 @@ const SingleWallet = props => {
                 text="Send"
                 onPress={() => {
                   readFromClipboard();
-                  NavigationService.navigate(routes.root.SendFTM);
+                  NavigationService.navigate(routes.root.SendFTM, {
+                    publicKey: currentWallet.publicKey
+                  });
                 }}
                 buttonStyle={{
                   backgroundColor: hexToRGB(colorTheme, 0.1),
