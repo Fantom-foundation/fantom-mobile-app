@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   TouchableOpacity,
   Text,
@@ -50,6 +50,8 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
     Clipboard.setString(publicKey);
     setDopdownAlert('custom', 'COPIED');
   }
+  const { navigation } = props;
+  const publicKey = navigation.getParam("publicKey", "");
   return (
     <View
       style={{
@@ -60,13 +62,13 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
       <StatusBar
         barStyle={
           colorTheme === Colors.royalBlue ||
-          colorTheme === '#8959DD' ||
-          colorTheme === '#A650A6' ||
-          colorTheme === '#4649FD' ||
-          colorTheme === '#E32C2C' ||
-          colorTheme === '#5F5F7C'
-            ? 'light-content'
-            : 'dark-content'
+          colorTheme === "#8959DD" ||
+          colorTheme === "#A650A6" ||
+          colorTheme === "#4649FD" ||
+          colorTheme === "#E32C2C" ||
+          colorTheme === "#5F5F7C"
+            ? "light-content"
+            : "dark-content"
         }
       />
       <SafeAreaView

@@ -25,10 +25,8 @@ const KeyReducer = (state: KeyStateT = initialState, action: Action) => {
   switch (action.type) {
     case types.SET_KEYS:
       let oldWallets = state.wallets || [];
-      const { privateKey } = action.payload;
-      const index = oldWallets.findIndex(
-        item => item.privateKey === privateKey
-      );
+      const { publicKey } = action.payload;
+      const index = oldWallets.findIndex(item => item.publicKey === publicKey);
 
       if (index > -1) {
         oldWallets.splice(index, 1, action.payload);
