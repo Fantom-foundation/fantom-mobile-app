@@ -1,24 +1,31 @@
 // @flow
-import { takeLatest, put, select } from 'redux-saga/effects';
-import Web3 from 'web3';
+import { takeLatest, put, select } from "redux-saga/effects";
+import Web3 from "web3";
 
-import { types, setBalance } from '../actions';
-import { setDopdownAlert } from '~/redux/notification/actions';
-import Web3Agent from '~/services/api/web3';
-import { scientificToDecimal } from '../../../utils/converts';
+import { types, setBalance } from "../actions";
+import { setDopdownAlert } from "~/redux/notification/actions";
+import Web3Agent from "~/services/api/web3";
+import { scientificToDecimal } from "../../../utils/converts";
 
 export function* getBalance(): any {
   try {
-    const { publicKey } = yield select(({ keys }) => keys);
+    const { walletsData } = yield select(({ keys, walletsData }) => {
+      keys, walletsData;
+    });
+    if (walletsData && walletsData.length > 0) {
+      for (let i = 0; i < walletsData.length; i++) {
+        const wallet = walletsData[i];
+        const { publicKey, name } = wallet;
+        const response = yield Web3Agent.Fantom.getBalance(publicKey);
+        const balanceWei = scientificToDecimal(response);
+        const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
 
-    const response = yield Web3Agent.Fantom.getBalance(publicKey);
-    const balanceWei = scientificToDecimal(response);
-    const balance = Web3.utils.fromWei(`${balanceWei}`, 'ether');
-
-    yield put(setBalance({ balance, loading: false }));
+        yield put(setBalance({ name, publicKey, balance, loading: false }));
+      }
+    }
   } catch (e) {
-    yield put(setDopdownAlert('error', e.message));
-    yield put(setBalance({ balance: '0', loading: false }));
+    yield put(setDopdownAlert("error", e.message));
+    // yield put(setBalance({ publicKey, balance: "0", loading: false }));
   }
 }
 

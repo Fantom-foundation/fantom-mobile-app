@@ -1,16 +1,16 @@
 // @flow
-import React, { useEffect } from 'react';
-import { View, Image } from 'react-native';
-import { connect } from 'react-redux';
+import React, { useEffect } from "react";
+import { View, Image } from "react-native";
+import { connect } from "react-redux";
 
 import {
   getBalance as getBalanceAction,
-  getHistory as getHistoryAction,
-} from '~/redux/wallet/actions';
-import styles from './styles';
+  getHistory as getHistoryAction
+} from "~/redux/wallet/actions";
+import styles from "./styles";
 // components
-import WalletViewInfo from './walletViewInfo';
-import BackgroundImage from '~/images/BackgroundIcon.png';
+import WalletViewInfo from "./walletViewInfo";
+import BackgroundImage from "~/images/BackgroundIcon.png";
 
 type Props = {
   balance: string,
@@ -20,8 +20,8 @@ type Props = {
   getBalance: ({ loading: boolean }) => void,
   getHistory: () => void,
   navigation: {
-    navigate: string => void,
-  },
+    navigate: string => void
+  }
 };
 
 /**
@@ -33,7 +33,7 @@ export const Wallet = ({
   history,
   getBalance,
   getHistory,
-  isLoading,
+  isLoading
 }: Props) => {
   const getData = (loading: boolean = false) => {
     if (publicKey && !isLoading) {
@@ -49,7 +49,11 @@ export const Wallet = ({
 
   return (
     <View style={styles.walletScreenStyle}>
-      <Image style={styles.backgroundImgStyle} source={BackgroundImage} resizeMode="contain" />
+      <Image
+        style={styles.backgroundImgStyle}
+        source={BackgroundImage}
+        resizeMode="contain"
+      />
       <WalletViewInfo
         transactionData={history}
         balance={balance}
@@ -65,15 +69,12 @@ const mapStateToProps = state => ({
   publicKey: state.keys.publicKey,
   balance: state.wallet.balance,
   isLoading: state.wallet.loading,
-  history: state.wallet.history,
+  history: state.wallet.history
 });
 
 const mapDispatchToProps = {
   getBalance: getBalanceAction,
-  getHistory: getHistoryAction,
+  getHistory: getHistoryAction
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
