@@ -50,8 +50,6 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
     Clipboard.setString(publicKey);
     setDopdownAlert('custom', 'COPIED');
   }
-  const { navigation } = props;
-  const publicKey = navigation.getParam("publicKey", "");
   return (
     <View
       style={{
