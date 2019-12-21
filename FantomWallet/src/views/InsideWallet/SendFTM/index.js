@@ -26,11 +26,13 @@ import { connect } from "react-redux";
 import { addUpdateTimestampAddress } from "../../../redux/addressBook/actions";
 import { sendTransaction as sendTransactionAction } from "../../../redux/wallet/actions";
 import { estimationMaxFantomBalance, toFixed } from "../../../utils/converts";
+import { Loader } from "../../../components/loader";
 
 const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
 
 const SendFTM = (props: Props) => {
   const [toId, setToId] = useState("");
+  const [loader, setLoader] = useState(false);
   const [amountText, setAmountText] = useState("");
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation } = props;
@@ -73,11 +75,14 @@ const SendFTM = (props: Props) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
+    setLoader(true);
     const { sendTransaction } = props;
 
     if (Number(amountText) === 0) {
+      setLoader(false);
       Alert.alert("Error", "Please enter valid amount");
     } else if (currentWallet.balance < amountText) {
+      setLoader(false);
       Alert.alert("Error", "Insufficient balance");
     } else {
       let message = "";
@@ -86,7 +91,10 @@ const SendFTM = (props: Props) => {
         message = "Please enter valid address.";
       else if (amountText === "") message = "Please enter valid amount";
 
-      if (message !== "") Alert.alert("Error", message);
+      if (message !== "") {
+        setLoader(false);
+        Alert.alert("Error", message);
+      }
       if (toId && Web3.utils.isAddress(toId) && amountText) {
         //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
         // if (amountText === 0 || amountText > maxFantomBalance) {
@@ -99,6 +107,7 @@ const SendFTM = (props: Props) => {
         //     cbSuccess: alertSuccessfulButtonPressed
         //   });
         // }
+        setLoader(false);
         console.log("trass", {
           to: toId,
           value: amountText,
@@ -132,6 +141,7 @@ const SendFTM = (props: Props) => {
         translucent
       />
       <SafeAreaView style={styles.safeAreaView}>
+        {loader && <Loader />}
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.buttonsWrapper}>
             <View style={styles.buttonContainer}>
