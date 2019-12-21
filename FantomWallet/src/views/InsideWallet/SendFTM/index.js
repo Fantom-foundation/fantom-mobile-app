@@ -34,16 +34,14 @@ const SendFTM = (props: Props) => {
   const [amountText, setAmountText] = useState("");
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation } = props;
-  const publicKey = navigation.getParam("publicKey", "");
-  // console.log('****Public key is',publicKey)
-  // state = {
-  //   unit: "FTM", //FTM, BNB, ETA
-  //   toId: "", // Use 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
-  //   memoId: "",
-  //   amountText: "",
-  //   amount: 27.46
-  // };
-  //formating Number
+
+  useEffect(() => {
+    const setPublicKey = props.navigation.getParam("publicKey");
+    if (setPublicKey) {
+      setToId(setPublicKey);
+    }
+  }, [navigation.state.params]);
+
   const formatNumber = num => {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
@@ -177,7 +175,7 @@ const SendFTM = (props: Props) => {
                   <TouchableOpacity
                     onPress={() =>
                       NavigationService.navigate(routes.root.ScanQR, {
-                        publicKey
+                        routes: "SendFTM"
                       })
                     }
                   >

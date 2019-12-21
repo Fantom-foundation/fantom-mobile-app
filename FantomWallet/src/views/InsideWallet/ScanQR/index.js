@@ -32,14 +32,15 @@ let options = {
     path: "images"
   }
 };
-const ScanQR = () => {
+const ScanQR = props => {
   const [torch, setTorch] = useState(false);
   const [barcodeCodes, setbarCodes] = useState([]);
   const [qrImage, setqrImage] = useState("");
   let camera = createRef(null);
+  let isBarcodeRead = false;
   const openGallery = () => {
     ImagePicker.launchImageLibrary(options, response => {
-      console.log("Response = ", response);
+      const routes = props.navigation.getParam("routes");
 
       if (response.didCancel) {
         console.log("User cancelled image picker");
@@ -55,7 +56,13 @@ const ScanQR = () => {
               let copybarCodes = barcodeCodes.slice();
               copybarCodes.push(data);
               setbarCodes(copybarCodes);
-              Alert.alert("Correct", "A Valid QrCode");
+              if (routes) {
+                props.navigation.navigate(routes, {
+                  publicKey: data
+                });
+              } else {
+                NavigationService.pop();
+              }
             })
             .catch(err => {
               Alert.alert("Error", "Not a Valid QrCode");
@@ -65,24 +72,34 @@ const ScanQR = () => {
     });
   };
 
-  async function onBarCodeRead(scanResult) {
-    let copybarCodes = barcodeCodes.slice();
-    if (scanResult.data != null) {
-      if (camera) {
-        const options = { quality: 1, base64: true };
-        const data = await camera.takePictureAsync(options);
-        if (data && data.uri) {
-          copybarCodes.push(scanResult.data);
-          setbarCodes(copybarCodes);
-          setqrImage(data.uri);
+  const onBarCodeRead = async scanResult => {
+    const routes = props.navigation.getParam("routes");
+    if (!isBarcodeRead) {
+      isBarcodeRead = true;
+      let copybarCodes = barcodeCodes.slice();
+      if (scanResult.data !== null) {
+        if (camera) {
+          const options = { quality: 1, base64: true };
+          const data = await camera.takePictureAsync(options);
+          if (data && data.uri) {
+            copybarCodes.push({ scanResult: scanResult.data });
 
-          NavigationService.pop();
+            setbarCodes(copybarCodes);
+            setqrImage(data.uri);
+            if (routes) {
+              props.navigation.navigate(routes, {
+                publicKey: scanResult.data
+              });
+            } else {
+              NavigationService.pop();
+            }
+          }
         }
       }
     }
 
     return;
-  }
+  };
 
   return (
     <View style={styles.containerStyle}>
