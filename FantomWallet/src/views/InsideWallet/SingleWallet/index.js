@@ -90,7 +90,6 @@ const SingleWallet = props => {
     await Clipboard.getString()
       .then(clipBoardText => {
         setClipboardText(clipBoardText);
-        // console.log('****Text is',clipBoardText)
       })
       .catch(err => console.error("error: " + err));
   };
@@ -207,7 +206,7 @@ const SingleWallet = props => {
               />
             </View>
             <View style={styles.activityListWrapper}>
-              {history.length > 0 && (
+              {history && history.length > 0 && (
                 <Text style={styles.activityText}>ACTIVITY</Text>
               )}
               <View style={styles.activityListView}>

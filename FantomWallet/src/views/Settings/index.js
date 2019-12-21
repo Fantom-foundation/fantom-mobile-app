@@ -66,13 +66,13 @@ const settingData = [
     darkToggleButton: false,
     to: 'ManageWallet'
   },
-  {
-    text: 'Dark Mode',
-    rightArrowIcon: '',
-    source: MoonIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: true
-  },
+  // {
+  //   text: 'Dark Mode',
+  //   rightArrowIcon: '',
+  //   source: MoonIcon,
+  //   notificationsToggleButton: false,
+  //   darkToggleButton: true
+  // },
   // {
   //   text: 'Privacy and security',
   //   rightArrowIcon: RightArrowIcon,
@@ -81,13 +81,13 @@ const settingData = [
   //   darkToggleButton: false,
   //   to: 'PrivacyAndSecurity'
   // },
-  {
-    text: 'Push notifications',
-    rightArrowIcon: '',
-    source: NotificationIcon,
-    notificationsToggleButton: true,
-    darkToggleButton: false
-  },
+  // {
+  //   text: 'Push notifications',
+  //   rightArrowIcon: '',
+  //   source: NotificationIcon,
+  //   notificationsToggleButton: true,
+  //   darkToggleButton: false
+  // },
   // {
   //   text: 'Currency',
   //   rightArrowIcon: RightArrowIcon,

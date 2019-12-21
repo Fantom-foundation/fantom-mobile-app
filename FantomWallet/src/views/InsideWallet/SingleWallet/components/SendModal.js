@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { TouchableOpacity, Text, View } from "react-native";
-import { Colors } from "~/theme";
-import { getHeight, Metrics } from "~/utils/pixelResolver";
-import { NavigationService, routes } from "~/navigation/helpers";
-import Entypo from "react-native-vector-icons/Entypo";
-import styles from "../styles";
+import React, { useState } from 'react';
+import { TouchableOpacity, Text, View } from 'react-native';
+import { Colors } from '~/theme';
+import { getHeight, Metrics } from '~/utils/pixelResolver';
+import { NavigationService, routes } from '~/navigation/helpers';
+import Entypo from 'react-native-vector-icons/Entypo';
+import styles from '../styles';
 
 const SendModal = props => {
   const { closeSendModal, transactionData } = props;
@@ -19,6 +19,25 @@ const SendModal = props => {
     isError,
     date
   } = transactionData;
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: publicKey
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <TouchableOpacity
       activeOpacity={1}
@@ -60,7 +79,10 @@ const SendModal = props => {
             >
               {amount}
             </Text>
-            <TouchableOpacity style={styles.shareIconWrapper}>
+            <TouchableOpacity
+              style={styles.shareIconWrapper}
+              onPress={() => onShare()}
+            >
               <Entypo
                 style={styles.shareIcon}
                 name="share"
