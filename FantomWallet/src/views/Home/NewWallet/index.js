@@ -123,6 +123,7 @@ class Wallet extends Component {
                       <ListView
                         setCurrentWallet={setCurrentWallet}
                         data={item}
+                        isHiddenText={isHiddenText}
                       />
                     );
                   }}

@@ -29,7 +29,6 @@ class Web3Agent {
 
   async getBalance(address: string = EXAMPLE_ADDRESS) {
     const res = await this.web3.eth.getBalance(address);
-    console.log(res, "hjagsdjaghajsdgh");
     return res;
   }
 

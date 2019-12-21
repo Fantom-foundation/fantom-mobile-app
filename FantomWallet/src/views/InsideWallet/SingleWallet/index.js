@@ -38,7 +38,6 @@ const SingleWallet = props => {
   const writeToClipboard = () => {
     const { currentWallet } = props;
     //To copy the text to clipboard
-    console.log(currentWallet.publicKey, "currentWallet.publicKey");
     Clipboard.setString(currentWallet.publicKey);
     alert("Copied to Clipboard!");
   };
