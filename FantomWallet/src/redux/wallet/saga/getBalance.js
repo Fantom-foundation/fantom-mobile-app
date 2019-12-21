@@ -23,7 +23,6 @@ export function* getBalance(): any {
           const response = yield Web3Agent.Fantom.getBalance(publicKey);
           const balanceWei = scientificToDecimal(response);
           const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
-          console.log("balancebalancebalancebalancebalance", balance);
           yield put(setBalance({ name, publicKey, balance, loading: false }));
         }
       }

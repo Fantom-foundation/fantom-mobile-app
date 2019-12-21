@@ -27,7 +27,7 @@ import { EyeIcon, EyeOffIcon } from "../../../images";
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
-  const { currentWallet } = props;
+  const { currentWallet, wallet, keys } = props;
   const [textColor, setTextColor] = useState(Colors.white);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
@@ -38,7 +38,6 @@ const SingleWallet = props => {
   const writeToClipboard = () => {
     const { currentWallet } = props;
     //To copy the text to clipboard
-    console.log(currentWallet.publicKey, "currentWallet.publicKey");
     Clipboard.setString(currentWallet.publicKey);
     alert("Copied to Clipboard!");
   };
@@ -95,6 +94,10 @@ const SingleWallet = props => {
   };
 
   const history = sortActivities(currentWallet.history);
+  console.log(
+    currentWallet.balance,
+    "currentWallet.balancecurrentWallet.balance"
+  );
   return (
     <View style={styles.containerStyle}>
       <StatusBar barStyle="light-content" />
@@ -194,9 +197,8 @@ const SingleWallet = props => {
                 text="Send"
                 onPress={() => {
                   readFromClipboard();
-                  NavigationService.navigate(routes.root.SendFTM, {
-                    publicKey: currentWallet.publicKey
-                  });
+                  // props.navigation.setParams()
+                  NavigationService.navigate(routes.root.SendFTM);
                 }}
                 buttonStyle={{
                   backgroundColor: hexToRGB(colorTheme, 0.1),

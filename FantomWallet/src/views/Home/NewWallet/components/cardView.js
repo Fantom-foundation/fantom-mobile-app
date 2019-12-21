@@ -1,11 +1,9 @@
 import React from "react";
-import { View, Text, ImageBackground,TouchableOpacity } from "react-native";
+import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
-import {BackLogo} from "../../../../images";
+import { BackLogo } from "../../../../images";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
-
-
 
 const CardView = ({
   showList,
@@ -15,10 +13,10 @@ const CardView = ({
   setCurrentWallet
 }) => {
   const { name, publicKey, history, balance } = data;
-  const handleCardClick=()=>{
+  const handleCardClick = () => {
     setCurrentWallet(data);
-    NavigationService.navigate(routes.HomeScreen.Wallet)
-  }
+    NavigationService.navigate(routes.HomeScreen.Wallet);
+  };
   return (
     <View style={{ justifyContent: "center" }}>
       {showCard && data && (
@@ -33,7 +31,7 @@ const CardView = ({
               {isHiddenText ? "********" : balance + " FTM"}
             </Text>
             <Text style={styles.bottomCardSubText}>
-              {isHiddenText ? "" : "$" + balance}
+              {isHiddenText ? "*******" : "$" + balance}
             </Text>
           </View>
           <ImageBackground style={styles.cardImageStyle} source={BackLogo} />

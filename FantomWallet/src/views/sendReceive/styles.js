@@ -101,11 +101,10 @@ const modalStyles = {
   },
   sendText: {
     fontSize: FontSize.base,
-    fontFamily: fonts.WorkSansSemiBold,
-    color: Colors.lightGrey
+    fontFamily: fonts.WorkSansSemiBold
   },
   toView: {
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     height: getHeight(60),
     borderBottomWidth: 1,
     borderBottomColor: Colors.borderGrey,
@@ -119,7 +118,8 @@ const modalStyles = {
     color: Colors.royalBlue
   },
   sendTo: {
-    width: getWidth(175),
+    flex: 1,
+    // width: getWidth(175),
     marginLeft: 3,
     flexWrap: "wrap",
     fontSize: FontSize.base,

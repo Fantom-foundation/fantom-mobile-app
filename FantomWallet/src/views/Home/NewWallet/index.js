@@ -68,7 +68,7 @@ class Wallet extends Component {
         totalBalance += Number(item.balance);
       });
     }
-    return totalBalance;
+    return totalBalance > 0 ? totalBalance.toFixed(2) : 0;
   };
 
   render() {
@@ -123,6 +123,7 @@ class Wallet extends Component {
                       <ListView
                         setCurrentWallet={setCurrentWallet}
                         data={item}
+                        isHiddenText={isHiddenText}
                       />
                     );
                   }}

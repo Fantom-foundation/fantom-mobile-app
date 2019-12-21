@@ -7,16 +7,16 @@ import {
   StatusBar,
   Share,
   Clipboard
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, getWidth, Metrics } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
-import styles from './styles';
-import QRCode from 'react-native-qrcode';
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, getWidth, Metrics } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Entypo from "react-native-vector-icons/Entypo";
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
+import styles from "./styles";
+import QRCode from "react-native-qrcode";
 import { connect } from "react-redux";
 import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
 
@@ -24,13 +24,13 @@ const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette them
 
 const ReceiveMyQcCode = (props: TReceiveQcCode) => {
   const { setDopdownAlert } = props;
-  const { navigation } = props;
-  const publicKey = navigation.getParam('publicKey', '');
+  const { currentWallet } = props;
+  const publicKey = currentWallet && currentWallet.publicKey;
+
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message:publicKey
-          
+        message: publicKey
       });
 
       if (result.action === Share.sharedAction) {
@@ -46,10 +46,10 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
       alert(error.message);
     }
   };
-  const copyToClipboard = (publicKey) => {
+  const copyToClipboard = publicKey => {
     Clipboard.setString(publicKey);
-    setDopdownAlert('custom', 'COPIED');
-  }
+    setDopdownAlert("custom", "COPIED");
+  };
   return (
     <View
       style={{
@@ -141,11 +141,11 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
   );
 };
 const mapStateToProps = state => ({
-  state
+  currentWallet: state.wallet.currentWallet
 });
 
 const mapDispatchToProps = {
-  setDopdownAlert: setDopdownAlertAction,
+  setDopdownAlert: setDopdownAlertAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReceiveMyQcCode);
