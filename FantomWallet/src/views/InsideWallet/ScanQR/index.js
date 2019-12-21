@@ -66,6 +66,8 @@ const ScanQR = props => {
             })
             .catch(err => {
               Alert.alert("Error", "Not a Valid QrCode");
+              setqrImage("");
+              setbarCodes("");
             });
         }
       }

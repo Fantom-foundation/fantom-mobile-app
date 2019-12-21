@@ -228,25 +228,24 @@ export const SendReceive = (props: TSendReceiveTypes) => {
               ></TextInput>
               {/* Paste Option */}
               {!address && (
-                <TouchableOpacity
-                  style={styles.pasteButton}
-                  onPress={() => readFromClipboard()}
-                >
-                  <Text style={styles.pasteText}>Paste</Text>
-                </TouchableOpacity>
-              )}
-              {/* QR Button */}
-              {!address && (
-                <TouchableOpacity
-                  onPress={() =>
-                    NavigationService.navigate(routes.root.ScanQR, {
-                      routes: "SendReceive"
-                    })
-                  }
-                  style={styles.qrButton}
-                >
-                  <Image source={QRCode} style={styles.qrSendImage} />
-                </TouchableOpacity>
+                <>
+                  <TouchableOpacity
+                    style={styles.pasteButton}
+                    onPress={() => readFromClipboard()}
+                  >
+                    <Text style={styles.pasteText}>Paste</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      NavigationService.navigate(routes.root.ScanQR, {
+                        routes: "SendReceive"
+                      })
+                    }
+                    style={styles.qrButton}
+                  >
+                    <Image source={QRCode} style={styles.qrSendImage} />
+                  </TouchableOpacity>
+                </>
               )}
             </View>
           </View>

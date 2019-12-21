@@ -153,40 +153,39 @@ const SendFTM = (props: Props) => {
 
             <View style={styles.toWrapper}>
               <View style={styles.flexDirectionRow}>
-                <View style={{ flexDirection: "row" }}>
-                  <Text style={styles.toText}>To:</Text>
-                  <TextInput
-                    multiline
-                    style={styles.toId}
-                    value={toId}
-                    onChangeText={text => setToId(text)}
-                  ></TextInput>
-                </View>
-              </View>
-              {toId === "" && (
-                <View style={styles.flexDirectionRow}>
-                  <Button
-                    activeOpacity={0.5}
-                    text="Paste"
-                    onPress={() => readFromClipboard()}
-                    buttonStyle={styles.buttonStyle}
-                    textStyle={styles.textStyle}
-                  />
-                  <TouchableOpacity
-                    onPress={() =>
-                      NavigationService.navigate(routes.root.ScanQR, {
-                        routes: "SendFTM"
-                      })
-                    }
-                  >
-                    <MaterialCommunityIcons
-                      name="qrcode-scan"
-                      size={25}
-                      color={Colors.textBlack}
+                <Text style={styles.toText}>To:</Text>
+                <TextInput
+                  multiline
+                  style={styles.toId}
+                  value={toId}
+                  onChangeText={text => setToId(text)}
+                ></TextInput>
+
+                {toId === "" && (
+                  <>
+                    <Button
+                      activeOpacity={0.5}
+                      text="Paste"
+                      onPress={() => readFromClipboard()}
+                      buttonStyle={styles.buttonStyle}
+                      textStyle={styles.textStyle}
                     />
-                  </TouchableOpacity>
-                </View>
-              )}
+                    <TouchableOpacity
+                      onPress={() =>
+                        NavigationService.navigate(routes.root.ScanQR, {
+                          routes: "SendFTM"
+                        })
+                      }
+                    >
+                      <MaterialCommunityIcons
+                        name="qrcode-scan"
+                        size={25}
+                        color={Colors.textBlack}
+                      />
+                    </TouchableOpacity>
+                  </>
+                )}
+              </View>
             </View>
             <View style={styles.horizontalRow} />
 
