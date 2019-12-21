@@ -3,6 +3,7 @@ package com.fantomwallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.reactnative.camera.RNCameraPackage;
 import com.lewin.qrcode.QRScanReaderPackage;
 import com.imagepicker.ImagePickerPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNCameraPackage(),
             new QRScanReaderPackage(),
             new ImagePickerPackage(),
             new SplashScreenReactPackage(),
@@ -50,7 +52,6 @@ public class MainApplication extends Application implements ShareApplication, Re
             new TcpSocketsModule(),
             new RNOSModule(),
             new AsyncStoragePackage(),
-            new RNCameraPackage(),
             new LinearGradientPackage(),
             new RandomBytesPackage(),
             new RNVersionCheckPackage(),
