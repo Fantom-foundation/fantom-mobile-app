@@ -11,6 +11,7 @@ import {
   StatusBar,
   FlatList,
   Switch,
+  Platform,
   Linking
 } from "react-native";
 
@@ -109,7 +110,8 @@ const settingData = [
     rightArrowIcon: RightArrowIcon,
     source: ShareIcon,
     notificationsToggleButton: false,
-    darkToggleButton: false
+    darkToggleButton: false,
+    isShareApp: true
   },
   {
     text: "About",
@@ -124,7 +126,8 @@ const settingData = [
     rightArrowIcon: RightArrowIcon,
     source: ReviewIcon,
     notificationsToggleButton: false,
-    darkToggleButton: false
+    darkToggleButton: false,
+    isShareApp: true
   }
 ];
 
@@ -133,15 +136,24 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
   const [notificationSwitchValue, setNotificationSwitchValue] = useState(false);
   const [darkSwitchValue, setDarkSwitchValue] = useState(false);
 
-  const openUrl = () => Linking.openURL("https://Fantom.foundation");
+  const openUrl = url => Linking.openURL(url);
 
   const navigateTo = item => navigation.navigate(item.to);
 
   const getFunctionToCall = item => {
     if (item) {
       if (item.to) return () => navigateTo(item);
-      if (item.isOpenUrl) return () => openUrl();
+      if (item.isOpenUrl) return () => openUrl("https://Fantom.foundation");
+      if (item.isShareApp) return () => shareTheApp();
     }
+  };
+
+  shareTheApp = () => {
+    const url =
+      Platform.OS === "android"
+        ? "https://play.google.com/store/apps/details?id=com.fantomwallet"
+        : "https://itunes.apple.com/us/app/fantom-payments-testnet/id1436694080?ls=1&mt=8";
+    openUrl(url);
   };
 
   return (

@@ -106,7 +106,10 @@ class Wallet extends Component {
               />
               <ScrollView
                 style={[
-                  { height: getHeight(500), marginHorizontal: getWidth(22) }
+                  {
+                    height: getHeight(500),
+                    marginHorizontal: getWidth(22)
+                  }
                 ]}
                 showsVerticalScrollIndicator={false}
               >

@@ -17,6 +17,7 @@ import ModalView from 'react-native-modalbox';
 import { Dropdown } from 'react-native-material-dropdown';
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 import { getHeight, getWidth } from '../../../utils/pixelResolver';
+import { connect } from 'react-redux';
 
 const walletData = [
   {
@@ -69,8 +70,9 @@ const colors = [
   '#5f5f7c'
 ];
 const ManageWallet = props => {
-
-  const { navigation } = props;
+  const { navigation, wallet } = props;
+  const { walletsData } = wallet;
+  console.log('***Current wallet', walletsData);
   const [showModal, setShowModal] = useState(false);
   const [renameModal, setRenameModal] = useState(false);
   const [isModalOpened, setIsModalOpened] = useState([]);
@@ -100,7 +102,7 @@ const ManageWallet = props => {
           <Text style={styles.headingText}>Manage wallets</Text>
         </View>
         <FlatList
-          data={walletData}
+          data={walletsData}
           bounces={false}
           extraData={[showModal, openColorPalette]}
           renderItem={({ item, index }) => {
@@ -115,15 +117,26 @@ const ManageWallet = props => {
                   <View
                     style={{
                       ...styles.circularView,
-                      backgroundColor: item.color
+                      backgroundColor: Colors.royalBlue
                     }}
                   ></View>
                   <View style={styles.centerTextView}>
-                    <Text style={styles.rowsText}>{item.text}</Text>
+                    <Text style={styles.rowsText}>{item.name}</Text>
                     <View style={styles.centerBottomText}>
-                      <Text style={styles.centerText}>{item.code}</Text>
-                      <Text style={{ ...styles.centerText, marginLeft: 10 }}>
-                        {item.id}
+                      <Text style={styles.centerText}>FTM</Text>
+                      <Text
+                        style={{
+                          ...styles.centerText,
+                          marginLeft: 20,
+                          width: getWidth(180)
+                        }}
+                      >
+                        {`${item.publicKey.substring(
+                          1,
+                          7
+                        )}... ${item.publicKey.substring(
+                          item.publicKey.length - 6
+                        )}`}
                       </Text>
                     </View>
                   </View>
@@ -262,4 +275,10 @@ const ManageWallet = props => {
   );
 };
 
-export default ManageWallet;
+const mapStateToProps = state => ({
+  wallet: state.wallet
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageWallet);
