@@ -29,11 +29,12 @@ export const generateWallet = ({ mnemonic, cb }: MnemonicT) => ({
 
 export const generateWalletUsingPrivateKey = ({
   privateKey,
+  publicKey,
   cb
 }: MnemonicT) => {
   return {
     type: types.GENERATE_WALLET_USING_PRIVATE_KEY,
-    payload: { privateKey, cb }
+    payload: { privateKey, publicKey, cb }
   };
 };
 

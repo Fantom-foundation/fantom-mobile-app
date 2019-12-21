@@ -141,7 +141,11 @@ class Wallet extends Component {
                 justifyContent: "center"
               }}
               onSnapToItem={index => {
+                const { walletsData, setCurrentWallet } = this.props;
                 this.setState({ activeSlide: index });
+                if (index > -1) {
+                  setCurrentWallet(walletsData[index]);
+                }
               }}
               activeSlideOffset={20}
               inactiveSlideScale={isScaleView}

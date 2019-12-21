@@ -32,6 +32,11 @@ class Web3Agent {
     return res;
   }
 
+  async restoreWallet(privateKey) {
+    const wallet = this.web3.eth.accounts.privateKeyToAccount(privateKey);
+    return wallet;
+  }
+
   async transfer({ from, to, value, memo, privateKey }: Transfer) {
     const nonce = await this.web3.eth.getTransactionCount(from);
     const gasPrice = await this.web3.eth.getGasPrice();

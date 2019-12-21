@@ -48,7 +48,11 @@ export default (state: Wallet = initialState, action: actionType) => {
       return {
         ...state,
         loading: action.payload.loading,
-        walletsData: oldData
+        walletsData: oldData,
+        currentWallet: {
+          ...state.currentWallet,
+          balance
+        }
       };
     }
     case types.GET_BALANCE: {
@@ -60,7 +64,11 @@ export default (state: Wallet = initialState, action: actionType) => {
     case types.SET_HISTORY: {
       return {
         ...state,
-        history: action.payload.history
+        history: action.payload.history,
+        currentWallet: {
+          ...state.currentWallet,
+          history
+        }
       };
     }
     case types.SET_LOADING_SEND: {
@@ -103,7 +111,11 @@ export default (state: Wallet = initialState, action: actionType) => {
       }
       return {
         ...state,
-        walletsData: oldData
+        walletsData: oldData,
+        currentWallet: {
+          ...state.currentWallet,
+          name
+        }
       };
     }
     case types.SET_CURRENT_WALLET:

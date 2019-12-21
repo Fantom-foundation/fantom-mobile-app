@@ -12,27 +12,36 @@ import { connect } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
-import { setWalletName as setWalletNameAction } from "~/redux/wallet/actions";
+import {
+  setWalletName as setWalletNameAction,
+  setCurrentWallet
+} from "~/redux/wallet/actions";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../theme/colors";
 import Button from "../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
 
-const WalletInfo = (props:TWalletInfoTypes) => {
-  const { navigation, setWalletName, setDopdownAlert } = props;
+const WalletInfo = (props: TWalletInfoTypes) => {
+  const {
+    navigation,
+    setWalletName,
+    setDopdownAlert,
+    setCurrentWallet,
+    walletsData
+  } = props;
   const publicKey = navigation.getParam("publicKey", "");
   const [renameIconPressed, setRenameIconPressed] = useState(false);
   const [name, setName] = useState("My Fantom Wallet");
 
-  handleContinue = () => {
+  const handleContinue = () => {
     setWalletName({ name: name || "My Fantom Wallet", publicKey });
-    
+    setCurrentWallet({ name: name || "My Fantom Wallet", publicKey });
     NavigationService.navigate(routes.root.HomeScreen);
   };
 
   const copyToClipboard = address => {
     Clipboard.setString(address);
-    setDopdownAlert('custom', 'COPIED');
+    setDopdownAlert("custom", "COPIED");
   };
 
   // const colors = [
@@ -115,17 +124,17 @@ const WalletInfo = (props:TWalletInfoTypes) => {
               onPress={() => this.setState({ modalVisible: !modalVisible })}
             >
               {/* <EvilIcons name="pencil" size={20} color={Colors.textBlack} /> */}
-              {/* <Image
+        {/* <Image
                 source={PenIcon}
                 resizeMode="contain"
                 style={styles.penIcon}
               ></Image>
             </TouchableOpacity>
-          </View> */} 
+          </View> */}
         <View style={styles.buttonContainer}>
           <Button
             buttonStyle={styles.buttonStyle}
-            onPress={() => this.handleContinue()}
+            onPress={handleContinue}
             textStyle={styles.buttonText}
             text={"CONTINUE"}
           />
@@ -166,12 +175,13 @@ const WalletInfo = (props:TWalletInfoTypes) => {
 };
 
 const mapStateToProps = state => ({
-  state
+  walletsData: state.wallet.walletsData
 });
 
 const mapDispatchToProps = {
   setDopdownAlert: setDopdownAlertAction,
-  setWalletName: setWalletNameAction
+  setWalletName: setWalletNameAction,
+  setCurrentWallet
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletInfo);

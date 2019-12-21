@@ -13,7 +13,7 @@ import {
 import { connect } from "react-redux";
 import Button from "../../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
-import WalletUtils from "../../../utils/wallet";
+import Web3Agent from "../../../services/api/web3";
 import { generateWallet as generateWalletAction } from "~/redux/keys/actions";
 import { generateWalletUsingPrivateKey as generateWalletUsingPrivateKeyAction } from "~/redux/keys/actions";
 import { Loader } from "../../../components/loader";
@@ -86,11 +86,11 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
     setMnemonic("");
   };
 
-  const handleRecoverWalletUsingPrivateKey = () => {
+  const handleRecoverWalletUsingPrivateKey = async () => {
     setIsImporting(true);
     if (privateKey) {
-      const address = WalletUtils.restoreWallet(privateKey);
-
+      // const address = WalletUtils.restoreWallet(privateKey);
+      const address = await Web3Agent.Fantom.restoreWallet(privateKey);
       if (address && address.address) {
         generateWalletUsingPrivateKey({
           privateKey,

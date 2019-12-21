@@ -1,10 +1,11 @@
 // @flow
-import { takeLatest, put } from "redux-saga/effects";
+import { takeLatest, put, select } from "redux-saga/effects";
 import Bip39 from "react-native-bip39";
 import EthUtil from "ethereumjs-util";
 import Hdkey from "hdkey";
 
 import { types, setKeys, setMnemonic } from "../actions";
+import { setCurrentWallet } from "../../wallet/actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
 
 type Action = {
@@ -24,7 +25,6 @@ export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
     const addr = yield EthUtil.publicToAddress(pubKey).toString("hex");
     const publicKey = yield EthUtil.toChecksumAddress(addr);
     const privateKey = yield EthUtil.bufferToHex(addrNode._privateKey); //eslint-disable-line
-
     yield put(setMnemonic({ mnemonic: "" }));
 
     yield put(setKeys({ masterKey, privateKey, publicKey }));
