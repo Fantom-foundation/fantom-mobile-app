@@ -9,9 +9,9 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
-	<string></string>
+	<string/>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string/>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -29,7 +29,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>
@@ -61,7 +61,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>NSHumanReadableCopyright</key>
-	<string></string>
+	<string/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Please allow access to location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -147,7 +147,7 @@
 		<string>WorkSans-SemiBoldItalic.otf</string>
 		<string>WorkSans-Thin.otf</string>
 		<string>WorkSans-ThinItalic.otf</string>
-		<string></string>
+		<string/>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

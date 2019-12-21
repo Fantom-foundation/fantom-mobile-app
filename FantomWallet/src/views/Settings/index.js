@@ -66,8 +66,15 @@ const settingData = [
     source: WalletIcon,
     notificationsToggleButton: false,
     darkToggleButton: false,
-    to: "ManageWallet"
+    to: 'ManageWallet'
   },
+  // {
+  //   text: 'Dark Mode',
+  //   rightArrowIcon: '',
+  //   source: MoonIcon,
+  //   notificationsToggleButton: false,
+  //   darkToggleButton: true
+  // },
   // {
   //   text: 'Dark Mode',
   //   rightArrowIcon: '',

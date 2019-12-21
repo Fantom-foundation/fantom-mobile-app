@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -7,17 +7,17 @@ import {
   SafeAreaView,
   Modal,
   StatusBar
-} from "react-native";
-import { Colors } from "~/theme";
-import { getHeight, Metrics } from "~/utils/pixelResolver";
-import { NavigationService, routes } from "~/navigation/helpers";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import moment from "moment";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Entypo from "react-native-vector-icons/Entypo";
-import Button from "~/components/general/Button";
-import styles from "../styles";
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
+} from 'react-native';
+import { Colors } from '~/theme';
+import { getHeight, Metrics } from '~/utils/pixelResolver';
+import { NavigationService, routes } from '~/navigation/helpers';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import moment from 'moment';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Button from '~/components/general/Button';
+import styles from '../styles';
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
 
 const ReceiveModal = props => {
   const [closeModal, setCloseModal] = useState(true);
@@ -33,6 +33,26 @@ const ReceiveModal = props => {
     isError,
     date
   } = transactionData;
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        // message:publicKey
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <TouchableOpacity
       activeOpacity={1}
@@ -68,7 +88,10 @@ const ReceiveModal = props => {
             >
               {date}
             </Text>
-            <TouchableOpacity style={styles.shareIconWrapper}>
+            <TouchableOpacity
+              style={styles.shareIconWrapper}
+              onPress={() => onShare()}
+            >
               <Entypo
                 style={styles.shareIcon}
                 name="share"

@@ -208,7 +208,7 @@ const SingleWallet = props => {
               />
             </View>
             <View style={styles.activityListWrapper}>
-              {history.length > 0 && (
+              {history && history.length > 0 && (
                 <Text style={styles.activityText}>ACTIVITY</Text>
               )}
               <View style={styles.activityListView}>
