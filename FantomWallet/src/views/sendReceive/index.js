@@ -1,6 +1,6 @@
 // @flow
 // Library
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -53,6 +53,13 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       setAmount(amount.concat(item));
     }
   };
+
+  useEffect(() => {
+    const setPublicKey = props.navigation.getParam("publicKey");
+    if (setPublicKey) {
+      setSendTo(setPublicKey);
+    }
+  }, [navigation.state.params]);
 
   const alertSuccessfulButtonPressed = () => {
     addUpdateAddress(address, "", new Date().getTime());
@@ -129,7 +136,11 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           {/* Scan Button */}
 
           <TouchableOpacity
-            onPress={() => NavigationService.navigate(routes.root.ScanQR)}
+            onPress={() =>
+              NavigationService.navigate(routes.root.ScanQR, {
+                routes: "SendReceive"
+              })
+            }
             style={styles.qrCodeButton}
           >
             <Image source={QRCode} style={styles.qrImage} />
@@ -184,11 +195,26 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
           <View style={styles.modalView}>
             <View style={styles.crossSendView}>
-              <TouchableOpacity onPress={() => setOpenModal(false)}>
+              <TouchableOpacity
+                onPress={() => {
+                  setSendTo("");
+                  setOpenModal(false);
+                }}
+              >
                 <Entypo name="cross" size={25} color={Colors.blackOpacity} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={handleSendMoney}>
-                <Text style={styles.sendText}>Send</Text>
+              <TouchableOpacity
+                onPress={handleSendMoney}
+                disabled={address ? false : true}
+              >
+                <Text
+                  style={{
+                    ...styles.sendText,
+                    color: address ? Colors.royalBlue : Colors.lightGrey
+                  }}
+                >
+                  Send
+                </Text>
               </TouchableOpacity>
             </View>
             {/* To Option */}
@@ -201,23 +227,26 @@ export const SendReceive = (props: TSendReceiveTypes) => {
                 onChangeText={text => setSendTo(text)}
               ></TextInput>
               {/* Paste Option */}
-              <TouchableOpacity
-                style={styles.pasteButton}
-                onPress={() => readFromClipboard()}
-              >
-                <Text style={styles.pasteText}>Paste</Text>
-              </TouchableOpacity>
-              {/* QR Button */}
-              <TouchableOpacity
-                onPress={() =>
-                  NavigationService.navigate(routes.root.ScanQR, {
-                    publicKey: currentWallet.publicKey
-                  })
-                }
-                style={styles.qrButton}
-              >
-                <Image source={QRCode} style={styles.qrSendImage} />
-              </TouchableOpacity>
+              {!address && (
+                <>
+                  <TouchableOpacity
+                    style={styles.pasteButton}
+                    onPress={() => readFromClipboard()}
+                  >
+                    <Text style={styles.pasteText}>Paste</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      NavigationService.navigate(routes.root.ScanQR, {
+                        routes: "SendReceive"
+                      })
+                    }
+                    style={styles.qrButton}
+                  >
+                    <Image source={QRCode} style={styles.qrSendImage} />
+                  </TouchableOpacity>
+                </>
+              )}
             </View>
           </View>
         </KeyboardAvoidingView>

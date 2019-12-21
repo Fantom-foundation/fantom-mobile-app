@@ -60,7 +60,8 @@ export default StyleSheet.create({
     fontFamily: fonts.WorkSansRegular,
     fontSize: FontSize.small,
     marginLeft: 5,
-    width: getWidth(190),
+    flex: 1,
+    // width: getWidth(190),
     marginTop: -4
   },
   buttonStyle: {

@@ -27,7 +27,7 @@ import { EyeIcon, EyeOffIcon } from "../../../images";
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
-  const { currentWallet } = props;
+  const { currentWallet, wallet, keys } = props;
   const [textColor, setTextColor] = useState(Colors.white);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
@@ -89,7 +89,6 @@ const SingleWallet = props => {
     await Clipboard.getString()
       .then(clipBoardText => {
         setClipboardText(clipBoardText);
-        // console.log('****Text is',clipBoardText)
       })
       .catch(err => console.error("error: " + err));
   };
@@ -198,9 +197,8 @@ const SingleWallet = props => {
                 text="Send"
                 onPress={() => {
                   readFromClipboard();
-                  NavigationService.navigate(routes.root.SendFTM, {
-                    publicKey: currentWallet.publicKey
-                  });
+                  // props.navigation.setParams()
+                  NavigationService.navigate(routes.root.SendFTM);
                 }}
                 buttonStyle={{
                   backgroundColor: hexToRGB(colorTheme, 0.1),

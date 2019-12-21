@@ -34,16 +34,14 @@ const SendFTM = (props: Props) => {
   const [amountText, setAmountText] = useState("");
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation } = props;
-  const publicKey = navigation.getParam("publicKey", "");
-  // console.log('****Public key is',publicKey)
-  // state = {
-  //   unit: "FTM", //FTM, BNB, ETA
-  //   toId: "", // Use 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
-  //   memoId: "",
-  //   amountText: "",
-  //   amount: 27.46
-  // };
-  //formating Number
+
+  useEffect(() => {
+    const setPublicKey = props.navigation.getParam("publicKey");
+    if (setPublicKey) {
+      setToId(setPublicKey);
+    }
+  }, [navigation.state.params]);
+
   const formatNumber = num => {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
@@ -155,40 +153,39 @@ const SendFTM = (props: Props) => {
 
             <View style={styles.toWrapper}>
               <View style={styles.flexDirectionRow}>
-                <View style={{ flexDirection: "row" }}>
-                  <Text style={styles.toText}>To:</Text>
-                  <TextInput
-                    multiline
-                    style={styles.toId}
-                    value={toId}
-                    onChangeText={text => setToId(text)}
-                  ></TextInput>
-                </View>
-              </View>
-              {toId === "" && (
-                <View style={styles.flexDirectionRow}>
-                  <Button
-                    activeOpacity={0.5}
-                    text="Paste"
-                    onPress={() => readFromClipboard()}
-                    buttonStyle={styles.buttonStyle}
-                    textStyle={styles.textStyle}
-                  />
-                  <TouchableOpacity
-                    onPress={() =>
-                      NavigationService.navigate(routes.root.ScanQR, {
-                        publicKey
-                      })
-                    }
-                  >
-                    <MaterialCommunityIcons
-                      name="qrcode-scan"
-                      size={25}
-                      color={Colors.textBlack}
+                <Text style={styles.toText}>To:</Text>
+                <TextInput
+                  multiline
+                  style={styles.toId}
+                  value={toId}
+                  onChangeText={text => setToId(text)}
+                ></TextInput>
+
+                {toId === "" && (
+                  <>
+                    <Button
+                      activeOpacity={0.5}
+                      text="Paste"
+                      onPress={() => readFromClipboard()}
+                      buttonStyle={styles.buttonStyle}
+                      textStyle={styles.textStyle}
                     />
-                  </TouchableOpacity>
-                </View>
-              )}
+                    <TouchableOpacity
+                      onPress={() =>
+                        NavigationService.navigate(routes.root.ScanQR, {
+                          routes: "SendFTM"
+                        })
+                      }
+                    >
+                      <MaterialCommunityIcons
+                        name="qrcode-scan"
+                        size={25}
+                        color={Colors.textBlack}
+                      />
+                    </TouchableOpacity>
+                  </>
+                )}
+              </View>
             </View>
             <View style={styles.horizontalRow} />
 
