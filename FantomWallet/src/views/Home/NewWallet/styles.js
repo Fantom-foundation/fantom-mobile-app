@@ -152,6 +152,7 @@ export default StyleSheet.create({
   mainContainer: {
     flex: 1,
     paddingBottom: getHeight(50)
+
     // paddingHorizontal: getWidth(22)
   },
   headerContainer: {
