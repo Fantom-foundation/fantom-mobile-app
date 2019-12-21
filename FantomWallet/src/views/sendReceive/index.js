@@ -32,7 +32,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import { Colors } from "../../theme";
 import KeyPad from "../../components/general/keyPad";
 import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
-
+import { Loader } from "../../components/loader";
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
@@ -40,6 +40,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const { navigation, addUpdateAddress, currentWallet } = props;
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [address, setSendTo] = useState("");
+  const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [amount, setAmount] = useState("");
   //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
@@ -83,10 +84,13 @@ export const SendReceive = (props: TSendReceiveTypes) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
+    setLoader(true);
     const { sendTransaction } = props;
     if (Number(amount) === 0) {
+      sertLoader(false);
       Alert.alert("Error", "Please enter valid amount");
     } else if (currentWallet.balance < amount) {
+      sertLoader(false);
       Alert.alert("Error", "Insufficient balance");
     } else {
       let message = "";
@@ -95,7 +99,10 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         message = "Please enter valid address.";
       else if (amount === "") message = "Please enter valid amount";
 
-      if (message !== "") Alert.alert("Error", message);
+      if (message !== "") {
+        sertLoader(false);
+        Alert.alert("Error", message);
+      }
       if (address && Web3.utils.isAddress(address) && amount) {
         // const maxFantomBalance = estimationMaxFantomBalance(
         //   Number(currentWallet.balance),
@@ -132,6 +139,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
+        {loader && <Loader />}
         <ScrollView>
           {/* Scan Button */}
 
