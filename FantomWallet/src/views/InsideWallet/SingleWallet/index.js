@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   Modal,
   StatusBar,
-  Clipboard
+  Clipboard,
+  Image
 } from "react-native";
 import { Colors } from "~/theme";
 import { connect } from "react-redux";
@@ -22,6 +23,7 @@ import styles from "./styles";
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
+import { EyeIcon, EyeOffIcon } from "../../../images";
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
@@ -31,8 +33,59 @@ const SingleWallet = props => {
   const [showSendModal, setShowSendModal] = useState(false);
   const [clipBoardContent, setClipboardText] = useState("");
   const [transactionData, setTransactionData] = useState(null);
+  const [isHiddenText, setCardHiddenView] = useState(false);
 
-  history = sortActivities(currentWallet.history);
+  const writeToClipboard = () => {
+    const { currentWallet } = props;
+    //To copy the text to clipboard
+    console.log(currentWallet.publicKey, "currentWallet.publicKey");
+    Clipboard.setString(currentWallet.publicKey);
+    alert("Copied to Clipboard!");
+  };
+
+  const sortActivities = (activityObject: any) => {
+    if (!!activityObject) {
+      return activityObject.sort((a, b) => {
+        if (
+          moment(a.date, "MMM DD, YYYY hh:mmA") <
+          moment(b.date, "MMM DD, YYYY hh:mmA")
+        )
+          return 1;
+        if (
+          moment(a.date, "MMM DD, YYYY hh:mmA") >
+          moment(b.date, "MMM DD, YYYY hh:mmA")
+        )
+          return -1;
+        return 0;
+      });
+    }
+  };
+  const formatActivities = (activityDate: any) => {
+    if (moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === 0)
+      return "Today, ".concat(
+        moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
+      );
+    if (
+      moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === -1
+    )
+      return "Yesterday, ".concat(
+        moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
+      );
+    return moment(activityDate, "MMM DD, YYYY hh:mmA").format(
+      "MMM DD, hh:mm A"
+    );
+  };
+  const hexToRGB = (hex, alpha) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    if (alpha) {
+      return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    } else {
+      return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+  };
+
   const readFromClipboard = async () => {
     await Clipboard.getString()
       .then(clipBoardText => {
@@ -41,6 +94,8 @@ const SingleWallet = props => {
       })
       .catch(err => console.error("error: " + err));
   };
+
+  const history = sortActivities(currentWallet.history);
   return (
     <View style={styles.containerStyle}>
       <StatusBar barStyle="light-content" />
@@ -70,7 +125,7 @@ const SingleWallet = props => {
                 ? currentWallet.publicKey
                 : ""}
             </Text>
-            <TouchableOpacity onPress={() => writeToClipboard()}>
+            <TouchableOpacity onPress={writeToClipboard}>
               <Ionicons
                 style={styles.copyIcon}
                 name="md-copy"
@@ -82,22 +137,44 @@ const SingleWallet = props => {
         </View>
         <View style={styles.activityContainer}>
           <View style={styles.activityWrapper}>
-            <TouchableOpacity>
-              <MaterialCommunityIcons
+            <TouchableOpacity onPress={() => setCardHiddenView(!isHiddenText)}>
+              {/* <MaterialCommunityIcons
                 style={styles.lineOnEye}
                 name="eye-off-outline"
                 size={18}
                 color="rgb(96, 106, 125)"
-              />
+              /> */}
+
+              {isHiddenText ? (
+                <Image
+                  source={EyeOffIcon}
+                  resizeMode="contain"
+                  style={styles.lineOnEyeOff}
+                ></Image>
+              ) : (
+                <Image
+                  source={EyeIcon}
+                  resizeMode="contain"
+                  style={styles.lineOnEye}
+                ></Image>
+              )}
             </TouchableOpacity>
             <Text style={styles.ftmText}>
-              {currentWallet && currentWallet.balance
-                ? currentWallet.balance
-                : 0}
+              {!isHiddenText
+                ? currentWallet && currentWallet.balance
+                  ? currentWallet.balance
+                  : 0
+                : "*******"}
             </Text>
-            <Text style={styles.amountText}>{`($${
-              currentWallet && currentWallet.balance ? currentWallet.balance : 0
-            })`}</Text>
+            <Text style={styles.amountText}>
+              {!isHiddenText
+                ? `($${
+                    currentWallet && currentWallet.balance
+                      ? currentWallet.balance
+                      : 0
+                  })`
+                : "*******"}
+            </Text>
             <View style={styles.buttonWrapper}>
               <Button
                 activeOpacity={0.5}
@@ -135,7 +212,7 @@ const SingleWallet = props => {
               )}
               <View style={styles.activityListView}>
                 <FlatList
-                  data={history}
+                  data={history || []}
                   keyExtractor={(item, index) => index.toString()}
                   showsVerticalScrollIndicator={false}
                   bounces={false}
@@ -171,10 +248,16 @@ const SingleWallet = props => {
                           marginTop: index === 0 ? 0 : getHeight(32)
                         }}
                       >
-                        <Text style={styles.dateText}>{newDate}</Text>
+                        <Text style={styles.dateText}>
+                          {isHiddenText ? "*******" : newDate}
+                        </Text>
                         <Text style={styles.activityAmountText}>
-                          {item.type === "Sent" ? "-" : ""}
-                          {item.amount}
+                          {isHiddenText
+                            ? "*"
+                            : item.type === "Sent"
+                            ? "-"
+                            : "+"}
+                          {isHiddenText ? "******" : item.amount}
                         </Text>
                       </TouchableOpacity>
                     );
@@ -211,48 +294,6 @@ const SingleWallet = props => {
       </SafeAreaView>
     </View>
   );
-};
-
-const writeToClipboard = async () => {
-  //To copy the text to clipboard
-  await Clipboard.setString(currentWallet.publicKey);
-  alert("Copied to Clipboard!");
-};
-const sortActivities = (activityObject: any) => {
-  return activityObject.sort((a, b) => {
-    if (
-      moment(a.date, "MMM DD, YYYY hh:mmA") <
-      moment(b.date, "MMM DD, YYYY hh:mmA")
-    )
-      return 1;
-    if (
-      moment(a.date, "MMM DD, YYYY hh:mmA") >
-      moment(b.date, "MMM DD, YYYY hh:mmA")
-    )
-      return -1;
-    return 0;
-  });
-};
-const formatActivities = (activityDate: any) => {
-  if (moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === 0)
-    return "Today, ".concat(
-      moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
-    );
-  if (moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === -1)
-    return "Yesterday, ".concat(
-      moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
-    );
-  return moment(activityDate, "MMM DD, YYYY hh:mmA").format("MMM DD, hh:mm A");
-};
-const hexToRGB = (hex, alpha) => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  if (alpha) {
-    return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
-  } else {
-    return "rgb(" + r + ", " + g + ", " + b + ")";
-  }
 };
 
 const mapStateToProps = state => ({

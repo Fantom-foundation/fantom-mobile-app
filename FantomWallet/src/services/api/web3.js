@@ -1,16 +1,20 @@
 // @flow
-import EthUtil from 'ethereumjs-util';
-import { API_URL_FANTOM, KEY_INFURA, EXAMPLE_ADDRESS } from 'react-native-dotenv';
+import EthUtil from "ethereumjs-util";
+import {
+  API_URL_FANTOM,
+  KEY_INFURA,
+  EXAMPLE_ADDRESS
+} from "react-native-dotenv";
 
-const Web3 = require('web3');
-const Tx = require('ethereumjs-tx');
+const Web3 = require("web3");
+const Tx = require("ethereumjs-tx");
 
 type Transfer = {
   from: string,
   to: string,
   value: string,
   memo: string,
-  privateKey: string,
+  privateKey: string
 };
 
 const URL_FANTOM = API_URL_FANTOM;
@@ -25,6 +29,7 @@ class Web3Agent {
 
   async getBalance(address: string = EXAMPLE_ADDRESS) {
     const res = await this.web3.eth.getBalance(address);
+    console.log(res, "hjagsdjaghajsdgh");
     return res;
   }
 
@@ -35,11 +40,11 @@ class Web3Agent {
     const rawTx = {
       from,
       to,
-      value: Web3.utils.toHex(Web3.utils.toWei(value, 'ether')),
+      value: Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
       gasLimit: Web3.utils.toHex(44000),
       gasPrice: Web3.utils.toHex(gasPrice),
       nonce: Web3.utils.toHex(nonce),
-      data: memo,
+      data: memo
     };
 
     const privateKeyBuffer = EthUtil.toBuffer(privateKey);
@@ -48,11 +53,12 @@ class Web3Agent {
     tx.sign(privateKeyBuffer);
     const serializedTx = tx.serialize();
 
-    const res = await this.web3.eth.sendSignedTransaction(`0x${serializedTx.toString('hex')}`);
+    const res = await this.web3.eth.sendSignedTransaction(
+      `0x${serializedTx.toString("hex")}`
+    );
     return res;
   }
 }
-
 
 // from debug network
 /* eslint-disable no-undef */
@@ -61,5 +67,5 @@ GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
 
 export default {
   Fantom: new Web3Agent(URL_FANTOM),
-  Ethereum: new Web3Agent(URL_ETHEREUM),
+  Ethereum: new Web3Agent(URL_ETHEREUM)
 };

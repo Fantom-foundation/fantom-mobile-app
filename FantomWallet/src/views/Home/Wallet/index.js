@@ -65,12 +65,14 @@ export const Wallet = ({
   );
 };
 
-const mapStateToProps = state => ({
-  publicKey: state.keys.publicKey,
-  balance: state.wallet.balance,
-  isLoading: state.wallet.loading,
-  history: state.wallet.history
-});
+const mapStateToProps = state => {
+  return {
+    publicKey: state.keys.publicKey,
+    balance: state.wallet.balance,
+    isLoading: state.wallet.loading,
+    history: state.wallet.history
+  };
+};
 
 const mapDispatchToProps = {
   getBalance: getBalanceAction,

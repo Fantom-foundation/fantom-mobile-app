@@ -37,7 +37,7 @@ type Props = {
   navigation: any,
   generateWallet: ({
     mnemonic: string,
-    cb: (publicKey:string) => void
+    cb: (publicKey: string) => void
   }) => any,
   setDopdownAlert: (string, string, { [string]: string }) => void
 };
@@ -84,7 +84,7 @@ export const CheckMnemonicContainer = ({
         .split(" ")
         .slice(0, verifyMnemonicArr.length)
         .join();
-    
+
       if (mnemonicString === verifyMnemonicArr.join()) setEnable(false);
       else setEnable(true);
       return;
@@ -93,7 +93,12 @@ export const CheckMnemonicContainer = ({
   }, [verifyMnemonic]);
 
   const handleVerify = () => {
-    if (!verifyMnemonic) return;
+    if (verifyMnemonic && verifyMnemonic.length === 0) {
+      setDopdownAlert("custom", `Please Enter Mnemonics.`, {
+        backgroundColor: "rgb(251,128,0)"
+      });
+      return;
+    }
     let inconsistency = false;
 
     const verifyMnemonicArr = verifyMnemonic.map(obj => obj.name.toLowerCase());
@@ -145,10 +150,8 @@ export const CheckMnemonicContainer = ({
   const behaviour = Platform.OS === "ios" ? "padding" : null;
 
   return (
-
     <View style={styles.mainContainerStyle}>
       <SafeAreaView style={{ flex: 1 }}>
-
         <View style={{ flex: 0.5 }}>
           <View style={styles.mainHeadingContainer}>
             <Text style={styles.mainHeading}>Verify recovery words</Text>
@@ -170,7 +173,6 @@ export const CheckMnemonicContainer = ({
                 {verifyMnemonic.map(val => (
                   <WordItem {...val} key={val.index} onClick={unSelect} isTop />
                 ))}
-
               </View>
               {isEnable && (
                 <Text style={styles.errorText}>
@@ -185,7 +187,6 @@ export const CheckMnemonicContainer = ({
               if (item.isClickable)
                 return <WordItem {...item} key={item.index} onClick={select} />;
             })}
-
           </View>
 
           <Button
@@ -201,9 +202,7 @@ export const CheckMnemonicContainer = ({
             text={"CONTINUE"}
           />
           <View style={{ height: 40 }}></View>
- 
         </View>
-  
       </SafeAreaView>
     </View>
   );

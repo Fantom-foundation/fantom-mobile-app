@@ -35,7 +35,7 @@ export default (state: Wallet = initialState, action: actionType) => {
   switch (action.type) {
     case types.SET_BALANCE: {
       const { publicKey, balance, name } = action.payload;
-      let oldData = state.walletsData || [];
+      let oldData = [...state.walletsData] || [];
 
       const index = oldData.findIndex(item => item.publicKey === publicKey);
       if (publicKey && index > -1) {
@@ -71,7 +71,7 @@ export default (state: Wallet = initialState, action: actionType) => {
     }
     case types.ADD_TRANSACTION: {
       const { from } = action.payload.transaction;
-      let oldData = state.walletsData || [];
+      let oldData = [...state.walletsData] || [];
       let history = [];
       const index = oldData.findIndex(item => item.publicKey === from);
       if (index > -1) {
@@ -89,7 +89,7 @@ export default (state: Wallet = initialState, action: actionType) => {
     }
     case types.SET_WALLET_NAME: {
       const { publicKey, name } = action.payload;
-      let oldData = state.walletsData || [];
+      let oldData = [...state.walletsData] || [];
       const index = oldData.findIndex(item => item.publicKey === publicKey);
       if (index > -1) {
         const newData = {

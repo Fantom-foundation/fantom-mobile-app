@@ -50,6 +50,12 @@ export default StyleSheet.create({
     flex: 1,
     marginBottom: 10
   },
+  lineOnEyeOff: {
+    marginRight: getWidth(18),
+    alignSelf: "flex-end",
+    width: getWidth(21),
+    height: getHeight(21)
+  },
   lineOnEye: { marginRight: getWidth(18), alignSelf: "flex-end" },
   ftmText: {
     textAlign: "center",

@@ -16,6 +16,7 @@ import { NavigationService, routes } from "~/navigation/helpers";
 import WalletUtils from "../../../utils/wallet";
 import { generateWallet as generateWalletAction } from "~/redux/keys/actions";
 import { generateWalletUsingPrivateKey as generateWalletUsingPrivateKeyAction } from "~/redux/keys/actions";
+import { Loader } from "../../../components/loader";
 
 import styles from "./styles";
 import HeaderView from "./components/header";
@@ -39,6 +40,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   const [privateKey, setPrivateKey] = useState("");
   const [errorType, setErrorType] = useState("");
   const [active, setActive] = useState(true);
+  const [isImporting, setIsImporting] = useState(false);
 
   const onLeftIconPress = () => {
     const backToHome = navigation.getParam("backToHome", false);
@@ -61,6 +63,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   };
 
   const handleRecoverWallet = () => {
+    setIsImporting(true);
     const _mnemonic = mnemonic
       .replace(/' '/g, "") // TODO: flow??? legacy
       .replace(",", "")
@@ -68,19 +71,23 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
       .trim();
 
     if (!isValidSeed(_mnemonic)) {
+      setIsImporting(false);
       setErrorType("phrase");
       return;
     }
     setErrorType("");
     generateWallet({
       mnemonic: _mnemonic,
-      cb: (publicKey: string) =>
-        NavigationService.navigate(routes.root.WalletImported, { publicKey })
+      cb: (publicKey: string) => {
+        NavigationService.navigate(routes.root.WalletImported, { publicKey });
+        setIsImporting(false);
+      }
     });
     setMnemonic("");
   };
 
   const handleRecoverWalletUsingPrivateKey = () => {
+    setIsImporting(true);
     if (privateKey) {
       const address = WalletUtils.restoreWallet(privateKey);
 
@@ -88,10 +95,12 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
         generateWalletUsingPrivateKey({
           privateKey,
           publicKey: address.address,
-          cb: () =>
+          cb: () => {
             NavigationService.navigate(routes.root.WalletImported, {
               publicKey: address.address
-            })
+            });
+            setIsImporting(false);
+          }
         });
       }
     } else {
@@ -121,6 +130,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
       }}
     >
       <View style={styles.container}>
+        {isImporting && <Loader />}
         <HeaderView
           onLeftIconPress={onLeftIconPress}
           active={active}

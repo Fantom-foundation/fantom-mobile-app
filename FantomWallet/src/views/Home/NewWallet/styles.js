@@ -174,6 +174,11 @@ export default StyleSheet.create({
     height: getHeight(21),
     tintColor: Colors.textBlack
   },
+  eyeOffIcon: {
+    width: getWidth(25),
+    height: getHeight(25),
+    tintColor: Colors.textBlack
+  },
   iconStyle: {
     top: getHeight(15),
     opacity: 0.7

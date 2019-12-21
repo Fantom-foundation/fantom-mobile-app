@@ -98,6 +98,7 @@ class Wallet extends Component {
               <CardHeader
                 totalBalance={this.getTotalCount(walletsData)}
                 setCardHiddenView={this.setCardHiddenView}
+                isHiddenText={isHiddenText}
                 margin={22}
                 isListView={isListView}
                 changeView={this.changeView}
@@ -194,6 +195,7 @@ class Wallet extends Component {
                           <CardHeader
                             totalBalance={this.getTotalCount(walletsData)}
                             margin={0}
+                            isHiddenText={isHiddenText}
                             setCardHiddenView={this.setCardHiddenView}
                             isListView={isListView}
                             changeView={this.changeView}
@@ -201,6 +203,7 @@ class Wallet extends Component {
                           >
                             <CardView
                               setCurrentWallet={setCurrentWallet}
+                              setCardHiddenView={this.setCardHiddenView}
                               isHiddenText={isHiddenText}
                               data={item}
                               showCard={true}
