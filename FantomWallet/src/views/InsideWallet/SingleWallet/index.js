@@ -95,6 +95,10 @@ const SingleWallet = props => {
   };
 
   const history = sortActivities(currentWallet.history);
+  console.log(
+    currentWallet.balance,
+    "currentWallet.balancecurrentWallet.balance"
+  );
   return (
     <View style={styles.containerStyle}>
       <StatusBar barStyle="light-content" />

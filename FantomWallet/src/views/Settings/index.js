@@ -10,7 +10,8 @@ import {
   ScrollView,
   StatusBar,
   FlatList,
-  Switch
+  Switch,
+  Linking
 } from "react-native";
 
 // Components
@@ -108,7 +109,8 @@ const settingData = [
     rightArrowIcon: RightArrowIcon,
     source: AboutIcon,
     notificationsToggleButton: false,
-    darkToggleButton: false
+    darkToggleButton: false,
+    isOpenUrl: true
   },
   {
     text: "Leave a review",
@@ -123,6 +125,18 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
   const { navigation } = props;
   const [notificationSwitchValue, setNotificationSwitchValue] = useState(false);
   const [darkSwitchValue, setDarkSwitchValue] = useState(false);
+
+  const openUrl = () => Linking.openURL("https://Fantom.foundation");
+
+  const navigateTo = item => navigation.navigate(item.to);
+
+  const getFunctionToCall = item => {
+    if (item) {
+      if (item.to) return () => navigateTo(item);
+      if (item.isOpenUrl) return () => openUrl();
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -146,10 +160,11 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
               data={settingData}
               extraData={[notificationSwitchValue, darkSwitchValue]}
               renderItem={({ item, index }) => {
+                const functionToCall = getFunctionToCall(item);
                 return (
                   <View style={styles.mainContainer}>
                     <TouchableOpacity
-                      onPress={() => item.to && navigation.navigate(item.to)}
+                      onPress={functionToCall}
                       style={{
                         ...styles.rowsView,
                         marginTop: index === 0 ? getHeight(55) : getHeight(42)
