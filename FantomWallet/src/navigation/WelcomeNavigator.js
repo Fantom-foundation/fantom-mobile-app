@@ -17,7 +17,6 @@ import ManageWallet from "~/views/Settings/ManageWallet";
 import Success from "~/views/Success";
 const WelcomeNavigator = createStackNavigator(
   {
-    // ManageWallet:{screen:ManageWallet},
     SplashScreen: { screen: SplashScreen },
     WalletSetup: {
       screen: WalletSetup
