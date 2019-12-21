@@ -47,10 +47,11 @@ const styles = {
     marginLeft: getWidth(18)
   },
   centerBottomText: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop:2
   },
   centerText: {
-    fontSize: FontSize.xSmall,
+    fontSize: FontSize.xSmall+1,
     fontFamily: fonts.WorkSansMedium,
     color: Colors.textGrey
   },

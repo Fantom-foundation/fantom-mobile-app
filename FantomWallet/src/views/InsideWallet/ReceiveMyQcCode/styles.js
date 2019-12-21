@@ -23,7 +23,7 @@ export default StyleSheet.create({
     marginVertical: getHeight(35),
     backgroundColor: Colors.white
   },
-  qrWrapper: { alignSelf: 'center' },
+  qrWrapper: { alignSelf: 'center',backgroundColor:'red'},
   textWrapper: { width: getWidth(230), alignSelf: 'center' },
   qrText: {
     fontFamily: fonts.WorkSansMedium,

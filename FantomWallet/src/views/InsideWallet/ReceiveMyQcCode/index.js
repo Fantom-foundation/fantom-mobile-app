@@ -144,8 +144,8 @@ const mapStateToProps = state => ({
   currentWallet: state.wallet.currentWallet
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = ({
   setDopdownAlert: setDopdownAlertAction
-};
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReceiveMyQcCode);
