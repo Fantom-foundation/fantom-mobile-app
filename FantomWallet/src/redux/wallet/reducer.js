@@ -1,6 +1,6 @@
 // @flow
-import { types } from './actions';
-import type { TransactionT, WalletInfoT } from './actions';
+import { types } from "./actions";
+import type { TransactionT, WalletInfoT } from "./actions";
 
 type WalletsDataT = {
   publicKey: string,
@@ -12,7 +12,8 @@ type Wallet = {
   loading: boolean,
   sendTransactionIsLoading: boolean,
   walletsData: Array<WalletsDataT>,
-  currentWallet: WalletsDataT
+  currentWallet: WalletsDataT,
+  fantomDollarRate: number
 };
 
 type actionType = {
@@ -28,7 +29,8 @@ const initialState = {
   loading: false,
   walletsData: [],
   sendTransactionIsLoading: false,
-  currentWallet: {}
+  currentWallet: {},
+  fantomDollarRate: 0
 };
 
 export default (state: Wallet = initialState, action: actionType) => {
@@ -147,6 +149,13 @@ export default (state: Wallet = initialState, action: actionType) => {
         ...state,
         currentWallet: action.payload
       };
+
+    case types.SET_FANTOM_BALANCE_RATE: {
+      return {
+        ...state,
+        fantomDollarRate: action.payload
+      };
+    }
     default:
       return state;
   }

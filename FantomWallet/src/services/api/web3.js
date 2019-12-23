@@ -61,20 +61,19 @@ class Web3Agent {
     const res = await this.web3.eth.sendSignedTransaction(
       `0x${serializedTx.toString("hex")}`
     );
-    
+
     return res;
   }
 
   // async getAccounts() {
-    
+
   //   const res = await this.web3.eth.getAccounts();
   //   return res;
   // }
 
-
   async getAccount(address: string) {
-    console.log("FANTOM_GET_ACCOUNT_INFO",FANTOM_GET_ACCOUNT_INFO,address)
-    return await fetch(`${FANTOM_GET_ACCOUNT_INFO}?address=${address}`)
+    console.log("FANTOM_GET_ACCOUNT_INFO", FANTOM_GET_ACCOUNT_INFO, address);
+    return await fetch(`${FANTOM_GET_ACCOUNT_INFO}?address=${address}`);
   }
 }
 
@@ -84,6 +83,6 @@ class Web3Agent {
 // GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
 
 export default {
-  Fantom: new Web3Agent(),
+  Fantom: new Web3Agent(API_URL_FANTOM),
   Ethereum: new Web3Agent(URL_ETHEREUM)
 };

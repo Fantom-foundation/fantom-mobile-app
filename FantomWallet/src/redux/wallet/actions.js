@@ -8,7 +8,8 @@ export const types = {
   SET_LOADING_SEND: "wallet/SET_LOADING_SEND",
   ADD_TRANSACTION: "wallet/add_transaction",
   SET_WALLET_NAME: "wallet/SET_WALLET_NAME",
-  SET_CURRENT_WALLET: "wallet/SET_CURRENT_WALLET"
+  SET_CURRENT_WALLET: "wallet/SET_CURRENT_WALLET",
+  SET_FANTOM_BALANCE_RATE: "wallet/SET_FANTOM_BALANCE_RATE"
 };
 
 type Balance = {
@@ -51,7 +52,7 @@ export const setBalance = ({ name, publicKey, balance, loading }: Balance) => ({
 });
 
 export const getHistory = () => ({
-  type: types.GET_HISTORY,
+  type: types.GET_HISTORY
 });
 
 export const setHistory = ({

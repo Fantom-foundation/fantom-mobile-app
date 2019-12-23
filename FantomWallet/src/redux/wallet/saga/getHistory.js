@@ -5,12 +5,7 @@ import axios from "axios";
 import { types, setHistory } from "../actions";
 import { API_URL_1_FANTOM } from "react-native-dotenv";
 // import type { TransactionT } from '../actions';
-import {
-  FANTOM_GET_ACCOUNT_INFO
-} from "react-native-dotenv";
-
-const getHistoryApi = async () => {
- return await fetch(`${FANTOM_GET_ACCOUNT_INFO}?address=0x239fa7623354ec26520de878b52f13fe84b06971`)
+import { FANTOM_GET_ACCOUNT_INFO, GET_BALANCE_API } from "react-native-dotenv";
 
 const getTransactionApi = async publicKey => {
   return await axios.get(
@@ -22,6 +17,9 @@ const getTransactionApi = async publicKey => {
     }
   );
 };
+const getBalanceApi = async () => {
+  return await axios.get(GET_BALANCE_API);
+};
 
 export function* getHistory(): any {
   try {
@@ -29,7 +27,17 @@ export function* getHistory(): any {
       keys,
       walletsData: wallet.walletsData
     }));
-
+    const {
+      data: { body }
+    } = yield call(getBalanceApi);
+    console.log("getBalance", JSON.parse(body));
+    if (body) {
+      const balanceInfo = JSON.parse(body);
+      yield put({
+        type: types.SET_FANTOM_BALANCE_RATE,
+        payload: Number(balanceInfo.price)
+      });
+    }
     if (walletsData && walletsData.length > 0) {
       for (let i = 0; i < walletsData.length; i++) {
         const wallet = walletsData[i];
@@ -50,7 +58,6 @@ export function* getHistory(): any {
       }
     }
   } catch (e) {
-
     yield console.log(e);
   }
 }

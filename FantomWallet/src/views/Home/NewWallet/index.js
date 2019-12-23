@@ -32,6 +32,8 @@ import {
   setCurrentWallet as setCurrentWalletAction
 } from "~/redux/wallet/actions";
 import Loader from "~/components/general/Loader";
+import { fantomToDollar } from "../../../utils/converts";
+import axios from "axios";
 
 class Wallet extends Component {
   constructor(props) {
@@ -79,7 +81,7 @@ class Wallet extends Component {
       isScaleView,
       isHiddenText
     } = this.state;
-
+    console.log("hellohelo", fantomToDollar(50));
     const { isLoading, wallets, walletsData, setCurrentWallet } = this.props;
     console.log("all walllets", walletsData, wallets);
     return (

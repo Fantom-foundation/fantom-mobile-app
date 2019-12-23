@@ -79,7 +79,6 @@ const ManageWallet = props => {
   const [isModalOpened, setIsModalOpened] = useState([]);
   const [openColorPalette, setOpenColorPalette] = useState(false);
   const [selectedColor, setSelectedColor] = useState("");
-  const [walletName, setWalletName] = useState("");
   const [selectedKey, setSelectedKey] = useState(null);
   const [name, setName] = useState("");
 
