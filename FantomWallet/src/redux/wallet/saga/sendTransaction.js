@@ -52,15 +52,16 @@ export function* sendTransaction({
     transactionId = responce.blockHash;
     const transaction: TransactionT = {
       type: SENT,
-      amount: value,
-      transactionId,
+      value,
+      hash: transactionId,
       transactionStatus,
       amountUnit: "FTM",
       from: publicKey,
       to,
       isError: false,
-      date
+      timestamp: date
     };
+
     yield put(addTransaction(transaction));
     // add to local history storage
     yield put(setLoadingSendTransaction(false));

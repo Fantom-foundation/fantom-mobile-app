@@ -1,43 +1,35 @@
-import React, { useState } from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  FlatList,
-  View,
-  SafeAreaView,
-  Modal,
-  StatusBar
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, Metrics } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import moment from 'moment';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Button from '~/components/general/Button';
-import styles from '../styles';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
+import React, { useState } from "react";
+import { TouchableOpacity, Text, View, Share } from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, Metrics } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Entypo from "react-native-vector-icons/Entypo";
+import styles from "../styles";
 
-const ReceiveModal = props => {
-  const [closeModal, setCloseModal] = useState(true);
-  const { showReceiveModal, closeReceiveModal, transactionData } = props;
+import {
+  fantomToDollar,
+  convertFTMValue,
+  formatActivities
+} from "~/utils/converts";
+const SendModal = props => {
+  const { closeSendModal, transactionData, publicKey } = props;
+
   const {
     type,
-    amount,
-    transactionId,
+    value,
+    hash,
     transactionStatus,
-    amountUnit,
+    fee,
     from,
     to,
     isError,
-    date
+    timestamp
   } = transactionData;
-
+  const formattedDate = formatActivities(timestamp);
   const onShare = async () => {
     try {
       const result = await Share.share({
-        // message:publicKey
+        message: publicKey
       });
 
       if (result.action === Share.sharedAction) {
@@ -58,35 +50,36 @@ const ReceiveModal = props => {
       activeOpacity={1}
       style={styles.modalBackground}
       onPress={() => {
-        closeReceiveModal();
+        closeSendModal();
       }}
     >
-      <TouchableOpacity
-        activeOpacity={1}
-        // onPress={() => {
-        //   closeReceiveModal();
-        // }}
-        style={styles.modalShadow}
-      >
+      <TouchableOpacity activeOpacity={1} style={styles.modalShadow}>
         <View style={styles.modalWrapper}>
           <View
-            style={{ ...styles.themeStripe, backgroundColor: Colors.royalBlue }}
+            style={{
+              ...styles.themeStripe,
+              backgroundColor: Colors.royalBlue
+            }}
           />
           <View style={styles.detailsContainer}>
             <Text style={styles.modalText}>You received</Text>
-            <Text style={styles.modalAmount}>{`${amount} ${amountUnit}`}</Text>
-            <Text style={styles.modalTransaction}>Sender</Text>
-            <Text style={styles.modalTransactionText}>{from}</Text>
+            <Text style={styles.modalAmount}>{`${convertFTMValue(
+              value
+            )} FTM`}</Text>
+            <Text style={styles.modalTransaction}>Recipient</Text>
+            <Text style={styles.modalTransactionText}>{to}</Text>
             <Text style={styles.modalTransaction}>Transaction number</Text>
-            <Text style={styles.modalTransactionText}>{transactionId}</Text>
+            <Text style={styles.modalTransactionText}>{hash}</Text>
             <Text style={styles.modalTransaction}>Date</Text>
+            <Text style={styles.modalTransactionText}>{formattedDate}</Text>
+            <Text style={styles.modalTransaction}>Transaction fee</Text>
             <Text
               style={{
                 ...styles.modalTransactionText,
                 marginBottom: getHeight(40)
               }}
             >
-              {date}
+              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee)})`}
             </Text>
             <TouchableOpacity
               style={styles.shareIconWrapper}
@@ -105,5 +98,4 @@ const ReceiveModal = props => {
     </TouchableOpacity>
   );
 };
-
-export default ReceiveModal;
+export default SendModal;

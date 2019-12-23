@@ -2,7 +2,8 @@ const math = require("../../__mocks__/mathjs");
 const Web3 = require("web3");
 const axios = require("axios");
 const { store } = require("../redux/store");
-
+const { GAS_PRICE } = require("../common/constants");
+const moment = require("moment");
 math.config({
   number: "bignumber"
 });
@@ -61,7 +62,29 @@ export const toFixed = (num, fixed) => {
 export const fantomToDollar = value => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
-    return fantomDollarRate * Number(value);
+    return (
+      fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE)
+    ).toFixed(10);
   }
   return value;
+};
+
+export const convertFTMValue = value => {
+  if (value) {
+    return Number(estimationMaxFantomBalance(value, GAS_PRICE)).toFixed(10);
+  }
+  return 0;
+};
+export const getConversionRate = value => {
+  const { fantomDollarRate } = store.getState().wallet;
+  if (fantomDollarRate) {
+    return fantomDollarRate;
+  }
+  return 1;
+};
+
+export const formatActivities = (activityDate: any) => {
+  const t = new Date(activityDate);
+  const dateString = moment(t).format("MMM D, hh:mm A");
+  return dateString;
 };

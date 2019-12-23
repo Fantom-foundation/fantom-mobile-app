@@ -24,6 +24,12 @@ import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
 import { EyeIcon, EyeOffIcon } from "../../../images";
+import {
+  fantomToDollar,
+  convertFTMValue,
+  getConversionRate,
+  formatActivities
+} from "~/utils/converts";
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
@@ -58,21 +64,6 @@ const SingleWallet = props => {
         return 0;
       });
     }
-  };
-  const formatActivities = (activityDate: any) => {
-    if (moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === 0)
-      return "Today, ".concat(
-        moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
-      );
-    if (
-      moment(activityDate, "MMM DD, YYYY hh:mmA").diff(moment(), "day") === -1
-    )
-      return "Yesterday, ".concat(
-        moment(activityDate, "MMM DD, YYYY hh:mmA").format("hh:mm A")
-      );
-    return moment(activityDate, "MMM DD, YYYY hh:mmA").format(
-      "MMM DD, hh:mm A"
-    );
   };
   const hexToRGB = (hex, alpha) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -196,7 +187,6 @@ const SingleWallet = props => {
                 text="Send"
                 onPress={() => {
                   readFromClipboard();
-                  // props.navigation.setParams()
                   NavigationService.navigate(routes.root.SendFTM);
                 }}
                 buttonStyle={{
@@ -231,11 +221,17 @@ const SingleWallet = props => {
                     </View>
                   }
                   renderItem={({ item, index }) => {
-                    const newDate = formatActivities(item.date);
+                    const type =
+                      item.from.toLowerCase() ===
+                      currentWallet.publicKey.toLowerCase()
+                        ? "Sent"
+                        : "Received";
+
+                    const newDate = formatActivities(item.timestamp);
                     return (
                       <TouchableOpacity
                         onPress={() => {
-                          if (item.type === "Sent") {
+                          if (type === "Sent") {
                             setTransactionData(item);
                             setShowSendModal(true);
                           } else {
@@ -252,12 +248,10 @@ const SingleWallet = props => {
                           {isHiddenText ? "*******" : newDate}
                         </Text>
                         <Text style={styles.activityAmountText}>
+                          {isHiddenText ? "*" : type === "Sent" ? "-" : "+"}
                           {isHiddenText
-                            ? "*"
-                            : item.type === "Sent"
-                            ? "-"
-                            : "+"}
-                          {isHiddenText ? "******" : item.amount}
+                            ? "******"
+                            : convertFTMValue(item.value)}
                         </Text>
                       </TouchableOpacity>
                     );
@@ -274,6 +268,7 @@ const SingleWallet = props => {
           onRequestClose={() => setShowReceiveModal(false)}
         >
           <ReceiveModal
+            publicKey={currentWallet.publicKey}
             transactionData={transactionData}
             showReceiveModal={showReceiveModal}
             closeReceiveModal={() => setShowReceiveModal(false)}
@@ -286,6 +281,7 @@ const SingleWallet = props => {
           onRequestClose={() => setShowSendModal(false)}
         >
           <SendModal
+            publicKey={currentWallet.publicKey}
             transactionData={transactionData}
             showSendModal={showSendModal}
             closeSendModal={() => setShowSendModal(false)}

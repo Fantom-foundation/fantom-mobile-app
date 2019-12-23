@@ -25,7 +25,7 @@ const cardStyles = StyleSheet.create({
   },
   bottomCardText: {
     fontFamily: fonts.WorkSansBold,
-    fontSize: FontSize.xLarge,
+    fontSize: FontSize.base,
     color: Colors.white,
     textAlign: "right"
   },
