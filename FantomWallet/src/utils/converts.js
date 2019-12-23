@@ -1,8 +1,10 @@
-const math = require('../../__mocks__/mathjs');
-const Web3 = require('web3');
+const math = require("../../__mocks__/mathjs");
+const Web3 = require("web3");
+const axios = require("axios");
+const { store } = require("../redux/store");
 
 math.config({
-  number: 'bignumber',
+  number: "bignumber"
 });
 
 export function scientificToDecimal(num) {
@@ -11,21 +13,21 @@ export function scientificToDecimal(num) {
   // eslint-disable-next-line no-useless-escape
   if (/\d+\.?\d*e[\+\-]*\d+/i.test(num)) {
     // eslint-disable-line
-    const zero = '0';
+    const zero = "0";
     const parts = String(num)
       .toLowerCase()
-      .split('e'); // split into coeff and exponent
+      .split("e"); // split into coeff and exponent
     const e = parts.pop(); // store the exponential part
     let l = Math.abs(e); // get the number of zeros
     const direction = e / l; // use to determine the zeroes on the left or right
-    const coeffArray = parts[0].split('.');
+    const coeffArray = parts[0].split(".");
     if (direction === -1) {
       coeffArray[0] = Math.abs(coeffArray[0]);
-      num = `${zero}.${new Array(l).join(zero)}${coeffArray.join('')}`; // eslint-disable-line
+      num = `${zero}.${new Array(l).join(zero)}${coeffArray.join("")}`; // eslint-disable-line
     } else {
       const dec = coeffArray[1];
       if (dec) l -= dec.length;
-      num = coeffArray.join('') + new Array(l + 1).join(zero); // eslint-disable-line
+      num = coeffArray.join("") + new Array(l + 1).join(zero); // eslint-disable-line
     }
   }
 
@@ -45,13 +47,21 @@ export function estimationMaxFantomBalance(fantomWei, gasPrice) {
   }
 
   const maxFantomBalanceWei = math.subtract(math.bignumber(wei), gasPrice);
-  return Web3.utils.fromWei(maxFantomBalanceWei.toString(), 'ether');
+  return Web3.utils.fromWei(maxFantomBalanceWei.toString(), "ether");
 
   // due to mock bignumber it is difficult to evaluate the behavior
 }
 
 export const toFixed = (num, fixed) => {
-  if (!num) return '';
+  if (!num) return "";
   const re = new RegExp(`^-?\\d+(?:.\\d{0,${fixed || -1}})?`);
   return num.toString().match(re)[0];
+};
+
+export const fantomToDollar = value => {
+  const { fantomDollarRate } = store.getState().wallet;
+  if (fantomDollarRate) {
+    return fantomDollarRate * Number(value);
+  }
+  return value;
 };

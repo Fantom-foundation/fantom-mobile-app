@@ -38,7 +38,7 @@ const SendFTM = (props: Props) => {
   const [buttonModalText, setButtonModalText] = useState("Send");
   const [isSendingModal, setSendingModal] = useState(false);
   const [amount, setAmountInDollar] = useState(27.46);
-  const { addUpdateAddress, currentWallet, navigation } = props;
+  const { addUpdateAddress, currentWallet, navigation, isLoading } = props;
 
   useEffect(() => {
     const setPublicKey = props.navigation.getParam("publicKey");
@@ -78,15 +78,14 @@ const SendFTM = (props: Props) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
-    setLoader(true);
     const { sendTransaction } = props;
 
     if (Number(amountText) === 0) {
-      setLoader(false);
       Alert.alert("Error", "Please enter valid amount");
+      return;
     } else if (currentWallet.balance < amountText) {
-      setLoader(false);
       Alert.alert("Error", "Insufficient balance");
+      return;
     } else {
       let message = "";
       if (toId === "") message = "Please enter address.";
@@ -95,9 +94,11 @@ const SendFTM = (props: Props) => {
       else if (amountText === "") message = "Please enter valid amount";
 
       if (message !== "") {
-        setLoader(false);
         Alert.alert("Error", message);
+      } else {
+        setSendingModal(true);
       }
+
       // if (toId && Web3.utils.isAddress(toId) && amountText) {
       //   //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
       //   // if (amountText === 0 || amountText > maxFantomBalance) {
@@ -136,7 +137,8 @@ const SendFTM = (props: Props) => {
     }
   };
 
-  handleSendAmount = () => {
+  const handleSendAmount = () => {
+    const { sendTransaction } = props;
     setLoader(true);
     setButtonModalText("Sending....");
     if (toId && Web3.utils.isAddress(toId) && amountText) {
@@ -158,12 +160,15 @@ const SendFTM = (props: Props) => {
         memo: "",
         cbSuccess: alertSuccessfulButtonPressed
       });
+
       sendTransaction({
         to: toId,
         value: amountText,
         memo: "",
         cbSuccess: () => {
-          setLoader(false), setSendingModal(false), setButtonModalText("Send");
+          setLoader(false);
+          setSendingModal(false);
+          setButtonModalText("Send");
           alertSuccessfulButtonPressed();
         }
       });
@@ -266,7 +271,7 @@ const SendFTM = (props: Props) => {
           </View>
         </ScrollView>
       </SafeAreaView>
-      {true && (
+      {isSendingModal && (
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
             amountText
@@ -276,14 +281,13 @@ const SendFTM = (props: Props) => {
           buttons={[
             {
               name: "Cancel",
-              onPress: () => setSendingModal(!isSendingModal),
-              disabled: buttonModalText === "Send" ? false : true
+              onPress: () => setSendingModal(!isSendingModal)
             },
             {
               style: styles.sendButton,
               name: buttonModalText,
-              onPress: () => handleSendAmount,
-              disabled: buttonModalText === "Send" ? false : true,
+              onPress: handleSendAmount,
+              disabled: buttonModalText === "Send",
               textStyle: styles.sendTextStyle
             }
           ]}

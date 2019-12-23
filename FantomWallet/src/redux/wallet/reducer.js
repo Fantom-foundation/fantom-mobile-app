@@ -1,6 +1,6 @@
 // @flow
-import { types } from './actions';
-import type { TransactionT, WalletInfoT } from './actions';
+import { types } from "./actions";
+import type { TransactionT, WalletInfoT } from "./actions";
 
 type WalletsDataT = {
   publicKey: string,
@@ -12,7 +12,8 @@ type Wallet = {
   loading: boolean,
   sendTransactionIsLoading: boolean,
   walletsData: Array<WalletsDataT>,
-  currentWallet: WalletsDataT
+  currentWallet: WalletsDataT,
+  fantomDollarRate: number
 };
 
 type actionType = {
@@ -28,7 +29,8 @@ const initialState = {
   loading: false,
   walletsData: [],
   sendTransactionIsLoading: false,
-  currentWallet: {}
+  currentWallet: {},
+  fantomDollarRate: 0
 };
 
 export default (state: Wallet = initialState, action: actionType) => {
@@ -62,13 +64,30 @@ export default (state: Wallet = initialState, action: actionType) => {
       };
     }
     case types.SET_HISTORY: {
-      return {
-        ...state,
-        history: action.payload.history,
-        currentWallet: {
+      const { publicKey, balance, history } = action.payload;
+      let oldData = [...state.walletsData] || [];
+
+      const index = oldData.findIndex(item => item.publicKey === publicKey);
+      if (index > -1) {
+        const newData = {
+          ...oldData[index],
+          history,
+          balance
+        };
+        oldData.splice(index, 1, newData);
+      }
+      let newCurrentWallet = state.currentWallet;
+      if (state.currentWallet && state.currentWallet.publicKey === publicKey) {
+        newCurrentWallet = {
           ...state.currentWallet,
           history
-        }
+        };
+      }
+      return {
+        ...state,
+        walletsData: oldData,
+
+        currentWallet: newCurrentWallet
       };
     }
     case types.SET_LOADING_SEND: {
@@ -80,19 +99,28 @@ export default (state: Wallet = initialState, action: actionType) => {
     case types.ADD_TRANSACTION: {
       const { from } = action.payload.transaction;
       let oldData = [...state.walletsData] || [];
+      let currentWallet = state.currentWallet;
       let history = [];
       const index = oldData.findIndex(item => item.publicKey === from);
       if (index > -1) {
         history = oldData[index].history;
         history.push(action.payload.transaction);
         const newData = {
-          ...oldData[index]
+          ...oldData[index],
+          history
         };
+        if (currentWallet.publicKey === oldData[index].publicKey) {
+          currentWallet = {
+            ...currentWallet,
+            history
+          };
+        }
         oldData.splice(index, 1, newData);
       }
       return {
         ...state,
-        walletsData: oldData
+        walletsData: oldData,
+        currentWallet
       };
     }
     case types.SET_WALLET_NAME: {
@@ -121,6 +149,13 @@ export default (state: Wallet = initialState, action: actionType) => {
         ...state,
         currentWallet: action.payload
       };
+
+    case types.SET_FANTOM_BALANCE_RATE: {
+      return {
+        ...state,
+        fantomDollarRate: action.payload
+      };
+    }
     default:
       return state;
   }
