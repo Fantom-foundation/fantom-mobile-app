@@ -25,12 +25,6 @@ export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
     const addr = yield EthUtil.publicToAddress(pubKey).toString("hex");
     const publicKey = yield EthUtil.toChecksumAddress(addr);
     const privateKey = yield EthUtil.bufferToHex(addrNode._privateKey); //eslint-disable-line
-    console.log(
-      masterKey,
-      privateKey,
-      publicKey,
-      "masterKey, privateKey, publicKey"
-    );
     yield put(setMnemonic({ mnemonic: "" }));
 
     yield put(setKeys({ masterKey, privateKey, publicKey }));

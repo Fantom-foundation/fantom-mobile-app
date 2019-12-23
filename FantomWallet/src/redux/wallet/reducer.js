@@ -80,19 +80,28 @@ export default (state: Wallet = initialState, action: actionType) => {
     case types.ADD_TRANSACTION: {
       const { from } = action.payload.transaction;
       let oldData = [...state.walletsData] || [];
+      let currentWallet = state.currentWallet;
       let history = [];
       const index = oldData.findIndex(item => item.publicKey === from);
       if (index > -1) {
         history = oldData[index].history;
         history.push(action.payload.transaction);
         const newData = {
-          ...oldData[index]
+          ...oldData[index],
+          history
         };
+        if (currentWallet.publicKey === oldData[index].publicKey) {
+          currentWallet = {
+            ...currentWallet,
+            history
+          };
+        }
         oldData.splice(index, 1, newData);
       }
       return {
         ...state,
-        walletsData: oldData
+        walletsData: oldData,
+        currentWallet
       };
     }
     case types.SET_WALLET_NAME: {

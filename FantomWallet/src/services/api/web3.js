@@ -67,7 +67,7 @@ class Web3Agent {
 // from debug network
 /* eslint-disable no-undef */
 // $FlowFixMe
-GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+// GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
 
 export default {
   Fantom: new Web3Agent(URL_FANTOM),
