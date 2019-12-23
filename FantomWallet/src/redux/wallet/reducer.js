@@ -62,13 +62,30 @@ export default (state: Wallet = initialState, action: actionType) => {
       };
     }
     case types.SET_HISTORY: {
-      return {
-        ...state,
-        history: action.payload.history,
-        currentWallet: {
+      const { publicKey, balance, history } = action.payload;
+      let oldData = [...state.walletsData] || [];
+
+      const index = oldData.findIndex(item => item.publicKey === publicKey);
+      if (index > -1) {
+        const newData = {
+          ...oldData[index],
+          history,
+          balance
+        };
+        oldData.splice(index, 1, newData);
+      }
+      let newCurrentWallet = state.currentWallet;
+      if (state.currentWallet && state.currentWallet.publicKey === publicKey) {
+        newCurrentWallet = {
           ...state.currentWallet,
           history
-        }
+        };
+      }
+      return {
+        ...state,
+        walletsData: oldData,
+
+        currentWallet: newCurrentWallet
       };
     }
     case types.SET_LOADING_SEND: {

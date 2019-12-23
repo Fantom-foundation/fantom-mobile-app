@@ -54,9 +54,17 @@ export const getHistory = () => ({
   type: types.GET_HISTORY
 });
 
-export const setHistory = ({ history }: { history: Array<TransactionT> }) => ({
+export const setHistory = ({
+  publicKey,
+  balance,
+  history
+}: {
+  history: Array<TransactionT>,
+  publicKey: String,
+  balance: number
+}) => ({
   type: types.SET_HISTORY,
-  payload: { history }
+  payload: { history, publicKey, balance }
 });
 
 export const sendTransaction = ({

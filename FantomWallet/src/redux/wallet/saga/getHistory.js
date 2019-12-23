@@ -1,19 +1,48 @@
 /* eslint-disable no-console */
 // @flow
-import {
-  takeLatest,
-  // put, select
-} from 'redux-saga/effects';
-
-import {
-  types,
-  // setHistory
-} from '../actions';
+import { takeLatest, call, select, put } from "redux-saga/effects";
+import axios from "axios";
+import { types, setHistory } from "../actions";
+import { API_URL_1_FANTOM } from "react-native-dotenv";
 // import type { TransactionT } from '../actions';
+
+const getTransactionApi = async publicKey => {
+  return await axios.get(
+    `${API_URL_1_FANTOM}api/v1/get-account?address=${publicKey}&trxsFilter=from`,
+    {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
+};
 
 export function* getHistory(): any {
   try {
-    yield () => {};
+    const { walletsData } = yield select(({ keys, wallet }) => ({
+      keys,
+      walletsData: wallet.walletsData
+    }));
+
+    if (walletsData && walletsData.length > 0) {
+      for (let i = 0; i < walletsData.length; i++) {
+        const wallet = walletsData[i];
+        const { publicKey } = wallet;
+        if (publicKey) {
+          const {
+            data: { data }
+          } = yield call(getTransactionApi, publicKey);
+
+          console.log("****** response ******", data);
+          if (data && data.account) {
+            const { address, transactions, balance } = data.account;
+            yield put(
+              setHistory({ publicKey, history: transactions, balance })
+            );
+          }
+        }
+      }
+    }
   } catch (e) {
     yield console.log(e);
   }
