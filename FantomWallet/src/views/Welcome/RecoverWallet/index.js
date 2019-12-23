@@ -87,8 +87,8 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   };
 
   const handleRecoverWalletUsingPrivateKey = async () => {
-    setIsImporting(true);
     if (privateKey) {
+      setIsImporting(true);
       // const address = WalletUtils.restoreWallet(privateKey);
       const address = await Web3Agent.Fantom.restoreWallet(privateKey);
       if (address && address.address) {
