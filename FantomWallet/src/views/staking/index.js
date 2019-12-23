@@ -5,7 +5,8 @@ import {
   SafeAreaView,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from "react-native";
 import styles from "./styles";
 import question from "../../images/question.png";
@@ -136,7 +137,7 @@ const Staking = ({}: Props) => {
           data={data}
           renderItem={_renderItem}
           sliderWidth={Metrics.screenWidth}
-          itemWidth={getWidth(260)}
+          itemWidth={getWidth(280)}
           inactiveSlideScale={1}
           inactiveSlideOpacity={1}
         />

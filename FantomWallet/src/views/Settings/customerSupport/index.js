@@ -21,7 +21,15 @@ export const CustomerSupportContainer = ({ navigation }: Props) => {
   const websiteLink = 'https://fantom.foundation/';
   const phoneNumber = 'mailto:contact@fantom.foundation';
   const displayPhoneNumber = 'contact@fantom.foundation';
-
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAndroidPress);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAndroidPress);
+  }, []);
+  const backAndroidPress = () => {
+    BackHandler.exitApp();
+    return true;
+  };
   const onLeftIconPress = () => navigation.goBack();
   const renderLinkRow = (iconName, textHeading, urlLink, linkText) => {
     let IconType = MaterialIcons;

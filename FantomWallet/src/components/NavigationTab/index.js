@@ -41,6 +41,7 @@ const TABS = [
 type Props = {
   navigation: {
     navigate: string => void,
+    goBack: () => void,
     state: {
       index: number
     }
@@ -52,8 +53,7 @@ type Props = {
  */
 const HomeNavigationBar = ({ navigation }: Props) => {
   const backAndroidPress = () => {
-    BackHandler.exitApp();
-    return true;
+    navigation.goBack()
   };
 
   useEffect(() => {

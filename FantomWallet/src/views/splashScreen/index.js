@@ -21,6 +21,7 @@ export const SplashScreenContainer = (props: TSplashScreenTypes) => {
    */
   const { wallets, walletsData, setCurrentWallet, navigation } = props;
   useEffect(() => {
+    
     let route = 'WalletSetup';
     if (
       wallets &&
