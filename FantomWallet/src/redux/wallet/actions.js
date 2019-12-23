@@ -51,7 +51,7 @@ export const setBalance = ({ name, publicKey, balance, loading }: Balance) => ({
 });
 
 export const getHistory = () => ({
-  type: types.GET_HISTORY
+  type: types.GET_HISTORY,
 });
 
 export const setHistory = ({ history }: { history: Array<TransactionT> }) => ({

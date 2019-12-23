@@ -1,6 +1,6 @@
 // @flow
-import { types } from "./actions";
-import type { TransactionT, WalletInfoT } from "./actions";
+import { types } from './actions';
+import type { TransactionT, WalletInfoT } from './actions';
 
 type WalletsDataT = {
   publicKey: string,
@@ -106,25 +106,23 @@ export default (state: Wallet = initialState, action: actionType) => {
     }
     case types.SET_WALLET_NAME: {
       const { publicKey, name } = action.payload;
-      let oldData = [...state.walletsData] || [];
+      const oldData = [...state.walletsData] || [];
       const index = oldData.findIndex(item => item.publicKey === publicKey);
       if (index > -1) {
         const newData = {
+          ...oldData[index],
           name,
-          publicKey,
-          ...oldData[index]
+          publicKey
         };
+
         oldData.splice(index, 1, newData);
       } else {
         oldData.push({ name, publicKey, history: [], balance: 0 });
       }
+
       return {
         ...state,
-        walletsData: oldData,
-        currentWallet: {
-          ...state.currentWallet,
-          name
-        }
+        walletsData: oldData
       };
     }
     case types.SET_CURRENT_WALLET:

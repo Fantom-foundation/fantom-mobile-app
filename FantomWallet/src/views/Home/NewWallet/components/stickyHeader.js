@@ -3,6 +3,7 @@ import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import CardImage from "../../../../images/fantomWhiteIcon.png";
 import { NavigationService, routes } from "~/navigation/helpers";
+import { BackLogo} from "../../../../images";
 
 const StickyHeader = ({ data, setCurrentWallet }) => {
   const { name, balance } = data;
@@ -30,7 +31,7 @@ const StickyHeader = ({ data, setCurrentWallet }) => {
       </View>
       <ImageBackground
         style={styles.stickyHeaderImageStyle}
-        source={CardImage}
+        source={BackLogo}
       />
     </TouchableOpacity>
   );
