@@ -113,7 +113,10 @@ const SingleWallet = props => {
         }}
       >
         <View style={styles.safeAreaViewContainer}>
-          <Text style={{ ...styles.walletTitle, color: textColor }}>
+          <Text
+            numberOfLines={1}
+            style={{ ...styles.walletTitle, color: textColor }}
+          >
             {currentWallet && currentWallet.name ? currentWallet.name : ""}
           </Text>
           <View style={styles.walletIDWrapper}>
