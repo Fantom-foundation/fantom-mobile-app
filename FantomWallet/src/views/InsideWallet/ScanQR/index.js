@@ -105,7 +105,7 @@ const ScanQR = props => {
 
   return (
     <View style={styles.containerStyle}>
-      <StatusBar barStyle={colorTheme === Colors.royalBlue} />
+    <StatusBar barStyle={"dark-content"} />
 
       <SafeAreaView style={styles.safeAreaView}>
         <View
