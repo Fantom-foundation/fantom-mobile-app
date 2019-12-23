@@ -13,6 +13,15 @@ const PrivacyPolicy = (props: TPrivacyPolicyTypes) => {
   const [visible, setVisible] = useState(true);
   const uri = 'http://fantom.foundation';
 
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAndroidPress);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAndroidPress);
+  }, []);
+const backAndroidPress = () => {
+    BackHandler.exitApp();
+    return true;
+  };
   const onRightIconPress = () => navigation.goBack();
   const hideSpinner = () => setVisible(false);
 

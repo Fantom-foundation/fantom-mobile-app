@@ -9,8 +9,7 @@ const ModalView = props => {
     modalTextStyle,
     buttonViewStyle,
     buttons,
-    stakingView,
-    disabled = false
+    stakingView
   } = props;
   return (
     <View style={styles.backgroundView}>
@@ -21,19 +20,15 @@ const ModalView = props => {
             buttons.map(b => {
               return (
                 <TouchableOpacity
-                  disabled={disabled}
+                  // disabled={b.disabled}
                   onPress={b.onPress}
                   style={{
                     ...styles.backButtonStyle,
-                    ...b.style,
-                    backgroundColor: disabled && Colors.grey
+                    ...b.style
+                    // backgroundColor: b.disabled ? Colors.grey : Colors.lightBlue
                   }}
                 >
-                  <Text
-                    style={{ ...b.textStyle, color: disabled && Colors.black }}
-                  >
-                    {b.name}
-                  </Text>
+                  <Text style={{ ...b.textStyle }}>{b.name}</Text>
                 </TouchableOpacity>
               );
             })}

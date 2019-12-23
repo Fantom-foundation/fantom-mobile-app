@@ -15,16 +15,23 @@ export default StyleSheet.create({
     marginTop: getHeight(20)
   },
   qrContainer: {
-    paddingTop: getHeight(43),
-    paddingBottom: getHeight(19),
+    // paddingTop: getHeight(43),
+    // paddingBottom: getHeight(19),
     width: DEVICE_WIDTH - getWidth(44),
     marginHorizontal: getWidth(22),
     borderRadius: getHeight(19),
     marginVertical: getHeight(35),
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
+    padding:getWidth(43)
   },
-  qrWrapper: { alignSelf: 'center',backgroundColor:'red'},
-  textWrapper: { width: getWidth(230), alignSelf: 'center' },
+  qrWrapper: {
+    alignSelf: 'center',
+    width: 250,
+    height: 200,
+    alignItems: 'center',
+    justifyContent:'center'
+  },
+  textWrapper: { width: getWidth(230), alignSelf: 'center',marginTop:getHeight(13) },
   qrText: {
     fontFamily: fonts.WorkSansMedium,
     fontSize: FontSize.xSmall,
@@ -45,7 +52,7 @@ export default StyleSheet.create({
   },
   actionItemWrapper: {
     width: getWidth(82),
-    alignItems: 'center',
+    alignItems: 'center'
   },
   actionIconBackground: {
     backgroundColor: Colors.textBlack,

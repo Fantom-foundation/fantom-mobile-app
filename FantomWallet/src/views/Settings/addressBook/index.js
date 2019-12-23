@@ -41,7 +41,15 @@ export const AddressBookContainer = ({ addresses, toggleAddress, deleteAddress, 
   const [addOrFavorite, setAddOrFavorite] = useState('add');
   const [displaySearch, setDisplaySearch] = useState(false);
   const [searchText, setSearchText] = useState('');
-
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAndroidPress);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAndroidPress);
+  }, []);
+  const backAndroidPress = () => {
+    BackHandler.exitApp();
+    return true;
+  };
   const onLeftIconPress = () => {
     navigation.goBack();
   };

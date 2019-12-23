@@ -120,7 +120,7 @@ const stickyHeaderStyles = StyleSheet.create({
     top: 15,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.2
+    opacity: 0.7
   }
 });
 

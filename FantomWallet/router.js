@@ -5,7 +5,6 @@ import SplashScreen from './src/views/splashScreen/';
 import WalletSetup from './src/views/walletSetup/';
 import PrivacyPolicy from './src/views/privacyPolicy/index';
 import TermsConditions from './src/views/termsConditions/index';
-import CaptionOutput from './src/views/captionOutput/index';
 import HomeScreen from './src/views/homeScreen/';
 import CaptchaVerification from './src/views/captchaVerification/index';
 import AddressBook from './src/views/homeScreen/settings/addressBook/'
@@ -36,7 +35,6 @@ const Routing = createStackNavigator(
     },
     Terms: { screen: TermsConditions },
     PrivacyPolicy: { screen: PrivacyPolicy },
-    CaptionOutput: { screen: CaptionOutput },
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {

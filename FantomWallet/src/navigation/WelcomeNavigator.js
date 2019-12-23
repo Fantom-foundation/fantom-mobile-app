@@ -6,9 +6,7 @@ import WalletSetup from "~/views/Welcome/WalletSetup";
 import CreateMnemonic from "~/views/Welcome/CreateMnemonic";
 import CheckMnemonic from "~/views/Welcome/CheckMnemonic";
 import RecoverWallet from "~/views/Welcome/RecoverWallet";
-import CaptionOutput from "~/views/captionOutput";
 import BackupWallet from "~/views/backupWallet";
-import VerifyRecoveryWords from "~/views/verifyRecoveryWords";
 import WalletCreated from "~/views/WalletCreated";
 import WalletImported from "~/views/WalletImported";
 import WalletInfo from "~/views/WalletInfo";
@@ -27,9 +25,7 @@ const WelcomeNavigator = createStackNavigator(
     CreateMnemonic: { screen: CreateMnemonic },
     CheckMnemonic: { screen: CheckMnemonic },
     RecoverWallet: { screen: RecoverWallet },
-    CaptionOutput: { screen: CaptionOutput },
     BackupWallet: { screen: BackupWallet },
-    VerifyRecoveryWords: { screen: VerifyRecoveryWords },
     WalletCreated: { screen: WalletCreated },
     WalletImported: { screen: WalletImported },
     WalletInfo: { screen: WalletInfo },

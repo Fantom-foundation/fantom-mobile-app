@@ -6,13 +6,12 @@ const styles = {
   mainView: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: getWidth(22)
+    paddingHorizontal: getWidth(15)
   },
   headingView: {
     marginTop: getHeight(18),
     flexDirection: 'row',
     alignItems: 'center'
-    // backgroundColor:'red'
   },
   crossIcon: {
     width: 16,
@@ -48,10 +47,10 @@ const styles = {
   },
   centerBottomText: {
     flexDirection: 'row',
-    marginTop:2
+    marginTop: 2
   },
   centerText: {
-    fontSize: FontSize.xSmall+1,
+    fontSize: FontSize.xSmall + 1,
     fontFamily: fonts.WorkSansMedium,
     color: Colors.textGrey
   },
@@ -80,7 +79,7 @@ const styles = {
     },
     shadowRadius: 4,
     elevation: 5,
-    backgroundColor:'green'
+    backgroundColor: 'green'
   },
   colorModalStyle: {
     width: Metrics.screenWidth,
@@ -104,19 +103,19 @@ const styles = {
     fontFamily: fonts.WorkSansBold,
     color: Colors.textBlack,
     width: Metrics.screenWidth * 0.72,
-    flexWrap: 'wrap',
-},
+    flexWrap: 'wrap'
+  },
   modalText: {
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.mediumSmall,
-    alignSelf: "center",
-    backgroundColor:'yellow'
+    alignSelf: 'center',
+    backgroundColor: 'yellow'
   },
   renameModalStyle: {
     width: Metrics.screenWidth - 40,
     height: Metrics.screenHeight * 0.55,
     position: 'absolute',
-    bottom:0,
+    bottom: 0,
     shadowColor: Colors.blackOpacity,
     shadowOpacity: 0.4,
     shadowOffset: {
@@ -126,13 +125,33 @@ const styles = {
     shadowRadius: 4,
     elevation: 5,
     borderRadius: 22,
-    padding: 20
+    padding: 20,
+    alignItems:'center'
+
   },
   textInput: {
     borderBottomWidth: 2,
     borderBottomColor: Colors.textGrey,
     width: Metrics.screenWidth * 0.72,
-    height: Metrics.screenHeight * 0.04,
+    height: Metrics.screenHeight * 0.06,
+  },
+  doneButton: {
+    position: 'absolute',
+    bottom: getHeight(20),
+    backgroundColor:Colors.royalBlue,
+    alignSelf: 'center',
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 20,
+    width:getWidth(150)
+  },
+  doneText: {
+    fontFamily: fonts.WorkSansSemiBold,
+    color:Colors.white
+  },
+  dotIcon: {
+    width: 20,
+    height: 20
   }
 };
 export default styles;

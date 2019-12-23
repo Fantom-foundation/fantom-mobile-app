@@ -50,6 +50,20 @@ export function* sendTransaction({
     // if (!responce.blockHash) throw Error(otherErrorMessage);
     // success
     transactionId = responce.blockHash;
+    const transaction: TransactionT = {
+      type: SENT,
+      amount: value,
+      transactionId,
+      transactionStatus,
+      amountUnit: "FTM",
+      from: publicKey,
+      to,
+      isError: false,
+      date
+    };
+    yield put(addTransaction(transaction));
+    // add to local history storage
+    yield put(setLoadingSendTransaction(false));
     Alert.alert(
       "Success",
       `Transfer successful with transaction hash: ${responce.blockHash}`,
@@ -65,20 +79,6 @@ export function* sendTransaction({
     Alert.alert("Error", e.message || otherErrorMessage);
     transactionStatus = FAILED;
   }
-  // add to local history storage
-  const transaction: TransactionT = {
-    type: SENT,
-    amount: value,
-    transactionId,
-    transactionStatus,
-    amountUnit: "FTM",
-    from: publicKey,
-    to,
-    isError: false,
-    date
-  };
-  yield put(addTransaction(transaction));
-  yield put(setLoadingSendTransaction(false));
 }
 
 export default function* listener(): Iterable<any> {

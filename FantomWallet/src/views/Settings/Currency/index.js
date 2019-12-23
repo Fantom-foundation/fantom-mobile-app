@@ -60,6 +60,15 @@ const Currency =(props)=>{
   const selectItem = (item, index) => {
     setTextClicked(item.text)
   };
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAndroidPress);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAndroidPress);
+  }, []);
+  const backAndroidPress = () => {
+    BackHandler.exitApp();
+    return true;
+  };
     const { navigation } = props;
     return (
       <View style={styles.mainContainer}>

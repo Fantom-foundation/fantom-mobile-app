@@ -5,6 +5,12 @@ import axios from "axios";
 import { types, setHistory } from "../actions";
 import { API_URL_1_FANTOM } from "react-native-dotenv";
 // import type { TransactionT } from '../actions';
+import {
+  FANTOM_GET_ACCOUNT_INFO
+} from "react-native-dotenv";
+
+const getHistoryApi = async () => {
+ return await fetch(`${FANTOM_GET_ACCOUNT_INFO}?address=0x239fa7623354ec26520de878b52f13fe84b06971`)
 
 const getTransactionApi = async publicKey => {
   return await axios.get(
@@ -44,6 +50,7 @@ export function* getHistory(): any {
       }
     }
   } catch (e) {
+
     yield console.log(e);
   }
 }
