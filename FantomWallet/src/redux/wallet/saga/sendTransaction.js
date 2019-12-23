@@ -47,7 +47,7 @@ export function* sendTransaction({
       privateKey
     });
     // other error
-    if (!responce.blockHash) throw Error(otherErrorMessage);
+    // if (!responce.blockHash) throw Error(otherErrorMessage);
     // success
     transactionId = responce.blockHash;
     Alert.alert(

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import styles from "../styles";
+import styles from "./styles";
+import { Colors } from "../../../theme";
 
 const ModalView = props => {
   const {
@@ -8,7 +9,8 @@ const ModalView = props => {
     modalTextStyle,
     buttonViewStyle,
     buttons,
-    stakingView
+    stakingView,
+    disabled = false
   } = props;
   return (
     <View style={styles.backgroundView}>
@@ -19,10 +21,19 @@ const ModalView = props => {
             buttons.map(b => {
               return (
                 <TouchableOpacity
+                  disabled={disabled}
                   onPress={b.onPress}
-                  style={{ ...styles.backButtonStyle, ...b.style }}
+                  style={{
+                    ...styles.backButtonStyle,
+                    ...b.style,
+                    backgroundColor: disabled && Colors.grey
+                  }}
                 >
-                  <Text style={{ ...b.textStyle }}>{b.name}</Text>
+                  <Text
+                    style={{ ...b.textStyle, color: disabled && Colors.black }}
+                  >
+                    {b.name}
+                  </Text>
                 </TouchableOpacity>
               );
             })}

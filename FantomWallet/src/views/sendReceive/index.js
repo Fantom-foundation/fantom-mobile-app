@@ -87,10 +87,10 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     setLoader(true);
     const { sendTransaction } = props;
     if (Number(amount) === 0) {
-      sertLoader(false);
+      setLoader(false);
       Alert.alert("Error", "Please enter valid amount");
     } else if (currentWallet.balance < amount) {
-      sertLoader(false);
+      setLoader(false);
       Alert.alert("Error", "Insufficient balance");
     } else {
       let message = "";
@@ -100,7 +100,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       else if (amount === "") message = "Please enter valid amount";
 
       if (message !== "") {
-        sertLoader(false);
+        setLoader(false);
         Alert.alert("Error", message);
       }
       if (address && Web3.utils.isAddress(address) && amount) {
