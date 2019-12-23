@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
-import { BackLogo } from "../../../../images";
+import CardImage from "../../../../images/fantomWhiteIcon.png";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
+import { balanceToDollar } from "~/utils/converts.js";
 
 const CardView = ({
   showList,
@@ -31,10 +32,10 @@ const CardView = ({
               {isHiddenText ? "********" : balance + " FTM"}
             </Text>
             <Text style={styles.bottomCardSubText}>
-              {isHiddenText ? "*******" : "$" + balance}
+              {isHiddenText ? "*******" : "$" + balanceToDollar(balance, 10)}
             </Text>
           </View>
-          <ImageBackground style={styles.cardImageStyle} source={BackLogo} />
+          <ImageBackground style={styles.cardImageStyle} source={CardImage} />
         </TouchableOpacity>
       )}
       {showList && history && history.length > 0 && (

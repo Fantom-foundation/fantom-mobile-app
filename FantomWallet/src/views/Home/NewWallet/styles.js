@@ -46,7 +46,7 @@ const cardStyles = StyleSheet.create({
     bottom: -10,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.8
+    opacity: 0.2
   },
   cardIndicatorStyle: {
     width: getWidth(12),
@@ -120,7 +120,7 @@ const stickyHeaderStyles = StyleSheet.create({
     top: 15,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.7
+    opacity: 0.2
   }
 });
 

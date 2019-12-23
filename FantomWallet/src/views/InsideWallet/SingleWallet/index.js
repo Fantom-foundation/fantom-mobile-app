@@ -25,11 +25,12 @@ import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
 import { EyeIcon, EyeOffIcon } from "../../../images";
 import {
-  fantomToDollar,
+  balanceToDollar,
   convertFTMValue,
   getConversionRate,
   formatActivities
 } from "~/utils/converts";
+
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
@@ -162,7 +163,7 @@ const SingleWallet = props => {
               {!isHiddenText
                 ? `($${
                     currentWallet && currentWallet.balance
-                      ? currentWallet.balance
+                      ? balanceToDollar(currentWallet.balance, 10)
                       : 0
                   })`
                 : "*******"}

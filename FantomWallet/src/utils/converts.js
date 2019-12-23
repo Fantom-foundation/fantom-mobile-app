@@ -88,3 +88,11 @@ export const formatActivities = (activityDate: any) => {
   const dateString = moment(t).format("MMM D, hh:mm A");
   return dateString;
 };
+
+export const balanceToDollar = (value, decimal) => {
+  const { fantomDollarRate } = store.getState().wallet;
+  if (fantomDollarRate) {
+    return (fantomDollarRate * value).toFixed(decimal);
+  }
+  return value;
+};

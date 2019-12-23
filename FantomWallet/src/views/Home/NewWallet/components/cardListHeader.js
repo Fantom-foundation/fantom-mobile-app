@@ -8,7 +8,7 @@ import { Colors, FontSize, fonts } from "../../../../theme";
 import WalletMenu from "./walletMenu";
 import CardView from "./cardView";
 import { EyeIcon, EyeOffIcon } from "../../../../images";
-
+import { balanceToDollar } from "~/utils/converts.js";
 const CardHeader = props => {
   const {
     showCard,
@@ -30,7 +30,7 @@ const CardHeader = props => {
       >
         <View style={styles.headerItems}>
           <Text style={styles.headerText}>
-            {isHiddenText ? "*******" : `$${totalBalance}`}
+            {isHiddenText ? "*******" : `$${balanceToDollar(totalBalance, 2)}`}
           </Text>
           <TouchableOpacity onPress={() => setCardHiddenView()}>
             {/* <Icon

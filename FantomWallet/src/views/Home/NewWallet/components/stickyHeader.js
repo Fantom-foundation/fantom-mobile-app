@@ -3,12 +3,8 @@ import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import CardImage from "../../../../images/fantomWhiteIcon.png";
 import { NavigationService, routes } from "~/navigation/helpers";
-import { BackLogo } from "../../../../images";
-import {
-  fantomToDollar,
-  convertFTMValue,
-  getConversionRate
-} from "~/utils/converts";
+
+import { balanceToDollar } from "~/utils/converts.js";
 
 const StickyHeader = ({ data, setCurrentWallet }) => {
   const { name, balance } = data;
@@ -32,11 +28,14 @@ const StickyHeader = ({ data, setCurrentWallet }) => {
         <Text style={styles.bottomCardText}>{`${balance} FTM`}</Text>
       </View>
       <View style={styles.cardBottomTextContainer}>
-        <Text style={styles.bottomCardSubText}>{`$${balance}`}</Text>
+        <Text style={styles.bottomCardSubText}>{`$${balanceToDollar(
+          balance,
+          10
+        )}`}</Text>
       </View>
       <ImageBackground
         style={styles.stickyHeaderImageStyle}
-        source={BackLogo}
+        source={CardImage}
       />
     </TouchableOpacity>
   );
