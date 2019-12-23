@@ -107,7 +107,6 @@ const SendFTM = (props: Props) => {
         //     cbSuccess: alertSuccessfulButtonPressed
         //   });
         // }
-        setLoader(false);
         console.log("trass", {
           to: toId,
           value: amountText,
@@ -118,7 +117,10 @@ const SendFTM = (props: Props) => {
           to: toId,
           value: amountText,
           memo: "",
-          cbSuccess: alertSuccessfulButtonPressed
+          cbSuccess: () => {
+            alertSuccessfulButtonPressed();
+            setLoader(false);
+          }
         });
         // NavigationService.navigate(routes.root.SendMoney, {
         //   address,
