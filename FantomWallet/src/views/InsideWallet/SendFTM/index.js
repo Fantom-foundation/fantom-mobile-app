@@ -27,6 +27,7 @@ import { addUpdateTimestampAddress } from "../../../redux/addressBook/actions";
 import { sendTransaction as sendTransactionAction } from "../../../redux/wallet/actions";
 import { estimationMaxFantomBalance, toFixed } from "../../../utils/converts";
 import { Loader } from "../../../components/loader";
+import Modal from "../../../components/general/modal";
 
 const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
 
@@ -34,6 +35,8 @@ const SendFTM = (props: Props) => {
   const [toId, setToId] = useState("");
   const [loader, setLoader] = useState(false);
   const [amountText, setAmountText] = useState("");
+  const [buttonModalText, setButtonModalText] = useState("Send");
+  const [isSendingModal, setSendingModal] = useState(false);
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation } = props;
 
@@ -95,41 +98,84 @@ const SendFTM = (props: Props) => {
         setLoader(false);
         Alert.alert("Error", message);
       }
-      if (toId && Web3.utils.isAddress(toId) && amountText) {
-        //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
-        // if (amountText === 0 || amountText > maxFantomBalance) {
-        //   Alert.alert("Error", "Please enter valid amount.");
-        // } else {
-        //   sendTransaction({
-        //     to: toId,
-        //     value: amountText,
-        //     memo: "",
-        //     cbSuccess: alertSuccessfulButtonPressed
-        //   });
-        // }
-        setLoader(false);
-        console.log("trass", {
-          to: toId,
-          value: amountText,
-          memo: "",
-          cbSuccess: alertSuccessfulButtonPressed
-        });
-        sendTransaction({
-          to: toId,
-          value: amountText,
-          memo: "",
-          cbSuccess: alertSuccessfulButtonPressed
-        });
-        // NavigationService.navigate(routes.root.SendMoney, {
-        //   address,
-        //   amount,
-        //   coin,
-        //   memo,
-        //   fees,
-        //   reload,
-        //   balance
-        // });
-      }
+      // if (toId && Web3.utils.isAddress(toId) && amountText) {
+      //   //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+      //   // if (amountText === 0 || amountText > maxFantomBalance) {
+      //   //   Alert.alert("Error", "Please enter valid amount.");
+      //   // } else {
+      //   //   sendTransaction({
+      //   //     to: toId,
+      //   //     value: amountText,
+      //   //     memo: "",
+      //   //     cbSuccess: alertSuccessfulButtonPressed
+      //   //   });
+      //   // }
+      //   setLoader(false);
+      //   console.log("trass", {
+      //     to: toId,
+      //     value: amountText,
+      //     memo: "",
+      //     cbSuccess: alertSuccessfulButtonPressed
+      //   });
+      //   sendTransaction({
+      //     to: toId,
+      //     value: amountText,
+      //     memo: "",
+      //     cbSuccess: alertSuccessfulButtonPressed
+      //   });
+      //   // NavigationService.navigate(routes.root.SendMoney, {
+      //   //   address,
+      //   //   amount,
+      //   //   coin,
+      //   //   memo,
+      //   //   fees,
+      //   //   reload,
+      //   //   balance
+      //   // });
+      // }
+    }
+  };
+
+  handleSendAmount = () => {
+    setLoader(true);
+    setButtonModalText("Sending....");
+    if (toId && Web3.utils.isAddress(toId) && amountText) {
+      //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+      // if (amountText === 0 || amountText > maxFantomBalance) {
+      //   Alert.alert("Error", "Please enter valid amount.");
+      // } else {
+      //   sendTransaction({
+      //     to: toId,
+      //     value: amountText,
+      //     memo: "",
+      //     cbSuccess: alertSuccessfulButtonPressed
+      //   });
+      // }
+
+      console.log("trass", {
+        to: toId,
+        value: amountText,
+        memo: "",
+        cbSuccess: alertSuccessfulButtonPressed
+      });
+      sendTransaction({
+        to: toId,
+        value: amountText,
+        memo: "",
+        cbSuccess: () => {
+          setLoader(false), setSendingModal(false), setButtonModalText("Send");
+          alertSuccessfulButtonPressed();
+        }
+      });
+      // NavigationService.navigate(routes.root.SendMoney, {
+      //   address,
+      //   amount,
+      //   coin,
+      //   memo,
+      //   fees,
+      //   reload,
+      //   balance
+      // });
     }
   };
 
@@ -220,6 +266,29 @@ const SendFTM = (props: Props) => {
           </View>
         </ScrollView>
       </SafeAreaView>
+      {true && (
+        <Modal
+          modalText={`Are you sure you want to send ${formatNumber(
+            amountText
+          )}\n FTM to ${toId}?"`}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.sendButtonView}
+          buttons={[
+            {
+              name: "Cancel",
+              onPress: () => setSendingModal(!isSendingModal),
+              disabled: buttonModalText === "Send" ? false : true
+            },
+            {
+              style: styles.sendButton,
+              name: buttonModalText,
+              onPress: () => handleSendAmount,
+              disabled: buttonModalText === "Send" ? false : true,
+              textStyle: styles.sendTextStyle
+            }
+          ]}
+        />
+      )}
     </View>
   );
 };

@@ -64,6 +64,28 @@ export default StyleSheet.create({
     // width: getWidth(190),
     marginTop: -4
   },
+  modalTextStyle: {
+    textAlign: "center",
+    flexWrap: "wrap",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    color: Colors.blackOpacity,
+    marginHorizontal: getWidth(20)
+  },
+  sendButtonView: {
+    marginTop: getHeight(80),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: getWidth(12)
+  },
+  sendButton: {
+    backgroundColor: Colors.royalBlue,
+    borderWidth: 0
+  },
+  sendTextStyle: {
+    color: Colors.white
+  },
+
   buttonStyle: {
     height: null,
     paddingVertical: getHeight(4),

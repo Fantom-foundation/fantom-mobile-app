@@ -12,7 +12,7 @@ import styles from "./styles";
 import question from "../../images/question.png";
 import Carousel from "react-native-snap-carousel";
 import { Metrics, getWidth } from "../../utils/pixelResolver";
-import Modal from "./component/modal";
+import Modal from "../../components/general/modal";
 import { NavigationService, routes } from "../../navigation/helpers";
 
 const data = [
@@ -169,8 +169,8 @@ const Staking = ({}: Props) => {
             onPress: handleBackPress,
             textStyle: styles.backButton
           }
-        ]} 
-      />*/}
+        ]}
+      /> */}
 
       {/* Unstake Confirm */}
 
