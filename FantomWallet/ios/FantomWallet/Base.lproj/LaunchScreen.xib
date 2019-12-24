@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,19 +15,38 @@
             <rect key="frame" x="0.0" y="0.0" width="479" height="476"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splashIson" translatesAutoresizingMaskIntoConstraints="NO" id="dXB-5D-DSS">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wtj-vZ-xm7">
                     <rect key="frame" x="0.0" y="0.0" width="479" height="476"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                </imageView>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="sz0-l8-MFg">
+                            <rect key="frame" x="139.5" y="138" width="200" height="200"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="Ac8-8W-KEG"/>
+                                <constraint firstAttribute="width" constant="200" id="swB-h1-qSt"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.095889545977115631" green="0.3974422812461853" blue="0.91475647687911987" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="sz0-l8-MFg" firstAttribute="centerX" secondItem="Wtj-vZ-xm7" secondAttribute="centerX" id="MdN-SN-p9c"/>
+                        <constraint firstItem="sz0-l8-MFg" firstAttribute="centerY" secondItem="Wtj-vZ-xm7" secondAttribute="centerY" id="rmb-Xg-z2g"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.066656596958637238" green="0.066673107445240021" blue="0.066652975976467133" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" red="0.066656596958637238" green="0.066673107445240021" blue="0.066652975976467133" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Wtj-vZ-xm7" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="HpL-Ov-Y7y"/>
+                <constraint firstItem="Wtj-vZ-xm7" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="Jjj-Bd-2TV"/>
+                <constraint firstItem="Wtj-vZ-xm7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="S2g-LS-1Aj"/>
+                <constraint firstItem="Wtj-vZ-xm7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Vl2-Cv-5M1"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="545.6521739130435" y="456.69642857142856"/>
         </view>
     </objects>
     <resources>
-        <image name="splashIson" width="4096" height="4096"/>
+        <image name="Splash.png" width="1024" height="1024"/>
     </resources>
 </document>

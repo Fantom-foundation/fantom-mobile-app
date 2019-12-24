@@ -71,6 +71,7 @@
 		80D02C113A924EB8B4696ED2 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB4BFA79B09343CD9344EFA3 /* MaterialCommunityIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		B0222CF523B1299100977EE5 /* Splash.png in Resources */ = {isa = PBXBuildFile; fileRef = B0222CB823B1299000977EE5 /* Splash.png */; };
 		B1C0D431ACA94E4CA37763FE /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD91A36B72974B318AF43500 /* libRNCAsyncStorage.a */; };
 		B8D9F9250C914F9896389DCB /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF236D869CB942D6821AF8FB /* libBVLinearGradient.a */; };
 		BC45C16403974CC8B2BC7C39 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEB34175F27F4AED8080B592 /* Foundation.ttf */; };
@@ -623,6 +624,7 @@
 		AB4BFA79B09343CD9344EFA3 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		AC99FD6B6ACF4A1783D154E3 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		B0222CB823B1299000977EE5 /* Splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Splash.png; sourceTree = "<group>"; };
 		B3BE884D892748A0A04572D1 /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		BBC08D43A42348D39BC4ADAD /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		BD61B7084DF441039C0885B6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -988,6 +990,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B0222CB823B1299000977EE5 /* Splash.png */,
 				13B07FAE1A68108700A75B9A /* FantomWallet */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FantomWalletTests */,
@@ -1814,6 +1817,7 @@
 				D8F38D7B21B7CF0A005CB59A /* Lato-Black.ttf in Resources */,
 				C5C3E8CE212F0D630024CA91 /* SF-Pro-Display-Regular.otf in Resources */,
 				04CFB401239FA9840029094C /* WorkSans-Hairline.otf in Resources */,
+				B0222CF523B1299100977EE5 /* Splash.png in Resources */,
 				04CFB3FD239FA9840029094C /* WorkSans-ExtraLightItalic.otf in Resources */,
 				C5C3E8D2212F0D630024CA91 /* SF-Pro-Text-Regular.otf in Resources */,
 				E862767899234393BBA9765F /* Feather.ttf in Resources */,
@@ -1919,7 +1923,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1972,7 +1976,7 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
