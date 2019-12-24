@@ -7,7 +7,7 @@ import { getHeight, getWidth } from "../../../../utils/pixelResolver";
 import { Colors, FontSize, fonts } from "../../../../theme";
 import WalletMenu from "./walletMenu";
 import CardView from "./cardView";
-import { EyeIcon, EyeOffIcon } from "../../../../images";
+import { EyeOpen, EyeClose } from "../../../../images";
 import { balanceToDollar } from "~/utils/converts.js";
 const CardHeader = props => {
   const {
@@ -41,13 +41,13 @@ const CardHeader = props => {
             /> */}
             {isHiddenText ? (
               <Image
-                source={EyeOffIcon}
+                source={EyeClose}
                 resizeMode="contain"
                 style={styles.eyeOffIcon}
               ></Image>
             ) : (
               <Image
-                source={EyeIcon}
+                source={EyeOpen}
                 resizeMode="contain"
                 style={styles.eyeIcon}
               ></Image>

@@ -56,10 +56,17 @@ export default StyleSheet.create({
   lineOnEyeOff: {
     marginRight: getWidth(18),
     alignSelf: "flex-end",
-    width: getWidth(21),
-    height: getHeight(21)
+    width: getWidth(25),
+    height: getHeight(25),
+    tintColor: Colors.textBlack
   },
-  lineOnEye: { marginRight: getWidth(18), alignSelf: "flex-end" },
+  lineOnEye: {
+    marginRight: getWidth(18),
+    alignSelf: "flex-end",
+    width: getWidth(25),
+    height: getHeight(25),
+    tintColor: Colors.textBlack
+  },
   ftmText: {
     textAlign: "center",
     marginTop: getHeight(16),

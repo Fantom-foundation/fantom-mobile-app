@@ -21,7 +21,7 @@ import styles from "./styles";
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
-import { EyeIcon, EyeOffIcon } from "../../../images";
+import { EyeOpen, EyeClose } from "../../../images";
 import {
   balanceToDollar,
   convertFTMValue,
@@ -139,13 +139,13 @@ const SingleWallet = props => {
 
               {isHiddenText ? (
                 <Image
-                  source={EyeOffIcon}
+                  source={EyeClose}
                   resizeMode="contain"
                   style={styles.lineOnEyeOff}
                 ></Image>
               ) : (
                 <Image
-                  source={EyeIcon}
+                  source={EyeOpen}
                   resizeMode="contain"
                   style={styles.lineOnEye}
                 ></Image>

@@ -22,3 +22,5 @@ export { default as PenIcon } from "./pen-01.png";
 export { default as EyeIcon } from "./show-01.png";
 export { default as EyeOffIcon } from "./eye-off.png";
 export { default as BackLogo } from "./Binance_logo.png";
+export { default as EyeOpen } from "./view.png";
+export { default as EyeClose } from "./hide.png";
