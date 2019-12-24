@@ -25,7 +25,7 @@ import Web3 from "web3";
 import { connect } from "react-redux";
 import { addUpdateTimestampAddress } from "../../../redux/addressBook/actions";
 import { sendTransaction as sendTransactionAction } from "../../../redux/wallet/actions";
-import { estimationMaxFantomBalance, toFixed } from "../../../utils/converts";
+import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../../components/loader";
 import Modal from "../../../components/general/modal";
 
@@ -39,6 +39,8 @@ const SendFTM = (props: Props) => {
   const [isSendingModal, setSendingModal] = useState(false);
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation, isLoading } = props;
+  const [fontSizeValue, setFontSizeValue] = useState(40);
+
   useEffect(() => {
     const setPublicKey = props.navigation.getParam("publicKey");
     if (setPublicKey) {
@@ -46,13 +48,24 @@ const SendFTM = (props: Props) => {
     }
   }, [navigation.state.params]);
 
+  useEffect(() => {
+    if (amountText.length <= 5) {
+      setFontSizeValue(36);
+    } else if (amountText.length <= 10) {
+      setFontSizeValue(32);
+    } else if (amountText.length <= 15) {
+      setFontSizeValue(28);
+    } else {
+      setFontSizeValue(20);
+    }
+  }, [amountText]);
+
   const formatNumber = num => {
     if (num && num.indexOf(".") !== -1) {
       return num.replace(",", "");
     }
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
-
   const handleInputNumber = item => {
     if (item === "0" && amountText === "") {
       return;
@@ -260,14 +273,14 @@ const SendFTM = (props: Props) => {
             <View style={styles.horizontalRow} />
 
             <View style={styles.flexDirectionRow}>
-              <Text style={styles.amountText}>
+              <Text style={[styles.amountText, { fontSize: fontSizeValue }]}>
                 {amountText ? formatNumber(amountText) : 0}
               </Text>
               <Text style={styles.unit}>FTM</Text>
             </View>
 
             <Text style={styles.amount}>
-              {amountText ? `($${formatNumber(amountText)})` : `($${0})`}
+              {amountText ? `($${balanceToDollar(amountText, 5)})` : `($${0})`}
             </Text>
 
             {/* KeyPad */}
