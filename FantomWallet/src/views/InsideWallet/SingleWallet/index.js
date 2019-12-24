@@ -162,7 +162,7 @@ const SingleWallet = props => {
               {!isHiddenText
                 ? `($${
                     currentWallet && currentWallet.balance
-                      ? balanceToDollar(currentWallet.balance, 10)
+                      ? balanceToDollar(currentWallet.balance, 2)
                       : 0
                   })`
                 : "*******"}

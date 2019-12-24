@@ -24,3 +24,8 @@ export { default as EyeOffIcon } from "./eye-off.png";
 export { default as BackLogo } from "./Binance_logo.png";
 export { default as EyeOpen } from "./view.png";
 export { default as EyeClose } from "./hide.png";
+export { default as MoneyBagIcon } from "./money-bag.png";
+export { default as HomeIcon } from "./home.png";
+export { default as OppositeArrow } from "./twoOppositeArrows.png";
+export { default as Avatar } from "./avatar.png";
+export { default as WalletTabIcon } from "./walletTabIcon.png";

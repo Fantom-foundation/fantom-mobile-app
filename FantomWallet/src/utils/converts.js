@@ -72,6 +72,7 @@ export const fantomToDollar = value => {
 export const convertFTMValue = value => {
   if (value) {
     return Number(estimationMaxFantomBalance(value, GAS_PRICE)).toFixed(2);
+    // return parseFloat(Web3.utils.fromWei(value)).toFixed(2);
   }
   return 0;
 };
@@ -92,7 +93,7 @@ export const formatActivities = (activityDate: any) => {
 export const balanceToDollar = (value, decimal) => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
-    return (fantomDollarRate * value).toFixed(2);
+    return (fantomDollarRate * value).toFixed(decimal);
   }
   return value;
 };
