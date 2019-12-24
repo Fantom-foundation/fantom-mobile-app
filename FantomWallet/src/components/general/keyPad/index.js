@@ -10,16 +10,18 @@ import styles from "./styles";
 const KeyPad = (props: TKeypadTypes) => {
   const {
     keyPad = [],
-    handleInputNumber = () => { },
+    handleInputNumber = (item) => { },
     buttonStyle,
     textStyle,
-    keyPadStyle
+    keyPadStyle,
+    amountText
   }=props
   return (
     <View style={{ ...styles.keyPadView, ...keyPadStyle }}>
       <FlatList
         scrollEnabled={false}
         data={keyPad}
+        extraData={amountText}
         renderItem={({ item, index }) => {
           let marginLeft = getWidth(58);
           let marginTop = index <= 2 ? 0 : 10;
@@ -28,6 +30,7 @@ const KeyPad = (props: TKeypadTypes) => {
 
           return (
             <TouchableOpacity
+              key={item}
               style={{
                 ...styles.numberButton,
                 ...buttonStyle,
