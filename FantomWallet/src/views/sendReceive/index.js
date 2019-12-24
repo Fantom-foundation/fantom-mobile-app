@@ -123,7 +123,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     } else {
       let message = "";
       if (address === "") message = "Please enter address.";
-      else if (!Web3.utils.isAddress(address))
+      else if (!Web3.utils.isAddress(address.trim()))
         message = "Please enter valid address.";
       else if (amount === "") message = "Please enter valid amount";
 

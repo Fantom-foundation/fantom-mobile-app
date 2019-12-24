@@ -111,7 +111,7 @@ const SendFTM = (props: Props) => {
     } else {
       let message = "";
       if (toId === "") message = "Please enter address.";
-      else if (!Web3.utils.isAddress(toId))
+      else if (!Web3.utils.isAddress(toId.trim()))
         message = "Please enter valid address.";
       else if (amountText === "") message = "Please enter valid amount";
 
@@ -163,7 +163,7 @@ const SendFTM = (props: Props) => {
     const { sendTransaction } = props;
     setLoader(true);
     setButtonModalText("Sending....");
-    if (toId && Web3.utils.isAddress(toId) && amountText) {
+    if (toId && Web3.utils.isAddress(toId.trim()) && amountText) {
       //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
       // if (amountText === 0 || amountText > maxFantomBalance) {
       //   Alert.alert("Error", "Please enter valid amount.");
