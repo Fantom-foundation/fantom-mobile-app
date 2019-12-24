@@ -81,9 +81,9 @@ class Wallet extends Component {
       isScaleView,
       isHiddenText
     } = this.state;
-    console.log("hellohelo", fantomToDollar(50));
+
     const { isLoading, wallets, walletsData, setCurrentWallet } = this.props;
-    console.log("all walllets", walletsData, wallets);
+
     return (
       <View style={styles.mainContainer}>
         <SafeAreaView style={{ flex: 1 }}>

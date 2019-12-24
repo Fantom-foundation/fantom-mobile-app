@@ -171,8 +171,8 @@ export default StyleSheet.create({
     color: Colors.textBlack
   },
   eyeIcon: {
-    width: getWidth(21),
-    height: getHeight(21),
+    width: getWidth(25),
+    height: getHeight(25),
     tintColor: Colors.textBlack
   },
   eyeOffIcon: {

@@ -16,25 +16,24 @@ import { getHeight, Metrics } from "~/utils/pixelResolver";
 import { NavigationService, routes } from "~/navigation/helpers";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Entypo from "react-native-vector-icons/Entypo";
 import Button from "~/components/general/Button";
 import styles from "./styles";
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
-import { EyeIcon, EyeOffIcon } from "../../../images";
+import { EyeOpen, EyeClose } from "../../../images";
 import {
   balanceToDollar,
   convertFTMValue,
   getConversionRate,
   formatActivities
 } from "~/utils/converts";
+import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
-  const { currentWallet, wallet, keys } = props;
+  const { currentWallet, setDopdownAlert } = props;
   const [textColor, setTextColor] = useState(Colors.white);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
@@ -46,7 +45,7 @@ const SingleWallet = props => {
     const { currentWallet } = props;
     //To copy the text to clipboard
     Clipboard.setString(currentWallet.publicKey);
-    alert("Copied to Clipboard!");
+    setDopdownAlert("custom", "COPIED");
   };
 
   const sortActivities = (activityObject: any) => {
@@ -122,7 +121,7 @@ const SingleWallet = props => {
               <Ionicons
                 style={styles.copyIcon}
                 name="md-copy"
-                size={16}
+                size={22}
                 color={textColor}
               />
             </TouchableOpacity>
@@ -140,13 +139,13 @@ const SingleWallet = props => {
 
               {isHiddenText ? (
                 <Image
-                  source={EyeOffIcon}
+                  source={EyeClose}
                   resizeMode="contain"
                   style={styles.lineOnEyeOff}
                 ></Image>
               ) : (
                 <Image
-                  source={EyeIcon}
+                  source={EyeOpen}
                   resizeMode="contain"
                   style={styles.lineOnEye}
                 ></Image>
@@ -296,5 +295,8 @@ const SingleWallet = props => {
 const mapStateToProps = state => ({
   currentWallet: state.wallet.currentWallet
 });
+const mapDispatchToProps = {
+  setDopdownAlert: setDopdownAlertAction
+};
 
-export default connect(mapStateToProps, null)(SingleWallet);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleWallet);
