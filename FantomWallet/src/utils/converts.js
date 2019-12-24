@@ -42,8 +42,7 @@ export function scientificToDecimal(num) {
 export function estimationMaxFantomBalance(fantomWei, gasPrice) {
   let wei = fantomWei;
 
-  const isEther = fantomWei < 1;
-  if (isEther) {
+  if (fantomWei % 1 != 0) {
     wei *= 1e18;
   }
 
@@ -60,6 +59,9 @@ export const toFixed = (num, fixed) => {
 };
 
 export const fantomToDollar = value => {
+  if (value % 1 != 0) {
+    value *= 1e18;
+  }
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
     return (
@@ -70,8 +72,11 @@ export const fantomToDollar = value => {
 };
 
 export const convertFTMValue = value => {
+  if (value % 1 != 0) {
+    value *= 1e18;
+  }
   if (value) {
-    return Number(estimationMaxFantomBalance(value, GAS_PRICE)).toFixed(2);
+    return Number(estimationMaxFantomBalance(value, GAS_PRICE));
   }
   return 0;
 };
