@@ -59,12 +59,12 @@ export const toFixed = (num, fixed) => {
   return num.toString().match(re)[0];
 };
 
-export const fantomToDollar = value => {
+export const fantomToDollar = (value,decimal) => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
     return (
       fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE)
-    ).toFixed(10);
+    ).toFixed(decimal);
   }
   return value;
 };
