@@ -75,7 +75,7 @@ const WalletInfo = (props: TWalletInfoTypes) => {
         <View style={styles.codeView}>
           <Text style={styles.codeText}>{publicKey}</Text>
           <TouchableOpacity onPress={() => copyToClipboard(publicKey)}>
-            <Ionicons name="ios-copy" size={16} color={Colors.textBlack} />
+            <Ionicons name="ios-copy" size={22} color={Colors.textBlack} />
           </TouchableOpacity>
         </View>
         <Text style={styles.addressText}>Name</Text>
