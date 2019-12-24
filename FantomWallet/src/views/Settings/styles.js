@@ -164,12 +164,12 @@ export default StyleSheet.create({
     marginBottom: 10
   },
   imageStyle: {
-    marginHorizontal: getWidth(10)
+    marginHorizontal: getWidth(10),
+    width: 24,
+    height: 20,
   },
   iconStyle: {
     width: 20,
     height: 20,
-    tintColor: Colors.textBlack
-    // backgroundColor:'red'
   }
 });

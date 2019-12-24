@@ -1,10 +1,10 @@
 export { default as ShareIcon } from "./share.png";
-export { default as ReviewIcon } from "./Path-01.png";
+export { default as ReviewIcon } from "./favorite-heart-button.png";
 export { default as AboutIcon } from "./Shape-01.png";
-export { default as TelegramIcon } from "./telegram-plane-01.png";
-export { default as CrossIcon } from "./times-01.png";
-export { default as TwitterIcon } from "./twitter-01.png";
-export { default as WalletIcon } from "./wallet-01.png";
+export { default as TelegramIcon } from "./telegram.png";
+export { default as CrossIcon } from "./delete.png";
+export { default as TwitterIcon } from "./twitter.png";
+export { default as WalletIcon } from "./wallet-filled.png";
 export { default as NotificationIcon } from "./notification.png";
 export { default as PlusIcon } from "./plusSymbol.png";
 export { default as RightArrowIcon } from "./rightArrowIcon.png";
