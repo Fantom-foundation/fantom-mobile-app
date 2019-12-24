@@ -86,7 +86,7 @@ const SendModal = props => {
                 marginBottom: getHeight(40)
               }}
             >
-              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee)})`}
+              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee,5)})`}
             </Text>
             <TouchableOpacity
               style={styles.shareIconWrapper}

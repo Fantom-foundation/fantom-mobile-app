@@ -33,16 +33,19 @@ import { Colors } from "../../theme";
 import KeyPad from "../../components/general/keyPad";
 import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
 import { Loader } from "../../components/loader";
+import Modal from "../../components/general/modal";
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
 export const SendReceive = (props: TSendReceiveTypes) => {
   const { navigation, addUpdateAddress, currentWallet } = props;
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
+  const [buttonModalText, setButtonModalText] = useState("Send");
   const [address, setSendTo] = useState("");
   const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [amount, setAmount] = useState("");
+  const [isSendingModal, setSendingModal] = useState(false);
   //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
 
   //  function for entered amount from KeyPad
@@ -80,7 +83,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const alertSuccessfulButtonPressed = () => {
     addUpdateAddress(address, "", new Date().getTime());
     clearState();
-    setOpenModal(false);
+    // setOpenModal(false);
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
 
@@ -99,14 +102,14 @@ export const SendReceive = (props: TSendReceiveTypes) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
-    setLoader(true);
+
     const { sendTransaction } = props;
     if (Number(amount) === 0) {
-      setLoader(false);
       Alert.alert("Error", "Please enter valid amount");
+      return;
     } else if (currentWallet.balance < amount) {
-      setLoader(false);
-      Alert.alert("Error", "Insufficient balance");
+ Alert.alert("Error", "Insufficient balance");
+      return;
     } else {
       let message = "";
       if (address === "") message = "Please enter address.";
@@ -118,7 +121,33 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         setLoader(false);
         Alert.alert("Error", message);
       }
-      if (address && Web3.utils.isAddress(address) && amount) {
+      else {
+        setSendingModal(true);
+      }
+      // if (address && Web3.utils.isAddress(address) && amount) {
+      //   // const maxFantomBalance = estimationMaxFantomBalance(
+      //   //   Number(currentWallet.balance),
+      //   //   GAS_PRICE
+      //   // );
+      //   // if (amount === 0 || amount > maxFantomBalance) {
+      //   //   Alert.alert("Error", "Please enter valid amount.");
+      //   // } else {
+      //   sendTransaction({
+      //     to: address,
+      //     value: amount,
+      //     memo: "",
+      //     cbSuccess: alertSuccessfulButtonPressed
+      //   });
+      // }
+    }
+  };
+
+
+  const handleSendAmount = () => {
+    const { sendTransaction } = props;
+    setLoader(true);
+    setButtonModalText("Sending....");
+  if (address && Web3.utils.isAddress(address) && amount) {
         // const maxFantomBalance = estimationMaxFantomBalance(
         //   Number(currentWallet.balance),
         //   GAS_PRICE
@@ -133,8 +162,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           cbSuccess: alertSuccessfulButtonPressed
         });
       }
-    }
-  };
+  }
 
   /**
    * clearState() : reset the fields.
@@ -142,6 +170,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const clearState = () => {
     setSendTo("");
     setOpenModal(false);
+    setSendingModal(false);
     setAmount("");
   };
 
@@ -273,6 +302,29 @@ export const SendReceive = (props: TSendReceiveTypes) => {
             </View>
           </View>
         </KeyboardAvoidingView>
+      )}
+
+      { isSendingModal && (
+        <Modal
+          modalText={`Are you sure you want to send ${formatNumber(
+            amount
+          )}\n FTM to ${address}?"`}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.sendButtonView}
+          buttons={[
+            {
+              name: "Cancel",
+              onPress: () => setSendingModal(!isSendingModal)
+            },
+            {
+              style: styles.sendButton,
+              name: buttonModalText,
+              onPress: handleSendAmount,
+              disabled: buttonModalText === "Send",
+              textStyle: styles.sendTextStyle
+            }
+          ]}
+        />
       )}
     </View>
   );

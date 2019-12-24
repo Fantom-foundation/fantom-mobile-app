@@ -14,7 +14,8 @@ const cardStyles = StyleSheet.create({
   cardHeaderText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
-    color: Colors.white
+    color: Colors.white,
+    marginTop: getHeight(5)
   },
   cardSecretText: {
     fontFamily: fonts.WorkSansMedium,
@@ -27,14 +28,15 @@ const cardStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    textAlign: "right"
+    alignSelf: "flex-end"
   },
   bottomCardSubText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.small,
     color: Colors.white,
-    textAlign: "right",
-    opacity: 0.5
+    alignSelf: "flex-end",
+    opacity: 0.5,
+    marginVertical: getHeight(5)
   },
   cardBottomTextContainer: {
     flex: 1,
@@ -46,7 +48,7 @@ const cardStyles = StyleSheet.create({
     bottom: -10,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.2
+    opacity: 0.7
   },
   cardIndicatorStyle: {
     width: getWidth(12),
@@ -106,13 +108,12 @@ const cardListItemStyles = StyleSheet.create({
 
 const stickyHeaderStyles = StyleSheet.create({
   stickyHeaderStyle: {
-    height: getHeight(80),
+    height: getHeight(90),
     borderRadius: 12,
     overflow: "hidden",
     backgroundColor: "#416ed5",
-    paddingHorizontal: getWidth(22),
-    //marginHorizontal:getWidth(22),
-    paddingVertical: getHeight(10)
+    paddingHorizontal: getWidth(15),
+    paddingVertical: getHeight(5)
   },
   stickyHeaderImageStyle: {
     height: getHeight(100),
@@ -120,7 +121,7 @@ const stickyHeaderStyles = StyleSheet.create({
     top: 15,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.2
+    opacity: 0.7
   }
 });
 

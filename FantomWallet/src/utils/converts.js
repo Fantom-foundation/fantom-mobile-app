@@ -58,7 +58,7 @@ export const toFixed = (num, fixed) => {
   return num.toString().match(re)[0];
 };
 
-export const fantomToDollar = value => {
+export const fantomToDollar = (value, decimal) => {
   if (value % 1 != 0) {
     value *= 1e18;
   }
@@ -66,7 +66,7 @@ export const fantomToDollar = value => {
   if (fantomDollarRate) {
     return (
       fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE)
-    ).toFixed(10);
+    ).toFixed(decimal);
   }
   return value;
 };
@@ -76,7 +76,8 @@ export const convertFTMValue = value => {
     value *= 1e18;
   }
   if (value) {
-    return Number(estimationMaxFantomBalance(value, GAS_PRICE));
+    return Number(estimationMaxFantomBalance(value, GAS_PRICE)).toFixed(2);
+    // return parseFloat(Web3.utils.fromWei(value)).toFixed(2);
   }
   return 0;
 };
@@ -97,7 +98,7 @@ export const formatActivities = (activityDate: any) => {
 export const balanceToDollar = (value, decimal) => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
-    return (fantomDollarRate * value).toFixed(2);
+    return (fantomDollarRate * value).toFixed(decimal);
   }
   return value;
 };
