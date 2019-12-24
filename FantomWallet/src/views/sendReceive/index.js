@@ -47,12 +47,27 @@ export const SendReceive = (props: TSendReceiveTypes) => {
 
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
-    if (item === "<") {
-      let num = amount.slice(0, -1);
-      setAmount(num);
-    } else {
-      setAmount(amount.concat(item));
+    if (item ==="0" && amount === "") {
+      return;
     }
+    else if (item === "." && amount === "") {
+      let num = amount.concat("0.")
+      setAmount(num);
+    }
+    else {
+      if (item === "<") {
+        if (amount === "0.") {
+          setAmount("")
+        }
+        else {
+          let num = amount.slice(0, -1);
+          setAmount(num);
+        }}
+      else {
+        setAmount(amount.concat(item));
+      }
+    }
+  
   };
 
   useEffect(() => {

@@ -39,7 +39,7 @@ const SendFTM = (props: Props) => {
   const [isSendingModal, setSendingModal] = useState(false);
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation, isLoading } = props;
-
+  console.log(amountText, "amountTextamountText1111")
   useEffect(() => {
     const setPublicKey = props.navigation.getParam("publicKey");
     if (setPublicKey) {
@@ -50,11 +50,20 @@ const SendFTM = (props: Props) => {
   const formatNumber = num => {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
-  const handleInputNumber = item => {
-    if (item === "<") {
-      setAmountText(prev => prev.slice(0, -1));
-    } else {
-      setAmountText(prev => prev.concat(item));
+  const handleInputNumber = (item) => {
+
+  if (item === "0" && amountText === "") {
+    return;
+  } else if (item === "." && amountText === "") {
+       setAmountText(amountText.concat("0."));
+  } else {
+      if (item === "<") {
+        if (amountText == "0.") 
+          setAmountText("")
+        else setAmountText(prev => prev.slice(0, -1));
+      }
+      else
+        setAmountText(prev => prev.concat(item));
     }
   };
   const alertSuccessfulButtonPressed = () => {
@@ -266,6 +275,7 @@ const SendFTM = (props: Props) => {
             <KeyPad
               textStyle={styles.keypadItem}
               keyPad={keypadText}
+              amountText={amountText}
               handleInputNumber={handleInputNumber}
             />
           </View>
