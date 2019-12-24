@@ -28,9 +28,13 @@ const StakingAmount = ({}: Props) => {
   };
 
   //formating Number
-  function formatNumber(num) {
+  const formatNumber = num => {
+    if (num && num.indexOf(".") !== -1) {
+      return num.replace(",", "");
+    }
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-  }
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>

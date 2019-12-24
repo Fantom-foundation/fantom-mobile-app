@@ -50,27 +50,23 @@ export const SendReceive = (props: TSendReceiveTypes) => {
 
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
-    if (item ==="0" && amount === "") {
+    if (item === "0" && amount === "") {
       return;
-    }
-    else if (item === "." && amount === "") {
-      let num = amount.concat("0.")
+    } else if (item === "." && amount === "") {
+      let num = amount.concat("0.");
       setAmount(num);
-    }
-    else {
+    } else {
       if (item === "<") {
         if (amount === "0.") {
-          setAmount("")
-        }
-        else {
+          setAmount("");
+        } else {
           let num = amount.slice(0, -1);
           setAmount(num);
-        }}
-      else {
+        }
+      } else {
         setAmount(amount.concat(item));
       }
     }
-  
   };
 
   useEffect(() => {
@@ -88,9 +84,12 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   };
 
   //formating Number
-  function formatNumber(num) {
+  const formatNumber = num => {
+    if (num && num.indexOf(".") !== -1) {
+      return num.replace(",", "");
+    }
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-  }
+  };
 
   const handleSendOption = () => {
     // for open Modal for Send Option
@@ -102,13 +101,12 @@ export const SendReceive = (props: TSendReceiveTypes) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
-
     const { sendTransaction } = props;
     if (Number(amount) === 0) {
       Alert.alert("Error", "Please enter valid amount");
       return;
     } else if (currentWallet.balance < amount) {
- Alert.alert("Error", "Insufficient balance");
+      Alert.alert("Error", "Insufficient balance");
       return;
     } else {
       let message = "";
@@ -120,8 +118,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       if (message !== "") {
         setLoader(false);
         Alert.alert("Error", message);
-      }
-      else {
+      } else {
         setSendingModal(true);
       }
       // if (address && Web3.utils.isAddress(address) && amount) {
@@ -142,27 +139,26 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     }
   };
 
-
   const handleSendAmount = () => {
     const { sendTransaction } = props;
     setLoader(true);
     setButtonModalText("Sending....");
-  if (address && Web3.utils.isAddress(address) && amount) {
-        // const maxFantomBalance = estimationMaxFantomBalance(
-        //   Number(currentWallet.balance),
-        //   GAS_PRICE
-        // );
-        // if (amount === 0 || amount > maxFantomBalance) {
-        //   Alert.alert("Error", "Please enter valid amount.");
-        // } else {
-        sendTransaction({
-          to: address,
-          value: amount,
-          memo: "",
-          cbSuccess: alertSuccessfulButtonPressed
-        });
-      }
-  }
+    if (address && Web3.utils.isAddress(address) && amount) {
+      // const maxFantomBalance = estimationMaxFantomBalance(
+      //   Number(currentWallet.balance),
+      //   GAS_PRICE
+      // );
+      // if (amount === 0 || amount > maxFantomBalance) {
+      //   Alert.alert("Error", "Please enter valid amount.");
+      // } else {
+      sendTransaction({
+        to: address,
+        value: amount,
+        memo: "",
+        cbSuccess: alertSuccessfulButtonPressed
+      });
+    }
+  };
 
   /**
    * clearState() : reset the fields.
@@ -304,7 +300,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         </KeyboardAvoidingView>
       )}
 
-      { isSendingModal && (
+      {isSendingModal && (
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
             amount
