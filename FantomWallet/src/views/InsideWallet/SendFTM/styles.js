@@ -106,7 +106,7 @@ export default StyleSheet.create({
   },
   amountText: {
     fontFamily: fonts.MuliBold,
-    fontSize: FontSize.massive * 2,
+
     color: Colors.textBlack,
     flex: 1,
     paddingLeft: getWidth(25),

@@ -18,7 +18,6 @@ const qrCode = {
 };
 const priceText = {
   sendPrice: {
-    fontSize: getHeight(72),
     fontFamily: fonts.WorkSansBold,
     color: Colors.white,
     flexWrap: "wrap",

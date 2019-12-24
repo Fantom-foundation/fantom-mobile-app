@@ -31,7 +31,7 @@ import Button from "../../components/general/Button";
 import Entypo from "react-native-vector-icons/Entypo";
 import { Colors } from "../../theme";
 import KeyPad from "../../components/general/keyPad";
-import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
+import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../components/loader";
 import Modal from "../../components/general/modal";
 /**
@@ -46,8 +46,20 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const [openModal, setOpenModal] = useState(false);
   const [amount, setAmount] = useState("");
   const [isSendingModal, setSendingModal] = useState(false);
+  const [fontSizeValue, setFontSizeValue] = useState(40);
   //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
 
+  useEffect(() => {
+    if (amount.length <= 5) {
+      setFontSizeValue(36);
+    } else if (amount.length <= 10) {
+      setFontSizeValue(32);
+    } else if (amount.length <= 15) {
+      setFontSizeValue(28);
+    } else {
+      setFontSizeValue(20);
+    }
+  }, [amount]);
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     if (item === "0" && amount === "") {
@@ -195,10 +207,12 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           </TouchableOpacity>
 
           {/* Price and Wallet View */}
-          <Text style={styles.sendPrice}>
+          <Text style={[styles.sendPrice, { fontSize: fontSizeValue }]}>
             {amount ? formatNumber(amount) : 0}
           </Text>
-          <Text style={styles.sendPriceExample}>(${amount})</Text>
+          <Text style={styles.sendPriceExample}>
+            (${balanceToDollar(amount, 5)})
+          </Text>
           <View style={styles.walletButton}>
             <Text style={styles.walletText}>FTM</Text>
             <Text style={styles.walletAmountText}>
