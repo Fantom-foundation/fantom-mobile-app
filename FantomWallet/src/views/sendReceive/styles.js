@@ -114,6 +114,10 @@ const modalStyles = {
   sendTextStyle: {
     color: Colors.white
   },
+  sendButton: {
+    backgroundColor: Colors.royalBlue,
+    borderWidth: 0
+  },
   sendButtonView: {
     marginTop: getHeight(80),
     flexDirection: "row",

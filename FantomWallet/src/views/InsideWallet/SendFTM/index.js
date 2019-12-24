@@ -75,7 +75,7 @@ const SendFTM = (props: Props) => {
   const clearState = () => {
     setToId("");
     setAmountText("");
-    setOpenModal(false);
+    setSendingModal(false);
   };
 
   const readFromClipboard = async () => {

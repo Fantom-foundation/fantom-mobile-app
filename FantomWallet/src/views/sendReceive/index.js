@@ -170,6 +170,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const clearState = () => {
     setSendTo("");
     setOpenModal(false);
+    setSendingModal(false);
     setAmount("");
   };
 
