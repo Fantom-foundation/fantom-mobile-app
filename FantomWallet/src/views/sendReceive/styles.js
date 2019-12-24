@@ -103,6 +103,23 @@ const modalStyles = {
     fontSize: FontSize.base,
     fontFamily: fonts.WorkSansSemiBold
   },
+  modalTextStyle: {
+    textAlign: "center",
+    flexWrap: "wrap",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    color: Colors.blackOpacity,
+    marginHorizontal: getWidth(20)
+  },
+  sendTextStyle: {
+    color: Colors.white
+  },
+  sendButtonView: {
+    marginTop: getHeight(80),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: getWidth(12)
+  },
   toView: {
     // justifyContent: "space-between",
     height: getHeight(60),
