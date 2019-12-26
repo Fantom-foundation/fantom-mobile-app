@@ -5,7 +5,8 @@ import CardListItem from "./cardListItem";
 
 const ListView = ({ data, isHiddenText }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { name, history, balance } = data;
+
+  const { name, history, balance, publicKey } = data;
   return (
     <View>
       <TouchableOpacity
@@ -18,7 +19,7 @@ const ListView = ({ data, isHiddenText }) => {
         </Text>
       </TouchableOpacity>
       {isOpen && history && history.length > 0 && (
-        <CardListItem data={history} />
+        <CardListItem data={history} publicKey={publicKey} />
       )}
     </View>
   );

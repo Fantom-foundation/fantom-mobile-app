@@ -6,21 +6,28 @@ import {
   convertFTMValue,
   getConversionRate
 } from "../../../../utils/converts";
-const CardListItem = ({ data, isHiddenText }) => {
+const CardListItem = ({ data, isHiddenText, publicKey }) => {
   return data.map(item => {
-    const { value } = item;
+    const { value, from, to } = item;
+
+    const type =
+      from.toLowerCase() === publicKey.toLowerCase() ? "Sent" : "Received";
+
     return (
       <View style={styles.listItemContainer}>
         <Text style={styles.listItemTitle}>
+          {to.toLowerCase() != from.toLowerCase()
+            ? isHiddenText
+              ? "*"
+              : type === "Sent"
+              ? "-"
+              : "+"
+            : ""}
           {isHiddenText ? "********" : `${convertFTMValue(value)} FTM`}
         </Text>
-
-        <View style={styles.titleContainer}>
-          <Text style={styles.balanceText}>{`$${getConversionRate()}`}</Text>
-          <Text style={styles.balanceText}>
-            {isHiddenText ? "" : `$${fantomToDollar(value)}`}
-          </Text>
-        </View>
+        {to.toLowerCase() === from.toLowerCase() && (
+          <Text style={styles.selfText}>Self</Text>
+        )}
       </View>
     );
   });
