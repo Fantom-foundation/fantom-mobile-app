@@ -7,6 +7,7 @@ import {
   FANTOM_GET_ACCOUNT_INFO
 } from "react-native-dotenv";
 
+import contractFunctions from "../../common/constants/contractFunctions";
 const Web3 = require("web3");
 const Tx = require("ethereumjs-tx");
 
@@ -31,6 +32,12 @@ class Web3Agent {
   async getBalance(address: string = EXAMPLE_ADDRESS) {
     const res = await this.web3.eth.getBalance(address);
     return res;
+  }
+
+  async delegateStake() {
+    // const sfc = this.web3.ftm
+    //   .contract(contractFunctions)
+    //   .at("0xfa00face00fc0000000000000000000000000100");
   }
 
   async restoreWallet(privateKey) {

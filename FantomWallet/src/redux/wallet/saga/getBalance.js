@@ -28,9 +28,7 @@ export function* getBalance(): any {
       }
     }
   } catch (e) {
-    console.log("eroormessage", e.message);
     yield put(setDopdownAlert("error", e.message));
-    // yield put(setBalance({ publicKey, balance: "0", loading: false }));
   }
 }
 

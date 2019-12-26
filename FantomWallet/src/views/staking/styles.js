@@ -10,12 +10,14 @@ const crauselStyle = {
     paddingTop: getHeight(22),
     paddingBottom: getHeight(51),
     borderRadius: getWidth(22),
-    width: getWidth(260)
+    width: getWidth(260),
+    backgroundColor: Colors.royalBlue
   },
   titleView: {
     fontSize: FontSize.base,
     fontFamily: fonts.WorkSansSemiBold,
-    paddingHorizontal: getWidth(22)
+    paddingHorizontal: getWidth(22),
+    color: Colors.white
   },
   amountStyle: {
     textAlign: "right",
@@ -23,7 +25,8 @@ const crauselStyle = {
     width: getWidth(150),
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansBold,
-    fontSize: FontSize.large + 1
+    fontSize: FontSize.large + 1,
+    color: Colors.white
   },
   walletTextStyle: {
     textAlign: "right",
@@ -31,7 +34,8 @@ const crauselStyle = {
     width: getWidth(150),
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansSemiBold,
-    fontSize: FontSize.small
+    fontSize: FontSize.small,
+    color: Colors.white
   },
   buttonStakeView: {
     width: getWidth(121),
@@ -61,7 +65,8 @@ const crauselStyle = {
   },
   buttonText: {
     fontSize: FontSize.mediumlarge,
-    fontFamily: fonts.WorkSansSemiBold
+    fontFamily: fonts.WorkSansSemiBold,
+    color: Colors.royalBlue
   }
 };
 

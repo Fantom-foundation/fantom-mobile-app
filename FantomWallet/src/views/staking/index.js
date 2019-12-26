@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   SafeAreaView,
@@ -14,6 +14,8 @@ import Carousel from "react-native-snap-carousel";
 import { Metrics, getWidth } from "../../utils/pixelResolver";
 import Modal from "../../components/general/modal";
 import { NavigationService, routes } from "../../navigation/helpers";
+import { connect } from "react-redux";
+import { delegateByAddresses as delegateByAddressesAction } from "~/redux/staking/actions";
 
 const data = [
   {
@@ -46,63 +48,60 @@ const amountHightModalText =
 const unstakeText =
   "Are you sure you want to withdraw \n your tokens from staking?\n\nThe tokens will be immediately\navailable in your wallet.";
 
-const Staking = ({}: Props) => {
+const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
+  const { delegateByAddresses, stakes, wallets } = props;
+  useEffect(() => {
+    delegateByAddresses();
+  }, []);
+
   const _renderItem = ({ item, index }) => {
+    const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
+    if (!stakeData) {
+      return null;
+    }
+    const availableToStake = item.balance - stakeData.amount;
     return (
       <View
         style={{
           ...styles.walletView,
-          marginLeft: index !== 0 ? 20 : 0,
-          backgroundColor: item.backgroundColor
+          marginLeft: index !== 0 ? 20 : 0
         }}
       >
         <View style={{ paddingHorizontal: 22 }}>
-          <Text style={{ ...styles.titleView, color: item.titleColor }}>
-            {item.title}
-          </Text>
-          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
-            {item.availableAmount}
-          </Text>
-          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
-            {item.availableText}
-          </Text>
+          <Text style={{ ...styles.titleView }}>{item.name}</Text>
+          <Text style={{ ...styles.amountStyle }}>{availableToStake}</Text>
+          <Text style={{ ...styles.walletTextStyle }}>Available to stake</Text>
 
-          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
-            {item.currenrtStaking}
+          <Text style={{ ...styles.amountStyle }}>{stakeData.amount}</Text>
+          <Text style={{ ...styles.walletTextStyle }}>Currently staking</Text>
+          <Text style={{ ...styles.amountStyle }}>
+            {stakeData.claimedRewards}
           </Text>
-          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
-            {item.currenrtStakingText}
-          </Text>
-          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
-            {item.earnedRewards}
-          </Text>
-          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
-            {item.earnedRewardsText}
-          </Text>
+          <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
         </View>
         <View style={styles.buttonView}>
+          {availableToStake.isDeligate && (
+            <TouchableOpacity
+              style={styles.buttonUnstakeView}
+              onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
+            >
+              <Text
+                style={{
+                  ...styles.buttonText
+                }}
+              >
+                Unstake
+              </Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             style={styles.buttonStakeView}
-            onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
-          >
-            <Text
-              style={{
-                ...styles.buttonText,
-                color: index === 0 ? item.backgroundColor : item.titleColor
-              }}
-            >
-              Unstake
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonUnstakeView}
             onPress={handleStakeButton}
           >
             <Text
               style={{
-                ...styles.buttonText,
-                color: index === 0 ? item.backgroundColor : item.titleColor
+                ...styles.buttonText
               }}
             >
               Stake
@@ -119,7 +118,7 @@ const Staking = ({}: Props) => {
   const handleUnstakePress = () => {};
 
   const handleStakeButton = () => {
-    NavigationService.navigate(routes.root.StakingAmount);
+    NavigationService.navigate(routes.root.ValidatorNode);
   };
 
   return (
@@ -134,7 +133,7 @@ const Staking = ({}: Props) => {
       </View>
       <View style={styles.crauselView}>
         <Carousel
-          data={data}
+          data={wallets}
           renderItem={_renderItem}
           sliderWidth={Metrics.screenWidth}
           itemWidth={getWidth(280)}
@@ -200,4 +199,13 @@ const Staking = ({}: Props) => {
   );
 };
 
-export default Staking;
+const mapStateToProps = state => ({
+  stakes: state.stakes.data,
+  wallets: state.wallet.walletsData
+});
+
+const mapDispatchToProps = {
+  delegateByAddresses: delegateByAddressesAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Staking);

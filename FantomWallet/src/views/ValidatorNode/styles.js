@@ -1,8 +1,8 @@
-import { Dimensions } from 'react-native';
-import { getHeight, getWidth } from '../../utils/pixelResolver';
-import { fonts, Colors, FontSize } from '../../theme';
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
+import { Dimensions } from "react-native";
+import { getHeight, getWidth } from "../../utils/pixelResolver";
+import { fonts, Colors, FontSize } from "../../theme";
+const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height;
 
 const style = {
   mainContainer: {
@@ -20,24 +20,30 @@ const style = {
     color: Colors.textBlack
   },
   mainView: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
     marginVertical: getHeight(10),
     backgroundColor: Colors.lightWhite,
     padding: 10,
     borderRadius: 11
   },
   rowView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   activeIconTextView: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center"
   },
   nameText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.textBlack
+  },
+  validatorName: {
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.small,
+    color: Colors.textBlack,
+    width: getWidth(200)
   },
   stakeText: {
     fontSize: FontSize.small,
@@ -49,32 +55,32 @@ const style = {
     fontFamily: fonts.WorkSansSemiBold,
     color: Colors.silverGrey,
     marginLeft: 5
-    },
-    descView: {
-        marginTop:getHeight(35)
-    },
-    descText: {
-        fontSize: FontSize.mediumSmall,
-        fontFamily: fonts.WorkSansBold,
-        color: Colors.textBlack,
-        textAlign:'center'
-    },
-    selectButtonView: {
-        marginTop: getHeight(28),
-        alignItems: 'center',
-    },
-    selectButton: {
-        width: getWidth(152),
-        height: getHeight(50),
-        backgroundColor: Colors.activeGreen,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius:25
-    },
-    selectText: {
-        fontFamily: fonts.WorkSansSemiBold,
-        fontSize: FontSize.mediumlarge,
-        color:Colors.textBlack
-    }
+  },
+  descView: {
+    marginTop: getHeight(35)
+  },
+  descText: {
+    fontSize: FontSize.mediumSmall,
+    fontFamily: fonts.WorkSansBold,
+    color: Colors.textBlack,
+    textAlign: "center"
+  },
+  selectButtonView: {
+    marginTop: getHeight(28),
+    alignItems: "center"
+  },
+  selectButton: {
+    width: getWidth(152),
+    height: getHeight(50),
+    backgroundColor: Colors.activeGreen,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 25
+  },
+  selectText: {
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.mediumlarge,
+    color: Colors.textBlack
+  }
 };
 export default style;
