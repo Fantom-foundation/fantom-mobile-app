@@ -18,7 +18,9 @@ const StickyHeader = ({ data, setCurrentWallet }) => {
       style={styles.stickyHeaderStyle}
     >
       <Text style={styles.cardHeaderText}>{name || ""}</Text>
-      <Text style={styles.bottomCardText}>{`${balance} FTM`}</Text>
+      <Text style={styles.bottomCardText}>{`${Number(balance).toFixed(
+        2
+      )} FTM`}</Text>
       {/* <View style={styles.cardBottomTextContainer}> */}
       <Text style={styles.bottomCardSubText}>{`$${balanceToDollar(
         balance,
