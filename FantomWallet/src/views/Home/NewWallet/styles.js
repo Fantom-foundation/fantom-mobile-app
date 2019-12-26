@@ -75,7 +75,8 @@ const cardListItemStyles = StyleSheet.create({
     paddingHorizontal: getWidth(8),
     borderLeftWidth: getWidth(8),
     borderLeftColor: Colors.royalBlue,
-    justifyContent: "space-between",
+    justifyContent: "center",
+
     shadowColor: Colors.blackOpacity,
     backgroundColor: Colors.white,
     //borderWidth:0.3,
@@ -94,6 +95,11 @@ const cardListItemStyles = StyleSheet.create({
     color: Colors.textBlack,
     alignSelf: "flex-end",
     lineHeight: getHeight(24)
+  },
+  selfText: {
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.mediumSmall,
+    color: Colors.blackOpacity
   },
   titleContainer: {
     justifyContent: "space-between",

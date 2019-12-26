@@ -18,6 +18,7 @@ const CardView = ({
     setCurrentWallet(data);
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
+
   return (
     <View style={{ justifyContent: "center" }}>
       {showCard && data && (
@@ -29,7 +30,7 @@ const CardView = ({
           <Text style={styles.cardSecretText}>{publicKey || ""}</Text>
           <View style={styles.cardBottomTextContainer}>
             <Text style={styles.bottomCardText}>
-              {isHiddenText ? "********" : balance + " FTM"}
+              {isHiddenText ? "********" : Number(balance).toFixed(2) + " FTM"}
             </Text>
             <Text style={styles.bottomCardSubText}>
               {isHiddenText ? "*******" : "$" + balanceToDollar(balance, 2)}
@@ -39,7 +40,11 @@ const CardView = ({
         </TouchableOpacity>
       )}
       {showList && history && history.length > 0 && (
-        <CardListItem data={history} isHiddenText={isHiddenText} />
+        <CardListItem
+          data={history}
+          isHiddenText={isHiddenText}
+          publicKey={publicKey}
+        />
       )}
     </View>
   );
