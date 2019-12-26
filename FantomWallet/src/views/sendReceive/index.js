@@ -98,9 +98,9 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   //formating Number
   const formatNumber = num => {
     if (num && num.indexOf(".") !== -1) {
-      console.log(num, "***** num ****");
-      return num.replace(",", "");
+      return num.replace(/\d(?=(\d{3})+\.)/g, "$&,");
     }
+
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
 

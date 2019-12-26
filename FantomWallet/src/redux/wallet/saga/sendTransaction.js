@@ -79,6 +79,7 @@ export function* sendTransaction({
       ]
     );
   } catch (e) {
+    yield put(setLoadingSendTransaction(false));
     Alert.alert("Error", e.message || otherErrorMessage);
     transactionStatus = FAILED;
   }

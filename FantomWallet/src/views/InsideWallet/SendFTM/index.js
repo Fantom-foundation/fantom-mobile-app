@@ -62,7 +62,7 @@ const SendFTM = (props: Props) => {
 
   const formatNumber = num => {
     if (num && num.indexOf(".") !== -1) {
-      return num.replace(",", "");
+      return num.replace(/\d(?=(\d{3})+\.)/g, "$&,");
     }
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };

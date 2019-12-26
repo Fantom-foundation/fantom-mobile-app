@@ -4,7 +4,7 @@ import styles from "../styles";
 import { BackLogo } from "../../../../images";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
-import { balanceToDollar } from "~/utils/converts.js";
+import { balanceToDollar, balanceWithSeprators } from "~/utils/converts.js";
 
 const CardView = ({
   showList,
@@ -31,7 +31,9 @@ const CardView = ({
           <Text style={styles.cardSecretText}>{publicKey || ""}</Text>
           <View style={styles.cardBottomTextContainer}>
             <Text style={styles.bottomCardText}>
-              {isHiddenText ? "********" : Number(balance).toFixed(2) + " FTM"}
+              {isHiddenText
+                ? "********"
+                : balanceWithSeprators(balance) + " FTM"}
             </Text>
             <Text style={styles.bottomCardSubText}>
               {isHiddenText ? "*******" : "$" + balanceToDollar(balance, 2)}
