@@ -78,15 +78,16 @@ export const convertFTMValue = value => {
   if (value % 1 != 0) {
     value *= 1e18;
   }
+
   if (value) {
-    if (value <= 0.01) {
-      return Number(estimationMaxFantomBalance(value, GAS_PRICE));
-    }
-    return Number(estimationMaxFantomBalance(value, GAS_PRICE)).toFixed(2);
-    // return parseFloat(Web3.utils.fromWei(value)).toFixed(2);
+    let convertValue = Number(estimationMaxFantomBalance(value, GAS_PRICE));
+
+    if (convertValue <= 0.01) return convertValue.toFixed(8);
+    else return convertValue.toFixed(2);
   }
   return 0;
 };
+
 export const getConversionRate = value => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {

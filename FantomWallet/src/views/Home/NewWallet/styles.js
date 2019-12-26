@@ -92,6 +92,7 @@ const cardListItemStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.textBlack,
+    alignSelf: "flex-end",
     lineHeight: getHeight(24)
   },
   titleContainer: {
