@@ -50,6 +50,7 @@ class Wallet extends Component {
   componentDidMount() {
     const { getBalance, getHistory, isLoading, walletsData } = this.props;
     if (walletsData && walletsData.length > 0 && !isLoading) {
+      console.log(walletsData, "***** walletsData ****");
       getBalance({ loading: isLoading });
       getHistory();
     }

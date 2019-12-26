@@ -63,14 +63,14 @@ export const fantomToDollar = (value, decimal) => {
     value *= 1e18;
   }
   const { fantomDollarRate } = store.getState().wallet;
+
   if (fantomDollarRate) {
-    if (value <= 0.01) {
-      return fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE);
-    }
-    return (
-      fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE)
-    ).toFixed(decimal);
+    let convertedValue =
+      fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE);
+    if (convertedValue <= 0.01) return convertedValue.toFixed(8);
+    else convertedValue.toFixed(2);
   }
+
   return value;
 };
 
