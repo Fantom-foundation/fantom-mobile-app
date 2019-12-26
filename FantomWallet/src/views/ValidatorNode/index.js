@@ -16,7 +16,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { getValidatorsList as getValidatorsListAction } from "~/redux/staking/actions";
 import { connect } from "react-redux";
-import { convertFTMValue, formatNumber } from "~/utils/converts";
+import { formatNumber } from "~/utils/converts";
 
 const ValidatorNode = props => {
   const { validators, getValidatorsList } = props;
@@ -34,7 +34,7 @@ const ValidatorNode = props => {
       setNodeExpanded(validators[ind]);
     }
   };
-
+  const dividend = Math.pow(10, 18);
   return (
     <View style={styles.mainContainer}>
       <SafeAreaView style={styles.mainContainer}>
@@ -91,7 +91,7 @@ const ValidatorNode = props => {
                       </View>
                       <Text style={styles.nameText}>
                         {formatNumber(
-                          Number(convertFTMValue(item.totalStake, "validator"))
+                          Number((item.totalStake / dividend).toFixed(2))
                         )}
                       </Text>
                     </View>
@@ -116,7 +116,11 @@ const ValidatorNode = props => {
                           }}
                         >
                           <Text style={styles.nameText}>100%</Text>
-                          <Text style={styles.nameText}>{stakingSpace}</Text>
+                          <Text style={styles.nameText}>
+                            {formatNumber(
+                              Number((stakingSpace / dividend).toFixed(2))
+                            )}
+                          </Text>
                         </View>
                         {stakingSpace <= 0 ? (
                           <View style={styles.descView}>

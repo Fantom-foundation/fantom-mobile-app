@@ -9,6 +9,8 @@ import {
 
 import contractFunctions from "../../common/constants/contractFunctions";
 const Web3 = require("web3");
+import { Contract, ContractOptions } from "web3-eth-contract";
+
 const Tx = require("ethereumjs-tx");
 
 type Transfer = {
@@ -28,16 +30,25 @@ class Web3Agent {
   }
 
   web3: any = null;
+  sfc: any = null;
 
   async getBalance(address: string = EXAMPLE_ADDRESS) {
     const res = await this.web3.eth.getBalance(address);
     return res;
   }
 
-  async delegateStake() {
-    // const sfc = this.web3.ftm
-    //   .contract(contractFunctions)
-    //   .at("0xfa00face00fc0000000000000000000000000100");
+  async delegateStake({ amount, publicKey }) {
+    const abi = JSON.parse(contractFunctions);
+
+    // Assign contract functions to sfc variable
+    const web3 = new Web3(new Web3.providers.HttpProvider(API_URL_FANTOM));
+
+    this.sfc = new web3.ftm.Contract(
+      abi,
+      "0xfa00face00fc0000000000000000000000000100"
+    );
+
+    this.sfc.stakersNum(); // if everything is all right, will return non-zero value
   }
 
   async restoreWallet(privateKey) {

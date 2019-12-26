@@ -37,7 +37,7 @@ const crauselStyle = {
     fontSize: FontSize.small,
     color: Colors.white
   },
-  buttonStakeView: {
+  buttonUnstakeView: {
     width: getWidth(121),
     height: getHeight(50),
     backgroundColor: Colors.white,
@@ -45,17 +45,19 @@ const crauselStyle = {
     borderTopRightRadius: getHeight(25),
     marginRight: -2,
     alignItems: "center",
+    alignSelf: "flex-start",
     justifyContent: "center"
   },
-  buttonUnstakeView: {
+  buttonStakeView: {
     width: getWidth(121),
     height: getHeight(50),
     backgroundColor: Colors.white,
     borderBottomLeftRadius: getHeight(25),
     borderTopLeftRadius: getHeight(25),
-    right: -1,
+    //right: -1,
     borderColor: "white",
     alignItems: "center",
+    alignSelf: "flex-end",
     justifyContent: "center"
   },
   buttonView: {

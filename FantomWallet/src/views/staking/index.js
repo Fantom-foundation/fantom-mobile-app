@@ -15,6 +15,8 @@ import { Metrics, getWidth } from "../../utils/pixelResolver";
 import Modal from "../../components/general/modal";
 import { NavigationService, routes } from "../../navigation/helpers";
 import { connect } from "react-redux";
+import { Colors } from "../../theme";
+import { formatNumber } from "~/utils/converts";
 import { delegateByAddresses as delegateByAddressesAction } from "~/redux/staking/actions";
 
 const data = [
@@ -55,6 +57,11 @@ const Staking = (props: Props) => {
     delegateByAddresses();
   }, []);
 
+  const formatValues = (value, isDividedBy = true) => {
+    const dividend = isDividedBy ? Math.pow(10, 18) : 1;
+    return formatNumber(Number((value / dividend).toFixed(2)));
+  };
+
   const _renderItem = ({ item, index }) => {
     const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
     if (!stakeData) {
@@ -70,18 +77,22 @@ const Staking = (props: Props) => {
       >
         <View style={{ paddingHorizontal: 22 }}>
           <Text style={{ ...styles.titleView }}>{item.name}</Text>
-          <Text style={{ ...styles.amountStyle }}>{availableToStake}</Text>
+          <Text style={{ ...styles.amountStyle }}>
+            {formatValues(availableToStake, false)}
+          </Text>
           <Text style={{ ...styles.walletTextStyle }}>Available to stake</Text>
 
-          <Text style={{ ...styles.amountStyle }}>{stakeData.amount}</Text>
+          <Text style={{ ...styles.amountStyle }}>
+            {formatValues(stakeData.amount)}
+          </Text>
           <Text style={{ ...styles.walletTextStyle }}>Currently staking</Text>
           <Text style={{ ...styles.amountStyle }}>
-            {stakeData.claimedRewards}
+            {formatValues(stakeData.claimedRewards)}
           </Text>
           <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
         </View>
         <View style={styles.buttonView}>
-          {availableToStake.isDeligate && (
+          {availableToStake.isDeligate ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
               onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
@@ -94,6 +105,13 @@ const Staking = (props: Props) => {
                 Unstake
               </Text>
             </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                ...styles.buttonUnstakeView,
+                backgroundColor: Colors.royalBlue
+              }}
+            />
           )}
           <TouchableOpacity
             style={styles.buttonStakeView}
@@ -125,11 +143,11 @@ const Staking = (props: Props) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
         <Text style={styles.stakingText}>Staking</Text>
-        <Image
+        {/* <Image
           source={question}
           resizeMode="contain"
           style={styles.imagestyle}
-        ></Image>
+        ></Image> */}
       </View>
       <View style={styles.crauselView}>
         <Carousel

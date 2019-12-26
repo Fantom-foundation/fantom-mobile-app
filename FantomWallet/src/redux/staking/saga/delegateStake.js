@@ -67,9 +67,14 @@ export function* delegateByStakerIdSaga({
   }
 }
 
-export function* delegateAmountSaga({ payload: { amount } }: Action): any {
+export function* delegateAmountSaga({
+  payload: { amount, publicKey }
+}: Action): any {
   try {
-    const responce = yield Web3Agent.Fantom.delegateStake();
+    const response = yield Web3Agent.Fantom.delegateStake({
+      amount,
+      publicKey
+    });
     // Assign contract functions to sfc variable
   } catch (e) {
     yield put(setDopdownAlert("error", e.message));

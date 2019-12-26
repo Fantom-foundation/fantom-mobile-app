@@ -11,10 +11,10 @@ import { connect } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 import KeyPad from "../../components/general/keyPad";
-import { Colors } from "../../theme/colors";
 import { NavigationService, routes } from "../../navigation/helpers";
 import { convertFTMValue, formatNumber } from "~/utils/converts";
 import { delegateAmount as delegateAmountAction } from "../../redux/staking/actions";
+import { Colors, fonts, FontSize } from "../../theme";
 
 const StakingAmount = (props: Props) => {
   const { validators, delegateAmount } = props;
@@ -35,6 +35,10 @@ const StakingAmount = (props: Props) => {
     validatorObj => validatorObj.id === selectedValidatorId
   );
   const stakingSpace = 15 * validator.totalStake - validator.delegatedMe;
+  const dividend = Math.pow(10, 18);
+  const availableSpace = formatNumber(
+    Number((stakingSpace / dividend).toFixed(2))
+  );
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -47,22 +51,20 @@ const StakingAmount = (props: Props) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.validatorNode}>{validator.address}</Text>
           <Text style={styles.stakinSpace}>
-            Staking space left:
-            {/* {formatNumber(Number(convertFTMValue(stakingSpace, "validator")))} */}
-            {stakingSpace}
+            Staking space left: {availableSpace}
           </Text>
           {/*for the price entered   */}
-          <Text style={styles.sendPrice}>
+          <Text style={{ ...styles.sendPrice }}>
             {amount ? formatNumber(amount) : 0}
           </Text>
 
           <View style={styles.availableAmountView}>
             <Text
               style={styles.availablePrice}
-            >{`Available: ${stakingSpace}`}</Text>
+            >{`Available: ${availableSpace}`}</Text>
             <TouchableOpacity
               style={styles.maxButton}
-              onPress={() => setAmount(stakingSpace.toString())}
+              onPress={() => setAmount(availableSpace.toString())}
             >
               <Text style={styles.maxButtonText}>Max</Text>
             </TouchableOpacity>
@@ -80,7 +82,8 @@ const StakingAmount = (props: Props) => {
           <TouchableOpacity
             style={styles.stakeButton}
             onPress={() => {
-              delegateAmount({ amount: 100 });
+              delegateAmount({ amount, publicKey: validator.address });
+              NavigationService.navigate(routes.root.Success);
             }}
           >
             <Text style={styles.stakeText}>Stake</Text>
