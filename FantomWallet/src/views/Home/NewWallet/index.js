@@ -226,6 +226,7 @@ class Wallet extends Component {
                 renderItem={({ item, index }) => {
                   return (isScaleView?
                     <CardView
+                    setCurrentWallet={setCurrentWallet}
                       isHiddenText={isHiddenText}
                       data={item}
                       showCard={true}
@@ -236,7 +237,8 @@ class Wallet extends Component {
                 data={walletsData}
               />
               <View style={[styles.marginHorizontal]}>
-                <CardView
+                  <CardView
+                    setCurrentWallet={setCurrentWallet}
                   isHiddenText={isHiddenText}
                   data={walletsData[activeSlide] || []}
                   showCard={false}
