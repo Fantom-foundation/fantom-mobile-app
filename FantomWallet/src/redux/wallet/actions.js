@@ -95,7 +95,10 @@ export const setWalletName = (walletInfo: WalletInfoT) => ({
   payload: walletInfo
 });
 
-export const setCurrentWallet = (walletData: any) => ({
-  type: types.SET_CURRENT_WALLET,
-  payload: walletData
-});
+export const setCurrentWallet = (walletData: any) => {
+  console.log(walletData, "***** WalletData *****");
+  return {
+    type: types.SET_CURRENT_WALLET,
+    payload: walletData
+  };
+};

@@ -20,8 +20,11 @@ export function* getBalance(): any {
         const { publicKey, name } = wallet;
         if (publicKey) {
           console.log("publicKey__-publicKey", publicKey);
+
           const response = yield Web3Agent.Fantom.getBalance(publicKey);
+
           const balanceWei = scientificToDecimal(response);
+
           const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
           yield put(setBalance({ name, publicKey, balance, loading: false }));
         }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   StatusBar,
@@ -9,31 +9,31 @@ import {
   Image,
   TouchableOpacity,
   Dimensions
-} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import styles from './styles';
-import Button from '../../../components/general/Button';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import GridIcon from '../../../images/card-01.png';
-import CardView from './components/cardView';
-import ListView from './components/listView';
+} from "react-native";
+import { SafeAreaView } from "react-navigation";
+import styles from "./styles";
+import Button from "../../../components/general/Button";
+import Icon from "react-native-vector-icons/FontAwesome";
+import GridIcon from "../../../images/card-01.png";
+import CardView from "./components/cardView";
+import ListView from "./components/listView";
 
-import StickyHeader from './components/stickyHeader';
-import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import Carousel from 'react-native-snap-carousel';
-import { getHeight, getWidth } from '../../../utils/pixelResolver';
-import { Colors } from '../../../theme';
-import WalletMenu from './components/walletMenu';
-import CardHeader from './components/cardListHeader';
-import { connect } from 'react-redux';
+import StickyHeader from "./components/stickyHeader";
+import ParallaxScrollView from "react-native-parallax-scroll-view";
+import Carousel from "react-native-snap-carousel";
+import { getHeight, getWidth } from "../../../utils/pixelResolver";
+import { Colors } from "../../../theme";
+import WalletMenu from "./components/walletMenu";
+import CardHeader from "./components/cardListHeader";
+import { connect } from "react-redux";
 import {
   getBalance as getBalanceAction,
   getHistory as getHistoryAction,
   setCurrentWallet as setCurrentWalletAction
-} from '~/redux/wallet/actions';
-import Loader from '~/components/general/Loader';
-import { fantomToDollar } from '../../../utils/converts';
-import axios from 'axios';
+} from "~/redux/wallet/actions";
+import Loader from "~/components/general/Loader";
+import { fantomToDollar } from "../../../utils/converts";
+import axios from "axios";
 
 class Wallet extends Component {
   constructor(props) {
@@ -46,12 +46,16 @@ class Wallet extends Component {
       isScaleView: 1
     };
     this.carousel = React.createRef();
-
   }
   componentDidMount() {
-    const { getBalance, getHistory, isLoading, walletsData } = this.props;
+    const {
+      getBalance,
+      getHistory,
+      isLoading,
+      walletsData,
+      setCurrentWallet
+    } = this.props;
     if (walletsData && walletsData.length > 0 && !isLoading) {
-      console.log(walletsData, '***** walletsData ****');
       getBalance({ loading: isLoading });
       getHistory();
     }
@@ -84,7 +88,13 @@ class Wallet extends Component {
       isHiddenText
     } = this.state;
 
-    const { isLoading, wallets, walletsData, setCurrentWallet } = this.props;
+    const {
+      isLoading,
+      wallets,
+      walletsData,
+      setCurrentWallet,
+      Keys
+    } = this.props;
 
     return (
       <View style={styles.mainContainer}>
@@ -109,7 +119,6 @@ class Wallet extends Component {
                 showCard={false}
               />
               <ScrollView
-              
                 style={[
                   {
                     height: getHeight(500),
@@ -136,11 +145,10 @@ class Wallet extends Component {
                     );
                   }}
                 />
-              </ScrollView >
+              </ScrollView>
             </View>
           ) : (
-              <ParallaxScrollView
-            
+            <ParallaxScrollView
               onScroll={event => {
                 const threshold = 30;
 
@@ -148,18 +156,14 @@ class Wallet extends Component {
                   event.nativeEvent.contentOffset.y <= threshold &&
                   headerHeight > 1
                 ) {
-                
                   this.setState({ headerHeight: 1, isScaleView: 1 });
                 } else if (
                   event.nativeEvent.contentOffset.y > threshold &&
                   headerHeight === 1
                 ) {
-                 
                   this.setState({ headerHeight: 220, isScaleView: 0 });
                 }
               }}
-              
-          
               isForegroundTouchable={true}
               backgroundColor={Colors.white}
               showsVerticalScrollIndicator={false}
@@ -201,12 +205,12 @@ class Wallet extends Component {
             >
               <Carousel
                 style={styles.listContainer}
-                sliderWidth={Dimensions.get('window').width}
+                sliderWidth={Dimensions.get("window").width}
                 ref={c => {
                   this.carousel = c;
                 }}
                 contentContainerCustomStyle={{
-                  justifyContent: 'center'
+                  justifyContent: "center"
                 }}
                 onSnapToItem={index => {
                   const { walletsData, setCurrentWallet } = this.props;
@@ -219,19 +223,21 @@ class Wallet extends Component {
                 inactiveSlideScale={isScaleView}
                 lockScrollWhileSnapping={true}
                 useScrollView={true}
-                activeSlideAlignment={'center'}
+                activeSlideAlignment={"center"}
                 pagingEnabled={true}
                 swipeThreshold={150}
-                itemWidth={Dimensions.get('window').width - 40}
+                itemWidth={Dimensions.get("window").width - 40}
                 renderItem={({ item, index }) => {
-                  return (isScaleView?
+                  return isScaleView ? (
                     <CardView
                     setCurrentWallet={setCurrentWallet}
                       isHiddenText={isHiddenText}
                       data={item}
                       showCard={true}
                       showList={false}
-                    />:<View/>
+                    />
+                  ) : (
+                    <View />
                   );
                 }}
                 data={walletsData}
@@ -255,6 +261,7 @@ class Wallet extends Component {
 
 const mapStateToProps = state => ({
   wallets: state.keys.wallets,
+  Keys: state.keys,
   walletsData: state.wallet.walletsData,
   isLoading: state.wallet.loading
 });

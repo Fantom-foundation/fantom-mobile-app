@@ -41,16 +41,17 @@ const priceText = {
   walletText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
-    color: Colors.white
+    color: Colors.white,
+    textAlign: "right"
   },
   walletAmountText: {
     fontSize: FontSize.mediumSmall,
     fontFamily: fonts.WorkSansBold,
     color: Colors.lightBlue,
-    textAlign: "center",
+    textAlign: "right",
     marginTop: 15,
     flexWrap: "wrap",
-    width: getWidth(60)
+    width: getWidth(150)
   }
 };
 const keyPadStyle = {

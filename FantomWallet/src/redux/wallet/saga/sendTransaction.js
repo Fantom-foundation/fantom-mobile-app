@@ -63,7 +63,7 @@ export function* sendTransaction({
       timestamp: date
     };
 
-    yield put(addTransaction(transaction));
+    yield put(getHistory());
     // add to local history storage
     yield put(setLoadingSendTransaction(false));
     yield put({ type: types.GET_BALANCE, payload: { loading: false } });
