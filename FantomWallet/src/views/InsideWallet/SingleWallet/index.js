@@ -249,7 +249,13 @@ const SingleWallet = props => {
                           {isHiddenText ? "*******" : newDate}
                         </Text>
                         <Text style={styles.activityAmountText}>
-                          {isHiddenText ? "*" : type === "Sent" ? "-" : "+"}
+                          {item.from.toLowerCase() !== item.to.toLowerCase()
+                            ? isHiddenText
+                              ? "*"
+                              : type === "Sent"
+                              ? "-"
+                              : "+"
+                            : ""}
                           {isHiddenText
                             ? "******"
                             : `${Number(convertFTMValue(item.value))} FTM`}

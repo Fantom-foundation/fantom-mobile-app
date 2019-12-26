@@ -50,7 +50,6 @@ export function* getHistory(): any {
             data: { data }
           } = yield call(getTransactionApi, publicKey);
 
-          console.log("****** response ******", data);
           if (data && data.account) {
             const { address, transactions, balance } = data.account;
             yield put(

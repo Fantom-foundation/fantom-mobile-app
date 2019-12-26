@@ -98,6 +98,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   //formating Number
   const formatNumber = num => {
     if (num && num.indexOf(".") !== -1) {
+      console.log(num, "***** num ****");
       return num.replace(",", "");
     }
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -195,7 +196,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
             {amount ? formatNumber(amount) : 0}
           </Text>
           <Text style={styles.sendPriceExample}>
-            (${balanceToDollar(amount, 5)})
+            (${amount ? balanceToDollar(amount, 5) : 0})
           </Text>
           <View style={styles.walletButton}>
             <Text style={styles.walletText}>FTM</Text>

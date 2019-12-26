@@ -11,7 +11,8 @@ const CardView = ({
   showCard,
   data,
   isHiddenText,
-  setCurrentWallet
+  setCurrentWallet,
+  emptyView
 }) => {
   const { name, publicKey, history, balance } = data;
   const handleCardClick = () => {
@@ -39,11 +40,17 @@ const CardView = ({
           <ImageBackground style={styles.cardImageStyle} source={BackLogo} />
         </TouchableOpacity>
       )}
-      {showList && history && history.length > 0 && (
+      {showList && history && history.length > 0 ? (
         <CardListItem
           data={history}
           isHiddenText={isHiddenText}
           publicKey={publicKey}
+        />
+      ) : (
+        <View
+          style={{
+            height: emptyView && history && history.length <= 0 ? 600 : 0
+          }}
         />
       )}
     </View>
