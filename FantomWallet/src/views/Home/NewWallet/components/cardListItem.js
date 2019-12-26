@@ -23,7 +23,7 @@ const CardListItem = ({ data, isHiddenText, publicKey }) => {
               ? "-"
               : "+"
             : ""}
-          {isHiddenText ? "********" : `${convertFTMValue(value)} FTM`}
+          {isHiddenText ? "********" : `${Number(convertFTMValue(value))} FTM`}
         </Text>
         {to.toLowerCase() === from.toLowerCase() && (
           <Text style={styles.selfText}>Self</Text>

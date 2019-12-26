@@ -252,7 +252,7 @@ const SingleWallet = props => {
                           {isHiddenText ? "*" : type === "Sent" ? "-" : "+"}
                           {isHiddenText
                             ? "******"
-                            : `${convertFTMValue(item.value)} FTM`}
+                            : `${Number(convertFTMValue(item.value))} FTM`}
                         </Text>
                       </TouchableOpacity>
                     );
