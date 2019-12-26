@@ -231,6 +231,7 @@ class Wallet extends Component {
                   return isScaleView ? (
                     <CardView
                       emptyView={false}
+                      setCurrentWallet={setCurrentWallet}
                       isHiddenText={isHiddenText}
                       data={item}
                       showCard={true}
@@ -245,6 +246,7 @@ class Wallet extends Component {
               <View style={[styles.marginHorizontal]}>
                 <CardView
                   emptyView
+                  setCurrentWallet={setCurrentWallet}
                   isHiddenText={isHiddenText}
                   data={walletsData[activeSlide] || []}
                   showCard={false}
