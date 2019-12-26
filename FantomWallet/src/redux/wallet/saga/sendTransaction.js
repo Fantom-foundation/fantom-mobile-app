@@ -3,7 +3,7 @@ import { takeLatest, put, select } from "redux-saga/effects";
 import { Alert } from "react-native";
 import moment from "moment";
 
-import { types, setLoadingSendTransaction, addTransaction } from "../actions";
+import { types, setLoadingSendTransaction, getHistory } from "../actions";
 import Web3Agent from "~/services/api/web3";
 import type { TransactionT } from "../actions";
 import { SUCCESS, FAILED, SENT } from "~/common/constants";
@@ -62,7 +62,7 @@ export function* sendTransaction({
       timestamp: date
     };
 
-    yield put(addTransaction(transaction));
+    yield put(getHistory());
     // add to local history storage
     yield put(setLoadingSendTransaction(false));
     yield put({ type: types.GET_BALANCE, payload: { loading: false } });

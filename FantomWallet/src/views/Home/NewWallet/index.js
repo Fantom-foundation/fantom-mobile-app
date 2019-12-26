@@ -48,9 +48,14 @@ class Wallet extends Component {
     this.carousel = React.createRef();
   }
   componentDidMount() {
-    const { getBalance, getHistory, isLoading, walletsData } = this.props;
+    const {
+      getBalance,
+      getHistory,
+      isLoading,
+      walletsData,
+      setCurrentWallet
+    } = this.props;
     if (walletsData && walletsData.length > 0 && !isLoading) {
-      console.log(walletsData, "***** walletsData ****");
       getBalance({ loading: isLoading });
       getHistory();
     }
@@ -83,7 +88,13 @@ class Wallet extends Component {
       isHiddenText
     } = this.state;
 
-    const { isLoading, wallets, walletsData, setCurrentWallet } = this.props;
+    const {
+      isLoading,
+      wallets,
+      walletsData,
+      setCurrentWallet,
+      Keys
+    } = this.props;
 
     return (
       <View style={styles.mainContainer}>
@@ -265,6 +276,7 @@ class Wallet extends Component {
 
 const mapStateToProps = state => ({
   wallets: state.keys.wallets,
+  Keys: state.keys,
   walletsData: state.wallet.walletsData,
   isLoading: state.wallet.loading
 });

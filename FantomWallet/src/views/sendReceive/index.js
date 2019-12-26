@@ -91,7 +91,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const alertSuccessfulButtonPressed = () => {
     addUpdateAddress(address, "", new Date().getTime());
     clearState();
-    // setOpenModal(false);
+
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
 
@@ -113,7 +113,6 @@ export const SendReceive = (props: TSendReceiveTypes) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
-    const { sendTransaction } = props;
     if (Number(amount) === 0) {
       Alert.alert("Error", "Please enter valid amount");
       return;
@@ -133,21 +132,6 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       } else {
         setSendingModal(true);
       }
-      // if (address && Web3.utils.isAddress(address) && amount) {
-      //   // const maxFantomBalance = estimationMaxFantomBalance(
-      //   //   Number(currentWallet.balance),
-      //   //   GAS_PRICE
-      //   // );
-      //   // if (amount === 0 || amount > maxFantomBalance) {
-      //   //   Alert.alert("Error", "Please enter valid amount.");
-      //   // } else {
-      //   sendTransaction({
-      //     to: address,
-      //     value: amount,
-      //     memo: "",
-      //     cbSuccess: alertSuccessfulButtonPressed
-      //   });
-      // }
     }
   };
 

@@ -52,8 +52,8 @@ export default (state: Wallet = initialState, action: actionType) => {
         loading: action.payload.loading,
         walletsData: oldData,
         currentWallet: {
-          ...state.currentWallet,
-          balance
+          ...state.currentWallet
+          // balance
         }
       };
     }
@@ -144,11 +144,13 @@ export default (state: Wallet = initialState, action: actionType) => {
         walletsData: oldData
       };
     }
-    case types.SET_CURRENT_WALLET:
+    case types.SET_CURRENT_WALLET: {
+      const { payload } = action;
       return {
         ...state,
-        currentWallet: action.payload
+        currentWallet: { ...payload, balance: payload.balance }
       };
+    }
 
     case types.SET_FANTOM_BALANCE_RATE: {
       return {
