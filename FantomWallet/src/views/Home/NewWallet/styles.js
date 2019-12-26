@@ -117,7 +117,7 @@ const stickyHeaderStyles = StyleSheet.create({
   stickyHeaderStyle: {
     height: getHeight(90),
     borderRadius: 12,
-    overflow: "hidden",
+   overflow: "hidden",
     backgroundColor: "#416ed5",
     paddingHorizontal: getWidth(15),
     paddingVertical: getHeight(5)
@@ -214,6 +214,9 @@ export default StyleSheet.create({
   },
   itemSeperatorStyle: {
     marginHorizontal: getWidth(10)
+  },
+  marginHorizontal: {
+    marginHorizontal:getWidth(22)
   },
   stickyHeaderContainer: {
     height: getHeight(220)

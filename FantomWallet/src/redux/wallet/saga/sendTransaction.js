@@ -2,8 +2,8 @@
 import { takeLatest, put, select } from "redux-saga/effects";
 import { Alert } from "react-native";
 import moment from "moment";
-
-import { types, setLoadingSendTransaction, getHistory } from "../actions";
+import Web3 from "web3";
+import { types, setLoadingSendTransaction, addTransaction } from "../actions";
 import Web3Agent from "~/services/api/web3";
 import type { TransactionT } from "../actions";
 import { SUCCESS, FAILED, SENT } from "~/common/constants";
@@ -20,6 +20,7 @@ type Action = {
 export function* sendTransaction({
   payload: { to, value, memo, cbSuccess }
 }: Action): any {
+  console.log(value, "payload");
   const otherErrorMessage =
     "Invalid error. Please check the data and try again.";
   const date = moment().format("YYYY-MMM-DD hh:mm:ss a");
@@ -52,7 +53,7 @@ export function* sendTransaction({
     transactionId = responce.blockHash;
     const transaction: TransactionT = {
       type: SENT,
-      value,
+      value: Web3.utils.toWei(value, "ether"),
       hash: transactionId,
       transactionStatus,
       amountUnit: "FTM",

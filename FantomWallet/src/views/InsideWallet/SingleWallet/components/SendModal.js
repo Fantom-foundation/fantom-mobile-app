@@ -13,7 +13,6 @@ import {
 } from "~/utils/converts";
 const SendModal = props => {
   const { closeSendModal, transactionData, publicKey } = props;
-
   const {
     type,
     value,
@@ -29,7 +28,7 @@ const SendModal = props => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: publicKey
+        message: hash
       });
 
       if (result.action === Share.sharedAction) {
@@ -86,7 +85,7 @@ const SendModal = props => {
                 marginBottom: getHeight(40)
               }}
             >
-              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee,5)})`}
+              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee, 5)})`}
             </Text>
             <TouchableOpacity
               style={styles.shareIconWrapper}
