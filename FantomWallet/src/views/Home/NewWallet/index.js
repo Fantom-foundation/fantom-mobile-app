@@ -46,6 +46,7 @@ class Wallet extends Component {
       isScaleView: 1
     };
     this.carousel = React.createRef();
+
   }
   componentDidMount() {
     const { getBalance, getHistory, isLoading, walletsData } = this.props;
@@ -108,6 +109,7 @@ class Wallet extends Component {
                 showCard={false}
               />
               <ScrollView
+              
                 style={[
                   {
                     height: getHeight(500),
@@ -134,10 +136,11 @@ class Wallet extends Component {
                     );
                   }}
                 />
-              </ScrollView>
+              </ScrollView >
             </View>
           ) : (
-            <ParallaxScrollView
+              <ParallaxScrollView
+            
               onScroll={event => {
                 const threshold = 30;
 
@@ -145,14 +148,18 @@ class Wallet extends Component {
                   event.nativeEvent.contentOffset.y <= threshold &&
                   headerHeight > 1
                 ) {
+                
                   this.setState({ headerHeight: 1, isScaleView: 1 });
                 } else if (
                   event.nativeEvent.contentOffset.y > threshold &&
                   headerHeight === 1
                 ) {
+                 
                   this.setState({ headerHeight: 220, isScaleView: 0 });
                 }
               }}
+              
+          
               isForegroundTouchable={true}
               backgroundColor={Colors.white}
               showsVerticalScrollIndicator={false}
@@ -217,18 +224,18 @@ class Wallet extends Component {
                 swipeThreshold={150}
                 itemWidth={Dimensions.get('window').width - 40}
                 renderItem={({ item, index }) => {
-                  return (
+                  return (isScaleView?
                     <CardView
                       isHiddenText={isHiddenText}
                       data={item}
                       showCard={true}
                       showList={false}
-                    />
+                    />:<View/>
                   );
                 }}
                 data={walletsData}
               />
-              <View style={styles.marginHorizontal}>
+              <View style={[styles.marginHorizontal]}>
                 <CardView
                   isHiddenText={isHiddenText}
                   data={walletsData[activeSlide] || []}
