@@ -20,6 +20,7 @@ const CardHeader = props => {
     isHiddenText,
     totalBalance
   } = props;
+
   return (
     <View>
       <View
@@ -33,12 +34,6 @@ const CardHeader = props => {
             {isHiddenText ? "*******" : `$${balanceToDollar(totalBalance, 2)}`}
           </Text>
           <TouchableOpacity onPress={() => setCardHiddenView()}>
-            {/* <Icon
-              style={styles.iconStyle}
-              name={"eye"}
-              size={18}
-              color={Colors.textBlack}
-            /> */}
             {isHiddenText ? (
               <Image
                 source={EyeClose}

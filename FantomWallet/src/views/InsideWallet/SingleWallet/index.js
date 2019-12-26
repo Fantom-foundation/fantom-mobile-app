@@ -28,6 +28,7 @@ import {
   getConversionRate,
   formatActivities
 } from "~/utils/converts";
+
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes

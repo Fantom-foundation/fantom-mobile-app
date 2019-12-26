@@ -96,7 +96,7 @@ export const getConversionRate = value => {
 };
 
 export const formatActivities = (activityDate: any) => {
-  const t = new Date(activityDate);
+  const t = new Date(activityDate * 1000);
   const dateString = moment(t).format("MMM D, hh:mm A");
   return dateString;
 };
@@ -104,8 +104,8 @@ export const formatActivities = (activityDate: any) => {
 export const balanceToDollar = (value, decimal) => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
-    if (value <= 0.01) {
-      return fantomDollarRate * value;
+    if (value <= 1) {
+      return (fantomDollarRate * value).toFixed(8);
     }
     return (fantomDollarRate * value).toFixed(decimal);
   }
