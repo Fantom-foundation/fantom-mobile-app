@@ -3,7 +3,12 @@ import { takeLatest, put, select } from "redux-saga/effects";
 import { Alert } from "react-native";
 import moment from "moment";
 import Web3 from "web3";
-import { types, setLoadingSendTransaction, addTransaction } from "../actions";
+import {
+  types,
+  setLoadingSendTransaction,
+  addTransaction,
+  getHistory
+} from "../actions";
 import Web3Agent from "~/services/api/web3";
 import type { TransactionT } from "../actions";
 import { SUCCESS, FAILED, SENT } from "~/common/constants";

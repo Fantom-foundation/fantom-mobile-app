@@ -124,10 +124,11 @@ export const balanceToDollar = (value, decimal) => {
 };
 
 export const balanceWithSeprators = value => {
-  if (value) {
+  if (!!value) {
     return Number(value)
       .toFixed(2)
       .toString()
       .replace(/\d(?=(\d{3})+\.)/g, "$&,");
   }
+  return 0;
 };

@@ -129,8 +129,8 @@ const ManageWallet = props => {
                   onPress={() => handleWalletClick(item)}
                   style={{
                     flexDirection: "row",
-                    alignItems: "center",
-                    backgroundColor: "red"
+                    alignItems: "center"
+                    // backgroundColor: "red"
                   }}
                 >
                   <Image
