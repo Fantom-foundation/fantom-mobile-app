@@ -19,30 +19,7 @@ import { Colors } from "../../theme";
 import { formatNumber } from "~/utils/converts";
 import { delegateByAddresses as delegateByAddressesAction } from "~/redux/staking/actions";
 
-const data = [
-  {
-    title: "My Fantom Wallet",
-    availableAmount: "43,680 FTM",
-    availableText: "Available to stake",
-    currenrtStaking: "160,323 FTM",
-    currenrtStakingText: "Currently staking",
-    earnedRewards: "3,206 FTM",
-    earnedRewardsText: "Earned rewards",
-    backgroundColor: "#416ed5",
-    titleColor: "#ffffff"
-  },
-  {
-    title: "Aqua Wallet",
-    availableAmount: "200,000 FTM",
-    availableText: "Available to stake",
-    currenrtStaking: "0 FTM",
-    currenrtStakingText: "Currently staking",
-    earnedRewards: "0 FTM",
-    earnedRewardsText: "Earned rewards",
-    backgroundColor: "#59c5dd",
-    titleColor: "#2b3954"
-  }
-];
+
 
 const modalText = "You need at least 1 FTM to \n stake.";
 const amountHightModalText =
@@ -53,11 +30,11 @@ const unstakeText =
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
-  const { delegateByAddresses, stakes, wallets, navigation } = props;
+  const { delegateByAddresses, stakes, wallets} = props;
   const [values, setValues] = useState(wallets);
   useEffect(() => {
     setValues(wallets);
-    delegateByAddresses();
+    delegateByAddresses()
   }, []);
 
   const formatValues = (value, isDividedBy = true) => {
