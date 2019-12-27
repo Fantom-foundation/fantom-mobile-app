@@ -5,6 +5,7 @@ import { BackLogo } from "../../../../images";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { balanceToDollar, balanceWithSeprators } from "~/utils/converts.js";
+import { getHeight } from "../../../../utils/pixelResolver";
 
 const CardView = ({
   showList,
@@ -51,8 +52,8 @@ const CardView = ({
         />
       ) : (
         <View
-          style={{
-            height: emptyView && history && history.length <= 0 ? 600 : 0
+            style={{
+            height: emptyView && history && history.length <= 0 ? getHeight(600) : 0
           }}
         />
       )}

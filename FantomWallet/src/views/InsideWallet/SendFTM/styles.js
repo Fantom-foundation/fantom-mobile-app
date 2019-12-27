@@ -44,16 +44,18 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical: getHeight(18)
+     marginVertical: getHeight(18)
   },
   flexDirectionRow: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+  
   },
   toText: {
     color: Colors.royalBlue,
     fontFamily: fonts.WorkSansSemiBold,
-    fontSize: FontSize.base
+    fontSize: FontSize.base,
+    
   },
   toId: {
     color: Colors.textBlack,
@@ -61,8 +63,8 @@ export default StyleSheet.create({
     fontSize: FontSize.small,
     marginLeft: 5,
     flex: 1,
-    // width: getWidth(190),
-    marginTop: -4
+    paddingVertical:2,
+     marginTop: -4
   },
   modalTextStyle: {
     textAlign: "center",
@@ -88,8 +90,7 @@ export default StyleSheet.create({
   },
 
   buttonStyle: {
-    height: null,
-    paddingVertical: getHeight(4),
+    height:getHeight(36),
     paddingHorizontal: getWidth(12),
     width: null,
     alignItems: "center",

@@ -15,7 +15,7 @@ const cardStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    marginTop: getHeight(5)
+    marginTop: getHeight(2)
   },
   cardSecretText: {
     fontFamily: fonts.WorkSansMedium,
@@ -36,7 +36,7 @@ const cardStyles = StyleSheet.create({
     color: Colors.white,
     alignSelf: "flex-end",
     opacity: 0.5,
-    marginVertical: getHeight(5)
+    marginVertical: getHeight(2)
   },
   cardBottomTextContainer: {
     flex: 1,
@@ -115,12 +115,12 @@ const cardListItemStyles = StyleSheet.create({
 
 const stickyHeaderStyles = StyleSheet.create({
   stickyHeaderStyle: {
-    height: getHeight(90),
+     height: getHeight(95),
     borderRadius: 12,
    overflow: "hidden",
     backgroundColor: "#416ed5",
     paddingHorizontal: getWidth(15),
-    paddingVertical: getHeight(5)
+    paddingVertical: getHeight(2)
   },
   stickyHeaderImageStyle: {
     height: getHeight(100),
