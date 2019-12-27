@@ -53,8 +53,10 @@ const unstakeText =
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
-  const { delegateByAddresses, stakes, wallets } = props;
+  const [values, setValues] = useState("");
+  const { delegateByAddresses, stakes, wallets, navigation } = props;
   useEffect(() => {
+    setValues(wallets);
     delegateByAddresses();
   }, []);
 
@@ -100,7 +102,7 @@ const Staking = (props: Props) => {
               Your {currentlyStaking} will be available in
               {timeLeft}
             </Text>
-          ) : (
+          ) : isWithdrawModalOpened ? (
             <TouchableOpacity
               onPress={() => openWithdrawModal(currentlyStaking)}
             >
@@ -108,6 +110,8 @@ const Staking = (props: Props) => {
                 Withdraw {currentlyStaking} FTM now
               </Text>
             </TouchableOpacity>
+          ) : (
+            <View />
           )}
         </View>
         <View style={styles.buttonView}>
@@ -155,15 +159,17 @@ const Staking = (props: Props) => {
   //onUnstake Button
   const handleUnstakePress = () => {
     const { navigation } = props;
+
     navigation.navigate("WalletImported", {
       text: "Requested to unstake successfully",
-      navigationRoute: "Staking"
+      navigationRoute: "Back"
     });
   };
 
   //onUnstake Button
   const handleWithdrawPress = () => {
     const { navigation } = props;
+    openWithdrawModal("");
     navigation.navigate("WalletImported", {
       text: "Tokens successfully withdrawn!",
       navigationRoute: "Staking"
@@ -174,7 +180,7 @@ const Staking = (props: Props) => {
     NavigationService.navigate(routes.root.ValidatorNode);
   };
   const withdrawText = `Withdraw ${isWithdrawModalOpened} FTM now`;
-
+  console.log(values, "asdkjahdaksjh");
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>

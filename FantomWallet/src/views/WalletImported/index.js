@@ -10,8 +10,8 @@ const WalletImported = (props: TSettingsScreenTypes) => {
   return (
     <SuccessScreen
       onPress={() => {
-        if (navigationRoute && navigationRoute === "back") {
-          NavigationService.goBack();
+        if (navigationRoute && navigationRoute === "Back") {
+          NavigationService.navigate(routes.HomeScreen["Home"]);
           return;
         }
         if (navigationRoute) {
