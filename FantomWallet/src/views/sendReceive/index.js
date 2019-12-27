@@ -299,7 +299,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         </KeyboardAvoidingView>
       )}
 
-      {isSndingModal && (
+      {isSendingModal && (
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
             amount

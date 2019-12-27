@@ -70,7 +70,7 @@ const Staking = (props: Props) => {
     if (!stakeData) {
       return null;
     }
-    const availableToStake = item.balance - stakeData.amount;
+    const availableToStake = item.balance;
     const currentDate = new Date();
     const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
     const currentlyStaking = formatValues(stakeData.amount);
