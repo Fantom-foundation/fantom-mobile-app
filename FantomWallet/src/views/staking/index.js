@@ -48,7 +48,7 @@ const modalText = "You need at least 1 FTM to \n stake.";
 const amountHightModalText =
   "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
 const unstakeText =
-  "Are you sure you want to withdraw \n your tokens from staking?\n\nThe tokens will be immediately\navailable in your wallet.";
+  "Are you sure you want to  request to withdraw \n your tokens from staking??\n\nThe tokens will be available\n after 7 days in your wallet.";
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
@@ -90,9 +90,14 @@ const Staking = (props: Props) => {
             {formatValues(stakeData.claimedRewards)}
           </Text>
           <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
+          <Text style={{ ...styles.bottomTextStyle }}>
+            Your {formatValues(stakeData.claimedRewards)} will be available in
+            time left
+          </Text>
         </View>
         <View style={styles.buttonView}>
-          {availableToStake.isDeligate ? (
+          {/* {availableToStake.isDeligate ? ( */}
+          {true ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
               onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
@@ -133,7 +138,13 @@ const Staking = (props: Props) => {
   const handleBackPress = () => {};
 
   //onUnstake Button
-  const handleUnstakePress = () => {};
+  const handleUnstakePress = () => {
+    const { navigation } = props;
+    navigation.navigate("WalletImported", {
+      text: "Requested to unstake successfully",
+      navigationRoute: "Staking"
+    });
+  };
 
   const handleStakeButton = () => {
     NavigationService.navigate(routes.root.ValidatorNode);

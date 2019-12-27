@@ -24,12 +24,13 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
     case `${types.DELEGATE_BY_ADDRESSES}_SUCCESS`: {
       let oldStakes = [...state.data];
       const { publicKey, response } = action.payload;
-      const { amount, claimedRewards } = response;
+      const { amount, claimedRewards, deactivatedTime } = response;
       const index = oldStakes.findIndex(item => item.publicKey === publicKey);
       const data = {
         amount,
         claimedRewards,
-        isDeligate: true
+        isDeligate: true,
+        deactivatedTime
       };
       if (index > -1) {
         const updatedStake = {
@@ -76,9 +77,16 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
           address,
           totalStake,
           deactivatedEpoch,
-          delegatedMe
+          delegatedMe,
+          deactivatedTime
         } = staker;
-        return { id, address, totalStake, deactivatedEpoch, delegatedMe };
+        return {
+          id,
+          address,
+          totalStake,
+          deactivatedEpoch,
+          delegatedMe
+        };
       });
       return {
         ...state,

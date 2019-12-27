@@ -37,6 +37,15 @@ const crauselStyle = {
     fontSize: FontSize.small,
     color: Colors.white
   },
+  bottomTextStyle: {
+    // textAlign: "right",
+    marginTop: 4,
+    // width: getWidth(150),
+    alignSelf: "flex-end",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.small,
+    color: Colors.white
+  },
   buttonUnstakeView: {
     width: getWidth(121),
     height: getHeight(50),

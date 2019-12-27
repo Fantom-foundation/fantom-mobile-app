@@ -2,16 +2,21 @@ import React from "react";
 import SuccessScreen from "../../general/SuccessScreen";
 import { NavigationService, routes } from "~/navigation/helpers";
 
-const WalletImported = (props:TSettingsScreenTypes) => {
+const WalletImported = (props: TSettingsScreenTypes) => {
   const { navigation } = props;
   const publicKey = navigation.getParam("publicKey", "");
-
+  const text = navigation.getParam("text");
+  const navigationRoute = navigation.getParam("navigationRoute");
   return (
     <SuccessScreen
-      onPress={() =>
-        NavigationService.navigate(routes.root.WalletInfo, { publicKey })
-      }
-      text="Wallet imported!"
+      onPress={() => {
+        if (navigationRoute) {
+          NavigationService.navigate(navigationRoute);
+          return;
+        }
+        NavigationService.navigate(routes.root.WalletInfo, { publicKey });
+      }}
+      text={text || "Wallet imported!"}
     ></SuccessScreen>
   );
 };
