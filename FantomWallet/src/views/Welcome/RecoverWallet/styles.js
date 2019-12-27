@@ -102,29 +102,30 @@ const phraseView = {
     borderBottomWidth: 2,
      marginTop: getHeight(84),
     borderBottomColor: Colors.blackOpacity,
-    paddingBottom: 6
+ 
   },
   textInput: {
     width: getWidth(270),
-
-  
-  },
+    paddingVertical: 4,
+ },
 
   pasteButton: {
     marginLeft: 2,
     width: getWidth(60),
-    height: 24,
     alignItems: "center",
+    height:24,
     justifyContent: "center",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: Colors.blackOpacity
+    borderColor: Colors.blackOpacity,
+    alignSelf:'center'
   },
   pasterText: {
     color: Colors.blackOpacity,
     fontSize: FontSize.small,
-    fontFamily: fonts.WorkSansSemiBold
-  },
+    fontFamily: fonts.WorkSansSemiBold,
+   
+ },
   noteText: {
     marginTop: 6,
     fontSize: FontSize.small,
@@ -148,7 +149,7 @@ const privateKeyStyles = {
   flexDirection: "row",
     borderBottomWidth: 2,
     borderBottomColor: Colors.blackOpacity,
-    paddingBottom: 6
+    alignItems:'center',
   }
 };
 

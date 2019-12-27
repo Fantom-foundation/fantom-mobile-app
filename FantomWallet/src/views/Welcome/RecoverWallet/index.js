@@ -149,7 +149,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
                 style={styles.textInput}
               ></TextInput>
               <TouchableOpacity
-                style={styles.pasteButton}
+                 style={styles.pasteButton}
                 onPress={() => readMnemonicFromClipboard()}
               >
                 <Text style={styles.pasterText}>Paste</Text>
