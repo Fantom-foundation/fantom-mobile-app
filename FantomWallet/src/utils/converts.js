@@ -103,9 +103,13 @@ export const formatActivities = (activityDate: any) => {
 };
 
 export const balanceToDollar = (value, decimal) => {
+  
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
-    if (value <= 1) {
+    if (value === 0|| value ==="0") {
+      return value; 
+   }
+    else if (value <= 1) {
       return (fantomDollarRate * value).toFixed(8);
     }
     return (fantomDollarRate * value).toFixed(decimal);

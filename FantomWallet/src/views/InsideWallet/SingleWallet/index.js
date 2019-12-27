@@ -26,7 +26,8 @@ import {
   balanceToDollar,
   convertFTMValue,
   getConversionRate,
-  formatActivities
+  formatActivities,
+  balanceWithSeprators
 } from "~/utils/converts";
 
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
@@ -155,7 +156,7 @@ const SingleWallet = props => {
             <Text style={styles.ftmText}>
               {!isHiddenText
                 ? currentWallet && currentWallet.balance
-                  ? currentWallet.balance
+                  ? balanceWithSeprators(currentWallet.balance)
                   : 0
                 : "*******"}
             </Text>

@@ -20,6 +20,7 @@ const CardView = ({
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
 
+
   return (
     <View style={{ justifyContent: "center" }}>
       {showCard && data && (
