@@ -56,6 +56,7 @@ const Staking = (props: Props) => {
   const { delegateByAddresses, stakes, wallets, navigation } = props;
   const [values, setValues] = useState(wallets);
   useEffect(() => {
+    setValues(wallets);
     delegateByAddresses();
   }, []);
 
@@ -114,8 +115,7 @@ const Staking = (props: Props) => {
           )}
         </View>
         <View style={styles.buttonView}>
-          {/* {availableToStake.isDeligate ? ( */}
-          {true ? (
+          {availableToStake.isDeligate ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
               onPress={() => openUnstakingModal(currentlyStaking)}
