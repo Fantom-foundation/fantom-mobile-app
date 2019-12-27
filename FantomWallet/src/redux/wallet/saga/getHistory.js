@@ -12,7 +12,7 @@ const getTransactionApi = async publicKey => {
     API_URL_FANTOM
   );
   return await axios.get(
-    `${API_URL_FANTOM}/api/v1/get-account?address=${publicKey}`,
+    `${API_URL_FANTOM}api/v1/get-account?address=${publicKey}`,
     {
       headers: {
         "Content-Type": "application/json"
