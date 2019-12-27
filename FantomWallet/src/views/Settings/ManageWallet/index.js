@@ -18,7 +18,11 @@ import { Dropdown } from "react-native-material-dropdown";
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import { getHeight, getWidth } from "../../../utils/pixelResolver";
 import { connect } from "react-redux";
-import { setWalletName as setWalletNameAction } from "~/redux/wallet/actions";
+import { NavigationService, routes } from "../../../navigation/helpers";
+import {
+  setWalletName as setWalletNameAction,
+  setCurrentWallet as setCurrentWalletAction
+} from "~/redux/wallet/actions";
 
 const walletData = [
   {
@@ -94,6 +98,12 @@ const ManageWallet = props => {
     if (selectedKey && name)
       setWalletName({ name: name, publicKey: selectedKey });
   };
+
+  const handleWalletClick = item => {
+    const { setCurrentWallet } = props;
+    setCurrentWallet(item);
+    NavigationService.navigate(routes.HomeScreen.Wallet);
+  };
   return (
     <View style={styles.mainView}>
       <SafeAreaView style={styles.mainView}>
@@ -115,10 +125,12 @@ const ManageWallet = props => {
           renderItem={({ item, index }) => {
             return (
               <View style={styles.middleView}>
-                <View
+                <TouchableOpacity
+                  onPress={() => handleWalletClick(item)}
                   style={{
                     flexDirection: "row",
-                    alignItems: "center"
+                    alignItems: "center",
+                    backgroundColor: "red"
                   }}
                 >
                   <Image
@@ -154,7 +166,7 @@ const ManageWallet = props => {
                       </Text>
                     </View>
                   </View>
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
                     const modalVal = showModal;
@@ -303,7 +315,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setWalletName: setWalletNameAction
+  setWalletName: setWalletNameAction,
+  setCurrentWallet: setCurrentWalletAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageWallet);

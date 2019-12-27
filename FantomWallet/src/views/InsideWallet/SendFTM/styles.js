@@ -82,6 +82,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.royalBlue,
     borderWidth: 0
   },
+
   sendTextStyle: {
     color: Colors.white
   },

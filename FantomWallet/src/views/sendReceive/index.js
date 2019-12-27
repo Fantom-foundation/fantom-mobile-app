@@ -299,7 +299,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         </KeyboardAvoidingView>
       )}
 
-      {isSendingModal && (
+      {isSndingModal && (
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
             amount
@@ -309,10 +309,14 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           buttons={[
             {
               name: "Cancel",
-              onPress: () => setSendingModal(!isSendingModal)
+              onPress: () => setSendingModal(!isSendingModal),
+              isShow: buttonModalText == "Sending...." ? false : true
             },
             {
-              style: styles.sendButton,
+              style:
+                buttonModalText === "Sending...."
+                  ? { ...styles.sendButton, backgroundColor: Colors.grey }
+                  : styles.sendButton,
               name: buttonModalText,
               onPress: handleSendAmount,
               disabled: buttonModalText === "Send",
