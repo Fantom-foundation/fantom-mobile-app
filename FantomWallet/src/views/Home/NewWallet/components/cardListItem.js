@@ -9,7 +9,6 @@ import {
 const CardListItem = ({ data, isHiddenText, publicKey }) => {
   return data.map(item => {
     const { value, from, to } = item;
-
     const type =
       from.toLowerCase() === publicKey.toLowerCase() ? "Sent" : "Received";
 
@@ -23,7 +22,9 @@ const CardListItem = ({ data, isHiddenText, publicKey }) => {
               ? "-"
               : "+"
             : ""}
-          {isHiddenText ? "********" : `${Number(convertFTMValue(value))} FTM`}
+          {isHiddenText
+            ? "********"
+            : `${Number(convertFTMValue(value, "bignumber"))} FTM`}
         </Text>
         {to.toLowerCase() === from.toLowerCase() && (
           <Text style={styles.selfText}>Self</Text>

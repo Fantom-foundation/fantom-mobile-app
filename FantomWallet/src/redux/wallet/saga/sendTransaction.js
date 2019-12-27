@@ -56,17 +56,17 @@ export function* sendTransaction({
     // if (!responce.blockHash) throw Error(otherErrorMessage);
     // success
     transactionId = responce.blockHash;
-    const transaction: TransactionT = {
-      type: SENT,
-      value: Web3.utils.toWei(value, "ether"),
-      hash: transactionId,
-      transactionStatus,
-      amountUnit: "FTM",
-      from: publicKey,
-      to,
-      isError: false,
-      timestamp: date
-    };
+    // const transaction: TransactionT = {
+    //   type: SENT,
+    //   value: Web3.utils.toWei(value, "ether"),
+    //   hash: transactionId,
+    //   transactionStatus,
+    //   amountUnit: "FTM",
+    //   from: publicKey,
+    //   to,
+    //   isError: false,
+    //   timestamp: date
+    // };
 
     yield put(getHistory());
     // add to local history storage

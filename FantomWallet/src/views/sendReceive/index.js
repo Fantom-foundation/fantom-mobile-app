@@ -91,7 +91,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const alertSuccessfulButtonPressed = () => {
     addUpdateAddress(address, "", new Date().getTime());
     clearState();
-
+    setLoader(false);
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
 
@@ -132,6 +132,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         Alert.alert("Error", message);
       } else {
         setSendingModal(true);
+        setLoader(false);
       }
     }
   };

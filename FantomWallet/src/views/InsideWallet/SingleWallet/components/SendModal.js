@@ -48,10 +48,7 @@ const SendModal = props => {
     <TouchableOpacity
       activeOpacity={1}
       style={styles.modalBackground}
-      onPress={() => {
-        closeSendModal();
-        //   NavigationService.navigate(routes.root.SendFTM);
-      }}
+      onPress={closeSendModal}
     >
       <TouchableOpacity
         activeOpacity={1}
@@ -69,8 +66,8 @@ const SendModal = props => {
           />
           <View style={styles.detailsContainer}>
             <Text style={styles.modalText}>You sent</Text>
-            <Text style={styles.modalAmount}>{`${convertFTMValue(
-              value
+            <Text style={styles.modalAmount}>{`${Number(
+              convertFTMValue(value, "bignumber")
             )} FTM`}</Text>
             <Text style={styles.modalTransaction}>Recipient</Text>
             <Text style={styles.modalTransactionText}>{to}</Text>

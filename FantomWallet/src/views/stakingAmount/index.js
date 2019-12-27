@@ -12,7 +12,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 import KeyPad from "../../components/general/keyPad";
 import { NavigationService, routes } from "../../navigation/helpers";
-import { convertFTMValue, formatNumber } from "~/utils/converts";
+import { formatNumber } from "~/utils/converts";
 import { delegateAmount as delegateAmountAction } from "../../redux/staking/actions";
 import { Colors, fonts, FontSize } from "../../theme";
 
@@ -83,7 +83,7 @@ const StakingAmount = (props: Props) => {
             style={styles.stakeButton}
             onPress={() => {
               delegateAmount({ amount, publicKey: validator.address });
-              NavigationService.navigate(routes.root.Success);
+              // NavigationService.navigate(routes.root.Success);
             }}
           >
             <Text style={styles.stakeText}>Stake</Text>

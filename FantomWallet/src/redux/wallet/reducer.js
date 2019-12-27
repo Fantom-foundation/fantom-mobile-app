@@ -80,13 +80,13 @@ export default (state: Wallet = initialState, action: actionType) => {
       if (state.currentWallet && state.currentWallet.publicKey === publicKey) {
         newCurrentWallet = {
           ...state.currentWallet,
-          history
+          history,
+          balance
         };
       }
       return {
         ...state,
         walletsData: oldData,
-
         currentWallet: newCurrentWallet
       };
     }

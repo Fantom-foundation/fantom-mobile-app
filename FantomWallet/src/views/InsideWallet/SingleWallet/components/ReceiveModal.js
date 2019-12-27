@@ -12,7 +12,7 @@ import {
   formatActivities
 } from "~/utils/converts";
 const SendModal = props => {
-  const { closeSendModal, transactionData, publicKey } = props;
+  const { closeReceiveModal, transactionData, publicKey } = props;
 
   const {
     type,
@@ -49,9 +49,7 @@ const SendModal = props => {
     <TouchableOpacity
       activeOpacity={1}
       style={styles.modalBackground}
-      onPress={() => {
-        closeSendModal();
-      }}
+      onPress={closeReceiveModal}
     >
       <TouchableOpacity activeOpacity={1} style={styles.modalShadow}>
         <View style={styles.modalWrapper}>
@@ -63,8 +61,8 @@ const SendModal = props => {
           />
           <View style={styles.detailsContainer}>
             <Text style={styles.modalText}>You received</Text>
-            <Text style={styles.modalAmount}>{`${convertFTMValue(
-              value
+            <Text style={styles.modalAmount}>{`${Number(
+              convertFTMValue(value, "bignumber")
             )} FTM`}</Text>
             <Text style={styles.modalTransaction}>Recipient</Text>
             <Text style={styles.modalTransactionText}>{to}</Text>
@@ -79,7 +77,7 @@ const SendModal = props => {
                 marginBottom: getHeight(40)
               }}
             >
-              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee,5)})`}
+              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee, 5)})`}
             </Text>
             <TouchableOpacity
               style={styles.shareIconWrapper}

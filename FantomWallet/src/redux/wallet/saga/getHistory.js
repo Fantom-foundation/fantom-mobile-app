@@ -4,15 +4,15 @@ import { takeLatest, call, select, put } from "redux-saga/effects";
 import axios from "axios";
 import { types, setHistory } from "../actions";
 
-import { GET_BALANCE_API, API_URL_1_FANTOM } from "react-native-dotenv";
+import { GET_BALANCE_API, API_URL_FANTOM } from "react-native-dotenv";
 
 const getTransactionApi = async publicKey => {
   console.log(
     "API_URL_1_FANTOMAPI_URL_1_FANTOMAPI_URL_1_FANTOMAPI_URL_1_FANTOM",
-    API_URL_1_FANTOM
+    API_URL_FANTOM
   );
   return await axios.get(
-    `${API_URL_1_FANTOM}api/v1/get-account?address=${publicKey}&trxsFilter=from`,
+    `${API_URL_FANTOM}/api/v1/get-account?address=${publicKey}`,
     {
       headers: {
         "Content-Type": "application/json"

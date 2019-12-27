@@ -46,7 +46,7 @@ export function estimationMaxFantomBalance(fantomWei, gasPrice, from = "") {
     wei *= 1e18;
   }
   let maxFantomBalanceWei = math.subtract(math.bignumber(wei), gasPrice);
-  if (from === "validator") {
+  if (from === "validator" || from === "bignumber") {
     maxFantomBalanceWei = fantomWei;
   }
   return Web3.utils.fromWei(maxFantomBalanceWei.toString(), "ether");
@@ -80,7 +80,7 @@ export const fantomToDollar = (value, decimal) => {
   return value;
 };
 
-export const convertFTMValue = value => {
+export const convertFTMValue = (value, from = "") => {
   if (value % 1 != 0) {
     value *= 1e18;
   }
