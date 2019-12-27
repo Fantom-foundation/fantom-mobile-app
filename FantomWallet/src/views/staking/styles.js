@@ -10,12 +10,14 @@ const crauselStyle = {
     paddingTop: getHeight(22),
     paddingBottom: getHeight(51),
     borderRadius: getWidth(22),
-    width: getWidth(260)
+    width: getWidth(260),
+    backgroundColor: Colors.royalBlue
   },
   titleView: {
     fontSize: FontSize.base,
     fontFamily: fonts.WorkSansSemiBold,
-    paddingHorizontal: getWidth(22)
+    paddingHorizontal: getWidth(22),
+    color: Colors.white
   },
   amountStyle: {
     textAlign: "right",
@@ -23,7 +25,8 @@ const crauselStyle = {
     width: getWidth(150),
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansBold,
-    fontSize: FontSize.large + 1
+    fontSize: FontSize.large + 1,
+    color: Colors.white
   },
   walletTextStyle: {
     textAlign: "right",
@@ -31,9 +34,19 @@ const crauselStyle = {
     width: getWidth(150),
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansSemiBold,
-    fontSize: FontSize.small
+    fontSize: FontSize.small,
+    color: Colors.white
   },
-  buttonStakeView: {
+  bottomTextStyle: {
+    // textAlign: "right",
+    marginTop: 4,
+    // width: getWidth(150),
+    alignSelf: "flex-end",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.small,
+    color: Colors.white
+  },
+  buttonUnstakeView: {
     width: getWidth(121),
     height: getHeight(50),
     backgroundColor: Colors.white,
@@ -41,17 +54,19 @@ const crauselStyle = {
     borderTopRightRadius: getHeight(25),
     marginRight: -2,
     alignItems: "center",
+    alignSelf: "flex-start",
     justifyContent: "center"
   },
-  buttonUnstakeView: {
+  buttonStakeView: {
     width: getWidth(121),
     height: getHeight(50),
     backgroundColor: Colors.white,
     borderBottomLeftRadius: getHeight(25),
     borderTopLeftRadius: getHeight(25),
-    right: -1,
+    //right: -1,
     borderColor: "white",
     alignItems: "center",
+    alignSelf: "flex-end",
     justifyContent: "center"
   },
   buttonView: {
@@ -61,7 +76,8 @@ const crauselStyle = {
   },
   buttonText: {
     fontSize: FontSize.mediumlarge,
-    fontFamily: fonts.WorkSansSemiBold
+    fontFamily: fonts.WorkSansSemiBold,
+    color: Colors.royalBlue
   }
 };
 

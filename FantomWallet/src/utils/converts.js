@@ -39,18 +39,24 @@ export function scientificToDecimal(num) {
   return num;
 }
 
-export function estimationMaxFantomBalance(fantomWei, gasPrice) {
+export function estimationMaxFantomBalance(fantomWei, gasPrice, from = "") {
   let wei = fantomWei;
 
   if (fantomWei % 1 != 0) {
     wei *= 1e18;
   }
-
-  const maxFantomBalanceWei = math.subtract(math.bignumber(wei), gasPrice);
+  let maxFantomBalanceWei = math.subtract(math.bignumber(wei), gasPrice);
+  if (from === "validator") {
+    maxFantomBalanceWei = fantomWei;
+  }
   return Web3.utils.fromWei(maxFantomBalanceWei.toString(), "ether");
 
   // due to mock bignumber it is difficult to evaluate the behavior
 }
+
+export const formatNumber = num => {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+};
 
 export const toFixed = (num, fixed) => {
   if (!num) return "";
@@ -80,7 +86,9 @@ export const convertFTMValue = value => {
   }
 
   if (value) {
-    let convertValue = Number(estimationMaxFantomBalance(value, GAS_PRICE));
+    let convertValue = Number(
+      estimationMaxFantomBalance(value, GAS_PRICE, from)
+    );
 
     if (convertValue <= 0.01) return convertValue.toFixed(8);
     else return convertValue.toFixed(2);
@@ -103,13 +111,11 @@ export const formatActivities = (activityDate: any) => {
 };
 
 export const balanceToDollar = (value, decimal) => {
-  
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
-    if (value === 0|| value ==="0") {
-      return value; 
-   }
-    else if (value <= 1) {
+    if (value === 0 || value === "0") {
+      return value;
+    } else if (value <= 1) {
       return (fantomDollarRate * value).toFixed(8);
     }
     return (fantomDollarRate * value).toFixed(decimal);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Text,
   FlatList,
@@ -7,61 +7,34 @@ import {
   StatusBar,
   TouchableOpacity,
   ScrollView
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, getWidth } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import styles from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-const validatorData = [
-  {
-    text: 'Validator node 1',
-    status: 'Active',
-    amount: '230,000,000',
-    id: 0
-  },
-  {
-    text: 'Fantom validator',
-    status: 'Active',
-    amount: '215,735,250',
-    id: 1
-  },
-  {
-    text: 'Europe validator',
-    status: 'Active',
-    amount: '195,199,366',
-    id: 2
-  },
-  {
-    text: 'Satoshi node',
-    status: 'Active',
-    amount: '170,345,678',
-    id: 3
-  },
-  {
-    text: 'Node validator',
-    status: 'Offline',
-    amount: '112,654,100',
-    id: 4
-  },
-  {
-    text: 'Validator node 2',
-    status: 'Active',
-    amount: '99,135,717',
-    id: 5
-  }
-];
-const ValidatorNode = (props) => {
-  const [nodeExpanded, setNodeExpanded] = useState('');
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, getWidth } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import styles from "./styles";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { getValidatorsList as getValidatorsListAction } from "~/redux/staking/actions";
+import { connect } from "react-redux";
+import { formatNumber } from "~/utils/converts";
+
+const ValidatorNode = props => {
+  const { validators, getValidatorsList } = props;
+
+  useEffect(() => {
+    getValidatorsList();
+  }, []);
+
+  const [nodeExpanded, setNodeExpanded] = useState("");
   const selectItem = (item, index) => {
-    const ind = validatorData.findIndex(i => index === i.id);
+    const ind = validators.findIndex(i => (index + 1).toString() === i.id);
     if (nodeExpanded && nodeExpanded.id === item.id) {
-      setNodeExpanded('');
+      setNodeExpanded("");
     } else {
-      setNodeExpanded(validatorData[ind]);
+      setNodeExpanded(validators[ind]);
     }
   };
+  const dividend = Math.pow(10, 18);
   return (
     <View style={styles.mainContainer}>
       <SafeAreaView style={styles.mainContainer}>
@@ -83,9 +56,13 @@ const ValidatorNode = (props) => {
           <Text style={styles.headingText}>Select a validator node</Text>
 
           <FlatList
-            data={validatorData}
+            data={validators}
             extraData={nodeExpanded}
             renderItem={({ item, index }) => {
+              const status =
+                item.deactivatedEpoch === "0" ? "Active" : "Inactive";
+
+              const stakingSpace = 15 * item.totalStake - item.delegatedMe;
               return (
                 <View>
                   <TouchableOpacity
@@ -96,7 +73,7 @@ const ValidatorNode = (props) => {
                     onPress={() => selectItem(item, index)}
                   >
                     <View style={styles.rowView}>
-                      <Text style={styles.nameText}>{item.text}</Text>
+                      <Text style={styles.validatorName}>{item.address}</Text>
                       <Text style={styles.stakeText}>Total staked</Text>
                     </View>
                     <View style={{ ...styles.rowView, marginTop: 10 }}>
@@ -105,17 +82,21 @@ const ValidatorNode = (props) => {
                           name="circle"
                           size={12}
                           color={
-                            item.status === 'Active'
+                            status === "Active"
                               ? Colors.activeGreen
                               : Colors.offlinePink
                           }
                         ></FontAwesome>
-                        <Text style={styles.statusText}>{item.status}</Text>
+                        <Text style={styles.statusText}>{status}</Text>
                       </View>
-                      <Text style={styles.nameText}>{item.amount}</Text>
+                      <Text style={styles.nameText}>
+                        {formatNumber(
+                          Number((item.totalStake / dividend).toFixed(2))
+                        )}
+                      </Text>
                     </View>
                     {/* Third Optional row */}
-                    {nodeExpanded.text === item.text && (
+                    {nodeExpanded.address === item.address && (
                       <>
                         <View
                           style={{
@@ -135,9 +116,13 @@ const ValidatorNode = (props) => {
                           }}
                         >
                           <Text style={styles.nameText}>100%</Text>
-                          <Text style={styles.nameText}>0</Text>
+                          <Text style={styles.nameText}>
+                            {formatNumber(
+                              Number((stakingSpace / dividend).toFixed(2))
+                            )}
+                          </Text>
                         </View>
-                        {item.text.toLowerCase().includes('validator') ? (
+                        {stakingSpace <= 0 ? (
                           <View style={styles.descView}>
                             <Text style={styles.descText}>
                               This node is full at the moment.
@@ -151,7 +136,12 @@ const ValidatorNode = (props) => {
                             <TouchableOpacity
                               style={styles.selectButton}
                               onPress={() =>
-                                NavigationService.navigate(routes.root.Success)
+                                NavigationService.navigate(
+                                  routes.root.StakingAmount,
+                                  {
+                                    validatorId: item.id
+                                  }
+                                )
                               }
                             >
                               <Text style={styles.selectText}>Select</Text>
@@ -171,4 +161,13 @@ const ValidatorNode = (props) => {
     </View>
   );
 };
-export default ValidatorNode;
+
+const mapStateToProps = state => ({
+  validators: state.stakes.validators
+});
+
+const mapDispatchToProps = {
+  getValidatorsList: getValidatorsListAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ValidatorNode);

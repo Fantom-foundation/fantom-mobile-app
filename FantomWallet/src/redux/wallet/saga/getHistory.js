@@ -20,6 +20,7 @@ const getTransactionApi = async publicKey => {
     }
   );
 };
+
 const getBalanceApi = async () => {
   return await axios.get(GET_BALANCE_API);
 };

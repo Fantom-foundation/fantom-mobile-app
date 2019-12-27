@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   SafeAreaView,
@@ -14,6 +14,10 @@ import Carousel from "react-native-snap-carousel";
 import { Metrics, getWidth } from "../../utils/pixelResolver";
 import Modal from "../../components/general/modal";
 import { NavigationService, routes } from "../../navigation/helpers";
+import { connect } from "react-redux";
+import { Colors } from "../../theme";
+import { formatNumber } from "~/utils/converts";
+import { delegateByAddresses as delegateByAddressesAction } from "~/redux/staking/actions";
 
 const data = [
   {
@@ -44,65 +48,98 @@ const modalText = "You need at least 1 FTM to \n stake.";
 const amountHightModalText =
   "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
 const unstakeText =
-  "Are you sure you want to withdraw \n your tokens from staking?\n\nThe tokens will be immediately\navailable in your wallet.";
+  "Are you sure you want to  request to withdraw \n your tokens from staking??\n\nThe tokens will be available\n after 7 days in your wallet.";
 
-const Staking = ({}: Props) => {
+const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
+  const [isWithdrawModalOpened, openWithdrawModal] = useState("");
+  const { delegateByAddresses, stakes, wallets } = props;
+  useEffect(() => {
+    delegateByAddresses();
+  }, []);
+
+  const formatValues = (value, isDividedBy = true) => {
+    const dividend = isDividedBy ? Math.pow(10, 18) : 1;
+    return formatNumber(Number((value / dividend).toFixed(2)));
+  };
+
   const _renderItem = ({ item, index }) => {
+    const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
+    if (!stakeData) {
+      return null;
+    }
+    const availableToStake = item.balance - stakeData.amount;
+    const currentDate = new Date();
+    const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
+    const currentlyStaking = formatValues(stakeData.amount);
+    const timeLeft =
+      new Date().getTime() -
+      (formatValues(stakeData.deactivatedTime || 0) + nextSevenDays);
     return (
       <View
         style={{
           ...styles.walletView,
-          marginLeft: index !== 0 ? 20 : 0,
-          backgroundColor: item.backgroundColor
+          marginLeft: index !== 0 ? 20 : 0
         }}
       >
         <View style={{ paddingHorizontal: 22 }}>
-          <Text style={{ ...styles.titleView, color: item.titleColor }}>
-            {item.title}
+          <Text style={{ ...styles.titleView }}>{item.name}</Text>
+          <Text style={{ ...styles.amountStyle }}>
+            {formatValues(availableToStake, false)}
           </Text>
-          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
-            {item.availableAmount}
-          </Text>
-          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
-            {item.availableText}
-          </Text>
+          <Text style={{ ...styles.walletTextStyle }}>Available to stake</Text>
 
-          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
-            {item.currenrtStaking}
+          <Text style={{ ...styles.amountStyle }}>{currentlyStaking}</Text>
+          <Text style={{ ...styles.walletTextStyle }}>Currently staking</Text>
+          <Text style={{ ...styles.amountStyle }}>
+            {formatValues(stakeData.claimedRewards)}
           </Text>
-          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
-            {item.currenrtStakingText}
-          </Text>
-          <Text style={{ ...styles.amountStyle, color: item.titleColor }}>
-            {item.earnedRewards}
-          </Text>
-          <Text style={{ ...styles.walletTextStyle, color: item.titleColor }}>
-            {item.earnedRewardsText}
-          </Text>
+          <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
+          {timeLeft > 0 ? (
+            <Text style={{ ...styles.bottomTextStyle }}>
+              Your {currentlyStaking} will be available in
+              {timeLeft}
+            </Text>
+          ) : (
+            <TouchableOpacity
+              onPress={() => openWithdrawModal(currentlyStaking)}
+            >
+              <Text style={{ ...styles.bottomTextStyle }}>
+                Withdraw {currentlyStaking} FTM now
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={styles.buttonView}>
+          {/* {availableToStake.isDeligate ? ( */}
+          {true ? (
+            <TouchableOpacity
+              style={styles.buttonUnstakeView}
+              onPress={() => openUnstakingModal(currentlyStaking)}
+            >
+              <Text
+                style={{
+                  ...styles.buttonText
+                }}
+              >
+                Unstake
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                ...styles.buttonUnstakeView,
+                backgroundColor: Colors.royalBlue
+              }}
+            />
+          )}
           <TouchableOpacity
             style={styles.buttonStakeView}
-            onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
-          >
-            <Text
-              style={{
-                ...styles.buttonText,
-                color: index === 0 ? item.backgroundColor : item.titleColor
-              }}
-            >
-              Unstake
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonUnstakeView}
             onPress={handleStakeButton}
           >
             <Text
               style={{
-                ...styles.buttonText,
-                color: index === 0 ? item.backgroundColor : item.titleColor
+                ...styles.buttonText
               }}
             >
               Stake
@@ -116,25 +153,41 @@ const Staking = ({}: Props) => {
   const handleBackPress = () => {};
 
   //onUnstake Button
-  const handleUnstakePress = () => {};
+  const handleUnstakePress = () => {
+    const { navigation } = props;
+    navigation.navigate("WalletImported", {
+      text: "Requested to unstake successfully",
+      navigationRoute: "Staking"
+    });
+  };
+
+  //onUnstake Button
+  const handleWithdrawPress = () => {
+    const { navigation } = props;
+    navigation.navigate("WalletImported", {
+      text: "Tokens successfully withdrawn!",
+      navigationRoute: "Staking"
+    });
+  };
 
   const handleStakeButton = () => {
-    NavigationService.navigate(routes.root.StakingAmount);
+    NavigationService.navigate(routes.root.ValidatorNode);
   };
+  const withdrawText = `Withdraw ${isWithdrawModalOpened} FTM now`;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
         <Text style={styles.stakingText}>Staking</Text>
-        <Image
+        {/* <Image
           source={question}
           resizeMode="contain"
           style={styles.imagestyle}
-        ></Image>
+        ></Image> */}
       </View>
       <View style={styles.crauselView}>
         <Carousel
-          data={data}
+          data={wallets}
           renderItem={_renderItem}
           sliderWidth={Metrics.screenWidth}
           itemWidth={getWidth(280)}
@@ -173,6 +226,28 @@ const Staking = ({}: Props) => {
       /> */}
 
       {/* Unstake Confirm */}
+      {!!isWithdrawModalOpened && (
+        <Modal
+          modalText={withdrawText}
+          stakingView={styles.unstakeOuterView}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.unstakeView}
+          buttons={[
+            {
+              name: "Back",
+              style: styles.backButtonStyle,
+              onPress: () => openWithdrawModal(""),
+              textStyle: styles.backButton
+            },
+            {
+              name: "Withdraw",
+              style: styles.unstakeButton,
+              onPress: handleWithdrawPress,
+              textStyle: styles.unStakeText
+            }
+          ]}
+        />
+      )}
 
       {isUnstakeModalOpened && (
         <Modal
@@ -200,4 +275,13 @@ const Staking = ({}: Props) => {
   );
 };
 
-export default Staking;
+const mapStateToProps = state => ({
+  stakes: state.stakes.data,
+  wallets: state.wallet.walletsData
+});
+
+const mapDispatchToProps = {
+  delegateByAddresses: delegateByAddressesAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Staking);
