@@ -53,10 +53,9 @@ const unstakeText =
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
-  const [values, setValues] = useState("");
   const { delegateByAddresses, stakes, wallets, navigation } = props;
+  const [values, setValues] = useState(wallets);
   useEffect(() => {
-    setValues(wallets);
     delegateByAddresses();
   }, []);
 
@@ -180,7 +179,6 @@ const Staking = (props: Props) => {
     NavigationService.navigate(routes.root.ValidatorNode);
   };
   const withdrawText = `Withdraw ${isWithdrawModalOpened} FTM now`;
-  console.log(values, "asdkjahdaksjh");
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
@@ -193,12 +191,13 @@ const Staking = (props: Props) => {
       </View>
       <View style={styles.crauselView}>
         <Carousel
-          data={wallets}
+          data={values}
           renderItem={_renderItem}
           sliderWidth={Metrics.screenWidth}
           itemWidth={getWidth(280)}
           inactiveSlideScale={1}
           inactiveSlideOpacity={1}
+          extraData={values}
         />
       </View>
 

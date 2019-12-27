@@ -11,7 +11,7 @@ const WalletImported = (props: TSettingsScreenTypes) => {
     <SuccessScreen
       onPress={() => {
         if (navigationRoute && navigationRoute === "Back") {
-          NavigationService.navigate(routes.HomeScreen["Home"]);
+          NavigationService.navigate(routes.HomeScreen["Staking"]);
           return;
         }
         if (navigationRoute) {
