@@ -52,6 +52,7 @@ const unstakeText =
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
+  const [isWithdrawModalOpened, openWithdrawModal] = useState("");
   const { delegateByAddresses, stakes, wallets } = props;
   useEffect(() => {
     delegateByAddresses();
@@ -68,6 +69,12 @@ const Staking = (props: Props) => {
       return null;
     }
     const availableToStake = item.balance - stakeData.amount;
+    const currentDate = new Date();
+    const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
+    const currentlyStaking = formatValues(stakeData.amount);
+    const timeLeft =
+      new Date().getTime() -
+      (formatValues(stakeData.deactivatedTime || 0) + nextSevenDays);
     return (
       <View
         style={{
@@ -82,25 +89,33 @@ const Staking = (props: Props) => {
           </Text>
           <Text style={{ ...styles.walletTextStyle }}>Available to stake</Text>
 
-          <Text style={{ ...styles.amountStyle }}>
-            {formatValues(stakeData.amount)}
-          </Text>
+          <Text style={{ ...styles.amountStyle }}>{currentlyStaking}</Text>
           <Text style={{ ...styles.walletTextStyle }}>Currently staking</Text>
           <Text style={{ ...styles.amountStyle }}>
             {formatValues(stakeData.claimedRewards)}
           </Text>
           <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
-          <Text style={{ ...styles.bottomTextStyle }}>
-            Your {formatValues(stakeData.claimedRewards)} will be available in
-            time left
-          </Text>
+          {timeLeft > 0 ? (
+            <Text style={{ ...styles.bottomTextStyle }}>
+              Your {currentlyStaking} will be available in
+              {timeLeft}
+            </Text>
+          ) : (
+            <TouchableOpacity
+              onPress={() => openWithdrawModal(currentlyStaking)}
+            >
+              <Text style={{ ...styles.bottomTextStyle }}>
+                Withdraw {currentlyStaking} FTM now
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={styles.buttonView}>
           {/* {availableToStake.isDeligate ? ( */}
           {true ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
-              onPress={() => openUnstakingModal(!isUnstakeModalOpened)}
+              onPress={() => openUnstakingModal(currentlyStaking)}
             >
               <Text
                 style={{
@@ -146,9 +161,19 @@ const Staking = (props: Props) => {
     });
   };
 
+  //onUnstake Button
+  const handleWithdrawPress = () => {
+    const { navigation } = props;
+    navigation.navigate("WalletImported", {
+      text: "Tokens successfully withdrawn!",
+      navigationRoute: "Staking"
+    });
+  };
+
   const handleStakeButton = () => {
     NavigationService.navigate(routes.root.ValidatorNode);
   };
+  const withdrawText = `Withdraw ${isWithdrawModalOpened} FTM now`;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -201,6 +226,28 @@ const Staking = (props: Props) => {
       /> */}
 
       {/* Unstake Confirm */}
+      {!!isWithdrawModalOpened && (
+        <Modal
+          modalText={withdrawText}
+          stakingView={styles.unstakeOuterView}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.unstakeView}
+          buttons={[
+            {
+              name: "Back",
+              style: styles.backButtonStyle,
+              onPress: () => openWithdrawModal(""),
+              textStyle: styles.backButton
+            },
+            {
+              name: "Withdraw",
+              style: styles.unstakeButton,
+              onPress: handleWithdrawPress,
+              textStyle: styles.unStakeText
+            }
+          ]}
+        />
+      )}
 
       {isUnstakeModalOpened && (
         <Modal
