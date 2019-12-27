@@ -102,6 +102,7 @@ const phraseView = {
     borderBottomWidth: 2,
      marginTop: getHeight(84),
     borderBottomColor: Colors.blackOpacity,
+    paddingBottom:6
  
   },
   textInput: {
@@ -120,7 +121,7 @@ const phraseView = {
     borderColor: Colors.blackOpacity,
     alignSelf:'center'
   },
-  pasterText: {
+  pasteText: {
     color: Colors.blackOpacity,
     fontSize: FontSize.small,
     fontFamily: fonts.WorkSansSemiBold,
@@ -149,7 +150,8 @@ const privateKeyStyles = {
   flexDirection: "row",
     borderBottomWidth: 2,
     borderBottomColor: Colors.blackOpacity,
-    alignItems:'center',
+    alignItems: 'center',
+    paddingBottom:6
   }
 };
 
