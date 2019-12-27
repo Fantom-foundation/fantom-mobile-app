@@ -176,7 +176,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
               <TextInput
                 multiline={true}
                 style={styles.textInput}
-                value={privateKey}
+                value={privateKey?privateKey.trim():""}
                 onChangeText={text => setPrivateKey(text)}
               ></TextInput>
               <TouchableOpacity

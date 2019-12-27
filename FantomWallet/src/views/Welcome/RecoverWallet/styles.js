@@ -100,12 +100,14 @@ const phraseView = {
   inputView: {
     flexDirection: "row",
     borderBottomWidth: 2,
-    marginTop: getHeight(84),
+     marginTop: getHeight(84),
     borderBottomColor: Colors.blackOpacity,
     paddingBottom: 6
   },
   textInput: {
-    width: getWidth(270)
+    width: getWidth(270),
+
+  
   },
 
   pasteButton: {
@@ -143,7 +145,7 @@ const phraseView = {
 };
 const privateKeyStyles = {
   privateInputView: {
-    flexDirection: "row",
+  flexDirection: "row",
     borderBottomWidth: 2,
     borderBottomColor: Colors.blackOpacity,
     paddingBottom: 6
