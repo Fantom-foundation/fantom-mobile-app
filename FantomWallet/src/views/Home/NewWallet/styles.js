@@ -44,9 +44,9 @@ const cardStyles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   cardImageStyle: {
-    height: getHeight(110),
+    height: getHeight(120),
     width: getWidth(80),
-    bottom: -10,
+    bottom: -20,
     left: getWidth(20),
     position: "absolute",
     opacity: 0.2
@@ -77,10 +77,8 @@ const cardListItemStyles = StyleSheet.create({
     borderLeftWidth: getWidth(8),
     borderLeftColor: Colors.royalBlue,
     justifyContent: "center",
-
     shadowColor: Colors.blackOpacity,
     backgroundColor: Colors.white,
-    //borderWidth:0.3,
     shadowOffset: {
       width: 0,
       height: 7
@@ -200,12 +198,9 @@ export default StyleSheet.create({
     opacity: 0.5
   },
   listHeader: {
-    // marginVertical: getHeight(40),
     height: getHeight(44),
     flexDirection: "row",
     justifyContent: "space-between"
-    //paddingHorizontal: getWidth(22),
-    //marginHorizontal: getWidth(22)
   },
   listContainer: {
     // marginHorizontal: getWidth(22)
@@ -217,7 +212,7 @@ export default StyleSheet.create({
     marginHorizontal: getWidth(10)
   },
   marginHorizontal: {
-    marginHorizontal:getWidth(22)
+    marginHorizontal: getWidth(22),
   },
   stickyHeaderContainer: {
     height: getHeight(220),

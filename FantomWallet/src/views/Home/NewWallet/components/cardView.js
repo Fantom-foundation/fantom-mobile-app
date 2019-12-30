@@ -5,7 +5,6 @@ import { FantomLogo } from "../../../../images";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { balanceToDollar, balanceWithSeprators } from "~/utils/converts.js";
-import { getHeight } from "../../../../utils/pixelResolver";
 
 const CardView = ({
   showList,
@@ -13,7 +12,6 @@ const CardView = ({
   data,
   isHiddenText,
   setCurrentWallet,
-  emptyView
 }) => {
   const { name, publicKey, history, balance } = data;
   const handleCardClick = () => {
