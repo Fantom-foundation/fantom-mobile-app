@@ -199,12 +199,6 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           <Text style={styles.sendPriceExample}>
             (${amount ? balanceToDollar(amount, 5) : 0})
           </Text>
-          <View style={styles.walletButton}>
-            <Text style={styles.walletText}>FTM</Text>
-            <Text style={styles.walletAmountText}>
-              {currentWallet.balance || 0}
-            </Text>
-          </View>
 
           {/* KeyPad */}
 
