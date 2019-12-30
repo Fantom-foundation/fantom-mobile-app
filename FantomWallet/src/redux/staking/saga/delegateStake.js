@@ -3,13 +3,14 @@ import { takeLatest, put, select, call } from "redux-saga/effects";
 import {
   types,
   delegateByAddressesSuccess,
-  delegateByAddressesFailure
+  delegateByAddressesFailure,
+  delegateByAddress
 } from "../actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
 import { getDataWithQueryString } from "../../../common/api";
 import { GET_BALANCE_API } from "react-native-dotenv";
 import axios from "axios";
-import Web3Agent from "~/services/api/web3";
+import Web3Agent from "../../../services/api/web3";
 
 type Action = {
   payload: {
@@ -22,10 +23,10 @@ export function* delegateByAddressSaga({
   payload: { publicKey }
 }: Action): any {
   try {
-    const response = yield call(
-      getDataWithQueryString("delegatorByAddress", publicKey)
-    );
+    const response = yield call(delegatorByAddressApi, publicKey);
+    yield put(delegateByAddressesSuccess({ publicKey, response }));
   } catch (e) {
+    yield put(delegateByAddressesFailure({ publicKey }));
     yield put(setDopdownAlert("error", e.message));
   }
 }
@@ -46,7 +47,7 @@ export function* delegateByAddressesSaga(): any {
       if (publicKey) {
         try {
           const response = yield call(delegatorByAddressApi, publicKey);
-          yield put(delegateByAddressesFailure({ publicKey, response }));
+          yield put(delegateByAddressesSuccess({ publicKey, response }));
         } catch (exception) {
           yield put(delegateByAddressesFailure({ publicKey }));
         }
@@ -68,14 +69,25 @@ export function* delegateByStakerIdSaga({
 }
 
 export function* delegateAmountSaga({
-  payload: { amount, publicKey }
+  value: amount,
+  publicKey,
+  validatorId
 }: Action): any {
   try {
-    const response = yield Web3Agent.Fantom.delegateStake({
-      amount,
-      publicKey
-    });
-    // Assign contract functions to sfc variable
+    const { keys } = yield select(({ keys }) => ({
+      keys: keys.wallets
+    }));
+    if (keys && keys.length > 0) {
+      const walletKey = keys.find(wallet => wallet.publicKey === publicKey);
+      // Assign contract functions to sfc variable
+      const response = yield Web3Agent.Fantom.delegateStake({
+        amount,
+        publicKey,
+        privateKey: walletKey.privateKey,
+        validatorId
+      });
+      yield put(delegateByAddress({ publicKey }));
+    }
   } catch (e) {
     yield put(setDopdownAlert("error", e.message));
   }

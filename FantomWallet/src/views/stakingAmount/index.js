@@ -17,11 +17,13 @@ import { delegateAmount as delegateAmountAction } from "../../redux/staking/acti
 import { Colors, fonts, FontSize } from "../../theme";
 
 const StakingAmount = (props: Props) => {
-  const { validators, delegateAmount } = props;
+  const { validators, delegateAmount, keys, currentWallet } = props;
+
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [amount, setAmount] = useState("");
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
+    getPrivateKey();
     if (item === "<") {
       let num = amount.slice(0, -1);
       setAmount(num);
@@ -53,6 +55,16 @@ const StakingAmount = (props: Props) => {
     else if (balance === availableSpace) setAmount(availableSpace.toString());
   };
 
+  const getPrivateKey = () => {
+    const { keys, currentWallet } = props;
+    const { wallets } = keys;
+    if (wallets && wallets.length > 0) {
+      const key = wallets.find(w => w.publicKey === currentWallet.publicKey);
+      const { privateKey } = key;
+      return privateKey;
+    }
+    return null;
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -93,8 +105,12 @@ const StakingAmount = (props: Props) => {
           <TouchableOpacity
             style={styles.stakeButton}
             onPress={() => {
-              delegateAmount({ amount, publicKey: validator.address });
-              // NavigationService.navigate(routes.root.Success);
+              delegateAmount({
+                value: amount,
+                publicKey: currentWallet.publicKey,
+                validatorId: validator.id
+              });
+              NavigationService.navigate(routes.root.StakingAmount);
             }}
           >
             <Text style={styles.stakeText}>Stake</Text>
@@ -107,7 +123,8 @@ const StakingAmount = (props: Props) => {
 
 const mapStateToProps = state => ({
   validators: state.stakes.validators,
-  currentWallet: state.wallet.currentWallet
+  currentWallet: state.wallet.currentWallet,
+  keys: state.keys
 });
 
 const mapDispatchToProps = {
