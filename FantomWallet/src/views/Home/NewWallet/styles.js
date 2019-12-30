@@ -9,8 +9,9 @@ const cardStyles = StyleSheet.create({
     borderRadius: 22,
     padding: getWidth(20),
     marginHorizontal: getWidth(6),
-    backgroundColor: "#416ed5"
+    backgroundColor: Colors.royalBlue
   },
+
   cardHeaderText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
@@ -43,12 +44,12 @@ const cardStyles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   cardImageStyle: {
-    height: getHeight(100),
+    height: getHeight(110),
     width: getWidth(80),
     bottom: -10,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.7
+    opacity: 0.2
   },
   cardIndicatorStyle: {
     width: getWidth(12),
@@ -125,10 +126,10 @@ const stickyHeaderStyles = StyleSheet.create({
   stickyHeaderImageStyle: {
     height: getHeight(100),
     width: getWidth(80),
-    top: 15,
+    top: getHeight(15),
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.7
+    opacity: 0.2,
   }
 });
 
@@ -219,10 +220,14 @@ export default StyleSheet.create({
     marginHorizontal:getWidth(22)
   },
   stickyHeaderContainer: {
-    height: getHeight(220)
+    height: getHeight(220),
   },
   ...cardStyles,
   ...cardListItemStyles,
   ...listViewStyles,
-  ...stickyHeaderStyles
+  ...stickyHeaderStyles,
+  safeAreaStyle: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  }
 });

@@ -1,10 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "../styles";
-import Icon from "react-native-vector-icons/FontAwesome";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { getHeight, getWidth } from "../../../../utils/pixelResolver";
-import { Colors, FontSize, fonts } from "../../../../theme";
 import WalletMenu from "./walletMenu";
 import CardView from "./cardView";
 import { EyeOpen, EyeClose } from "../../../../images";

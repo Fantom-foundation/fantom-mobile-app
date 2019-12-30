@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
-import { BackLogo } from "../../../../images";
+import { FantomLogo } from "../../../../images";
 import CardListItem from "./cardListItem";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { balanceToDollar, balanceWithSeprators } from "~/utils/converts.js";
@@ -41,22 +41,18 @@ const CardView = ({
               {isHiddenText ? "*******" : "$" + balanceToDollar(balance, 2)}
             </Text>
           </View>
-          <ImageBackground style={styles.cardImageStyle} source={BackLogo} />
+          <ImageBackground style={styles.cardImageStyle} source={FantomLogo} />
         </TouchableOpacity>
       )}
-      {showList && history && history.length > 0 ? (
+      {showList && history && history.length > 0 && (
         <CardListItem
           data={history}
           isHiddenText={isHiddenText}
           publicKey={publicKey}
         />
-      ) : (
-        <View
-            style={{
-            height: emptyView && history && history.length <= 0 ? getHeight(600) : 0
-          }}
-        />
-      )}
+      )
+   
+      }
     </View>
   );
 };
