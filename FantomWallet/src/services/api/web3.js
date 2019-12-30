@@ -54,11 +54,15 @@ class Web3Agent {
         abi,
         "0xfc00face00000000000000000000000000000000"
       );
+      const delegateValidatorId = this.web3.eth.abi.encodeParameter(
+        "uint256",
+        validatorId
+      );
       return this.transfer({
         from,
         to: "0xfc00face00000000000000000000000000000000",
         value,
-        memo: sfc.methods.createDelegation(validatorId).encodeABI(),
+        memo: sfc.methods.createDelegation(delegateValidatorId).encodeABI(),
         privateKey
       });
     } catch (exception) {

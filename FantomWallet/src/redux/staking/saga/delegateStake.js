@@ -27,7 +27,7 @@ export function* delegateByAddressSaga({
     yield put(delegateByAddressesSuccess({ publicKey, response }));
   } catch (e) {
     yield put(delegateByAddressesFailure({ publicKey }));
-    yield put(setDopdownAlert("error", e.message));
+    // yield put(setDopdownAlert("error", e.message));
   }
 }
 
