@@ -21,6 +21,7 @@ const StakingAmount = (props: Props) => {
 
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [amount, setAmount] = useState("");
+  const [ifStaking, setIfStaking] = useState(false);
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     getPrivateKey();
@@ -103,8 +104,13 @@ const StakingAmount = (props: Props) => {
 
           {/* Stake Button */}
           <TouchableOpacity
-            style={styles.stakeButton}
+            disabled={ifStaking}
+            style={{
+              ...styles.stakeButton,
+              backgroundColor: !ifStaking ? Colors.lightGrey : Colors.grey
+            }}
             onPress={() => {
+              setIfStaking(true);
               delegateAmount({
                 value: amount,
                 publicKey: currentWallet.publicKey,
@@ -113,7 +119,9 @@ const StakingAmount = (props: Props) => {
               NavigationService.navigate(routes.root.StakingAmount);
             }}
           >
-            <Text style={styles.stakeText}>Stake</Text>
+            <Text style={styles.stakeText}>
+              {ifStaking ? "Staking..." : "Stake"}
+            </Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>

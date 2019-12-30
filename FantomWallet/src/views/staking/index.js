@@ -27,6 +27,7 @@ const unstakeText =
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
+  const [ifUnstaking, setIfUnstaking] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
   const { delegateByAddresses, stakes, wallets, navigation } = props;
   const [values, setValues] = useState(wallets);
@@ -142,12 +143,15 @@ const Staking = (props: Props) => {
 
   //onUnstake Button
   const handleUnstakePress = () => {
+    setIfUnstaking(true);
     const { navigation } = props;
-
     navigation.navigate("WalletImported", {
       text: "Requested to unstake successfully",
       navigationRoute: "Back"
     });
+    //   ,
+    //   1000
+    // );
   };
 
   //onUnstake Button
@@ -254,13 +258,18 @@ const Staking = (props: Props) => {
               name: "Back",
               style: styles.backButtonStyle,
               onPress: () => openUnstakingModal(!isUnstakeModalOpened),
-              textStyle: styles.backButton
+              textStyle: styles.backButton,
+              disabled: ifUnstaking
             },
             {
-              name: "Unstake",
-              style: styles.unstakeButton,
+              name: ifUnstaking ? "Unstaking..." : "Unstake",
+              style: {
+                ...styles.unstakeButton,
+                backgroundColor: ifUnstaking ? Colors.grey : Colors.red
+              },
               onPress: handleUnstakePress,
-              textStyle: styles.unStakeText
+              textStyle: styles.unStakeText,
+              disabled: ifUnstaking
             }
           ]}
         />
