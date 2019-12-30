@@ -39,6 +39,20 @@ const StakingAmount = (props: Props) => {
   const availableSpace = formatNumber(
     Number((stakingSpace / dividend).toFixed(2))
   );
+  const handleMaxStake = () => {
+    const { currentWallet } = props;
+    const { balance } = currentWallet;
+
+    if (balance > availableSpace) setAmount(availableSpace.toString());
+    else if (balance < availableSpace)
+      setAmount(
+        Number(balance)
+          .toFixed(2)
+          .toString()
+      );
+    else if (balance === availableSpace) setAmount(availableSpace.toString());
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -62,10 +76,7 @@ const StakingAmount = (props: Props) => {
             <Text
               style={styles.availablePrice}
             >{`Available: ${availableSpace}`}</Text>
-            <TouchableOpacity
-              style={styles.maxButton}
-              onPress={() => setAmount(availableSpace.toString())}
-            >
+            <TouchableOpacity style={styles.maxButton} onPress={handleMaxStake}>
               <Text style={styles.maxButtonText}>Max</Text>
             </TouchableOpacity>
           </View>
@@ -95,7 +106,8 @@ const StakingAmount = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  validators: state.stakes.validators
+  validators: state.stakes.validators,
+  currentWallet: state.wallet.currentWallet
 });
 
 const mapDispatchToProps = {

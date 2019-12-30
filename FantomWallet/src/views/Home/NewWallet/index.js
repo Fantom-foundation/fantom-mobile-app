@@ -29,7 +29,8 @@ import { connect } from "react-redux";
 import {
   getBalance as getBalanceAction,
   getHistory as getHistoryAction,
-  setCurrentWallet as setCurrentWalletAction
+  setCurrentWallet as setCurrentWalletAction,
+  sendFtm as sendFtmAction
 } from "~/redux/wallet/actions";
 import Loader from "~/components/general/Loader";
 import { fantomToDollar } from "../../../utils/converts";
@@ -53,10 +54,12 @@ class Wallet extends Component {
       getHistory,
       isLoading,
       walletsData,
+      sendFtm,
       setCurrentWallet
     } = this.props;
     if (walletsData && walletsData.length > 0 && !isLoading) {
       getBalance({ loading: isLoading });
+      sendFtm();
       getHistory();
     }
   }
@@ -272,7 +275,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getBalance: getBalanceAction,
   getHistory: getHistoryAction,
-  setCurrentWallet: setCurrentWalletAction
+  setCurrentWallet: setCurrentWalletAction,
+  sendFtm: sendFtmAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
