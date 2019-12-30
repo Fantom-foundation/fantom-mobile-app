@@ -19,8 +19,6 @@ import { Colors } from "../../theme";
 import { formatNumber } from "~/utils/converts";
 import { delegateByAddresses as delegateByAddressesAction } from "~/redux/staking/actions";
 
-
-
 const modalText = "You need at least 1 FTM to \n stake.";
 const amountHightModalText =
   "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
@@ -30,12 +28,20 @@ const unstakeText =
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
-  const { delegateByAddresses, stakes, wallets} = props;
+  const { delegateByAddresses, stakes, wallets, navigation } = props;
   const [values, setValues] = useState(wallets);
+  const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
   useEffect(() => {
     setValues(wallets);
-    delegateByAddresses()
+    delegateByAddresses();
+    setTimeout(() => {
+      setCarouselWidth(getWidth(280));
+    });
   }, []);
+
+  useEffect(() => {
+    if (!!carousRef) carousRef.props.autoplay = true;
+  }, [carousRef, carouselWidth]);
 
   const formatValues = (value, isDividedBy = true) => {
     const dividend = isDividedBy ? Math.pow(10, 18) : 1;
@@ -54,6 +60,7 @@ const Staking = (props: Props) => {
     const timeLeft =
       new Date().getTime() -
       (formatValues(stakeData.deactivatedTime || 0) + nextSevenDays);
+    const isUnstaking = navigation.getParam("isUnstaking");
     return (
       <View
         style={{
@@ -79,7 +86,7 @@ const Staking = (props: Props) => {
               Your {currentlyStaking} will be available in
               {timeLeft}
             </Text>
-          ) : isWithdrawModalOpened ? (
+          ) : isUnstaking ? (
             <TouchableOpacity
               onPress={() => openWithdrawModal(currentlyStaking)}
             >
@@ -92,7 +99,8 @@ const Staking = (props: Props) => {
           )}
         </View>
         <View style={styles.buttonView}>
-          {availableToStake.isDeligate ? (
+          {/* {availableToStake.isDeligate ? ( */}
+          {true ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
               onPress={() => openUnstakingModal(currentlyStaking)}
@@ -145,7 +153,7 @@ const Staking = (props: Props) => {
   //onUnstake Button
   const handleWithdrawPress = () => {
     const { navigation } = props;
-    openWithdrawModal("");
+    // openWithdrawModal("");
     navigation.navigate("WalletImported", {
       text: "Tokens successfully withdrawn!",
       navigationRoute: "Staking"
@@ -156,6 +164,7 @@ const Staking = (props: Props) => {
     NavigationService.navigate(routes.root.ValidatorNode);
   };
   const withdrawText = `Withdraw ${isWithdrawModalOpened} FTM now`;
+  let carousRef = React.createRef(null);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
@@ -168,13 +177,16 @@ const Staking = (props: Props) => {
       </View>
       <View style={styles.crauselView}>
         <Carousel
+          ref={carouselRef => (carousRef = carouselRef)}
           data={values}
+          shouldOptimizeUpdates={false}
           renderItem={_renderItem}
+          // autoplay
           sliderWidth={Metrics.screenWidth}
-          itemWidth={getWidth(280)}
+          itemWidth={carouselWidth}
           inactiveSlideScale={1}
           inactiveSlideOpacity={1}
-          extraData={values}
+          extraData={carouselWidth !== 279}
         />
       </View>
 

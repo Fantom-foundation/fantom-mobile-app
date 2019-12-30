@@ -300,12 +300,16 @@ const SendFTM = (props: Props) => {
             amountText
           )}\n FTM to ${toId}?"`}
           modalTextStyle={styles.modalTextStyle}
-          buttonViewStyle={styles.sendButtonView}
+          buttonViewStyle={
+            buttonModalText === "Sending...."
+              ? { ...styles.sendButtonView, justifyContent: "center" }
+              : styles.sendButtonView
+          }
           buttons={[
             {
               name: "Cancel",
               onPress: () => setSendingModal(!isSendingModal),
-              isShow: buttonModalText == "Sending...." ? false : true
+              isShow: buttonModalText === "Sending...." ? false : true
             },
             {
               style:

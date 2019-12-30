@@ -199,12 +199,6 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           <Text style={styles.sendPriceExample}>
             (${amount ? balanceToDollar(amount, 5) : 0})
           </Text>
-          <View style={styles.walletButton}>
-            <Text style={styles.walletText}>FTM</Text>
-            <Text style={styles.walletAmountText}>
-              {currentWallet.balance || 0}
-            </Text>
-          </View>
 
           {/* KeyPad */}
 
@@ -306,12 +300,16 @@ export const SendReceive = (props: TSendReceiveTypes) => {
             amount
           )}\n FTM to ${address}?"`}
           modalTextStyle={styles.modalTextStyle}
-          buttonViewStyle={styles.sendButtonView}
+          buttonViewStyle={
+            buttonModalText === "Sending...."
+              ? { ...styles.sendButtonView, justifyContent: "center" }
+              : styles.sendButtonView
+          }
           buttons={[
             {
               name: "Cancel",
               onPress: () => setSendingModal(!isSendingModal),
-              isShow: buttonModalText == "Sending...." ? false : true
+              isShow: buttonModalText === "Sending...." ? false : true
             },
             {
               style:
