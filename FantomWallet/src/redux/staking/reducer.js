@@ -28,13 +28,13 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
       const index = oldStakes.findIndex(item => item.publicKey === publicKey);
       const data = {
         amount,
-        claimedRewards,
+        claimedRewards: claimedRewards || 0,
         isDeligate: true,
         deactivatedTime
       };
       if (index > -1) {
         const updatedStake = {
-          ...oldStakes.data[index],
+          ...oldStakes[index],
           ...data
         };
         oldStakes.splice(index, 1, updatedStake);
@@ -51,7 +51,7 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
       };
     }
     case `${types.DELEGATE_BY_ADDRESSES}_FAILURE`: {
-      console.log("types.DELEGATE_BY_ADDRESSES", action.payload);
+      console.log("types.DELEGATE_BY_ADDRESSES_FAILURE", action.payload);
       let oldStakes = [...state.data];
       const { publicKey } = action.payload;
       const data = {

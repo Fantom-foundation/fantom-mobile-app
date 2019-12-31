@@ -34,7 +34,6 @@ export function* getHistory(): any {
     const {
       data: { body }
     } = yield call(getBalanceApi);
-    console.log("getBalance", JSON.parse(body));
     if (body) {
       const balanceInfo = JSON.parse(body);
       yield put({

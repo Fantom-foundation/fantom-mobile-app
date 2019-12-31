@@ -25,7 +25,6 @@ type Action = {
 export function* sendTransaction({
   payload: { to, value, memo, cbSuccess }
 }: Action): any {
-  console.log(value, "payload");
   const otherErrorMessage =
     "Invalid error. Please check the data and try again.";
   const date = moment().format("YYYY-MMM-DD hh:mm:ss a");

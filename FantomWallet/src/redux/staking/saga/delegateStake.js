@@ -45,9 +45,20 @@ export function* delegateByAddressesSaga(): any {
       const { publicKey } = wallet;
       if (publicKey) {
         try {
+          const pendingRewards = yield Web3Agent.Fantom.getDelegationPendingRewards(
+            publicKey,
+            "0xfab392eea7eee3c89a82abf212b8ec82fceaf0b6"
+          );
+          console.log(pendingRewards, "pendingRewardspendingRewards");
           const response = yield call(delegatorByAddressApi, publicKey);
-          yield put(delegateByAddressesFailure({ publicKey, response }));
+          yield put(
+            delegateByAddressesSuccess({
+              publicKey,
+              response: response.data.data
+            })
+          );
         } catch (exception) {
+          console.log(exception, "exceptionexception");
           yield put(delegateByAddressesFailure({ publicKey }));
         }
       }
@@ -68,12 +79,18 @@ export function* delegateByStakerIdSaga({
 }
 
 export function* delegateAmountSaga({
-  payload: { amount, publicKey }
+  payload: { amount, publicKey, validatorId }
 }: Action): any {
   try {
+    const { keys } = yield select(({ keys }) => ({
+      keys
+    }));
+    const key = keys.wallets.find(k => k.publicKey === publicKey);
     const response = yield Web3Agent.Fantom.delegateStake({
       amount,
-      publicKey
+      publicKey,
+      privateKey: key.privateKey,
+      validatorId
     });
     // Assign contract functions to sfc variable
   } catch (e) {

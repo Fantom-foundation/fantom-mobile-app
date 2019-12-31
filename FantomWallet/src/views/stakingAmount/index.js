@@ -17,7 +17,7 @@ import { delegateAmount as delegateAmountAction } from "../../redux/staking/acti
 import { Colors, fonts, FontSize } from "../../theme";
 
 const StakingAmount = (props: Props) => {
-  const { validators, delegateAmount } = props;
+  const { validators, delegateAmount, currentWallet } = props;
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [amount, setAmount] = useState("");
   //  function for entered amount from KeyPad
@@ -36,8 +36,11 @@ const StakingAmount = (props: Props) => {
   );
   const stakingSpace = 15 * validator.totalStake - validator.delegatedMe;
   const dividend = Math.pow(10, 18);
-  const availableSpace = formatNumber(
+  const stakingSpaceLeft = formatNumber(
     Number((stakingSpace / dividend).toFixed(2))
+  );
+  const availableSpace = formatNumber(
+    Number((currentWallet.balance / dividend).toFixed(2))
   );
   return (
     <View style={styles.container}>
@@ -51,7 +54,7 @@ const StakingAmount = (props: Props) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.validatorNode}>{validator.address}</Text>
           <Text style={styles.stakinSpace}>
-            Staking space left: {availableSpace}
+            Staking space left: {stakingSpaceLeft}
           </Text>
           {/*for the price entered   */}
           <Text style={{ ...styles.sendPrice }}>
@@ -82,7 +85,11 @@ const StakingAmount = (props: Props) => {
           <TouchableOpacity
             style={styles.stakeButton}
             onPress={() => {
-              delegateAmount({ amount, publicKey: validator.address });
+              delegateAmount({
+                amount,
+                publicKey: currentWallet.publicKey,
+                validatorId: validator.id
+              });
               // NavigationService.navigate(routes.root.Success);
             }}
           >
@@ -95,7 +102,8 @@ const StakingAmount = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  validators: state.stakes.validators
+  validators: state.stakes.validators,
+  currentWallet: state.wallet.currentWallet
 });
 
 const mapDispatchToProps = {

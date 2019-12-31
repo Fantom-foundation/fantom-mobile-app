@@ -36,10 +36,11 @@ export const delegateByAddresses = () => ({
 });
 
 export const delegateByAddressesSuccess = ({
-  publicKey
+  publicKey,
+  response
 }: TDelegateByAddress) => ({
   type: `${types.DELEGATE_BY_ADDRESSES}_SUCCESS`,
-  payload: { publicKey }
+  payload: { publicKey, response }
 });
 
 export const delegateByAddressesFailure = ({
@@ -67,7 +68,7 @@ export const delegateByStakerId = ({ stakerId }: TDelegateByStakerId) => ({
   payload: { stakerId }
 });
 
-export const delegateAmount = ({ amount, publicKey }) => ({
+export const delegateAmount = ({ amount, publicKey, validatorId }) => ({
   type: types.DELEGATE_AMOUNT,
-  payload: { amount, publicKey }
+  payload: { amount, publicKey, validatorId }
 });
