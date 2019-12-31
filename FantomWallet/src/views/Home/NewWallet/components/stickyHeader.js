@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
-import { BackLogo } from "~/images";
+import { FantomLogo } from "~/images";
 import { NavigationService, routes } from "~/navigation/helpers";
 
 import { balanceToDollar } from "~/utils/converts.js";
@@ -29,7 +29,7 @@ const StickyHeader = ({ data, setCurrentWallet }) => {
       {/* </View> */}
       <ImageBackground
         style={styles.stickyHeaderImageStyle}
-        source={BackLogo}
+        source={FantomLogo}
       />
     </TouchableOpacity>
   );

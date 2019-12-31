@@ -3,13 +3,14 @@ import { takeLatest, put, select, call } from "redux-saga/effects";
 import {
   types,
   delegateByAddressesSuccess,
-  delegateByAddressesFailure
+  delegateByAddressesFailure,
+  delegateByAddress
 } from "../actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
 import { getDataWithQueryString } from "../../../common/api";
 import { GET_BALANCE_API } from "react-native-dotenv";
 import axios from "axios";
-import Web3Agent from "~/services/api/web3";
+import Web3Agent from "../../../services/api/web3";
 
 type Action = {
   payload: {
@@ -22,11 +23,11 @@ export function* delegateByAddressSaga({
   payload: { publicKey }
 }: Action): any {
   try {
-    const response = yield call(
-      getDataWithQueryString("delegatorByAddress", publicKey)
-    );
+    const response = yield call(delegatorByAddressApi, publicKey);
+    yield put(delegateByAddressesSuccess({ publicKey, response }));
   } catch (e) {
-    yield put(setDopdownAlert("error", e.message));
+    yield put(delegateByAddressesFailure({ publicKey }));
+    // yield put(setDopdownAlert("error", e.message));
   }
 }
 
@@ -92,6 +93,7 @@ export function* delegateAmountSaga({
       privateKey: key.privateKey,
       validatorId
     });
+    yield put(delegateByAddress({ publicKey }));
     // Assign contract functions to sfc variable
   } catch (e) {
     yield put(setDopdownAlert("error", e.message));

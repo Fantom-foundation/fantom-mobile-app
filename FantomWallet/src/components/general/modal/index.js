@@ -21,8 +21,9 @@ const ModalView = props => {
               const { isShow = true } = b;
               return (
                 <>
-                  {isShow ? (
+                  {isShow && (
                     <TouchableOpacity
+                      disabled={b.disabled}
                       onPress={b.onPress}
                       style={{
                         ...styles.backButtonStyle,
@@ -31,14 +32,6 @@ const ModalView = props => {
                     >
                       <Text style={{ ...b.textStyle }}>{b.name}</Text>
                     </TouchableOpacity>
-                  ) : (
-                    <View
-                      style={{
-                        ...styles.backButtonStyle,
-                        ...b.style,
-                        borderWidth: 0
-                      }}
-                    />
                   )}
                 </>
               );

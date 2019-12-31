@@ -17,11 +17,14 @@ import { delegateAmount as delegateAmountAction } from "../../redux/staking/acti
 import { Colors, fonts, FontSize } from "../../theme";
 
 const StakingAmount = (props: Props) => {
-  const { validators, delegateAmount, currentWallet } = props;
+  const { validators, delegateAmount, keys, currentWallet } = props;
+
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [amount, setAmount] = useState("");
+  const [ifStaking, setIfStaking] = useState(false);
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
+    getPrivateKey();
     if (item === "<") {
       let num = amount.slice(0, -1);
       setAmount(num);
@@ -42,6 +45,30 @@ const StakingAmount = (props: Props) => {
   const availableSpace = formatNumber(
     Number((currentWallet.balance / dividend).toFixed(2))
   );
+  const handleMaxStake = () => {
+    const { currentWallet } = props;
+    const { balance } = currentWallet;
+
+    if (balance > availableSpace) setAmount(availableSpace.toString());
+    else if (balance < availableSpace)
+      setAmount(
+        Number(balance)
+          .toFixed(2)
+          .toString()
+      );
+    else if (balance === availableSpace) setAmount(availableSpace.toString());
+  };
+
+  const getPrivateKey = () => {
+    const { keys, currentWallet } = props;
+    const { wallets } = keys;
+    if (wallets && wallets.length > 0) {
+      const key = wallets.find(w => w.publicKey === currentWallet.publicKey);
+      const { privateKey } = key;
+      return privateKey;
+    }
+    return null;
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -65,10 +92,7 @@ const StakingAmount = (props: Props) => {
             <Text
               style={styles.availablePrice}
             >{`Available: ${availableSpace}`}</Text>
-            <TouchableOpacity
-              style={styles.maxButton}
-              onPress={() => setAmount(availableSpace.toString())}
-            >
+            <TouchableOpacity style={styles.maxButton} onPress={handleMaxStake}>
               <Text style={styles.maxButtonText}>Max</Text>
             </TouchableOpacity>
           </View>
@@ -83,17 +107,24 @@ const StakingAmount = (props: Props) => {
 
           {/* Stake Button */}
           <TouchableOpacity
-            style={styles.stakeButton}
+            disabled={ifStaking}
+            style={{
+              ...styles.stakeButton,
+              backgroundColor: !ifStaking ? Colors.lightGrey : Colors.grey
+            }}
             onPress={() => {
+              setIfStaking(true);
               delegateAmount({
                 amount,
                 publicKey: currentWallet.publicKey,
                 validatorId: validator.id
               });
-              // NavigationService.navigate(routes.root.Success);
+              NavigationService.navigate(routes.root.StakingAmount);
             }}
           >
-            <Text style={styles.stakeText}>Stake</Text>
+            <Text style={styles.stakeText}>
+              {ifStaking ? "Staking..." : "Stake"}
+            </Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
@@ -103,7 +134,8 @@ const StakingAmount = (props: Props) => {
 
 const mapStateToProps = state => ({
   validators: state.stakes.validators,
-  currentWallet: state.wallet.currentWallet
+  currentWallet: state.wallet.currentWallet,
+  keys: state.keys
 });
 
 const mapDispatchToProps = {

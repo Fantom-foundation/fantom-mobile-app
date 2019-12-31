@@ -3,6 +3,8 @@ export const types = {
   GET_BALANCE: "wallet/GET_BALANCE",
   SET_BALANCE: "wallet/SET_BALANCE",
   GET_HISTORY: "wallet/GET_HISTORY",
+  SEND_FTM: "wallet/SEND_FTM",
+  SEND_FTM_SUCESS: "wallet/SEND_FTM_SUCCESS",
   SET_HISTORY: "wallet/SET_HISTORY",
   SEND_TRANSACTION: "wallet/SEND_TRANSACTION",
   SET_LOADING_SEND: "wallet/SET_LOADING_SEND",
@@ -55,6 +57,14 @@ export const getHistory = () => ({
   type: types.GET_HISTORY
 });
 
+export const sendFtm = () => ({
+  type: types.SEND_FTM
+});
+
+export const sendFtmSuccess = balance => ({
+  type: types.SEND_FTM_SUCESS,
+  payload: balance
+});
 export const setHistory = ({
   publicKey,
   balance,

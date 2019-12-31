@@ -127,7 +127,6 @@ class Web3Agent {
 
     // this.sfc.stakersNum(); // if everything is all right, will return non-zero value
   }
-
   async restoreWallet(privateKey) {
     const wallet = this.web3.eth.accounts.privateKeyToAccount(privateKey);
     return wallet;

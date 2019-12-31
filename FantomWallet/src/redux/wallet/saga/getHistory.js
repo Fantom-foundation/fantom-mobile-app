@@ -31,6 +31,7 @@ export function* getHistory(): any {
       keys,
       walletsData: wallet.walletsData
     }));
+
     const {
       data: { body }
     } = yield call(getBalanceApi);
@@ -42,6 +43,7 @@ export function* getHistory(): any {
       });
     }
     if (walletsData && walletsData.length > 0) {
+
       for (let i = 0; i < walletsData.length; i++) {
         const wallet = walletsData[i];
         const { publicKey } = wallet;
@@ -52,6 +54,7 @@ export function* getHistory(): any {
 
           if (data && data.account) {
             const { address, transactions, balance } = data.account;
+            console.log("transactionstransactions",transactions)
             yield put(
               setHistory({ publicKey, history: transactions, balance })
             );
@@ -60,7 +63,7 @@ export function* getHistory(): any {
       }
     }
   } catch (e) {
-    yield console.log(e);
+    yield console.log("getHistory",e);
   }
 }
 

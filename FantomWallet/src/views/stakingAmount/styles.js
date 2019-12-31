@@ -75,7 +75,6 @@ const buttonStyles = {
     width: getWidth(152),
     height: getHeight(50),
     borderRadius: getHeight(25),
-    backgroundColor: Colors.lightGrey,
     alignItems: "center",
     justifyContent: "center"
   },

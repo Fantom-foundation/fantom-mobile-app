@@ -24,7 +24,10 @@ import QRCode from "../../images/scanQR.png";
 // Styling
 import { GAS_PRICE } from "~/common/constants";
 import { addUpdateTimestampAddress } from "~/redux/addressBook/actions";
-import { sendTransaction as sendTransactionAction } from "~/redux/wallet/actions";
+import {
+  sendTransaction as sendTransactionAction,
+  sendFtm as sendFtmAction
+} from "~/redux/wallet/actions";
 import styles from "./styles";
 import { getWidth } from "../../utils/pixelResolver";
 import Button from "../../components/general/Button";
@@ -89,7 +92,9 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   }, [navigation.state.params]);
 
   const alertSuccessfulButtonPressed = () => {
+    const { sendFtm } = props;
     addUpdateAddress(address, "", new Date().getTime());
+    sendFtm();
     clearState();
     setLoader(false);
     NavigationService.navigate(routes.HomeScreen.Wallet);
@@ -199,12 +204,6 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           <Text style={styles.sendPriceExample}>
             (${amount ? balanceToDollar(amount, 5) : 0})
           </Text>
-          <View style={styles.walletButton}>
-            <Text style={styles.walletText}>FTM</Text>
-            <Text style={styles.walletAmountText}>
-              {currentWallet.balance || 0}
-            </Text>
-          </View>
 
           {/* KeyPad */}
 
@@ -306,12 +305,16 @@ export const SendReceive = (props: TSendReceiveTypes) => {
             amount
           )}\n FTM to ${address}?"`}
           modalTextStyle={styles.modalTextStyle}
-          buttonViewStyle={styles.sendButtonView}
+          buttonViewStyle={
+            buttonModalText === "Sending...."
+              ? { ...styles.sendButtonView, justifyContent: "center" }
+              : styles.sendButtonView
+          }
           buttons={[
             {
               name: "Cancel",
               onPress: () => setSendingModal(!isSendingModal),
-              isShow: buttonModalText == "Sending...." ? false : true
+              isShow: buttonModalText === "Sending...." ? false : true
             },
             {
               style:
@@ -337,7 +340,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   addUpdateAddress: addUpdateTimestampAddress,
-  sendTransaction: sendTransactionAction
+  sendTransaction: sendTransactionAction,
+  sendFtm: sendFtmAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendReceive);
