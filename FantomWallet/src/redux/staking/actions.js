@@ -68,7 +68,12 @@ export const delegateByStakerId = ({ stakerId }: TDelegateByStakerId) => ({
   payload: { stakerId }
 });
 
-export const delegateAmount = ({ amount, publicKey, validatorId }) => ({
+export const delegateAmount = ({
+  amount,
+  publicKey,
+  validatorId,
+  cbSuccess
+}) => ({
   type: types.DELEGATE_AMOUNT,
-  payload: { amount, publicKey, validatorId }
+  payload: { amount, publicKey, validatorId, cbSuccess }
 });

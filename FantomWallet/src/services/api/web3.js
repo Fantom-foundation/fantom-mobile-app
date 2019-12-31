@@ -74,13 +74,21 @@ class Web3Agent {
     const web3 = new Web3(
       new Web3.providers.HttpProvider("http://34.253.43.155:3001/")
     );
-    // const web3 = new Web3(
-    //   new Web3.providers.HttpProvider("http://rpc.fantom.network")
-    // );
     const sfc = new web3.eth.Contract(
       contractFunctions,
-      "0xfa00face00fc0000000000000000000000000100"
+      "0xfc00face00000000000000000000000000000000"
     );
+
+    sfc.methods
+      .delegations("0x2210BE0bDba6daC30c4023Ea22b4235E420178bE")
+      .call({ from: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe" }, function(
+        error,
+        result
+      ) {
+        console.log("hello", error);
+        console.log(result);
+      });
+
     // Get delegator info and current epoch - 1 (i.e the previous sealed epoch)
     const info = await Promise.all([
       this.getCurrentEpoch(from, sfc),

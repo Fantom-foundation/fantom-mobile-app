@@ -21,7 +21,7 @@ const crauselStyle = {
   },
   amountStyle: {
     textAlign: "right",
-    marginTop: 40,
+    marginTop: getHeight(30),
     width: getWidth(150),
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansBold,

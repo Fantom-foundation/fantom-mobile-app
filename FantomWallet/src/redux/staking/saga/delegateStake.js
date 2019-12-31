@@ -48,14 +48,13 @@ export function* delegateByAddressesSaga(): any {
         try {
           const pendingRewards = yield Web3Agent.Fantom.getDelegationPendingRewards(
             publicKey,
-            "0xfab392eea7eee3c89a82abf212b8ec82fceaf0b6"
+            publicKey
           );
-          console.log(pendingRewards, "pendingRewardspendingRewards");
           const response = yield call(delegatorByAddressApi, publicKey);
           yield put(
             delegateByAddressesSuccess({
               publicKey,
-              response: response.data.data
+              response: { ...response.data.data, pendingRewards }
             })
           );
         } catch (exception) {
@@ -80,7 +79,7 @@ export function* delegateByStakerIdSaga({
 }
 
 export function* delegateAmountSaga({
-  payload: { amount, publicKey, validatorId }
+  payload: { amount, publicKey, validatorId, cbSuccess }
 }: Action): any {
   try {
     const { keys } = yield select(({ keys }) => ({
@@ -94,8 +93,10 @@ export function* delegateAmountSaga({
       validatorId
     });
     yield put(delegateByAddress({ publicKey }));
+    cbSuccess();
     // Assign contract functions to sfc variable
   } catch (e) {
+    console.log(e, "eeeeeeeeeeee");
     yield put(setDopdownAlert("error", e.message));
   }
 }

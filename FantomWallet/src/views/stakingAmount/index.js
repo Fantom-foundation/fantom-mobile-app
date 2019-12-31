@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Text,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -24,12 +25,27 @@ const StakingAmount = (props: Props) => {
   const [ifStaking, setIfStaking] = useState(false);
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
+    const { currentWallet } = props;
+    const { balance } = currentWallet;
     getPrivateKey();
     if (item === "<") {
       let num = amount.slice(0, -1);
       setAmount(num);
     } else {
-      setAmount(amount.concat(item));
+      const updatedAmount = amount.concat(item);
+      if (updatedAmount <= balance) setAmount(updatedAmount);
+      else {
+        Alert.alert(
+          "Error",
+          `Entered amount cannot be greater than Available Balance`,
+          [
+            {
+              text: "Ok",
+              style: "cancel"
+            }
+          ]
+        );
+      }
     }
   };
 
@@ -42,9 +58,8 @@ const StakingAmount = (props: Props) => {
   const stakingSpaceLeft = formatNumber(
     Number((stakingSpace / dividend).toFixed(2))
   );
-  const availableSpace = formatNumber(
-    Number((currentWallet.balance / dividend).toFixed(2))
-  );
+  const availableSpace =
+    currentWallet && formatNumber(Number(currentWallet.balance.toFixed(2)));
   const handleMaxStake = () => {
     const { currentWallet } = props;
     const { balance } = currentWallet;
@@ -117,9 +132,10 @@ const StakingAmount = (props: Props) => {
               delegateAmount({
                 amount,
                 publicKey: currentWallet.publicKey,
-                validatorId: validator.id
+                validatorId: validator.id,
+                cbSuccess: () =>
+                  NavigationService.navigate(routes.root.StakingAmount)
               });
-              NavigationService.navigate(routes.root.StakingAmount);
             }}
           >
             <Text style={styles.stakeText}>

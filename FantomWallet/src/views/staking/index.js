@@ -37,16 +37,25 @@ const Staking = (props: Props) => {
     delegateByAddresses();
     setTimeout(() => {
       setCarouselWidth(getWidth(280));
-    });
+    }, 500);
   }, []);
 
   useEffect(() => {
-    if (!!carousRef) carousRef.props.autoplay = true;
-  }, [carousRef, carouselWidth]);
+    if (values && values.length > 1) {
+      if (!!carousRef) carousRef.triggerRenderingHack();
+      setTimeout(() => {
+        if (!!carousRef) carousRef.triggerRenderingHack();
+      }, 1000);
+    }
+  }, [carouselWidth]);
 
   const formatValues = (value, isDividedBy = true) => {
     const dividend = isDividedBy ? Math.pow(10, 18) : 1;
-    return formatNumber(Number((value / dividend).toFixed(2)));
+    const dividedValue = value / dividend;
+    if (value <= 0.01) {
+      return !!value && value > 0 ? formatNumber(Number(value).toFixed(8)) : 0;
+    }
+    return formatNumber(Number(dividedValue.toFixed(2)));
   };
 
   const _renderItem = ({ item, index }) => {
@@ -98,12 +107,17 @@ const Staking = (props: Props) => {
           ) : (
             <View />
           )}
+          <Text style={{ ...styles.amountStyle }}>
+            {formatValues(stakeData.pendingRewards, false)}
+          </Text>
+          <Text style={{ ...styles.walletTextStyle }}>Pending rewards</Text>
         </View>
         <View style={styles.buttonView}>
           {/* {availableToStake.isDeligate ? ( */}
           {true ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
+              disabled={true}
               onPress={() => openUnstakingModal(currentlyStaking)}
             >
               <Text
@@ -180,18 +194,28 @@ const Staking = (props: Props) => {
         ></Image> */}
       </View>
       <View style={styles.crauselView}>
-        <Carousel
-          ref={carouselRef => (carousRef = carouselRef)}
-          data={values}
-          shouldOptimizeUpdates={false}
-          renderItem={_renderItem}
-          // autoplay
-          sliderWidth={Metrics.screenWidth}
-          itemWidth={carouselWidth}
-          inactiveSlideScale={1}
-          inactiveSlideOpacity={1}
-          extraData={carouselWidth !== 279}
-        />
+        {values && values.length === 1 ? (
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            {_renderItem({ item: values[0], index: 0 })}
+          </View>
+        ) : (
+          <Carousel
+            ref={carouselRef => (carousRef = carouselRef)}
+            data={values}
+            shouldOptimizeUpdates={false}
+            renderItem={_renderItem}
+            sliderWidth={Metrics.screenWidth}
+            itemWidth={carouselWidth}
+            inactiveSlideScale={1}
+            inactiveSlideOpacity={1}
+            extraData={carouselWidth !== 279}
+          />
+        )}
       </View>
 
       {/* Not Enought Ftm to Stake */}

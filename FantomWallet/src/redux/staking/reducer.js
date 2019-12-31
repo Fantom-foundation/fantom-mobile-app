@@ -24,13 +24,21 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
     case `${types.DELEGATE_BY_ADDRESSES}_SUCCESS`: {
       let oldStakes = [...state.data];
       const { publicKey, response } = action.payload;
-      const { amount, claimedRewards, deactivatedTime } = response;
+      const {
+        amount,
+        claimedRewards,
+        deactivatedTime,
+        pendingRewards,
+        createdTime
+      } = response;
       const index = oldStakes.findIndex(item => item.publicKey === publicKey);
       const data = {
         amount,
         claimedRewards: claimedRewards || 0,
+        pendingRewards: pendingRewards || 0,
         isDeligate: true,
-        deactivatedTime
+        deactivatedTime,
+        createdTime: Number(createdTime)
       };
       if (index > -1) {
         const updatedStake = {
@@ -58,7 +66,9 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
         publicKey,
         isDeligate: false,
         amount: 0,
-        claimedRewards: 0
+        claimedRewards: 0,
+        pendingRewards: 0,
+        createdTime: new Date().getTime()
       };
       const index = oldStakes.findIndex(item => item.publicKey === publicKey);
       if (index === -1) oldStakes.push(data);
@@ -78,14 +88,17 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
           totalStake,
           deactivatedEpoch,
           delegatedMe,
-          deactivatedTime
+          deactivatedTime,
+          createdTime
         } = staker;
         return {
           id,
           address,
           totalStake,
           deactivatedEpoch,
-          delegatedMe
+          delegatedMe,
+          deactivatedTime,
+          createdTime
         };
       });
       return {

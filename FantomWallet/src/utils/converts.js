@@ -55,6 +55,9 @@ export function estimationMaxFantomBalance(fantomWei, gasPrice, from = "") {
 }
 
 export const formatNumber = num => {
+  if (num && num.toString().indexOf(".") !== -1) {
+    return num.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  }
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
 
