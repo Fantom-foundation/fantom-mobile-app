@@ -29,7 +29,7 @@ const cardStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
   },
   bottomCardSubText: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -68,7 +68,7 @@ const cardStyles = StyleSheet.create({
 const cardListItemStyles = StyleSheet.create({
   listItemContainer: {
     height: getHeight(70),
-    marginVertical: getHeight(12),
+    marginVertical: getHeight(15),
     marginHorizontal: getWidth(2),
     borderRadius: getHeight(11),
     flex: 1,
@@ -85,15 +85,14 @@ const cardListItemStyles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 5
+    elevation: 5,
   },
-
   listItemTitle: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.textBlack,
     alignSelf: "flex-end",
-    lineHeight: getHeight(24)
+    lineHeight: getHeight(24),
   },
   selfText: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -151,7 +150,7 @@ const listViewStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    lineHeight: getHeight(24)
+    lineHeight: getHeight(24),
   }
 });
 
