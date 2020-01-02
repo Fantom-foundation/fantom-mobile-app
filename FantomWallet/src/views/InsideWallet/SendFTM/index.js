@@ -287,7 +287,7 @@ const SendFTM = (props: Props) => {
                   : styles.sendButton,
               name: buttonModalText,
               onPress: handleSendAmount,
-              disabled: buttonModalText === "Send",
+              disabled: buttonModalText !== "Send",
               textStyle: styles.sendTextStyle
             }
           ]}

@@ -79,15 +79,15 @@ class Web3Agent {
       "0xfc00face00000000000000000000000000000000"
     );
 
-    sfc.methods
-      .delegations("0x2210BE0bDba6daC30c4023Ea22b4235E420178bE")
-      .call({ from: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe" }, function(
-        error,
-        result
-      ) {
-        console.log("hello", error);
-        console.log(result);
-      });
+    // sfc.methods
+    //   .delegations("0x2210BE0bDba6daC30c4023Ea22b4235E420178bE")
+    //   .call({ from: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe" }, function(
+    //     error,
+    //     result
+    //   ) {
+    //     console.log("hello", error);
+    //     console.log(result);
+    //   });
 
     // Get delegator info and current epoch - 1 (i.e the previous sealed epoch)
     const info = await Promise.all([
