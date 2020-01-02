@@ -17,7 +17,10 @@ import { NavigationService, routes } from "../../navigation/helpers";
 import { connect } from "react-redux";
 import { Colors } from "../../theme";
 import { formatNumber } from "~/utils/converts";
-import { delegateByAddresses as delegateByAddressesAction } from "~/redux/staking/actions";
+import {
+  delegateByAddresses as delegateByAddressesAction,
+  delegateUnstake as delegateUnstakeAction
+} from "~/redux/staking/actions";
 
 const modalText = "You need at least 1 FTM to \n stake.";
 const amountHightModalText =
@@ -29,7 +32,9 @@ const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [ifUnstaking, setIfUnstaking] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
+  const [unstakeKey, setUnstakeKey] = useState("");
   const { delegateByAddresses, stakes, wallets, navigation } = props;
+
   const [values, setValues] = useState(wallets);
   const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
   useEffect(() => {
@@ -60,9 +65,11 @@ const Staking = (props: Props) => {
 
   const _renderItem = ({ item, index }) => {
     const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
+    const isDeligate = stakeData && stakeData.isDeligate;
     if (!stakeData) {
       return null;
     }
+
     const availableToStake = item.balance;
     const currentDate = new Date();
     const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
@@ -97,9 +104,7 @@ const Staking = (props: Props) => {
               {timeLeft}
             </Text>
           ) : isUnstaking ? (
-            <TouchableOpacity
-              onPress={() => openWithdrawModal(currentlyStaking)}
-            >
+            <TouchableOpacity onPress={() => openWithdrawModal(true)}>
               <Text style={{ ...styles.bottomTextStyle }}>
                 Withdraw {currentlyStaking} FTM now
               </Text>
@@ -114,11 +119,14 @@ const Staking = (props: Props) => {
         </View>
         <View style={styles.buttonView}>
           {/* {availableToStake.isDeligate ? ( */}
-          {true ? (
+          {isDeligate ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
-              disabled={true}
-              onPress={() => openUnstakingModal(currentlyStaking)}
+              // disabled={fa}
+              onPress={() => {
+                if (stakeData) setUnstakeKey(stakeData.publicKey);
+                openUnstakingModal(true);
+              }}
             >
               <Text
                 style={{
@@ -152,20 +160,21 @@ const Staking = (props: Props) => {
       </View>
     );
   };
-  // onbackButtonPress
-  const handleBackPress = () => {};
 
   //onUnstake Button
   const handleUnstakePress = () => {
     setIfUnstaking(true);
-    const { navigation } = props;
-    navigation.navigate("WalletImported", {
-      text: "Requested to unstake successfully",
-      navigationRoute: "Back"
+    const { navigation, delegateUnstake } = props;
+
+    delegateUnstake({
+      publicKey: unstakeKey,
+      cbSuccess: () => {
+        navigation.navigate("WalletImported", {
+          text: "Requested to unstake successfully",
+          navigationRoute: "Back"
+        });
+      }
     });
-    //   ,
-    //   1000
-    // );
   };
 
   //onUnstake Button
@@ -308,7 +317,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  delegateByAddresses: delegateByAddressesAction
+  delegateByAddresses: delegateByAddressesAction,
+  delegateUnstake: delegateUnstakeAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Staking);

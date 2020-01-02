@@ -84,6 +84,23 @@ const StakingAmount = (props: Props) => {
     }
     return null;
   };
+  const handleStakingAmount = () => {
+    if (amount !== "") {
+      setIfStaking(true);
+      delegateAmount({
+        amount,
+        publicKey: currentWallet.publicKey,
+        validatorId: validator.id,
+        cbSuccess: () => {
+          NavigationService.navigate(routes.root.Success);
+          setIfStaking(false);
+        }
+      });
+    } else if (amount === "") {
+      Alert.alert("Error", "Please enter valid amount.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -127,16 +144,7 @@ const StakingAmount = (props: Props) => {
               ...styles.stakeButton,
               backgroundColor: !ifStaking ? Colors.lightGrey : Colors.grey
             }}
-            onPress={() => {
-              setIfStaking(true);
-              delegateAmount({
-                amount,
-                publicKey: currentWallet.publicKey,
-                validatorId: validator.id,
-                cbSuccess: () =>
-                  NavigationService.navigate(routes.root.StakingAmount)
-              });
-            }}
+            onPress={handleStakingAmount}
           >
             <Text style={styles.stakeText}>
               {ifStaking ? "Staking..." : "Stake"}

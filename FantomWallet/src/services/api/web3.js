@@ -127,7 +127,7 @@ class Web3Agent {
     // );
     return this.transfer({
       from: publicKey,
-      to: "0xfc00face00000000000000000000000000000000",
+      to: validatorId,
       value: amount,
       memo: web3Sfc.methods.createDelegation(validatorId).encodeABI(),
       privateKey,
@@ -176,6 +176,26 @@ class Web3Agent {
     );
 
     return res;
+  }
+
+  delegateUnstake(delegatorAddress: string) {
+    const sfc = new this.web3.eth.Contract(
+      contractFunctions,
+      "0xfc00face00000000000000000000000000000000"
+    );
+
+    return new Promise(resolve => {
+      sfc.methods
+        .prepareToWithdrawDelegation()
+        .call({ from: delegatorAddress }, function(error, result) {
+          console.log(
+            "delegateUnstakedelegateUnstakedelegateUnstake",
+            result,
+            error
+          );
+          resolve(result);
+        });
+    });
   }
 
   // async getAccounts() {
