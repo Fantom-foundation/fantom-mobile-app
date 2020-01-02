@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import { API_URL_FANTOM } from "react-native-dotenv";
+import { REACT_APP_API_URL_FANTOM } from "react-native-dotenv";
 
 const getApiPathName = apiName => {
-  return `${API_URL_FANTOM}${getAPIPath(apiName)}`;
+  return `${REACT_APP_API_URL_FANTOM}${getAPIPath(apiName)}`;
 };
 
 const getAPIPath = apiName => {

@@ -4,15 +4,19 @@ import { takeLatest, call, select, put } from "redux-saga/effects";
 import axios from "axios";
 import { types, setHistory } from "../actions";
 
-import { GET_BALANCE_API, API_URL_FANTOM } from "react-native-dotenv";
+import {
+  GET_BALANCE_API,
+  API_URL_FANTOM,
+  REACT_APP_API_URL_FANTOM
+} from "react-native-dotenv";
 
 const getTransactionApi = async publicKey => {
   console.log(
-    "API_URL_1_FANTOMAPI_URL_1_FANTOMAPI_URL_1_FANTOMAPI_URL_1_FANTOM",
-    API_URL_FANTOM
+    "REACT_APP_API_URL_FANTOMREACT_APP_API_URL_FANTOM",
+    REACT_APP_API_URL_FANTOM
   );
   return await axios.get(
-    `${API_URL_FANTOM}api/v1/get-account?address=${publicKey}`,
+    `${REACT_APP_API_URL_FANTOM}api/v1/get-account?address=${publicKey}`,
     {
       headers: {
         "Content-Type": "application/json"
@@ -43,7 +47,6 @@ export function* getHistory(): any {
       });
     }
     if (walletsData && walletsData.length > 0) {
-
       for (let i = 0; i < walletsData.length; i++) {
         const wallet = walletsData[i];
         const { publicKey } = wallet;
@@ -54,7 +57,7 @@ export function* getHistory(): any {
 
           if (data && data.account) {
             const { address, transactions, balance } = data.account;
-            console.log("transactionstransactions",transactions)
+            console.log("transactionstransactions", transactions);
             yield put(
               setHistory({ publicKey, history: transactions, balance })
             );
@@ -63,7 +66,7 @@ export function* getHistory(): any {
       }
     }
   } catch (e) {
-    yield console.log("getHistory",e);
+    yield console.log("getHistory", e);
   }
 }
 

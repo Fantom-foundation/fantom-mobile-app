@@ -5,7 +5,9 @@ import {
   KEY_INFURA,
   EXAMPLE_ADDRESS,
   API_PREVIOUS_URL_FANTOM,
-  FANTOM_GET_ACCOUNT_INFO
+  FANTOM_GET_ACCOUNT_INFO,
+  REACT_APP_API_URL_WEB3,
+  REACT_APP_API_URL_FANTOM
 } from "react-native-dotenv";
 
 import contractFunctions from "./contractFunctions";
@@ -33,7 +35,7 @@ const URL_ETHEREUM = `https://rinkeby.infura.io/v3/${KEY_INFURA}`;
 class Web3Agent {
   constructor() {
     this.web3 = new Web3(
-      new Web3.providers.HttpProvider(API_PREVIOUS_URL_FANTOM || "")
+      new Web3.providers.HttpProvider(REACT_APP_API_URL_WEB3 || "")
     );
   }
 
@@ -72,7 +74,7 @@ class Web3Agent {
   // Get info on delegator
   async getDelegationPendingRewards(from, delegateAddress) {
     const web3 = new Web3(
-      new Web3.providers.HttpProvider("http://34.253.43.155:3001/")
+      new Web3.providers.HttpProvider(REACT_APP_API_URL_WEB3)
     );
     const sfc = new web3.eth.Contract(
       contractFunctions,
@@ -107,7 +109,7 @@ class Web3Agent {
 
   async delegateStake({ amount, publicKey, privateKey, validatorId }) {
     const web3 = new Web3(
-      new Web3.providers.HttpProvider("http://34.253.43.155:3001/")
+      new Web3.providers.HttpProvider(REACT_APP_API_URL_WEB3)
     );
     const web3Sfc = new web3.eth.Contract(
       contractFunctions,
@@ -184,7 +186,9 @@ class Web3Agent {
 
   async getAccount(address: string) {
     console.log("FANTOM_GET_ACCOUNT_INFO", FANTOM_GET_ACCOUNT_INFO, address);
-    return await fetch(`${FANTOM_GET_ACCOUNT_INFO}?address=${address}`);
+    return await fetch(
+      `${REACT_APP_API_URL_FANTOM}api/v1/get-account?address=${address}`
+    );
   }
 }
 

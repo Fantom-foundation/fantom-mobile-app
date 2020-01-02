@@ -51,10 +51,17 @@ export function* delegateByAddressesSaga(): any {
             publicKey
           );
           const response = yield call(delegatorByAddressApi, publicKey);
+          console.log(
+            "delegateByAddressesSagadelegateByAddressesSaga",
+            response
+          );
           yield put(
             delegateByAddressesSuccess({
               publicKey,
-              response: { ...response.data.data, pendingRewards }
+              response: {
+                ...response.data.data,
+                pendingRewards: pendingRewards || 0
+              }
             })
           );
         } catch (exception) {
