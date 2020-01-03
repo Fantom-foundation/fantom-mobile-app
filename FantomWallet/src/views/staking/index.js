@@ -191,7 +191,9 @@ const Staking = (props: Props) => {
 
   const handleStakeButton = item => {
     if (item >= 1) {
-      NavigationService.navigate(routes.root.ValidatorNode);
+      NavigationService.navigate(routes.root.ValidatorNode, {
+        availableToStake: item
+      });
     } else if (item < 1) {
       setStakeAmountModal(true);
     }

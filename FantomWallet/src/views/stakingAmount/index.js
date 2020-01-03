@@ -23,6 +23,8 @@ const StakingAmount = (props: Props) => {
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [amount, setAmount] = useState("");
   const [ifStaking, setIfStaking] = useState(false);
+
+  const availableToStake = props.navigation.getParam("availableToStake");
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     const { currentWallet } = props;
@@ -59,19 +61,17 @@ const StakingAmount = (props: Props) => {
     Number((stakingSpace / dividend).toFixed(2))
   );
   const availableSpace =
-    currentWallet && formatNumber(Number(currentWallet.balance.toFixed(2)));
+    availableToStake && formatNumber(Number(availableToStake.toFixed(2)));
   const handleMaxStake = () => {
-    const { currentWallet } = props;
-    const { balance } = currentWallet;
-
-    if (balance > availableSpace) setAmount(availableSpace.toString());
-    else if (balance < availableSpace)
+    if (stakingSpace > availableSpace) setAmount(availableSpace.toString());
+    else if (stakingSpace < availableSpace)
       setAmount(
-        Number(balance)
+        Number(stakingSpace)
           .toFixed(2)
           .toString()
       );
-    else if (balance === availableSpace) setAmount(availableSpace.toString());
+    else if (stakingSpace === availableSpace)
+      setAmount(availableSpace.toString());
   };
 
   const getPrivateKey = () => {
