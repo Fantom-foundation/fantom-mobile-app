@@ -113,7 +113,7 @@ const Staking = (props: Props) => {
             {formatValues(stakeData.claimedRewards)}
           </Text>
           <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
-          {timeLeft > 0 ? (
+          {timeLeft > 0 && isDeligate ? (
             <Text style={{ ...styles.bottomTextStyle }}>
               {`Your ${currentlyStaking} FTM will be available in ${timeLeft} days`}
             </Text>
@@ -132,6 +132,7 @@ const Staking = (props: Props) => {
           ) : (
             <View />
           )}
+
           <Text style={{ ...styles.amountStyle }}>
             {formatValues(stakeData.pendingRewards, false)}
           </Text>
@@ -192,6 +193,7 @@ const Staking = (props: Props) => {
           text: "Requested to unstake successfully",
           navigationRoute: "Back"
         });
+        setIfUnstaking(false);
       }
     });
   };
@@ -275,27 +277,44 @@ const Staking = (props: Props) => {
           modalText={withdrawText}
           stakingView={styles.unstakeOuterView}
           modalTextStyle={styles.modalTextStyle}
-          buttonViewStyle={styles.unstakeView}
-          buttons={[
-            {
-              name: "Cancel",
-              style: styles.backButtonStyle,
-              onPress: () => openWithdrawModal(""),
-              textStyle: styles.backButton,
-              disabled: ifWithdrawing
-            },
-            {
-              name: ifWithdrawing ? "Withdrawing..." : "Withdraw",
-              style: {
-                ...styles.unstakeButton,
-                backgroundColor: ifWithdrawing ? Colors.grey : Colors.red
-              },
+          buttonViewStyle={{
+            ...styles.unstakeView,
+            justifyContent: ifWithdrawing ? "center" : "space-between"
+          }}
+          buttons={
+            ifWithdrawing
+              ? [
+                  {
+                    name: "Withdrawing...",
+                    style: {
+                      ...styles.unstakeButton,
+                      backgroundColor: Colors.grey
+                    },
+                    textStyle: styles.unStakeText,
+                    disabled: true
+                  }
+                ]
+              : [
+                  {
+                    name: "Cancel",
+                    style: styles.backButtonStyle,
+                    onPress: () => openWithdrawModal(""),
+                    textStyle: styles.backButton,
+                    disabled: ifWithdrawing
+                  },
+                  {
+                    name: "Withdraw",
+                    style: {
+                      ...styles.unstakeButton,
+                      backgroundColor: Colors.red
+                    },
 
-              onPress: handleWithdrawPress,
-              textStyle: styles.unStakeText,
-              disabled: ifWithdrawing
-            }
-          ]}
+                    onPress: handleWithdrawPress,
+                    textStyle: styles.unStakeText,
+                    disabled: false
+                  }
+                ]
+          }
         />
       )}
 
