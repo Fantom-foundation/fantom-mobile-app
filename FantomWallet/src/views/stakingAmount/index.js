@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TouchableOpacity,
@@ -15,7 +15,7 @@ import KeyPad from "../../components/general/keyPad";
 import { NavigationService, routes } from "../../navigation/helpers";
 import { formatNumber } from "~/utils/converts";
 import { delegateAmount as delegateAmountAction } from "../../redux/staking/actions";
-import { Colors, fonts, FontSize } from "../../theme";
+import { Colors } from "../../theme";
 import Modal from "../../components/general/modal";
 
 const StakingAmount = (props: Props) => {
@@ -25,9 +25,22 @@ const StakingAmount = (props: Props) => {
   const [amount, setAmount] = useState("");
   const [ifStaking, setIfStaking] = useState(false);
   const [stakingModal, setStakingModal] = useState(false);
+  const [fontSizeValue, setFontSizeValue] = useState(40);
   const amountHightModalText =
     "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
   const availableToStake = props.navigation.getParam("availableToStake");
+
+  useEffect(() => {
+    if (amount.length <= 5) {
+      setFontSizeValue(36);
+    } else if (amount.length <= 10) {
+      setFontSizeValue(32);
+    } else if (amount.length <= 15) {
+      setFontSizeValue(28);
+    } else {
+      setFontSizeValue(20);
+    }
+  }, [amount]);
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     getPrivateKey();
@@ -120,7 +133,7 @@ const StakingAmount = (props: Props) => {
             Staking space left: {stakingSpaceLeft}
           </Text>
           {/*for the price entered   */}
-          <Text style={{ ...styles.sendPrice }}>
+          <Text style={{ ...styles.sendPrice, fontSize: fontSizeValue }}>
             {amount ? formatNumber(amount) : 0}
           </Text>
 
