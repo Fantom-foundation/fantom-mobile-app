@@ -209,6 +209,10 @@ class Web3Agent {
         .withdrawDelegation()
         .call({ from: delegatorAddress }, function(error, result) {
           console.log("withdrawDelegation", result);
+          // sfc.methods.delegations(‘0x00f4cc6fc5e636ba1e1732bdef7af75df7b339b8’).call({from: delegatorAddress}, function(error, result){
+          //   if (!error)
+          //     console.log(result);
+          // });
           resolve(result);
         });
     });

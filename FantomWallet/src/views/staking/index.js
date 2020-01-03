@@ -165,18 +165,20 @@ const Staking = (props: Props) => {
               }}
             />
           )}
-          <TouchableOpacity
-            style={styles.buttonStakeView}
-            onPress={() => handleStakeButton(availableToStake)}
-          >
-            <Text
-              style={{
-                ...styles.buttonText
-              }}
+          {currentlyStaking <= 0 && (
+            <TouchableOpacity
+              style={styles.buttonStakeView}
+              onPress={() => handleStakeButton(availableToStake)}
             >
-              Stake
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={{
+                  ...styles.buttonText
+                }}
+              >
+                Stake
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
