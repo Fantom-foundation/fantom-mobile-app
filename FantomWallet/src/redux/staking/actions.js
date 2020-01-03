@@ -4,7 +4,8 @@ export const types = {
   DELEGATE_BY_ADDRESSES: "staking/DELEGATE_BY_ADDRESSES",
   DELEGATE_BY_STAKER_ID: "staking/DELEGATE_BY_STAKER_ID",
   VALIDATORS_LIST: "staking/VALIDATORS_LIST",
-  DELEGATE_AMOUNT: "staking/DELEGATE_AMOUNT"
+  DELEGATE_AMOUNT: "staking/DELEGATE_AMOUNT",
+  DELEGATE_UNSTAKE: "staking/DELEGATE_UNSTAKE"
 };
 
 type TDelegateByStakerId = {
@@ -36,10 +37,11 @@ export const delegateByAddresses = () => ({
 });
 
 export const delegateByAddressesSuccess = ({
-  publicKey
+  publicKey,
+  response
 }: TDelegateByAddress) => ({
   type: `${types.DELEGATE_BY_ADDRESSES}_SUCCESS`,
-  payload: { publicKey }
+  payload: { publicKey, response }
 });
 
 export const delegateByAddressesFailure = ({
@@ -67,7 +69,17 @@ export const delegateByStakerId = ({ stakerId }: TDelegateByStakerId) => ({
   payload: { stakerId }
 });
 
-export const delegateAmount = ({ amount, publicKey }) => ({
+export const delegateAmount = ({
+  amount,
+  publicKey,
+  validatorId,
+  cbSuccess
+}) => ({
   type: types.DELEGATE_AMOUNT,
-  payload: { amount, publicKey }
+  payload: { amount, publicKey, validatorId, cbSuccess }
+});
+
+export const delegateUnstake = ({ publicKey, cbSuccess }) => ({
+  type: types.DELEGATE_UNSTAKE,
+  payload: { publicKey, cbSuccess }
 });

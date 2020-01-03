@@ -46,7 +46,7 @@ export function estimationMaxFantomBalance(fantomWei, gasPrice, from = "") {
     wei *= 1e18;
   }
   let maxFantomBalanceWei = math.subtract(math.bignumber(wei), gasPrice);
-  if (from === "validator") {
+  if (from === "validator" || from === "bignumber") {
     maxFantomBalanceWei = fantomWei;
   }
   return Web3.utils.fromWei(maxFantomBalanceWei.toString(), "ether");
@@ -55,6 +55,9 @@ export function estimationMaxFantomBalance(fantomWei, gasPrice, from = "") {
 }
 
 export const formatNumber = num => {
+  if (num && num.toString().indexOf(".") !== -1) {
+    return num.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  }
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
 
@@ -80,7 +83,7 @@ export const fantomToDollar = (value, decimal) => {
   return value;
 };
 
-export const convertFTMValue = value => {
+export const convertFTMValue = (value, from = "") => {
   if (value % 1 != 0) {
     value *= 1e18;
   }
@@ -124,10 +127,11 @@ export const balanceToDollar = (value, decimal) => {
 };
 
 export const balanceWithSeprators = value => {
-  if (value) {
+  if (!!value) {
     return Number(value)
       .toFixed(2)
       .toString()
       .replace(/\d(?=(\d{3})+\.)/g, "$&,");
   }
+  return 0;
 };

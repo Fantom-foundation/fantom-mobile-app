@@ -3,13 +3,14 @@ import { takeLatest, put, select, call } from "redux-saga/effects";
 import {
   types,
   delegateByAddressesSuccess,
-  delegateByAddressesFailure
+  delegateByAddressesFailure,
+  delegateByAddress
 } from "../actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
 import { getDataWithQueryString } from "../../../common/api";
 import { GET_BALANCE_API } from "react-native-dotenv";
 import axios from "axios";
-import Web3Agent from "~/services/api/web3";
+import Web3Agent from "../../../services/api/web3";
 
 type Action = {
   payload: {
@@ -22,11 +23,12 @@ export function* delegateByAddressSaga({
   payload: { publicKey }
 }: Action): any {
   try {
-    const response = yield call(
-      getDataWithQueryString("delegatorByAddress", publicKey)
-    );
+    const response = yield call(delegatorByAddressApi, publicKey);
+
+    yield put(delegateByAddressesSuccess({ publicKey, response }));
   } catch (e) {
-    yield put(setDopdownAlert("error", e.message));
+    yield put(delegateByAddressesFailure({ publicKey }));
+    // yield put(setDopdownAlert("error", e.message));
   }
 }
 
@@ -45,9 +47,26 @@ export function* delegateByAddressesSaga(): any {
       const { publicKey } = wallet;
       if (publicKey) {
         try {
+          const pendingRewards = yield Web3Agent.Fantom.getDelegationPendingRewards(
+            publicKey,
+            publicKey
+          );
           const response = yield call(delegatorByAddressApi, publicKey);
-          yield put(delegateByAddressesFailure({ publicKey, response }));
+          console.log(
+            "delegateByAddressesSagadelegateByAddressesSaga",
+            response
+          );
+          yield put(
+            delegateByAddressesSuccess({
+              publicKey,
+              response: {
+                ...response.data.data,
+                pendingRewards: pendingRewards || 0
+              }
+            })
+          );
         } catch (exception) {
+          console.log(exception, "exceptionexception");
           yield put(delegateByAddressesFailure({ publicKey }));
         }
       }
@@ -68,15 +87,42 @@ export function* delegateByStakerIdSaga({
 }
 
 export function* delegateAmountSaga({
-  payload: { amount, publicKey }
+  payload: { amount, publicKey, validatorId, cbSuccess }
 }: Action): any {
   try {
+    const { keys } = yield select(({ keys }) => ({
+      keys
+    }));
+    const key = keys.wallets.find(k => k.publicKey === publicKey);
     const response = yield Web3Agent.Fantom.delegateStake({
       amount,
-      publicKey
+      publicKey,
+      privateKey: key.privateKey,
+      validatorId
     });
+
+    yield put(delegateByAddress({ publicKey }));
+    cbSuccess();
     // Assign contract functions to sfc variable
   } catch (e) {
+    console.log(e, "eeeeeeeeeeee");
+
+    yield put(setDopdownAlert("error", e.message));
+  }
+}
+
+export function* delegateUnstakeSaga({
+  payload: { publicKey, cbSuccess }
+}: Action): any {
+  try {
+    const response = yield Web3Agent.Fantom.delegateUnstake(publicKey);
+
+    console.log("delegateUnstakeSaga", response);
+    cbSuccess();
+    // Assign contract functions to sfc variable
+  } catch (e) {
+    console.log(e, "eeeeeeeeeeee");
+
     yield put(setDopdownAlert("error", e.message));
   }
 }
@@ -86,4 +132,5 @@ export default function* listener(): Iterable<any> {
   yield takeLatest(types.DELEGATE_BY_ADDRESSES, delegateByAddressesSaga);
   yield takeLatest(types.DELEGATE_BY_STAKER_ID, delegateByStakerIdSaga);
   yield takeLatest(types.DELEGATE_AMOUNT, delegateAmountSaga);
+  yield takeLatest(types.DELEGATE_UNSTAKE, delegateUnstakeSaga);
 }

@@ -9,13 +9,14 @@ const cardStyles = StyleSheet.create({
     borderRadius: 22,
     padding: getWidth(20),
     marginHorizontal: getWidth(6),
-    backgroundColor: "#416ed5"
+    backgroundColor: Colors.royalBlue
   },
+
   cardHeaderText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    marginTop: getHeight(5)
+    marginTop: getHeight(2)
   },
   cardSecretText: {
     fontFamily: fonts.WorkSansMedium,
@@ -36,19 +37,19 @@ const cardStyles = StyleSheet.create({
     color: Colors.white,
     alignSelf: "flex-end",
     opacity: 0.5,
-    marginVertical: getHeight(5)
+    marginVertical: getHeight(2)
   },
   cardBottomTextContainer: {
     flex: 1,
     justifyContent: "flex-end"
   },
   cardImageStyle: {
-    height: getHeight(100),
+    height: getHeight(120),
     width: getWidth(80),
-    bottom: -10,
+    bottom: -20,
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.7
+    opacity: 0.2
   },
   cardIndicatorStyle: {
     width: getWidth(12),
@@ -67,7 +68,7 @@ const cardStyles = StyleSheet.create({
 const cardListItemStyles = StyleSheet.create({
   listItemContainer: {
     height: getHeight(70),
-    marginVertical: getHeight(12),
+    marginVertical: getHeight(15),
     marginHorizontal: getWidth(2),
     borderRadius: getHeight(11),
     flex: 1,
@@ -76,10 +77,8 @@ const cardListItemStyles = StyleSheet.create({
     borderLeftWidth: getWidth(8),
     borderLeftColor: Colors.royalBlue,
     justifyContent: "center",
-
     shadowColor: Colors.blackOpacity,
     backgroundColor: Colors.white,
-    //borderWidth:0.3,
     shadowOffset: {
       width: 0,
       height: 7
@@ -88,7 +87,6 @@ const cardListItemStyles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 5
   },
-
   listItemTitle: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
@@ -115,20 +113,20 @@ const cardListItemStyles = StyleSheet.create({
 
 const stickyHeaderStyles = StyleSheet.create({
   stickyHeaderStyle: {
-    height: getHeight(90),
+    height: getHeight(95),
     borderRadius: 12,
-   overflow: "hidden",
+    overflow: "hidden",
     backgroundColor: "#416ed5",
     paddingHorizontal: getWidth(15),
-    paddingVertical: getHeight(5)
+    paddingVertical: getHeight(2)
   },
   stickyHeaderImageStyle: {
     height: getHeight(100),
     width: getWidth(80),
-    top: 15,
+    top: getHeight(15),
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.7
+    opacity: 0.2
   }
 });
 
@@ -199,12 +197,9 @@ export default StyleSheet.create({
     opacity: 0.5
   },
   listHeader: {
-    // marginVertical: getHeight(40),
     height: getHeight(44),
     flexDirection: "row",
     justifyContent: "space-between"
-    //paddingHorizontal: getWidth(22),
-    //marginHorizontal: getWidth(22)
   },
   listContainer: {
     // marginHorizontal: getWidth(22)
@@ -216,7 +211,7 @@ export default StyleSheet.create({
     marginHorizontal: getWidth(10)
   },
   marginHorizontal: {
-    marginHorizontal:getWidth(22)
+    marginHorizontal: getWidth(22)
   },
   stickyHeaderContainer: {
     height: getHeight(220)
@@ -224,5 +219,9 @@ export default StyleSheet.create({
   ...cardStyles,
   ...cardListItemStyles,
   ...listViewStyles,
-  ...stickyHeaderStyles
+  ...stickyHeaderStyles,
+  safeAreaStyle: {
+    flex: 1,
+    backgroundColor: Colors.white
+  }
 });

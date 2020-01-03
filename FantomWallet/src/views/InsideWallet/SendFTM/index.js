@@ -24,7 +24,10 @@ import { GAS_PRICE } from "../../../common/constants";
 import Web3 from "web3";
 import { connect } from "react-redux";
 import { addUpdateTimestampAddress } from "../../../redux/addressBook/actions";
-import { sendTransaction as sendTransactionAction } from "../../../redux/wallet/actions";
+import {
+  sendTransaction as sendTransactionAction,
+  sendFtm as sendFtmAction
+} from "../../../redux/wallet/actions";
 import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../../components/loader";
 import Modal from "../../../components/general/modal";
@@ -79,7 +82,9 @@ const SendFTM = (props: Props) => {
     }
   };
   const alertSuccessfulButtonPressed = () => {
+    const { sendFtm } = props;
     addUpdateAddress(toId, "", new Date().getTime());
+    sendFtm();
     clearState();
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
@@ -120,42 +125,6 @@ const SendFTM = (props: Props) => {
       } else {
         setSendingModal(true);
       }
-
-      // if (toId && Web3.utils.isAddress(toId) && amountText) {
-      //   //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
-      //   // if (amountText === 0 || amountText > maxFantomBalance) {
-      //   //   Alert.alert("Error", "Please enter valid amount.");
-      //   // } else {
-      //   //   sendTransaction({
-      //   //     to: toId,
-      //   //     value: amountText,
-      //   //     memo: "",
-      //   //     cbSuccess: alertSuccessfulButtonPressed
-      //   //   });
-      //   // }
-      //   setLoader(false);
-      //   console.log("trass", {
-      //     to: toId,
-      //     value: amountText,
-      //     memo: "",
-      //     cbSuccess: alertSuccessfulButtonPressed
-      //   });
-      //   sendTransaction({
-      //     to: toId,
-      //     value: amountText,
-      //     memo: "",
-      //     cbSuccess: alertSuccessfulButtonPressed
-      //   });
-      //   // NavigationService.navigate(routes.root.SendMoney, {
-      //   //   address,
-      //   //   amount,
-      //   //   coin,
-      //   //   memo,
-      //   //   fees,
-      //   //   reload,
-      //   //   balance
-      //   // });
-      // }
     }
   };
 
@@ -300,17 +269,25 @@ const SendFTM = (props: Props) => {
             amountText
           )}\n FTM to ${toId}?"`}
           modalTextStyle={styles.modalTextStyle}
-          buttonViewStyle={styles.sendButtonView}
+          buttonViewStyle={
+            buttonModalText === "Sending...."
+              ? { ...styles.sendButtonView, justifyContent: "center" }
+              : styles.sendButtonView
+          }
           buttons={[
             {
               name: "Cancel",
-              onPress: () => setSendingModal(!isSendingModal)
+              onPress: () => setSendingModal(!isSendingModal),
+              isShow: buttonModalText === "Sending...." ? false : true
             },
             {
-              style: styles.sendButton,
+              style:
+                buttonModalText === "Sending...."
+                  ? { ...styles.sendButton, backgroundColor: Colors.grey }
+                  : styles.sendButton,
               name: buttonModalText,
               onPress: handleSendAmount,
-              disabled: buttonModalText === "Send",
+              disabled: buttonModalText !== "Send",
               textStyle: styles.sendTextStyle
             }
           ]}
@@ -327,7 +304,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   addUpdateAddress: addUpdateTimestampAddress,
-  sendTransaction: sendTransactionAction
+  sendTransaction: sendTransactionAction,
+  sendFtm: sendFtmAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendFTM);

@@ -53,10 +53,21 @@ export default (state: Wallet = initialState, action: actionType) => {
         walletsData: oldData,
         currentWallet: {
           ...state.currentWallet
-          // balance
         }
       };
     }
+
+    case types.SEND_FTM_SUCESS: {
+      const { balance } = action.payload;
+      return {
+        ...state,
+        currentWallet: {
+          ...state.currentWallet,
+          balance
+        }
+      };
+    }
+
     case types.GET_BALANCE: {
       return {
         ...state,
@@ -80,13 +91,13 @@ export default (state: Wallet = initialState, action: actionType) => {
       if (state.currentWallet && state.currentWallet.publicKey === publicKey) {
         newCurrentWallet = {
           ...state.currentWallet,
-          history
+          history,
+          balance
         };
       }
       return {
         ...state,
         walletsData: oldData,
-
         currentWallet: newCurrentWallet
       };
     }

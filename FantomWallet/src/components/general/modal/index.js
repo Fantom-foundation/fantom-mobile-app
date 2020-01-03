@@ -18,18 +18,22 @@ const ModalView = props => {
         <View style={buttonViewStyle}>
           {buttons &&
             buttons.map(b => {
+              const { isShow = true } = b;
               return (
-                <TouchableOpacity
-                  // disabled={b.disabled}
-                  onPress={b.onPress}
-                  style={{
-                    ...styles.backButtonStyle,
-                    ...b.style
-                    // backgroundColor: b.disabled ? Colors.grey : Colors.lightBlue
-                  }}
-                >
-                  <Text style={{ ...b.textStyle }}>{b.name}</Text>
-                </TouchableOpacity>
+                <>
+                  {isShow && (
+                    <TouchableOpacity
+                      disabled={b.disabled}
+                      onPress={b.onPress}
+                      style={{
+                        ...styles.backButtonStyle,
+                        ...b.style
+                      }}
+                    >
+                      <Text style={{ ...b.textStyle }}>{b.name}</Text>
+                    </TouchableOpacity>
+                  )}
+                </>
               );
             })}
         </View>

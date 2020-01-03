@@ -60,6 +60,7 @@ export const CheckMnemonicContainer = ({
   const [mnemonicWords, setMnemonicWords] = useState([]);
   const [realWord, setRealWord] = useState([]);
 
+
   useEffect(() => {
     setShuffledMnemonic(
       mnemonic
@@ -115,14 +116,21 @@ export const CheckMnemonicContainer = ({
       });
       return;
     }
+  
 
-    generateWallet({
-      mnemonic,
-      cb: (publicKey: string) =>
-        NavigationService.navigate(routes.root.WalletCreated, { publicKey })
-    });
+     generateWallet({
+        mnemonic,
+        cb: (publicKey: string) => {
+    
+          NavigationService.navigate(routes.root.WalletCreated, { publicKey })
+     
+        }
+      });
+ 
   };
 
+  
+  
   const select = ({ name, index }) => () => {
     setVerifyMnemonic([
       ...verifyMnemonic.slice(),
@@ -137,6 +145,8 @@ export const CheckMnemonicContainer = ({
     );
   };
 
+ 
+ 
   const unSelect = ({ name, index }) => () => {
     setVerifyMnemonic(verifyMnemonic.filter(word => word.index !== index));
     setShuffledMnemonic(

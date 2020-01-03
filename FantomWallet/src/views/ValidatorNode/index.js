@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 import { formatNumber } from "~/utils/converts";
 
 const ValidatorNode = props => {
-  const { validators, getValidatorsList } = props;
+  const { validators, getValidatorsList, stakes, currentWallet } = props;
 
   useEffect(() => {
     getValidatorsList();
@@ -35,6 +35,11 @@ const ValidatorNode = props => {
     }
   };
   const dividend = Math.pow(10, 18);
+  const upTime =
+    100 -
+    (Number(nodeExpanded.deactivatedTime) /
+      (new Date().getTime() - Number(nodeExpanded.createdTime))) *
+      100;
   return (
     <View style={styles.mainContainer}>
       <SafeAreaView style={styles.mainContainer}>
@@ -104,7 +109,9 @@ const ValidatorNode = props => {
                             marginTop: getHeight(23)
                           }}
                         >
-                          <Text style={styles.statusText}>Uptime</Text>
+                          <Text style={{ ...styles.statusText, marginLeft: 0 }}>
+                            Uptime
+                          </Text>
                           <Text style={styles.stakeText}>
                             Staking room left
                           </Text>
@@ -115,7 +122,7 @@ const ValidatorNode = props => {
                             marginTop: getHeight(7)
                           }}
                         >
-                          <Text style={styles.nameText}>100%</Text>
+                          <Text style={styles.nameText}>{upTime}%</Text>
                           <Text style={styles.nameText}>
                             {formatNumber(
                               Number((stakingSpace / dividend).toFixed(2))
@@ -163,7 +170,9 @@ const ValidatorNode = props => {
 };
 
 const mapStateToProps = state => ({
-  validators: state.stakes.validators
+  stakes: state.stakes.data,
+  validators: state.stakes.validators,
+  currentWallet: state.wallet.currentWallet
 });
 
 const mapDispatchToProps = {
