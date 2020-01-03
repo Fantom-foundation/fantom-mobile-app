@@ -18,7 +18,6 @@ const CardListItem = ({ data, isHiddenText, publicKey }) => {
     const { value, from, to } = item;
     const type =
       from.toLowerCase() === publicKey.toLowerCase() ? "Sent" : "Received";
-    console.log(item, "******* item *******");
 
     return (
       <>
