@@ -30,27 +30,26 @@ const StakingAmount = (props: Props) => {
   const availableToStake = props.navigation.getParam("availableToStake");
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
-    // const { currentWallet } = props;
-    // const { balance } = currentWallet;
     getPrivateKey();
     if (item === "<") {
       let num = amount.slice(0, -1);
       setAmount(num);
     } else {
       const updatedAmount = amount.concat(item);
-      if (updatedAmount <= availableToStake) setAmount(updatedAmount);
-      else {
-        Alert.alert(
-          "Error",
-          `Entered amount cannot be greater than Available Balance`,
-          [
-            {
-              text: "Ok",
-              style: "cancel"
-            }
-          ]
-        );
-      }
+      setAmount(updatedAmount);
+      // if (updatedAmount <= availableToStake)
+      // else {
+      //   Alert.alert(
+      //     "Error",
+      //     `Entered amount cannot be greater than Available Balance`,
+      //     [
+      //       {
+      //         text: "Ok",
+      //         style: "cancel"
+      //       }
+      //     ]
+      //   );
+      // }
     }
   };
 
@@ -88,8 +87,9 @@ const StakingAmount = (props: Props) => {
     return null;
   };
   const handleStakingAmount = () => {
-    if (Number(amount) > Number(stakingSpace)) setStakingModal(true);
-    else if (amount !== "") {
+    if (Number(amount) > Number(stakingSpace)) {
+      setStakingModal(true);
+    } else if (amount !== "") {
       setIfStaking(true);
       delegateAmount({
         amount,
@@ -166,7 +166,7 @@ const StakingAmount = (props: Props) => {
             {
               name: "Back",
               style: styles.backButtonStyle,
-              // onPress: handleBackPress,
+              onPress: () => setStakingModal(false),
               textStyle: styles.backButton
             }
           ]}
