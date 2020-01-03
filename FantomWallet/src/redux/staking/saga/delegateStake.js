@@ -66,6 +66,8 @@ export function* delegateByAddressesSaga(): any {
                 }
               })
             );
+          } else {
+            yield put(delegateByAddressesFailure({ publicKey }));
           }
         } catch (exception) {
           console.log(exception, "exceptionexception");
