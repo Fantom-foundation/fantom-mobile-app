@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import {
   fantomToDollar,
   convertFTMValue,
+  formatActivities,
   getConversionRate
 } from "../../../../utils/converts";
+
 const CardListItem = ({ data, isHiddenText, publicKey }) => {
   return data.map(item => {
     const { value, from, to } = item;
@@ -14,6 +16,7 @@ const CardListItem = ({ data, isHiddenText, publicKey }) => {
 
     return (
       <View style={styles.listItemContainer}>
+        <Text style={styles.selfText}>{formatActivities(item.timestamp)}</Text>
         <Text style={styles.listItemTitle}>
           {to.toLowerCase() != from.toLowerCase()
             ? isHiddenText

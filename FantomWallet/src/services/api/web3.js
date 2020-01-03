@@ -127,7 +127,7 @@ class Web3Agent {
     // );
     return this.transfer({
       from: publicKey,
-      to: validatorId,
+      to: "0xfa00face00fc0000000000000000000000000100",
       value: amount,
       memo: web3Sfc.methods.createDelegation(validatorId).encodeABI(),
       privateKey,
