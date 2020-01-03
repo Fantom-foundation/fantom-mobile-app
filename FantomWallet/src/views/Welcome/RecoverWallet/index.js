@@ -109,7 +109,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   };
 
   const changeMnemonic = text => {
-    setMnemonic(text);
+    setMnemonic(text.toLowerCase());
     setErrorType("");
   };
 
@@ -149,7 +149,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
                 style={styles.textInput}
               ></TextInput>
               <TouchableOpacity
-                 style={styles.pasteButton}
+                style={styles.pasteButton}
                 onPress={() => readMnemonicFromClipboard()}
               >
                 <Text style={styles.pasterText}>Paste</Text>
@@ -176,7 +176,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
               <TextInput
                 multiline={true}
                 style={styles.textInput}
-                value={privateKey?privateKey.trim():""}
+                value={privateKey ? privateKey.trim() : ""}
                 onChangeText={text => setPrivateKey(text)}
               ></TextInput>
               <TouchableOpacity
