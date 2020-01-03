@@ -33,6 +33,7 @@ const Staking = (props: Props) => {
   const [ifUnstaking, setIfUnstaking] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
   const [unstakeKey, setUnstakeKey] = useState("");
+  const [stakeAmountModal, setStakeAmountModal] = useState(false);
   const { delegateByAddresses, stakes, wallets, navigation } = props;
 
   const [values, setValues] = useState(wallets);
@@ -81,8 +82,7 @@ const Staking = (props: Props) => {
     return (
       <View
         style={{
-          ...styles.walletView,
-          marginLeft: index !== 0 ? 20 : 0
+          ...styles.walletView
         }}
       >
         <View style={{ paddingHorizontal: 22 }}>
@@ -146,7 +146,7 @@ const Staking = (props: Props) => {
           )}
           <TouchableOpacity
             style={styles.buttonStakeView}
-            onPress={handleStakeButton}
+            onPress={() => handleStakeButton(availableToStake)}
           >
             <Text
               style={{
@@ -187,8 +187,12 @@ const Staking = (props: Props) => {
     });
   };
 
-  const handleStakeButton = () => {
-    NavigationService.navigate(routes.root.ValidatorNode);
+  const handleStakeButton = item => {
+    if (item >= 1) {
+      NavigationService.navigate(routes.root.ValidatorNode);
+    } else if (item < 1) {
+      setStakeAmountModal(true);
+    }
   };
   const withdrawText = `Withdraw ${isWithdrawModalOpened} FTM now`;
   let carousRef = React.createRef(null);
@@ -228,18 +232,20 @@ const Staking = (props: Props) => {
       </View>
 
       {/* Not Enought Ftm to Stake */}
-      {/* <Modal
-        modalText={modalText}
-        modalTextStyle={styles.modalTextStyle}
-        buttonViewStyle={styles.notEnoughSpaceButtonView}
-        buttons={[
-          {
-            name: "Back",
-            style: styles.backButtonStyle,
-            onPress: handleBackPress
-          }
-        ]}
-      /> */}
+      {stakeAmountModal && (
+        <Modal
+          modalText={modalText}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.notEnoughSpaceButtonView}
+          buttons={[
+            {
+              name: "Back",
+              style: styles.backButtonStyle,
+              onPress: () => setStakeAmountModal(false)
+            }
+          ]}
+        />
+      )}
 
       {/* Modal For Amount Too High */}
       {/* <Modal
@@ -250,7 +256,7 @@ const Staking = (props: Props) => {
           {
             name: "Back",
             style: styles.backButtonStyle,
-            onPress: handleBackPress,
+            // onPress: handleBackPress,
             textStyle: styles.backButton
           }
         ]}
