@@ -50,19 +50,6 @@ const StakingAmount = (props: Props) => {
     } else {
       const updatedAmount = amount.concat(item);
       setAmount(updatedAmount);
-      // if (updatedAmount <= availableToStake)
-      // else {
-      //   Alert.alert(
-      //     "Error",
-      //     `Entered amount cannot be greater than Available Balance`,
-      //     [
-      //       {
-      //         text: "Ok",
-      //         style: "cancel"
-      //       }
-      //     ]
-      //   );
-      // }
     }
   };
 
@@ -75,8 +62,9 @@ const StakingAmount = (props: Props) => {
   const stakingSpaceLeft = formatNumber(
     Number((stakingSpace / dividend).toFixed(2))
   );
-  const availableSpace =
-    availableToStake && formatNumber(Number(availableToStake.toFixed(2)));
+  const availableSpace = availableToStake
+    ? formatNumber(Number(availableToStake.toFixed(2)))
+    : 0;
   const handleMaxStake = () => {
     if (stakingSpace > availableSpace) setAmount(availableSpace.toString());
     else if (stakingSpace < availableSpace)
