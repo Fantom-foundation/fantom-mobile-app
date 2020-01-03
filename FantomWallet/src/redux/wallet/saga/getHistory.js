@@ -11,18 +11,15 @@ import {
 } from "react-native-dotenv";
 
 const getTransactionApi = async publicKey => {
-  console.log(
-    "REACT_APP_API_URL_FANTOMREACT_APP_API_URL_FANTOM",
-    REACT_APP_API_URL_FANTOM
-  );
-  return await axios.get(
-    `${REACT_APP_API_URL_FANTOM}api/v1/get-account?address=${publicKey}`,
-    {
+  return await axios
+    .get(`${REACT_APP_API_URL_FANTOM}api/v1/get-account?address=${publicKey}`, {
       headers: {
         "Content-Type": "application/json"
       }
-    }
-  );
+    })
+    .catch(() => {
+      return { data: { data: false } };
+    });
 };
 
 const getBalanceApi = async () => {
@@ -57,7 +54,7 @@ export function* getHistory(): any {
 
           if (data && data.account) {
             const { address, transactions, balance } = data.account;
-            console.log("transactionstransactions", transactions);
+
             yield put(
               setHistory({ publicKey, history: transactions, balance })
             );

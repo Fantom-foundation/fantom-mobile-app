@@ -205,7 +205,7 @@ class Web3Agent {
   // }
 
   async getAccount(address: string) {
-    console.log("FANTOM_GET_ACCOUNT_INFO", FANTOM_GET_ACCOUNT_INFO, address);
+    console.log("REACT_APP_API_URL_FANTOM", REACT_APP_API_URL_FANTOM, address);
     return await fetch(
       `${REACT_APP_API_URL_FANTOM}api/v1/get-account?address=${address}`
     );
