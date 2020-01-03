@@ -86,7 +86,9 @@ const Staking = (props: Props) => {
         }}
       >
         <View style={{ paddingHorizontal: 22 }}>
-          <Text style={{ ...styles.titleView }}>{item.name}</Text>
+          <Text numberOfLines={1} style={{ ...styles.titleView }}>
+            {item.name}
+          </Text>
           <Text style={{ ...styles.amountStyle }}>
             {formatValues(availableToStake, false)}
           </Text>
@@ -200,11 +202,6 @@ const Staking = (props: Props) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
         <Text style={styles.stakingText}>Staking</Text>
-        {/* <Image
-          source={question}
-          resizeMode="contain"
-          style={styles.imagestyle}
-        ></Image> */}
       </View>
       <View style={styles.crauselView}>
         {values && values.length === 1 ? (
