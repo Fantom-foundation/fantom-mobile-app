@@ -32,7 +32,9 @@ const unstakeText =
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [ifUnstaking, setIfUnstaking] = useState(false);
+  const [ifWithdrawing, setifWithdrawing] = useState(false);
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
+  const [delegateAmount, setDelegateAmount] = useState("");
   const [unstakeKey, setUnstakeKey] = useState("");
   const [stakeAmountModal, setStakeAmountModal] = useState(false);
   const { delegateByAddresses, stakes, wallets, navigation } = props;
@@ -75,12 +77,21 @@ const Staking = (props: Props) => {
     const availableToStake = item.balance;
     const currentDate = new Date();
     const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
+    const delegateDate = new Date();
+    const deactivatedDate = delegateDate.setDate(
+      delegateDate.getDate() + Number(stakeData.deactivatedTime || 0)
+    );
+    const date1 = new Date(deactivatedDate);
+    const date2 = new Date(nextSevenDays);
+    const diffTime = Math.abs(date2 - date1);
+    const timeLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     const currentlyStaking = formatValues(Number(stakeData.amount || 0));
 
-    const timeLeft =
-      new Date().getTime() -
-      (formatValues(stakeData.deactivatedTime || 0) + nextSevenDays);
+    // const timeLeft =
+    //   new Date().getTime() -
+    //   (Number(stakeData.deactivatedTime || 0) + nextSevenDays);
+
     const isUnstaking = navigation.getParam("isUnstaking");
     return (
       <View
@@ -105,14 +116,14 @@ const Staking = (props: Props) => {
           <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
           {timeLeft > 0 ? (
             <Text style={{ ...styles.bottomTextStyle }}>
-              Your {currentlyStaking} will be available in
-              {timeLeft}
+              {`Your ${currentlyStaking} FTM will be available in ${timeLeft} days`}
             </Text>
-          ) : isUnstaking ? (
+          ) : isDeligate && currentlyStaking > 0 ? (
             <TouchableOpacity
               onPress={() => {
                 if (stakeData) setUnstakeKey(stakeData.publicKey);
                 openWithdrawModal(true);
+                setDelegateAmount(currentlyStaking);
               }}
             >
               <Text style={{ ...styles.bottomTextStyle }}>
@@ -190,7 +201,7 @@ const Staking = (props: Props) => {
   //onUnstake Button
   const handleWithdrawPress = () => {
     const { navigation, delegateWithdraw } = props;
-    // openWithdrawModal("");
+    setifWithdrawing(true);
     delegateWithdraw({
       publicKey: unstakeKey,
       cbSuccess: () => {
@@ -198,6 +209,7 @@ const Staking = (props: Props) => {
           text: "Tokens successfully withdrawn!",
           navigationRoute: "Staking"
         });
+        setifWithdrawing(false);
       }
     });
   };
@@ -209,7 +221,7 @@ const Staking = (props: Props) => {
       setStakeAmountModal(true);
     }
   };
-  const withdrawText = `Withdraw ${isWithdrawModalOpened} FTM now`;
+  const withdrawText = `Withdraw ${delegateAmount} FTM now`;
   let carousRef = React.createRef(null);
   return (
     <SafeAreaView style={styles.container}>
@@ -284,13 +296,19 @@ const Staking = (props: Props) => {
               name: "Cancel",
               style: styles.backButtonStyle,
               onPress: () => openWithdrawModal(""),
-              textStyle: styles.backButton
+              textStyle: styles.backButton,
+              disabled: ifWithdrawing
             },
             {
-              name: "Withdraw",
-              style: styles.unstakeButton,
+              name: ifWithdrawing ? "Withdrawing..." : "Withdraw",
+              style: {
+                ...styles.unstakeButton,
+                backgroundColor: ifWithdrawing ? Colors.grey : Colors.red
+              },
+
               onPress: handleWithdrawPress,
-              textStyle: styles.unStakeText
+              textStyle: styles.unStakeText,
+              disabled: ifWithdrawing
             }
           ]}
         />
