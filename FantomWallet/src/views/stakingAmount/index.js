@@ -62,8 +62,8 @@ const StakingAmount = (props: Props) => {
   const stakingSpaceLeft = formatNumber(
     Number((stakingSpace / dividend).toFixed(2))
   );
-  const availableSpace = availableToStake
-    ? formatNumber(Number(availableToStake.toFixed(2)))
+  const availableSpace = !isNaN(availableToStake)
+    ? formatNumber(Number(availableToStake).toFixed(2))
     : 0;
   const handleMaxStake = () => {
     if (stakingSpace > availableSpace) setAmount(availableSpace.toString());

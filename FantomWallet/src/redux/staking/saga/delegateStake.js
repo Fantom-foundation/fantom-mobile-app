@@ -50,7 +50,10 @@ export function* delegateByAddressesSaga(): any {
       const { publicKey } = wallet;
       if (publicKey) {
         try {
-          const pendingRewards = yield Web3Agent.Fantom.getDelegationPendingRewards(
+          const {
+            pendingRewards,
+            data
+          } = yield Web3Agent.Fantom.getDelegationPendingRewards(
             publicKey,
             publicKey
           );
@@ -60,6 +63,7 @@ export function* delegateByAddressesSaga(): any {
             "delegateByAddressesSagadelegateByAddressesSaga",
             response
           );
+
           if (response) {
             yield put(
               delegateByAddressesSuccess({
