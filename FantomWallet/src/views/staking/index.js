@@ -44,7 +44,7 @@ const Staking = (props: Props) => {
     setTimeout(() => {
       setCarouselWidth(getWidth(280));
     }, 500);
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     if (values && values.length > 1) {

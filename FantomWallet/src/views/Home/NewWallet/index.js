@@ -8,7 +8,8 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  RefreshControl
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import styles from "./styles";
@@ -44,7 +45,8 @@ class Wallet extends Component {
       isHiddenText: false,
       activeSlide: 0,
       headerHeight: 1,
-      isScaleView: 1
+      isScaleView: 1,
+      refreshLoader: false
     };
     this.carousel = React.createRef();
   }
@@ -81,14 +83,39 @@ class Wallet extends Component {
     }
     return totalBalance > 0 ? totalBalance.toFixed(2) : 0;
   };
+  onRefresh = () => {
+    const {
+      getHistory,
+      walletsData,
+      getBalance,
+      sendFtm,
+      isLoading
+    } = this.props;
 
+    this.setState(
+      {
+        refreshLoader: true
+      },
+      () => {
+        if (walletsData && walletsData.length > 0 && !isLoading) {
+          getBalance({ loading: true });
+          sendFtm();
+          getHistory();
+        }
+      }
+    );
+    this.setState({
+      refreshLoader: false
+    });
+  };
   render() {
     const {
       isListView,
       activeSlide,
       headerHeight,
       isScaleView,
-      isHiddenText
+      isHiddenText,
+      refreshLoader
     } = this.state;
 
     const {
@@ -154,6 +181,12 @@ class Wallet extends Component {
           ) : (
             <SafeAreaView style={styles.safeAreaStyle}>
               <ParallaxScrollView
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshLoader}
+                    onRefresh={() => this.onRefresh()}
+                  />
+                }
                 onScroll={event => {
                   const threshold = 30;
 
