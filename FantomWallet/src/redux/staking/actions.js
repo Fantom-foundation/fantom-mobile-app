@@ -5,7 +5,8 @@ export const types = {
   DELEGATE_BY_STAKER_ID: "staking/DELEGATE_BY_STAKER_ID",
   VALIDATORS_LIST: "staking/VALIDATORS_LIST",
   DELEGATE_AMOUNT: "staking/DELEGATE_AMOUNT",
-  DELEGATE_UNSTAKE: "staking/DELEGATE_UNSTAKE"
+  DELEGATE_UNSTAKE: "staking/DELEGATE_UNSTAKE",
+  WITHDRAW_DELEGATE: "staking/WITHDRAW_DELEGATE"
 };
 
 type TDelegateByStakerId = {
@@ -81,5 +82,10 @@ export const delegateAmount = ({
 
 export const delegateUnstake = ({ publicKey, cbSuccess }) => ({
   type: types.DELEGATE_UNSTAKE,
+  payload: { publicKey, cbSuccess }
+});
+
+export const delegateWithdraw = ({ publicKey, cbSuccess }) => ({
+  type: types.WITHDRAW_DELEGATE,
   payload: { publicKey, cbSuccess }
 });
