@@ -66,7 +66,7 @@ export const CheckMnemonicContainer = ({
         .split(" ")
         .sort(() => Math.random() - 0.5)
         .map((word, index) => ({
-          name: word[0].toUpperCase() + word.slice(1),
+          name: word,
           index: `${word}_${index}`,
           isClickable: true
         }))
