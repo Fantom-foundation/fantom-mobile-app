@@ -113,7 +113,7 @@ class Web3Agent {
     );
     const web3Sfc = new web3.eth.Contract(
       contractFunctions,
-      "0xfa00face00fc0000000000000000000000000100"
+      "0xfc00face00000000000000000000000000000000"
     );
     // Assign contract functions to sfc variable
     // tx = this.sfc.createDelegation("1", {
@@ -127,7 +127,7 @@ class Web3Agent {
     // );
     return this.transfer({
       from: publicKey,
-      to: "0xfa00face00fc0000000000000000000000000100",
+      to: "0xfc00face00000000000000000000000000000000",
       value: amount,
       memo: web3Sfc.methods.createDelegation(validatorId).encodeABI(),
       privateKey,
@@ -193,6 +193,22 @@ class Web3Agent {
             result,
             error
           );
+          resolve(result);
+        });
+    });
+  }
+
+  withdrawDelegateAmount(delegatorAddress: string) {
+    const sfc = new this.web3.eth.Contract(
+      contractFunctions,
+      "0xfc00face00000000000000000000000000000000"
+    );
+
+    return new Promise(resolve => {
+      sfc.methods
+        .withdrawDelegation()
+        .call({ from: delegatorAddress }, function(error, result) {
+          console.log("withdrawDelegation", result);
           resolve(result);
         });
     });

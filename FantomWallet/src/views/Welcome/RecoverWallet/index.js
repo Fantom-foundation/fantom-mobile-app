@@ -81,9 +81,10 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
       cb: (publicKey: string) => {
         NavigationService.navigate(routes.root.WalletImported, { publicKey });
         setIsImporting(false);
+        setMnemonic("");
+        setPrivateKey("");
       }
     });
-    setMnemonic("");
   };
 
   const handleRecoverWalletUsingPrivateKey = async () => {
@@ -100,6 +101,8 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
               publicKey: address.address
             });
             setIsImporting(false);
+            setMnemonic("");
+            setPrivateKey("");
           }
         });
       }

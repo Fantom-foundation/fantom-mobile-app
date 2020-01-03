@@ -216,6 +216,12 @@ export default StyleSheet.create({
   stickyHeaderContainer: {
     height: getHeight(220)
   },
+  modalStyle: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
   ...cardStyles,
   ...cardListItemStyles,
   ...listViewStyles,

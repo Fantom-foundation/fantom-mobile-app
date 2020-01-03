@@ -33,7 +33,10 @@ export function* delegateByAddressSaga({
 }
 
 const delegatorByAddressApi = async publicKey => {
-  return getDataWithQueryString("delegatorByAddress", `${publicKey}`);
+  return getDataWithQueryString(
+    "delegatorByAddress",
+    `${publicKey}?verbosity=2`
+  );
 };
 
 export function* delegateByAddressesSaga(): any {
@@ -51,6 +54,7 @@ export function* delegateByAddressesSaga(): any {
             publicKey,
             publicKey
           );
+
           const response = yield call(delegatorByAddressApi, publicKey);
           console.log(
             "delegateByAddressesSagadelegateByAddressesSaga",
@@ -130,10 +134,26 @@ export function* delegateUnstakeSaga({
   }
 }
 
+export function* delegateWithdrawSaga({
+  payload: { publicKey, cbSuccess }
+}: Action): any {
+  try {
+    const response = yield Web3Agent.Fantom.withdrawDelegateAmount(publicKey);
+
+    cbSuccess();
+    // Assign contract functions to sfc variable
+  } catch (e) {
+    console.log(e, "eeeeeeeeeeee");
+
+    yield put(setDopdownAlert("error", e.message));
+  }
+}
+
 export default function* listener(): Iterable<any> {
   yield takeLatest(types.DELEGATE_BY_ADDRESS, delegateByAddressSaga);
   yield takeLatest(types.DELEGATE_BY_ADDRESSES, delegateByAddressesSaga);
   yield takeLatest(types.DELEGATE_BY_STAKER_ID, delegateByStakerIdSaga);
   yield takeLatest(types.DELEGATE_AMOUNT, delegateAmountSaga);
   yield takeLatest(types.DELEGATE_UNSTAKE, delegateUnstakeSaga);
+  yield takeLatest(types.WITHDRAW_DELEGATE, delegateWithdrawSaga);
 }

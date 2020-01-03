@@ -19,7 +19,8 @@ import { Colors } from "../../theme";
 import { formatNumber } from "~/utils/converts";
 import {
   delegateByAddresses as delegateByAddressesAction,
-  delegateUnstake as delegateUnstakeAction
+  delegateUnstake as delegateUnstakeAction,
+  delegateWithdraw as delegateWithdrawAction
 } from "~/redux/staking/actions";
 
 const modalText = "You need at least 1 FTM to \n stake.";
@@ -73,7 +74,9 @@ const Staking = (props: Props) => {
     const availableToStake = item.balance;
     const currentDate = new Date();
     const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
-    const currentlyStaking = formatValues(stakeData.amount);
+
+    const currentlyStaking = formatValues(Number(stakeData.amount || 0));
+
     const timeLeft =
       new Date().getTime() -
       (formatValues(stakeData.deactivatedTime || 0) + nextSevenDays);
@@ -104,7 +107,12 @@ const Staking = (props: Props) => {
               {timeLeft}
             </Text>
           ) : isUnstaking ? (
-            <TouchableOpacity onPress={() => openWithdrawModal(true)}>
+            <TouchableOpacity
+              onPress={() => {
+                if (stakeData) setUnstakeKey(stakeData.publicKey);
+                openWithdrawModal(true);
+              }}
+            >
               <Text style={{ ...styles.bottomTextStyle }}>
                 Withdraw {currentlyStaking} FTM now
               </Text>
@@ -179,11 +187,16 @@ const Staking = (props: Props) => {
 
   //onUnstake Button
   const handleWithdrawPress = () => {
-    const { navigation } = props;
+    const { navigation, delegateWithdraw } = props;
     // openWithdrawModal("");
-    navigation.navigate("WalletImported", {
-      text: "Tokens successfully withdrawn!",
-      navigationRoute: "Staking"
+    delegateWithdraw({
+      publicKey: unstakeKey,
+      cbSuccess: () => {
+        navigation.navigate("WalletImported", {
+          text: "Tokens successfully withdrawn!",
+          navigationRoute: "Staking"
+        });
+      }
     });
   };
 
@@ -265,7 +278,7 @@ const Staking = (props: Props) => {
           buttonViewStyle={styles.unstakeView}
           buttons={[
             {
-              name: "Back",
+              name: "Cancel",
               style: styles.backButtonStyle,
               onPress: () => openWithdrawModal(""),
               textStyle: styles.backButton
@@ -288,7 +301,7 @@ const Staking = (props: Props) => {
           buttonViewStyle={styles.unstakeView}
           buttons={[
             {
-              name: "Back",
+              name: "Cancel",
               style: styles.backButtonStyle,
               onPress: () => openUnstakingModal(!isUnstakeModalOpened),
               textStyle: styles.backButton,
@@ -318,7 +331,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   delegateByAddresses: delegateByAddressesAction,
-  delegateUnstake: delegateUnstakeAction
+  delegateUnstake: delegateUnstakeAction,
+  delegateWithdraw: delegateWithdrawAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Staking);
