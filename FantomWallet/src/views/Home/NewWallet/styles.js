@@ -29,7 +29,7 @@ const cardStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    alignSelf: "flex-end",
+    alignSelf: "flex-end"
   },
   bottomCardSubText: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -85,14 +85,14 @@ const cardListItemStyles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 5,
+    elevation: 5
   },
   listItemTitle: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.textBlack,
     alignSelf: "flex-end",
-    lineHeight: getHeight(24),
+    lineHeight: getHeight(24)
   },
   selfText: {
     fontFamily: fonts.WorkSansSemiBold,
@@ -113,9 +113,9 @@ const cardListItemStyles = StyleSheet.create({
 
 const stickyHeaderStyles = StyleSheet.create({
   stickyHeaderStyle: {
-     height: getHeight(95),
+    height: getHeight(95),
     borderRadius: 12,
-   overflow: "hidden",
+    overflow: "hidden",
     backgroundColor: "#416ed5",
     paddingHorizontal: getWidth(15),
     paddingVertical: getHeight(2)
@@ -126,7 +126,7 @@ const stickyHeaderStyles = StyleSheet.create({
     top: getHeight(15),
     left: getWidth(20),
     position: "absolute",
-    opacity: 0.2,
+    opacity: 0.2
   }
 });
 
@@ -150,7 +150,7 @@ const listViewStyles = StyleSheet.create({
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
     color: Colors.white,
-    lineHeight: getHeight(24),
+    lineHeight: getHeight(24)
   }
 });
 
@@ -211,10 +211,10 @@ export default StyleSheet.create({
     marginHorizontal: getWidth(10)
   },
   marginHorizontal: {
-    marginHorizontal: getWidth(22),
+    marginHorizontal: getWidth(22)
   },
   stickyHeaderContainer: {
-    height: getHeight(220),
+    height: getHeight(220)
   },
   ...cardStyles,
   ...cardListItemStyles,
@@ -222,6 +222,6 @@ export default StyleSheet.create({
   ...stickyHeaderStyles,
   safeAreaStyle: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white
   }
 });
