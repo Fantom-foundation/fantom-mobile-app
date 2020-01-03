@@ -37,7 +37,6 @@ export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
 
   const generateMnemonic = async () => {
     const _menmonic = await Bip39.generateMnemonic();
-    console.log(_menmonic, "_menmonic");
     setMnemonic(_menmonic);
   };
 
