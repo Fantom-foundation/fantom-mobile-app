@@ -46,7 +46,7 @@ const Staking = (props: Props) => {
     setTimeout(() => {
       setCarouselWidth(getWidth(280));
     }, 500);
-  }, []);
+  }, [wallets.length]);
 
   useEffect(() => {
     if (values && values.length > 1) {
@@ -142,7 +142,6 @@ const Staking = (props: Props) => {
           {isDeligate ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
-              // disabled={fa}
               onPress={() => {
                 if (stakeData) setUnstakeKey(stakeData.publicKey);
                 openUnstakingModal(true);
