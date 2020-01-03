@@ -72,6 +72,8 @@ const SendFTM = (props: Props) => {
   const handleInputNumber = item => {
     if (item === "0" && amountText === "") {
       return;
+    } else if (item === "." && amountText.includes(".")) {
+      return;
     } else if (item === "." && amountText === "") {
       setAmountText(amountText.concat("0."));
     } else {

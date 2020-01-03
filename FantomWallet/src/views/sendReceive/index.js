@@ -67,6 +67,8 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const handleInputNumber = item => {
     if (item === "0" && amount === "") {
       return;
+    } else if (item === "." && amount.includes(".")) {
+      return;
     } else if (item === "." && amount === "") {
       let num = amount.concat("0.");
       setAmount(num);
