@@ -104,6 +104,28 @@ export default StyleSheet.create({
     marginTop: 18,
     alignSelf: "center"
   },
+  modalTextStyle: {
+    textAlign: "center",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    color: Colors.blackOpacity,
+    marginHorizontal: getWidth(20)
+  },
+  backButtonStyle: {
+    width: getWidth(132),
+    height: getHeight(50),
+    borderRadius: getHeight(25),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    backgroundColor: "transparent",
+    borderWidth: 2,
+    borderColor: Colors.blackOpacity
+  },
+  notEnoughSpaceButtonView: {
+    marginTop: getHeight(40),
+    alignSelf: "center"
+  },
   safeAreaView: {
     flex: 1,
     backgroundColor: Colors.transparent

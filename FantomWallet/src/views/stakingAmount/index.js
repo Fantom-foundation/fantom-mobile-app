@@ -16,6 +16,7 @@ import { NavigationService, routes } from "../../navigation/helpers";
 import { formatNumber } from "~/utils/converts";
 import { delegateAmount as delegateAmountAction } from "../../redux/staking/actions";
 import { Colors, fonts, FontSize } from "../../theme";
+import Modal from "../../components/general/modal";
 
 const StakingAmount = (props: Props) => {
   const { validators, delegateAmount, keys, currentWallet } = props;
@@ -23,17 +24,21 @@ const StakingAmount = (props: Props) => {
   const keyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const [amount, setAmount] = useState("");
   const [ifStaking, setIfStaking] = useState(false);
+  const [stakingModal, setStakingModal] = useState(false);
+  const amountHightModalText =
+    "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
+  const availableToStake = props.navigation.getParam("availableToStake");
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
-    const { currentWallet } = props;
-    const { balance } = currentWallet;
+    // const { currentWallet } = props;
+    // const { balance } = currentWallet;
     getPrivateKey();
     if (item === "<") {
       let num = amount.slice(0, -1);
       setAmount(num);
     } else {
       const updatedAmount = amount.concat(item);
-      if (updatedAmount <= balance) setAmount(updatedAmount);
+      if (updatedAmount <= availableToStake) setAmount(updatedAmount);
       else {
         Alert.alert(
           "Error",
@@ -59,19 +64,17 @@ const StakingAmount = (props: Props) => {
     Number((stakingSpace / dividend).toFixed(2))
   );
   const availableSpace =
-    currentWallet && formatNumber(Number(currentWallet.balance.toFixed(2)));
+    availableToStake && formatNumber(Number(availableToStake.toFixed(2)));
   const handleMaxStake = () => {
-    const { currentWallet } = props;
-    const { balance } = currentWallet;
-
-    if (balance > availableSpace) setAmount(availableSpace.toString());
-    else if (balance < availableSpace)
+    if (stakingSpace > availableSpace) setAmount(availableSpace.toString());
+    else if (stakingSpace < availableSpace)
       setAmount(
-        Number(balance)
+        Number(stakingSpace)
           .toFixed(2)
           .toString()
       );
-    else if (balance === availableSpace) setAmount(availableSpace.toString());
+    else if (stakingSpace === availableSpace)
+      setAmount(availableSpace.toString());
   };
 
   const getPrivateKey = () => {
@@ -85,7 +88,8 @@ const StakingAmount = (props: Props) => {
     return null;
   };
   const handleStakingAmount = () => {
-    if (amount !== "") {
+    if (Number(amount) > Number(stakingSpace)) setStakingModal(true);
+    else if (amount !== "") {
       setIfStaking(true);
       delegateAmount({
         amount,
@@ -152,6 +156,22 @@ const StakingAmount = (props: Props) => {
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
+      {/* Modal For Amount Too High */}
+      {stakingModal && (
+        <Modal
+          modalText={amountHightModalText}
+          modalTextStyle={styles.modalTextStyle}
+          buttonViewStyle={styles.notEnoughSpaceButtonView}
+          buttons={[
+            {
+              name: "Back",
+              style: styles.backButtonStyle,
+              // onPress: handleBackPress,
+              textStyle: styles.backButton
+            }
+          ]}
+        />
+      )}
     </View>
   );
 };

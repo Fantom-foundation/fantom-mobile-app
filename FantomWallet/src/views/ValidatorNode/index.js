@@ -146,7 +146,10 @@ const ValidatorNode = props => {
                                 NavigationService.navigate(
                                   routes.root.StakingAmount,
                                   {
-                                    validatorId: item.id
+                                    validatorId: item.id,
+                                    availableToStake: props.navigation.getParam(
+                                      "availableToStake"
+                                    )
                                   }
                                 )
                               }
