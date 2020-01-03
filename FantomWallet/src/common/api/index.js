@@ -18,19 +18,24 @@ const getAPIPath = apiName => {
 };
 
 export const getDataWithQueryString = async (apiName, queryString) =>
-  axios.get(`${getApiPathName(apiName)}/${queryString}`);
+  axios.get(`${getApiPathName(apiName)}/${queryString}`).catch(() => false);
+
 export const putDataWithQueryString = (apiName, queryString, data) => {
-  return axios.put(`${getApiPathName(apiName)}/${queryString}`, data);
+  return axios
+    .put(`${getApiPathName(apiName)}/${queryString}`, data)
+    .catch(() => false);
 };
 
 export const postData = (apiName, data, queryParam = "") => {
   if (!!queryParam) {
-    return axios.post(`${getApiPathName(apiName)}/${queryParam}`, data);
+    return axios
+      .post(`${getApiPathName(apiName)}/${queryParam}`, data)
+      .catch(() => false);
   } else {
-    return axios.post(`${getApiPathName(apiName)}`, data);
+    return axios.post(`${getApiPathName(apiName)}`, data).catch(() => false);
   }
 };
 
 export const deleteData = (apiName, data) => {
-  return axios.delete(`${getApiPathName(apiName)}/${data}`);
+  return axios.delete(`${getApiPathName(apiName)}/${data}`).catch(() => false);
 };

@@ -56,15 +56,17 @@ export function* delegateByAddressesSaga(): any {
             "delegateByAddressesSagadelegateByAddressesSaga",
             response
           );
-          yield put(
-            delegateByAddressesSuccess({
-              publicKey,
-              response: {
-                ...response.data.data,
-                pendingRewards: pendingRewards || 0
-              }
-            })
-          );
+          if (response) {
+            yield put(
+              delegateByAddressesSuccess({
+                publicKey,
+                response: {
+                  ...response.data.data,
+                  pendingRewards: pendingRewards || 0
+                }
+              })
+            );
+          }
         } catch (exception) {
           console.log(exception, "exceptionexception");
           yield put(delegateByAddressesFailure({ publicKey }));
@@ -117,7 +119,6 @@ export function* delegateUnstakeSaga({
   try {
     const response = yield Web3Agent.Fantom.delegateUnstake(publicKey);
 
-    console.log("delegateUnstakeSaga", response);
     cbSuccess();
     // Assign contract functions to sfc variable
   } catch (e) {
