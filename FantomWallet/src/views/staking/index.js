@@ -24,8 +24,7 @@ import {
 } from "~/redux/staking/actions";
 
 const modalText = "You need at least 1 FTM to \n stake.";
-const amountHightModalText =
-  "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
+
 const unstakeText =
   "Are you sure you want to  request to withdraw \n your tokens from staking??\n\nThe tokens will be available\n after 7 days in your wallet.";
 
@@ -258,21 +257,6 @@ const Staking = (props: Props) => {
           ]}
         />
       )}
-
-      {/* Modal For Amount Too High */}
-      {/* <Modal
-        modalText={amountHightModalText}
-        modalTextStyle={styles.modalTextStyle}
-        buttonViewStyle={styles.notEnoughSpaceButtonView}
-        buttons={[
-          {
-            name: "Back",
-            style: styles.backButtonStyle,
-            // onPress: handleBackPress,
-            textStyle: styles.backButton
-          }
-        ]}
-      /> */}
 
       {/* Unstake Confirm */}
       {!!isWithdrawModalOpened && (
