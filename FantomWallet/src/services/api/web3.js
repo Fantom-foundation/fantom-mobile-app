@@ -267,7 +267,7 @@ class Web3Agent {
       contractFunctions,
       "0xfc00face00000000000000000000000000000000"
     );
-    debugger;
+
     const gasLimit = 200000;
     const gasPrice = await this.web3.eth.getGasPrice();
     const nonce = await this.web3.eth.getTransactionCount(delegatorAddress);
