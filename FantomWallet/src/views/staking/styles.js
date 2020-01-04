@@ -4,7 +4,7 @@ import { Colors, fonts, FontSize } from "../../theme";
 
 const crauselStyle = {
   crauselView: {
-    marginTop: getHeight(58)
+    marginTop: getHeight(30)
   },
   walletView: {
     paddingTop: getHeight(22),

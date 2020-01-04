@@ -165,15 +165,6 @@ const SendFTM = (props: Props) => {
           alertSuccessfulButtonPressed(isSuccess);
         }
       });
-      // NavigationService.navigate(routes.root.SendMoney, {
-      //   address,
-      //   amount,
-      //   coin,
-      //   memo,
-      //   fees,
-      //   reload,
-      //   balance
-      // });
     }
   };
 
