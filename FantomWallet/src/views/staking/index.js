@@ -22,6 +22,7 @@ import {
   delegateUnstake as delegateUnstakeAction,
   delegateWithdraw as delegateWithdrawAction
 } from "~/redux/staking/actions";
+import moment from "moment";
 
 const modalText = "You need at least 1 FTM to \n stake.";
 
@@ -77,17 +78,24 @@ const Staking = (props: Props) => {
     const availableToStake = item.balance;
     const currentDate = new Date();
     const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
-    const delegateDate = new Date();
+    const todayDate = new Date();
     // const deactivatedDate = delegateDate.setDate(
     //   delegateDate.getDate() + Number(stakeData.deactivatedTime || 0)
     // );
+
     const deactivatedEpoch = Number(stakeData.deactivatedEpoch || 0);
     const deactivatedTime = Number(stakeData.deactivatedTime || 0);
-    const timeLeft =
-      delegateDate.getTime() - (deactivatedTime + currentDate.getTime());
-    // const date1 = new Date(deactivatedDate);
-    // const date2 = new Date(nextSevenDays);
-    // const diffTime = Math.abs(date2 - date1);
+    // const timeLeft =
+    //   delegateDate.getTime() - deactivatedTime + currentDate.getTime();
+    const date1 = new Date(deactivatedTime * 1000);
+    date1.setDate(date1.getDate() + 7);
+    const date2 = new Date();
+    const startTime = moment(date1, "YYYY/MM/DD HH:mm");
+    const endTime = moment(date2, "YYYY/MM/DD HH:mm");
+
+    const timeLeft = startTime.diff(endTime, "hours", true);
+
+    // const diffTime = Math.abs(date1 - date2);
     // const timeLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     const currentlyStaking = formatValues(Number(stakeData.amount || 0));
@@ -124,7 +132,9 @@ const Staking = (props: Props) => {
           )}
           {timeLeft > 0 && deactivatedEpoch > 0 ? (
             <Text style={{ ...styles.bottomTextStyle, marginTop: 15 }}>
-              {`Your ${currentlyStaking} FTM will be available in ${timeLeft} days`}
+              {`Your ${currentlyStaking} FTM will be available in ${
+                timeLeft / 24 > 0 ? Math.floor(timeLeft / 24) + " days and" : ""
+              }  ${Math.ceil(timeLeft % 24)} hours`}
             </Text>
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
             <TouchableOpacity
@@ -340,14 +350,19 @@ const Staking = (props: Props) => {
           modalText={unstakeText}
           stakingView={styles.unstakeOuterView}
           modalTextStyle={styles.modalTextStyle}
-          buttonViewStyle={styles.unstakeView}
+          buttonViewStyle={
+            ifUnstaking
+              ? { ...styles.unstakeView, justifyContent: "center" }
+              : styles.unstakeView
+          }
           buttons={[
             {
               name: "Cancel",
               style: styles.backButtonStyle,
               onPress: () => openUnstakingModal(!isUnstakeModalOpened),
               textStyle: styles.backButton,
-              disabled: ifUnstaking
+              disabled: ifUnstaking,
+              isShow: ifUnstaking ? false : true
             },
             {
               name: ifUnstaking ? "Unstaking..." : "Unstake",
