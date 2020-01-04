@@ -12,13 +12,14 @@ const CardView = ({
   data,
   isHiddenText,
   setCurrentWallet,
+  handleTransactionClick
 }) => {
   const { name, publicKey, history, balance } = data;
+
   const handleCardClick = () => {
     setCurrentWallet(data);
     NavigationService.navigate(routes.HomeScreen.Wallet);
   };
-
 
   return (
     <View style={{ justifyContent: "center" }}>
@@ -47,10 +48,9 @@ const CardView = ({
           data={history}
           isHiddenText={isHiddenText}
           publicKey={publicKey}
+          handleTransactionClick={handleTransactionClick}
         />
-      )
-   
-      }
+      )}
     </View>
   );
 };
