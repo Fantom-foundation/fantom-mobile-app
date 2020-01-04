@@ -9,7 +9,8 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  RefreshControl
+  RefreshControl,
+  Modal
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import styles from "./styles";
@@ -34,8 +35,9 @@ import {
   sendFtm as sendFtmAction
 } from "~/redux/wallet/actions";
 import Loader from "~/components/general/Loader";
-import { fantomToDollar } from "../../../utils/converts";
-import axios from "axios";
+
+import ReceiveModal from "../../InsideWallet/SingleWallet/components/ReceiveModal";
+import SendModal from "../../InsideWallet/SingleWallet/components/SendModal";
 
 class Wallet extends Component {
   constructor(props) {
@@ -46,7 +48,11 @@ class Wallet extends Component {
       activeSlide: 0,
       headerHeight: 1,
       isScaleView: 1,
-      refreshLoader: false
+      refreshLoader: false,
+      showReceiveModal: false,
+      showSendModal: false,
+      transactionData: null,
+      publicKeyModal: ""
     };
     this.carousel = React.createRef();
   }
@@ -108,6 +114,24 @@ class Wallet extends Component {
       refreshLoader: false
     });
   };
+
+  handleTransactionClick = (type, item, publicKey) => {
+    if (type && item) {
+      if (type === "Sent") {
+        this.setState({
+          showSendModal: true,
+          transactionData: item,
+          publicKeyModal: publicKey
+        });
+      } else {
+        this.setState({
+          showReceiveModal: true,
+          transactionData: item,
+          publicKeyModal: publicKey
+        });
+      }
+    }
+  };
   render() {
     const {
       isListView,
@@ -115,7 +139,10 @@ class Wallet extends Component {
       headerHeight,
       isScaleView,
       isHiddenText,
-      refreshLoader
+      refreshLoader,
+      showReceiveModal,
+      showSendModal,
+      transactionData
     } = this.state;
 
     const {
@@ -205,28 +232,28 @@ class Wallet extends Component {
                 isForegroundTouchable={true}
                 backgroundColor={Colors.white}
                 showsVerticalScrollIndicator={false}
-                stickyHeaderHeight={getHeight(headerHeight)}
+                // stickyHeaderHeight={getHeight(headerHeight)}
                 parallaxHeaderHeight={getHeight(440)}
-                renderStickyHeader={() => (
-                  <View
-                    style={[
-                      styles.stickyHeaderContainer,
-                      styles.marginHorizontal
-                    ]}
-                  >
-                    <WalletMenu
-                      isListView={isListView}
-                      changeView={this.changeView}
-                      customStyle={{
-                        marginVertical: getHeight(40)
-                      }}
-                    />
-                    <StickyHeader
-                      setCurrentWallet={setCurrentWallet}
-                      data={walletsData[activeSlide] || []}
-                    />
-                  </View>
-                )}
+                // renderStickyHeader={() => (
+                //   <View
+                //     style={[
+                //       styles.stickyHeaderContainer,
+                //       styles.marginHorizontal
+                //     ]}
+                //   >
+                //     <WalletMenu
+                //       isListView={isListView}
+                //       changeView={this.changeView}
+                //       customStyle={{
+                //         marginVertical: getHeight(40)
+                //       }}
+                //     />
+                //     <StickyHeader
+                //       setCurrentWallet={setCurrentWallet}
+                //       data={walletsData[activeSlide] || []}
+                //     />
+                //   </View>
+                // )}
                 renderForeground={() => (
                   <View>
                     <View style={styles.marginHorizontal}>
@@ -273,6 +300,7 @@ class Wallet extends Component {
                             data={item}
                             showCard={true}
                             showList={false}
+                            handleTransactionClick={this.handleTransactionClick}
                           />
                         );
                       }}
@@ -289,12 +317,38 @@ class Wallet extends Component {
                     data={walletsData[activeSlide] || []}
                     showCard={false}
                     showList={true}
+                    handleTransactionClick={this.handleTransactionClick}
                   />
                 </View>
               </ParallaxScrollView>
             </SafeAreaView>
           )}
         </SafeAreaView>
+
+        <Modal
+          transparent
+          visible={showReceiveModal}
+          style={styles.modalStyle}
+          onRequestClose={() => this.setState({ showReceiveModal: false })}
+        >
+          <ReceiveModal
+            transactionData={transactionData}
+            showReceiveModal={showReceiveModal}
+            closeReceiveModal={() => this.setState({ showReceiveModal: false })}
+          />
+        </Modal>
+        <Modal
+          transparent
+          visible={showSendModal}
+          style={styles.modalStyle}
+          onRequestClose={() => this.setState({ showSendModal: false })}
+        >
+          <SendModal
+            transactionData={transactionData}
+            showSendModal={showSendModal}
+            closeSendModal={() => this.setState({ showSendModal: false })}
+          />
+        </Modal>
       </View>
     );
   }
