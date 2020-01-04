@@ -23,6 +23,7 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
   switch (action.type) {
     case `${types.DELEGATE_BY_ADDRESSES}_SUCCESS`: {
       let oldStakes = [...state.data];
+
       const { publicKey, response } = action.payload;
       const {
         amount,

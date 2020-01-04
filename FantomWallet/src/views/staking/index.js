@@ -37,6 +37,7 @@ const Staking = (props: Props) => {
   const [unstakeKey, setUnstakeKey] = useState("");
   const [stakeAmountModal, setStakeAmountModal] = useState(false);
   const { delegateByAddresses, stakes, wallets, navigation } = props;
+  console.log("st", stakes);
 
   const [values, setValues] = useState(wallets);
   const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
