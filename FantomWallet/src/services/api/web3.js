@@ -187,7 +187,7 @@ class Web3Agent {
     return res;
   }
 
-  async delegateUnstake(delegatorAddress: string) {
+  async delegateUnstake({ delegatorAddress, privateKey }) {
     const web3 = new Web3(
       new Web3.providers.HttpProvider(REACT_APP_API_URL_WEB3)
     );
@@ -199,8 +199,7 @@ class Web3Agent {
     const gasLimit = 200000;
     const gasPrice = await this.web3.eth.getGasPrice();
     const nonce = await this.web3.eth.getTransactionCount(delegatorAddress);
-    const privateKey =
-      "0x41922e4d5ca04608a0837f2d245844662c03e8b82003d9be6b9fc37ece5f611d";
+
     const rawTx = {
       from: delegatorAddress,
       to: "0xfc00face00000000000000000000000000000000",
@@ -242,23 +241,62 @@ class Web3Agent {
     // });
   }
 
-  withdrawDelegateAmount(delegatorAddress: string) {
-    const sfc = new this.web3.eth.Contract(
+  async withdrawDelegateAmount({ delegatorAddress, privateKey }) {
+    // const sfc = new this.web3.eth.Contract(
+    //   contractFunctions,
+    //   "0xfc00face00000000000000000000000000000000"
+    // );
+
+    // return new Promise(resolve => {
+    //   sfc.methods
+    //     .withdrawDelegation()
+    //     .call({ from: delegatorAddress }, function(error, result) {
+    //       console.log("withdrawDelegation", result);
+    //       // sfc.methods.delegations(‘0x00f4cc6fc5e636ba1e1732bdef7af75df7b339b8’).call({from: delegatorAddress}, function(error, result){
+    //       //   if (!error)
+    //       //     console.log(result);
+    //       // });
+    //       resolve(result);
+    //     });
+    // });
+
+    const web3 = new Web3(
+      new Web3.providers.HttpProvider(REACT_APP_API_URL_WEB3)
+    );
+    const web3Sfc = new web3.eth.Contract(
       contractFunctions,
       "0xfc00face00000000000000000000000000000000"
     );
+    debugger;
+    const gasLimit = 200000;
+    const gasPrice = await this.web3.eth.getGasPrice();
+    const nonce = await this.web3.eth.getTransactionCount(delegatorAddress);
 
-    return new Promise(resolve => {
-      sfc.methods
-        .withdrawDelegation()
-        .call({ from: delegatorAddress }, function(error, result) {
-          console.log("withdrawDelegation", result);
-          // sfc.methods.delegations(‘0x00f4cc6fc5e636ba1e1732bdef7af75df7b339b8’).call({from: delegatorAddress}, function(error, result){
-          //   if (!error)
-          //     console.log(result);
-          // });
-          resolve(result);
-        });
+    const rawTx = {
+      from: delegatorAddress,
+      to: "0xfc00face00000000000000000000000000000000",
+      value: 0,
+      gasLimit: Web3.utils.toHex(gasLimit),
+      gasPrice: Web3.utils.toHex(gasPrice),
+      nonce: Web3.utils.toHex(nonce),
+      data: ""
+    };
+
+    const privateKeyBuffer = EthUtil.toBuffer(privateKey);
+
+    const tx = new Tx(rawTx);
+    tx.sign(privateKeyBuffer);
+    const serializedTx = tx.serialize();
+    console.log("serializedTx.toString", serializedTx.toString("hex"));
+
+    return this.transfer({
+      from: delegatorAddress,
+      to: "0xfc00face00000000000000000000000000000000",
+      value: "0",
+      memo: web3Sfc.methods.withdrawDelegation().encodeABI(),
+      privateKey,
+      gasLimit: 200000,
+      web3Delegate: web3
     });
   }
 

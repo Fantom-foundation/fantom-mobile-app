@@ -30,7 +30,8 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
         claimedRewards,
         deactivatedTime,
         pendingRewards,
-        createdTime
+        createdTime,
+        deactivatedEpoch
       } = response;
       const index = oldStakes.findIndex(item => item.publicKey === publicKey);
       const data = {
@@ -39,6 +40,7 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
         pendingRewards: pendingRewards || 0,
         isDeligate: true,
         deactivatedTime,
+        deactivatedEpoch,
         createdTime: Number(createdTime)
       };
       if (index > -1) {
@@ -68,6 +70,7 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
         isDeligate: false,
         amount: 0,
         claimedRewards: 0,
+        deactivatedEpoch: 0,
         pendingRewards: 0,
         createdTime: new Date().getTime()
       };

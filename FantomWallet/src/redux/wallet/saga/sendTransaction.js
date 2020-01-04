@@ -18,7 +18,7 @@ type Action = {
     to: string,
     value: string,
     memo: string,
-    cbSuccess: () => void
+    cbSuccess: (isSuccess: boolean) => void
   }
 };
 
@@ -77,13 +77,14 @@ export function* sendTransaction({
       [
         {
           text: "Ok",
-          onPress: cbSuccess,
+          onPress: () => cbSuccess(true),
           style: "cancel"
         }
       ]
     );
   } catch (e) {
     yield put(setLoadingSendTransaction(false));
+    cbSuccess(false);
     Alert.alert("Error", e.message || otherErrorMessage);
     transactionStatus = FAILED;
   }

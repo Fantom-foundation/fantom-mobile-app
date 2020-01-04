@@ -50,7 +50,7 @@ export const SendMoneyContainer = ({
   } = navigation.state.params;
 
   const onLeftIconPress = () => NavigationService.pop();
-  const alertSuccessfulButtonPressed = () => {
+  const alertSuccessfulButtonPressed = isSuccess => {
     addUpdateAddress(address, "", new Date().getTime());
     if (reload) reload();
     NavigationService.navigate(routes.HomeScreen.Wallet);

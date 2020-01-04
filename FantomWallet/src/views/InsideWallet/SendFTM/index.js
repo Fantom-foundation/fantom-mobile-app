@@ -83,12 +83,12 @@ const SendFTM = (props: Props) => {
       } else setAmountText(prev => prev.concat(item));
     }
   };
-  const alertSuccessfulButtonPressed = () => {
+  const alertSuccessfulButtonPressed = isSuccess => {
     const { sendFtm } = props;
     addUpdateAddress(toId, "", new Date().getTime());
     sendFtm();
     clearState();
-    NavigationService.navigate(routes.HomeScreen.Wallet);
+    if (isSuccess) NavigationService.navigate(routes.HomeScreen.Wallet);
   };
 
   const clearState = () => {
@@ -158,11 +158,11 @@ const SendFTM = (props: Props) => {
         to: toId,
         value: amountText,
         memo: "",
-        cbSuccess: () => {
+        cbSuccess: isSuccess => {
           setLoader(false);
           setSendingModal(false);
           setButtonModalText("Send");
-          alertSuccessfulButtonPressed();
+          alertSuccessfulButtonPressed(isSuccess);
         }
       });
       // NavigationService.navigate(routes.root.SendMoney, {

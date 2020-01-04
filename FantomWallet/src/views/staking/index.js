@@ -78,13 +78,17 @@ const Staking = (props: Props) => {
     const currentDate = new Date();
     const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
     const delegateDate = new Date();
-    const deactivatedDate = delegateDate.setDate(
-      delegateDate.getDate() + Number(stakeData.deactivatedTime || 0)
-    );
-    const date1 = new Date(deactivatedDate);
-    const date2 = new Date(nextSevenDays);
-    const diffTime = Math.abs(date2 - date1);
-    const timeLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    // const deactivatedDate = delegateDate.setDate(
+    //   delegateDate.getDate() + Number(stakeData.deactivatedTime || 0)
+    // );
+    const deactivatedEpoch = Number(stakeData.deactivatedEpoch || 0);
+    const deactivatedTime = Number(stakeData.deactivatedTime || 0);
+    const timeLeft =
+      delegateDate.getTime() - (deactivatedTime + currentDate.getTime());
+    // const date1 = new Date(deactivatedDate);
+    // const date2 = new Date(nextSevenDays);
+    // const diffTime = Math.abs(date2 - date1);
+    // const timeLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     const currentlyStaking = formatValues(Number(stakeData.amount || 0));
 
@@ -110,15 +114,19 @@ const Staking = (props: Props) => {
 
           <Text style={{ ...styles.amountStyle }}>{currentlyStaking}</Text>
           <Text style={{ ...styles.walletTextStyle }}>Currently staking</Text>
-          <Text style={{ ...styles.amountStyle }}>
-            {formatValues(stakeData.claimedRewards)}
-          </Text>
-          <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
-          {timeLeft > 0 && isDeligate ? (
-            <Text style={{ ...styles.bottomTextStyle }}>
+          {deactivatedEpoch <= 0 && (
+            <View>
+              <Text style={{ ...styles.amountStyle }}>
+                {formatValues(stakeData.claimedRewards)}
+              </Text>
+              <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
+            </View>
+          )}
+          {timeLeft > 0 && deactivatedEpoch > 0 ? (
+            <Text style={{ ...styles.bottomTextStyle, marginTop: 15 }}>
               {`Your ${currentlyStaking} FTM will be available in ${timeLeft} days`}
             </Text>
-          ) : isDeligate && currentlyStaking > 0 ? (
+          ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
             <TouchableOpacity
               onPress={() => {
                 if (stakeData) setUnstakeKey(stakeData.publicKey);
@@ -126,7 +134,7 @@ const Staking = (props: Props) => {
                 setDelegateAmount(currentlyStaking);
               }}
             >
-              <Text style={{ ...styles.bottomTextStyle }}>
+              <Text style={{ ...styles.bottomTextStyle, marginTop: 15 }}>
                 Withdraw {currentlyStaking} FTM now
               </Text>
             </TouchableOpacity>
@@ -134,14 +142,18 @@ const Staking = (props: Props) => {
             <View />
           )}
 
-          <Text style={{ ...styles.amountStyle }}>
-            {formatValues(stakeData.pendingRewards, false)}
-          </Text>
-          <Text style={{ ...styles.walletTextStyle }}>Pending rewards</Text>
+          {deactivatedEpoch <= 0 && (
+            <View>
+              <Text style={{ ...styles.amountStyle }}>
+                {formatValues(stakeData.pendingRewards, false)}
+              </Text>
+              <Text style={{ ...styles.walletTextStyle }}>Pending rewards</Text>
+            </View>
+          )}
         </View>
         <View style={styles.buttonView}>
           {/* {availableToStake.isDeligate ? ( */}
-          {isDeligate ? (
+          {isDeligate && deactivatedEpoch <= 0 ? (
             <TouchableOpacity
               style={styles.buttonUnstakeView}
               onPress={() => {
@@ -191,11 +203,12 @@ const Staking = (props: Props) => {
 
     delegateUnstake({
       publicKey: unstakeKey,
-      cbSuccess: () => {
-        navigation.navigate("WalletImported", {
-          text: "Requested to unstake successfully",
-          navigationRoute: "Back"
-        });
+      cbSuccess: isSuccess => {
+        if (isSuccess)
+          navigation.navigate("WalletImported", {
+            text: "Requested to unstake successfully",
+            navigationRoute: "Back"
+          });
         setIfUnstaking(false);
       }
     });
@@ -207,11 +220,12 @@ const Staking = (props: Props) => {
     setifWithdrawing(true);
     delegateWithdraw({
       publicKey: unstakeKey,
-      cbSuccess: () => {
-        navigation.navigate("WalletImported", {
-          text: "Tokens successfully withdrawn!",
-          navigationRoute: "Staking"
-        });
+      cbSuccess: isSuccess => {
+        if (isSuccess)
+          navigation.navigate("WalletImported", {
+            text: "Tokens successfully withdrawn!",
+            navigationRoute: "Staking"
+          });
         setifWithdrawing(false);
       }
     });

@@ -57,7 +57,6 @@ export function* delegateByAddressesSaga(): any {
             publicKey,
             publicKey
           );
-
           const response = yield call(delegatorByAddressApi, publicKey);
           console.log(
             "delegateByAddressesSagadelegateByAddressesSaga",
@@ -65,11 +64,29 @@ export function* delegateByAddressesSaga(): any {
           );
 
           if (response) {
+            const {
+              address,
+              amount,
+              claimedRewards,
+              createdEpoch,
+              createdTime,
+              toStakerID
+            } = response.data.data;
+
+            const { deactivatedEpoch, deactivatedTime, paidUntilEpoch } = data;
             yield put(
               delegateByAddressesSuccess({
                 publicKey,
                 response: {
-                  ...response.data.data,
+                  address,
+                  amount,
+                  claimedRewards,
+                  createdEpoch,
+                  createdTime,
+                  toStakerID,
+                  deactivatedEpoch,
+                  deactivatedTime,
+                  paidUntilEpoch,
                   pendingRewards: pendingRewards || 0
                 }
               })
@@ -114,11 +131,11 @@ export function* delegateAmountSaga({
     });
 
     yield put(delegateByAddress({ publicKey }));
-    cbSuccess();
+    cbSuccess(true);
     // Assign contract functions to sfc variable
   } catch (e) {
     console.log(e, "eeeeeeeeeeee");
-
+    cbSuccess(false);
     yield put(setDopdownAlert("error", e.message));
   }
 }
@@ -127,13 +144,20 @@ export function* delegateUnstakeSaga({
   payload: { publicKey, cbSuccess }
 }: Action): any {
   try {
-    const response = yield Web3Agent.Fantom.delegateUnstake(publicKey);
+    const { keys } = yield select(({ keys }) => ({
+      keys
+    }));
+    const key = keys.wallets.find(k => k.publicKey === publicKey);
+    const response = yield Web3Agent.Fantom.delegateUnstake({
+      delegatorAddress: publicKey,
+      privateKey: key.privateKey
+    });
 
-    cbSuccess();
+    cbSuccess(true);
     // Assign contract functions to sfc variable
   } catch (e) {
     console.log(e, "eeeeeeeeeeee");
-
+    cbSuccess(false);
     yield put(setDopdownAlert("error", e.message));
   }
 }
@@ -142,13 +166,20 @@ export function* delegateWithdrawSaga({
   payload: { publicKey, cbSuccess }
 }: Action): any {
   try {
-    const response = yield Web3Agent.Fantom.withdrawDelegateAmount(publicKey);
+    const { keys } = yield select(({ keys }) => ({
+      keys
+    }));
+    const key = keys.wallets.find(k => k.publicKey === publicKey);
+    const response = yield Web3Agent.Fantom.withdrawDelegateAmount({
+      delegatorAddress: publicKey,
+      privateKey: key.privateKey
+    });
 
-    cbSuccess();
+    cbSuccess(true);
     // Assign contract functions to sfc variable
   } catch (e) {
     console.log(e, "eeeeeeeeeeee");
-
+    cbSuccess(false);
     yield put(setDopdownAlert("error", e.message));
   }
 }

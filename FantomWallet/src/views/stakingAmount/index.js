@@ -96,8 +96,8 @@ const StakingAmount = (props: Props) => {
         amount,
         publicKey: currentWallet.publicKey,
         validatorId: validator.id,
-        cbSuccess: () => {
-          NavigationService.navigate(routes.root.Success);
+        cbSuccess: isSuccess => {
+          if (isSuccess) NavigationService.navigate(routes.root.Success);
           setIfStaking(false);
         }
       });
