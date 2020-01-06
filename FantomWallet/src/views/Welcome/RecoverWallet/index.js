@@ -43,17 +43,20 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   const [active, setActive] = useState(true);
   const [isImporting, setIsImporting] = useState(false);
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", onLeftIconPress);
-    return BackHandler.removeEventListener("hardwareBackPress");
-  });
-
   const onLeftIconPress = () => {
     const backToHome = navigation.getParam("backToHome", false);
     if (backToHome) {
       NavigationService.navigate(routes.HomeScreen.Settings);
     } else NavigationService.pop();
+    return true;
   };
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onLeftIconPress
+    );
+    return () => handler.remove();
+  }, []);
 
   const onChangeView = value => {
     setActive(value);

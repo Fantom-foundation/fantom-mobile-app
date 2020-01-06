@@ -8,9 +8,12 @@ const WalletImported = (props: TSettingsScreenTypes) => {
   const text = navigation.getParam("text");
   const navigationRoute = navigation.getParam("navigationRoute");
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handlePress);
-    return BackHandler.removeEventListener("hardwareBackPress");
-  });
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      handlePress
+    );
+    return () => handler.remove();
+  }, []);
   const handlePress = () => {
     if (navigationRoute && navigationRoute === "Back") {
       NavigationService.navigate(routes.HomeScreen["Staking"], {
@@ -23,6 +26,7 @@ const WalletImported = (props: TSettingsScreenTypes) => {
       return;
     }
     NavigationService.navigate(routes.root.WalletInfo, { publicKey });
+    return true;
   };
 
   return (

@@ -9,19 +9,25 @@ import { NavigationService, routes } from "~/navigation/helpers";
 import Header from "~/components/Header";
 const BackupWallet = (props: TBackupWalletTypes) => {
   const [isEnable, setIsEnable] = useState(false);
-
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", onLeftIconPress);
-    return BackHandler.removeEventListener("hardwareBackPress");
-  });
+  const { navigation } = props;
+  const backToHome = navigation.getParam("backToHome", false);
 
   const onLeftIconPress = () => {
-    const { navigation } = props;
-    const backToHome = navigation.getParam("backToHome", false);
     if (backToHome) {
       NavigationService.navigate(routes.HomeScreen.Settings);
     } else NavigationService.pop();
+    return true;
   };
+
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onLeftIconPress
+    );
+
+    return () => handler.remove();
+  }, []);
+
   return (
     <View style={styles.mainContainerStyle}>
       <SafeAreaView style={{ flex: 1 }}>

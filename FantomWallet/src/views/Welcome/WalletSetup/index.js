@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Text,
   View,
   TouchableOpacity,
   Image,
   ImageBackground,
-  StatusBar
+  StatusBar,
+  BackHandler
 } from "react-native";
+
 import styles from "./styles";
 import { FantomLogo } from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
@@ -17,6 +19,16 @@ const WalletSetup = () => {
   const onRestoreWallet = () => {
     NavigationService.navigate(routes.root.RecoverWallet);
   };
+  const backAndroidPress = () => {
+    BackHandler.exitApp();
+  };
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAndroidPress
+    );
+    return () => handler.remove();
+  });
   return (
     <ImageBackground
       style={styles.imageBackground}

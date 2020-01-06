@@ -10,7 +10,8 @@ import {
   ActivityIndicator,
   ScrollView,
   Image,
-  SafeAreaView
+  SafeAreaView,
+  BackHandler
 } from "react-native";
 import { connect } from "react-redux";
 import Bip39 from "react-native-bip39";
@@ -39,6 +40,18 @@ export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
     const _menmonic = await Bip39.generateMnemonic();
     setMnemonic(_menmonic);
   };
+
+  const androidBackPress = () => {
+    BackHandler.exitApp();
+    return true;
+  };
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      androidBackPress
+    );
+    return () => handler.remove();
+  }, []);
 
   useEffect(() => {
     generateMnemonic();
