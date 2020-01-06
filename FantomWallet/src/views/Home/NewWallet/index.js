@@ -66,12 +66,19 @@ class Wallet extends Component {
       setCurrentWallet
     } = this.props;
     if (walletsData && walletsData.length > 0 && !isLoading) {
+      getBalance({ loading: isLoading });
+      sendFtm();
+      getHistory();
       this._interval = setInterval(() => {
         getBalance({ loading: isLoading });
         sendFtm();
         getHistory();
-      }, 2000);
+      }, 5000);
     }
+  }
+  componentWillUnmount() {
+    console.log("COMPONENTWILLUNMOUNT");
+    clearInterval(this._interval);
   }
 
   changeView = isListView => {
@@ -200,6 +207,7 @@ class Wallet extends Component {
                       <ListView
                         setCurrentWallet={setCurrentWallet}
                         data={item}
+                        handleTransactionClick={this.handleTransactionClick}
                         isHiddenText={isHiddenText}
                       />
                     );
@@ -358,11 +366,6 @@ class Wallet extends Component {
         </Modal>
       </View>
     );
-  }
-
-  componentWillUnmount() {
-    console.log("COMPONENTWILLUNMOUNT");
-    clearInterval(this._interval);
   }
 }
 

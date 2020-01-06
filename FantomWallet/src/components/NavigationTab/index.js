@@ -12,6 +12,8 @@ import {
   MoneyBagIcon,
   Avatar
 } from "~/images";
+import { delegateByAddresses } from "~/redux/staking/actions";
+import { store } from "~/redux/store";
 
 import styles from "./styles";
 import Tab from "./tab";
@@ -65,6 +67,9 @@ const HomeNavigationBar = ({ navigation }: Props) => {
   }, []);
 
   const handleSelectedTab = route => {
+    if (route === routes.HomeScreen.Staking) {
+      store.dispatch(delegateByAddresses());
+    }
     NavigationService.navigate(route);
   };
 

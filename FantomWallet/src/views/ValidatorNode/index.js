@@ -147,6 +147,9 @@ const ValidatorNode = props => {
                                   routes.root.StakingAmount,
                                   {
                                     validatorId: item.id,
+                                    publicKey: props.navigation.getParam(
+                                      "publicKey"
+                                    ),
                                     availableToStake: props.navigation.getParam(
                                       "availableToStake"
                                     )

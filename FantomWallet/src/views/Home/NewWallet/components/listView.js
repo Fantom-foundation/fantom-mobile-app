@@ -3,7 +3,7 @@ import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import CardListItem from "./cardListItem";
 
-const ListView = ({ data, isHiddenText }) => {
+const ListView = ({ data, isHiddenText, handleTransactionClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { name, history, balance, publicKey } = data;
@@ -19,7 +19,11 @@ const ListView = ({ data, isHiddenText }) => {
         </Text>
       </TouchableOpacity>
       {isOpen && history && history.length > 0 && (
-        <CardListItem data={history} publicKey={publicKey} />
+        <CardListItem
+          handleTransactionClick={handleTransactionClick}
+          data={history}
+          publicKey={publicKey}
+        />
       )}
     </View>
   );

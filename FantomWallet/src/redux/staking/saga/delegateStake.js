@@ -123,13 +123,22 @@ export function* delegateAmountSaga({
       keys
     }));
     const key = keys.wallets.find(k => k.publicKey === publicKey);
+
+    // const fee = yield Web3Agent.Fantom.estimateFee({
+    //   from: publicKey,
+    //   to: "0xfc00face00000000000000000000000000000000",
+    //   value: amount.toString(),
+    //   memo: ""
+    // });
+
+    // console.log(fee, "*******0xfc00face00000000000000000000000000000000***");
+
     const response = yield Web3Agent.Fantom.delegateStake({
       amount,
       publicKey,
       privateKey: key.privateKey,
       validatorId
     });
-
     yield put(delegateByAddress({ publicKey }));
     cbSuccess(true);
     // Assign contract functions to sfc variable

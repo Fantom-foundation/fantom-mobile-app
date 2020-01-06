@@ -39,9 +39,25 @@ const Staking = (props: Props) => {
   const [stakeAmountModal, setStakeAmountModal] = useState(false);
   const { delegateByAddresses, stakes, wallets, navigation } = props;
   console.log("st", stakes);
-
+  const [flag, setFlag] = useState(0);
   const [values, setValues] = useState(wallets);
   const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setValues(wallets);
+      delegateByAddresses();
+    }, 5000);
+    const timer = setInterval(() => {
+      setFlag(prev => prev + 1);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(timer);
+    };
+  }, [flag]);
+
   useEffect(() => {
     setValues(wallets);
     delegateByAddresses();
@@ -49,15 +65,6 @@ const Staking = (props: Props) => {
       setCarouselWidth(getWidth(280));
     }, 500);
   }, [wallets.length]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setValues(wallets);
-      delegateByAddresses();
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     if (values && values.length > 1) {
@@ -143,7 +150,7 @@ const Staking = (props: Props) => {
             <Text style={{ ...styles.amountStyle, textAlign: "center" }}>
               {`Your ${currentlyStaking} FTM will be available in ${
                 timeLeft / 24 > 0 ? Math.floor(timeLeft / 24) + " days and" : ""
-              }  ${Math.ceil(timeLeft % 24)} hours`}
+              }  ${Math.floor(timeLeft % 24)} hours`}
             </Text>
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
             <TouchableOpacity
@@ -199,7 +206,9 @@ const Staking = (props: Props) => {
           {currentlyStaking <= 0 && (
             <TouchableOpacity
               style={styles.buttonStakeView}
-              onPress={() => handleStakeButton(availableToStake)}
+              onPress={() =>
+                handleStakeButton(availableToStake, item.publicKey)
+              }
             >
               <Text
                 style={{
@@ -250,12 +259,13 @@ const Staking = (props: Props) => {
     });
   };
 
-  const handleStakeButton = item => {
-    if (item >= 1) {
+  const handleStakeButton = (amount, publicKey) => {
+    if (amount >= 1) {
       NavigationService.navigate(routes.root.ValidatorNode, {
-        availableToStake: item
+        availableToStake: amount,
+        publicKey
       });
-    } else if (item < 1) {
+    } else if (amount < 1) {
       setStakeAmountModal(true);
     }
   };

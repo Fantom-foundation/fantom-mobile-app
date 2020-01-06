@@ -44,9 +44,19 @@ const StakingAmount = (props: Props) => {
   //  function for entered amount from KeyPad
   const handleInputNumber = item => {
     getPrivateKey();
-    if (item === "<") {
-      let num = amount.slice(0, -1);
+
+    if (item === "0" && amount === "") return;
+    else if (item === "." && amount.includes(".")) return;
+    else if (item === "." && amount === "") {
+      let num = amount.concat("0.");
       setAmount(num);
+    } else if (item === "<") {
+      if (amount === "0.") {
+        setAmount("");
+      } else {
+        let num = amount.slice(0, -1);
+        setAmount(num);
+      }
     } else {
       const updatedAmount = amount.concat(item);
       setAmount(updatedAmount);
@@ -88,13 +98,14 @@ const StakingAmount = (props: Props) => {
     return null;
   };
   const handleStakingAmount = () => {
+    const publicKey = props.navigation.getParam("publicKey");
     if (Number(amount) > Number(stakingSpace)) {
       setStakingModal(true);
     } else if (amount !== "") {
       setIfStaking(true);
       delegateAmount({
         amount,
-        publicKey: currentWallet.publicKey,
+        publicKey: publicKey,
         validatorId: validator.id,
         cbSuccess: isSuccess => {
           if (isSuccess) NavigationService.navigate(routes.root.Success);

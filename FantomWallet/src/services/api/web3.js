@@ -9,7 +9,7 @@ import {
   REACT_APP_API_URL_WEB3,
   REACT_APP_API_URL_FANTOM
 } from "react-native-dotenv";
-
+import BigInt from "big-integer";
 import contractFunctions from "./contractFunctions";
 const Web3 = require("web3");
 
@@ -207,6 +207,23 @@ class Web3Agent {
       gasLimit: 200000,
       web3Delegate: web3
     });
+  }
+
+  async estimateFee({ from, to, value, memo }) {
+    const gasPrice = await this.web3.eth.getGasPrice();
+    // const gasLimit = await this.web3.eth.estimateGas({
+    //   from,
+    //   to,
+    //   value: Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
+    //   data: Web3.utils.asciiToHex(memo)
+    // });
+    const gasLimit = 200000;
+    const fee = Web3.utils.fromWei(
+      BigInt(gasPrice.toString())
+        .multiply(BigInt(gasLimit.toString()))
+        .toString()
+    );
+    return fee;
   }
 
   async withdrawDelegateAmount({ delegatorAddress, privateKey }) {
