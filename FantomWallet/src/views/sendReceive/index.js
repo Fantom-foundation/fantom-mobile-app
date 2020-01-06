@@ -90,6 +90,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     const setPublicKey = props.navigation.getParam("publicKey");
     if (setPublicKey) {
       setSendTo(setPublicKey);
+      setOpenModal(true);
     }
   }, [navigation.state.params]);
 
