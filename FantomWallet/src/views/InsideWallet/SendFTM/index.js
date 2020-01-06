@@ -48,6 +48,7 @@ const SendFTM = (props: Props) => {
     const setPublicKey = props.navigation.getParam("publicKey");
     if (setPublicKey) {
       setToId(setPublicKey);
+      isSendingModal(true);
     }
   }, [navigation.state.params]);
 
@@ -260,7 +261,7 @@ const SendFTM = (props: Props) => {
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
             amountText
-          )}\n FTM to ${toId}?"`}
+          )}\n FTM to ${toId}?`}
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
             buttonModalText === "Sending...."

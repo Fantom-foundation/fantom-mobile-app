@@ -305,7 +305,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
             amount
-          )}\n FTM to ${address}?"`}
+          )}\n FTM to ${address}?`}
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
             buttonModalText === "Sending...."
