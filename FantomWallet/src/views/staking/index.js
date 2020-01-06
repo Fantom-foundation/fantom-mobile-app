@@ -27,7 +27,7 @@ import moment from "moment";
 const modalText = "You need at least 1 FTM to \n stake.";
 
 const unstakeText =
-  "Are you sure you want to  request to withdraw \n your tokens from staking??\n\nThe tokens will be available\n after 7 days in your wallet.";
+  "Are you sure you want to  request to withdraw \n your tokens from staking?\n\nThe tokens will be available\n after 7 days in your wallet.";
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);

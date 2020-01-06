@@ -172,8 +172,8 @@ const stakingModal = {
   unstakeView: {
     marginTop: getHeight(80),
     flexDirection: "row",
-
-    paddingHorizontal: getWidth(12)
+    paddingHorizontal: getWidth(10),
+    justifyContent: "space-between"
   },
   unstakeOuterView: {
     borderWidth: 2,
