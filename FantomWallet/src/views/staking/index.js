@@ -51,6 +51,15 @@ const Staking = (props: Props) => {
   }, [wallets.length]);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setValues(wallets);
+      delegateByAddresses();
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     if (values && values.length > 1) {
       if (!!carousRef) carousRef.triggerRenderingHack();
       setTimeout(() => {
@@ -111,7 +120,7 @@ const Staking = (props: Props) => {
           ...styles.walletView
         }}
       >
-        <View style={{ paddingHorizontal: 22 }}>
+        <View style={styles.stakingCard}>
           <Text numberOfLines={1} style={{ ...styles.titleView }}>
             {item.name}
           </Text>
@@ -131,7 +140,7 @@ const Staking = (props: Props) => {
             </View>
           )}
           {timeLeft > 0 && deactivatedEpoch > 0 ? (
-            <Text style={{ ...styles.bottomTextStyle, marginTop: 15 }}>
+            <Text style={{ ...styles.amountStyle, textAlign: "center" }}>
               {`Your ${currentlyStaking} FTM will be available in ${
                 timeLeft / 24 > 0 ? Math.floor(timeLeft / 24) + " days and" : ""
               }  ${Math.ceil(timeLeft % 24)} hours`}
@@ -144,7 +153,7 @@ const Staking = (props: Props) => {
                 setDelegateAmount(currentlyStaking);
               }}
             >
-              <Text style={{ ...styles.bottomTextStyle, marginTop: 15 }}>
+              <Text style={{ ...styles.amountStyle }}>
                 Withdraw {currentlyStaking} FTM now
               </Text>
             </TouchableOpacity>

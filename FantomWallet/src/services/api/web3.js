@@ -120,6 +120,7 @@ class Web3Agent {
     const web3 = new Web3(
       new Web3.providers.HttpProvider(REACT_APP_API_URL_WEB3)
     );
+
     const web3Sfc = new web3.eth.Contract(
       contractFunctions,
       "0xfc00face00000000000000000000000000000000"
@@ -173,6 +174,7 @@ class Web3Agent {
       nonce: Web3.utils.toHex(nonce),
       data: memo
     };
+    console.log(rawTx, "&********** rawtx******");
 
     const privateKeyBuffer = EthUtil.toBuffer(privateKey);
 
@@ -196,27 +198,6 @@ class Web3Agent {
       "0xfc00face00000000000000000000000000000000"
     );
 
-    const gasLimit = 200000;
-    const gasPrice = await this.web3.eth.getGasPrice();
-    const nonce = await this.web3.eth.getTransactionCount(delegatorAddress);
-
-    const rawTx = {
-      from: delegatorAddress,
-      to: "0xfc00face00000000000000000000000000000000",
-      value: 0,
-      gasLimit: Web3.utils.toHex(gasLimit),
-      gasPrice: Web3.utils.toHex(gasPrice),
-      nonce: Web3.utils.toHex(nonce),
-      data: ""
-    };
-
-    const privateKeyBuffer = EthUtil.toBuffer(privateKey);
-
-    const tx = new Tx(rawTx);
-    tx.sign(privateKeyBuffer);
-    const serializedTx = tx.serialize();
-    console.log("serializedTx.toString", serializedTx.toString("hex"));
-
     return this.transfer({
       from: delegatorAddress,
       to: "0xfc00face00000000000000000000000000000000",
@@ -226,40 +207,9 @@ class Web3Agent {
       gasLimit: 200000,
       web3Delegate: web3
     });
-
-    // return new Promise(resolve => {
-    //   sfc.methods
-    //     .prepareToWithdrawDelegation()
-    //     .call(`0x${serializedTx.toString("hex")}`, function(error, result) {
-    //       console.log(
-    //         "delegateUnstakedelegateUnstakedelegateUnstake",
-    //         result,
-    //         error
-    //       );
-    //       resolve(result);
-    //     });
-    // });
   }
 
   async withdrawDelegateAmount({ delegatorAddress, privateKey }) {
-    // const sfc = new this.web3.eth.Contract(
-    //   contractFunctions,
-    //   "0xfc00face00000000000000000000000000000000"
-    // );
-
-    // return new Promise(resolve => {
-    //   sfc.methods
-    //     .withdrawDelegation()
-    //     .call({ from: delegatorAddress }, function(error, result) {
-    //       console.log("withdrawDelegation", result);
-    //       // sfc.methods.delegations(‘0x00f4cc6fc5e636ba1e1732bdef7af75df7b339b8’).call({from: delegatorAddress}, function(error, result){
-    //       //   if (!error)
-    //       //     console.log(result);
-    //       // });
-    //       resolve(result);
-    //     });
-    // });
-
     const web3 = new Web3(
       new Web3.providers.HttpProvider(REACT_APP_API_URL_WEB3)
     );
@@ -267,28 +217,6 @@ class Web3Agent {
       contractFunctions,
       "0xfc00face00000000000000000000000000000000"
     );
-
-    const gasLimit = 200000;
-    const gasPrice = await this.web3.eth.getGasPrice();
-    const nonce = await this.web3.eth.getTransactionCount(delegatorAddress);
-
-    const rawTx = {
-      from: delegatorAddress,
-      to: "0xfc00face00000000000000000000000000000000",
-      value: 0,
-      gasLimit: Web3.utils.toHex(gasLimit),
-      gasPrice: Web3.utils.toHex(gasPrice),
-      nonce: Web3.utils.toHex(nonce),
-      data: ""
-    };
-
-    const privateKeyBuffer = EthUtil.toBuffer(privateKey);
-
-    const tx = new Tx(rawTx);
-    tx.sign(privateKeyBuffer);
-    const serializedTx = tx.serialize();
-    console.log("serializedTx.toString", serializedTx.toString("hex"));
-
     return this.transfer({
       from: delegatorAddress,
       to: "0xfc00face00000000000000000000000000000000",

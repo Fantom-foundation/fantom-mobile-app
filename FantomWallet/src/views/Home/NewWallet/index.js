@@ -66,9 +66,11 @@ class Wallet extends Component {
       setCurrentWallet
     } = this.props;
     if (walletsData && walletsData.length > 0 && !isLoading) {
-      getBalance({ loading: isLoading });
-      sendFtm();
-      getHistory();
+      this._interval = setInterval(() => {
+        getBalance({ loading: isLoading });
+        sendFtm();
+        getHistory();
+      }, 2000);
     }
   }
 
@@ -232,28 +234,33 @@ class Wallet extends Component {
                 isForegroundTouchable={true}
                 backgroundColor={Colors.white}
                 showsVerticalScrollIndicator={false}
-                // stickyHeaderHeight={getHeight(headerHeight)}
+                stickyHeaderHeight={
+                  walletsData[activeSlide] &&
+                  walletsData[activeSlide].history.length > 0
+                    ? 0
+                    : getHeight(headerHeight)
+                }
                 parallaxHeaderHeight={getHeight(440)}
-                // renderStickyHeader={() => (
-                //   <View
-                //     style={[
-                //       styles.stickyHeaderContainer,
-                //       styles.marginHorizontal
-                //     ]}
-                //   >
-                //     <WalletMenu
-                //       isListView={isListView}
-                //       changeView={this.changeView}
-                //       customStyle={{
-                //         marginVertical: getHeight(40)
-                //       }}
-                //     />
-                //     <StickyHeader
-                //       setCurrentWallet={setCurrentWallet}
-                //       data={walletsData[activeSlide] || []}
-                //     />
-                //   </View>
-                // )}
+                renderStickyHeader={() => (
+                  <View
+                    style={[
+                      styles.stickyHeaderContainer,
+                      styles.marginHorizontal
+                    ]}
+                  >
+                    <WalletMenu
+                      isListView={isListView}
+                      changeView={this.changeView}
+                      customStyle={{
+                        marginVertical: getHeight(40)
+                      }}
+                    />
+                    <StickyHeader
+                      setCurrentWallet={setCurrentWallet}
+                      data={walletsData[activeSlide] || []}
+                    />
+                  </View>
+                )}
                 renderForeground={() => (
                   <View>
                     <View style={styles.marginHorizontal}>
@@ -351,6 +358,11 @@ class Wallet extends Component {
         </Modal>
       </View>
     );
+  }
+
+  componentWillUnmount() {
+    console.log("COMPONENTWILLUNMOUNT");
+    clearInterval(this._interval);
   }
 }
 

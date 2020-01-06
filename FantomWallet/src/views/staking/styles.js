@@ -11,7 +11,16 @@ const crauselStyle = {
     paddingBottom: getHeight(51),
     borderRadius: getWidth(22),
     width: getWidth(260),
-    backgroundColor: Colors.royalBlue
+    height: getHeight(540),
+    backgroundColor: Colors.royalBlue,
+    shadowColor: Colors.black,
+    shadowOffset: {
+      height: 0,
+      width: 0
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   titleView: {
     fontSize: FontSize.base,
@@ -22,11 +31,15 @@ const crauselStyle = {
   amountStyle: {
     textAlign: "right",
     marginTop: getHeight(30),
-    width: getWidth(150),
+    width: getWidth(216),
+
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansBold,
     fontSize: FontSize.large + 1,
     color: Colors.white
+  },
+  stakingCard: {
+    paddingHorizontal: 22
   },
   walletTextStyle: {
     textAlign: "right",

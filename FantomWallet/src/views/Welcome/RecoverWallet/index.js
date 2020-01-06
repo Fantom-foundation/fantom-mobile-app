@@ -160,7 +160,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             </View>
 
             <Text style={styles.noteText}>
-              12 or 24 words separated by single spaces
+              12 words separated by single spaces
             </Text>
             <Button
               onPress={handleRecoverWallet}

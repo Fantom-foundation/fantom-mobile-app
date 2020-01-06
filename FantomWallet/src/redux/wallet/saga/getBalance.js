@@ -31,7 +31,7 @@ export function* getBalance(): any {
       }
     }
   } catch (e) {
-    yield put(setDopdownAlert("error", e.message));
+    //yield put(setDopdownAlert("error", e.message));
   }
 }
 
