@@ -260,7 +260,7 @@ const SendFTM = (props: Props) => {
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
             amountText
-          )}\n FTM to ${toId}?"`}
+          )}\n FTM to ${toId}?`}
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
             buttonModalText === "Sending...."
