@@ -101,6 +101,8 @@ const StakingAmount = (props: Props) => {
     const publicKey = props.navigation.getParam("publicKey");
     if (Number(amount) > Number(stakingSpace)) {
       setStakingModal(true);
+    } else if (Number(amount) < 1) {
+      Alert.alert("Error", "Minimum 1 FTM required to stake");
     } else if (amount !== "") {
       setIfStaking(true);
       delegateAmount({
