@@ -1,27 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SuccessScreen from "../../general/SuccessScreen";
 import { NavigationService, routes } from "~/navigation/helpers";
-
+import { BackHandler } from "react-native";
 const WalletImported = (props: TSettingsScreenTypes) => {
   const { navigation } = props;
   const publicKey = navigation.getParam("publicKey", "");
   const text = navigation.getParam("text");
   const navigationRoute = navigation.getParam("navigationRoute");
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", handlePress);
+    return BackHandler.removeEventListener("hardwareBackPress");
+  });
+  const handlePress = () => {
+    if (navigationRoute && navigationRoute === "Back") {
+      NavigationService.navigate(routes.HomeScreen["Staking"], {
+        isUnstaking: true
+      });
+      return;
+    }
+    if (navigationRoute) {
+      NavigationService.navigate(navigationRoute);
+      return;
+    }
+    NavigationService.navigate(routes.root.WalletInfo, { publicKey });
+  };
+
   return (
     <SuccessScreen
-      onPress={() => {
-        if (navigationRoute && navigationRoute === "Back") {
-          NavigationService.navigate(routes.HomeScreen["Staking"], {
-            isUnstaking: true
-          });
-          return;
-        }
-        if (navigationRoute) {
-          NavigationService.navigate(navigationRoute);
-          return;
-        }
-        NavigationService.navigate(routes.root.WalletInfo, { publicKey });
-      }}
+      onPress={handlePress}
       text={text || "Wallet imported!"}
     ></SuccessScreen>
   );
