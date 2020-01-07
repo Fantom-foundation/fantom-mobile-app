@@ -41,10 +41,11 @@ const Staking = (props: Props) => {
   const [estimatedfee, setEstimatedfee] = useState(0);
   const [stakeAmountModal, setStakeAmountModal] = useState(false);
   const { delegateByAddresses, stakes, wallets, navigation } = props;
-  console.log("st", stakes);
+
   const [flag, setFlag] = useState(0);
   const [values, setValues] = useState(wallets);
   const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
+  const [reRender, setRerender] = useState(0);
 
   useEffect(() => {
     const gasLimit = 150000;
@@ -52,6 +53,16 @@ const Staking = (props: Props) => {
       setEstimatedfee(value * 2);
     });
   });
+
+  useEffect(() => {
+    const renderTime = setInterval(() => {
+      setRerender(prev => prev + 1);
+    }, 2000);
+
+    return () => {
+      clearInterval(renderTime);
+    };
+  }, [reRender]);
 
   useEffect(() => {
     const interval = setInterval(() => {

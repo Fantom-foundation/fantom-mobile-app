@@ -1,5 +1,5 @@
 // @flow
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import { Alert } from "react-native";
 import moment from "moment";
 import Web3 from "web3";
@@ -91,5 +91,5 @@ export function* sendTransaction({
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.SEND_TRANSACTION, sendTransaction);
+  yield takeEvery(types.SEND_TRANSACTION, sendTransaction);
 }

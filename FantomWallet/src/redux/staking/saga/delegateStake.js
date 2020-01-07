@@ -189,10 +189,10 @@ export function* delegateWithdrawSaga({
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.DELEGATE_BY_ADDRESS, delegateByAddressSaga);
+  yield takeEvery(types.DELEGATE_BY_ADDRESS, delegateByAddressSaga);
   yield takeEvery(types.DELEGATE_BY_ADDRESSES, delegateByAddressesSaga);
-  yield takeLatest(types.DELEGATE_BY_STAKER_ID, delegateByStakerIdSaga);
-  yield takeLatest(types.DELEGATE_AMOUNT, delegateAmountSaga);
-  yield takeLatest(types.DELEGATE_UNSTAKE, delegateUnstakeSaga);
-  yield takeLatest(types.WITHDRAW_DELEGATE, delegateWithdrawSaga);
+  yield takeEvery(types.DELEGATE_BY_STAKER_ID, delegateByStakerIdSaga);
+  yield takeEvery(types.DELEGATE_AMOUNT, delegateAmountSaga);
+  yield takeEvery(types.DELEGATE_UNSTAKE, delegateUnstakeSaga);
+  yield takeEvery(types.WITHDRAW_DELEGATE, delegateWithdrawSaga);
 }
