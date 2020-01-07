@@ -38,7 +38,7 @@ const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
 const SendFTM = (props: Props) => {
   const [toId, setToId] = useState("");
   const [loader, setLoader] = useState(false);
-  const [amountText, setAmountText] = useState("");
+  const [amountText, setAmountText] = useState("0");
   const [buttonModalText, setButtonModalText] = useState("Send");
   const [isSendingModal, setSendingModal] = useState(false);
   const [amount, setAmountInDollar] = useState(27.46);
@@ -119,7 +119,7 @@ const SendFTM = (props: Props) => {
   const handleSendMoney = () => {
     const { sendTransaction } = props;
 
-    if (Number(amountText) === 0) {
+    if (Number(amountText) < 0) {
       Alert.alert("Error", "Please enter valid amount");
       return;
     } else if (

@@ -48,7 +48,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const [address, setSendTo] = useState("");
   const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState("0");
   const [isSendingModal, setSendingModal] = useState(false);
   const [fontSizeValue, setFontSizeValue] = useState(40);
   const [estimatedfee, setEstimatedfee] = useState(0);
@@ -131,7 +131,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
    *  and navigate to SendMoney screen if all fields are filled.
    */
   const handleSendMoney = () => {
-    if (Number(amount) === 0) {
+    if (Number(amount) < 0) {
       Alert.alert("Error", "Please enter valid amount");
       return;
     } else if (Number(currentWallet.balance) - Number(estimatedfee) < amount) {
