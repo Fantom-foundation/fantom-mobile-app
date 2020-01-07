@@ -11,7 +11,8 @@ export const types = {
   ADD_TRANSACTION: "wallet/add_transaction",
   SET_WALLET_NAME: "wallet/SET_WALLET_NAME",
   SET_CURRENT_WALLET: "wallet/SET_CURRENT_WALLET",
-  SET_FANTOM_BALANCE_RATE: "wallet/SET_FANTOM_BALANCE_RATE"
+  SET_FANTOM_BALANCE_RATE: "wallet/SET_FANTOM_BALANCE_RATE",
+  ADD_WALLET_INFO: "wallet/SET_FANTOM_BALANCE_RATE"
 };
 
 type Balance = {

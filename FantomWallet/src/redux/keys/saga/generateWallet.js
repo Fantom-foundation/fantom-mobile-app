@@ -28,7 +28,7 @@ export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
     yield put(setMnemonic({ mnemonic: "" }));
 
     yield put(setKeys({ masterKey, privateKey, publicKey }));
-
+    yield put({ type: types.ADD_WALLET_INFO, payload: { publicKey } });
     cb(publicKey);
   } catch (e) {
     yield put(setDopdownAlert("error", e.message));
@@ -40,6 +40,7 @@ export function* generateWalletUsingPrivateKey({
 }: Action): any {
   try {
     yield put(setKeys({ privateKey, publicKey }));
+    yield put({ type: types.ADD_WALLET_INFO, payload: { publicKey } });
     cb();
   } catch (e) {
     yield put(setDopdownAlert("error", e.message));

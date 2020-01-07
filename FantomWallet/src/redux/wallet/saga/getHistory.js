@@ -38,6 +38,7 @@ export function* getHistory(): any {
     } = yield call(getBalanceApi);
     if (body) {
       const balanceInfo = JSON.parse(body);
+
       yield put({
         type: types.SET_FANTOM_BALANCE_RATE,
         payload: Number(balanceInfo.price)

@@ -155,6 +155,32 @@ export default (state: Wallet = initialState, action: actionType) => {
         walletsData: oldData
       };
     }
+
+    // case types.ADD_WALLET_INFO: {
+    //   const { publicKey } = action.payload;
+    //   const oldData = [...state.walletsData] || [];
+    //   const index = oldData.findIndex(item => item.publicKey === publicKey);
+    //   if (index > -1) {
+    //     const newData = {
+    //       ...oldData[index],
+    //       publicKey
+    //     };
+
+    //     oldData.splice(index, 1, newData);
+    //   } else {
+    //     oldData.push({
+    //       name: "My Fantom Wallet",
+    //       publicKey,
+    //       history: [],
+    //       balance: 0
+    //     });
+    //   }
+
+    //   return {
+    //     ...state,
+    //     walletsData: oldData
+    //   };
+    // }
     case types.SET_CURRENT_WALLET: {
       const { payload } = action;
       return {

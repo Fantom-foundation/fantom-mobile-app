@@ -47,10 +47,10 @@ const Staking = (props: Props) => {
     const interval = setInterval(() => {
       setValues(wallets);
       delegateByAddresses();
-    }, 2000);
+    }, (wallets.length + 1) * 1000);
     const timer = setInterval(() => {
       setFlag(prev => prev + 1);
-    }, 2000);
+    }, (wallets.length + 1) * 1000);
 
     return () => {
       clearInterval(interval);

@@ -1,5 +1,5 @@
 // @flow
-import { takeLatest, put, select, call } from "redux-saga/effects";
+import { takeLatest, put, select, call, takeEvery } from "redux-saga/effects";
 import {
   types,
   delegateByAddressesSuccess,
@@ -44,6 +44,7 @@ export function* delegateByAddressesSaga(): any {
     keys,
     walletsData: wallet.walletsData
   }));
+
   if (walletsData && walletsData.length > 0) {
     for (let i = 0; i < walletsData.length; i++) {
       const wallet = walletsData[i];
@@ -195,7 +196,7 @@ export function* delegateWithdrawSaga({
 
 export default function* listener(): Iterable<any> {
   yield takeLatest(types.DELEGATE_BY_ADDRESS, delegateByAddressSaga);
-  yield takeLatest(types.DELEGATE_BY_ADDRESSES, delegateByAddressesSaga);
+  yield takeEvery(types.DELEGATE_BY_ADDRESSES, delegateByAddressesSaga);
   yield takeLatest(types.DELEGATE_BY_STAKER_ID, delegateByStakerIdSaga);
   yield takeLatest(types.DELEGATE_AMOUNT, delegateAmountSaga);
   yield takeLatest(types.DELEGATE_UNSTAKE, delegateUnstakeSaga);

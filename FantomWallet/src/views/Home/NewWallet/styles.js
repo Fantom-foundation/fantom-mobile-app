@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { getHeight, getWidth } from "../../../utils/pixelResolver";
+import { getHeight, getWidth, isIphoneX } from "../../../utils/pixelResolver";
 import { Colors, FontSize, fonts } from "../../../theme";
 
 const cardStyles = StyleSheet.create({
@@ -157,7 +157,7 @@ const listViewStyles = StyleSheet.create({
 export default StyleSheet.create({
   mainContainer: {
     flex: 1,
-    paddingBottom: getHeight(50)
+    paddingBottom: isIphoneX() ? getHeight(86) : getHeight(50)
 
     // paddingHorizontal: getWidth(22)
   },
