@@ -48,7 +48,6 @@ const SendFTM = (props: Props) => {
     const setPublicKey = props.navigation.getParam("publicKey");
     if (setPublicKey) {
       setToId(setPublicKey);
-      setSendingModal(true);
     }
   }, [navigation.state.params]);
 
