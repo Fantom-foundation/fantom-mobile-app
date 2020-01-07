@@ -19,8 +19,6 @@ export function* getBalance(): any {
         const wallet = walletsData[i];
         const { publicKey, name } = wallet;
         if (publicKey) {
-          console.log("publicKey__-publicKey", publicKey);
-
           const response = yield Web3Agent.Fantom.getBalance(publicKey);
 
           const balanceWei = scientificToDecimal(response);

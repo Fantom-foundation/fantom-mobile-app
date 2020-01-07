@@ -59,10 +59,6 @@ export function* delegateByAddressesSaga(): any {
             publicKey
           );
           const response = yield call(delegatorByAddressApi, publicKey);
-          console.log(
-            "delegateByAddressesSagadelegateByAddressesSaga",
-            response
-          );
 
           if (response) {
             const {
@@ -131,8 +127,6 @@ export function* delegateAmountSaga({
     //   value: amount.toString(),
     //   memo: ""
     // });
-
-    // console.log(fee, "*******0xfc00face00000000000000000000000000000000***");
 
     const response = yield Web3Agent.Fantom.delegateStake({
       amount,

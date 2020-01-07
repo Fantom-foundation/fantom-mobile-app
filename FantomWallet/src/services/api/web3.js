@@ -98,14 +98,13 @@ class Web3Agent {
       this.getCurrentEpoch(from, sfc),
       this.getDelegate(from, delegateAddress, sfc)
     ]);
-    console.log("info ", info);
+
     const maxEpochs = parseInt(info[0]) - 1;
     const fromEpoch = info[1]["paidUntilEpoch"];
     return new Promise(resolve => {
       sfc.methods
         .calcDelegationRewards(delegateAddress, fromEpoch, maxEpochs)
         .call({ from: from }, function(error, result) {
-          console.log("resultredfdfsultresult", result);
           if (result) {
             resolve({
               pendingRewards: parseFloat(result["0"]) / Math.pow(10, 18),
@@ -249,7 +248,6 @@ class Web3Agent {
   // }
 
   async getAccount(address: string) {
-    console.log("REACT_APP_API_URL_FANTOM", REACT_APP_API_URL_FANTOM, address);
     return await fetch(
       `${REACT_APP_API_URL_FANTOM}api/v1/get-account?address=${address}`
     );

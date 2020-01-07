@@ -82,7 +82,6 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
       };
     }
     case `${types.VALIDATORS_LIST}_SUCCESS`: {
-      console.log("types.VALIDATORS_LIST", action.payload);
       const { stakers } = action.payload.response.data.data;
 
       const validators = stakers.map(staker => {

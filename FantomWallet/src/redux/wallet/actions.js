@@ -107,7 +107,6 @@ export const setWalletName = (walletInfo: WalletInfoT) => ({
 });
 
 export const setCurrentWallet = (walletData: any) => {
-  console.log(walletData, "***** WalletData *****");
   return {
     type: types.SET_CURRENT_WALLET,
     payload: walletData

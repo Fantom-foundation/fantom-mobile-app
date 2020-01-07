@@ -164,13 +164,6 @@ const SendFTM = (props: Props) => {
       //   });
       // }
 
-      console.log("trass", {
-        to: toId,
-        value: amountText,
-        memo: "",
-        cbSuccess: alertSuccessfulButtonPressed
-      });
-
       sendTransaction({
         to: toId,
         value: amountText,

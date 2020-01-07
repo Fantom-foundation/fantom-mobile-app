@@ -77,7 +77,6 @@ class Wallet extends Component {
     }
   }
   componentWillUnmount() {
-    console.log("COMPONENTWILLUNMOUNT");
     clearInterval(this._interval);
   }
 
@@ -161,7 +160,6 @@ class Wallet extends Component {
       setCurrentWallet,
       Keys
     } = this.props;
-    console.log("all walllets", walletsData, wallets);
 
     return (
       <View style={styles.mainContainer}>
