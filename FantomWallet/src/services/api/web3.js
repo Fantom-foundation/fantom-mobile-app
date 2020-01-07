@@ -59,6 +59,8 @@ class Web3Agent {
     });
   }
 
+  // estimation fee
+
   // Get current epoch
   getCurrentEpoch(from, sfc) {
     return new Promise(resolve => {
@@ -163,6 +165,7 @@ class Web3Agent {
   }: Transfer) {
     const useWeb3 = web3Delegate || this.web3;
     const nonce = await useWeb3.eth.getTransactionCount(from);
+
     const gasPrice = await useWeb3.eth.getGasPrice();
 
     const rawTx = {
@@ -174,7 +177,6 @@ class Web3Agent {
       nonce: Web3.utils.toHex(nonce),
       data: memo
     };
-    console.log(rawTx, "&********** rawtx******");
 
     const privateKeyBuffer = EthUtil.toBuffer(privateKey);
 
@@ -209,20 +211,16 @@ class Web3Agent {
     });
   }
 
-  async estimateFee({ from, to, value, memo }) {
+  async estimateFee() {
     const gasPrice = await this.web3.eth.getGasPrice();
-    // const gasLimit = await this.web3.eth.estimateGas({
-    //   from,
-    //   to,
-    //   value: Web3.utils.toHex(Web3.utils.toWei(value, "ether")),
-    //   data: Web3.utils.asciiToHex(memo)
-    // });
     const gasLimit = 200000;
+
     const fee = Web3.utils.fromWei(
       BigInt(gasPrice.toString())
         .multiply(BigInt(gasLimit.toString()))
         .toString()
     );
+
     return fee;
   }
 

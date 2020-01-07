@@ -17,6 +17,7 @@ import { formatNumber } from "~/utils/converts";
 import { delegateAmount as delegateAmountAction } from "../../redux/staking/actions";
 import { Colors } from "../../theme";
 import Modal from "../../components/general/modal";
+import Web3Agent from "../../services/api/web3";
 
 const StakingAmount = (props: Props) => {
   const { validators, delegateAmount, keys, currentWallet } = props;
@@ -26,10 +27,16 @@ const StakingAmount = (props: Props) => {
   const [ifStaking, setIfStaking] = useState(false);
   const [stakingModal, setStakingModal] = useState(false);
   const [fontSizeValue, setFontSizeValue] = useState(40);
+  const [estimationfee, setEstimationfee] = useState(0);
   const amountHightModalText =
     "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
   const availableToStake = props.navigation.getParam("availableToStake");
 
+  useEffect(() => {
+    Web3Agent.Fantom.estimateFee().then(value => {
+      setEstimationfee(value);
+    });
+  });
   useEffect(() => {
     if (amount.length <= 5) {
       setFontSizeValue(36);
@@ -75,16 +82,23 @@ const StakingAmount = (props: Props) => {
   const availableSpace = !isNaN(availableToStake)
     ? formatNumber(Number(availableToStake).toFixed(2))
     : 0;
+
+  // Maximum Stake function
   const handleMaxStake = () => {
-    if (stakingSpace > availableSpace) setAmount(availableSpace.toString());
-    else if (stakingSpace < availableSpace)
+    if (stakingSpace > availableSpace) {
+      const maxwithfee = Number(availableSpace) - Number(estimationfee);
+      setAmount(maxwithfee.toString());
+    } else if (stakingSpace < availableSpace) {
+      const maxwithfee = Number(stakingSpace) - Number(estimationfee);
       setAmount(
-        Number(stakingSpace)
+        Number(maxwithfee)
           .toFixed(2)
           .toString()
       );
-    else if (stakingSpace === availableSpace)
-      setAmount(availableSpace.toString());
+    } else if (stakingSpace === availableSpace) {
+      const maxwithfee = Number(availableSpace) - Number(estimationfee);
+      setAmount(maxwithfee.toString());
+    }
   };
 
   const getPrivateKey = () => {
@@ -119,6 +133,8 @@ const StakingAmount = (props: Props) => {
     }
   };
 
+  console.log(estimationfee, "****** value *****");
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -139,9 +155,9 @@ const StakingAmount = (props: Props) => {
           </Text>
 
           <View style={styles.availableAmountView}>
-            <Text
-              style={styles.availablePrice}
-            >{`Available: ${availableSpace}`}</Text>
+            <Text style={styles.availablePrice}>{`Available: ${Number(
+              availableSpace
+            ) - Number(estimationfee)}`}</Text>
             <TouchableOpacity style={styles.maxButton} onPress={handleMaxStake}>
               <Text style={styles.maxButtonText}>Max</Text>
             </TouchableOpacity>
