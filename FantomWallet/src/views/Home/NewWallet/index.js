@@ -73,7 +73,7 @@ class Wallet extends Component {
         getBalance({ loading: isLoading });
         sendFtm();
         getHistory();
-      }, 5000);
+      }, 1000 * (walletsData.length + 1));
     }
   }
   componentWillUnmount() {
