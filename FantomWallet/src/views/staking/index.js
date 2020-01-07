@@ -209,7 +209,9 @@ const Staking = (props: Props) => {
                   if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                     Alert.alert(
                       "Insufficient funds",
-                      `You need minimum ${estimatedfee} in your balance to initiate unstake transaction.`
+                      `You need minimum ${estimatedfee.toFixed(
+                        5
+                      )} in your balance to initiate unstake transaction.`
                     );
                   } else openUnstakingModal(true);
                 }

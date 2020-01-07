@@ -125,7 +125,7 @@ const StakingAmount = (props: Props) => {
       const maxStake = Number(availableSpace) - Number(estimationfee);
       Alert.alert(
         "Insufficient funds",
-        `You can stake max ${maxStake.toFixed(6)} (Value + gas * price)`
+        `You can stake max ${maxStake.toFixed(5)} (Value + gas * price)`
       );
     } else if (amount !== "") {
       setIfStaking(true);
@@ -144,7 +144,7 @@ const StakingAmount = (props: Props) => {
   };
 
   console.log(estimationfee, "****** value *****");
-
+  const availbleAmount = Number(availableSpace) - Number(estimationfee);
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -165,9 +165,9 @@ const StakingAmount = (props: Props) => {
           </Text>
 
           <View style={styles.availableAmountView}>
-            <Text style={styles.availablePrice}>{`Available: ${Number(
-              availableSpace
-            ) - Number(estimationfee)}`}</Text>
+            <Text
+              style={styles.availablePrice}
+            >{`Available: ${availbleAmount.toFixed(5)}`}</Text>
             <TouchableOpacity style={styles.maxButton} onPress={handleMaxStake}>
               <Text style={styles.maxButtonText}>Max</Text>
             </TouchableOpacity>
