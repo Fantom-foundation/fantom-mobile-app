@@ -1,5 +1,5 @@
 // @flow
-import { takeLatest, put, select, call } from "redux-saga/effects";
+import { takeEvery, put, select, call } from "redux-saga/effects";
 import {
   types,
   getValidatorsListSuccess,
@@ -21,5 +21,5 @@ export function* validatorsListSaga(): any {
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.VALIDATORS_LIST, validatorsListSaga);
+  yield takeEvery(types.VALIDATORS_LIST, validatorsListSaga);
 }

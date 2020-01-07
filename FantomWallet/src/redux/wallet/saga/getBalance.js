@@ -1,5 +1,5 @@
 // @flow
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import Web3 from "web3";
 
 import { types, setBalance, sendFtmSuccess } from "../actions";
@@ -51,6 +51,6 @@ export function* setFtmBalance(): any {
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.GET_BALANCE, getBalance);
-  yield takeLatest(types.SEND_FTM, setFtmBalance);
+  yield takeEvery(types.GET_BALANCE, getBalance);
+  yield takeEvery(types.SEND_FTM, setFtmBalance);
 }

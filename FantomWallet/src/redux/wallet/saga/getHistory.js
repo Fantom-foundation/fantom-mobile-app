@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 // @flow
-import { takeLatest, call, select, put } from "redux-saga/effects";
+import { takeEvery, call, select, put } from "redux-saga/effects";
 import axios from "axios";
 import { types, setHistory } from "../actions";
 
@@ -69,7 +69,7 @@ export function* getHistory(): any {
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.GET_HISTORY, getHistory);
+  yield takeEvery(types.GET_HISTORY, getHistory);
 }
 
 // transactionData.push({

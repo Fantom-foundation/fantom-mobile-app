@@ -186,6 +186,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     setSendTo("");
     setOpenModal(false);
     setSendingModal(false);
+    setButtonModalText("Send");
     setAmount("");
   };
 

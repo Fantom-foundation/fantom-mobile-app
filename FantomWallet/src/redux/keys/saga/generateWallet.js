@@ -1,5 +1,5 @@
 // @flow
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeLatest, put, select, takeEvery } from "redux-saga/effects";
 import Bip39 from "react-native-bip39";
 import EthUtil from "ethereumjs-util";
 import Hdkey from "hdkey";
@@ -48,8 +48,8 @@ export function* generateWalletUsingPrivateKey({
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.GENERATE_WALLET, generateWallet);
-  yield takeLatest(
+  yield takeEvery(types.GENERATE_WALLET, generateWallet);
+  yield takeEvery(
     types.GENERATE_WALLET_USING_PRIVATE_KEY,
     generateWalletUsingPrivateKey
   );
