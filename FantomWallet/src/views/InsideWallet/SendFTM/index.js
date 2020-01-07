@@ -38,7 +38,7 @@ const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
 const SendFTM = (props: Props) => {
   const [toId, setToId] = useState("");
   const [loader, setLoader] = useState(false);
-  const [amountText, setAmountText] = useState("0");
+  const [amountText, setAmountText] = useState("");
   const [buttonModalText, setButtonModalText] = useState("Send");
   const [isSendingModal, setSendingModal] = useState(false);
   const [amount, setAmountInDollar] = useState(27.46);
@@ -137,7 +137,10 @@ const SendFTM = (props: Props) => {
       if (toId === "") message = "Please enter address.";
       else if (!Web3.utils.isAddress(toId.trim()))
         message = "Please enter valid address.";
-      else if (amountText === "") message = "Please enter valid amount";
+      // else if (amountText === "") {
+      //   //message = "Please enter valid amount";
+      //   setAmountText("0");
+      // }
 
       if (message !== "") {
         Alert.alert("Error", message);
@@ -151,7 +154,7 @@ const SendFTM = (props: Props) => {
     const { sendTransaction } = props;
     setLoader(true);
     setButtonModalText("Sending....");
-    if (toId && Web3.utils.isAddress(toId.trim()) && amountText) {
+    if (toId && Web3.utils.isAddress(toId.trim())) {
       //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
       // if (amountText === 0 || amountText > maxFantomBalance) {
       //   Alert.alert("Error", "Please enter valid amount.");
@@ -166,7 +169,7 @@ const SendFTM = (props: Props) => {
 
       sendTransaction({
         to: toId,
-        value: amountText,
+        value: amountText || "0",
         memo: "",
         cbSuccess: isSuccess => {
           setLoader(false);
@@ -269,7 +272,7 @@ const SendFTM = (props: Props) => {
       {isSendingModal && (
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
-            amountText
+            amountText || "0"
           )}\n FTM to ${toId}?`}
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={

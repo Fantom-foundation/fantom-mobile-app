@@ -48,7 +48,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const [address, setSendTo] = useState("");
   const [loader, setLoader] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [amount, setAmount] = useState("0");
+  const [amount, setAmount] = useState("");
   const [isSendingModal, setSendingModal] = useState(false);
   const [fontSizeValue, setFontSizeValue] = useState(40);
   const [estimatedfee, setEstimatedfee] = useState(0);
@@ -146,7 +146,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       if (address === "") message = "Please enter address.";
       else if (!Web3.utils.isAddress(address.trim()))
         message = "Please enter valid address.";
-      else if (amount === "") message = "Please enter valid amount";
+      // else if (amount === "") message = "Please enter valid amount";
 
       if (message !== "") {
         setLoader(false);
@@ -162,7 +162,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     const { sendTransaction } = props;
     setLoader(true);
     setButtonModalText("Sending....");
-    if (address && Web3.utils.isAddress(address) && amount) {
+    if (address && Web3.utils.isAddress(address)) {
       // const maxFantomBalance = estimationMaxFantomBalance(
       //   Number(currentWallet.balance),
       //   GAS_PRICE
@@ -172,7 +172,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       // } else {
       sendTransaction({
         to: address,
-        value: amount,
+        value: amount || "0",
         memo: "",
         cbSuccess: alertSuccessfulButtonPressed
       });
@@ -319,7 +319,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       {isSendingModal && (
         <Modal
           modalText={`Are you sure you want to send ${formatNumber(
-            amount
+            amount || "0"
           )}\n FTM to ${address}?`}
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
