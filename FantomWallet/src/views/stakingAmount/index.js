@@ -35,7 +35,7 @@ const StakingAmount = (props: Props) => {
   useEffect(() => {
     const gasLimit = 200000;
     Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
-      setEstimationfee(value * 1.5);
+      setEstimationfee(value * 2);
     });
   });
   useEffect(() => {

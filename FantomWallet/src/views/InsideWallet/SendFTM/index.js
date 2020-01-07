@@ -49,7 +49,7 @@ const SendFTM = (props: Props) => {
   useEffect(() => {
     const gasLimit = 44000;
     Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
-      setEstimatedfee(value * 1.5);
+      setEstimatedfee(value * 2);
     });
   });
 

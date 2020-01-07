@@ -6,7 +6,8 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Alert
 } from "react-native";
 import styles from "./styles";
 import question from "../../images/question.png";
@@ -23,6 +24,7 @@ import {
   delegateWithdraw as delegateWithdrawAction
 } from "~/redux/staking/actions";
 import moment from "moment";
+import Web3Agent from "../../services/api/web3";
 
 const modalText = "You need at least 1 FTM to \n stake.";
 
@@ -36,12 +38,20 @@ const Staking = (props: Props) => {
   const [isWithdrawModalOpened, openWithdrawModal] = useState("");
   const [delegateAmount, setDelegateAmount] = useState("");
   const [unstakeKey, setUnstakeKey] = useState("");
+  const [estimatedfee, setEstimatedfee] = useState(0);
   const [stakeAmountModal, setStakeAmountModal] = useState(false);
   const { delegateByAddresses, stakes, wallets, navigation } = props;
   console.log("st", stakes);
   const [flag, setFlag] = useState(0);
   const [values, setValues] = useState(wallets);
   const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
+
+  useEffect(() => {
+    const gasLimit = 150000;
+    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+      setEstimatedfee(value * 2);
+    });
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -183,8 +193,15 @@ const Staking = (props: Props) => {
             <TouchableOpacity
               style={styles.buttonUnstakeView}
               onPress={() => {
-                if (stakeData) setUnstakeKey(stakeData.publicKey);
-                openUnstakingModal(true);
+                if (stakeData) {
+                  setUnstakeKey(stakeData.publicKey);
+                  if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
+                    Alert.alert(
+                      "Insufficient funds",
+                      `You need minimum ${estimatedfee} in your balance to initiate unstake transaction.`
+                    );
+                  } else openUnstakingModal(true);
+                }
               }}
             >
               <Text
