@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from "react-native";
 import { Colors, fonts, FontSize } from "~/theme";
-import { getHeight, getWidth } from "~/utils/pixelResolver";
+import { getHeight, getWidth, isIphoneX } from "~/utils/pixelResolver";
 import { DEVICE_WIDTH } from "~/common/constants";
 
 export default StyleSheet.create({
@@ -48,10 +48,12 @@ export default StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     borderRadius: getHeight(20),
-    paddingVertical: getHeight(30),
+    paddingTop: getHeight(30),
+    paddingBottom: getHeight(30),
     paddingHorizontal: getWidth(12),
     flex: 1,
-    marginBottom: Platform.OS === "ios" ? getHeight(10) : getHeight(20)
+
+    marginBottom: Platform.OS === "ios" ? getHeight(8) : getHeight(20)
   },
   lineOnEyeOff: {
     marginRight: getWidth(18),
@@ -108,7 +110,8 @@ export default StyleSheet.create({
   },
   activityListView: {
     height: getHeight(310),
-    paddingVertical: 25
+    paddingTop: getHeight(18)
+    //paddingBottom: getHeight(5)
   },
   emptyListWrapper: {
     marginTop: getHeight(14),

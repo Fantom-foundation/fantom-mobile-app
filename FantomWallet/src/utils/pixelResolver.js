@@ -13,7 +13,7 @@ const { width: deviceScreenWidth, height: deviceHeight } = Dimensions.get(
 /**
  * @method isIphoneX: Return true if device is Iphone X.
  */
-function isIphoneX() {
+export function isIphoneX() {
   const dimen = Dimensions.get("window");
   return (
     Platform.OS === "ios" &&

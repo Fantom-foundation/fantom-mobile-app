@@ -216,76 +216,127 @@ class Wallet extends Component {
               </ScrollView>
             </View>
           ) : (
-            <ScrollView
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              style={styles.safeAreaStyle}
-            >
-              <View>
-                <View style={styles.marginHorizontal}>
-                  <CardHeader
-                    totalBalance={this.getTotalCount(walletsData)}
-                    margin={0}
+            <SafeAreaView style={styles.safeAreaStyle}>
+              <ParallaxScrollView
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshLoader}
+                    onRefresh={() => this.onRefresh()}
+                  />
+                }
+                onScroll={event => {
+                  const threshold = 30;
+
+                  if (
+                    event.nativeEvent.contentOffset.y <= threshold &&
+                    headerHeight > 1
+                  ) {
+                    this.setState({ headerHeight: 1, isScaleView: 1 });
+                  } else if (
+                    event.nativeEvent.contentOffset.y > threshold &&
+                    headerHeight === 1
+                  ) {
+                    this.setState({ headerHeight: 220, isScaleView: 0 });
+                  }
+                }}
+                isForegroundTouchable={true}
+                backgroundColor={Colors.white}
+                showsVerticalScrollIndicator={false}
+                stickyHeaderHeight={
+                  walletsData[activeSlide] &&
+                  walletsData[activeSlide].history.length > 0
+                    ? 0
+                    : getHeight(headerHeight)
+                }
+                parallaxHeaderHeight={getHeight(440)}
+                renderStickyHeader={() => (
+                  <View
+                    style={[
+                      styles.stickyHeaderContainer,
+                      styles.marginHorizontal
+                    ]}
+                  >
+                    <WalletMenu
+                      isListView={isListView}
+                      changeView={this.changeView}
+                      customStyle={{
+                        marginVertical: getHeight(40)
+                      }}
+                    />
+                    <StickyHeader
+                      setCurrentWallet={setCurrentWallet}
+                      data={walletsData[activeSlide] || []}
+                    />
+                  </View>
+                )}
+                renderForeground={() => (
+                  <View>
+                    <View style={styles.marginHorizontal}>
+                      <CardHeader
+                        totalBalance={this.getTotalCount(walletsData)}
+                        margin={0}
+                        isHiddenText={isHiddenText}
+                        setCardHiddenView={this.setCardHiddenView}
+                        isListView={isListView}
+                        changeView={this.changeView}
+                        showCard={true}
+                      />
+                    </View>
+                    <Carousel
+                      style={styles.listContainer}
+                      sliderWidth={Dimensions.get("window").width}
+                      ref={c => {
+                        this.carousel = c;
+                      }}
+                      contentContainerCustomStyle={{
+                        justifyContent: "center"
+                      }}
+                      onSnapToItem={index => {
+                        const { walletsData, setCurrentWallet } = this.props;
+                        this.setState({ activeSlide: index });
+                        if (index > -1) {
+                          setCurrentWallet(walletsData[index]);
+                        }
+                      }}
+                      activeSlideOffset={20}
+                      inactiveSlideScale={isScaleView}
+                      lockScrollWhileSnapping={true}
+                      useScrollView={true}
+                      activeSlideAlignment={"center"}
+                      pagingEnabled={true}
+                      swipeThreshold={150}
+                      itemWidth={Dimensions.get("window").width - 40}
+                      renderItem={({ item, index }) => {
+                        return (
+                          <CardView
+                            emptyView={false}
+                            setCurrentWallet={setCurrentWallet}
+                            isHiddenText={isHiddenText}
+                            data={item}
+                            showCard={true}
+                            showList={false}
+                            handleTransactionClick={this.handleTransactionClick}
+                          />
+                        );
+                      }}
+                      data={walletsData}
+                    />
+                  </View>
+                )}
+              >
+                <View style={[styles.marginHorizontal]}>
+                  <CardView
+                    emptyView
+                    setCurrentWallet={setCurrentWallet}
                     isHiddenText={isHiddenText}
-                    setCardHiddenView={this.setCardHiddenView}
-                    isListView={isListView}
-                    changeView={this.changeView}
-                    showCard={true}
+                    data={walletsData[activeSlide] || []}
+                    showCard={false}
+                    showList={true}
+                    handleTransactionClick={this.handleTransactionClick}
                   />
                 </View>
-                <Carousel
-                  style={styles.listContainer}
-                  sliderWidth={Dimensions.get("window").width}
-                  ref={c => {
-                    this.carousel = c;
-                  }}
-                  contentContainerCustomStyle={{
-                    justifyContent: "center"
-                  }}
-                  onSnapToItem={index => {
-                    const { walletsData, setCurrentWallet } = this.props;
-                    this.setState({ activeSlide: index });
-                    if (index > -1) {
-                      setCurrentWallet(walletsData[index]);
-                    }
-                  }}
-                  //activeSlideOffset={10}
-                  inactiveSlideScale={1}
-                  lockScrollWhileSnapping={true}
-                  useScrollView={true}
-                  activeSlideAlignment={"center"}
-                  pagingEnabled={true}
-                  //swipeThreshold={150}
-                  itemWidth={Dimensions.get("window").width - 40}
-                  renderItem={({ item, index }) => {
-                    return (
-                      <CardView
-                        emptyView={false}
-                        setCurrentWallet={setCurrentWallet}
-                        isHiddenText={isHiddenText}
-                        data={item}
-                        showCard={true}
-                        showList={false}
-                        handleTransactionClick={this.handleTransactionClick}
-                      />
-                    );
-                  }}
-                  data={walletsData}
-                />
-              </View>
-
-              <View style={[styles.marginHorizontal]}>
-                <CardView
-                  emptyView
-                  setCurrentWallet={setCurrentWallet}
-                  isHiddenText={isHiddenText}
-                  data={walletsData[activeSlide] || []}
-                  showCard={false}
-                  showList={true}
-                  handleTransactionClick={this.handleTransactionClick}
-                />
-              </View>
-            </ScrollView>
+              </ParallaxScrollView>
+            </SafeAreaView>
           )}
         </SafeAreaView>
 

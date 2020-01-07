@@ -97,7 +97,7 @@ const SingleWallet = props => {
           marginBottom:
             Metrics.getiPhoneX_Dimensions().height === DEVICE_HEIGHT &&
             Metrics.getiPhoneX_Dimensions().width === DEVICE_WIDTH
-              ? getHeight(60)
+              ? getHeight(86)
               : getHeight(48)
         }}
       >
