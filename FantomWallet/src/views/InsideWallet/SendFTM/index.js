@@ -31,6 +31,7 @@ import {
 import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../../components/loader";
 import Modal from "../../../components/general/modal";
+import Web3Agent from "../../../services/api/web3";
 
 const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
 
@@ -43,6 +44,14 @@ const SendFTM = (props: Props) => {
   const [amount, setAmountInDollar] = useState(27.46);
   const { addUpdateAddress, currentWallet, navigation, isLoading } = props;
   const [fontSizeValue, setFontSizeValue] = useState(40);
+  const [estimatedfee, setEstimatedfee] = useState(0);
+
+  useEffect(() => {
+    const gasLimit = 44000;
+    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+      setEstimatedfee(value * 1.5);
+    });
+  });
 
   useEffect(() => {
     const setPublicKey = props.navigation.getParam("publicKey");
@@ -112,8 +121,15 @@ const SendFTM = (props: Props) => {
     if (Number(amountText) === 0) {
       Alert.alert("Error", "Please enter valid amount");
       return;
-    } else if (currentWallet.balance < amountText) {
-      Alert.alert("Error", "Insufficient balance");
+    } else if (
+      Number(currentWallet.balance) - Number(estimatedfee) <
+      amountText
+    ) {
+      const maxAmount = Number(currentWallet.balance) - Number(estimatedfee);
+      Alert.alert(
+        "Insufficient funds",
+        `You can transfer max ${maxAmount.toFixed(6)} (Value + gas * price)`
+      );
       return;
     } else {
       let message = "";

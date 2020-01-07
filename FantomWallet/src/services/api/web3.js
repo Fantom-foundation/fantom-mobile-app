@@ -211,10 +211,9 @@ class Web3Agent {
     });
   }
 
-  async estimateFee() {
+  async estimateFee(value) {
     const gasPrice = await this.web3.eth.getGasPrice();
-    const gasLimit = 200000;
-
+    const gasLimit = value;
     const fee = Web3.utils.fromWei(
       BigInt(gasPrice.toString())
         .multiply(BigInt(gasLimit.toString()))

@@ -33,8 +33,9 @@ const StakingAmount = (props: Props) => {
   const availableToStake = props.navigation.getParam("availableToStake");
 
   useEffect(() => {
-    Web3Agent.Fantom.estimateFee().then(value => {
-      setEstimationfee(value);
+    const gasLimit = 200000;
+    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+      setEstimationfee(value * 1.5);
     });
   });
   useEffect(() => {
@@ -117,6 +118,15 @@ const StakingAmount = (props: Props) => {
       setStakingModal(true);
     } else if (Number(amount) < 1) {
       Alert.alert("Error", "Minimum 1 FTM required to stake");
+    } else if (
+      Number(availableSpace) - Number(estimationfee) <
+      Number(amount)
+    ) {
+      const maxStake = Number(availableSpace) - Number(estimationfee);
+      Alert.alert(
+        "Insufficient funds",
+        `You can stake max ${maxStake.toFixed(6)} (Value + gas * price)`
+      );
     } else if (amount !== "") {
       setIfStaking(true);
       delegateAmount({

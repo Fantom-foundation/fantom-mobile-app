@@ -37,6 +37,7 @@ import KeyPad from "../../components/general/keyPad";
 import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../components/loader";
 import Modal from "../../components/general/modal";
+import Web3Agent from "../../services/api/web3";
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
@@ -50,7 +51,15 @@ export const SendReceive = (props: TSendReceiveTypes) => {
   const [amount, setAmount] = useState("");
   const [isSendingModal, setSendingModal] = useState(false);
   const [fontSizeValue, setFontSizeValue] = useState(40);
+  const [estimatedfee, setEstimatedfee] = useState(0);
   //const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
+
+  useEffect(() => {
+    const gasLimit = 44000;
+    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+      setEstimatedfee(value * 1.5);
+    });
+  });
 
   useEffect(() => {
     if (amount.length <= 5) {
@@ -125,8 +134,12 @@ export const SendReceive = (props: TSendReceiveTypes) => {
     if (Number(amount) === 0) {
       Alert.alert("Error", "Please enter valid amount");
       return;
-    } else if (currentWallet.balance < amount) {
-      Alert.alert("Error", "Insufficient balance");
+    } else if (Number(currentWallet.balance) - Number(estimatedfee) < amount) {
+      const maxAmount = Number(currentWallet.balance) - Number(estimatedfee);
+      Alert.alert(
+        "Insufficient funds",
+        `You can transfer max ${maxAmount.toFixed(6)} (Value + gas * price)`
+      );
       return;
     } else {
       let message = "";
