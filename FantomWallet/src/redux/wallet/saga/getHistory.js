@@ -3,7 +3,7 @@
 import { takeEvery, call, select, put } from "redux-saga/effects";
 import axios from "axios";
 import { types, setHistory } from "../actions";
-
+import { setDopdownAlert } from "~/redux/notification/actions";
 import {
   GET_BALANCE_API,
   API_URL_FANTOM,
@@ -64,7 +64,17 @@ export function* getHistory(): any {
       }
     }
   } catch (e) {
-    yield console.log("getHistory", e);
+    console.log("e.message, e", e.message, e);
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 

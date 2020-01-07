@@ -12,7 +12,7 @@ import {
 import Web3Agent from "~/services/api/web3";
 import type { TransactionT } from "../actions";
 import { SUCCESS, FAILED, SENT } from "~/common/constants";
-
+import { setDopdownAlert } from "~/redux/notification/actions";
 type Action = {
   payload: {
     to: string,
@@ -85,7 +85,17 @@ export function* sendTransaction({
   } catch (e) {
     yield put(setLoadingSendTransaction(false));
     cbSuccess(false);
-    Alert.alert("Error", e.message || otherErrorMessage);
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      Alert.alert("Error", e.message || otherErrorMessage);
+    }
+
     transactionStatus = FAILED;
   }
 }

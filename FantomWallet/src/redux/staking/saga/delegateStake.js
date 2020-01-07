@@ -28,7 +28,6 @@ export function* delegateByAddressSaga({
     yield put(delegateByAddressesSuccess({ publicKey, response }));
   } catch (e) {
     yield put(delegateByAddressesFailure({ publicKey }));
-    // yield put(setDopdownAlert("error", e.message));
   }
 }
 
@@ -138,9 +137,17 @@ export function* delegateAmountSaga({
     cbSuccess(true);
     // Assign contract functions to sfc variable
   } catch (e) {
-    console.log(e, "eeeeeeeeeeee");
     cbSuccess(false);
-    yield put(setDopdownAlert("error", e.message));
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 
@@ -160,9 +167,18 @@ export function* delegateUnstakeSaga({
     cbSuccess(true);
     // Assign contract functions to sfc variable
   } catch (e) {
-    console.log(e, "eeeeeeeeeeee");
     cbSuccess(false);
-    yield put(setDopdownAlert("error", e.message));
+
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 
@@ -182,9 +198,18 @@ export function* delegateWithdrawSaga({
     cbSuccess(true);
     // Assign contract functions to sfc variable
   } catch (e) {
-    console.log(e, "eeeeeeeeeeee");
     cbSuccess(false);
-    yield put(setDopdownAlert("error", e.message));
+
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 

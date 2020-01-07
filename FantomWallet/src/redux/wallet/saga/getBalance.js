@@ -29,7 +29,16 @@ export function* getBalance(): any {
       }
     }
   } catch (e) {
-    //yield put(setDopdownAlert("error", e.message));
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 
@@ -44,7 +53,16 @@ export function* setFtmBalance(): any {
     const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
     yield put(sendFtmSuccess({ balance }));
   } catch (e) {
-    yield put(setDopdownAlert("error", e.message));
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 
