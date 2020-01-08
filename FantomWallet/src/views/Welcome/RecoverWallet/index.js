@@ -97,7 +97,19 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   };
 
   const handleRecoverWalletUsingPrivateKey = async () => {
-    if (privateKey) {
+    var regx = /^[a-zA-Z0-9]+$/;
+
+    if (
+      privateKey.length !== 66 ||
+      regx.test(privateKey) === false ||
+      privateKey.toLowerCase().substring(0, 2) !== "0x"
+    ) {
+      Alert.alert(
+        "Warning",
+        "Please enter a valid 66 bit alphanumeric private key that starts with 0x"
+      );
+      setPrivateKey("");
+    } else {
       setIsImporting(true);
       // const address = WalletUtils.restoreWallet(privateKey);
       const address = await Web3Agent.Fantom.restoreWallet(privateKey);
@@ -115,9 +127,10 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
           }
         });
       }
-    } else {
-      Alert.alert("Warning", "Please enter the Private Key");
     }
+    // } else {
+    //   Alert.alert("Warning", "Please enter the Private Key");
+    // }
   };
 
   const changeMnemonic = text => {
