@@ -100,6 +100,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
     var regx = /^[a-zA-Z0-9]+$/;
 
     if (
+      privateKey === "" ||
       privateKey.length !== 66 ||
       regx.test(privateKey) === false ||
       privateKey.toLowerCase().substring(0, 2) !== "0x"
