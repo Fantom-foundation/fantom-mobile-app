@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
 
@@ -54,12 +54,12 @@ const availableAmount = {
     color: Colors.lightGrey
   },
   maxButton: {
-    width: getWidth(50),
-    height: 26,
+    width: Platform.OS === "ios" ? getHeight(50) : getWidth(60),
+    height: Platform.OS === "ios" ? 26 : 40,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "red",
-    borderRadius: 13,
+    borderRadius: Platform.OS === "ios" ? 13 : 20,
     backgroundColor: Colors.lightGrey
   },
   maxButtonText: {

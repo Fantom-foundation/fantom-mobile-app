@@ -1,6 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
+
+const deviceHeight = Dimensions.get("window").height;
 
 const crauselStyle = {
   crauselView: {
@@ -11,7 +13,8 @@ const crauselStyle = {
     paddingBottom: getHeight(51),
     borderRadius: getWidth(22),
     width: getWidth(260),
-    height: getHeight(540),
+
+    height: Metrics.screenHeight <= 600 ? getHeight(580) : getHeight(540),
     backgroundColor: Colors.royalBlue,
     shadowColor: Colors.black,
     shadowOffset: {
@@ -20,7 +23,7 @@ const crauselStyle = {
     },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-    elevation: 5
+    elevation: 3
   },
   titleView: {
     fontSize: FontSize.base,
