@@ -23,7 +23,7 @@ const crauselStyle = {
     },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-    elevation: 5
+  //  elevation: 1
   },
   titleView: {
     fontSize: FontSize.base,
@@ -65,7 +65,8 @@ const crauselStyle = {
   buttonUnstakeView: {
     width: getWidth(121),
     height: getHeight(50),
-    backgroundColor: Colors.white,
+    //backgroundColor: Colors.white,
+    backgroundColor: "rgb(248,248,248)",
     borderBottomRightRadius: getHeight(25),
     borderTopRightRadius: getHeight(25),
     marginRight: -2,
@@ -76,7 +77,8 @@ const crauselStyle = {
   buttonStakeView: {
     width: getWidth(121),
     height: getHeight(50),
-    backgroundColor: Colors.white,
+    backgroundColor: "rgb(248,248,248)",
+    //backgroundColor: Colors.white,
     borderBottomLeftRadius: getHeight(25),
     borderTopLeftRadius: getHeight(25),
     //right: -1,
