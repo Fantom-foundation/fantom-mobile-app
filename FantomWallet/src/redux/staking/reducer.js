@@ -76,6 +76,9 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
       };
       const index = oldStakes.findIndex(item => item.publicKey === publicKey);
       if (index === -1) oldStakes.push(data);
+      else {
+        oldStakes.splice(index,1,data)
+      }
       return {
         ...state,
         data: oldStakes
