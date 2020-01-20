@@ -112,6 +112,7 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		F3DF2EC3DABA48D5907F6F97 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35875473D49346C191F520D9 /* FontAwesome5_Regular.ttf */; };
 		FAD67ADF5EA84990B356982E /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA9F6BED4FC4D3EA6C3AC5B /* libUdpSockets.a */; };
+		FD82D8B6393A443888472FEC /* libReactNativeLocalization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E508490DB6DC44039FF26958 /* libReactNativeLocalization.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 07FD4BE520874AB3002FBD31;
 			remoteInfo = QRCode;
+		};
+		09BA442523D582E300FACB9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 807BA2CF9EC3401A9817007A /* ReactNativeLocalization.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B5D9D0A1B6AD0EA00CF3A83;
+			remoteInfo = ReactNativeLocalization;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -578,6 +586,7 @@
 		04CFB3EE239FA9830029094C /* WorkSans-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-ExtraBold.otf"; sourceTree = "<group>"; };
 		04CFB3EF239FA9830029094C /* worksans-roman-vf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "worksans-roman-vf.ttf"; sourceTree = "<group>"; };
 		04CFB3F0239FA9830029094C /* WorkSans-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-BoldItalic.otf"; sourceTree = "<group>"; };
+		09BA442723D5897B00FACB9C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FantomWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantomWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -610,6 +619,7 @@
 		7829F69D0EB04391BC9E0AAA /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7956A4A483B14206B8B96CB7 /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
+		807BA2CF9EC3401A9817007A /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/react-native-localization/ios/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
 		829B72B81BC242B18E2CD5E8 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		84FBF89A2BCB4F91B2B76B58 /* libRNVersionCheck.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVersionCheck.a; sourceTree = "<group>"; };
@@ -665,6 +675,7 @@
 		DB2F1C3EF8864847B960D31C /* libRNCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCamera.a; sourceTree = "<group>"; };
 		DFDD45D585D741509542B654 /* libRNRandomBytes-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNRandomBytes-tvOS.a"; sourceTree = "<group>"; };
 		DFF301CF9D674F23AE0CBC22 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReanimated.a; sourceTree = "<group>"; };
+		E508490DB6DC44039FF26958 /* libReactNativeLocalization.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeLocalization.a; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F95929CA91DF45B0BB28BD2C /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -707,6 +718,7 @@
 				593C1632ACB9404EB9B67989 /* libSplashScreen.a in Frameworks */,
 				56ADE71D6F584E8D933A921D /* libRNImagePicker.a in Frameworks */,
 				16FBB630F6B74D4ABA8B6B47 /* libQRCode.a in Frameworks */,
+				FD82D8B6393A443888472FEC /* libReactNativeLocalization.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +805,14 @@
 			isa = PBXGroup;
 			children = (
 				0960009623AB90F500191CB2 /* libQRCode.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		09BA442223D582E300FACB9C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09BA442623D582E300FACB9C /* libReactNativeLocalization.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -974,6 +994,7 @@
 				388AD0BE85E8439FA40A854B /* SplashScreen.xcodeproj */,
 				5461F1EDA2A54CE0A9403C12 /* RNImagePicker.xcodeproj */,
 				CC991AB180414219891D511C /* QrCode.xcodeproj */,
+				807BA2CF9EC3401A9817007A /* ReactNativeLocalization.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1054,6 +1075,7 @@
 				6A1BEB340A24451BAFB41F9D /* libSplashScreen.a */,
 				1D36C36F6ACB452AAE6E24AF /* libRNImagePicker.a */,
 				2D88731CFD03452D87A74790 /* libQRCode.a */,
+				E508490DB6DC44039FF26958 /* libReactNativeLocalization.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1302,6 +1324,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 09BA442223D582E300FACB9C /* Products */;
+					ProjectRef = 807BA2CF9EC3401A9817007A /* ReactNativeLocalization.xcodeproj */;
+				},
+				{
 					ProductGroup = C5E564B7211D81BB0028C173 /* Products */;
 					ProjectRef = C5E564B6211D81BB0028C173 /* ReactNativePermissions.xcodeproj */;
 				},
@@ -1435,6 +1461,13 @@
 			fileType = archive.ar;
 			path = libQRCode.a;
 			remoteRef = 0960009523AB90F500191CB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		09BA442623D582E300FACB9C /* libReactNativeLocalization.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeLocalization.a;
+			remoteRef = 09BA442523D582E300FACB9C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
@@ -1912,6 +1945,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				13B07FB21A68108700A75B9A /* Base */,
+				09BA442723D5897B00FACB9C /* it */,
 			);
 			name = LaunchScreen.xib;
 			path = FantomWallet;
@@ -1949,11 +1983,13 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-localization/ios",
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
@@ -2001,11 +2037,13 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-localization/ios",
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",

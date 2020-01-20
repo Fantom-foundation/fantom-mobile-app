@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Dimensions
 } from "react-native";
+import { Messages } from "../../../theme";
 import { SafeAreaView } from "react-navigation";
 import styles from "./styles";
 import Button from "../../../components/general/Button";
@@ -17,7 +18,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import GridIcon from "../../../images/card-01.png";
 import CardView from "./components/cardView";
 import ListView from "./components/listView";
-
 import StickyHeader from "./components/stickyHeader";
 import ParallaxScrollView from "react-native-parallax-scroll-view";
 import Carousel from "react-native-snap-carousel";
@@ -32,8 +32,6 @@ import {
   setCurrentWallet as setCurrentWalletAction
 } from "~/redux/wallet/actions";
 import Loader from "~/components/general/Loader";
-import { fantomToDollar } from "../../../utils/converts";
-import axios from "axios";
 
 class Wallet extends Component {
   constructor(props) {
@@ -49,6 +47,8 @@ class Wallet extends Component {
   }
   componentDidMount() {
     const { getBalance, getHistory, isLoading, walletsData } = this.props;
+    console.log(Messages.how, "***** strings.how *****");
+    console.log(Messages.getInterfaceLanguage());
     if (walletsData && walletsData.length > 0 && !isLoading) {
       getBalance({ loading: isLoading });
       getHistory();
