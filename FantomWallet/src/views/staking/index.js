@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   SafeAreaView,
@@ -8,36 +8,37 @@ import {
   TouchableOpacity,
   Dimensions,
   Alert
-} from 'react-native';
-import styles from './styles';
-import question from '../../images/question.png';
-import Carousel from 'react-native-snap-carousel';
-import { Metrics, getWidth } from '../../utils/pixelResolver';
-import Modal from '../../components/general/modal';
-import { NavigationService, routes } from '../../navigation/helpers';
-import { connect } from 'react-redux';
-import { Colors } from '../../theme';
-import { formatNumber } from '~/utils/converts';
+} from "react-native";
+import styles from "./styles";
+import question from "../../images/question.png";
+import Carousel from "react-native-snap-carousel";
+import { Metrics, getWidth } from "../../utils/pixelResolver";
+import Modal from "../../components/general/modal";
+import { NavigationService, routes } from "../../navigation/helpers";
+import { connect } from "react-redux";
+import { Colors } from "../../theme";
+import { formatNumber } from "~/utils/converts";
 import {
   delegateByAddresses as delegateByAddressesAction,
   delegateUnstake as delegateUnstakeAction,
   delegateWithdraw as delegateWithdrawAction
-} from '~/redux/staking/actions';
-import moment from 'moment';
-import Web3Agent from '../../services/api/web3';
+} from "~/redux/staking/actions";
+import moment from "moment";
+import { Messages } from "../../theme";
+import Web3Agent from "../../services/api/web3";
 
-const modalText = 'You need at least 1 FTM to \n stake.';
+const modalText = "You need at least 1 FTM to \n stake.";
 
 const unstakeText =
-  'Are you sure you want to  request to withdraw \n your tokens from staking?\n\nThe tokens will be available\n after 7 days in your wallet.';
+  "Are you sure you want to  request to withdraw \n your tokens from staking?\n\nThe tokens will be available\n after 7 days in your wallet.";
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [ifUnstaking, setIfUnstaking] = useState(false);
   const [ifWithdrawing, setifWithdrawing] = useState(false);
-  const [isWithdrawModalOpened, openWithdrawModal] = useState('');
-  const [delegateAmount, setDelegateAmount] = useState('');
-  const [unstakeKey, setUnstakeKey] = useState('');
+  const [isWithdrawModalOpened, openWithdrawModal] = useState("");
+  const [delegateAmount, setDelegateAmount] = useState("");
+  const [unstakeKey, setUnstakeKey] = useState("");
   const [estimatedfee, setEstimatedfee] = useState(0);
   const [stakeAmountModal, setStakeAmountModal] = useState(false);
   const { delegateByAddresses, stakes, wallets, navigation } = props;
@@ -127,10 +128,10 @@ const Staking = (props: Props) => {
     const date1 = new Date(deactivatedTime * 1000);
     date1.setDate(date1.getDate() + 7);
     const date2 = new Date();
-    const startTime = moment(date1, 'YYYY/MM/DD HH:mm');
-    const endTime = moment(date2, 'YYYY/MM/DD HH:mm');
+    const startTime = moment(date1, "YYYY/MM/DD HH:mm");
+    const endTime = moment(date2, "YYYY/MM/DD HH:mm");
 
-    const timeLeft = startTime.diff(endTime, 'hours', true);
+    const timeLeft = startTime.diff(endTime, "hours", true);
 
     // const diffTime = Math.abs(date1 - date2);
     // const timeLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -141,7 +142,7 @@ const Staking = (props: Props) => {
     //   new Date().getTime() -
     //   (Number(stakeData.deactivatedTime || 0) + nextSevenDays);
 
-    const isUnstaking = navigation.getParam('isUnstaking');
+    const isUnstaking = navigation.getParam("isUnstaking");
     return (
       <View
         style={{
@@ -155,10 +156,14 @@ const Staking = (props: Props) => {
           <Text style={{ ...styles.amountStyle }}>
             {formatValues(availableToStake, false)}
           </Text>
-          <Text style={{ ...styles.walletTextStyle }}>Available to stake</Text>
+          <Text style={{ ...styles.walletTextStyle }}>
+            {Messages.availableStake}
+          </Text>
 
           <Text style={{ ...styles.amountStyle }}>{currentlyStaking}</Text>
-          <Text style={{ ...styles.walletTextStyle }}>Currently staking</Text>
+          <Text style={{ ...styles.walletTextStyle }}>
+            {Messages.currentlyStaking}
+          </Text>
           {deactivatedEpoch <= 0 && (
             <View>
               <Text style={{ ...styles.amountStyle }}>
@@ -168,9 +173,9 @@ const Staking = (props: Props) => {
             </View>
           )}
           {timeLeft > 0 && deactivatedEpoch > 0 ? (
-            <Text style={{ ...styles.amountStyle, textAlign: 'center' }}>
+            <Text style={{ ...styles.amountStyle, textAlign: "center" }}>
               {`Your ${currentlyStaking} FTM will be available in ${
-                timeLeft / 24 > 0 ? Math.floor(timeLeft / 24) + ' days and' : ''
+                timeLeft / 24 > 0 ? Math.floor(timeLeft / 24) + " days and" : ""
               }  ${Math.floor(timeLeft % 24)} hours`}
             </Text>
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
@@ -178,7 +183,7 @@ const Staking = (props: Props) => {
               onPress={() => {
                 if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                   Alert.alert(
-                    'Insufficient funds',
+                    "Insufficient funds",
                     `You need minimum ${estimatedfee.toFixed(
                       5
                     )} in your balance to initiate withdraw transaction.`
@@ -217,7 +222,7 @@ const Staking = (props: Props) => {
                   setUnstakeKey(stakeData.publicKey);
                   if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                     Alert.alert(
-                      'Insufficient funds',
+                      "Insufficient funds",
                       `You need minimum ${estimatedfee.toFixed(
                         5
                       )} in your balance to initiate unstake transaction.`
@@ -254,7 +259,7 @@ const Staking = (props: Props) => {
                   ...styles.buttonText
                 }}
               >
-                Stake
+                {Messages.stake}
               </Text>
             </TouchableOpacity>
           )}
@@ -272,9 +277,9 @@ const Staking = (props: Props) => {
       publicKey: unstakeKey,
       cbSuccess: isSuccess => {
         if (isSuccess)
-          navigation.navigate('WalletImported', {
-            text: 'Requested to unstake successfully',
-            navigationRoute: 'Back'
+          navigation.navigate("WalletImported", {
+            text: "Requested to unstake successfully",
+            navigationRoute: "Back"
           });
         setIfUnstaking(false);
       }
@@ -289,9 +294,9 @@ const Staking = (props: Props) => {
       publicKey: unstakeKey,
       cbSuccess: isSuccess => {
         if (isSuccess)
-          navigation.navigate('WalletImported', {
-            text: 'Tokens successfully withdrawn!',
-            navigationRoute: 'Staking'
+          navigation.navigate("WalletImported", {
+            text: "Tokens successfully withdrawn!",
+            navigationRoute: "Staking"
           });
         setifWithdrawing(false);
       }
@@ -319,8 +324,8 @@ const Staking = (props: Props) => {
         {values && values.length === 1 ? (
           <View
             style={{
-              alignItems: 'center',
-              justifyContent: 'center'
+              alignItems: "center",
+              justifyContent: "center"
             }}
           >
             {_renderItem({ item: values[0], index: 0 })}
@@ -348,7 +353,7 @@ const Staking = (props: Props) => {
           buttonViewStyle={styles.notEnoughSpaceButtonView}
           buttons={[
             {
-              name: 'Back',
+              name: "Back",
               style: styles.backButtonStyle,
               onPress: () => setStakeAmountModal(false)
             }
@@ -364,13 +369,13 @@ const Staking = (props: Props) => {
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={{
             ...styles.unstakeView,
-            justifyContent: ifWithdrawing ? 'center' : 'space-between'
+            justifyContent: ifWithdrawing ? "center" : "space-between"
           }}
           buttons={
             ifWithdrawing
               ? [
                   {
-                    name: 'Withdrawing...',
+                    name: "Withdrawing...",
                     style: {
                       ...styles.unstakeButton,
                       backgroundColor: Colors.grey
@@ -381,14 +386,14 @@ const Staking = (props: Props) => {
                 ]
               : [
                   {
-                    name: 'Cancel',
+                    name: "Cancel",
                     style: styles.backButtonStyle,
-                    onPress: () => openWithdrawModal(''),
+                    onPress: () => openWithdrawModal(""),
                     textStyle: styles.backButton,
                     disabled: ifWithdrawing
                   },
                   {
-                    name: 'Withdraw',
+                    name: "Withdraw",
                     style: {
                       ...styles.unstakeButton,
                       backgroundColor: Colors.red
@@ -410,12 +415,12 @@ const Staking = (props: Props) => {
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
             ifUnstaking
-              ? { ...styles.unstakeView, justifyContent: 'center' }
+              ? { ...styles.unstakeView, justifyContent: "center" }
               : styles.unstakeView
           }
           buttons={[
             {
-              name: 'Cancel',
+              name: "Cancel",
               style: styles.backButtonStyle,
               onPress: () => openUnstakingModal(!isUnstakeModalOpened),
               textStyle: styles.backButton,
@@ -423,7 +428,7 @@ const Staking = (props: Props) => {
               isShow: ifUnstaking ? false : true
             },
             {
-              name: ifUnstaking ? 'Unstaking...' : 'Unstake',
+              name: ifUnstaking ? "Unstaking..." : Messages.unstake,
               style: {
                 ...styles.unstakeButton,
                 backgroundColor: ifUnstaking ? Colors.grey : Colors.red

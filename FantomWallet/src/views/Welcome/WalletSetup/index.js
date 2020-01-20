@@ -8,6 +8,7 @@ import {
   StatusBar,
   BackHandler
 } from "react-native";
+import { Messages } from "../../../theme";
 
 import styles from "./styles";
 import { FantomLogo } from "../../../images";
@@ -51,7 +52,7 @@ const WalletSetup = () => {
           style={styles.walletSetup}
           onPress={() => onCreateNewWallet()}
         >
-          <Text style={styles.walletSetupText}>CREATE A NEW WALLET</Text>
+          <Text style={styles.walletSetupText}>{Messages.createWallet}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.recoverWalletStyle}
