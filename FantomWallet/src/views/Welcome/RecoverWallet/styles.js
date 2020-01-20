@@ -100,29 +100,33 @@ const phraseView = {
   inputView: {
     flexDirection: "row",
     borderBottomWidth: 2,
-    marginTop: getHeight(84),
+     marginTop: getHeight(84),
     borderBottomColor: Colors.blackOpacity,
-    paddingBottom: 6
+    paddingBottom:6
+ 
   },
   textInput: {
-    width: getWidth(270)
-  },
+    width: getWidth(270),
+    paddingVertical: 4,
+ },
 
   pasteButton: {
     marginLeft: 2,
     width: getWidth(60),
-    height: 24,
     alignItems: "center",
+    height:24,
     justifyContent: "center",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: Colors.blackOpacity
+    borderColor: Colors.blackOpacity,
+    alignSelf:'center'
   },
-  pasterText: {
+  pasteText: {
     color: Colors.blackOpacity,
     fontSize: FontSize.small,
-    fontFamily: fonts.WorkSansSemiBold
-  },
+    fontFamily: fonts.WorkSansSemiBold,
+   
+ },
   noteText: {
     marginTop: 6,
     fontSize: FontSize.small,
@@ -143,10 +147,11 @@ const phraseView = {
 };
 const privateKeyStyles = {
   privateInputView: {
-    flexDirection: "row",
+  flexDirection: "row",
     borderBottomWidth: 2,
     borderBottomColor: Colors.blackOpacity,
-    paddingBottom: 6
+    alignItems: 'center',
+    paddingBottom:6
   }
 };
 

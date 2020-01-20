@@ -8,7 +8,8 @@ import {
   Keyboard,
   Clipboard,
   TouchableWithoutFeedback,
-  Alert
+  Alert,
+  BackHandler
 } from "react-native";
 import { connect } from "react-redux";
 import Button from "../../../components/general/Button";
@@ -47,7 +48,15 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
     if (backToHome) {
       NavigationService.navigate(routes.HomeScreen.Settings);
     } else NavigationService.pop();
+    return true;
   };
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onLeftIconPress
+    );
+    return () => handler.remove();
+  }, []);
 
   const onChangeView = value => {
     setActive(value);
@@ -81,13 +90,27 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
       cb: (publicKey: string) => {
         NavigationService.navigate(routes.root.WalletImported, { publicKey });
         setIsImporting(false);
+        setMnemonic("");
+        setPrivateKey("");
       }
     });
-    setMnemonic("");
   };
 
   const handleRecoverWalletUsingPrivateKey = async () => {
-    if (privateKey) {
+    var regx = /^[a-zA-Z0-9]+$/;
+
+    if (
+      privateKey === "" ||
+      privateKey.length !== 66 ||
+      regx.test(privateKey) === false ||
+      privateKey.toLowerCase().substring(0, 2) !== "0x"
+    ) {
+      Alert.alert(
+        "Warning",
+        "Please enter a valid 66 bit alphanumeric private key that starts with 0x"
+      );
+      setPrivateKey("");
+    } else {
       setIsImporting(true);
       // const address = WalletUtils.restoreWallet(privateKey);
       const address = await Web3Agent.Fantom.restoreWallet(privateKey);
@@ -100,16 +123,19 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
               publicKey: address.address
             });
             setIsImporting(false);
+            setMnemonic("");
+            setPrivateKey("");
           }
         });
       }
-    } else {
-      Alert.alert("Warning", "Please enter the Private Key");
     }
+    // } else {
+    //   Alert.alert("Warning", "Please enter the Private Key");
+    // }
   };
 
   const changeMnemonic = text => {
-    setMnemonic(text);
+    setMnemonic(text.toLowerCase());
     setErrorType("");
   };
 
@@ -157,7 +183,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             </View>
 
             <Text style={styles.noteText}>
-              12 or 24 words separated by single spaces
+              12 words separated by single spaces
             </Text>
             <Button
               onPress={handleRecoverWallet}
@@ -176,14 +202,14 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
               <TextInput
                 multiline={true}
                 style={styles.textInput}
-                value={privateKey}
+                value={privateKey ? privateKey.trim() : ""}
                 onChangeText={text => setPrivateKey(text)}
               ></TextInput>
               <TouchableOpacity
                 style={styles.pasteButton}
                 onPress={() => readPrivateKeyFromClipboard()}
               >
-                <Text style={styles.pasterText}>Paste</Text>
+                <Text style={styles.pasteText}>Paste</Text>
               </TouchableOpacity>
             </View>
             <Text style={styles.noteText}>64 alphanumeric characters</Text>

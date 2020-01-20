@@ -1,13 +1,10 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "../styles";
-import Icon from "react-native-vector-icons/FontAwesome";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { getHeight, getWidth } from "../../../../utils/pixelResolver";
-import { Colors, FontSize, fonts } from "../../../../theme";
 import WalletMenu from "./walletMenu";
 import CardView from "./cardView";
-import { EyeIcon, EyeOffIcon } from "../../../../images";
+import { EyeOpen, EyeClose } from "../../../../images";
 import { balanceToDollar } from "~/utils/converts.js";
 const CardHeader = props => {
   const {
@@ -20,6 +17,7 @@ const CardHeader = props => {
     isHiddenText,
     totalBalance
   } = props;
+
   return (
     <View>
       <View
@@ -33,21 +31,15 @@ const CardHeader = props => {
             {isHiddenText ? "*******" : `$${balanceToDollar(totalBalance, 2)}`}
           </Text>
           <TouchableOpacity onPress={() => setCardHiddenView()}>
-            {/* <Icon
-              style={styles.iconStyle}
-              name={"eye"}
-              size={18}
-              color={Colors.textBlack}
-            /> */}
             {isHiddenText ? (
               <Image
-                source={EyeOffIcon}
+                source={EyeClose}
                 resizeMode="contain"
                 style={styles.eyeOffIcon}
               ></Image>
             ) : (
               <Image
-                source={EyeIcon}
+                source={EyeOpen}
                 resizeMode="contain"
                 style={styles.eyeIcon}
               ></Image>

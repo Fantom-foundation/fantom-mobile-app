@@ -1,29 +1,48 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
 
+const deviceHeight = Dimensions.get("window").height;
+ 
 const crauselStyle = {
   crauselView: {
-    marginTop: getHeight(58)
+    marginTop: getHeight(30)
   },
   walletView: {
     paddingTop: getHeight(22),
     paddingBottom: getHeight(51),
     borderRadius: getWidth(22),
-    width: getWidth(260)
+    width: getWidth(260),
+
+    height: Metrics.screenHeight <= 600 ? getHeight(580) : getHeight(540),
+    backgroundColor: Colors.royalBlue,
+    shadowColor: Colors.black,
+    shadowOffset: {
+      height: 0,
+      width: 0
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+  //  elevation: 1
   },
   titleView: {
     fontSize: FontSize.base,
     fontFamily: fonts.WorkSansSemiBold,
-    paddingHorizontal: getWidth(22)
+    paddingHorizontal: getWidth(22),
+    color: Colors.white
   },
   amountStyle: {
     textAlign: "right",
-    marginTop: 40,
-    width: getWidth(150),
+    marginTop: getHeight(30),
+    width: getWidth(216),
+
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansBold,
-    fontSize: FontSize.large + 1
+    fontSize: FontSize.large + 1,
+    color: Colors.white
+  },
+  stakingCard: {
+    paddingHorizontal: 22
   },
   walletTextStyle: {
     textAlign: "right",
@@ -31,27 +50,41 @@ const crauselStyle = {
     width: getWidth(150),
     alignSelf: "flex-end",
     fontFamily: fonts.WorkSansSemiBold,
-    fontSize: FontSize.small
+    fontSize: FontSize.small,
+    color: Colors.white
   },
-  buttonStakeView: {
-    width: getWidth(121),
-    height: getHeight(50),
-    backgroundColor: Colors.white,
-    borderBottomRightRadius: getHeight(25),
-    borderTopRightRadius: getHeight(25),
-    marginRight: -2,
-    alignItems: "center",
-    justifyContent: "center"
+  bottomTextStyle: {
+    // textAlign: "right",
+    marginTop: 4,
+    // width: getWidth(150),
+    alignSelf: "flex-end",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.small,
+    color: Colors.white
   },
   buttonUnstakeView: {
     width: getWidth(121),
     height: getHeight(50),
-    backgroundColor: Colors.white,
+    //backgroundColor: Colors.white,
+    backgroundColor: "rgb(248,248,248)",
+    borderBottomRightRadius: getHeight(25),
+    borderTopRightRadius: getHeight(25),
+    marginRight: -2,
+    alignItems: "center",
+    alignSelf: "flex-start",
+    justifyContent: "center"
+  },
+  buttonStakeView: {
+    width: getWidth(121),
+    height: getHeight(50),
+    backgroundColor: "rgb(248,248,248)",
+    //backgroundColor: Colors.white,
     borderBottomLeftRadius: getHeight(25),
     borderTopLeftRadius: getHeight(25),
-    right: -1,
+    //right: -1,
     borderColor: "white",
     alignItems: "center",
+    alignSelf: "flex-end",
     justifyContent: "center"
   },
   buttonView: {
@@ -61,7 +94,8 @@ const crauselStyle = {
   },
   buttonText: {
     fontSize: FontSize.mediumlarge,
-    fontFamily: fonts.WorkSansSemiBold
+    fontFamily: fonts.WorkSansSemiBold,
+    color: Colors.royalBlue
   }
 };
 
@@ -143,8 +177,8 @@ const stakingModal = {
   unstakeView: {
     marginTop: getHeight(80),
     flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: getWidth(12)
+    paddingHorizontal: getWidth(10),
+    justifyContent: "space-between"
   },
   unstakeOuterView: {
     borderWidth: 2,

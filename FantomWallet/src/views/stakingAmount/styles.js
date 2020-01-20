@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
 
@@ -54,12 +54,12 @@ const availableAmount = {
     color: Colors.lightGrey
   },
   maxButton: {
-    width: getWidth(50),
-    height: 26,
+    width: Platform.OS === "ios" ? getHeight(50) : getWidth(60),
+    height: Platform.OS === "ios" ? 26 : 40,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "red",
-    borderRadius: 13,
+    borderRadius: Platform.OS === "ios" ? 13 : 20,
     backgroundColor: Colors.lightGrey
   },
   maxButtonText: {
@@ -75,7 +75,6 @@ const buttonStyles = {
     width: getWidth(152),
     height: getHeight(50),
     borderRadius: getHeight(25),
-    backgroundColor: Colors.lightGrey,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -103,6 +102,28 @@ export default StyleSheet.create({
     width: getWidth(200),
     textAlign: "center",
     marginTop: 18,
+    alignSelf: "center"
+  },
+  modalTextStyle: {
+    textAlign: "center",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    color: Colors.blackOpacity,
+    marginHorizontal: getWidth(20)
+  },
+  backButtonStyle: {
+    width: getWidth(132),
+    height: getHeight(50),
+    borderRadius: getHeight(25),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    backgroundColor: "transparent",
+    borderWidth: 2,
+    borderColor: Colors.blackOpacity
+  },
+  notEnoughSpaceButtonView: {
+    marginTop: getHeight(40),
     alignSelf: "center"
   },
   safeAreaView: {

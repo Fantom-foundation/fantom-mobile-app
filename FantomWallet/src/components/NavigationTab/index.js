@@ -4,36 +4,40 @@ import { View, BackHandler } from "react-native";
 
 /** * Active NavigationIcons */
 import { NavigationService, routes } from "~/navigation/helpers";
-import homeIcon from "~/images/tabHome.png";
-import prefrencesIcon from "~/images/tabPrefrences.png";
-import stakeIcon from "~/images/tabStake.png";
-import walletIcon from "~/images/tabWallet.png";
-import quickPayIcon from "~/images/tabQuickPay.png";
 import { Colors } from "../../theme";
+import {
+  HomeIcon,
+  WalletTabIcon,
+  OppositeArrow,
+  MoneyBagIcon,
+  Avatar
+} from "~/images";
+import { delegateByAddresses } from "~/redux/staking/actions";
+import { store } from "~/redux/store";
 
 import styles from "./styles";
 import Tab from "./tab";
 
 const TABS = [
   {
-    icon: homeIcon,
+    icon: HomeIcon,
     route: routes.HomeScreen.Home
   },
   {
-    icon: walletIcon,
+    icon: WalletTabIcon,
     route: routes.HomeScreen.Wallet
   },
   {
-    icon: quickPayIcon,
+    icon: OppositeArrow,
     route: routes.HomeScreen.SendReceive
   },
 
   {
-    icon: stakeIcon,
+    icon: MoneyBagIcon,
     route: routes.HomeScreen.Staking
   },
   {
-    icon: prefrencesIcon,
+    icon: Avatar,
     route: routes.HomeScreen.Settings
   }
 ];
@@ -53,7 +57,7 @@ type Props = {
  */
 const HomeNavigationBar = ({ navigation }: Props) => {
   const backAndroidPress = () => {
-    navigation.goBack()
+    navigation.goBack();
   };
 
   useEffect(() => {
@@ -63,6 +67,9 @@ const HomeNavigationBar = ({ navigation }: Props) => {
   }, []);
 
   const handleSelectedTab = route => {
+    if (route === routes.HomeScreen.Staking) {
+      store.dispatch(delegateByAddresses());
+    }
     NavigationService.navigate(route);
   };
 

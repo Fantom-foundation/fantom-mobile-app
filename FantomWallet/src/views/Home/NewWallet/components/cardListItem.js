@@ -1,29 +1,45 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import styles from "../styles";
-import {
-  fantomToDollar,
-  convertFTMValue,
-  getConversionRate
-} from "../../../../utils/converts";
-const CardListItem = ({ data, isHiddenText }) => {
+import { convertFTMValue, formatActivities } from "../../../../utils/converts";
+
+const CardListItem = ({
+  data,
+  isHiddenText,
+  publicKey,
+  handleTransactionClick
+}) => {
   return data.map(item => {
-    const { value } = item;
+    const { value, from, to } = item;
+    const type =
+      from.toLowerCase() === publicKey.toLowerCase() ? "Sent" : "Received";
+
     return (
-      <View style={styles.listItemContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.listItemTitle}>Fantom</Text>
+      <>
+        <TouchableOpacity
+          style={styles.listItemContainer}
+          onPress={() => handleTransactionClick(type, item, publicKey)}
+        >
+          <Text style={styles.selfText}>
+            {formatActivities(item.timestamp)}
+          </Text>
           <Text style={styles.listItemTitle}>
-            {isHiddenText ? "********" : `${convertFTMValue(value)} FTM`}
+            {to.toLowerCase() != from.toLowerCase()
+              ? isHiddenText
+                ? "*"
+                : type === "Sent"
+                ? "-"
+                : "+"
+              : ""}
+            {isHiddenText
+              ? "********"
+              : `${Number(convertFTMValue(value, "bignumber"))} FTM`}
           </Text>
-        </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.balanceText}>{`$${getConversionRate()}`}</Text>
-          <Text style={styles.balanceText}>
-            {isHiddenText ? "" : `$${fantomToDollar(value)}`}
-          </Text>
-        </View>
-      </View>
+          {to.toLowerCase() === from.toLowerCase() && (
+            <Text style={styles.selfText}>Self</Text>
+          )}
+        </TouchableOpacity>
+      </>
     );
   });
 };

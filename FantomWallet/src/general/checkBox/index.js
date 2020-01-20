@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import { TouchableOpacity,Image} from "react-native";
+import { TouchableOpacity, Image } from "react-native";
 import styles from "./style";
-import checkbox from "../../images/checkbox.png";
+import CheckboxBorder from "../../images/checkbox.png";
 import checkedIcon from "../../images/CheckedIcon.png";
 
-const CheckBox =(props)=> {
+const CheckBox = props => {
   const [checked, setChecked] = useState(false);
-      const {onChange}=props
+  const { onChange } = props;
 
-    return (
-      <TouchableOpacity
-        style={styles.checkBoxStyle}
-        activeOpacity={1}
-        onPress={() => {
-          setChecked(!checked)
-          onChange(!checked);
-        }}
-      >
-        <Image
-          source={checked ? checkedIcon : checkbox}
-          style={styles.imgStyle}
-        />
-      </TouchableOpacity>
-    );
-  }
+  return (
+    <TouchableOpacity
+      style={styles.checkBoxStyle}
+      activeOpacity={1}
+      onPress={() => {
+        setChecked(!checked);
+        onChange(!checked);
+      }}
+    >
+      <Image
+        source={checked ? checkedIcon : CheckboxBorder}
+        style={styles.imgStyle}
+      />
+    </TouchableOpacity>
+  );
+};
 
 export default CheckBox;

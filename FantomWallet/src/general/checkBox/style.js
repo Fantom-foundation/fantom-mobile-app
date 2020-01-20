@@ -5,15 +5,16 @@ import { Colors, FontSize, fonts } from "../../theme";
 export default StyleSheet.create({
   imgStyle: {
     width: getWidth(20),
-    height: getWidth(20),
-    tintColor:Colors.black
+    height: getWidth(20)
+    //tintColor: Colors.black
   },
   checkBoxStyle: {
     borderColor: Colors.black,
     borderWidth: 1.5,
     width: getWidth(21),
     height: getWidth(21),
-    borderRadius:2,
-    alignItems:"center"
+    borderRadius: 2,
+    alignItems: "center",
+    backgroundColor: Colors.white
   }
 });

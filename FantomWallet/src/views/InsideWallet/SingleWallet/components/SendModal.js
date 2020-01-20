@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { TouchableOpacity, Text, View, Share } from "react-native";
+import { TouchableOpacity, Text, View, Share, Linking } from "react-native";
 import { Colors } from "~/theme";
 import { getHeight, Metrics } from "~/utils/pixelResolver";
 import { NavigationService, routes } from "~/navigation/helpers";
 import Entypo from "react-native-vector-icons/Entypo";
 import styles from "../styles";
-
+import { LINKING_URL } from "react-native-dotenv";
 import {
   fantomToDollar,
   convertFTMValue,
@@ -13,7 +13,6 @@ import {
 } from "~/utils/converts";
 const SendModal = props => {
   const { closeSendModal, transactionData, publicKey } = props;
-
   const {
     type,
     value,
@@ -29,7 +28,7 @@ const SendModal = props => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: publicKey
+        message: hash
       });
 
       if (result.action === Share.sharedAction) {
@@ -45,14 +44,17 @@ const SendModal = props => {
       alert(error.message);
     }
   };
+
+  const openUrl = (value, type) => {
+    // const LINKING_URL = "https://explorer.fantom.network/";
+    Linking.openURL(`${LINKING_URL}${type}/${value}`);
+  };
+
   return (
     <TouchableOpacity
       activeOpacity={1}
       style={styles.modalBackground}
-      onPress={() => {
-        closeSendModal();
-        //   NavigationService.navigate(routes.root.SendFTM);
-      }}
+      onPress={closeSendModal}
     >
       <TouchableOpacity
         activeOpacity={1}
@@ -70,13 +72,31 @@ const SendModal = props => {
           />
           <View style={styles.detailsContainer}>
             <Text style={styles.modalText}>You sent</Text>
-            <Text style={styles.modalAmount}>{`${convertFTMValue(
-              value
+            <Text style={styles.modalAmount}>{`${Number(
+              convertFTMValue(value, "bignumber")
             )} FTM`}</Text>
             <Text style={styles.modalTransaction}>Recipient</Text>
-            <Text style={styles.modalTransactionText}>{to}</Text>
+            <TouchableOpacity onPress={() => openUrl(to, "address")}>
+              <Text
+                style={{
+                  ...styles.modalTransactionText,
+                  color: Colors.royalBlue
+                }}
+              >
+                {to}
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.modalTransaction}>Transaction number</Text>
-            <Text style={styles.modalTransactionText}>{hash}</Text>
+            <TouchableOpacity onPress={() => openUrl(hash, "transactions")}>
+              <Text
+                style={{
+                  ...styles.modalTransactionText,
+                  color: Colors.royalBlue
+                }}
+              >
+                {hash}
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.modalTransaction}>Date</Text>
             <Text style={styles.modalTransactionText}>{formattedDate}</Text>
             <Text style={styles.modalTransaction}>Transaction fee</Text>
@@ -86,7 +106,7 @@ const SendModal = props => {
                 marginBottom: getHeight(40)
               }}
             >
-              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee)})`}
+              {`${convertFTMValue(fee)} FTM ($${fantomToDollar(fee, 5)})`}
             </Text>
             <TouchableOpacity
               style={styles.shareIconWrapper}

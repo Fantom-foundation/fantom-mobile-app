@@ -25,6 +25,7 @@ import BackgroundFantomIcon from "~/images/BackgroundIcon.png";
 import { DEVICE_HEIGHT } from "~/common/constants";
 import { ENUM_WORD } from "./helpers";
 import { Colors } from "../../../theme";
+import { Loader } from "~/components/loader";
 
 type ShuffleItem = {
   name: string,
@@ -59,6 +60,7 @@ export const CheckMnemonicContainer = ({
   const [selectedWords, setSelectedWords] = useState([]);
   const [mnemonicWords, setMnemonicWords] = useState([]);
   const [realWord, setRealWord] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setShuffledMnemonic(
@@ -66,7 +68,7 @@ export const CheckMnemonicContainer = ({
         .split(" ")
         .sort(() => Math.random() - 0.5)
         .map((word, index) => ({
-          name: word[0].toUpperCase() + word.slice(1),
+          name: word,
           index: `${word}_${index}`,
           isClickable: true
         }))
@@ -115,11 +117,13 @@ export const CheckMnemonicContainer = ({
       });
       return;
     }
-
+    setIsLoading(true);
     generateWallet({
       mnemonic,
-      cb: (publicKey: string) =>
-        NavigationService.navigate(routes.root.WalletCreated, { publicKey })
+      cb: (publicKey: string) => {
+        setIsLoading(false);
+        NavigationService.navigate(routes.root.WalletCreated, { publicKey });
+      }
     });
   };
 
@@ -148,9 +152,9 @@ export const CheckMnemonicContainer = ({
   };
 
   const behaviour = Platform.OS === "ios" ? "padding" : null;
-
   return (
     <View style={styles.mainContainerStyle}>
+      {isLoading && <Loader />}
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 0.5 }}>
           <View style={styles.mainHeadingContainer}>

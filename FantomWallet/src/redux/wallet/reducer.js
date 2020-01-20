@@ -52,11 +52,22 @@ export default (state: Wallet = initialState, action: actionType) => {
         loading: action.payload.loading,
         walletsData: oldData,
         currentWallet: {
+          ...state.currentWallet
+        }
+      };
+    }
+
+    case types.SEND_FTM_SUCESS: {
+      const { balance } = action.payload;
+      return {
+        ...state,
+        currentWallet: {
           ...state.currentWallet,
           balance
         }
       };
     }
+
     case types.GET_BALANCE: {
       return {
         ...state,
@@ -80,13 +91,13 @@ export default (state: Wallet = initialState, action: actionType) => {
       if (state.currentWallet && state.currentWallet.publicKey === publicKey) {
         newCurrentWallet = {
           ...state.currentWallet,
-          history
+          history,
+          balance
         };
       }
       return {
         ...state,
         walletsData: oldData,
-
         currentWallet: newCurrentWallet
       };
     }
@@ -144,11 +155,39 @@ export default (state: Wallet = initialState, action: actionType) => {
         walletsData: oldData
       };
     }
-    case types.SET_CURRENT_WALLET:
+
+    // case types.ADD_WALLET_INFO: {
+    //   const { publicKey } = action.payload;
+    //   const oldData = [...state.walletsData] || [];
+    //   const index = oldData.findIndex(item => item.publicKey === publicKey);
+    //   if (index > -1) {
+    //     const newData = {
+    //       ...oldData[index],
+    //       publicKey
+    //     };
+
+    //     oldData.splice(index, 1, newData);
+    //   } else {
+    //     oldData.push({
+    //       name: "My Fantom Wallet",
+    //       publicKey,
+    //       history: [],
+    //       balance: 0
+    //     });
+    //   }
+
+    //   return {
+    //     ...state,
+    //     walletsData: oldData
+    //   };
+    // }
+    case types.SET_CURRENT_WALLET: {
+      const { payload } = action;
       return {
         ...state,
-        currentWallet: action.payload
+        currentWallet: { ...payload, balance: payload.balance }
       };
+    }
 
     case types.SET_FANTOM_BALANCE_RATE: {
       return {

@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
-import { View, WebView, StatusBar, Text } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import CheckBox from '../../general/checkBox';
-import styles from './style';
-import Button from '../../components/general/Button';
-import { Colors } from '../../theme';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Header from '~/components/Header';
-const BackupWallet = (props:TBackupWalletTypes) => {
+import React, { useState, useEffect } from "react";
+import { View, WebView, StatusBar, Text, BackHandler } from "react-native";
+import { SafeAreaView } from "react-navigation";
+import CheckBox from "../../general/checkBox";
+import styles from "./style";
+import Button from "../../components/general/Button";
+import { Colors } from "../../theme";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Header from "~/components/Header";
+const BackupWallet = (props: TBackupWalletTypes) => {
   const [isEnable, setIsEnable] = useState(false);
+  const { navigation } = props;
+  const backToHome = navigation.getParam("backToHome", false);
+
   const onLeftIconPress = () => {
-    const { navigation } = props;
-    const backToHome = navigation.getParam('backToHome', false);
     if (backToHome) {
       NavigationService.navigate(routes.HomeScreen.Settings);
     } else NavigationService.pop();
+    return true;
   };
+
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onLeftIconPress
+    );
+
+    return () => handler.remove();
+  }, []);
+
   return (
     <View style={styles.mainContainerStyle}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -59,7 +71,7 @@ const BackupWallet = (props:TBackupWalletTypes) => {
               backgroundColor: isEnable ? Colors.royalBlue : Colors.greyOpacity
             }}
             textStyle={styles.buttonText}
-            text={'CONTINUE'}
+            text={"CONTINUE"}
             onPress={() => {
               if (isEnable) {
                 NavigationService.navigate(routes.root.CreateMnemonic);

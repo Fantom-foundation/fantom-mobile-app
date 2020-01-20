@@ -10,7 +10,8 @@ import {
   ActivityIndicator,
   ScrollView,
   Image,
-  SafeAreaView
+  SafeAreaView,
+  BackHandler
 } from "react-native";
 import { connect } from "react-redux";
 import Bip39 from "react-native-bip39";
@@ -30,10 +31,7 @@ import { Metrics } from "../../../utils/pixelResolver";
  * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
  */
 export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
-  const {
-    setReduxMnemonic,
-    setDopdownAlert
-  } = props;
+  const { setReduxMnemonic, setDopdownAlert } = props;
   const [mnemonic, setMnemonic] = useState<string>("");
 
   const loading = !mnemonic.length;
@@ -42,6 +40,18 @@ export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
     const _menmonic = await Bip39.generateMnemonic();
     setMnemonic(_menmonic);
   };
+
+  const androidBackPress = () => {
+    BackHandler.exitApp();
+    return true;
+  };
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      androidBackPress
+    );
+    return () => handler.remove();
+  }, []);
 
   useEffect(() => {
     generateMnemonic();
@@ -60,7 +70,7 @@ export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
   const handleGoBack = () => NavigationService.pop();
 
   const mnemonicArray: Array<string> = mnemonic.length
-    ? mnemonic.split(" ").map(word => word[0].toUpperCase() + word.slice(1))
+    ? mnemonic.split(" ").map(word => word)
     : [];
 
   return (

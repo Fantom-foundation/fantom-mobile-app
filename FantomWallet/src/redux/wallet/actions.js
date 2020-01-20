@@ -3,13 +3,16 @@ export const types = {
   GET_BALANCE: "wallet/GET_BALANCE",
   SET_BALANCE: "wallet/SET_BALANCE",
   GET_HISTORY: "wallet/GET_HISTORY",
+  SEND_FTM: "wallet/SEND_FTM",
+  SEND_FTM_SUCESS: "wallet/SEND_FTM_SUCCESS",
   SET_HISTORY: "wallet/SET_HISTORY",
   SEND_TRANSACTION: "wallet/SEND_TRANSACTION",
   SET_LOADING_SEND: "wallet/SET_LOADING_SEND",
   ADD_TRANSACTION: "wallet/add_transaction",
   SET_WALLET_NAME: "wallet/SET_WALLET_NAME",
   SET_CURRENT_WALLET: "wallet/SET_CURRENT_WALLET",
-  SET_FANTOM_BALANCE_RATE: "wallet/SET_FANTOM_BALANCE_RATE"
+  SET_FANTOM_BALANCE_RATE: "wallet/SET_FANTOM_BALANCE_RATE",
+  ADD_WALLET_INFO: "wallet/SET_FANTOM_BALANCE_RATE"
 };
 
 type Balance = {
@@ -55,6 +58,14 @@ export const getHistory = () => ({
   type: types.GET_HISTORY
 });
 
+export const sendFtm = () => ({
+  type: types.SEND_FTM
+});
+
+export const sendFtmSuccess = balance => ({
+  type: types.SEND_FTM_SUCESS,
+  payload: balance
+});
 export const setHistory = ({
   publicKey,
   balance,
@@ -95,7 +106,9 @@ export const setWalletName = (walletInfo: WalletInfoT) => ({
   payload: walletInfo
 });
 
-export const setCurrentWallet = (walletData: any) => ({
-  type: types.SET_CURRENT_WALLET,
-  payload: walletData
-});
+export const setCurrentWallet = (walletData: any) => {
+  return {
+    type: types.SET_CURRENT_WALLET,
+    payload: walletData
+  };
+};

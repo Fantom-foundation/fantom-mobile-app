@@ -21,7 +21,7 @@ const stakingModal = {
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5
-  },
+  }, 
   backgroundView: {
     position: "absolute",
     top: 0,

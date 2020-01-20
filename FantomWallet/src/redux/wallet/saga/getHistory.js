@@ -1,25 +1,27 @@
 /* eslint-disable no-console */
 // @flow
-import { takeLatest, call, select, put } from "redux-saga/effects";
+import { takeEvery, call, select, put } from "redux-saga/effects";
 import axios from "axios";
 import { types, setHistory } from "../actions";
-
-import { GET_BALANCE_API, API_URL_1_FANTOM } from "react-native-dotenv";
+import { setDopdownAlert } from "~/redux/notification/actions";
+import {
+  GET_BALANCE_API,
+  API_URL_FANTOM,
+  REACT_APP_API_URL_FANTOM
+} from "react-native-dotenv";
 
 const getTransactionApi = async publicKey => {
-  console.log(
-    "API_URL_1_FANTOMAPI_URL_1_FANTOMAPI_URL_1_FANTOMAPI_URL_1_FANTOM",
-    API_URL_1_FANTOM
-  );
-  return await axios.get(
-    `${API_URL_1_FANTOM}api/v1/get-account?address=${publicKey}&trxsFilter=from`,
-    {
+  return await axios
+    .get(`${REACT_APP_API_URL_FANTOM}api/v1/get-account?address=${publicKey}`, {
       headers: {
         "Content-Type": "application/json"
       }
-    }
-  );
+    })
+    .catch(() => {
+      return { data: { data: false } };
+    });
 };
+
 const getBalanceApi = async () => {
   return await axios.get(GET_BALANCE_API);
 };
@@ -30,12 +32,13 @@ export function* getHistory(): any {
       keys,
       walletsData: wallet.walletsData
     }));
+
     const {
       data: { body }
     } = yield call(getBalanceApi);
-    console.log("getBalance", JSON.parse(body));
     if (body) {
       const balanceInfo = JSON.parse(body);
+
       yield put({
         type: types.SET_FANTOM_BALANCE_RATE,
         payload: Number(balanceInfo.price)
@@ -50,9 +53,9 @@ export function* getHistory(): any {
             data: { data }
           } = yield call(getTransactionApi, publicKey);
 
-          console.log("****** response ******", data);
           if (data && data.account) {
             const { address, transactions, balance } = data.account;
+
             yield put(
               setHistory({ publicKey, history: transactions, balance })
             );
@@ -61,12 +64,22 @@ export function* getHistory(): any {
       }
     }
   } catch (e) {
-    yield console.log(e);
+    console.log("e.message, e", e.message, e);
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.GET_HISTORY, getHistory);
+  yield takeEvery(types.GET_HISTORY, getHistory);
 }
 
 // transactionData.push({

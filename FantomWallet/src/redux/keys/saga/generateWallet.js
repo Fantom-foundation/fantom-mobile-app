@@ -1,5 +1,5 @@
 // @flow
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeLatest, put, select, takeEvery } from "redux-saga/effects";
 import Bip39 from "react-native-bip39";
 import EthUtil from "ethereumjs-util";
 import Hdkey from "hdkey";
@@ -28,10 +28,19 @@ export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
     yield put(setMnemonic({ mnemonic: "" }));
 
     yield put(setKeys({ masterKey, privateKey, publicKey }));
-
+    yield put({ type: types.ADD_WALLET_INFO, payload: { publicKey } });
     cb(publicKey);
   } catch (e) {
-    yield put(setDopdownAlert("error", e.message));
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 
@@ -40,15 +49,25 @@ export function* generateWalletUsingPrivateKey({
 }: Action): any {
   try {
     yield put(setKeys({ privateKey, publicKey }));
+    yield put({ type: types.ADD_WALLET_INFO, payload: { publicKey } });
     cb();
   } catch (e) {
-    yield put(setDopdownAlert("error", e.message));
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      yield put(setDopdownAlert("error", e.message));
+    }
   }
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.GENERATE_WALLET, generateWallet);
-  yield takeLatest(
+  yield takeEvery(types.GENERATE_WALLET, generateWallet);
+  yield takeEvery(
     types.GENERATE_WALLET_USING_PRIVATE_KEY,
     generateWalletUsingPrivateKey
   );

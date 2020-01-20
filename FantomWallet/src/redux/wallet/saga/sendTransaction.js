@@ -1,19 +1,24 @@
 // @flow
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import { Alert } from "react-native";
 import moment from "moment";
-
-import { types, setLoadingSendTransaction, addTransaction } from "../actions";
+import Web3 from "web3";
+import {
+  types,
+  setLoadingSendTransaction,
+  addTransaction,
+  getHistory
+} from "../actions";
 import Web3Agent from "~/services/api/web3";
 import type { TransactionT } from "../actions";
 import { SUCCESS, FAILED, SENT } from "~/common/constants";
-
+import { setDopdownAlert } from "~/redux/notification/actions";
 type Action = {
   payload: {
     to: string,
     value: string,
     memo: string,
-    cbSuccess: () => void
+    cbSuccess: (isSuccess: boolean) => void
   }
 };
 
@@ -50,38 +55,51 @@ export function* sendTransaction({
     // if (!responce.blockHash) throw Error(otherErrorMessage);
     // success
     transactionId = responce.blockHash;
-    const transaction: TransactionT = {
-      type: SENT,
-      value,
-      hash: transactionId,
-      transactionStatus,
-      amountUnit: "FTM",
-      from: publicKey,
-      to,
-      isError: false,
-      timestamp: date
-    };
+    // const transaction: TransactionT = {
+    //   type: SENT,
+    //   value: Web3.utils.toWei(value, "ether"),
+    //   hash: transactionId,
+    //   transactionStatus,
+    //   amountUnit: "FTM",
+    //   from: publicKey,
+    //   to,
+    //   isError: false,
+    //   timestamp: date
+    // };
 
-    yield put(addTransaction(transaction));
+    yield put(getHistory());
     // add to local history storage
     yield put(setLoadingSendTransaction(false));
+    yield put({ type: types.GET_BALANCE, payload: { loading: false } });
     Alert.alert(
       "Success",
       `Transfer successful with transaction hash: ${responce.blockHash}`,
       [
         {
           text: "Ok",
-          onPress: cbSuccess,
+          onPress: () => cbSuccess(true),
           style: "cancel"
         }
       ]
     );
   } catch (e) {
-    Alert.alert("Error", e.message || otherErrorMessage);
+    yield put(setLoadingSendTransaction(false));
+    cbSuccess(false);
+    if (
+      e.message.toString().includes("Internet connection") ||
+      e.message.toString().includes("Network Error")
+    ) {
+      yield put(
+        setDopdownAlert("error", "Please check your internet connection")
+      );
+    } else {
+      Alert.alert("Error", e.message || otherErrorMessage);
+    }
+
     transactionStatus = FAILED;
   }
 }
 
 export default function* listener(): Iterable<any> {
-  yield takeLatest(types.SEND_TRANSACTION, sendTransaction);
+  yield takeEvery(types.SEND_TRANSACTION, sendTransaction);
 }

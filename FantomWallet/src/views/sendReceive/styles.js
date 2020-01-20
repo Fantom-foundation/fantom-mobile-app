@@ -18,7 +18,6 @@ const qrCode = {
 };
 const priceText = {
   sendPrice: {
-    fontSize: getHeight(72),
     fontFamily: fonts.WorkSansBold,
     color: Colors.white,
     flexWrap: "wrap",
@@ -42,16 +41,17 @@ const priceText = {
   walletText: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
-    color: Colors.white
+    color: Colors.white,
+    textAlign: "right"
   },
   walletAmountText: {
     fontSize: FontSize.mediumSmall,
     fontFamily: fonts.WorkSansBold,
     color: Colors.lightBlue,
-    textAlign: "center",
+    textAlign: "right",
     marginTop: 15,
     flexWrap: "wrap",
-    width: getWidth(60)
+    width: getWidth(150)
   }
 };
 const keyPadStyle = {
@@ -102,6 +102,27 @@ const modalStyles = {
   sendText: {
     fontSize: FontSize.base,
     fontFamily: fonts.WorkSansSemiBold
+  },
+  modalTextStyle: {
+    textAlign: "center",
+    flexWrap: "wrap",
+    fontFamily: fonts.WorkSansSemiBold,
+    fontSize: FontSize.base,
+    color: Colors.blackOpacity,
+    marginHorizontal: getWidth(20)
+  },
+  sendTextStyle: {
+    color: Colors.white
+  },
+  sendButton: {
+    backgroundColor: Colors.royalBlue,
+    borderWidth: 0
+  },
+  sendButtonView: {
+    marginTop: getHeight(80),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: getWidth(12)
   },
   toView: {
     // justifyContent: "space-between",

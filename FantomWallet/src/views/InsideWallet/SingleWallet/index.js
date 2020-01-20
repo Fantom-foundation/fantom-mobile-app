@@ -21,13 +21,15 @@ import styles from "./styles";
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
-import { EyeIcon, EyeOffIcon } from "../../../images";
+import { EyeOpen, EyeClose } from "../../../images";
 import {
   balanceToDollar,
   convertFTMValue,
   getConversionRate,
-  formatActivities
+  formatActivities,
+  balanceWithSeprators
 } from "~/utils/converts";
+
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
@@ -95,7 +97,7 @@ const SingleWallet = props => {
           marginBottom:
             Metrics.getiPhoneX_Dimensions().height === DEVICE_HEIGHT &&
             Metrics.getiPhoneX_Dimensions().width === DEVICE_WIDTH
-              ? getHeight(60)
+              ? getHeight(86)
               : getHeight(48)
         }}
       >
@@ -139,13 +141,13 @@ const SingleWallet = props => {
 
               {isHiddenText ? (
                 <Image
-                  source={EyeOffIcon}
+                  source={EyeClose}
                   resizeMode="contain"
                   style={styles.lineOnEyeOff}
                 ></Image>
               ) : (
                 <Image
-                  source={EyeIcon}
+                  source={EyeOpen}
                   resizeMode="contain"
                   style={styles.lineOnEye}
                 ></Image>
@@ -154,7 +156,7 @@ const SingleWallet = props => {
             <Text style={styles.ftmText}>
               {!isHiddenText
                 ? currentWallet && currentWallet.balance
-                  ? currentWallet.balance
+                  ? balanceWithSeprators(currentWallet.balance)
                   : 0
                 : "*******"}
             </Text>
@@ -162,7 +164,7 @@ const SingleWallet = props => {
               {!isHiddenText
                 ? `($${
                     currentWallet && currentWallet.balance
-                      ? balanceToDollar(currentWallet.balance, 10)
+                      ? balanceToDollar(currentWallet.balance, 2)
                       : 0
                   })`
                 : "*******"}
@@ -198,7 +200,7 @@ const SingleWallet = props => {
             </View>
             <View style={styles.activityListWrapper}>
               {history && history.length > 0 && (
-                <Text style={styles.activityText}>ACTIVITY</Text>
+                <Text style={styles.activityText}>Recent Activity</Text>
               )}
               <View style={styles.activityListView}>
                 <FlatList
@@ -248,10 +250,18 @@ const SingleWallet = props => {
                           {isHiddenText ? "*******" : newDate}
                         </Text>
                         <Text style={styles.activityAmountText}>
-                          {isHiddenText ? "*" : type === "Sent" ? "-" : "+"}
+                          {item.from.toLowerCase() !== item.to.toLowerCase()
+                            ? isHiddenText
+                              ? "*"
+                              : type === "Sent"
+                              ? "-"
+                              : "+"
+                            : ""}
                           {isHiddenText
                             ? "******"
-                            : convertFTMValue(item.value)}
+                            : `${Number(
+                                convertFTMValue(item.value, "bignumber")
+                              )} FTM`}
                         </Text>
                       </TouchableOpacity>
                     );

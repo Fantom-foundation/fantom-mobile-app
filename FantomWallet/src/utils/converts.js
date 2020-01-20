@@ -39,19 +39,27 @@ export function scientificToDecimal(num) {
   return num;
 }
 
-export function estimationMaxFantomBalance(fantomWei, gasPrice) {
+export function estimationMaxFantomBalance(fantomWei, gasPrice, from = "") {
   let wei = fantomWei;
 
-  const isEther = fantomWei < 1;
-  if (isEther) {
+  if (fantomWei % 1 != 0) {
     wei *= 1e18;
   }
-
-  const maxFantomBalanceWei = math.subtract(math.bignumber(wei), gasPrice);
+  let maxFantomBalanceWei = math.subtract(math.bignumber(wei), gasPrice);
+  if (from === "validator" || from === "bignumber") {
+    maxFantomBalanceWei = fantomWei;
+  }
   return Web3.utils.fromWei(maxFantomBalanceWei.toString(), "ether");
 
   // due to mock bignumber it is difficult to evaluate the behavior
 }
+
+export const formatNumber = num => {
+  if (num && num.toString().indexOf(".") !== -1) {
+    return num.toString().replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  }
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+};
 
 export const toFixed = (num, fixed) => {
   if (!num) return "";
@@ -59,22 +67,38 @@ export const toFixed = (num, fixed) => {
   return num.toString().match(re)[0];
 };
 
-export const fantomToDollar = value => {
-  const { fantomDollarRate } = store.getState().wallet;
-  if (fantomDollarRate) {
-    return (
-      fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE)
-    ).toFixed(10);
+export const fantomToDollar = (value, decimal) => {
+  if (value % 1 != 0) {
+    value *= 1e18;
   }
+  const { fantomDollarRate } = store.getState().wallet;
+
+  if (fantomDollarRate) {
+    let convertedValue =
+      fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE);
+    if (convertedValue <= 0.01) return convertedValue.toFixed(8);
+    else convertedValue.toFixed(2);
+  }
+
   return value;
 };
 
-export const convertFTMValue = value => {
+export const convertFTMValue = (value, from = "") => {
+  if (value % 1 != 0) {
+    value *= 1e18;
+  }
+
   if (value) {
-    return Number(estimationMaxFantomBalance(value, GAS_PRICE)).toFixed(10);
+    let convertValue = Number(
+      estimationMaxFantomBalance(value, GAS_PRICE, from)
+    );
+
+    if (convertValue <= 0.01) return convertValue.toFixed(8);
+    else return convertValue.toFixed(2);
   }
   return 0;
 };
+
 export const getConversionRate = value => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
@@ -84,7 +108,7 @@ export const getConversionRate = value => {
 };
 
 export const formatActivities = (activityDate: any) => {
-  const t = new Date(activityDate);
+  const t = new Date(activityDate * 1000);
   const dateString = moment(t).format("MMM D, hh:mm A");
   return dateString;
 };
@@ -92,7 +116,22 @@ export const formatActivities = (activityDate: any) => {
 export const balanceToDollar = (value, decimal) => {
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
+    if (value === 0 || value === "0") {
+      return value;
+    } else if (value <= 1) {
+      return (fantomDollarRate * value).toFixed(8);
+    }
     return (fantomDollarRate * value).toFixed(decimal);
   }
   return value;
+};
+
+export const balanceWithSeprators = value => {
+  if (!!value) {
+    return Number(value)
+      .toFixed(2)
+      .toString()
+      .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  }
+  return 0;
 };

@@ -12,7 +12,8 @@ export default StyleSheet.create({
     marginBottom: Metrics.screenHeight >= 812 ? 25 : 0
   },
   tabIconStyle: {
-    width: 20,
-    height: 20
+    width: 25,
+    height: 20,
+    fontWeight: "bold"
   }
 });
