@@ -4,13 +4,13 @@ import styles from "../styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 import GridIcon from "../../../../images/card-01.png";
 import { getHeight, getWidth } from "../../../../utils/pixelResolver";
-import { Colors, FontSize, fonts } from "../../../../theme";
+import { Colors, FontSize, fonts, Messages } from "../../../../theme";
 
 const WalletMenu = props => {
   const { isListView, customStyle, changeView } = props;
   return (
     <View style={[styles.listHeader, customStyle]}>
-      <Text style={styles.headerText}>Wallets</Text>
+      <Text style={styles.headerText}>{Messages.wallets}</Text>
       {isListView ? (
         <TouchableOpacity
           style={styles.gridIcon}

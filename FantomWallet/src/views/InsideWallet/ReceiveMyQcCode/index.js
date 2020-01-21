@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   TouchableOpacity,
   Text,
@@ -7,19 +7,20 @@ import {
   StatusBar,
   Share,
   Clipboard
-} from 'react-native';
-import { Colors } from '~/theme';
-import { getHeight, getWidth, Metrics } from '~/utils/pixelResolver';
-import { NavigationService, routes } from '~/navigation/helpers';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from '~/common/constants';
-import styles from './styles';
+} from "react-native";
+import { Colors } from "~/theme";
+import { getHeight, getWidth, Metrics } from "~/utils/pixelResolver";
+import { NavigationService, routes } from "~/navigation/helpers";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Entypo from "react-native-vector-icons/Entypo";
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
+import styles from "./styles";
+import { Messages } from "../../../theme";
 // import QRCode from 'react-native-qrcode';
-import { QRCode } from 'react-native-custom-qr-codes';
-import { connect } from 'react-redux';
-import { setDopdownAlert as setDopdownAlertAction } from '~/redux/notification/actions';
+import { QRCode } from "react-native-custom-qr-codes";
+import { connect } from "react-redux";
+import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
@@ -49,7 +50,7 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
   };
   const copyToClipboard = publicKey => {
     Clipboard.setString(publicKey);
-    setDopdownAlert('custom', 'COPIED');
+    setDopdownAlert("custom", Messages.copied);
   };
   return (
     <View
@@ -61,13 +62,13 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
       <StatusBar
         barStyle={
           colorTheme === Colors.royalBlue ||
-          colorTheme === '#8959DD' ||
-          colorTheme === '#A650A6' ||
-          colorTheme === '#4649FD' ||
-          colorTheme === '#E32C2C' ||
-          colorTheme === '#5F5F7C'
-            ? 'light-content'
-            : 'dark-content'
+          colorTheme === "#8959DD" ||
+          colorTheme === "#A650A6" ||
+          colorTheme === "#4649FD" ||
+          colorTheme === "#E32C2C" ||
+          colorTheme === "#5F5F7C"
+            ? "light-content"
+            : "dark-content"
         }
       />
       <SafeAreaView
@@ -111,7 +112,7 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
               <View style={styles.actionIconBackground}>
                 <FontAwesome5 name="copy" size={20} color={Colors.white} />
               </View>
-              <Text style={styles.actionText}>Copy</Text>
+              <Text style={styles.actionText}>{Messages.copy}</Text>
             </TouchableOpacity>
             {/* <TouchableOpacity
                 style={{
@@ -134,7 +135,7 @@ const ReceiveMyQcCode = (props: TReceiveQcCode) => {
               <View style={styles.actionIconBackground}>
                 <Entypo name="share" size={20} color={Colors.white} />
               </View>
-              <Text style={styles.actionText}>Share</Text>
+              <Text style={styles.actionText}>{Messages.share}</Text>
             </TouchableOpacity>
           </View>
         </View>

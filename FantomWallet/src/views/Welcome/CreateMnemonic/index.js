@@ -26,6 +26,7 @@ import styles from "./styles";
 import Button from "~/components/general/Button";
 import ProgressBar from "~/components/general/ProgressBar";
 import { Metrics } from "../../../utils/pixelResolver";
+import { Messages } from "../../../theme";
 
 /**
  * CreateMnemonic: This component is meant for generating secret codes for captcha verification.
@@ -64,7 +65,7 @@ export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
 
   const copyToClipboard = () => {
     Clipboard.setString(mnemonic);
-    setDopdownAlert("custom", "COPIED");
+    setDopdownAlert("custom", Messages.copied);
   };
 
   const handleGoBack = () => NavigationService.pop();

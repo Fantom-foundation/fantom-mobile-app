@@ -22,6 +22,7 @@ import { DEVICE_WIDTH, DEVICE_HEIGHT } from "~/common/constants";
 import ReceiveModal from "./components/ReceiveModal";
 import SendModal from "./components/SendModal";
 import { EyeOpen, EyeClose } from "../../../images";
+import { Messages } from "../../../theme";
 import {
   balanceToDollar,
   convertFTMValue,
@@ -47,7 +48,7 @@ const SingleWallet = props => {
     const { currentWallet } = props;
     //To copy the text to clipboard
     Clipboard.setString(currentWallet.publicKey);
-    setDopdownAlert("custom", "COPIED");
+    setDopdownAlert("custom", Messages.copied);
   };
 
   const sortActivities = (activityObject: any) => {
@@ -172,7 +173,7 @@ const SingleWallet = props => {
             <View style={styles.buttonWrapper}>
               <Button
                 activeOpacity={0.5}
-                text="Receive"
+                text={Messages.receive}
                 onPress={() =>
                   NavigationService.navigate(routes.root.ReceiveMyQcCode, {
                     publicKey: currentWallet.publicKey
@@ -186,7 +187,7 @@ const SingleWallet = props => {
               />
               <Button
                 activeOpacity={0.5}
-                text="Send"
+                text={Messages.send}
                 onPress={() => {
                   readFromClipboard();
                   NavigationService.navigate(routes.root.SendFTM);
@@ -200,7 +201,9 @@ const SingleWallet = props => {
             </View>
             <View style={styles.activityListWrapper}>
               {history && history.length > 0 && (
-                <Text style={styles.activityText}>Recent Activity</Text>
+                <Text style={styles.activityText}>
+                  {Messages.recentActivity}
+                </Text>
               )}
               <View style={styles.activityListView}>
                 <FlatList

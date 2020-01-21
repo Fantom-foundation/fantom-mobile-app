@@ -17,6 +17,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { getValidatorsList as getValidatorsListAction } from "~/redux/staking/actions";
 import { connect } from "react-redux";
 import { formatNumber } from "~/utils/converts";
+import { Messages } from "../../theme";
 
 const ValidatorNode = props => {
   const { validators, getValidatorsList, stakes, currentWallet } = props;
@@ -157,7 +158,9 @@ const ValidatorNode = props => {
                                 )
                               }
                             >
-                              <Text style={styles.selectText}>Select</Text>
+                              <Text style={styles.selectText}>
+                                {Messages.select}
+                              </Text>
                             </TouchableOpacity>
                           </View>
                         )}

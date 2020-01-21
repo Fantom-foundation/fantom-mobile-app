@@ -169,7 +169,9 @@ const Staking = (props: Props) => {
               <Text style={{ ...styles.amountStyle }}>
                 {formatValues(stakeData.claimedRewards)}
               </Text>
-              <Text style={{ ...styles.walletTextStyle }}>Earned rewards</Text>
+              <Text style={{ ...styles.walletTextStyle }}>
+                {Messages.earnedRewards}
+              </Text>
             </View>
           )}
           {timeLeft > 0 && deactivatedEpoch > 0 ? (
@@ -208,7 +210,9 @@ const Staking = (props: Props) => {
               <Text style={{ ...styles.amountStyle }}>
                 {formatValues(stakeData.pendingRewards, false)}
               </Text>
-              <Text style={{ ...styles.walletTextStyle }}>Pending rewards</Text>
+              <Text style={{ ...styles.walletTextStyle }}>
+                {Messages.pendingRewards}
+              </Text>
             </View>
           )}
         </View>
@@ -318,7 +322,7 @@ const Staking = (props: Props) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
-        <Text style={styles.stakingText}>Staking</Text>
+        <Text style={styles.stakingText}>{Messages.staking}</Text>
       </View>
       <View style={styles.crauselView}>
         {values && values.length === 1 ? (

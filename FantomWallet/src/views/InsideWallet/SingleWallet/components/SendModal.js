@@ -11,6 +11,7 @@ import {
   convertFTMValue,
   formatActivities
 } from "~/utils/converts";
+import { Messages } from "../../../../theme";
 const SendModal = props => {
   const { closeSendModal, transactionData, publicKey } = props;
   const {
@@ -71,11 +72,11 @@ const SendModal = props => {
             }}
           />
           <View style={styles.detailsContainer}>
-            <Text style={styles.modalText}>You sent</Text>
+            <Text style={styles.modalText}>{Messages.youSent}</Text>
             <Text style={styles.modalAmount}>{`${Number(
               convertFTMValue(value, "bignumber")
             )} FTM`}</Text>
-            <Text style={styles.modalTransaction}>Recipient</Text>
+            <Text style={styles.modalTransaction}>{Messages.recipient}</Text>
             <TouchableOpacity onPress={() => openUrl(to, "address")}>
               <Text
                 style={{
@@ -86,7 +87,9 @@ const SendModal = props => {
                 {to}
               </Text>
             </TouchableOpacity>
-            <Text style={styles.modalTransaction}>Transaction number</Text>
+            <Text style={styles.modalTransaction}>
+              {Messages.transactionNumber}
+            </Text>
             <TouchableOpacity onPress={() => openUrl(hash, "transactions")}>
               <Text
                 style={{
@@ -97,9 +100,11 @@ const SendModal = props => {
                 {hash}
               </Text>
             </TouchableOpacity>
-            <Text style={styles.modalTransaction}>Date</Text>
+            <Text style={styles.modalTransaction}>{Messages.date}</Text>
             <Text style={styles.modalTransactionText}>{formattedDate}</Text>
-            <Text style={styles.modalTransaction}>Transaction fee</Text>
+            <Text style={styles.modalTransaction}>
+              {Messages.transactionFee}
+            </Text>
             <Text
               style={{
                 ...styles.modalTransactionText,

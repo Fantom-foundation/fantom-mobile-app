@@ -20,6 +20,7 @@ import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../theme/colors";
 import Button from "../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
+import { Messages } from "../../theme";
 
 const WalletInfo = (props: TWalletInfoTypes) => {
   const {
@@ -41,7 +42,7 @@ const WalletInfo = (props: TWalletInfoTypes) => {
 
   const copyToClipboard = address => {
     Clipboard.setString(address);
-    setDopdownAlert("custom", "COPIED");
+    setDopdownAlert("custom", Messages.copied);
   };
 
   // const colors = [
@@ -71,14 +72,14 @@ const WalletInfo = (props: TWalletInfoTypes) => {
         <View style={styles.headingView}>
           <Text style={styles.headingText}>Wallet info</Text>
         </View>
-        <Text style={styles.addressText}>Address</Text>
+        <Text style={styles.addressText}>{Messages.address}</Text>
         <View style={styles.codeView}>
           <Text style={styles.codeText}>{publicKey}</Text>
           <TouchableOpacity onPress={() => copyToClipboard(publicKey)}>
             <Ionicons name="ios-copy" size={22} color={Colors.textBlack} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.addressText}>Name</Text>
+        <Text style={styles.addressText}>{Messages.name}</Text>
         <View style={styles.codeView}>
           {renameIconPressed ? (
             <TextInput

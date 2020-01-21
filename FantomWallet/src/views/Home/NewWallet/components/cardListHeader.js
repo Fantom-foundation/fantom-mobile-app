@@ -6,6 +6,7 @@ import WalletMenu from "./walletMenu";
 import CardView from "./cardView";
 import { EyeOpen, EyeClose } from "../../../../images";
 import { balanceToDollar } from "~/utils/converts.js";
+import { Messages } from "../../../../theme";
 const CardHeader = props => {
   const {
     showCard,
@@ -46,7 +47,7 @@ const CardHeader = props => {
             )}
           </TouchableOpacity>
         </View>
-        <Text style={styles.subHeading}>Total balance</Text>
+        <Text style={styles.subHeading}>{Messages.totalBalance}</Text>
       </View>
       <WalletMenu
         isListView={isListView}

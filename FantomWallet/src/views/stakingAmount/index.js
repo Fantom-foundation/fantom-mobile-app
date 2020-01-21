@@ -18,6 +18,7 @@ import { delegateAmount as delegateAmountAction } from "../../redux/staking/acti
 import { Colors } from "../../theme";
 import Modal from "../../components/general/modal";
 import Web3Agent from "../../services/api/web3";
+import { Messages } from "../../theme";
 
 const StakingAmount = (props: Props) => {
   const { validators, delegateAmount, keys, currentWallet } = props;
@@ -191,7 +192,7 @@ const StakingAmount = (props: Props) => {
             onPress={handleStakingAmount}
           >
             <Text style={styles.stakeText}>
-              {ifStaking ? "Staking..." : "Stake"}
+              {ifStaking ? "Staking..." : Messages.stake}
             </Text>
           </TouchableOpacity>
         </ScrollView>

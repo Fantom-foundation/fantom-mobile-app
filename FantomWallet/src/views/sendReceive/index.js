@@ -38,6 +38,7 @@ import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../components/loader";
 import Modal from "../../components/general/modal";
 import Web3Agent from "../../services/api/web3";
+import { Messages } from "../../theme";
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
  */
@@ -235,7 +236,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           {/* Buttons */}
           <View style={styles.sendReceiveView}>
             <Button
-              text={"Receive"}
+              text={Messages.receive}
               onPress={() =>
                 NavigationService.navigate(routes.root.ReceiveMyQcCode, {
                   publicKey: currentWallet.publicKey
@@ -245,7 +246,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
               textStyle={styles.buttonText}
             />
             <Button
-              text={"Send"}
+              text={Messages.send}
               buttonStyle={styles.buttonStyle}
               textStyle={styles.buttonText}
               onPress={() => handleSendOption()}
@@ -277,13 +278,13 @@ export const SendReceive = (props: TSendReceiveTypes) => {
                     color: address ? Colors.royalBlue : Colors.lightGrey
                   }}
                 >
-                  Send
+                  {Messages.send}
                 </Text>
               </TouchableOpacity>
             </View>
             {/* To Option */}
             <View style={styles.toView}>
-              <Text style={styles.toText}>To:</Text>
+              <Text style={styles.toText}>{Messages.to}:</Text>
               <TextInput
                 multiline
                 style={styles.sendTo}
@@ -297,7 +298,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
                     style={styles.pasteButton}
                     onPress={() => readFromClipboard()}
                   >
-                    <Text style={styles.pasteText}>Paste</Text>
+                    <Text style={styles.pasteText}>{Messages.paste}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() =>

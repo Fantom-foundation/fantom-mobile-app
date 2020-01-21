@@ -32,6 +32,7 @@ import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../../components/loader";
 import Modal from "../../../components/general/modal";
 import Web3Agent from "../../../services/api/web3";
+import { Messages } from "../../../theme";
 
 const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
 
@@ -203,7 +204,7 @@ const SendFTM = (props: Props) => {
                     opacity: toId === "" ? 0.5 : 1
                   }}
                 >
-                  Send
+                  {Messages.send}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -211,7 +212,7 @@ const SendFTM = (props: Props) => {
 
             <View style={styles.toWrapper}>
               <View style={styles.flexDirectionRow}>
-                <Text style={styles.toText}>To:</Text>
+                <Text style={styles.toText}>{Messages.to}:</Text>
                 <TextInput
                   multiline
                   style={styles.toId}
@@ -223,7 +224,7 @@ const SendFTM = (props: Props) => {
                   <>
                     <Button
                       activeOpacity={0.5}
-                      text="Paste"
+                      text={Messages.paste}
                       onPress={() => readFromClipboard()}
                       buttonStyle={styles.buttonStyle}
                       textStyle={styles.textStyle}
