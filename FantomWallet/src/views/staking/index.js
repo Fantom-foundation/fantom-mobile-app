@@ -109,6 +109,7 @@ const Staking = (props: Props) => {
   const _renderItem = ({ item, index }) => {
     const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
     const isDeligate = stakeData && stakeData.isDeligate;
+ 
     if (!stakeData) {
       return null;
     }
@@ -122,6 +123,8 @@ const Staking = (props: Props) => {
     // );
 
     const deactivatedEpoch = Number(stakeData.deactivatedEpoch || 0);
+
+
     const deactivatedTime = Number(stakeData.deactivatedTime || 0);
     // const timeLeft =
     //   delegateDate.getTime() - deactivatedTime + currentDate.getTime();
@@ -181,8 +184,14 @@ const Staking = (props: Props) => {
               }  ${Math.floor(timeLeft % 24)} hours`}
             </Text>
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
-            <TouchableOpacity
-              onPress={() => {
+           
+              <>
+              <Text style={{ ...styles.amountStyle }}>
+                Withdraw {currentlyStaking} FTM now
+              </Text>
+              <TouchableOpacity
+              style={{...styles.buttonStakeView , ...styles.withdraw}}
+                onPress={() => {
                 if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                   Alert.alert(
                     "Insufficient funds",
@@ -197,10 +206,17 @@ const Staking = (props: Props) => {
                 }
               }}
             >
-              <Text style={{ ...styles.amountStyle }}>
-                Withdraw {currentlyStaking} FTM now
+              <Text
+                style={{
+                  ...styles.buttonText
+                }}
+              >
+               Withdraw
               </Text>
             </TouchableOpacity>
+
+                </>
+         
           ) : (
             <View />
           )}

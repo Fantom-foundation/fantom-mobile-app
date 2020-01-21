@@ -87,6 +87,10 @@ const crauselStyle = {
     alignSelf: "flex-end",
     justifyContent: "center"
   },
+  withdraw: {
+    right: getWidth(-22),
+    marginTop: getHeight(40)
+  },
   buttonView: {
     marginTop: getHeight(31),
     flexDirection: "row",
