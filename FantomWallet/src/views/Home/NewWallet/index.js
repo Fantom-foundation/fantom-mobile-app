@@ -231,45 +231,61 @@ class Wallet extends Component {
                     showCard={true}
                   />
                 </View>
-                <Carousel
-                  style={styles.listContainer}
-                  sliderWidth={Dimensions.get("window").width}
-                  ref={c => {
-                    this.carousel = c;
-                  }}
-                  contentContainerCustomStyle={{
+                <View
+                  style={{
                     justifyContent: "center"
                   }}
-                  onSnapToItem={index => {
-                    const { walletsData, setCurrentWallet } = this.props;
-                    this.setState({ activeSlide: index });
-                    if (index > -1) {
-                      setCurrentWallet(walletsData[index]);
+                >
+                  <Carousel
+                    sliderWidth={
+                      (Dimensions.get("window").width - getWidth(40)) *
+                      walletsData.length
                     }
-                  }}
-                  //activeSlideOffset={10}
-                  inactiveSlideScale={1}
-                  lockScrollWhileSnapping={true}
-                  useScrollView={true}
-                  //activeSlideAlignment={"center"}
-                  pagingEnabled={true}
-                  //swipeThreshold={150}
-                  itemWidth={Dimensions.get("window").width - getWidth(40)}
-                  renderItem={({ item, index }) => {
-                    return (
-                      <CardView
-                        emptyView={false}
-                        setCurrentWallet={setCurrentWallet}
-                        isHiddenText={isHiddenText}
-                        data={item}
-                        showCard={true}
-                        showList={false}
-                        handleTransactionClick={this.handleTransactionClick}
-                      />
-                    );
-                  }}
-                  data={walletsData}
-                />
+                    style={styles.listContainer}
+                    sliderWidth={Dimensions.get("window").width}
+                    ref={c => {
+                      this.carousel = c;
+                    }}
+                    contentContainerCustomStyle={{
+                      justifyContent: "center"
+                    }}
+                    onSnapToItem={index => {
+                      const { walletsData, setCurrentWallet } = this.props;
+                      this.setState({ activeSlide: index });
+                      if (index > -1) {
+                        setCurrentWallet(walletsData[index]);
+                      }
+                    }}
+                    //activeSlideOffset={10}
+                    inactiveSlideScale={1}
+                    lockScrollWhileSnapping={true}
+                    useScrollView={true}
+                    //activeSlideAlignment={"center"}
+                    pagingEnabled={false}
+                    //swipeThreshold={150}
+                    itemWidth={Dimensions.get("window").width - getWidth(40)}
+                    renderItem={({ item, index }) => {
+                      return (
+                        <View
+                          style={{
+                            justifyContent: "center"
+                          }}
+                        >
+                          <CardView
+                            emptyView={false}
+                            setCurrentWallet={setCurrentWallet}
+                            isHiddenText={isHiddenText}
+                            data={item}
+                            showCard={true}
+                            showList={false}
+                            handleTransactionClick={this.handleTransactionClick}
+                          />
+                        </View>
+                      );
+                    }}
+                    data={walletsData}
+                  />
+                </View>
               </View>
 
               <View style={[styles.marginHorizontal]}>
