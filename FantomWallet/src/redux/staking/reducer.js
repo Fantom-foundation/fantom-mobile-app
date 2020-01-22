@@ -38,7 +38,7 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
         amount,
         claimedRewards: claimedRewards || 0,
         pendingRewards: pendingRewards || 0,
-        isDeligate: true,
+        isDeligate: amount && amount !== "" && amount !== "0",
         deactivatedTime,
         deactivatedEpoch,
         createdTime: Number(createdTime)
@@ -77,7 +77,7 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
       const index = oldStakes.findIndex(item => item.publicKey === publicKey);
       if (index === -1) oldStakes.push(data);
       else {
-        oldStakes.splice(index,1,data)
+        oldStakes.splice(index, 1, data);
       }
       return {
         ...state,
