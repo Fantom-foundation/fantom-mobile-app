@@ -109,7 +109,7 @@ const Staking = (props: Props) => {
   const _renderItem = ({ item, index }) => {
     const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
     const isDeligate = stakeData && stakeData.isDeligate;
- 
+
     if (!stakeData) {
       return null;
     }
@@ -123,7 +123,6 @@ const Staking = (props: Props) => {
     // );
 
     const deactivatedEpoch = Number(stakeData.deactivatedEpoch || 0);
-
 
     const deactivatedTime = Number(stakeData.deactivatedTime || 0);
     // const timeLeft =
@@ -184,39 +183,36 @@ const Staking = (props: Props) => {
               }  ${Math.floor(timeLeft % 24)} hours`}
             </Text>
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
-           
-              <>
+            <>
               <Text style={{ ...styles.amountStyle }}>
                 Withdraw {currentlyStaking} FTM now
               </Text>
               <TouchableOpacity
-              style={{...styles.buttonStakeView , ...styles.withdraw}}
+                style={{ ...styles.buttonStakeView, ...styles.withdraw }}
                 onPress={() => {
-                if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
-                  Alert.alert(
-                    "Insufficient funds",
-                    `You need minimum ${estimatedfee.toFixed(
-                      5
-                    )} in your balance to initiate withdraw transaction.`
-                  );
-                } else {
-                  if (stakeData) setUnstakeKey(stakeData.publicKey);
-                  openWithdrawModal(true);
-                  setDelegateAmount(currentlyStaking);
-                }
-              }}
-            >
-              <Text
-                style={{
-                  ...styles.buttonText
+                  if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
+                    Alert.alert(
+                      "Insufficient funds",
+                      `You need minimum ${estimatedfee.toFixed(
+                        5
+                      )} in your balance to initiate withdraw transaction.`
+                    );
+                  } else {
+                    if (stakeData) setUnstakeKey(stakeData.publicKey);
+                    openWithdrawModal(true);
+                    setDelegateAmount(currentlyStaking);
+                  }
                 }}
               >
-               Withdraw
-              </Text>
-            </TouchableOpacity>
-
-                </>
-         
+                <Text
+                  style={{
+                    ...styles.buttonText
+                  }}
+                >
+                  Withdraw
+                </Text>
+              </TouchableOpacity>
+            </>
           ) : (
             <View />
           )}
@@ -298,7 +294,7 @@ const Staking = (props: Props) => {
       cbSuccess: isSuccess => {
         if (isSuccess)
           navigation.navigate("WalletImported", {
-            text: "Requested to unstake successfully",
+            text: "Request to unstake successful",
             navigationRoute: "Back"
           });
         setIfUnstaking(false);

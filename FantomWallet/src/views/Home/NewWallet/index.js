@@ -251,10 +251,10 @@ class Wallet extends Component {
                   inactiveSlideScale={1}
                   lockScrollWhileSnapping={true}
                   useScrollView={true}
-                  activeSlideAlignment={"center"}
+                  //activeSlideAlignment={"center"}
                   pagingEnabled={true}
                   //swipeThreshold={150}
-                  itemWidth={Dimensions.get("window").width - 40}
+                  itemWidth={Dimensions.get("window").width - getWidth(40)}
                   renderItem={({ item, index }) => {
                     return (
                       <CardView

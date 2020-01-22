@@ -68,7 +68,18 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
    */
   const isValidSeed = _mnemonic => {
     const mnemonicKey = _mnemonic.split(" ");
-    return mnemonicKey.length === 12;
+    return mnemonicKey.length === 12 || mnemonicKey.length === 24;
+  };
+  const isSpecialCharacters = _mnemonic => {
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    if (format.test(_mnemonic.trim())) return true;
+    else return false;
+  };
+  const isContainNumbers = _mnemonic => {
+    var numberRegex = /[0-9]/;
+
+    if (numberRegex.test(_mnemonic.trim())) return true;
+    else return false;
   };
 
   const handleRecoverWallet = () => {
@@ -78,6 +89,19 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
       .replace(",", "")
       .replace("  ", " ")
       .trim();
+
+    // console.log(_mnemonic.trim(), "******* mnemonic ******");
+
+    if (isSpecialCharacters(_mnemonic)) {
+      setIsImporting(false);
+      setErrorType("specialCharacters");
+      return;
+    }
+    if (isContainNumbers(_mnemonic)) {
+      setIsImporting(false);
+      setErrorType("numbers");
+      return;
+    }
 
     if (!isValidSeed(_mnemonic)) {
       setIsImporting(false);
@@ -119,12 +143,12 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
           privateKey,
           publicKey: address.address,
           cb: () => {
-            NavigationService.navigate(routes.root.WalletImported, {
-              publicKey: address.address
-            });
             setIsImporting(false);
             setMnemonic("");
             setPrivateKey("");
+            NavigationService.navigate(routes.root.WalletImported, {
+              publicKey: address.address
+            });
           }
         });
       }
@@ -183,7 +207,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             </View>
 
             <Text style={styles.noteText}>
-              12 words separated by single spaces
+              12 or 24 words separated by single spaces
             </Text>
             <Button
               onPress={handleRecoverWallet}
@@ -226,6 +250,12 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
 
         {errorType === "phrase" &&
           getErrorView("Incorrect passphrase", setErrorType)}
+
+        {errorType === "specialCharacters" &&
+          getErrorView("No special characters allowed", setErrorType)}
+
+        {errorType === "numbers" &&
+          getErrorView("No numbers allowed", setErrorType)}
       </View>
     </TouchableWithoutFeedback>
   );
