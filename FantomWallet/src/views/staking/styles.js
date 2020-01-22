@@ -3,7 +3,7 @@ import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
 
 const deviceHeight = Dimensions.get("window").height;
- 
+
 const crauselStyle = {
   crauselView: {
     marginTop: getHeight(30)
@@ -22,8 +22,8 @@ const crauselStyle = {
       width: 0
     },
     shadowOpacity: 0.3,
-    shadowRadius: 5,
-  //  elevation: 1
+    shadowRadius: 5
+    //  elevation: 1
   },
   titleView: {
     fontSize: FontSize.base,
@@ -88,7 +88,7 @@ const crauselStyle = {
     justifyContent: "center"
   },
   withdraw: {
-    right: getWidth(-22),
+    right: getWidth(-23),
     marginTop: getHeight(40)
   },
   buttonView: {
