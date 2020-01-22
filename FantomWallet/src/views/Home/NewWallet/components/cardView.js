@@ -37,7 +37,11 @@ const CardView = ({
                 : balanceWithSeprators(balance) + " FTM"}
             </Text>
             <Text style={styles.bottomCardSubText}>
-              {isHiddenText ? "*******" : "$" + balanceToDollar(balance, 2)}
+              {isHiddenText
+                ? "*******"
+                : balance
+                ? "$" + balanceToDollar(balance, 2)
+                : "$0"}
             </Text>
           </View>
           <ImageBackground style={styles.cardImageStyle} source={FantomLogo} />

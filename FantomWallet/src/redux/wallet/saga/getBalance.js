@@ -19,11 +19,17 @@ export function* getBalance(): any {
         const wallet = walletsData[i];
         const { publicKey, name } = wallet;
         if (publicKey) {
-          const response = yield Web3Agent.Fantom.getBalance(publicKey);
+          let response;
+          if (Web3Agent.Fantom) {
+            response = yield Web3Agent.Fantom.getBalance(publicKey);
+          }
+          let balance = "0";
+          if (response) {
+            const balanceWei = scientificToDecimal(response);
 
-          const balanceWei = scientificToDecimal(response);
+            balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
+          }
 
-          const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
           yield put(setBalance({ name, publicKey, balance, loading: false }));
         }
       }
@@ -48,9 +54,16 @@ export function* setFtmBalance(): any {
       currentWallet: wallet.currentWallet
     }));
     const { publicKey } = currentWallet;
-    const response = yield Web3Agent.Fantom.getBalance(publicKey);
-    const balanceWei = scientificToDecimal(response);
-    const balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
+    let response;
+    let balance = "0";
+    if (Web3Agent.Fantom) {
+      response = yield Web3Agent.Fantom.getBalance(publicKey);
+    }
+    if (response) {
+      const balanceWei = scientificToDecimal(response);
+      balance = Web3.utils.fromWei(`${balanceWei}`, "ether");
+    }
+
     yield put(sendFtmSuccess({ balance }));
   } catch (e) {
     if (

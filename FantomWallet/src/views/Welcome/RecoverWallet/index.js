@@ -122,12 +122,13 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
 
   const handleRecoverWalletUsingPrivateKey = async () => {
     var regx = /^[a-zA-Z0-9]+$/;
+    const newKey = privateKey.trim();
 
     if (
-      privateKey === "" ||
-      privateKey.length !== 66 ||
-      regx.test(privateKey) === false ||
-      privateKey.toLowerCase().substring(0, 2) !== "0x"
+      newKey === "" ||
+      newKey.length !== 66 ||
+      !regx.test(newKey) ||
+      newKey.toLowerCase().substring(0, 2) !== "0x"
     ) {
       Alert.alert(
         "Warning",

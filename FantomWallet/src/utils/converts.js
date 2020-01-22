@@ -76,7 +76,7 @@ export const fantomToDollar = (value, decimal) => {
   if (fantomDollarRate) {
     let convertedValue =
       fantomDollarRate * estimationMaxFantomBalance(value, GAS_PRICE);
-    if (convertedValue <= 0.01) return convertedValue.toFixed(8);
+    if (convertedValue <= 0.01) return convertedValue.toFixed(7);
     else convertedValue.toFixed(2);
   }
 
@@ -93,7 +93,7 @@ export const convertFTMValue = (value, from = "") => {
       estimationMaxFantomBalance(value, GAS_PRICE, from)
     );
 
-    if (convertValue <= 0.01) return convertValue.toFixed(8);
+    if (convertValue <= 0.01) return convertValue.toFixed(7);
     else return convertValue.toFixed(2);
   }
   return 0;
@@ -119,7 +119,7 @@ export const balanceToDollar = (value, decimal) => {
     if (value === 0 || value === "0") {
       return value;
     } else if (value <= 1) {
-      return (fantomDollarRate * value).toFixed(8);
+      return (fantomDollarRate * value).toFixed(7);
     }
     return (fantomDollarRate * value).toFixed(decimal);
   }
