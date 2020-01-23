@@ -43,7 +43,10 @@ class Web3Agent {
   sfc: any = null;
 
   async getBalance(address: string = EXAMPLE_ADDRESS) {
-    const res = await this.web3.eth.getBalance(address);
+    let res;
+    if (this.web3 && this.web3.eth) {
+      res = await this.web3.eth.getBalance(address);
+    }
     return res;
   }
 
@@ -211,13 +214,17 @@ class Web3Agent {
   }
 
   async estimateFee(value) {
-    const gasPrice = await this.web3.eth.getGasPrice();
-    const gasLimit = value;
-    const fee = Web3.utils.fromWei(
-      BigInt(gasPrice.toString())
-        .multiply(BigInt(gasLimit.toString()))
-        .toString()
-    );
+    let fee;
+
+    if (this.web3 && this.web3.eth) {
+      const gasPrice = await this.web3.eth.getGasPrice();
+      const gasLimit = value;
+      fee = Web3.utils.fromWei(
+        BigInt(gasPrice.toString())
+          .multiply(BigInt(gasLimit.toString()))
+          .toString()
+      );
+    }
 
     return fee;
   }

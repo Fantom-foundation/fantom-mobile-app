@@ -58,7 +58,7 @@ const WalletSetup = () => {
           style={styles.recoverWalletStyle}
           onPress={() => onRestoreWallet()}
         >
-          <Text style={styles.footerText1}>I already have a wallet</Text>
+          <Text style={styles.footerText1}>{Messages.alreadyWallet}</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>

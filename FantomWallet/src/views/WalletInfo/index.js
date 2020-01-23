@@ -70,7 +70,7 @@ const WalletInfo = (props: TWalletInfoTypes) => {
     <View style={styles.mainContainer}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.headingView}>
-          <Text style={styles.headingText}>Wallet info</Text>
+          <Text style={styles.headingText}>{Messages.walletInfo}</Text>
         </View>
         <Text style={styles.addressText}>{Messages.address}</Text>
         <View style={styles.codeView}>

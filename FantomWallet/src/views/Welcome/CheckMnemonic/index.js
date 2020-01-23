@@ -26,6 +26,7 @@ import { DEVICE_HEIGHT } from "~/common/constants";
 import { ENUM_WORD } from "./helpers";
 import { Colors } from "../../../theme";
 import { Loader } from "~/components/loader";
+import { Messages } from "../../../theme";
 
 type ShuffleItem = {
   name: string,
@@ -158,13 +159,12 @@ export const CheckMnemonicContainer = ({
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 0.5 }}>
           <View style={styles.mainHeadingContainer}>
-            <Text style={styles.mainHeading}>Verify recovery words</Text>
+            <Text style={styles.mainHeading}>
+              {Messages.verifyRecoveryWords}
+            </Text>
           </View>
           <View style={styles.subHeadingContainer}>
-            <Text style={styles.subHeading}>
-              Tap the words to put them in the
-            </Text>
-            <Text style={styles.subHeading}> correct order.</Text>
+            <Text style={styles.subHeading}>{Messages.correctOrderText}</Text>
           </View>
           <View>
             <View
@@ -203,7 +203,7 @@ export const CheckMnemonicContainer = ({
             }}
             onPress={handleVerify}
             textStyle={styles.buttonText}
-            text={"CONTINUE"}
+            text={Messages.continue}
           />
           <View style={{ height: 40 }}></View>
         </View>

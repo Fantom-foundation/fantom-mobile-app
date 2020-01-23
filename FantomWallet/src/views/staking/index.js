@@ -27,7 +27,7 @@ import moment from "moment";
 import { Messages } from "../../theme";
 import Web3Agent from "../../services/api/web3";
 
-const modalText = "You need at least 1 FTM to \n stake.";
+const modalText = Messages.atleast1Ftm;
 
 const unstakeText =
   "Are you sure you want to  request to withdraw \n your tokens from staking?\n\nThe tokens will be available\n after 7 days in your wallet.";
@@ -51,7 +51,9 @@ const Staking = (props: Props) => {
   useEffect(() => {
     const gasLimit = 150000;
     Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
-      setEstimatedfee(value * 2);
+      if (value) {
+        setEstimatedfee(value * 2);
+      }
     });
   });
 
@@ -101,7 +103,7 @@ const Staking = (props: Props) => {
     const dividend = isDividedBy ? Math.pow(10, 18) : 1;
     const dividedValue = value / dividend;
     if (value <= 0.01) {
-      return !!value && value > 0 ? formatNumber(Number(value).toFixed(8)) : 0;
+      return !!value && value > 0 ? formatNumber(Number(value).toFixed(6)) : 0;
     }
     return formatNumber(Number(dividedValue.toFixed(2)));
   };
@@ -192,7 +194,7 @@ const Staking = (props: Props) => {
                 onPress={() => {
                   if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                     Alert.alert(
-                      "Insufficient funds",
+                      Messages.insufficentFunds,
                       `You need minimum ${estimatedfee.toFixed(
                         5
                       )} in your balance to initiate withdraw transaction.`
@@ -238,7 +240,7 @@ const Staking = (props: Props) => {
                   setUnstakeKey(stakeData.publicKey);
                   if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                     Alert.alert(
-                      "Insufficient funds",
+                      Messages.insufficentFunds,
                       `You need minimum ${estimatedfee.toFixed(
                         5
                       )} in your balance to initiate unstake transaction.`
@@ -369,7 +371,7 @@ const Staking = (props: Props) => {
           buttonViewStyle={styles.notEnoughSpaceButtonView}
           buttons={[
             {
-              name: "Back",
+              name: Messages.back,
               style: styles.backButtonStyle,
               onPress: () => setStakeAmountModal(false)
             }

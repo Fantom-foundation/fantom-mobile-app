@@ -1,4 +1,3 @@
-
 import { StyleSheet } from "react-native";
 import { getHeight, getWidth } from "../../../utils/pixelResolver";
 import { Colors, FontSize, fonts } from "../../../theme";
@@ -35,6 +34,7 @@ export default StyleSheet.create({
   subHeading: {
     textAlign: "center",
     lineHeight: getHeight(24),
+    flexWrap: "wrap",
     fontSize: FontSize.base,
     color: Colors.textBlack,
     fontFamily: fonts.WorkSansMedium

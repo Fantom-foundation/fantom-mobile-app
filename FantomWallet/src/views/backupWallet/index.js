@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-navigation";
 import CheckBox from "../../general/checkBox";
 import styles from "./style";
 import Button from "../../components/general/Button";
-import { Colors } from "../../theme";
+import { Colors, Messages } from "../../theme";
 import { NavigationService, routes } from "~/navigation/helpers";
 import Header from "~/components/Header";
 const BackupWallet = (props: TBackupWalletTypes) => {
@@ -41,28 +41,24 @@ const BackupWallet = (props: TBackupWalletTypes) => {
         />
         <View style={styles.headerTextView}>
           <View style={styles.mainHeadingContainer}>
-            <Text style={styles.mainHeading}>Back up your wallet now!</Text>
+            <Text style={styles.mainHeading}>{Messages.backupWalletNow}</Text>
           </View>
           <View style={styles.subHeadingContainer}>
             <Text style={styles.subHeading}>
-              In the next step you will see 12 words that allow you recover the
-              wallet.
+              {Messages.allowToRecoverWallet}
             </Text>
           </View>
         </View>
         <View style={styles.flex1}>
           <View style={styles.termsContainer}>
-            <Text style={styles.termsText}>
-              The recovery words are the only way to recover the wallet. If you
-              lose these words, you will lose access to your wallet.
-            </Text>
+            <Text style={styles.termsText}>{Messages.recoveryMessage}</Text>
           </View>
         </View>
         <View style={styles.flex1}>
           <View style={styles.checkBoxContainer}>
             <CheckBox onChange={() => setIsEnable(!isEnable)} />
             <Text style={{ ...styles.termsText, paddingLeft: 6 }}>
-              I understand
+              {Messages.iUnderstand}
             </Text>
           </View>
           <Button
@@ -71,7 +67,7 @@ const BackupWallet = (props: TBackupWalletTypes) => {
               backgroundColor: isEnable ? Colors.royalBlue : Colors.greyOpacity
             }}
             textStyle={styles.buttonText}
-            text={"CONTINUE"}
+            text={Messages.continue}
             onPress={() => {
               if (isEnable) {
                 NavigationService.navigate(routes.root.CreateMnemonic);

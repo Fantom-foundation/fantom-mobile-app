@@ -22,12 +22,18 @@ import { Loader } from "../../../components/loader";
 import styles from "./styles";
 import HeaderView from "./components/header";
 
-const getErrorView = (text, dismiss) => {
+const getErrorView = (text, dismiss, clearMnemnic) => {
   return (
     <View style={styles.errorView}>
       <View style={styles.errorModalView}>
         <Text style={styles.errorTextHeading}>{text}</Text>
-        <TouchableOpacity onPress={() => dismiss("")} style={styles.backButton}>
+        <TouchableOpacity
+          onPress={() => {
+            clearMnemnic("");
+            dismiss("");
+          }}
+          style={styles.backButton}
+        >
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
       </View>
@@ -250,13 +256,21 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
         {/* {getErrorView("Incorrect private key")}  */}
 
         {errorType === "phrase" &&
-          getErrorView("Incorrect passphrase", setErrorType)}
+          getErrorView(
+            "Mnemonic must be 12 or 24 words",
+            setErrorType,
+            setMnemonic
+          )}
 
         {errorType === "specialCharacters" &&
-          getErrorView("No special characters allowed", setErrorType)}
+          getErrorView(
+            "No special characters allowed",
+            setErrorType,
+            setMnemonic
+          )}
 
         {errorType === "numbers" &&
-          getErrorView("No numbers allowed", setErrorType)}
+          getErrorView("No numbers allowed", setErrorType, setMnemonic)}
       </View>
     </TouchableWithoutFeedback>
   );

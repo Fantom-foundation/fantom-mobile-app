@@ -129,22 +129,22 @@ const SendFTM = (props: Props) => {
     ) {
       const maxAmount = Number(currentWallet.balance) - Number(estimatedfee);
       Alert.alert(
-        "Insufficient funds",
+        Messages.insufficentFunds,
         `You can transfer max ${maxAmount.toFixed(6)} (Value + gas * price)`
       );
       return;
     } else {
       let message = "";
-      if (toId === "") message = "Please enter address.";
+      if (toId === "") message = Messages.enterAddress;
       else if (!Web3.utils.isAddress(toId.trim()))
-        message = "Please enter valid address.";
+        message = Messages.validAddress;
       // else if (amountText === "") {
       //   //message = "Please enter valid amount";
       //   setAmountText("0");
       // }
 
       if (message !== "") {
-        Alert.alert("Error", message);
+        Alert.alert(Messages.error, message);
       } else {
         setSendingModal(true);
       }

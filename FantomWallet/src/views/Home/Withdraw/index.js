@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/sort-comp */
 // Library
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import {
   ScrollView,
   View,
@@ -10,27 +10,28 @@ import {
   TouchableOpacity,
   Keyboard,
   Image,
-  Alert,
-} from 'react-native';
-import Web3 from 'web3';
-import { connect } from 'react-redux';
+  Alert
+} from "react-native";
+import Web3 from "web3";
+import { connect } from "react-redux";
 
-import { NavigationService, routes } from '~/navigation/helpers';
-import { DEVICE_HEIGHT, GAS_PRICE } from '~/common/constants';
-import { estimationMaxFantomBalance, toFixed } from '~/utils/converts';
+import { NavigationService, routes } from "~/navigation/helpers";
+import { DEVICE_HEIGHT, GAS_PRICE } from "~/common/constants";
+import { estimationMaxFantomBalance, toFixed } from "~/utils/converts";
 // Images
-import person from '~/images/person_whiteOutline.png';
-import qrCode from '~/images/QR.png';
-import BackgroundIcon from '~/images/BackgroundIcon.png';
-import SendIcon from '~/images/sendWhite.png';
+import person from "~/images/person_whiteOutline.png";
+import qrCode from "~/images/QR.png";
+import BackgroundIcon from "~/images/BackgroundIcon.png";
+import SendIcon from "~/images/sendWhite.png";
 
-import styles from './styles';
+import styles from "./styles";
+import { Messages } from "../../../theme";
 
 type Props = {
   balance: string,
   navigation: {
-    navigate: (string, any) => void,
-  },
+    navigate: (string, any) => void
+  }
 };
 
 /**
@@ -38,17 +39,21 @@ type Props = {
  */
 export const Withdraw = ({ balance }: Props) => {
   const scrollView = useRef<any>(null);
-  const [val, setVal] = useState('FTM');
-  const [address, setAddress] = useState('');
-  const [amount, setAmount] = useState('');
-  const [actualAmount, setActualAmount] = useState('');
-  const [fees, setFees] = useState('');
-  const [memo, setMemo] = useState('');
+  const [val, setVal] = useState("FTM");
+  const [address, setAddress] = useState("");
+  const [amount, setAmount] = useState("");
+  const [actualAmount, setActualAmount] = useState("");
+  const [fees, setFees] = useState("");
+  const [memo, setMemo] = useState("");
 
   const maxFantomBalance = estimationMaxFantomBalance(balance, GAS_PRICE);
 
   const onFocus = () => {
-    scrollView.current.scrollTo({ x: 0, y: DEVICE_HEIGHT * 0.18, animated: true });
+    scrollView.current.scrollTo({
+      x: 0,
+      y: DEVICE_HEIGHT * 0.18,
+      animated: true
+    });
   };
 
   const onBlur = () => {
@@ -64,7 +69,7 @@ export const Withdraw = ({ balance }: Props) => {
   const onContactPress = () => {
     NavigationService.navigate(routes.root.AddressBook, {
       isEditMode: true,
-      onSelection: onScanSuccess.bind(this),
+      onSelection: onScanSuccess.bind(this)
     });
   };
 
@@ -76,12 +81,12 @@ export const Withdraw = ({ balance }: Props) => {
    * reload() :  on screen reload reset the fields.
    */
   const reload = () => {
-    setVal('FTM');
-    setAddress('');
-    setAmount('');
-    setActualAmount('');
+    setVal("FTM");
+    setAddress("");
+    setAmount("");
+    setActualAmount("");
     setFees("");
-    setMemo('');
+    setMemo("");
   };
 
   /**
@@ -90,17 +95,17 @@ export const Withdraw = ({ balance }: Props) => {
    */
   const handleSendMoney = () => {
     if (Number(actualAmount) === 0) {
-      Alert.alert('Error', 'Please enter valid amount');
+      Alert.alert("Error", "Please enter valid amount");
     } else if (actualAmount > maxFantomBalance) {
-      Alert.alert('Error', 'Insufficient balance');
+      Alert.alert("Error", "Insufficient balance");
     } else {
       const coin = val;
-      let message = '';
-      if (address === '') message = 'Please enter address.';
-      else if (!Web3.utils.isAddress(address)) message = 'Please enter valid address.';
-      else if (amount === '') message = 'Please enter valid amount';
+      let message = "";
+      if (address === "") message = Messages.enterAddress;
+      else if (!Web3.utils.isAddress(address)) message = Messages.validAddress;
+      else if (amount === "") message = "Please enter valid amount";
 
-      if (message !== '') Alert.alert('Error', message);
+      if (message !== "") Alert.alert(Messages.error, message);
       if (address && Web3.utils.isAddress(address) && amount) {
         NavigationService.navigate(routes.root.SendMoney, {
           address,
@@ -109,7 +114,7 @@ export const Withdraw = ({ balance }: Props) => {
           memo,
           fees,
           reload,
-          balance,
+          balance
         });
       }
     }
@@ -128,7 +133,11 @@ export const Withdraw = ({ balance }: Props) => {
   const ftmBalanceFixed = toFixed(balance, 4);
   return (
     <View style={styles.mainContainerStyle}>
-      <Image style={styles.backgroundIconStyle} source={BackgroundIcon} resizeMode="contain" />
+      <Image
+        style={styles.backgroundIconStyle}
+        source={BackgroundIcon}
+        resizeMode="contain"
+      />
       <ScrollView
         ref={scrollView}
         style={styles.scroll}
@@ -160,10 +169,20 @@ export const Withdraw = ({ balance }: Props) => {
               onSubmitEditing={Keyboard.dismiss}
               underlineColorAndroid="transparent"
             />
-            <TouchableOpacity style={styles.iconContainer} onPress={onScannerPress}>
-              <Image source={qrCode} style={styles.qrCode} resizeMode="contain" />
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={onScannerPress}
+            >
+              <Image
+                source={qrCode}
+                style={styles.qrCode}
+                resizeMode="contain"
+              />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconContainer} onPress={onContactPress}>
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={onContactPress}
+            >
               <Image
                 source={person}
                 style={styles.contactIcon}
@@ -190,14 +209,18 @@ export const Withdraw = ({ balance }: Props) => {
               }}
               underlineColorAndroid="transparent"
             />
-            <View style={[styles.priceSubContainer, styles.priceSubContainerColor]}>
+            <View
+              style={[styles.priceSubContainer, styles.priceSubContainerColor]}
+            >
               <Text style={styles.priceTextStyle}>FTM</Text>
             </View>
             <TouchableOpacity
               style={styles.priceSubContainer}
               onPress={callAmountClicked}
             >
-              <Text style={[styles.priceTextStyle, styles.priceTextStyleAll]}>ALL</Text>
+              <Text style={[styles.priceTextStyle, styles.priceTextStyleAll]}>
+                ALL
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -242,7 +265,7 @@ export const Withdraw = ({ balance }: Props) => {
 };
 
 const mapStateToProps = state => ({
-  balance: state.wallet.balance,
+  balance: state.wallet.balance
 });
 
 export default connect(mapStateToProps)(Withdraw);

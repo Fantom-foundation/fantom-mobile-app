@@ -1,6 +1,6 @@
 // @flow
 // Library
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,26 +13,26 @@ import {
   Switch,
   Platform,
   Linking
-} from 'react-native';
+} from "react-native";
 
 // Components
-import Header from '~/components/Header/index';
+import Header from "~/components/Header/index";
 // Images
-import AboutApp from '~/images/AboutApp.png';
-import AddressBook from '~/images/AddressBook.png';
-import CustomerSupport from '~/images/CustomerSupport.png';
-import BackgroundIcon from '~/images/BackgroundIcon.png';
+import AboutApp from "~/images/AboutApp.png";
+import AddressBook from "~/images/AddressBook.png";
+import CustomerSupport from "~/images/CustomerSupport.png";
+import BackgroundIcon from "~/images/BackgroundIcon.png";
 // import PrivacyPolicy from '~/images/PrivacyPolicy.png';
 // import TermsOfServices from '~/images/TermsOfServices.png';
-import { NavigationService } from '~/navigation/helpers';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { NavigationService } from "~/navigation/helpers";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Entypo from "react-native-vector-icons/Entypo";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 // import { Switch } from 'react-native-switch';
 // Styling
-import styles from './styles';
+import styles from "./styles";
 import {
   CrossIcon,
   ShareIcon,
@@ -47,26 +47,27 @@ import {
   RightArrowIcon,
   PlusIcon,
   ShieldIcon
-} from '../../images';
-import { Colors } from '../../theme';
-import { getHeight } from '../../utils/pixelResolver';
+} from "../../images";
+import { Colors } from "../../theme";
+import { getHeight } from "../../utils/pixelResolver";
+import { Messages } from "../../theme";
 
 const settingData = [
   {
-    text: 'Add wallet',
+    text: Messages.addWallet,
     rightArrowIcon: RightArrowIcon,
     source: PlusIcon,
     notificationsToggleButton: false,
     darkToggleButton: false,
-    to: 'AddWallet'
+    to: "AddWallet"
   },
   {
-    text: 'Manage wallets',
+    text: Messages.manageWallet,
     rightArrowIcon: RightArrowIcon,
     source: WalletIcon,
     notificationsToggleButton: false,
     darkToggleButton: false,
-    to: 'ManageWallet'
+    to: "ManageWallet"
   },
   // {
   //   text: 'Dark Mode',
@@ -106,7 +107,7 @@ const settingData = [
   //   to: 'Currency'
   // },
   {
-    text: 'Share with your friends',
+    text: Messages.shareWithFreinds,
     rightArrowIcon: RightArrowIcon,
     source: ShareIcon,
     notificationsToggleButton: false,
@@ -114,7 +115,7 @@ const settingData = [
     isShareApp: true
   },
   {
-    text: 'About',
+    text: Messages.about,
     rightArrowIcon: RightArrowIcon,
     source: QuestionIcon,
     notificationsToggleButton: false,
@@ -122,7 +123,7 @@ const settingData = [
     isOpenUrl: true
   },
   {
-    text: 'Leave a review',
+    text: Messages.review,
     rightArrowIcon: RightArrowIcon,
     source: ReviewIcon,
     notificationsToggleButton: false,
@@ -143,16 +144,16 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
   const getFunctionToCall = item => {
     if (item) {
       if (item.to) return () => navigateTo(item);
-      if (item.isOpenUrl) return () => openUrl('https://Fantom.foundation');
+      if (item.isOpenUrl) return () => openUrl("https://Fantom.foundation");
       if (item.isShareApp) return () => shareTheApp();
     }
   };
 
   shareTheApp = () => {
     const url =
-      Platform.OS === 'android'
-        ? 'https://play.google.com/store/apps/details?id=com.fantomwallet'
-        : 'https://itunes.apple.com/us/app/fantom-payments-testnet/id1436694080?ls=1&mt=8';
+      Platform.OS === "android"
+        ? "https://play.google.com/store/apps/details?id=com.fantomwallet"
+        : "https://itunes.apple.com/us/app/fantom-payments-testnet/id1436694080?ls=1&mt=8";
     openUrl(url);
   };
 
@@ -166,8 +167,8 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
         >
           <View style={styles.mainView}>
             <View style={styles.settingView}>
-              <Text style={styles.settingText}>Settings</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+              <Text style={styles.settingText}>{Messages.settings}</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Home")}>
                 <Image
                   source={CrossIcon}
                   style={styles.crossIcon}
@@ -239,7 +240,7 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
             <View style={styles.bottomView}>
               <TouchableOpacity
                 onPress={() =>
-                  Linking.openURL('https://twitter.com/fantomfdn?lang=en).')
+                  Linking.openURL("https://twitter.com/fantomfdn?lang=en).")
                 }
               >
                 <Image
@@ -249,7 +250,7 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => Linking.openURL('https://t.me/Fantom_English')}
+                onPress={() => Linking.openURL("https://t.me/Fantom_English")}
               >
                 <Image
                   source={TelegramIcon}

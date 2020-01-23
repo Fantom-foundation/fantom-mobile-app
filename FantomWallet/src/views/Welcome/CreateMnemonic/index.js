@@ -80,13 +80,10 @@ export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
         {/* <StatusBar barStyle="light-content" /> */}
         <View style={styles.flex1}>
           <View style={styles.mainHeadingContainer}>
-            <Text style={styles.mainHeading}>Your recovery words</Text>
+            <Text style={styles.mainHeading}>{Messages.yourRecoveryWords}</Text>
           </View>
           <View style={styles.subHeadingContainer}>
-            <Text style={styles.subHeading}>
-              Write down these words in the right order and store them somewhere
-              safe.
-            </Text>
+            <Text style={styles.subHeading}>{Messages.wordsInRightOrder}</Text>
           </View>
         </View>
         <View style={styles.flex1}>
@@ -119,7 +116,7 @@ export const CreateMnemonicContainer = (props: TCreateMnemonicTypes) => {
             onPress={onConfirmHandler}
             buttonStyle={styles.buttonStyle}
             textStyle={styles.buttonText}
-            text={"CONTINUE"}
+            text={Messages.continue}
           />
         </View>
       </SafeAreaView>

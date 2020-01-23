@@ -118,14 +118,14 @@ const StakingAmount = (props: Props) => {
     if (Number(amount) > Number(stakingSpace)) {
       setStakingModal(true);
     } else if (Number(amount) < 1) {
-      Alert.alert("Error", "Minimum 1 FTM required to stake");
+      Alert.alert(Messages.error, "Minimum 1 FTM required to stake");
     } else if (
       Number(availableSpace) - Number(estimationfee) <
       Number(amount)
     ) {
       const maxStake = Number(availableSpace) - Number(estimationfee);
       Alert.alert(
-        "Insufficient funds",
+        Messages.insufficentFunds,
         `You can stake max ${maxStake.toFixed(5)} (Value + gas * price)`
       );
     } else if (amount !== "") {
@@ -140,11 +140,10 @@ const StakingAmount = (props: Props) => {
         }
       });
     } else if (amount === "") {
-      Alert.alert("Error", "Please enter valid amount.");
+      Alert.alert(Messages.error, "Please enter valid amount.");
     }
   };
 
-  console.log(estimationfee, "****** value *****");
   const availbleAmount = Number(availableSpace) - Number(estimationfee);
   return (
     <View style={styles.container}>

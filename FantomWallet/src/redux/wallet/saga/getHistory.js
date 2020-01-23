@@ -67,7 +67,6 @@ export function* getHistory(): any {
       }
     }
   } catch (e) {
-    console.log("e.message, e", e.message, e);
     if (
       e.message.toString().includes("Internet connection") ||
       e.message.toString().includes("Network Error")
@@ -75,9 +74,10 @@ export function* getHistory(): any {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")
       );
-    } else {
-      yield put(setDopdownAlert("error", e.message));
     }
+    //  else {
+    //   yield put(setDopdownAlert("error", e.message));
+    // }
   }
 }
 

@@ -133,25 +133,25 @@ export const SendReceive = (props: TSendReceiveTypes) => {
    */
   const handleSendMoney = () => {
     if (Number(amount) < 0) {
-      Alert.alert("Error", "Please enter valid amount");
+      Alert.alert(Messages.error, "Please enter valid amount");
       return;
     } else if (Number(currentWallet.balance) - Number(estimatedfee) < amount) {
       const maxAmount = Number(currentWallet.balance) - Number(estimatedfee);
       Alert.alert(
-        "Insufficient funds",
+        Messages.insufficentFunds,
         `You can transfer max ${maxAmount.toFixed(6)} (Value + gas * price)`
       );
       return;
     } else {
       let message = "";
-      if (address === "") message = "Please enter address.";
+      if (address === "") message = Messages.enterAddress;
       else if (!Web3.utils.isAddress(address.trim()))
-        message = "Please enter valid address.";
+        message = Messages.validAddress;
       // else if (amount === "") message = "Please enter valid amount";
 
       if (message !== "") {
         setLoader(false);
-        Alert.alert("Error", message);
+        Alert.alert(Messages.error, message);
       } else {
         setSendingModal(true);
         setLoader(false);

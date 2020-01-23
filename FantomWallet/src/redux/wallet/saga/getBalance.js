@@ -42,9 +42,10 @@ export function* getBalance(): any {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")
       );
-    } else {
-      yield put(setDopdownAlert("error", e.message));
     }
+    // } else {
+    //   yield put(setDopdownAlert("error", e.message));
+    // }
   }
 }
 
@@ -66,6 +67,8 @@ export function* setFtmBalance(): any {
 
     yield put(sendFtmSuccess({ balance }));
   } catch (e) {
+    // debugger;
+    // console.log(e, "********error");
     if (
       e.message.toString().includes("Internet connection") ||
       e.message.toString().includes("Network Error")
@@ -73,9 +76,10 @@ export function* setFtmBalance(): any {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")
       );
-    } else {
-      yield put(setDopdownAlert("error", e.message));
     }
+    // else {
+    //   yield put(setDopdownAlert("error", e.message));
+    // }
   }
 }
 
