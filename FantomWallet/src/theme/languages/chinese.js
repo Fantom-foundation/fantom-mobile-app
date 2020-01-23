@@ -54,5 +54,13 @@ export const Chinese = {
   back: "背部",
   insufficentFunds: "资⾦金金不不⾜足",
   enterAddress: "请输⼊入转账地址",
-  validAddress: "请输⼊入有效转账地址"
+  validAddress: "请输⼊入有效转账地址",
+  cancel: "取消",
+  canTransfer: "您最多可以转账",
+  sendAlert: "您确定您要转账吗",
+  withdrawAlert:
+    "您确定是要提现吗\n您进⾏行行权益质押的货币?\n\n货币将可被使⽤用\n7天后将会显示在您的钱包中.",
+  minimumAmountAlert: "您需要的最低限额",
+  minimumAmountAlert1: "提现交易易将从您的余额中扣取.",
+  minimumUnstakeAlert: "取消的权益质押将从您的余额中存取"
 };

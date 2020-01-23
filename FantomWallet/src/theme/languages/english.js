@@ -55,5 +55,13 @@ export const English = {
   back: "Back",
   insufficentFunds: "Insufficient funds",
   enterAddress: "Please enter address",
-  validAddress: "Please enter valid address"
+  validAddress: "Please enter valid address",
+  cancel: "Cancel",
+  canTransfer: "You can transfer max",
+  sendAlert: "Are you sure you want to send",
+  withdrawAlert:
+    "Are you sure you want to  request to withdraw \n your tokens from staking?\n\nThe tokens will be available\n after 7 days in your wallet.",
+  minimumAmountAlert: "You need minimum",
+  minimumAmountAlert1: "in your balance to initiate withdraw transaction.",
+  minimumUnstakeAlert: "in your balance to initiate unstake transaction."
 };

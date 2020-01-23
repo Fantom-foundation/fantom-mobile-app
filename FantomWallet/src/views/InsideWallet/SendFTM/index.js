@@ -130,7 +130,7 @@ const SendFTM = (props: Props) => {
       const maxAmount = Number(currentWallet.balance) - Number(estimatedfee);
       Alert.alert(
         Messages.insufficentFunds,
-        `You can transfer max ${maxAmount.toFixed(6)} (Value + gas * price)`
+        `${Messages.canTransfer} ${maxAmount.toFixed(6)} (Value + gas * price)`
       );
       return;
     } else {
@@ -272,9 +272,9 @@ const SendFTM = (props: Props) => {
       </SafeAreaView>
       {isSendingModal && (
         <Modal
-          modalText={`Are you sure you want to send ${formatNumber(
+          modalText={`${Messages.sendAlert} ${formatNumber(
             amountText || "0"
-          )}\n FTM to ${toId}?`}
+          )}\n FTM ${Messages.to} ${toId}?`}
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
             buttonModalText === "Sending...."
@@ -283,7 +283,7 @@ const SendFTM = (props: Props) => {
           }
           buttons={[
             {
-              name: "Cancel",
+              name: Messages.cancel,
               onPress: () => setSendingModal(!isSendingModal),
               isShow: buttonModalText === "Sending...." ? false : true
             },

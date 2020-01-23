@@ -54,5 +54,13 @@ export const korean = {
   back: "뒤",
   insufficentFunds: "잔액이 부족합니다",
   enterAddress: "주소를 입력하세요",
-  validAddress: "사용 가능한 주소를 입력하세요"
+  validAddress: "사용 가능한 주소를 입력하세요",
+  cancel: "취소",
+  canTransfer: "최대치로 전송 가능합니다",
+  sendAlert: "전송하시겠습니까",
+  withdrawAlert:
+    "스테이킹으로부터 토큰을 출금 \n 요청하시겠습니까?\n\n출금한 토큰은 7일 후부터 \n 지갑에서 사용 가능합니다.",
+  minimumAmountAlert: "인출하기 위해 잔액이 최소",
+  minimumAmountAlert1: "이상 필요합니다.",
+  minimumUnstakeAlert: "이상 필요합니다."
 };

@@ -29,8 +29,7 @@ import Web3Agent from "../../services/api/web3";
 
 const modalText = Messages.atleast1Ftm;
 
-const unstakeText =
-  "Are you sure you want to  request to withdraw \n your tokens from staking?\n\nThe tokens will be available\n after 7 days in your wallet.";
+const unstakeText = Messages.withdrawAlert;
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
@@ -195,9 +194,9 @@ const Staking = (props: Props) => {
                   if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                     Alert.alert(
                       Messages.insufficentFunds,
-                      `You need minimum ${estimatedfee.toFixed(
+                      `${Messages.minimumAmountAlert} ${estimatedfee.toFixed(
                         5
-                      )} in your balance to initiate withdraw transaction.`
+                      )} ${Messages.minimumAmountAlert1}`
                     );
                   } else {
                     if (stakeData) setUnstakeKey(stakeData.publicKey);
@@ -241,9 +240,9 @@ const Staking = (props: Props) => {
                   if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                     Alert.alert(
                       Messages.insufficentFunds,
-                      `You need minimum ${estimatedfee.toFixed(
+                      `${Messages.minimumAmountAlert} ${estimatedfee.toFixed(
                         5
-                      )} in your balance to initiate unstake transaction.`
+                      )} ${minimumUnstakeAlert}`
                     );
                   } else openUnstakingModal(true);
                 }
@@ -404,7 +403,7 @@ const Staking = (props: Props) => {
                 ]
               : [
                   {
-                    name: "Cancel",
+                    name: Messages.cancel,
                     style: styles.backButtonStyle,
                     onPress: () => openWithdrawModal(""),
                     textStyle: styles.backButton,
@@ -438,7 +437,7 @@ const Staking = (props: Props) => {
           }
           buttons={[
             {
-              name: "Cancel",
+              name: Messages.cancel,
               style: styles.backButtonStyle,
               onPress: () => openUnstakingModal(!isUnstakeModalOpened),
               textStyle: styles.backButton,

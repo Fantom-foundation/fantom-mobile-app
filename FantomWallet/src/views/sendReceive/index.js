@@ -139,7 +139,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
       const maxAmount = Number(currentWallet.balance) - Number(estimatedfee);
       Alert.alert(
         Messages.insufficentFunds,
-        `You can transfer max ${maxAmount.toFixed(6)} (Value + gas * price)`
+        `${Messages.canTransfer} ${maxAmount.toFixed(6)} (Value + gas * price)`
       );
       return;
     } else {
@@ -319,9 +319,9 @@ export const SendReceive = (props: TSendReceiveTypes) => {
 
       {isSendingModal && (
         <Modal
-          modalText={`Are you sure you want to send ${formatNumber(
+          modalText={`${Messages.sendAlert} ${formatNumber(
             amount || "0"
-          )}\n FTM to ${address}?`}
+          )}\n FTM ${Messages.to} ${address}?`}
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
             buttonModalText === "Sending...."
@@ -330,7 +330,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
           }
           buttons={[
             {
-              name: "Cancel",
+              name: Messages.cancel,
               onPress: () => setSendingModal(!isSendingModal),
               isShow: buttonModalText === "Sending...." ? false : true
             },
