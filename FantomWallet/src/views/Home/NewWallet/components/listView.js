@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import CardListItem from "./cardListItem";
+import { roundingOff } from "../../../../utils/converts";
 
 const ListView = ({ data, isHiddenText, handleTransactionClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { name, history, balance, publicKey } = data;
+
   return (
     <View>
       <TouchableOpacity
@@ -15,7 +17,11 @@ const ListView = ({ data, isHiddenText, handleTransactionClick }) => {
       >
         <Text style={styles.listTitleText}>{name || ""}</Text>
         <Text style={styles.rightTextStyle}>
-          {isHiddenText ? "*******" : `${balance} FTM`}
+          {isHiddenText
+            ? "*******"
+            : balance
+            ? `${roundingOff(balance)} FTM`
+            : "0 FTM"}
         </Text>
       </TouchableOpacity>
       {isOpen && history && history.length > 0 && (

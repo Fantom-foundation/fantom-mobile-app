@@ -135,3 +135,10 @@ export const balanceWithSeprators = value => {
   }
   return 0;
 };
+
+export const roundingOff = value => {
+  if (!!value) {
+    if (value === 0 || value === "0") return 0;
+    else return Number(value).toFixed(6);
+  }
+};
