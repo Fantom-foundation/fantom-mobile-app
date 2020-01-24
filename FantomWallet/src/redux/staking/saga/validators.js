@@ -6,7 +6,6 @@ import {
   getValidatorsListFailure
 } from "../actions";
 import { getDataWithQueryString } from "../../../common/api";
-import { Alert } from "react-native";
 
 const validatorsListApi = async () => {
   return getDataWithQueryString("validatorList", `?verbosity=2`);
