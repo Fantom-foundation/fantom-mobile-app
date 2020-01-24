@@ -6,6 +6,7 @@ import {
   getValidatorsListFailure
 } from "../actions";
 import { getDataWithQueryString } from "../../../common/api";
+import { Alert } from "react-native";
 
 const validatorsListApi = async () => {
   return getDataWithQueryString("validatorList", `?verbosity=2`);
@@ -14,7 +15,9 @@ const validatorsListApi = async () => {
 export function* validatorsListSaga(): any {
   try {
     const response = yield call(validatorsListApi);
-    yield put(getValidatorsListSuccess(response));
+    if (response) {
+      yield put(getValidatorsListSuccess(response));
+    }
   } catch (exception) {
     yield put(getValidatorsListFailure());
   }

@@ -140,7 +140,9 @@ export function* delegateAmountSaga({
     cbSuccess(false);
     if (
       e.message.toString().includes("Internet connection") ||
-      e.message.toString().includes("Network Error")
+      e.message.toString().includes("Network Error") ||
+      e.message.toString().includes("Invalid JSON RPC response") ||
+      e.message.toString().includes("Network is unreachable")
     ) {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")
@@ -171,7 +173,9 @@ export function* delegateUnstakeSaga({
 
     if (
       e.message.toString().includes("Internet connection") ||
-      e.message.toString().includes("Network Error")
+      e.message.toString().includes("Network Error") ||
+      e.message.toString().includes("Invalid JSON RPC response") ||
+      e.message.toString().includes("Network is unreachable")
     ) {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")
@@ -202,7 +206,9 @@ export function* delegateWithdrawSaga({
 
     if (
       e.message.toString().includes("Internet connection") ||
-      e.message.toString().includes("Network Error")
+      e.message.toString().includes("Network Error") ||
+      e.message.toString().includes("Invalid JSON RPC response") ||
+      e.message.toString().includes("Network is unreachable")
     ) {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")

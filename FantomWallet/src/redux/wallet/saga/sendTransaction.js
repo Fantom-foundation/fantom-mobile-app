@@ -87,7 +87,9 @@ export function* sendTransaction({
     cbSuccess(false);
     if (
       e.message.toString().includes("Internet connection") ||
-      e.message.toString().includes("Network Error")
+      e.message.toString().includes("Network Error") ||
+      e.message.toString().includes("Invalid JSON RPC response") ||
+      e.message.toString().includes("Network is unreachable")
     ) {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")

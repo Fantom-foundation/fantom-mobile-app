@@ -37,13 +37,15 @@ export function* getBalance(): any {
   } catch (e) {
     if (
       e.message.toString().includes("Internet connection") ||
-      e.message.toString().includes("Network Error")
+      e.message.toString().includes("Network Error") ||
+      e.message.toString().includes("Invalid JSON RPC response") ||
+      e.message.toString().includes("Network is unreachable")
     ) {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")
       );
     }
-    // } else {
+    // else {
     //   yield put(setDopdownAlert("error", e.message));
     // }
   }
@@ -67,16 +69,17 @@ export function* setFtmBalance(): any {
 
     yield put(sendFtmSuccess({ balance }));
   } catch (e) {
-    // debugger;
-    // console.log(e, "********error");
     if (
       e.message.toString().includes("Internet connection") ||
-      e.message.toString().includes("Network Error")
+      e.message.toString().includes("Network Error") ||
+      e.message.toString().includes("Invalid JSON RPC response") ||
+      e.message.toString().includes("Network is unreachable")
     ) {
       yield put(
         setDopdownAlert("error", "Please check your internet connection")
       );
     }
+
     // else {
     //   yield put(setDopdownAlert("error", e.message));
     // }

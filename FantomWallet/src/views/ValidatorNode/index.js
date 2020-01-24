@@ -60,7 +60,7 @@ const ValidatorNode = props => {
             ></Ionicons>
           </TouchableOpacity>
           <Text style={styles.headingText}>{Messages.selectValidatorNode}</Text>
-          1
+
           <FlatList
             data={validators}
             extraData={nodeExpanded}
