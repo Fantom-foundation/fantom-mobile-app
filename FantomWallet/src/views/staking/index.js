@@ -293,12 +293,12 @@ const Staking = (props: Props) => {
     delegateUnstake({
       publicKey: unstakeKey,
       cbSuccess: isSuccess => {
+        setIfUnstaking(false);
         if (isSuccess)
           navigation.navigate("WalletImported", {
             text: "Request to unstake successful",
             navigationRoute: "Back"
           });
-        setIfUnstaking(false);
       }
     });
   };
@@ -310,12 +310,12 @@ const Staking = (props: Props) => {
     delegateWithdraw({
       publicKey: unstakeKey,
       cbSuccess: isSuccess => {
+        setifWithdrawing(false);
         if (isSuccess)
           navigation.navigate("WalletImported", {
             text: "Tokens successfully withdrawn!",
             navigationRoute: "Staking"
           });
-        setifWithdrawing(false);
       }
     });
   };

@@ -118,7 +118,10 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
     generateWallet({
       mnemonic: _mnemonic,
       cb: (publicKey: string) => {
-        NavigationService.navigate(routes.root.WalletImported, { publicKey });
+        NavigationService.navigate(routes.root.WalletImported, {
+          publicKey,
+          navigationRoute: undefined
+        });
         setIsImporting(false);
         setMnemonic("");
         setPrivateKey("");
@@ -154,7 +157,8 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             setMnemonic("");
             setPrivateKey("");
             NavigationService.navigate(routes.root.WalletImported, {
-              publicKey: address.address
+              publicKey: address.address,
+              navigationRoute: undefined
             });
           }
         });

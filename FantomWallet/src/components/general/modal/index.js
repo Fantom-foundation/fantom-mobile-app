@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Modal } from "react-native";
 import styles from "./styles";
 import { Colors } from "../../../theme";
 
@@ -12,7 +12,7 @@ const ModalView = props => {
     stakingView
   } = props;
   return (
-    <View style={styles.backgroundView}>
+    <Modal transparent style={styles.backgroundView}>
       <View style={{ ...styles.stakingModalView, ...stakingView }}>
         <Text style={modalTextStyle}>{modalText}</Text>
         <View style={buttonViewStyle}>
@@ -38,7 +38,7 @@ const ModalView = props => {
             })}
         </View>
       </View>
-    </View>
+    </Modal>
   );
 };
 export default ModalView;
