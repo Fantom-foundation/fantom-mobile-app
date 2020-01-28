@@ -3,6 +3,8 @@ package com.fantomwallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.masteratul.RNAppstoreVersionCheckerPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.lewin.qrcode.QRScanReaderPackage;
@@ -43,6 +45,8 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAppstoreVersionCheckerPackage(),
+            new RNDeviceInfo(),
             new ReactNativeLocalizationPackage(),
             new RNCameraPackage(),
             new QRScanReaderPackage(),

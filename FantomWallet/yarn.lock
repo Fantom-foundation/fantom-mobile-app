@@ -7750,6 +7750,11 @@ lodash.pick@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
   integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
 
+lodash.result@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/lodash.result/-/lodash.result-4.5.2.tgz#cb45b27fb914eaa8d8ee6f0ce7b2870b87cb70aa"
+  integrity sha1-y0Wyf7kU6qjY7m8M57KHC4fLcKo=
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -10021,6 +10026,13 @@ react-localization@^1.0.14:
   dependencies:
     localized-strings "^0.2.0"
 
+react-native-appstore-version-checker@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-appstore-version-checker/-/react-native-appstore-version-checker-3.0.0.tgz#0c471402a09cb3fee4b0e2d031ffece5135d2009"
+  integrity sha512-qC8y4t82XqqbacDbL5O/Stsw5J8dbXAr+79IKewHWUkGZ+b7p8R3YFDw/LJId+PLoVIWnStp/zYhX+be4t9UyQ==
+  dependencies:
+    lodash.result "^4.5.2"
+
 react-native-bip39@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-native-bip39/-/react-native-bip39-2.3.0.tgz#30c58d93a22b41f4937727fd456ab6b03f452671"
@@ -10059,6 +10071,11 @@ react-native-custom-qr-codes@^1.0.2:
   integrity sha1-t9EipGMtJSsPdulLQIRnNCGs4EE=
   dependencies:
     prop-types "^15.5.10"
+
+react-native-device-info@^5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-5.4.1.tgz#507d2cd4be98813fc0421a35731b471b86ca194d"
+  integrity sha512-eb1fadKkaCy0C6p2gozGQ6vHO+rhQBh1FTN+l7pE23McfI7EKtp6Wy7OCexHvmEe6xsxoHK93cMiCsZuyaTnMA==
 
 react-native-dotenv@^0.2.0:
   version "0.2.0"

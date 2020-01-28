@@ -9,10 +9,11 @@ import {
   BackHandler
 } from "react-native";
 import { Messages } from "../../../theme";
-
+import DeviceInfo from "react-native-device-info";
 import styles from "./styles";
 import { FantomLogo } from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
+import { getAppstoreAppMetadata } from "react-native-appstore-version-checker";
 const WalletSetup = () => {
   const onCreateNewWallet = () => {
     NavigationService.navigate(routes.root.BackupWallet);
@@ -24,6 +25,30 @@ const WalletSetup = () => {
     BackHandler.exitApp();
   };
   useEffect(() => {
+    console.log(DeviceInfo.getVersion(), "********Device getVersion ********");
+
+    //On Android u can do
+    getAppstoreAppMetadata("com.fantomwallet") //put any apps packageId here
+      .then(metadata => {
+        console.log(
+          "clashofclans android app version on playstore",
+          metadata.version,
+          "published on",
+          metadata.currentVersionReleaseDate
+        );
+      })
+      .catch(err => {
+        console.log("error occurred", err);
+      });
+
+    //On IOS u can do
+    getAppstoreAppMetadata("1436694080") //put any apps id here
+      .then(metadata => {
+        console.log(metadata, "******* metaData *******");
+      })
+      .catch(err => {
+        console.log("error occurred in IOs ", err);
+      });
     const handler = BackHandler.addEventListener(
       "hardwareBackPress",
       backAndroidPress
