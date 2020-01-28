@@ -21,10 +21,10 @@ android {
     } 
 
     defaultConfig {
-        applicationId "com.fantomwallet.foundation"
+        applicationId "com.fantomwallet"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
+        versionCode 16
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
