@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "big-integer": "^1.6.48"
+    "react-native-flash-message": "^0.1.15"
   }
 }
