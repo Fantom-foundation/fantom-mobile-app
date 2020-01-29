@@ -14,6 +14,7 @@ const WalletImported = (props: TSettingsScreenTypes) => {
     );
     return () => handler.remove();
   }, []);
+  console.log("navigationRoute", navigationRoute);
   const handlePress = () => {
     if (navigationRoute && navigationRoute === "Back") {
       NavigationService.navigate(routes.HomeScreen["Staking"], {

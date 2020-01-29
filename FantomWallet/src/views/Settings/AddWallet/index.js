@@ -32,7 +32,11 @@ const AddWallet = props => {
         <TouchableOpacity
           style={styles.middleView}
           onPress={() =>
-            NavigationService.navigate("BackupWallet", { backToHome: true })
+            NavigationService.navigate("BackupWallet", {
+              backToHome: true,
+              navigationRoute: undefined,
+              text: undefined
+            })
           }
         >
           <Text style={styles.rowsText}>{Messages.createWallet}</Text>
@@ -47,7 +51,11 @@ const AddWallet = props => {
         <TouchableOpacity
           style={styles.middleView}
           onPress={() =>
-            NavigationService.navigate("RecoverWallet", { backToHome: true })
+            NavigationService.navigate("RecoverWallet", {
+              backToHome: true,
+              navigationRoute: undefined,
+              text: undefined
+            })
           }
         >
           <Text style={styles.rowsText}>{Messages.importWallet}</Text>
