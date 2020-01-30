@@ -8,7 +8,6 @@
 import "~/utils/shim";
 
 import React, { useEffect, useState } from "react";
-import { Alert, Modal, View, TouchableOpacity } from "react-native";
 import { Provider } from "react-redux";
 import { StatusBar } from "react-native";
 import { PersistGate } from "redux-persist/integration/react";
@@ -21,10 +20,11 @@ import DropdownNotification from "~/components/DropdownNotification";
 import UpdateAppDropdown from "./components/general/updateAppDropdown";
 console.disableYellowBox = true;
 export default () => {
-  const [appVersion, setAppVersion] = useState("0");
+  const [appVersion, setAppVersion] = useState("");
   const [isDisplayModal, setIsDisplayModal] = useState(false);
   const [isInitial, setIsInitial] = useState(false);
   const version = DeviceInfo.getVersion();
+
   useEffect(() => {
     getAppStoreVersion().then(result => {
       if (result && result.version) {
@@ -56,10 +56,9 @@ export default () => {
             }
           />
           <DropdownNotification />
-          {isDisplayModal &&
-            version &&
-            version !== appVersion &&
-            appVersion !== "0" && <UpdateAppDropdown isDisplayModal />}
+          {isDisplayModal && version && version !== appVersion && (
+            <UpdateAppDropdown isDisplayModal />
+          )}
         </>
       </PersistGate>
     </Provider>
