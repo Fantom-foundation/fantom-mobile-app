@@ -5,6 +5,7 @@ import Web3 from "web3";
 import { types, setBalance, sendFtmSuccess } from "../actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
 import Web3Agent from "~/services/api/web3";
+// import Fantom from ''
 import { scientificToDecimal } from "../../../utils/converts";
 
 export function* getBalance(): any {
