@@ -35,6 +35,7 @@ import {
   sendFtm as sendFtmAction
 } from "~/redux/wallet/actions";
 import Loader from "~/components/general/Loader";
+import { setMylanguage } from "../../../theme/messages";
 
 import ReceiveModal from "../../InsideWallet/SingleWallet/components/ReceiveModal";
 import SendModal from "../../InsideWallet/SingleWallet/components/SendModal";
@@ -63,8 +64,13 @@ class Wallet extends Component {
       isLoading,
       walletsData,
       sendFtm,
-      setCurrentWallet
+      setCurrentWallet,
+      language
     } = this.props;
+
+    if (language && language.selectedLanguage) {
+      setMylanguage(language.selectedLanguage);
+    }
     if (walletsData && walletsData.length > 0 && !isLoading) {
       getBalance({ loading: isLoading });
       sendFtm();
@@ -336,7 +342,8 @@ const mapStateToProps = state => ({
   wallets: state.keys.wallets,
   Keys: state.keys,
   walletsData: state.wallet.walletsData,
-  isLoading: state.wallet.loading
+  isLoading: state.wallet.loading,
+  language: state.selectedLanguage
 });
 
 const mapDispatchToProps = {

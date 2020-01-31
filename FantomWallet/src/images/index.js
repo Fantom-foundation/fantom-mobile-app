@@ -29,3 +29,4 @@ export { default as HomeIcon } from "./home.png";
 export { default as OppositeArrow } from "./twoOppositeArrows.png";
 export { default as Avatar } from "./avatar.png";
 export { default as WalletTabIcon } from "./walletTabIcon.png";
+export { default as RegionLaguage } from "./language.png";

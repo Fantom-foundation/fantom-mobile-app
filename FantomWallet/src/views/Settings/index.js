@@ -1,6 +1,6 @@
 // @flow
 // Library
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import {
   Platform,
   Linking
 } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
 
 // Components
 import Header from "~/components/Header/index";
@@ -30,6 +31,8 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { setLanguage } from "../../redux/language/actions";
+import { connect } from "react-redux";
 // import { Switch } from 'react-native-switch';
 // Styling
 import styles from "./styles";
@@ -46,98 +49,22 @@ import {
   NotificationIcon,
   RightArrowIcon,
   PlusIcon,
-  ShieldIcon
+  ShieldIcon,
+  RegionLaguage
 } from "../../images";
 import { Colors } from "../../theme";
 import { getHeight } from "../../utils/pixelResolver";
-import { Messages } from "../../theme";
-
-const settingData = [
-  {
-    text: Messages.addWallet,
-    rightArrowIcon: RightArrowIcon,
-    source: PlusIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    to: "AddWallet"
-  },
-  {
-    text: Messages.manageWallet,
-    rightArrowIcon: RightArrowIcon,
-    source: WalletIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    to: "ManageWallet"
-  },
-  // {
-  //   text: 'Dark Mode',
-  //   rightArrowIcon: '',
-  //   source: MoonIcon,
-  //   notificationsToggleButton: false,
-  //   darkToggleButton: true
-  // },
-  // {
-  //   text: 'Dark Mode',
-  //   rightArrowIcon: '',
-  //   source: MoonIcon,
-  //   notificationsToggleButton: false,
-  //   darkToggleButton: true
-  // },
-  // {
-  //   text: 'Privacy and security',
-  //   rightArrowIcon: RightArrowIcon,
-  //   source: ShieldIcon,
-  //   notificationsToggleButton: false,
-  //   darkToggleButton: false,
-  //   to: 'PrivacyAndSecurity'
-  // },
-  // {
-  //   text: 'Push notifications',
-  //   rightArrowIcon: '',
-  //   source: NotificationIcon,
-  //   notificationsToggleButton: true,
-  //   darkToggleButton: false
-  // },
-  // {
-  //   text: 'Currency',
-  //   rightArrowIcon: RightArrowIcon,
-  //   source: DollarIcon,
-  //   notificationsToggleButton: false,
-  //   darkToggleButton: false,
-  //   to: 'Currency'
-  // },
-  {
-    text: Messages.shareWithFreinds,
-    rightArrowIcon: RightArrowIcon,
-    source: ShareIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    isShareApp: true
-  },
-  {
-    text: Messages.about,
-    rightArrowIcon: RightArrowIcon,
-    source: QuestionIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    isOpenUrl: true
-  },
-  {
-    text: Messages.review,
-    rightArrowIcon: RightArrowIcon,
-    source: ReviewIcon,
-    notificationsToggleButton: false,
-    darkToggleButton: false,
-    isShareApp: true
-  }
-];
+import { Messages, helper } from "../../theme";
+import { setMylanguage } from "../../theme/messages";
 
 const SettingsContainer = (props: TSettingsScreenTypes) => {
-  const { navigation } = props;
+  const { navigation, setLanguage, language } = props;
   const [notificationSwitchValue, setNotificationSwitchValue] = useState(false);
   const [darkSwitchValue, setDarkSwitchValue] = useState(false);
-
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const openUrl = url => Linking.openURL(url);
+  const dropdownRef = useRef(null);
+  const settingData = helper();
 
   const navigateTo = item => navigation.navigate(item.to);
 
@@ -146,6 +73,14 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
       if (item.to) return () => navigateTo(item);
       if (item.isOpenUrl) return () => openUrl("https://Fantom.foundation");
       if (item.isShareApp) return () => shareTheApp();
+      if (item.isLanguageSelect) {
+        return () => {
+          console.log(dropdownRef.current, "ref");
+          dropdownRef &&
+            dropdownRef.current &&
+            dropdownRef.current.togglePicker(false, null);
+        };
+      }
     }
   };
 
@@ -176,6 +111,7 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
                 ></Image>
               </TouchableOpacity>
             </View>
+
             <FlatList
               data={settingData}
               extraData={[notificationSwitchValue, darkSwitchValue]}
@@ -197,7 +133,30 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
                           resizeMode="contain"
                         ></Image>
                         <Text style={styles.textStyle}>{item.text}</Text>
+                        {item.isLanguageSelect && (
+                          <View style={styles.languageView}>
+                            <RNPickerSelect
+                              ref={dropdownRef}
+                              placeholder={{
+                                label: "Phone Language",
+                                value: "defaultphoneLanguage"
+                              }}
+                              value={selectedLanguage}
+                              onValueChange={value => {
+                                setMylanguage(value);
+                                setSelectedLanguage(value);
+                                setLanguage(value);
+                              }}
+                              items={[
+                                { label: "English", value: "en" },
+                                { label: "Chinese", value: "zh-Hans" },
+                                { label: "Korean", value: "ko" }
+                              ]}
+                            />
+                          </View>
+                        )}
                       </View>
+
                       {item.rightArrowIcon ? (
                         <Image
                           source={item.rightArrowIcon}
@@ -237,6 +196,10 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
                 );
               }}
             />
+            {/* {isLanguageDropDown ? ( */}
+
+            {/* ) : null} */}
+
             <View style={styles.bottomView}>
               <TouchableOpacity
                 onPress={() =>
@@ -266,4 +229,13 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
   );
   // }
 };
-export default SettingsContainer;
+
+const mapStateToProps = state => ({
+  language: state.selectedLanguage
+});
+
+const mapDispatchToProps = {
+  setLanguage: setLanguage
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer);

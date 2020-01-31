@@ -12,6 +12,7 @@ import { Messages } from "../../../theme";
 import styles from "./styles";
 import { FantomLogo } from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
+import { connect } from "react-redux";
 
 const WalletSetup = () => {
   const onCreateNewWallet = () => {
@@ -65,4 +66,8 @@ const WalletSetup = () => {
     </ImageBackground>
   );
 };
-export default WalletSetup;
+const mapStateToProps = state => ({
+language: state.selectedLanguage
+});
+
+export default connect(mapStateToProps, null) WalletSetup;

@@ -7,3 +7,7 @@ export const Messages = new LocalizedStrings({
   "zh-Hans": Chinese,
   ko: korean
 });
+
+export const setMylanguage = language => {
+  Messages.setLanguage(language);
+};

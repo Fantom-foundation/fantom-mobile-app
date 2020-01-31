@@ -1,5 +1,5 @@
 import { StyleSheet, Platform } from "react-native";
-import { DEVICE_HEIGHT, DEVICE_WIDTH,iPhoneXHeight } from "~/common/constants";
+import { DEVICE_HEIGHT, DEVICE_WIDTH, iPhoneXHeight } from "~/common/constants";
 import { Colors } from "../../theme/colors";
 import { FontSize } from "../../theme/fontSize";
 import { fonts } from "../../theme/font";
@@ -11,7 +11,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: getWidth(15),
+    paddingHorizontal: getWidth(15)
   },
   mainContainer: {
     flex: 1,
@@ -25,7 +25,7 @@ export default StyleSheet.create({
   scrollView: {
     flex: 1,
     // backgroundColor: 'red',
-    marginBottom: isPhoneX ? 60 : 48,
+    marginBottom: isPhoneX ? 60 : 48
   },
   headerComponent: {
     backgroundColor: "rgb(44,52,58)",
@@ -147,6 +147,9 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  languageView: {
+    marginLeft: getWidth(-50)
+  },
   textStyle: {
     fontFamily: fonts.WorkSansSemiBold,
     fontSize: FontSize.base,
@@ -166,10 +169,10 @@ export default StyleSheet.create({
   imageStyle: {
     marginHorizontal: getWidth(10),
     width: 24,
-    height: 20,
+    height: 20
   },
   iconStyle: {
     width: 20,
-    height: 20,
+    height: 20
   }
 });
