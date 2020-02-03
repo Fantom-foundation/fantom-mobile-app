@@ -90,13 +90,14 @@ export const helper = () => {
       isOpenUrl: true
     },
     {
-      text: "Language",
+      text: Messages.language,
       rightArrowIcon: RightArrowIcon,
       source: RegionLaguage,
       notificationsToggleButton: false,
       darkToggleButton: false,
       isShareApp: false,
-      isLanguageSelect: true
+      isLanguageSelect: true,
+      to: "LanguageSelect"
     },
     {
       text: Messages.review,

@@ -204,7 +204,7 @@ const StakingAmount = (props: Props) => {
           buttonViewStyle={styles.notEnoughSpaceButtonView}
           buttons={[
             {
-              name: "Back",
+              name: Messages.back,
               style: styles.backButtonStyle,
               onPress: () => setStakingModal(false),
               textStyle: styles.backButton

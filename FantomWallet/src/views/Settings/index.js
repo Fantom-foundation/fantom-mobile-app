@@ -1,6 +1,6 @@
 // @flow
 // Library
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,8 @@ import {
   FlatList,
   Switch,
   Platform,
-  Linking
+  Linking,
+  NativeModules
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
@@ -33,6 +34,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { setLanguage } from "../../redux/language/actions";
 import { connect } from "react-redux";
+
 // import { Switch } from 'react-native-switch';
 // Styling
 import styles from "./styles";
@@ -58,13 +60,31 @@ import { Messages, helper } from "../../theme";
 import { setMylanguage } from "../../theme/messages";
 
 const SettingsContainer = (props: TSettingsScreenTypes) => {
-  const { navigation, setLanguage, language } = props;
+  const { navigation, language } = props;
   const [notificationSwitchValue, setNotificationSwitchValue] = useState(false);
   const [darkSwitchValue, setDarkSwitchValue] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
   const openUrl = url => Linking.openURL(url);
-  const dropdownRef = useRef(null);
+
   const settingData = helper();
+
+  useEffect(() => {
+    if (language && language.selectedLanguage) {
+      setMylanguage(language.selectedLanguage);
+    } else if (language && language.selectedLanguage === "") {
+      if (Platform.OS === "ios") {
+        const locale = NativeModules.SettingsManager.settings.AppleLocale;
+        if (locale.includes("ko")) setMylanguage("ko");
+        else if (locale.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
+      if (Platform.OS === "android") {
+        const locale1 = NativeModules.I18nManager.localeIdentifier;
+        if (locale1.includes("ko")) setMylanguage("ko");
+        else if (locale1.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
+    }
+  }, [language.selectedLanguage]);
 
   const navigateTo = item => navigation.navigate(item.to);
 
@@ -73,14 +93,6 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
       if (item.to) return () => navigateTo(item);
       if (item.isOpenUrl) return () => openUrl("https://Fantom.foundation");
       if (item.isShareApp) return () => shareTheApp();
-      if (item.isLanguageSelect) {
-        return () => {
-          console.log(dropdownRef.current, "ref");
-          dropdownRef &&
-            dropdownRef.current &&
-            dropdownRef.current.togglePicker(false, null);
-        };
-      }
     }
   };
 
@@ -133,37 +145,6 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
                           resizeMode="contain"
                         ></Image>
                         <Text style={styles.textStyle}>{item.text}</Text>
-                        {item.isLanguageSelect && (
-                          <View style={styles.languageView}>
-                            <View>
-                              <RNPickerSelect
-                                ref={dropdownRef}
-                                style={{
-                                  // alignItems: "center",
-                                  height: 50,
-                                  width: 100,
-                                  backgroundColor: "red"
-                                }}
-                                textInputProps={{ textAlign: "right" }}
-                                placeholder={{
-                                  label: "Phone Language",
-                                  value: ""
-                                }}
-                                value={selectedLanguage}
-                                onValueChange={value => {
-                                  setMylanguage(value);
-                                  setSelectedLanguage(value);
-                                  setLanguage(value);
-                                }}
-                                items={[
-                                  { label: "English", value: "en" },
-                                  { label: "Chinese", value: "zh-Hans" },
-                                  { label: "Korean", value: "ko" }
-                                ]}
-                              />
-                            </View>
-                          </View>
-                        )}
                       </View>
 
                       {item.rightArrowIcon ? (

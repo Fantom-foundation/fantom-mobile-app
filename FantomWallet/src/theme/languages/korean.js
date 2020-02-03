@@ -63,5 +63,6 @@ export const korean = {
   minimumAmountAlert: "인출하기 위해 잔액이 최소",
   minimumAmountAlert1: "이상 필요합니다.",
   minimumUnstakeAlert: "이상 필요합니다.",
-  withdraw: "빼다"
+  withdraw: "빼다",
+  language: "언어"
 };

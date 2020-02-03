@@ -23,6 +23,7 @@ import {
   setWalletName as setWalletNameAction,
   setCurrentWallet as setCurrentWalletAction
 } from "~/redux/wallet/actions";
+import { Messages } from ".././../../theme";
 
 const walletData = [
   {
@@ -77,7 +78,7 @@ const colors = [
 const ManageWallet = props => {
   const { navigation, wallet, setWalletName } = props;
   const { walletsData } = wallet;
-  console.log("***Current wallet", walletsData);
+
   const [showModal, setShowModal] = useState(false);
   const [renameModal, setRenameModal] = useState(false);
   const [isModalOpened, setIsModalOpened] = useState([]);
@@ -116,7 +117,7 @@ const ManageWallet = props => {
               resizeMode="contain"
             ></Image>
           </TouchableOpacity>
-          <Text style={styles.headingText}>Manage wallets</Text>
+          <Text style={styles.headingText}>{Messages.manageWallet}</Text>
         </View>
         <FlatList
           data={walletsData}

@@ -17,6 +17,7 @@ type Action = {
 
 export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
   try {
+    debugger;
     const seed = yield Bip39.mnemonicToSeed(mnemonic); // creates seed buffer
     const root = yield Hdkey.fromMasterSeed(seed);
     const masterKey = yield root.privateKey.toString("hex");

@@ -63,5 +63,6 @@ export const Chinese = {
   minimumAmountAlert: "您需要的最低限额",
   minimumAmountAlert1: "提现交易易将从您的余额中扣取.",
   minimumUnstakeAlert: "取消的权益质押将从您的余额中存取",
-  withdraw: "退出"
+  withdraw: "退出",
+  language: "语言"
 };

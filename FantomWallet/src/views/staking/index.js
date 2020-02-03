@@ -27,10 +27,6 @@ import moment from "moment";
 import { Messages } from "../../theme";
 import Web3Agent from "../../services/api/web3";
 
-const modalText = Messages.atleast1Ftm;
-
-const unstakeText = Messages.withdrawAlert;
-
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
   const [ifUnstaking, setIfUnstaking] = useState(false);
@@ -46,6 +42,8 @@ const Staking = (props: Props) => {
   const [values, setValues] = useState(wallets);
   const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
   const [reRender, setRerender] = useState(0);
+  const modalText = Messages.atleast1Ftm;
+  const unstakeText = Messages.withdrawAlert;
 
   useEffect(() => {
     const gasLimit = 150000;
@@ -253,7 +251,7 @@ const Staking = (props: Props) => {
                   ...styles.buttonText
                 }}
               >
-                Unstake
+                {Messages.unstake}
               </Text>
             </TouchableOpacity>
           ) : (
@@ -330,7 +328,7 @@ const Staking = (props: Props) => {
       setStakeAmountModal(true);
     }
   };
-  const withdrawText = `Withdraw ${delegateAmount} FTM now`;
+  const withdrawText = `${Messages.withdraw} ${delegateAmount} FTM now`;
   let carousRef = React.createRef(null);
   return (
     <SafeAreaView style={styles.container}>

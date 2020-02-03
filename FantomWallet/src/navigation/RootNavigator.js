@@ -24,7 +24,7 @@ import ScanQR from "~/views/InsideWallet/ScanQR";
 import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
 import SettingsContainer from "~/views/Settings";
 import ValidatorNode from "~/views/ValidatorNode";
-
+import LanguageSelect from "../views/Settings/languageList";
 
 const RootNavigator = createStackNavigator(
   {
@@ -50,6 +50,7 @@ const RootNavigator = createStackNavigator(
     EnterPasscode: { screen: EnterPasscode },
     PrivacyAndSecurity: { screen: PrivacyAndSecurity },
     AddWallet: { screen: AddWallet },
+    LanguageSelect: { screen: LanguageSelect },
     ManageWallet: { screen: ManageWallet },
     SingleWallet: { screen: SingleWallet },
     SendFTM: { screen: SendFTM },
@@ -57,8 +58,7 @@ const RootNavigator = createStackNavigator(
     ReceiveMyQcCode: { screen: ReceiveMyQcCode },
     StakingAmount: { screen: StakingAmount },
     SettingsContainer: { screen: SettingsContainer },
-    ValidatorNode: { screen: ValidatorNode },
-    
+    ValidatorNode: { screen: ValidatorNode }
   },
   {
     headerMode: "none",

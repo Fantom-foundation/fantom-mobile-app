@@ -64,5 +64,6 @@ export const English = {
   minimumAmountAlert: "You need minimum",
   minimumAmountAlert1: "in your balance to initiate withdraw transaction.",
   minimumUnstakeAlert: "in your balance to initiate unstake transaction.",
-  withdraw: "Withdraw"
+  withdraw: "Withdraw",
+  language: "Language"
 };
