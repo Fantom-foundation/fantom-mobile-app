@@ -62,5 +62,6 @@ export const korean = {
     "스테이킹으로부터 토큰을 출금 \n 요청하시겠습니까?\n\n출금한 토큰은 7일 후부터 \n 지갑에서 사용 가능합니다.",
   minimumAmountAlert: "인출하기 위해 잔액이 최소",
   minimumAmountAlert1: "이상 필요합니다.",
-  minimumUnstakeAlert: "이상 필요합니다."
+  minimumUnstakeAlert: "이상 필요합니다.",
+  withdraw: "빼다"
 };

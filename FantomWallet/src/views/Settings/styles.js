@@ -135,12 +135,10 @@ export default StyleSheet.create({
   },
   mainContainer: {
     flex: 1
-    // backgroundColor:'yellow',
   },
   rowsView: {
     flexDirection: "row",
     justifyContent: "space-between"
-    // marginVertical: getHeight(21),
   },
   leftView: {
     flexDirection: "row",
@@ -148,7 +146,10 @@ export default StyleSheet.create({
     justifyContent: "center"
   },
   languageView: {
-    marginLeft: getWidth(-50)
+    flex: 1, // This flex is optional, but probably desired
+    alignItems: "center",
+    flexDirection: "row"
+    // marginLeft: getWidth(-120)
   },
   textStyle: {
     fontFamily: fonts.WorkSansSemiBold,

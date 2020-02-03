@@ -6,15 +6,18 @@ import {
   Image,
   ImageBackground,
   StatusBar,
-  BackHandler
+  BackHandler,
+  Platform,
+  NativeModules
 } from "react-native";
 import { Messages } from "../../../theme";
 import styles from "./styles";
 import { FantomLogo } from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { connect } from "react-redux";
+import { setMylanguage } from "../../../theme";
 
-const WalletSetup = () => {
+const WalletSetup = (props: any) => {
   const onCreateNewWallet = () => {
     NavigationService.navigate(routes.root.BackupWallet);
   };
@@ -25,8 +28,28 @@ const WalletSetup = () => {
     BackHandler.exitApp();
   };
   useEffect(() => {
-  
- const handler = BackHandler.addEventListener(
+    const { language } = props;
+
+    if (language && language.selectedLanguage) {
+      setMylanguage(language.selectedLanguage);
+    } else if (language && language.selectedLanguage === "") {
+      if (Platform.OS === "ios") {
+        const locale = NativeModules.SettingsManager.settings.AppleLocale;
+        if (locale.includes("ko")) setMylanguage("ko");
+        else if (locale.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
+
+      if (Platform.OS === "android") {
+        const locale1 = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
+        if (locale1.includes("ko")) setMylanguage("ko");
+        else if (locale1.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
+    }
+  }, []);
+  useEffect(() => {
+    const handler = BackHandler.addEventListener(
       "hardwareBackPress",
       backAndroidPress
     );
@@ -67,7 +90,7 @@ const WalletSetup = () => {
   );
 };
 const mapStateToProps = state => ({
-language: state.selectedLanguage
+  language: state.selectedLanguage
 });
 
-export default connect(mapStateToProps, null) WalletSetup;
+export default connect(mapStateToProps, null)(WalletSetup);

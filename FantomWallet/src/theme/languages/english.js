@@ -63,5 +63,6 @@ export const English = {
     "Are you sure you want to  request to withdraw \n your tokens from staking?\n\nThe tokens will be available\n after 7 days in your wallet.",
   minimumAmountAlert: "You need minimum",
   minimumAmountAlert1: "in your balance to initiate withdraw transaction.",
-  minimumUnstakeAlert: "in your balance to initiate unstake transaction."
+  minimumUnstakeAlert: "in your balance to initiate unstake transaction.",
+  withdraw: "Withdraw"
 };

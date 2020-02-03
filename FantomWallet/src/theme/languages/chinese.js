@@ -62,5 +62,6 @@ export const Chinese = {
     "您确定是要提现吗\n您进⾏行行权益质押的货币?\n\n货币将可被使⽤用\n7天后将会显示在您的钱包中.",
   minimumAmountAlert: "您需要的最低限额",
   minimumAmountAlert1: "提现交易易将从您的余额中扣取.",
-  minimumUnstakeAlert: "取消的权益质押将从您的余额中存取"
+  minimumUnstakeAlert: "取消的权益质押将从您的余额中存取",
+  withdraw: "退出"
 };

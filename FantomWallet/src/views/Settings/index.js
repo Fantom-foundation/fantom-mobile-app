@@ -135,24 +135,33 @@ const SettingsContainer = (props: TSettingsScreenTypes) => {
                         <Text style={styles.textStyle}>{item.text}</Text>
                         {item.isLanguageSelect && (
                           <View style={styles.languageView}>
-                            <RNPickerSelect
-                              ref={dropdownRef}
-                              placeholder={{
-                                label: "Phone Language",
-                                value: "defaultphoneLanguage"
-                              }}
-                              value={selectedLanguage}
-                              onValueChange={value => {
-                                setMylanguage(value);
-                                setSelectedLanguage(value);
-                                setLanguage(value);
-                              }}
-                              items={[
-                                { label: "English", value: "en" },
-                                { label: "Chinese", value: "zh-Hans" },
-                                { label: "Korean", value: "ko" }
-                              ]}
-                            />
+                            <View>
+                              <RNPickerSelect
+                                ref={dropdownRef}
+                                style={{
+                                  // alignItems: "center",
+                                  height: 50,
+                                  width: 100,
+                                  backgroundColor: "red"
+                                }}
+                                textInputProps={{ textAlign: "right" }}
+                                placeholder={{
+                                  label: "Phone Language",
+                                  value: ""
+                                }}
+                                value={selectedLanguage}
+                                onValueChange={value => {
+                                  setMylanguage(value);
+                                  setSelectedLanguage(value);
+                                  setLanguage(value);
+                                }}
+                                items={[
+                                  { label: "English", value: "en" },
+                                  { label: "Chinese", value: "zh-Hans" },
+                                  { label: "Korean", value: "ko" }
+                                ]}
+                              />
+                            </View>
                           </View>
                         )}
                       </View>

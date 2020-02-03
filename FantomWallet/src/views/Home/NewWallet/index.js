@@ -10,7 +10,9 @@ import {
   TouchableOpacity,
   Dimensions,
   RefreshControl,
-  Modal
+  Modal,
+  NativeModules,
+  Platform
 } from "react-native";
 import { Messages } from "../../../theme";
 import { SafeAreaView } from "react-navigation";
@@ -35,7 +37,7 @@ import {
   sendFtm as sendFtmAction
 } from "~/redux/wallet/actions";
 import Loader from "~/components/general/Loader";
-import { setMylanguage } from "../../../theme/messages";
+import { setMylanguage } from "../../../theme";
 
 import ReceiveModal from "../../InsideWallet/SingleWallet/components/ReceiveModal";
 import SendModal from "../../InsideWallet/SingleWallet/components/SendModal";
@@ -70,7 +72,22 @@ class Wallet extends Component {
 
     if (language && language.selectedLanguage) {
       setMylanguage(language.selectedLanguage);
+    } else if (language && language.selectedLanguage === "") {
+      if (Platform.OS === "ios") {
+        const locale = NativeModules.SettingsManager.settings.AppleLocale;
+        if (locale.includes("ko")) setMylanguage("ko");
+        else if (locale.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
+
+      if (Platform.OS === "android") {
+        const locale1 = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
+        if (locale1.includes("ko")) setMylanguage("ko");
+        else if (locale1.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
     }
+
     if (walletsData && walletsData.length > 0 && !isLoading) {
       getBalance({ loading: isLoading });
       sendFtm();

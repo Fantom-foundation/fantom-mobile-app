@@ -210,7 +210,7 @@ const Staking = (props: Props) => {
                     ...styles.buttonText
                   }}
                 >
-                  Withdraw
+                  {Messages.withdraw}
                 </Text>
               </TouchableOpacity>
             </>
@@ -410,7 +410,7 @@ const Staking = (props: Props) => {
                     disabled: ifWithdrawing
                   },
                   {
-                    name: "Withdraw",
+                    name: Messages.withdraw,
                     style: {
                       ...styles.unstakeButton,
                       backgroundColor: Colors.red
