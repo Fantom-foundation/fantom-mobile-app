@@ -203,6 +203,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             <Text style={styles.phraseHeading}>Phrase</Text>
             <View style={styles.inputView}>
               <TextInput
+                autoCompleteType="off"
                 autoCorrect={false}
                 value={mnemonic}
                 multiline={true}
@@ -235,6 +236,8 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             <Text style={styles.phraseHeading}>Private key</Text>
             <View style={styles.privateInputView}>
               <TextInput
+                autoCompleteType="off"
+                autoCorrect={false}
                 multiline={true}
                 style={styles.textInput}
                 value={privateKey ? privateKey.trim() : ""}
