@@ -65,5 +65,16 @@ export const English = {
   minimumAmountAlert1: "in your balance to initiate withdraw transaction.",
   minimumUnstakeAlert: "in your balance to initiate unstake transaction.",
   withdraw: "Withdraw",
-  language: "Language"
+  language: "Language",
+  validAmount: "Please enter valid amount.",
+  tokenWidthdraw: "Tokens successfully withdrawn!",
+  unstakeSuccessfull: "Request to unstake successful",
+  minimumStakeAlert: "Minimum 1 FTM required to stake",
+  stakingspace: "Staking space left",
+  lowerAmountAlert:
+    "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.",
+  tokenStakedSuccessfull: "Tokens staked successfully.",
+  maxStake: "You can stake max",
+  available: "Available",
+  max: "Max"
 };

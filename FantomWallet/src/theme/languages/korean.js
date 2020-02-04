@@ -64,5 +64,16 @@ export const korean = {
   minimumAmountAlert1: "이상 필요합니다.",
   minimumUnstakeAlert: "이상 필요합니다.",
   withdraw: "빼다",
-  language: "언어"
+  language: "언어",
+  validAmount: "유효한 수량을 입력해주세요.",
+  tokenWidthdraw: "토큰이 성공적으로 출금되었습니다!",
+  unstakeSuccessfull: "언스테이크 요청이 성공적으로 이루어졌습니다",
+  minimumStakeAlert: "스테이크를 하기 위해 최소 1 FTM이 필요합니다",
+  stakingspace: "스테이킹을 위한 공간이 남아있습니다",
+  lowerAmountAlert:
+    "검증자 노드에 스테이킹을 위한 공간이 부족합니다.  더 적은 수량을 입력하거나 다른 검증자 노드를 선택해주세요.",
+  tokenStakedSuccessfull: "토큰이 성공적으로 스테이크되었습니다.",
+  maxStake: "스테이크 가능한 최대 수량",
+  available: "유효한",
+  max: "맥스"
 };

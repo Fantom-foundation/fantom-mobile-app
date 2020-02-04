@@ -64,5 +64,16 @@ export const Chinese = {
   minimumAmountAlert1: "提现交易易将从您的余额中扣取.",
   minimumUnstakeAlert: "取消的权益质押将从您的余额中存取",
   withdraw: "退出",
-  language: "语言"
+  language: "语言",
+  validAmount: "请输入有效数量.",
+  tokenWidthdraw: "成功提现货币!",
+  unstakeSuccessfull: "成功申请取消权益质押",
+  minimumStakeAlert: "最少需要1FTM来进行权益质押",
+  stakingspace: "剩余权益质押空间",
+  lowerAmountAlert:
+    "数量超出了该验证者节点上剩余的权益质押空间，请输入更少的数量或选择其他验证者的节点.",
+  tokenStakedSuccessfull: "货币成功进行权益质押.",
+  maxStake: "您可最大化的权益质押",
+  available: "可用的",
+  max: "最高"
 };

@@ -29,8 +29,7 @@ const StakingAmount = (props: Props) => {
   const [stakingModal, setStakingModal] = useState(false);
   const [fontSizeValue, setFontSizeValue] = useState(40);
   const [estimationfee, setEstimationfee] = useState(0);
-  const amountHightModalText =
-    "The amount exceeds the staking\n space left on this validator node.\n\nPlease input a lower amount or\n choose a different validator\n node.";
+  const amountHightModalText = Messages.lowerAmountAlert;
   const availableToStake = props.navigation.getParam("availableToStake");
 
   useEffect(() => {
@@ -118,7 +117,7 @@ const StakingAmount = (props: Props) => {
     if (Number(amount) > Number(stakingSpace)) {
       setStakingModal(true);
     } else if (Number(amount) < 1) {
-      Alert.alert(Messages.error, "Minimum 1 FTM required to stake");
+      Alert.alert(Messages.error, Messages.minimumStakeAlert);
     } else if (
       Number(availableSpace) - Number(estimationfee) <
       Number(amount)
@@ -126,7 +125,7 @@ const StakingAmount = (props: Props) => {
       const maxStake = Number(availableSpace) - Number(estimationfee);
       Alert.alert(
         Messages.insufficentFunds,
-        `You can stake max ${maxStake.toFixed(5)} (Value + gas * price)`
+        `${Messages.maxStake}${maxStake.toFixed(5)} (Value + gas * price)`
       );
     } else if (amount !== "") {
       setIfStaking(true);
@@ -140,7 +139,7 @@ const StakingAmount = (props: Props) => {
         }
       });
     } else if (amount === "") {
-      Alert.alert(Messages.error, "Please enter valid amount.");
+      Alert.alert(Messages.error, Messages.validAmount);
     }
   };
 
@@ -157,7 +156,7 @@ const StakingAmount = (props: Props) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.validatorNode}>{validator.address}</Text>
           <Text style={styles.stakinSpace}>
-            Staking space left: {stakingSpaceLeft}
+            {Messages.stakingspace}: {stakingSpaceLeft}
           </Text>
           {/*for the price entered   */}
           <Text style={{ ...styles.sendPrice, fontSize: fontSizeValue }}>
@@ -165,11 +164,11 @@ const StakingAmount = (props: Props) => {
           </Text>
 
           <View style={styles.availableAmountView}>
-            <Text
-              style={styles.availablePrice}
-            >{`Available: ${availbleAmount.toFixed(5)}`}</Text>
+            <Text style={styles.availablePrice}>{`${
+              Messages.available
+            }: ${availbleAmount.toFixed(5)}`}</Text>
             <TouchableOpacity style={styles.maxButton} onPress={handleMaxStake}>
-              <Text style={styles.maxButtonText}>Max</Text>
+              <Text style={styles.maxButtonText}>{Messages.max}</Text>
             </TouchableOpacity>
           </View>
           {/* KeyPad  */}

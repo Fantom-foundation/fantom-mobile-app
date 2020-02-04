@@ -294,7 +294,7 @@ const Staking = (props: Props) => {
         setIfUnstaking(false);
         if (isSuccess)
           navigation.navigate("WalletImported", {
-            text: "Request to unstake successful",
+            text: Messages.unstakeSuccessfull,
             navigationRoute: "Back"
           });
       }
@@ -311,7 +311,7 @@ const Staking = (props: Props) => {
         setifWithdrawing(false);
         if (isSuccess)
           navigation.navigate("WalletImported", {
-            text: "Tokens successfully withdrawn!",
+            text: Messages.tokenWidthdraw,
             navigationRoute: "Staking"
           });
       }
