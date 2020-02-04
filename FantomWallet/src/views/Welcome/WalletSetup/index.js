@@ -16,6 +16,9 @@ import { FantomLogo } from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { connect } from "react-redux";
 import { setMylanguage } from "../../../theme";
+import DeviceInfo from "react-native-device-info";
+import { getAppStoreVersion } from "../../../utils/converts";
+import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
 const WalletSetup = (props: any) => {
   const onCreateNewWallet = () => {
@@ -28,7 +31,20 @@ const WalletSetup = (props: any) => {
     BackHandler.exitApp();
   };
   useEffect(() => {
-    const { language } = props;
+    const { language, setDopdownAlert } = props;
+    const version = DeviceInfo.getVersion();
+
+    getAppStoreVersion().then(result => {
+      if (result && result.version) {
+        if (result && result.version && result.version !== version) {
+          setDopdownAlert(
+            "custom",
+            "A new update is available. Update now.",
+            true
+          );
+        }
+      }
+    });
 
     if (language && language.selectedLanguage) {
       setMylanguage(language.selectedLanguage);
@@ -92,5 +108,8 @@ const WalletSetup = (props: any) => {
 const mapStateToProps = state => ({
   language: state.selectedLanguage
 });
+const mapDispatchToProps = {
+  setDopdownAlert: setDopdownAlertAction
+};
 
-export default connect(mapStateToProps, null)(WalletSetup);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletSetup);

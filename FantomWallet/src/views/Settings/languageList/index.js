@@ -6,7 +6,9 @@ import {
   Image,
   SafeAreaView,
   StatusBar,
-  FlatList
+  FlatList,
+  NativeModules,
+  Platform
 } from "react-native";
 import styles from "./styles";
 import { CrossIcon } from "../../../images";
@@ -42,7 +44,23 @@ const LanguageSelect = props => {
 
   const handleLanguageSelect = (item, index) => {
     const { setLanguage } = props;
-    if (item) {
+    if (item.value === "") {
+      setLanguage(item.value);
+      setSelectedLanguage(item.value);
+      if (Platform.OS === "ios") {
+        const locale = NativeModules.SettingsManager.settings.AppleLocale;
+        if (locale.includes("ko")) setMylanguage("ko");
+        else if (locale.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
+      if (Platform.OS === "android") {
+        const locale1 = NativeModules.I18nManager.localeIdentifier;
+        if (locale1.includes("ko")) setMylanguage("ko");
+        else if (locale1.includes("zh")) setMylanguage("zh-Hans");
+        else setMylanguage("en");
+      }
+      NavigationService.pop();
+    } else {
       setLanguage(item.value);
       setMylanguage(item.value);
       setSelectedLanguage(item.value);

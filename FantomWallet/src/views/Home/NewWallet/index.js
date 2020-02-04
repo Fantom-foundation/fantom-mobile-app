@@ -28,6 +28,10 @@ import Carousel from "react-native-snap-carousel";
 import { getHeight, getWidth } from "../../../utils/pixelResolver";
 import { Colors } from "../../../theme";
 import WalletMenu from "./components/walletMenu";
+import DeviceInfo from "react-native-device-info";
+import { getAppStoreVersion } from "../../../utils/converts";
+import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
+
 import CardHeader from "./components/cardListHeader";
 import { connect } from "react-redux";
 import {
@@ -59,6 +63,10 @@ class Wallet extends Component {
     };
     this.carousel = React.createRef();
   }
+
+  componentWillUnmount() {
+    clearInterval(this._interval);
+  }
   componentDidMount() {
     const {
       getBalance,
@@ -67,9 +75,23 @@ class Wallet extends Component {
       walletsData,
       sendFtm,
       setCurrentWallet,
-      language
+      language,
+      setDopdownAlert
     } = this.props;
-
+    //  for the app updation Alert
+    const version = DeviceInfo.getVersion();
+    getAppStoreVersion().then(result => {
+      if (result && result.version) {
+        if (result && result.version && result.version !== version) {
+          setDopdownAlert(
+            "custom",
+            "A new update is available. Update now.",
+            true
+          );
+        }
+      }
+    });
+    // for the language of app
     if (language && language.selectedLanguage) {
       setMylanguage(language.selectedLanguage);
     } else if (language && language.selectedLanguage === "") {
@@ -98,9 +120,6 @@ class Wallet extends Component {
         getHistory();
       }, 1000 * (walletsData.length + 1));
     }
-  }
-  componentWillUnmount() {
-    clearInterval(this._interval);
   }
 
   changeView = isListView => {
@@ -367,7 +386,8 @@ const mapDispatchToProps = {
   getBalance: getBalanceAction,
   getHistory: getHistoryAction,
   setCurrentWallet: setCurrentWalletAction,
-  sendFtm: sendFtmAction
+  sendFtm: sendFtmAction,
+  setDopdownAlert: setDopdownAlertAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
