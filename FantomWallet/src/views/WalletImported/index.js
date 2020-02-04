@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import SuccessScreen from "../../general/SuccessScreen";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { BackHandler } from "react-native";
+import { Messages } from "../../theme";
 const WalletImported = (props: TSettingsScreenTypes) => {
   const { navigation } = props;
   const publicKey = navigation.getParam("publicKey", "");
@@ -33,7 +34,7 @@ const WalletImported = (props: TSettingsScreenTypes) => {
   return (
     <SuccessScreen
       onPress={handlePress}
-      text={text || "Wallet imported!"}
+      text={text || Messages.walletImp}
     ></SuccessScreen>
   );
 };

@@ -134,7 +134,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
    */
   const handleSendMoney = () => {
     if (Number(amount) < 0) {
-      Alert.alert(Messages.error, "Please enter valid amount");
+      Alert.alert(Messages.error, Messages.validAmount);
       return;
     } else if (Number(currentWallet.balance) - Number(estimatedfee) < amount) {
       const maxAmount = Number(currentWallet.balance) - Number(estimatedfee);

@@ -7,6 +7,7 @@ import Hdkey from "hdkey";
 import { types, setKeys, setMnemonic } from "../actions";
 import { setCurrentWallet } from "../../wallet/actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
+import { Messages } from "../../../theme";
 
 type Action = {
   payload: {
@@ -36,9 +37,7 @@ export function* generateWallet({ payload: { mnemonic, cb } }: Action): any {
       e.message.toString().includes("Internet connection") ||
       e.message.toString().includes("Network Error")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     } else {
       yield put(setDopdownAlert("error", e.message));
     }
@@ -57,9 +56,7 @@ export function* generateWalletUsingPrivateKey({
       e.message.toString().includes("Internet connection") ||
       e.message.toString().includes("Network Error")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     } else {
       yield put(setDopdownAlert("error", e.message));
     }

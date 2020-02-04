@@ -13,6 +13,7 @@ import {
 import Fantom from "web3-functions";
 import type { TransactionT } from "../actions";
 import { SUCCESS, FAILED, SENT } from "~/common/constants";
+import { Messages } from "../../../theme";
 import { setDopdownAlert } from "~/redux/notification/actions";
 type Action = {
   payload: {
@@ -101,9 +102,7 @@ export function* sendTransaction({
       e.message.toString().includes("Invalid JSON RPC response") ||
       e.message.toString().includes("Network is unreachable")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     } else {
       Alert.alert("Error", e.message || otherErrorMessage);
     }

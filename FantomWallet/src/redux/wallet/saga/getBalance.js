@@ -7,6 +7,7 @@ import { setDopdownAlert } from "~/redux/notification/actions";
 // import Web3Agent from "~/services/api/web3";
 import Fantom from "web3-functions";
 import { scientificToDecimal } from "../../../utils/converts";
+import { Messages } from "../../../theme";
 
 export function* getBalance(): any {
   try {
@@ -42,9 +43,7 @@ export function* getBalance(): any {
       e.message.toString().includes("Invalid JSON RPC response") ||
       e.message.toString().includes("Network is unreachable")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     }
     // else {
     //   yield put(setDopdownAlert("error", e.message));
@@ -76,9 +75,7 @@ export function* setFtmBalance(): any {
       e.message.toString().includes("Invalid JSON RPC response") ||
       e.message.toString().includes("Network is unreachable")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     }
 
     // else {

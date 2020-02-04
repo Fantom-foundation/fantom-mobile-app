@@ -2,7 +2,8 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import Header from "../../../../components/Header";
-import { Colors } from "../../../../theme";
+import { Colors, Messages } from "../../../../theme";
+
 import leftArrowIcon from "../../../../images/arrowLeft_White.png";
 
 const HeaderView = props => {
@@ -11,7 +12,7 @@ const HeaderView = props => {
     <View style={styles.headerView}>
       <Header
         onLeftIconPress={onLeftIconPress}
-        text="Import Fantom wallet"
+        text={Messages.importFantomWallet}
         headerStyle={styles.headerStyle}
         leftButtonIcon="chevron-left"
         leftIconColor="#fff"
@@ -36,7 +37,7 @@ const HeaderView = props => {
               }
             ]}
           >
-            Phrase
+            {Messages.phrase}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -58,7 +59,7 @@ const HeaderView = props => {
               }
             ]}
           >
-            Private Key
+            {Messages.privateKey}
           </Text>
         </TouchableOpacity>
       </View>

@@ -22,6 +22,7 @@ import { Loader } from "../../../components/loader";
 
 import styles from "./styles";
 import HeaderView from "./components/header";
+import { Messages } from "../../../theme";
 
 const getErrorView = (text, dismiss, clearMnemnic) => {
   return (
@@ -35,7 +36,7 @@ const getErrorView = (text, dismiss, clearMnemnic) => {
           }}
           style={styles.backButton}
         >
-          <Text style={styles.backText}>Back</Text>
+          <Text style={styles.backText}>{Messages.back}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -140,10 +141,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
       !regx.test(newKey) ||
       newKey.toLowerCase().substring(0, 2) !== "0x"
     ) {
-      Alert.alert(
-        "Warning",
-        "Please enter a valid 66 bit alphanumeric private key that starts with 0x"
-      );
+      Alert.alert(Messages.warning, Messages.enterPrivateValidation);
       setPrivateKey("");
     } else {
       setIsImporting(true);
@@ -201,7 +199,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
         {/* View for the Phrase Tab */}
         {active && (
           <View style={styles.phraseContainer}>
-            <Text style={styles.phraseHeading}>Phrase</Text>
+            <Text style={styles.phraseHeading}>{Messages.phrase}</Text>
             <View style={styles.inputView}>
               <TextInput
                 autoCompleteType="off"
@@ -215,18 +213,16 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
                 style={styles.pasteButton}
                 onPress={() => readMnemonicFromClipboard()}
               >
-                <Text style={styles.pasterText}>Paste</Text>
+                <Text style={styles.pasterText}>{Messages.paste}</Text>
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.noteText}>
-              12 or 24 words separated by single spaces
-            </Text>
+            <Text style={styles.noteText}>{Messages.phraseMessage}</Text>
             <Button
               onPress={handleRecoverWallet}
               buttonStyle={styles.buttonStyle}
               buttonText={styles.buttonText}
-              text="Import"
+              text={Messages.import}
             />
           </View>
         )}
@@ -234,7 +230,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
         {/* View for the Private Key  Tab */}
         {!active && (
           <View style={styles.phraseContainer}>
-            <Text style={styles.phraseHeading}>Private key</Text>
+            <Text style={styles.phraseHeading}>{Messages.privateKey}</Text>
             <View style={styles.privateInputView}>
               <TextInput
                 autoCompleteType="off"
@@ -248,15 +244,15 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
                 style={styles.pasteButton}
                 onPress={() => readPrivateKeyFromClipboard()}
               >
-                <Text style={styles.pasteText}>Paste</Text>
+                <Text style={styles.pasteText}>{Messages.paste}</Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.noteText}>64 alphanumeric characters</Text>
+            <Text style={styles.noteText}>{Messages.alphaNumericChar}</Text>
             <Button
               buttonStyle={styles.buttonStyle}
               buttonText={styles.buttonText}
               onPress={handleRecoverWalletUsingPrivateKey}
-              text="Import"
+              text={Messages.import}
             />
           </View>
         )}
@@ -264,21 +260,13 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
         {/* {getErrorView("Incorrect private key")}  */}
 
         {errorType === "phrase" &&
-          getErrorView(
-            "Mnemonic must be 12 or 24 words",
-            setErrorType,
-            setMnemonic
-          )}
+          getErrorView(Messages.mnemonicValidation, setErrorType, setMnemonic)}
 
         {errorType === "specialCharacters" &&
-          getErrorView(
-            "No special characters allowed",
-            setErrorType,
-            setMnemonic
-          )}
+          getErrorView(Messages.noSpecial, setErrorType, setMnemonic)}
 
         {errorType === "numbers" &&
-          getErrorView("No numbers allowed", setErrorType, setMnemonic)}
+          getErrorView(Messages.noNum, setErrorType, setMnemonic)}
       </View>
     </TouchableWithoutFeedback>
   );

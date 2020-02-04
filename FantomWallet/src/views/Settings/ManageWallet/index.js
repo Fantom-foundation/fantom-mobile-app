@@ -189,7 +189,7 @@ const ManageWallet = props => {
                   <Dropdown
                     data={[
                       {
-                        value: "Rename"
+                        value: Messages.rename
                       }
                       // {
                       //   value: 'Change Color'

@@ -2,6 +2,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import { convertFTMValue, formatActivities } from "../../../../utils/converts";
+import { Messages } from "../../../../theme";
 
 const CardListItem = ({
   data,
@@ -36,7 +37,7 @@ const CardListItem = ({
               : `${Number(convertFTMValue(value, "bignumber"))} FTM`}
           </Text>
           {to.toLowerCase() === from.toLowerCase() && (
-            <Text style={styles.selfText}>Self</Text>
+            <Text style={styles.selfText}>{Messages.self}</Text>
           )}
         </TouchableOpacity>
       </>

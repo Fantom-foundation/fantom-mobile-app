@@ -9,6 +9,7 @@ import {
   API_URL_FANTOM,
   REACT_APP_API_URL_FANTOM
 } from "react-native-dotenv";
+import { Messages } from "../../../theme";
 
 const getTransactionApi = async publicKey => {
   return await axios
@@ -72,9 +73,7 @@ export function* getHistory(): any {
       e.message.toString().includes("Invalid JSON RPC response") ||
       e.message.toString().includes("Network is unreachable")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     }
     // } else {
     //   yield put(setDopdownAlert("error", e.message));

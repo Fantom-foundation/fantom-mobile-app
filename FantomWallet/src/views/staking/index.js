@@ -46,8 +46,6 @@ const Staking = (props: Props) => {
   const modalText = Messages.atleast1Ftm;
   const unstakeText = Messages.withdrawAlert;
 
-  console.log(values, "***** values ******");
-
   useEffect(() => {
     const gasLimit = 150000;
     Fantom.estimateFeeMobile(gasLimit).then(value => {
@@ -180,14 +178,19 @@ const Staking = (props: Props) => {
           )}
           {timeLeft > 0 && deactivatedEpoch > 0 ? (
             <Text style={{ ...styles.amountStyle, textAlign: "center" }}>
-              {`Your ${currentlyStaking} FTM will be available in ${
-                timeLeft / 24 > 0 ? Math.floor(timeLeft / 24) + " days and" : ""
-              }  ${Math.floor(timeLeft % 24)} hours`}
+              {`${Messages.your} ${currentlyStaking} FTM ${
+                Messages.willAvailable
+              } ${
+                timeLeft / 24 > 0
+                  ? Math.floor(timeLeft / 24) + `${Messages.daysAnd}`
+                  : ""
+              }  ${Math.floor(timeLeft % 24)} ${Messages.hours}`}
             </Text>
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
             <>
               <Text style={{ ...styles.amountStyle }}>
-                Withdraw {currentlyStaking} FTM now
+                {Messages.withdraw}
+                {currentlyStaking} FTM {Messages.now}
               </Text>
               <TouchableOpacity
                 style={{ ...styles.buttonStakeView, ...styles.withdraw }}
@@ -331,7 +334,7 @@ const Staking = (props: Props) => {
       setStakeAmountModal(true);
     }
   };
-  const withdrawText = `${Messages.withdraw} ${delegateAmount} FTM now`;
+  const withdrawText = `${Messages.withdraw} ${delegateAmount} FTM ${Messages.now}`;
   let carousRef = React.createRef(null);
   return (
     <SafeAreaView style={styles.container}>

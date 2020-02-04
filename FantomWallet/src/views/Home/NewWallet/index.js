@@ -83,11 +83,7 @@ class Wallet extends Component {
     getAppStoreVersion().then(result => {
       if (result && result.version) {
         if (result && result.version && result.version !== version) {
-          setDopdownAlert(
-            "custom",
-            "A new update is available. Update now.",
-            true
-          );
+          setDopdownAlert("custom", Messages.updateNow, true);
         }
       }
     });

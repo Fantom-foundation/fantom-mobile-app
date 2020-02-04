@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import styles from './styles';
-import { Colors } from '../../../theme';
-import Entypo from 'react-native-vector-icons/Entypo';
-import ModalView from 'react-native-modalbox';
-import { getWidth } from '../../../utils/pixelResolver';
+import React, { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import styles from "./styles";
+import { Colors, Messages } from "../../../theme";
+import Entypo from "react-native-vector-icons/Entypo";
+import ModalView from "react-native-modalbox";
+import { getWidth } from "../../../utils/pixelResolver";
 
 export const MoreComponent = props => {
   const [rename, renameModal] = useState(false);
@@ -52,12 +52,12 @@ export const MoreComponent = props => {
           </TouchableOpacity> */}
 
           <TouchableOpacity
-            style={{ backgroundColor: 'red', marginVertical: 20 }}
+            style={{ backgroundColor: "red", marginVertical: 20 }}
           >
-            <Text style={styles.modalText}>Rename</Text>
+            <Text style={styles.modalText}>{Messages.rename}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ backgroundColor: 'red' }}>
-            <Text style={styles.modalText}>Change color</Text>
+          <TouchableOpacity style={{ backgroundColor: "red" }}>
+            <Text style={styles.modalText}>{Messages.changeColor}</Text>
           </TouchableOpacity>
         </ModalView>
       )}

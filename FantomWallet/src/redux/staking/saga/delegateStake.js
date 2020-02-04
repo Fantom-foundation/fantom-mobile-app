@@ -12,6 +12,7 @@ import { GET_BALANCE_API } from "react-native-dotenv";
 import axios from "axios";
 // import Web3Agent from "../../../services/api/web3";
 import Fantom from "web3-functions";
+import { Messages } from "../../../theme";
 
 type Action = {
   payload: {
@@ -148,9 +149,7 @@ export function* delegateAmountSaga({
       e.message.toString().includes("Invalid JSON RPC response") ||
       e.message.toString().includes("Network is unreachable")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     } else {
       yield put(setDopdownAlert("error", e.message));
     }
@@ -187,9 +186,7 @@ export function* delegateUnstakeSaga({
       e.message.toString().includes("Invalid JSON RPC response") ||
       e.message.toString().includes("Network is unreachable")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     } else {
       yield put(setDopdownAlert("error", e.message));
     }
@@ -208,7 +205,7 @@ export function* delegateWithdrawSaga({
     const response = yield call(
       Fantom.withdrawDelegateAmount,
       publicKey,
-      privateKey
+      key.privateKey
     );
     // Fantom.withdrawDelegateAmount({
     //   publicKey: publicKey,
@@ -230,9 +227,7 @@ export function* delegateWithdrawSaga({
       e.message.toString().includes("Invalid JSON RPC response") ||
       e.message.toString().includes("Network is unreachable")
     ) {
-      yield put(
-        setDopdownAlert("error", "Please check your internet connection")
-      );
+      yield put(setDopdownAlert("error", Messages.internetConnection));
     } else {
       yield put(setDopdownAlert("error", e.message));
     }

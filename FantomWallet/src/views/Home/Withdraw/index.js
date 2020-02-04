@@ -95,7 +95,7 @@ export const Withdraw = ({ balance }: Props) => {
    */
   const handleSendMoney = () => {
     if (Number(actualAmount) === 0) {
-      Alert.alert("Error", "Please enter valid amount");
+      Alert.alert("Error", Messages.validAmount);
     } else if (actualAmount > maxFantomBalance) {
       Alert.alert("Error", "Insufficient balance");
     } else {
