@@ -14,7 +14,8 @@ import {
 import { connect } from "react-redux";
 import Button from "../../../components/general/Button";
 import { NavigationService, routes } from "~/navigation/helpers";
-import Web3Agent from "../../../services/api/web3";
+// import Web3Agent from "../../../services/api/web3";
+import Fantom from "web3-functions";
 import { generateWallet as generateWalletAction } from "~/redux/keys/actions";
 import { generateWalletUsingPrivateKey as generateWalletUsingPrivateKeyAction } from "~/redux/keys/actions";
 import { Loader } from "../../../components/loader";
@@ -147,7 +148,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
     } else {
       setIsImporting(true);
       // const address = WalletUtils.restoreWallet(privateKey);
-      const address = await Web3Agent.Fantom.restoreWallet(privateKey);
+      const address = await Fantom.restoreWallet(privateKey);
       if (address && address.address) {
         generateWalletUsingPrivateKey({
           privateKey,

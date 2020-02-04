@@ -25,7 +25,8 @@ import {
 } from "~/redux/staking/actions";
 import moment from "moment";
 import { Messages } from "../../theme";
-import Web3Agent from "../../services/api/web3";
+// import Web3Agent from "../../services/api/web3";
+import Fantom from "web3-functions";
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
@@ -45,9 +46,11 @@ const Staking = (props: Props) => {
   const modalText = Messages.atleast1Ftm;
   const unstakeText = Messages.withdrawAlert;
 
+  console.log(values, "***** values ******");
+
   useEffect(() => {
     const gasLimit = 150000;
-    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+    Fantom.estimateFeeMobile(gasLimit).then(value => {
       if (value) {
         setEstimatedfee(value * 2);
       }

@@ -37,7 +37,8 @@ import KeyPad from "../../components/general/keyPad";
 import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../components/loader";
 import Modal from "../../components/general/modal";
-import Web3Agent from "../../services/api/web3";
+// import Web3Agent from "../../services/api/web3";
+import Fantom from "web3-functions";
 import { Messages } from "../../theme";
 /**
  * SendReceive: This component is meant for performing tasks related to amount of Cash Send OR Receive.
@@ -57,7 +58,7 @@ export const SendReceive = (props: TSendReceiveTypes) => {
 
   useEffect(() => {
     const gasLimit = 44000;
-    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+    Fantom.estimateFeeMobile(gasLimit).then(value => {
       setEstimatedfee(value * 2);
     });
   });

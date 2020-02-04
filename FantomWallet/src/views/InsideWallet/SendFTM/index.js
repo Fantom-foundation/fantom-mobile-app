@@ -31,7 +31,8 @@ import {
 import { balanceToDollar } from "~/utils/converts";
 import { Loader } from "../../../components/loader";
 import Modal from "../../../components/general/modal";
-import Web3Agent from "../../../services/api/web3";
+import Fantom from "web3-functions";
+// import Web3Agent from "../../../services/api/web3";
 import { Messages } from "../../../theme";
 
 const keypadText = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
@@ -49,7 +50,7 @@ const SendFTM = (props: Props) => {
 
   useEffect(() => {
     const gasLimit = 44000;
-    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+    Fantom.estimateFeeMobile(gasLimit).then(value => {
       setEstimatedfee(value * 2);
     });
   });

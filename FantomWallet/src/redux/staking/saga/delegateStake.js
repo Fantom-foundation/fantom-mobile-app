@@ -10,7 +10,8 @@ import { setDopdownAlert } from "~/redux/notification/actions";
 import { getDataWithQueryString } from "../../../common/api";
 import { GET_BALANCE_API } from "react-native-dotenv";
 import axios from "axios";
-import Web3Agent from "../../../services/api/web3";
+// import Web3Agent from "../../../services/api/web3";
+import Fantom from "web3-functions";
 
 type Action = {
   payload: {
@@ -53,10 +54,7 @@ export function* delegateByAddressesSaga(): any {
           const {
             pendingRewards,
             data
-          } = yield Web3Agent.Fantom.getDelegationPendingRewards(
-            publicKey,
-            publicKey
-          );
+          } = yield Fantom.getDelegationPendingRewards(publicKey, publicKey);
           const response = yield call(delegatorByAddressApi, publicKey);
 
           if (response) {
@@ -126,13 +124,19 @@ export function* delegateAmountSaga({
     //   value: amount.toString(),
     //   memo: ""
     // });
-
-    const response = yield Web3Agent.Fantom.delegateStake({
+    const response = yield call(Fantom.delegateStake, {
       amount,
       publicKey,
       privateKey: key.privateKey,
       validatorId
     });
+
+    // const response = yield Fantom.delegateStake({
+    //   amount,
+    //   publicKey,
+    //   privateKey: key.privateKey,
+    //   validatorId
+    // });
     yield put(delegateByAddress({ publicKey }));
     cbSuccess(true);
     // Assign contract functions to sfc variable
@@ -161,10 +165,16 @@ export function* delegateUnstakeSaga({
       keys
     }));
     const key = keys.wallets.find(k => k.publicKey === publicKey);
-    const response = yield Web3Agent.Fantom.delegateUnstake({
-      delegatorAddress: publicKey,
-      privateKey: key.privateKey
-    });
+    // const response = yield Fantom.delegateUnstake({
+    //   delegatorAddress: publicKey,
+    //   privateKey: key.privateKey
+    // });
+
+    const response = yield call(
+      Fantom.delegateUnstake,
+      publicKey,
+      key.privateKey
+    );
 
     cbSuccess(true);
     // Assign contract functions to sfc variable
@@ -194,10 +204,20 @@ export function* delegateWithdrawSaga({
       keys
     }));
     const key = keys.wallets.find(k => k.publicKey === publicKey);
-    const response = yield Web3Agent.Fantom.withdrawDelegateAmount({
-      delegatorAddress: publicKey,
-      privateKey: key.privateKey
-    });
+
+    const response = yield call(
+      Fantom.withdrawDelegateAmount,
+      publicKey,
+      privateKey
+    );
+    // Fantom.withdrawDelegateAmount({
+    //   publicKey: publicKey,
+    //   key.privateKey
+    // });
+    // const response = yield Fantom.withdrawDelegateAmount({
+    //   delegatorAddress: publicKey,
+    //   privateKey: key.privateKey
+    // });
 
     cbSuccess(true);
     // Assign contract functions to sfc variable

@@ -143,7 +143,11 @@ const ValidatorNode = props => {
                           <View style={styles.selectButtonView}>
                             <TouchableOpacity
                               style={styles.selectButton}
-                              onPress={() =>
+                              onPress={() => {
+                                console.log(
+                                  props.navigation.getParam("availableToStake"),
+                                  "props.navigation.getParam"
+                                );
                                 NavigationService.navigate(
                                   routes.root.StakingAmount,
                                   {
@@ -155,8 +159,8 @@ const ValidatorNode = props => {
                                       "availableToStake"
                                     )
                                   }
-                                )
-                              }
+                                );
+                              }}
                             >
                               <Text style={styles.selectText}>
                                 {Messages.select}

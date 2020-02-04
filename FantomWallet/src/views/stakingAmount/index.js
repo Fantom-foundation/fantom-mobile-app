@@ -17,7 +17,8 @@ import { formatNumber } from "~/utils/converts";
 import { delegateAmount as delegateAmountAction } from "../../redux/staking/actions";
 import { Colors } from "../../theme";
 import Modal from "../../components/general/modal";
-import Web3Agent from "../../services/api/web3";
+import Fantom from "web3-functions";
+// import Web3Agent from "../../services/api/web3";
 import { Messages } from "../../theme";
 
 const StakingAmount = (props: Props) => {
@@ -34,7 +35,7 @@ const StakingAmount = (props: Props) => {
 
   useEffect(() => {
     const gasLimit = 200000;
-    Web3Agent.Fantom.estimateFee(gasLimit).then(value => {
+    Fantom.estimateFeeMobile(gasLimit).then(value => {
       setEstimationfee(value * 2);
     });
   });
@@ -83,6 +84,8 @@ const StakingAmount = (props: Props) => {
   const availableSpace = !isNaN(availableToStake)
     ? formatNumber(Number(availableToStake).toFixed(2))
     : 0;
+
+  console.log("****availableSpace", availableSpace);
 
   // Maximum Stake function
   const handleMaxStake = () => {
@@ -144,6 +147,7 @@ const StakingAmount = (props: Props) => {
   };
 
   const availbleAmount = Number(availableSpace) - Number(estimationfee);
+  console.log(availbleAmount, "*****availbleAmount");
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -166,7 +170,7 @@ const StakingAmount = (props: Props) => {
           <View style={styles.availableAmountView}>
             <Text style={styles.availablePrice}>{`${
               Messages.available
-            }: ${availbleAmount.toFixed(5)}`}</Text>
+            }: ${Number(availbleAmount).toFixed(5)}`}</Text>
             <TouchableOpacity style={styles.maxButton} onPress={handleMaxStake}>
               <Text style={styles.maxButtonText}>{Messages.max}</Text>
             </TouchableOpacity>

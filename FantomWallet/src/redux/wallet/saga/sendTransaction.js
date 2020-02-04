@@ -1,5 +1,5 @@
 // @flow
-import { takeEvery, put, select } from "redux-saga/effects";
+import { takeEvery, put, select, call } from "redux-saga/effects";
 import { Alert } from "react-native";
 import moment from "moment";
 import Web3 from "web3";
@@ -9,7 +9,8 @@ import {
   addTransaction,
   getHistory
 } from "../actions";
-import Web3Agent from "~/services/api/web3";
+// import Web3Agent from "~/services/api/web3";
+import Fantom from "web3-functions";
 import type { TransactionT } from "../actions";
 import { SUCCESS, FAILED, SENT } from "~/common/constants";
 import { setDopdownAlert } from "~/redux/notification/actions";
@@ -44,13 +45,22 @@ export function* sendTransaction({
   let transactionId = "";
   yield put(setLoadingSendTransaction(true));
   try {
-    const responce = yield Web3Agent.Fantom.transfer({
+    const responce = yield call(Fantom.transfer, {
       from: publicKey,
       to,
       value,
       memo,
       privateKey
     });
+
+    // const responce = yield Fantom.transfer({
+    //   from: publicKey,
+    //   to,
+    //   value,
+    //   memo,
+    //   privateKey
+    // });
+
     // other error
     // if (!responce.blockHash) throw Error(otherErrorMessage);
     // success

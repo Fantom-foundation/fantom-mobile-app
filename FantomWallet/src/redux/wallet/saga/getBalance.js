@@ -4,7 +4,8 @@ import Web3 from "web3";
 
 import { types, setBalance, sendFtmSuccess } from "../actions";
 import { setDopdownAlert } from "~/redux/notification/actions";
-import Web3Agent from "~/services/api/web3";
+// import Web3Agent from "~/services/api/web3";
+import Fantom from "web3-functions";
 import { scientificToDecimal } from "../../../utils/converts";
 
 export function* getBalance(): any {
@@ -20,8 +21,8 @@ export function* getBalance(): any {
         const { publicKey, name } = wallet;
         if (publicKey) {
           let response;
-          if (Web3Agent.Fantom) {
-            response = yield Web3Agent.Fantom.getBalance(publicKey);
+          if (Fantom) {
+            response = yield Fantom.getBalance(publicKey);
           }
           let balance = "0";
           if (response) {
@@ -59,8 +60,8 @@ export function* setFtmBalance(): any {
     const { publicKey } = currentWallet;
     let response;
     let balance = "0";
-    if (Web3Agent.Fantom) {
-      response = yield Web3Agent.Fantom.getBalance(publicKey);
+    if (Fantom) {
+      response = yield Fantom.getBalance(publicKey);
     }
     if (response) {
       const balanceWei = scientificToDecimal(response);
