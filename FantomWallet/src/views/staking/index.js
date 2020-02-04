@@ -240,7 +240,7 @@ const Staking = (props: Props) => {
                       Messages.insufficentFunds,
                       `${Messages.minimumAmountAlert} ${estimatedfee.toFixed(
                         5
-                      )} ${minimumUnstakeAlert}`
+                      )} ${Messages.minimumUnstakeAlert}`
                     );
                   } else openUnstakingModal(true);
                 }
