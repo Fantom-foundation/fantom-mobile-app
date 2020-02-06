@@ -1,6 +1,6 @@
 // @flow
 import { types } from "./actions";
-
+import { types as walletTypes } from "../wallet/actions";
 export type KeyReducerT = {
   publicKey: string,
   amount: number,
@@ -61,8 +61,10 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
         data: oldStakes
       };
     }
+    case walletTypes.SET_WALLET_NAME:
     case `${types.DELEGATE_BY_ADDRESSES}_FAILURE`: {
       console.log("types.DELEGATE_BY_ADDRESSES_FAILURE", action.payload);
+
       let oldStakes = [...state.data];
       const { publicKey } = action.payload;
       const data = {
@@ -84,6 +86,7 @@ const StakeReducer = (state: KeyStateT = initialState, action: Action) => {
         data: oldStakes
       };
     }
+
     case `${types.VALIDATORS_LIST}_SUCCESS`: {
       const { stakers } = action.payload.response.data.data;
 

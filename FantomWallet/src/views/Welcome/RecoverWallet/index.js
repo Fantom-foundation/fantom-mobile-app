@@ -157,7 +157,8 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             setPrivateKey("");
             NavigationService.navigate(routes.root.WalletImported, {
               publicKey: address.address,
-              navigationRoute: undefined
+              navigationRoute: undefined,
+              text: Messages.walletImp
             });
           }
         });
@@ -169,7 +170,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
   };
 
   const changeMnemonic = text => {
-    setMnemonic(text.toLowerCase());
+    setMnemonic(text);
     setErrorType("");
   };
 
@@ -202,11 +203,13 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             <Text style={styles.phraseHeading}>{Messages.phrase}</Text>
             <View style={styles.inputView}>
               <TextInput
+                underlineColorAndroid="white"
                 autoCompleteType="off"
                 autoCorrect={false}
                 value={mnemonic}
                 multiline={true}
                 onChangeText={changeMnemonic}
+                autoCapitalize="none"
                 style={styles.textInput}
               ></TextInput>
               <TouchableOpacity
@@ -233,6 +236,7 @@ export const RecoverWalletContainer = (props: TRecoverWalletTypes) => {
             <Text style={styles.phraseHeading}>{Messages.privateKey}</Text>
             <View style={styles.privateInputView}>
               <TextInput
+                underlineColorAndroid="white"
                 autoCompleteType="off"
                 autoCorrect={false}
                 multiline={true}

@@ -15,7 +15,7 @@ import { CrossIcon } from "../../../images";
 import { NavigationService, routes } from "~/navigation/helpers";
 import { setLanguage } from "../../../redux/language/actions";
 import { connect } from "react-redux";
-import { setMylanguage } from "../../../theme/messages";
+import { setMylanguage, Messages } from "../../../theme";
 import Entypo from "react-native-vector-icons/Entypo";
 
 const LanguageSelect = props => {
@@ -25,7 +25,7 @@ const LanguageSelect = props => {
   );
   const languageList = [
     {
-      name: "Phone Language",
+      name: Messages.phoneLang,
       value: ""
     },
     {
@@ -33,11 +33,11 @@ const LanguageSelect = props => {
       value: "en"
     },
     {
-      name: "Chinese",
+      name: "简体中文",
       value: "zh-Hans"
     },
     {
-      name: "Korean",
+      name: "한국어",
       value: "ko"
     }
   ];
@@ -80,7 +80,7 @@ const LanguageSelect = props => {
               resizeMode="contain"
             ></Image>
           </TouchableOpacity>
-          <Text style={styles.headingText}>Choose Language</Text>
+          <Text style={styles.headingText}>{Messages.chooseLang}</Text>
         </View>
 
         <FlatList

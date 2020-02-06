@@ -340,7 +340,10 @@ export const SendReceive = (props: TSendReceiveTypes) => {
                 buttonModalText === "Sending...."
                   ? { ...styles.sendButton, backgroundColor: Colors.grey }
                   : styles.sendButton,
-              name: buttonModalText,
+              name:
+                buttonModalText === "Sending...."
+                  ? Messages.sending
+                  : Messages.send,
               onPress: handleSendAmount,
               disabled: buttonModalText !== "Send",
               textStyle: styles.sendTextStyle

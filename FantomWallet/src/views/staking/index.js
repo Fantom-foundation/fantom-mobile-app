@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   View,
   SafeAreaView,
@@ -7,10 +7,13 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  Alert
+  Alert,
+  FlatList,
+  Platform
 } from "react-native";
 import styles from "./styles";
 import question from "../../images/question.png";
+// const Carousel = React.lazy(() => import("react-native-snap-carousel"));
 import Carousel from "react-native-snap-carousel";
 import { Metrics, getWidth } from "../../utils/pixelResolver";
 import Modal from "../../components/general/modal";
@@ -27,6 +30,7 @@ import moment from "moment";
 import { Messages } from "../../theme";
 // import Web3Agent from "../../services/api/web3";
 import Fantom from "web3-functions";
+import Loader from "../../components/general/Loader";
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
@@ -88,14 +92,14 @@ const Staking = (props: Props) => {
     }, 500);
   }, [wallets.length]);
 
-  useEffect(() => {
-    if (values && values.length > 1) {
-      if (!!carousRef) carousRef.triggerRenderingHack();
-      setTimeout(() => {
-        if (!!carousRef) carousRef.triggerRenderingHack();
-      }, 1000);
-    }
-  }, [carouselWidth]);
+  // useEffect(() => {
+  //   if (values && values.length > 1) {
+  //     if (!!carousRef) carousRef.triggerRenderingHack();
+  //     setTimeout(() => {
+  //       if (!!carousRef) carousRef.triggerRenderingHack();
+  //     }, 1000);
+  //   }
+  // }, [carouselWidth]);
 
   const formatValues = (value, isDividedBy = true) => {
     const dividend = isDividedBy ? Math.pow(10, 18) : 1;
@@ -109,7 +113,6 @@ const Staking = (props: Props) => {
   const _renderItem = ({ item, index }) => {
     const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
     const isDeligate = stakeData && stakeData.isDeligate;
-
     if (!stakeData) {
       return null;
     }
@@ -140,11 +143,8 @@ const Staking = (props: Props) => {
 
     const currentlyStaking = formatValues(Number(stakeData.amount || 0));
 
-    // const timeLeft =
-    //   new Date().getTime() -
-    //   (Number(stakeData.deactivatedTime || 0) + nextSevenDays);
-
     const isUnstaking = navigation.getParam("isUnstaking");
+
     return (
       <View
         style={{
@@ -336,6 +336,7 @@ const Staking = (props: Props) => {
   };
   const withdrawText = `${Messages.withdraw} ${delegateAmount} FTM ${Messages.now}`;
   let carousRef = React.createRef(null);
+  console.log(values, "values");
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
@@ -352,17 +353,30 @@ const Staking = (props: Props) => {
             {_renderItem({ item: values[0], index: 0 })}
           </View>
         ) : (
-          <Carousel
-            ref={carouselRef => (carousRef = carouselRef)}
-            data={values}
-            shouldOptimizeUpdates={false}
-            renderItem={_renderItem}
-            sliderWidth={Metrics.screenWidth}
-            itemWidth={carouselWidth}
-            inactiveSlideScale={1}
-            inactiveSlideOpacity={1}
-            extraData={carouselWidth !== 279}
-          />
+          <>
+            {Platform.OS === "android" && (
+              <FlatList
+                data={values}
+                renderItem={_renderItem}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.contentContainerStyle}
+              />
+            )}
+            {Platform.OS === "ios" && (
+              <Carousel
+                ref={carouselRef => (carousRef = carouselRef)}
+                data={values}
+                shouldOptimizeUpdates={false}
+                renderItem={_renderItem}
+                sliderWidth={Metrics.screenWidth}
+                itemWidth={carouselWidth}
+                inactiveSlideScale={1}
+                inactiveSlideOpacity={1}
+                extraData={carouselWidth !== 279}
+              />
+            )}
+          </>
         )}
       </View>
 
@@ -396,7 +410,7 @@ const Staking = (props: Props) => {
             ifWithdrawing
               ? [
                   {
-                    name: "Withdrawing...",
+                    name: Messages.withdrawing,
                     style: {
                       ...styles.unstakeButton,
                       backgroundColor: Colors.grey
@@ -449,7 +463,7 @@ const Staking = (props: Props) => {
               isShow: ifUnstaking ? false : true
             },
             {
-              name: ifUnstaking ? "Unstaking..." : Messages.unstake,
+              name: ifUnstaking ? Messages.unStaking : Messages.unstake,
               style: {
                 ...styles.unstakeButton,
                 backgroundColor: ifUnstaking ? Colors.grey : Colors.red

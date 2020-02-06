@@ -3,9 +3,9 @@ import React, { useRef, useEffect } from "react";
 import { Linking, Platform, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import DropdownAlert from "react-native-dropdownalert";
-
+import { getHeight, getWidth, Metrics } from "../../utils/pixelResolver";
 import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/actions";
-import { Colors } from "~/theme";
+import { Colors, FontSize } from "~/theme";
 
 const DropdownNotification = (props: TDropDownNotificationTypes) => {
   const { type, text, style, cancelButton = {}, setDopdownAlert } = props;
@@ -47,15 +47,25 @@ const DropdownNotification = (props: TDropDownNotificationTypes) => {
       showCancel={cancelButton}
       onCancel={cancel}
       cancelBtnImageStyle={styles.cancelBtnImageStyle}
+      titleStyle={
+        cancelButton
+          ? { ...styles.tittle, textDecorationLine: "underline" }
+          : styles.tittle
+      }
     />
   );
 };
 
 const styles = StyleSheet.create({
   cancelBtnImageStyle: {
-    width: 30,
-    height: 30,
-    alignSelf: "center"
+    width: getWidth(25),
+    height: getWidth(25),
+    top: Metrics.screenHeight > 800 ? getHeight(30) : 5
+  },
+  tittle: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: FontSize.base
   }
 });
 

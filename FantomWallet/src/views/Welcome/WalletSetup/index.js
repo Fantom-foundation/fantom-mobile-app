@@ -18,9 +18,11 @@ import { connect } from "react-redux";
 import { setMylanguage } from "../../../theme";
 import DeviceInfo from "react-native-device-info";
 import { getAppStoreVersion } from "../../../utils/converts";
+import { setLanguage } from "../../../redux/language/actions";
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
 const WalletSetup = (props: any) => {
+  const { language } = props;
   const onCreateNewWallet = () => {
     NavigationService.navigate(routes.root.BackupWallet);
   };
@@ -31,7 +33,7 @@ const WalletSetup = (props: any) => {
     BackHandler.exitApp();
   };
   useEffect(() => {
-    const { language, setDopdownAlert } = props;
+    const { setDopdownAlert } = props;
     const version = DeviceInfo.getVersion();
 
     getAppStoreVersion().then(result => {
@@ -41,25 +43,30 @@ const WalletSetup = (props: any) => {
         }
       }
     });
-
+  }, []);
+  useEffect(() => {
+    const { language, setLanguage } = props;
     if (language && language.selectedLanguage) {
       setMylanguage(language.selectedLanguage);
     } else if (language && language.selectedLanguage === "") {
       if (Platform.OS === "ios") {
         const locale = NativeModules.SettingsManager.settings.AppleLocale;
+        setLanguage("");
         if (locale.includes("ko")) setMylanguage("ko");
         else if (locale.includes("zh")) setMylanguage("zh-Hans");
         else setMylanguage("en");
       }
 
       if (Platform.OS === "android") {
-        const locale1 = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
+        setLanguage("");
+        const locale1 = NativeModules.I18nManager.localeIdentifier;
         if (locale1.includes("ko")) setMylanguage("ko");
-        else if (locale1.includes("zh")) setMylanguage("zh-Hans");
-        else setMylanguage("en");
+        else if (locale1.includes("zh")) {
+          setMylanguage("zh-Hans");
+        } else setMylanguage("en");
       }
     }
-  }, []);
+  }, [language.selectedLanguage]);
   useEffect(() => {
     const handler = BackHandler.addEventListener(
       "hardwareBackPress",
@@ -105,7 +112,8 @@ const mapStateToProps = state => ({
   language: state.selectedLanguage
 });
 const mapDispatchToProps = {
-  setDopdownAlert: setDopdownAlertAction
+  setDopdownAlert: setDopdownAlertAction,
+  setLanguage: setLanguage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletSetup);

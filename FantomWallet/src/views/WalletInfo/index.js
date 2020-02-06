@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -28,15 +28,22 @@ const WalletInfo = (props: TWalletInfoTypes) => {
     setWalletName,
     setDopdownAlert,
     setCurrentWallet,
-    walletsData
+    walletsData,
+    language
   } = props;
   const publicKey = navigation.getParam("publicKey", "");
   const [renameIconPressed, setRenameIconPressed] = useState(false);
-  const [name, setName] = useState("My Fantom Wallet");
+  const [name, setName] = useState(Messages.myFantomWallet);
+  const [currLang, setCurrLang] = useState(language.selectedLanguage);
+  useEffect(() => {
+    if (name === "My Fantom Wallet") {
+      setName(Messages.myFantomWallet);
+    }
+  }, [language.selectedLanguage]);
 
   const handleContinue = () => {
-    setWalletName({ name: name || "My Fantom Wallet", publicKey });
-    setCurrentWallet({ name: name || "My Fantom Wallet", publicKey });
+    setWalletName({ name: name || Messages.myFantomWallet, publicKey });
+    setCurrentWallet({ name: name || Messages.myFantomWallet, publicKey });
     NavigationService.navigate(routes.root.HomeScreen);
   };
 
@@ -98,7 +105,8 @@ const WalletInfo = (props: TWalletInfoTypes) => {
 };
 
 const mapStateToProps = state => ({
-  walletsData: state.wallet.walletsData
+  walletsData: state.wallet.walletsData,
+  language: state.selectedLanguage
 });
 
 const mapDispatchToProps = {

@@ -1,11 +1,14 @@
 const math = require("../../__mocks__/mathjs");
 const Web3 = require("web3");
 const axios = require("axios");
-const { getAppstoreAppMetadata } = require("react-native-appstore-version-checker");
+const {
+  getAppstoreAppMetadata
+} = require("react-native-appstore-version-checker");
 const { store } = require("../redux/store");
 const { Platform } = require("react-native");
 const { GAS_PRICE } = require("../common/constants");
 const moment = require("moment");
+const { Messages } = require("../theme");
 math.config({
   number: "bignumber"
 });
@@ -111,11 +114,15 @@ export const getConversionRate = value => {
 
 export const formatActivities = (activityDate: any) => {
   const t = new Date(activityDate * 1000);
-  const dateString = moment(t).format("MMM D, hh:mm A");
+  const month = moment(t).format("MMM");
+  const time = moment(t).format("hh:mm A");
+  const dateString = `${Messages[month]}, ${time}`;
+
   return dateString;
 };
 
 export const balanceToDollar = (value, decimal) => {
+  console.log("****sdsd", value, decimal);
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
     if (value === 0 || value === "0") {
@@ -145,22 +152,15 @@ export const roundingOff = value => {
   }
 };
 
-export const getAppStoreVersion =()=> {
+export const getAppStoreVersion = () => {
   try {
     if (Platform.OS === "android") {
-     return getAppstoreAppMetadata("com.fantomwallet").then(result=>result) //put any apps packageId here
-     
- }
-    else if (Platform.OS === "ios") {
+      return getAppstoreAppMetadata("com.fantomwallet").then(result => result); //put any apps packageId here
+    } else if (Platform.OS === "ios") {
       //On IOS u can do
-     return getAppstoreAppMetadata("1436694080").then(result=>result) //put any apps id here
-   
+      return getAppstoreAppMetadata("1436694080").then(result => result); //put any apps id here
     }
   } catch (err) {
-    return "0"
+    return "0";
   }
-
-}
-
-
-
+};

@@ -83,8 +83,8 @@ export function* sendTransaction({
     yield put(setLoadingSendTransaction(false));
     yield put({ type: types.GET_BALANCE, payload: { loading: false } });
     Alert.alert(
-      "Success",
-      `Transfer successful with transaction hash: ${responce.blockHash}`,
+      Messages.success,
+      `${Messages.transferSuccessfull}${responce.blockHash}`,
       [
         {
           text: "Ok",

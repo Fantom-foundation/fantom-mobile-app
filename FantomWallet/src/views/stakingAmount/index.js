@@ -194,7 +194,7 @@ const StakingAmount = (props: Props) => {
             onPress={handleStakingAmount}
           >
             <Text style={styles.stakeText}>
-              {ifStaking ? "Staking..." : Messages.stake}
+              {ifStaking ? Messages.staking : Messages.stake}
             </Text>
           </TouchableOpacity>
         </ScrollView>

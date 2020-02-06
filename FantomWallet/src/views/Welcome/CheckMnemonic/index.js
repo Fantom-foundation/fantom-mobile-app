@@ -97,7 +97,7 @@ export const CheckMnemonicContainer = ({
 
   const handleVerify = () => {
     if (verifyMnemonic && verifyMnemonic.length === 0) {
-      setDopdownAlert("custom", `Please Enter Mnemonics.`, {
+      setDopdownAlert("custom", `Please Enter Mnemonics.`, false, {
         backgroundColor: "rgb(251,128,0)"
       });
       return;
@@ -113,9 +113,14 @@ export const CheckMnemonicContainer = ({
     });
 
     if (inconsistency) {
-      setDopdownAlert("custom", `The ${inconsistency} word does not match.`, {
-        backgroundColor: "rgb(251,128,0)"
-      });
+      setDopdownAlert(
+        "custom",
+        `The ${inconsistency} word does not match.`,
+        false,
+        {
+          backgroundColor: "rgb(251,128,0)"
+        }
+      );
       return;
     }
     setIsLoading(true);
@@ -179,9 +184,7 @@ export const CheckMnemonicContainer = ({
                 ))}
               </View>
               {isEnable && (
-                <Text style={styles.errorText}>
-                  Incorrect order. Try again!
-                </Text>
+                <Text style={styles.errorText}>{Messages.incorrectOrder}</Text>
               )}
             </View>
           </View>

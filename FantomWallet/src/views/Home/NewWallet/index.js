@@ -31,6 +31,7 @@ import WalletMenu from "./components/walletMenu";
 import DeviceInfo from "react-native-device-info";
 import { getAppStoreVersion } from "../../../utils/converts";
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
+import { delegateByAddresses as delegateByAddressesAction } from "~/redux/staking/actions";
 
 import CardHeader from "./components/cardListHeader";
 import { connect } from "react-redux";
@@ -76,9 +77,12 @@ class Wallet extends Component {
       sendFtm,
       setCurrentWallet,
       language,
-      setDopdownAlert
+      setDopdownAlert,
+      delegateByAddresses
     } = this.props;
     //  for the app updation Alert
+    delegateByAddresses();
+    console.log("Component Did mount");
     const version = DeviceInfo.getVersion();
     getAppStoreVersion().then(result => {
       if (result && result.version) {
@@ -383,7 +387,8 @@ const mapDispatchToProps = {
   getHistory: getHistoryAction,
   setCurrentWallet: setCurrentWalletAction,
   sendFtm: sendFtmAction,
-  setDopdownAlert: setDopdownAlertAction
+  setDopdownAlert: setDopdownAlertAction,
+  delegateByAddresses: delegateByAddressesAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

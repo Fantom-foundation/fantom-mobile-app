@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 import { Metrics, getHeight, getWidth } from "../../utils/pixelResolver";
 import { Colors, fonts, FontSize } from "../../theme";
 
@@ -8,7 +8,12 @@ const crauselStyle = {
   crauselView: {
     marginTop: getHeight(30)
   },
+  contentContainerStyle: {
+    paddingHorizontal: getWidth(25)
+  },
+
   walletView: {
+    marginHorizontal: Platform.OS === "android" ? getWidth(10) : 0,
     paddingTop: getHeight(22),
     paddingBottom: getHeight(51),
     borderRadius: getWidth(22),

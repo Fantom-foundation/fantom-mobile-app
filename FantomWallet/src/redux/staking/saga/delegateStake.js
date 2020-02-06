@@ -26,7 +26,6 @@ export function* delegateByAddressSaga({
 }: Action): any {
   try {
     const response = yield call(delegatorByAddressApi, publicKey);
-
     yield put(delegateByAddressesSuccess({ publicKey, response }));
   } catch (e) {
     yield put(delegateByAddressesFailure({ publicKey }));
