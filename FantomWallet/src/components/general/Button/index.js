@@ -1,8 +1,7 @@
 // @flow
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import styles from './styles';
-
+import React from "react";
+import { TouchableOpacity, Text } from "react-native";
+import styles from "./styles";
 
 /**
  * Button : This is generic component , meant for rendering Button on any screen.
@@ -11,10 +10,10 @@ const Button = (props: TButtonTypes) => {
   const {
     activeOpacity,
     text,
-    onPress = () => { },
+    onPress = () => {},
     buttonStyle = {},
-    textStyle = {},
-  }=props
+    textStyle = {}
+  } = props;
   return (
     <TouchableOpacity
       style={{ ...styles.buttonStyle, ...buttonStyle }}
@@ -24,5 +23,5 @@ const Button = (props: TButtonTypes) => {
       <Text style={{ ...styles.textStyle, ...textStyle }}>{text}</Text>
     </TouchableOpacity>
   );
-}
+};
 export default Button;

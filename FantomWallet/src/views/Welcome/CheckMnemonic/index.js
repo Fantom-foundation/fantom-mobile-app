@@ -97,9 +97,6 @@ export const CheckMnemonicContainer = ({
 
   const handleVerify = () => {
     if (verifyMnemonic && verifyMnemonic.length === 0) {
-      setDopdownAlert("custom", `Please Enter Mnemonics.`, false, {
-        backgroundColor: "rgb(251,128,0)"
-      });
       return;
     }
     let inconsistency = false;
@@ -113,14 +110,6 @@ export const CheckMnemonicContainer = ({
     });
 
     if (inconsistency) {
-      setDopdownAlert(
-        "custom",
-        `The ${inconsistency} word does not match.`,
-        false,
-        {
-          backgroundColor: "rgb(251,128,0)"
-        }
-      );
       return;
     }
     setIsLoading(true);
@@ -204,6 +193,7 @@ export const CheckMnemonicContainer = ({
                   ? Colors.royalBlue
                   : Colors.greyOpacity
             }}
+            disable={!isEnable && verifyMnemonic.length === 12}
             onPress={handleVerify}
             textStyle={styles.buttonText}
             text={Messages.continue}

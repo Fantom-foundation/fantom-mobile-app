@@ -12,8 +12,7 @@ import {
   Platform
 } from "react-native";
 import styles from "./styles";
-import question from "../../images/question.png";
-// const Carousel = React.lazy(() => import("react-native-snap-carousel"));
+
 import Carousel from "react-native-snap-carousel";
 import { Metrics, getWidth } from "../../utils/pixelResolver";
 import Modal from "../../components/general/modal";
@@ -28,9 +27,7 @@ import {
 } from "~/redux/staking/actions";
 import moment from "moment";
 import { Messages } from "../../theme";
-// import Web3Agent from "../../services/api/web3";
 import Fantom from "web3-functions";
-import Loader from "../../components/general/Loader";
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
