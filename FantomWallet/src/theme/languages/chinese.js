@@ -120,5 +120,6 @@ export const Chinese = {
   Oct: "十月",
   Nov: "十一月",
   Dec: "十二月",
-  incorrectOrder: "错误的助记词顺序. 请重新尝试"
+  incorrectOrder: "错误的助记词顺序. 请重新尝试",
+  th: "日"
 };

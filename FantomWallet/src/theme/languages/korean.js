@@ -121,5 +121,6 @@ export const korean = {
   Oct: "10 월",
   Nov: "11 월",
   Dec: "12 월",
-  incorrectOrder: "니모닉 문구가 일치하지 않습니다. 다시 시도해주세요"
+  incorrectOrder: "니모닉 문구가 일치하지 않습니다. 다시 시도해주세요",
+  th: "일"
 };

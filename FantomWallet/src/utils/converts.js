@@ -115,14 +115,19 @@ export const getConversionRate = value => {
 export const formatActivities = (activityDate: any) => {
   const t = new Date(activityDate * 1000);
   const month = moment(t).format("MMM");
+  const date = moment(t).format("DD");
+  const d = date[0] === "0" ? date[1] : date;
   const time = moment(t).format("hh:mm A");
-  const dateString = `${Messages[month]}, ${time}`;
+  const year = moment(t).format("YYYY");
+  const language = Messages.getLanguage();
 
-  return dateString;
+  const dateString = `${Messages[month]} ${d}${Messages.th}, ${year} ${time}`;
+  if (language.toLowerCase().substring(0, 2) === "zh")
+    return `${year}年 ${Messages[month]} ${d}${Messages.th},  ${time}`;
+  else return dateString;
 };
 
 export const balanceToDollar = (value, decimal) => {
-  console.log("****sdsd", value, decimal);
   const { fantomDollarRate } = store.getState().wallet;
   if (fantomDollarRate) {
     if (value === 0 || value === "0") {

@@ -122,5 +122,6 @@ export const English = {
   Oct: "Oct",
   Nov: "Nov",
   Dec: "Dec",
-  incorrectOrder: "Incorrect order. Try again!"
+  incorrectOrder: "Incorrect order. Try again!",
+  th: ""
 };
