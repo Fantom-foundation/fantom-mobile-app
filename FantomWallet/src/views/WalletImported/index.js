@@ -30,7 +30,7 @@ const WalletImported = (props: TSettingsScreenTypes) => {
     NavigationService.navigate(routes.root.WalletInfo, { publicKey });
     return true;
   };
-  console.log(text, "***** text  in Wallet Imported *****");
+
   return (
     <SuccessScreen
       onPress={handlePress}
