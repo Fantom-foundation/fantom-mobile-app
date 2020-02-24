@@ -86,7 +86,7 @@ class Wallet extends Component {
     const version = DeviceInfo.getVersion();
     getAppStoreVersion().then(result => {
       if (result && result.version) {
-        if (result && result.version && result.version !== version) {
+        if (result && result.version && result.version > version) {
           setDopdownAlert("custom", Messages.updateNow, true);
         }
       }
