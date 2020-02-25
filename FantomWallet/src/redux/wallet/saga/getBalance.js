@@ -16,6 +16,8 @@ export function* getBalance(): any {
       walletsData: wallet.walletsData
     }));
 
+    console.log("******asdsad", walletsData);
+
     if (walletsData && walletsData.length > 0) {
       for (let i = 0; i < walletsData.length; i++) {
         const wallet = walletsData[i];

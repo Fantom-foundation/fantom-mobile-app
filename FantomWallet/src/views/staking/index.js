@@ -4,12 +4,11 @@ import {
   View,
   SafeAreaView,
   Text,
-  Image,
   TouchableOpacity,
-  Dimensions,
   Alert,
   FlatList,
-  Platform
+  Platform,
+  RefreshControl
 } from "react-native";
 import styles from "./styles";
 
@@ -25,9 +24,12 @@ import {
   delegateUnstake as delegateUnstakeAction,
   delegateWithdraw as delegateWithdrawAction
 } from "~/redux/staking/actions";
+import { getBalance as getBalanceAction } from "~/redux/wallet/actions";
 import moment from "moment";
 import { Messages } from "../../theme";
 import Fantom from "web3-functions";
+import _ from "lodash";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Staking = (props: Props) => {
   const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
@@ -65,21 +67,28 @@ const Staking = (props: Props) => {
       clearInterval(renderTime);
     };
   }, [reRender]);
+  // (wallets.length + 1) * 1000
 
+  const isArrayEqual = (x, y) => {
+    return _(x)
+      .differenceWith(y, _.isEqual)
+      .isEmpty();
+  };
   useEffect(() => {
+    setValues(wallets);
     const interval = setInterval(() => {
       setValues(wallets);
       delegateByAddresses();
-    }, (wallets.length + 1) * 1000);
+    }, 30000);
     const timer = setInterval(() => {
       setFlag(prev => prev + 1);
-    }, (wallets.length + 1) * 1000);
+    }, 30000);
 
     return () => {
       clearInterval(interval);
       clearInterval(timer);
     };
-  }, [flag]);
+  }, [!isArrayEqual(wallets, values)]);
 
   useEffect(() => {
     setValues(wallets);
@@ -89,14 +98,20 @@ const Staking = (props: Props) => {
     }, 500);
   }, [wallets.length]);
 
-  // useEffect(() => {
-  //   if (values && values.length > 1) {
-  //     if (!!carousRef) carousRef.triggerRenderingHack();
-  //     setTimeout(() => {
-  //       if (!!carousRef) carousRef.triggerRenderingHack();
-  //     }, 1000);
-  //   }
-  // }, [carouselWidth]);
+  // if(!isArrayEqual(wallets, values)){
+  //   props.getBalance
+  // }
+
+  console.log(wallets, "****** wallets *******");
+
+  useEffect(() => {
+    if (values && values.length > 1) {
+      if (!!carousRef) carousRef.triggerRenderingHack();
+      setTimeout(() => {
+        if (!!carousRef) carousRef.triggerRenderingHack();
+      }, 1000);
+    }
+  }, [carouselWidth]);
 
   const formatValues = (value, isDividedBy = true) => {
     const dividend = isDividedBy ? Math.pow(10, 18) : 1;
@@ -186,8 +201,7 @@ const Staking = (props: Props) => {
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
             <>
               <Text style={{ ...styles.amountStyle }}>
-                {Messages.withdraw}
-                {currentlyStaking} FTM {Messages.now}
+                {Messages.withdraw} {currentlyStaking} FTM {Messages.now}
               </Text>
               <TouchableOpacity
                 style={{ ...styles.buttonStakeView, ...styles.withdraw }}
@@ -334,6 +348,7 @@ const Staking = (props: Props) => {
   const withdrawText = `${Messages.withdraw} ${delegateAmount} FTM ${Messages.now}`;
   let carousRef = React.createRef(null);
   console.log(values, "values");
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.stakingTextView}>
@@ -478,12 +493,15 @@ const Staking = (props: Props) => {
 
 const mapStateToProps = state => ({
   stakes: state.stakes.data,
-  wallets: state.wallet.walletsData
+  wallets: state.wallet.walletsData,
+  isLoading: state.wallet.loading
 });
 
 const mapDispatchToProps = {
   delegateByAddresses: delegateByAddressesAction,
   delegateUnstake: delegateUnstakeAction,
+  getBalance: getBalanceAction,
+
   delegateWithdraw: delegateWithdrawAction
 };
 
