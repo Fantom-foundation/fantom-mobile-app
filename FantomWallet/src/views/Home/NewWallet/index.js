@@ -99,6 +99,7 @@ class Wallet extends Component {
         const locale = NativeModules.SettingsManager.settings.AppleLocale;
         if (locale.includes("ko")) setMylanguage("ko");
         else if (locale.includes("zh")) setMylanguage("zh-Hans");
+        else if (locale.includes("vi")) setMylanguage("vi");
         else setMylanguage("en");
       }
 
@@ -106,6 +107,7 @@ class Wallet extends Component {
         const locale1 = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
         if (locale1.includes("ko")) setMylanguage("ko");
         else if (locale1.includes("zh")) setMylanguage("zh-Hans");
+        else if (locale1.includes("vi")) setMylanguage("vi");
         else setMylanguage("en");
       }
     }

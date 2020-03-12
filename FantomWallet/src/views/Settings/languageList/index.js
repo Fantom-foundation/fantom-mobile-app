@@ -39,6 +39,10 @@ const LanguageSelect = props => {
     {
       name: "한국어",
       value: "ko"
+    },
+    {
+      name: "Tiếng Việt",
+      value: "vi"
     }
   ];
 
@@ -51,12 +55,14 @@ const LanguageSelect = props => {
         const locale = NativeModules.SettingsManager.settings.AppleLocale;
         if (locale.includes("ko")) setMylanguage("ko");
         else if (locale.includes("zh")) setMylanguage("zh-Hans");
+        else if (locale.includes("vi")) setMylanguage("vi");
         else setMylanguage("en");
       }
       if (Platform.OS === "android") {
         const locale1 = NativeModules.I18nManager.localeIdentifier;
         if (locale1.includes("ko")) setMylanguage("ko");
         else if (locale1.includes("zh")) setMylanguage("zh-Hans");
+        else if (locale1.includes("vi")) setMylanguage("vi");
         else setMylanguage("en");
       }
       NavigationService.pop();

@@ -54,6 +54,7 @@ const WalletSetup = (props: any) => {
         setLanguage("");
         if (locale.includes("ko")) setMylanguage("ko");
         else if (locale.includes("zh")) setMylanguage("zh-Hans");
+        else if (locale.includes("vi")) setMylanguage("vi");
         else setMylanguage("en");
       }
 
@@ -63,7 +64,8 @@ const WalletSetup = (props: any) => {
         if (locale1.includes("ko")) setMylanguage("ko");
         else if (locale1.includes("zh")) {
           setMylanguage("zh-Hans");
-        } else setMylanguage("en");
+        } else if (locale1.includes("vi")) setMylanguage("vi");
+        else setMylanguage("en");
       }
     }
   }, [language.selectedLanguage]);
