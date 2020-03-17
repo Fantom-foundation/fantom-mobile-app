@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from 'react'
 import {
   View,
   SafeAreaView,
@@ -8,159 +8,161 @@ import {
   Alert,
   FlatList,
   Platform,
-  RefreshControl
-} from "react-native";
-import styles from "./styles";
+  RefreshControl,
+} from 'react-native'
+import styles from './styles'
 
-import Carousel from "react-native-snap-carousel";
-import { Metrics, getWidth } from "../../utils/pixelResolver";
-import Modal from "../../components/general/modal";
-import { NavigationService, routes } from "../../navigation/helpers";
-import { connect } from "react-redux";
-import { Colors } from "../../theme";
-import { formatNumber } from "~/utils/converts";
+import Carousel from 'react-native-snap-carousel'
+import { Metrics, getWidth } from '../../utils/pixelResolver'
+import Modal from '../../components/general/modal'
+import { NavigationService, routes } from '../../navigation/helpers'
+import { connect } from 'react-redux'
+import { Colors } from '../../theme'
+import { formatNumber } from '~/utils/converts'
 import {
   delegateByAddresses as delegateByAddressesAction,
   delegateUnstake as delegateUnstakeAction,
-  delegateWithdraw as delegateWithdrawAction
-} from "~/redux/staking/actions";
-import { getBalance as getBalanceAction } from "~/redux/wallet/actions";
-import moment from "moment";
-import { Messages } from "../../theme";
-import Fantom from "web3-functions";
-import _ from "lodash";
-import { ScrollView } from "react-native-gesture-handler";
+  delegateWithdraw as delegateWithdrawAction,
+} from '~/redux/staking/actions'
+import { getBalance as getBalanceAction } from '~/redux/wallet/actions'
+import moment from 'moment'
+import { Messages } from '../../theme'
+import Fantom from 'web3-functions'
+import _ from 'lodash'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const Staking = (props: Props) => {
-  const [isUnstakeModalOpened, openUnstakingModal] = useState(false);
-  const [ifUnstaking, setIfUnstaking] = useState(false);
-  const [ifWithdrawing, setifWithdrawing] = useState(false);
-  const [isWithdrawModalOpened, openWithdrawModal] = useState("");
-  const [delegateAmount, setDelegateAmount] = useState("");
-  const [unstakeKey, setUnstakeKey] = useState("");
-  const [estimatedfee, setEstimatedfee] = useState(0);
-  const [stakeAmountModal, setStakeAmountModal] = useState(false);
-  const { delegateByAddresses, stakes, wallets, navigation } = props;
+  const [isUnstakeModalOpened, openUnstakingModal] = useState(false)
+  const [ifUnstaking, setIfUnstaking] = useState(false)
+  const [ifWithdrawing, setifWithdrawing] = useState(false)
+  const [isWithdrawModalOpened, openWithdrawModal] = useState('')
+  const [delegateAmount, setDelegateAmount] = useState('')
+  const [unstakeKey, setUnstakeKey] = useState('')
+  const [estimatedfee, setEstimatedfee] = useState(0)
+  const [stakeAmountModal, setStakeAmountModal] = useState(false)
+  const { delegateByAddresses, stakes, wallets, navigation } = props
 
-  const [flag, setFlag] = useState(0);
-  const [values, setValues] = useState(wallets);
-  const [carouselWidth, setCarouselWidth] = useState(getWidth(279));
-  const [reRender, setRerender] = useState(0);
-  const modalText = Messages.atleast1Ftm;
-  const unstakeText = Messages.withdrawAlert;
+  const [flag, setFlag] = useState(0)
+  const [values, setValues] = useState(wallets)
+  const [carouselWidth, setCarouselWidth] = useState(getWidth(279))
+  const [reRender, setRerender] = useState(0)
+  const modalText = Messages.atleast1Ftm
+  const unstakeText = Messages.withdrawAlert
 
   useEffect(() => {
-    const gasLimit = 150000;
+    const gasLimit = 150000
     Fantom.estimateFeeMobile(gasLimit).then(value => {
       if (value) {
-        setEstimatedfee(value * 2);
+        setEstimatedfee(value * 2)
       }
-    });
-  });
+    })
+  })
 
   useEffect(() => {
     const renderTime = setInterval(() => {
-      setRerender(prev => prev + 1);
-    }, 2000);
+      setRerender(prev => prev + 1)
+    }, 2000)
 
     return () => {
-      clearInterval(renderTime);
-    };
-  }, [reRender]);
+      clearInterval(renderTime)
+    }
+  }, [reRender])
   // (wallets.length + 1) * 1000
 
   const isArrayEqual = (x, y) => {
     return _(x)
       .differenceWith(y, _.isEqual)
-      .isEmpty();
-  };
+      .isEmpty()
+  }
   useEffect(() => {
-    setValues(wallets);
+    setValues(wallets)
     const interval = setInterval(() => {
-      setValues(wallets);
-      delegateByAddresses();
-    }, 30000);
+      setValues(wallets)
+      delegateByAddresses()
+    }, 30000)
     const timer = setInterval(() => {
-      setFlag(prev => prev + 1);
-    }, 30000);
+      setFlag(prev => prev + 1)
+    }, 30000)
 
     return () => {
-      clearInterval(interval);
-      clearInterval(timer);
-    };
-  }, [!isArrayEqual(wallets, values)]);
+      clearInterval(interval)
+      clearInterval(timer)
+    }
+  }, [!isArrayEqual(wallets, values)])
 
   useEffect(() => {
-    setValues(wallets);
-    delegateByAddresses();
+    setValues(wallets)
+    delegateByAddresses()
     setTimeout(() => {
-      setCarouselWidth(getWidth(280));
-    }, 500);
-  }, [wallets.length]);
+      setCarouselWidth(getWidth(280))
+    }, 500)
+  }, [wallets.length])
 
   // if(!isArrayEqual(wallets, values)){
   //   props.getBalance
   // }
 
-  console.log(wallets, "****** wallets *******");
+  console.log(wallets, '****** wallets *******')
 
   useEffect(() => {
     if (values && values.length > 1) {
-      if (!!carousRef) carousRef.triggerRenderingHack();
+      if (!!carousRef && carousRef.triggerRenderingHack)
+        carousRef.triggerRenderingHack()
       setTimeout(() => {
-        if (!!carousRef) carousRef.triggerRenderingHack();
-      }, 1000);
+        if (!!carousRef && carousRef.triggerRenderingHack)
+          carousRef.triggerRenderingHack()
+      }, 1000)
     }
-  }, [carouselWidth]);
+  }, [carouselWidth])
 
   const formatValues = (value, isDividedBy = true) => {
-    const dividend = isDividedBy ? Math.pow(10, 18) : 1;
-    const dividedValue = value / dividend;
+    const dividend = isDividedBy ? Math.pow(10, 18) : 1
+    const dividedValue = value / dividend
     if (value <= 0.01) {
-      return !!value && value > 0 ? formatNumber(Number(value).toFixed(6)) : 0;
+      return !!value && value > 0 ? formatNumber(Number(value).toFixed(6)) : 0
     }
-    return formatNumber(Number(dividedValue.toFixed(2)));
-  };
+    return formatNumber(Number(dividedValue.toFixed(2)))
+  }
 
   const _renderItem = ({ item, index }) => {
-    const stakeData = stakes.find(stake => stake.publicKey === item.publicKey);
-    const isDeligate = stakeData && stakeData.isDeligate;
+    const stakeData = stakes.find(stake => stake.publicKey === item.publicKey)
+    const isDeligate = stakeData && stakeData.isDeligate
     if (!stakeData) {
-      return null;
+      return null
     }
 
-    const availableToStake = item.balance;
-    const currentDate = new Date();
-    const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7);
-    const todayDate = new Date();
+    const availableToStake = item.balance
+    const currentDate = new Date()
+    const nextSevenDays = currentDate.setDate(currentDate.getDate() + 7)
+    const todayDate = new Date()
     // const deactivatedDate = delegateDate.setDate(
     //   delegateDate.getDate() + Number(stakeData.deactivatedTime || 0)
     // );
 
-    const deactivatedEpoch = Number(stakeData.deactivatedEpoch || 0);
+    const deactivatedEpoch = Number(stakeData.deactivatedEpoch || 0)
 
-    const deactivatedTime = Number(stakeData.deactivatedTime || 0);
+    const deactivatedTime = Number(stakeData.deactivatedTime || 0)
     // const timeLeft =
     //   delegateDate.getTime() - deactivatedTime + currentDate.getTime();
-    const date1 = new Date(deactivatedTime * 1000);
-    date1.setDate(date1.getDate() + 7);
-    const date2 = new Date();
-    const startTime = moment(date1, "YYYY/MM/DD HH:mm");
-    const endTime = moment(date2, "YYYY/MM/DD HH:mm");
+    const date1 = new Date(deactivatedTime * 1000)
+    date1.setDate(date1.getDate() + 7)
+    const date2 = new Date()
+    const startTime = moment(date1, 'YYYY/MM/DD HH:mm')
+    const endTime = moment(date2, 'YYYY/MM/DD HH:mm')
 
-    const timeLeft = startTime.diff(endTime, "hours", true);
+    const timeLeft = startTime.diff(endTime, 'hours', true)
 
     // const diffTime = Math.abs(date1 - date2);
     // const timeLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    const currentlyStaking = formatValues(Number(stakeData.amount || 0));
+    const currentlyStaking = formatValues(Number(stakeData.amount || 0))
 
-    const isUnstaking = navigation.getParam("isUnstaking");
+    const isUnstaking = navigation.getParam('isUnstaking')
 
     return (
       <View
         style={{
-          ...styles.walletView
+          ...styles.walletView,
         }}
       >
         <View style={styles.stakingCard}>
@@ -189,13 +191,13 @@ const Staking = (props: Props) => {
             </View>
           )}
           {timeLeft > 0 && deactivatedEpoch > 0 ? (
-            <Text style={{ ...styles.amountStyle, textAlign: "center" }}>
+            <Text style={{ ...styles.amountStyle, textAlign: 'center' }}>
               {`${Messages.your} ${currentlyStaking} FTM ${
                 Messages.willAvailable
               } ${
                 timeLeft / 24 > 0
                   ? Math.floor(timeLeft / 24) + `${Messages.daysAnd}`
-                  : ""
+                  : ''
               }  ${Math.floor(timeLeft % 24)} ${Messages.hours}`}
             </Text>
           ) : deactivatedEpoch > 0 && isDeligate && currentlyStaking > 0 ? (
@@ -210,19 +212,19 @@ const Staking = (props: Props) => {
                     Alert.alert(
                       Messages.insufficentFunds,
                       `${Messages.minimumAmountAlert} ${estimatedfee.toFixed(
-                        5
-                      )} ${Messages.minimumAmountAlert1}`
-                    );
+                        5,
+                      )} ${Messages.minimumAmountAlert1}`,
+                    )
                   } else {
-                    if (stakeData) setUnstakeKey(stakeData.publicKey);
-                    openWithdrawModal(true);
-                    setDelegateAmount(currentlyStaking);
+                    if (stakeData) setUnstakeKey(stakeData.publicKey)
+                    openWithdrawModal(true)
+                    setDelegateAmount(currentlyStaking)
                   }
                 }}
               >
                 <Text
                   style={{
-                    ...styles.buttonText
+                    ...styles.buttonText,
                   }}
                 >
                   {Messages.withdraw}
@@ -251,21 +253,21 @@ const Staking = (props: Props) => {
               style={styles.buttonUnstakeView}
               onPress={() => {
                 if (stakeData) {
-                  setUnstakeKey(stakeData.publicKey);
+                  setUnstakeKey(stakeData.publicKey)
                   if (Number(item.balance).toFixed(2) < Number(estimatedfee)) {
                     Alert.alert(
                       Messages.insufficentFunds,
                       `${Messages.minimumAmountAlert} ${estimatedfee.toFixed(
-                        5
-                      )} ${Messages.minimumUnstakeAlert}`
-                    );
-                  } else openUnstakingModal(true);
+                        5,
+                      )} ${Messages.minimumUnstakeAlert}`,
+                    )
+                  } else openUnstakingModal(true)
                 }
               }}
             >
               <Text
                 style={{
-                  ...styles.buttonText
+                  ...styles.buttonText,
                 }}
               >
                 {Messages.unstake}
@@ -275,7 +277,7 @@ const Staking = (props: Props) => {
             <View
               style={{
                 ...styles.buttonUnstakeView,
-                backgroundColor: Colors.royalBlue
+                backgroundColor: Colors.royalBlue,
               }}
             />
           )}
@@ -288,7 +290,7 @@ const Staking = (props: Props) => {
             >
               <Text
                 style={{
-                  ...styles.buttonText
+                  ...styles.buttonText,
                 }}
               >
                 {Messages.stake}
@@ -297,57 +299,57 @@ const Staking = (props: Props) => {
           )}
         </View>
       </View>
-    );
-  };
+    )
+  }
 
   //onUnstake Button
   const handleUnstakePress = () => {
-    setIfUnstaking(true);
-    const { navigation, delegateUnstake } = props;
+    setIfUnstaking(true)
+    const { navigation, delegateUnstake } = props
 
     delegateUnstake({
       publicKey: unstakeKey,
       cbSuccess: isSuccess => {
-        setIfUnstaking(false);
+        setIfUnstaking(false)
         if (isSuccess)
-          navigation.navigate("WalletImported", {
+          navigation.navigate('WalletImported', {
             text: Messages.unstakeSuccessfull,
-            navigationRoute: "Back"
-          });
-      }
-    });
-  };
+            navigationRoute: 'Back',
+          })
+      },
+    })
+  }
 
   //onUnstake Button
   const handleWithdrawPress = () => {
-    const { navigation, delegateWithdraw } = props;
-    setifWithdrawing(true);
+    const { navigation, delegateWithdraw } = props
+    setifWithdrawing(true)
     delegateWithdraw({
       publicKey: unstakeKey,
       cbSuccess: isSuccess => {
-        setifWithdrawing(false);
+        setifWithdrawing(false)
         if (isSuccess)
-          navigation.navigate("WalletImported", {
+          navigation.navigate('WalletImported', {
             text: Messages.tokenWidthdraw,
-            navigationRoute: "Staking"
-          });
-      }
-    });
-  };
+            navigationRoute: 'Staking',
+          })
+      },
+    })
+  }
 
   const handleStakeButton = (amount, publicKey) => {
     if (amount >= 1) {
       NavigationService.navigate(routes.root.ValidatorNode, {
         availableToStake: amount,
-        publicKey
-      });
+        publicKey,
+      })
     } else if (amount < 1) {
-      setStakeAmountModal(true);
+      setStakeAmountModal(true)
     }
-  };
-  const withdrawText = `${Messages.withdraw} ${delegateAmount} FTM ${Messages.now}`;
-  let carousRef = React.createRef(null);
-  console.log(values, "values");
+  }
+  const withdrawText = `${Messages.withdraw} ${delegateAmount} FTM ${Messages.now}`
+  let carousRef = React.createRef(null)
+  console.log(values, 'values')
 
   return (
     <SafeAreaView style={styles.container}>
@@ -358,15 +360,15 @@ const Staking = (props: Props) => {
         {values && values.length === 1 ? (
           <View
             style={{
-              alignItems: "center",
-              justifyContent: "center"
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             {_renderItem({ item: values[0], index: 0 })}
           </View>
         ) : (
           <>
-            {Platform.OS === "android" && (
+            {Platform.OS === 'android' && (
               <FlatList
                 data={values}
                 renderItem={_renderItem}
@@ -375,7 +377,7 @@ const Staking = (props: Props) => {
                 contentContainerStyle={styles.contentContainerStyle}
               />
             )}
-            {Platform.OS === "ios" && (
+            {Platform.OS === 'ios' && (
               <Carousel
                 ref={carouselRef => (carousRef = carouselRef)}
                 data={values}
@@ -402,8 +404,8 @@ const Staking = (props: Props) => {
             {
               name: Messages.back,
               style: styles.backButtonStyle,
-              onPress: () => setStakeAmountModal(false)
-            }
+              onPress: () => setStakeAmountModal(false),
+            },
           ]}
         />
       )}
@@ -416,7 +418,7 @@ const Staking = (props: Props) => {
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={{
             ...styles.unstakeView,
-            justifyContent: ifWithdrawing ? "center" : "space-between"
+            justifyContent: ifWithdrawing ? 'center' : 'space-between',
           }}
           buttons={
             ifWithdrawing
@@ -425,31 +427,31 @@ const Staking = (props: Props) => {
                     name: Messages.withdrawing,
                     style: {
                       ...styles.unstakeButton,
-                      backgroundColor: Colors.grey
+                      backgroundColor: Colors.grey,
                     },
                     textStyle: styles.unStakeText,
-                    disabled: true
-                  }
+                    disabled: true,
+                  },
                 ]
               : [
                   {
                     name: Messages.cancel,
                     style: styles.backButtonStyle,
-                    onPress: () => openWithdrawModal(""),
+                    onPress: () => openWithdrawModal(''),
                     textStyle: styles.backButton,
-                    disabled: ifWithdrawing
+                    disabled: ifWithdrawing,
                   },
                   {
                     name: Messages.withdraw,
                     style: {
                       ...styles.unstakeButton,
-                      backgroundColor: Colors.red
+                      backgroundColor: Colors.red,
                     },
 
                     onPress: handleWithdrawPress,
                     textStyle: styles.unStakeText,
-                    disabled: false
-                  }
+                    disabled: false,
+                  },
                 ]
           }
         />
@@ -462,7 +464,7 @@ const Staking = (props: Props) => {
           modalTextStyle={styles.modalTextStyle}
           buttonViewStyle={
             ifUnstaking
-              ? { ...styles.unstakeView, justifyContent: "center" }
+              ? { ...styles.unstakeView, justifyContent: 'center' }
               : styles.unstakeView
           }
           buttons={[
@@ -472,37 +474,37 @@ const Staking = (props: Props) => {
               onPress: () => openUnstakingModal(!isUnstakeModalOpened),
               textStyle: styles.backButton,
               disabled: ifUnstaking,
-              isShow: ifUnstaking ? false : true
+              isShow: ifUnstaking ? false : true,
             },
             {
               name: ifUnstaking ? Messages.unStaking : Messages.unstake,
               style: {
                 ...styles.unstakeButton,
-                backgroundColor: ifUnstaking ? Colors.grey : Colors.red
+                backgroundColor: ifUnstaking ? Colors.grey : Colors.red,
               },
               onPress: handleUnstakePress,
               textStyle: styles.unStakeText,
-              disabled: ifUnstaking
-            }
+              disabled: ifUnstaking,
+            },
           ]}
         />
       )}
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const mapStateToProps = state => ({
   stakes: state.stakes.data,
   wallets: state.wallet.walletsData,
-  isLoading: state.wallet.loading
-});
+  isLoading: state.wallet.loading,
+})
 
 const mapDispatchToProps = {
   delegateByAddresses: delegateByAddressesAction,
   delegateUnstake: delegateUnstakeAction,
   getBalance: getBalanceAction,
 
-  delegateWithdraw: delegateWithdrawAction
-};
+  delegateWithdraw: delegateWithdrawAction,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Staking);
+export default connect(mapStateToProps, mapDispatchToProps)(Staking)
