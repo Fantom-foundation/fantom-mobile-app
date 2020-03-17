@@ -11,7 +11,9 @@
     "test": "jest",
     "clean": "watchman watch-del-all && rm -rf node_modules/ && yarn cache clean && yarn install && yarn start -- --reset-cache",
     "postinstall": "./node_modules/.bin/rn-nodeify --hack --install && yarn jetify",
-    "jetify": "rm -rf ./node_modules/react-native-http/example && npx jetify"
+    "jetify": "rm -rf ./node_modules/react-native-http/example && npx jetify",
+    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/",
+    "bundle-ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.3",
