@@ -41,11 +41,11 @@ yarn global add react-native-cli
 * cd FantomWallet
 
 ```
-npm install
+npm install --legacy-peer-deps
 npm run jetify
 ```
 
-Alternatively, use `yarn`:
+Alternatively, use `yarn`: (DEPRECATED)
 
 ```
 yarn install
