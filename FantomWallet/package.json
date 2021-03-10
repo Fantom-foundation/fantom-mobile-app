@@ -30,6 +30,7 @@
     "ethereumjs-util": "^5.2.0",
     "hdkey": "^1.1.0",
     "https-browserify": "0.0.1",
+    "keythereum": "^1.2.0",
     "loadash": "^1.0.0",
     "lodash": "^4.17.13",
     "moment": "^2.24.0",

@@ -86,6 +86,7 @@ export const English = {
   now: 'now',
   phrase: 'Phrase',
   privateKey: 'Private key',
+  exportKey: 'Export key',
   import: 'Import',
   importFantomWallet: 'Import Fantom wallet',
   phraseMessage: '12 or 24 words separated by single spaces',

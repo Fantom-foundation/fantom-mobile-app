@@ -30,13 +30,15 @@ import {
   formatActivities,
   balanceWithSeprators
 } from "~/utils/converts";
+import keythereum from 'keythereum';
+import crypto from 'crypto';
 
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
-  const { currentWallet, setDopdownAlert } = props;
+  const { currentWallet, walletsKeys, setDopdownAlert } = props;
   const [textColor, setTextColor] = useState(Colors.white);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
@@ -85,6 +87,24 @@ const SingleWallet = props => {
         setClipboardText(clipBoardText);
       })
       .catch(err => console.error("error: " + err));
+  };
+
+  const exportKey = async () => {
+    const wallet = walletsKeys.find(w => w.publicKey === currentWallet.publicKey);
+    if (!wallet) {
+      alert('Private key not found');
+      return;
+    }
+    alert('test ' + JSON.stringify(wallet));
+
+    let password = "123456";
+    let iv = crypto.randomBytes(16); // ivBytes
+    let salt = crypto.randomBytes(32); // keyBytes
+    let privateKey = wallet.privateKey.slice(2).toLowerCase();
+    let key = keythereum.dump(password, privateKey, salt, iv, null);
+
+    alert('export: ' + JSON.stringify(key));
+
   };
 
   const history = sortActivities(currentWallet.history);
@@ -199,6 +219,20 @@ const SingleWallet = props => {
                 textStyle={styles.textStyle}
               />
             </View>
+            <View style={styles.buttonWrapper}>
+              <Button
+                  activeOpacity={0.5}
+                  text={Messages.exportKey}
+                  onPress={() =>
+                      exportKey()
+                  }
+                  buttonStyle={{
+                    backgroundColor: hexToRGB(colorTheme, 0.1),
+                    ...styles.buttonStyle
+                  }}
+                  textStyle={{ ...styles.textStyle, opacity: 2 }}
+              />
+            </View>
             <View style={styles.activityListWrapper}>
               {history && history.length > 0 && (
                 <Text style={styles.activityText}>
@@ -306,7 +340,8 @@ const SingleWallet = props => {
 };
 
 const mapStateToProps = state => ({
-  currentWallet: state.wallet.currentWallet
+  currentWallet: state.wallet.currentWallet,
+  walletsKeys: state.keys.wallets,
 });
 const mapDispatchToProps = {
   setDopdownAlert: setDopdownAlertAction

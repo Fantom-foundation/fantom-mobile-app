@@ -22,6 +22,7 @@
         "ethereumjs-util": "^5.2.0",
         "hdkey": "^1.1.0",
         "https-browserify": "0.0.1",
+        "keythereum": "^1.2.0",
         "loadash": "^1.0.0",
         "lodash": "^4.17.13",
         "moment": "^2.24.0",
@@ -15940,6 +15941,7 @@
     },
     "node_modules/npm/node_modules/lodash._baseindexof": {
       "version": "3.1.0",
+      "extraneous": true,
       "inBundle": true,
       "license": "MIT"
     },
@@ -15956,16 +15958,19 @@
     },
     "node_modules/npm/node_modules/lodash._bindcallback": {
       "version": "3.0.1",
+      "extraneous": true,
       "inBundle": true,
       "license": "MIT"
     },
     "node_modules/npm/node_modules/lodash._cacheindexof": {
       "version": "3.0.2",
+      "extraneous": true,
       "inBundle": true,
       "license": "MIT"
     },
     "node_modules/npm/node_modules/lodash._createcache": {
       "version": "3.1.2",
+      "extraneous": true,
       "inBundle": true,
       "license": "MIT",
       "dependencies": {
@@ -15983,6 +15988,7 @@
       "version": "3.9.1",
       "resolved": "https://registry.npmjs.org/lodash._getnative/-/lodash._getnative-3.9.1.tgz",
       "integrity": "sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=",
+      "extraneous": true,
       "inBundle": true,
       "license": "MIT"
     },
@@ -16002,6 +16008,7 @@
     },
     "node_modules/npm/node_modules/lodash.restparam": {
       "version": "3.6.1",
+      "extraneous": true,
       "inBundle": true,
       "license": "MIT"
     },
@@ -37493,7 +37500,8 @@
         },
         "lodash._baseindexof": {
           "version": "3.1.0",
-          "bundled": true
+          "bundled": true,
+          "extraneous": true
         },
         "lodash._baseuniq": {
           "version": "4.6.0",
@@ -37507,15 +37515,18 @@
         },
         "lodash._bindcallback": {
           "version": "3.0.1",
-          "bundled": true
+          "bundled": true,
+          "extraneous": true
         },
         "lodash._cacheindexof": {
           "version": "3.0.2",
-          "bundled": true
+          "bundled": true,
+          "extraneous": true
         },
         "lodash._createcache": {
           "version": "3.1.2",
           "bundled": true,
+          "extraneous": true,
           "requires": {
             "lodash._getnative": "^3.0.0"
           }
@@ -37530,7 +37541,8 @@
           "version": "3.9.1",
           "resolved": "https://registry.npmjs.org/lodash._getnative/-/lodash._getnative-3.9.1.tgz",
           "integrity": "sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=",
-          "bundled": true
+          "bundled": true,
+          "extraneous": true
         },
         "lodash._root": {
           "version": "3.0.1",
@@ -37546,7 +37558,8 @@
         },
         "lodash.restparam": {
           "version": "3.6.1",
-          "bundled": true
+          "bundled": true,
+          "extraneous": true
         },
         "lodash.union": {
           "version": "4.6.0",
