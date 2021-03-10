@@ -3,6 +3,7 @@ package com.fantomwallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.masteratul.RNAppstoreVersionCheckerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
@@ -45,6 +46,7 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFSPackage(),
             new RNAppstoreVersionCheckerPackage(),
             new RNDeviceInfo(),
             new ReactNativeLocalizationPackage(),

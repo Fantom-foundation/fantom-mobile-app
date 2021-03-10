@@ -114,6 +114,7 @@
 		F766411936114F11BFD62CE6 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A38E2E70EF04A809421CF2C /* libRNDeviceInfo.a */; };
 		FAD67ADF5EA84990B356982E /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA9F6BED4FC4D3EA6C3AC5B /* libUdpSockets.a */; };
 		FD82D8B6393A443888472FEC /* libReactNativeLocalization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E508490DB6DC44039FF26958 /* libReactNativeLocalization.a */; };
+		15EB08E808A94F38856837D1 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37883202374B4890B1A088CC /* libRNFS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -697,6 +698,8 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F95929CA91DF45B0BB28BD2C /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		FBD4773F75B74928BF66E3F7 /* RNReanimated.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReanimated.xcodeproj; path = "../node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj"; sourceTree = "<group>"; };
+		D78DAC69F670414FA344777A /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		37883202374B4890B1A088CC /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -737,6 +740,7 @@
 				16FBB630F6B74D4ABA8B6B47 /* libQRCode.a in Frameworks */,
 				FD82D8B6393A443888472FEC /* libReactNativeLocalization.a in Frameworks */,
 				F766411936114F11BFD62CE6 /* libRNDeviceInfo.a in Frameworks */,
+				15EB08E808A94F38856837D1 /* libRNFS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1023,6 +1027,7 @@
 				CC991AB180414219891D511C /* QrCode.xcodeproj */,
 				807BA2CF9EC3401A9817007A /* ReactNativeLocalization.xcodeproj */,
 				03D49460CCDF4D3A9E2C10F9 /* RNDeviceInfo.xcodeproj */,
+				D78DAC69F670414FA344777A /* RNFS.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -2032,18 +2037,12 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-localization/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 				);
 				MARKETING_VERSION = 1.0.2;
@@ -2088,18 +2087,12 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-localization/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
 				);
 				INFOPLIST_FILE = FantomWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
-					"\"$(SRCROOT)/FantomWallet\"",
 					"\"$(SRCROOT)/FantomWallet\"",
 				);
 				MARKETING_VERSION = 1.0.2;

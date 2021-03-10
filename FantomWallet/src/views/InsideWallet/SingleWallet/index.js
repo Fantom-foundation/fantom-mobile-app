@@ -8,7 +8,8 @@ import {
   Modal,
   StatusBar,
   Clipboard,
-  Image
+  Image,
+  PermissionsAndroid
 } from "react-native";
 import { Colors } from "~/theme";
 import { connect } from "react-redux";
@@ -32,6 +33,7 @@ import {
 } from "~/utils/converts";
 import keythereum from 'keythereum';
 import crypto from 'crypto';
+import RNFS from 'react-native-fs';
 
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
@@ -95,16 +97,38 @@ const SingleWallet = props => {
       alert('Private key not found');
       return;
     }
-    alert('test ' + JSON.stringify(wallet));
 
-    let password = "123456";
-    let iv = crypto.randomBytes(16); // ivBytes
-    let salt = crypto.randomBytes(32); // keyBytes
-    let privateKey = wallet.privateKey.slice(2).toLowerCase();
-    let key = keythereum.dump(password, privateKey, salt, iv, null);
+    const password = "123456";
+    const iv = crypto.randomBytes(16); // ivBytes
+    const salt = crypto.randomBytes(32); // keyBytes
+    const privateKey = wallet.privateKey.slice(2).toLowerCase();
 
-    alert('export: ' + JSON.stringify(key));
+    let key = await keythereum.dump(password, privateKey, salt, iv, null);
 
+    try {
+      try {
+        await PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        ]);
+      } catch (err) {
+        alert(err);
+      }
+      const readGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
+      const writeGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+      if(!readGranted || !writeGranted) {
+        console.log('Read and write permissions have not been granted');
+        return;
+      }
+
+      // RNFS.DownloadDirectoryPath
+      const path = '/sdcard/' + currentWallet.name + '.json';
+      await RNFS.writeFile(path, JSON.stringify(key), 'utf8');
+
+      alert('Saved into ' + path);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   const history = sortActivities(currentWallet.history);

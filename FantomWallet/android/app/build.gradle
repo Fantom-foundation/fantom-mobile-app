@@ -70,6 +70,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-fs')
     implementation project(':react-native-appstore-version-checker')
     implementation project(':react-native-device-info')
     implementation project(':react-native-localization')
