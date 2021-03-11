@@ -24,8 +24,8 @@ android {
         applicationId "com.fantomwallet"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 29
-        versionName "1.0.3"
+        versionCode 30
+        versionName "1.0.4"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
       

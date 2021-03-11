@@ -103,6 +103,13 @@ For more detail visit: `https://facebook.github.io/react-native/docs/getting-sta
 ```
 react-native run-android
 ```
+Keep the command running while the app is loading on the device!
+
+5. to build app bundle for Google Play run
+```
+cd android; ./gradlew bundleRelease
+```
+The output will be in `android/app/build/outputs/bundle/release/app.aab`
 
 ## Running on Device
 To run the app on device, please follow instructions [here](https://facebook.github.io/react-native/docs/0.59/running-on-device)
