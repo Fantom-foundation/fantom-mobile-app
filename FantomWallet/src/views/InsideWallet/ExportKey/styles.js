@@ -17,7 +17,8 @@ export default StyleSheet.create({
         backgroundColor: Colors.white,
         flex: 1,
         borderTopLeftRadius: getHeight(22),
-        borderTopRightRadius: getHeight(22)
+        borderTopRightRadius: getHeight(22),
+        padding: getHeight(25),
     },
     actionItemWrapper: {
         width: getWidth(82),
@@ -49,6 +50,12 @@ export default StyleSheet.create({
         color: Colors.white,
         fontFamily: fonts.WorkSansBold
     },
+    buttonDisabledStyle: {
+        borderRadius: 25,
+        height: getHeight(60),
+        marginTop: getHeight(25),
+        backgroundColor: Colors.silverGrey
+    },
     mainHeadingContainer: {
         // marginTop: getHeight(40)
     },
@@ -69,13 +76,17 @@ export default StyleSheet.create({
         color: Colors.textBlack,
         fontFamily: fonts.WorkSansMedium
     },
-    enteredTextStyle: {
-        /*
-        fontSize: 12,
-        flex: 1,
-        paddingLeft: 20,
-         */
-        backgroundColor: 'rgb(32,37,42)',
-        color: '#fff',
+    textInputStyle: {
+        backgroundColor: Colors.silverGrey,
+        color: Colors.textBlack,
+        borderRadius: 15,
+    },
+    exportingDesc: {
+        textAlign: "center",
+        marginTop: getHeight(20),
+        lineHeight: getHeight(30),
+        fontSize: FontSize.large,
+        color: Colors.textBlack,
+        fontFamily: fonts.WorkSansMedium
     },
 });

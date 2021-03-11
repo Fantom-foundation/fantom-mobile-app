@@ -16,6 +16,7 @@
       android:roundIcon="@mipmap/ic_launcher"
       android:allowBackup="false"
       android:usesCleartextTraffic="true"
+      android:requestLegacyExternalStorage="true"
       android:theme="@style/AppTheme">
       <provider
         android:name="androidx.core.content.FileProvider"
