@@ -27,20 +27,16 @@ import { Messages } from "../../../theme";
 import {
   balanceToDollar,
   convertFTMValue,
-  getConversionRate,
   formatActivities,
   balanceWithSeprators
 } from "~/utils/converts";
-import keythereum from 'keythereum';
-import crypto from 'crypto';
-import RNFS from 'react-native-fs';
 
 import { setDopdownAlert as setDopdownAlertAction } from "../../../redux/notification/actions";
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
 const SingleWallet = props => {
-  const { currentWallet, walletsKeys, setDopdownAlert } = props;
+  const { currentWallet, setDopdownAlert } = props;
   const [textColor, setTextColor] = useState(Colors.white);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
@@ -89,46 +85,6 @@ const SingleWallet = props => {
         setClipboardText(clipBoardText);
       })
       .catch(err => console.error("error: " + err));
-  };
-
-  const exportKey = async () => {
-    const wallet = walletsKeys.find(w => w.publicKey === currentWallet.publicKey);
-    if (!wallet) {
-      alert('Private key not found');
-      return;
-    }
-
-    const password = "123456";
-    const iv = crypto.randomBytes(16); // ivBytes
-    const salt = crypto.randomBytes(32); // keyBytes
-    const privateKey = wallet.privateKey.slice(2).toLowerCase();
-
-    let key = await keythereum.dump(password, privateKey, salt, iv, null);
-
-    try {
-      try {
-        await PermissionsAndroid.requestMultiple([
-          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        ]);
-      } catch (err) {
-        alert(err);
-      }
-      const readGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
-      const writeGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
-      if(!readGranted || !writeGranted) {
-        console.log('Read and write permissions have not been granted');
-        return;
-      }
-
-      // RNFS.DownloadDirectoryPath
-      const path = '/sdcard/' + currentWallet.name + '.json';
-      await RNFS.writeFile(path, JSON.stringify(key), 'utf8');
-
-      alert('Saved into ' + path);
-    } catch (e) {
-      alert(e);
-    }
   };
 
   const history = sortActivities(currentWallet.history);
@@ -243,18 +199,18 @@ const SingleWallet = props => {
                 textStyle={styles.textStyle}
               />
             </View>
-            <View style={styles.buttonWrapper}>
+            <View style={styles.buttonWrapper2}>
               <Button
                   activeOpacity={0.5}
                   text={Messages.exportKey}
                   onPress={() =>
-                      exportKey()
+                      NavigationService.navigate(routes.root.ExportKey)
                   }
                   buttonStyle={{
                     backgroundColor: hexToRGB(colorTheme, 0.1),
-                    ...styles.buttonStyle
+                    ...styles.buttonStyleBig
                   }}
-                  textStyle={{ ...styles.textStyle, opacity: 2 }}
+                  textStyle={{ ...styles.textStyleBig, opacity: 2 }}
               />
             </View>
             <View style={styles.activityListWrapper}>
@@ -364,8 +320,7 @@ const SingleWallet = props => {
 };
 
 const mapStateToProps = state => ({
-  currentWallet: state.wallet.currentWallet,
-  walletsKeys: state.keys.wallets,
+  currentWallet: state.wallet.currentWallet
 });
 const mapDispatchToProps = {
   setDopdownAlert: setDopdownAlertAction

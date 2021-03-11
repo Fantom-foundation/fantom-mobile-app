@@ -23,6 +23,7 @@ export default {
     WalletInfo: "WalletInfo",
     AddWallet: "AddWallet",
     ReceiveMyQcCode: "ReceiveMyQcCode",
+    ExportKey: "ExportKey",
     ScanQR: "ScanQR",
     SendFTM: "SendFTM",
     SingleWallet: "SingleWallet",

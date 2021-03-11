@@ -22,6 +22,7 @@ import SingleWallet from "~/views/InsideWallet/SingleWallet";
 import SendFTM from "~/views/InsideWallet/SendFTM";
 import ScanQR from "~/views/InsideWallet/ScanQR";
 import ReceiveMyQcCode from "~/views/InsideWallet/ReceiveMyQcCode";
+import ExportKey from "~/views/InsideWallet/ExportKey";
 import SettingsContainer from "~/views/Settings";
 import ValidatorNode from "~/views/ValidatorNode";
 import LanguageSelect from "../views/Settings/languageList";
@@ -56,7 +57,7 @@ const RootNavigator = createStackNavigator(
     SendFTM: { screen: SendFTM },
     ScanQR: { screen: ScanQR },
     ReceiveMyQcCode: { screen: ReceiveMyQcCode },
-    StakingAmount: { screen: StakingAmount },
+    ExportKey: { screen: ExportKey },
     SettingsContainer: { screen: SettingsContainer },
     ValidatorNode: { screen: ValidatorNode }
   },

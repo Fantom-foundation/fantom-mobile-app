@@ -88,11 +88,28 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     marginTop: getHeight(46)
   },
+  buttonWrapper2: {
+    flexDirection: "row",
+    marginTop: getHeight(20),
+    justifyContent: "center",
+    alignItems: 'center'
+  },
   buttonStyle: {
     width: getWidth(152),
     height: null,
     paddingVertical: getHeight(15),
     borderRadius: getHeight(30)
+  },
+  buttonStyleBig: {
+    paddingVertical: getHeight(15),
+    borderRadius: getHeight(30),
+    height: getHeight(60),
+    backgroundColor: Colors.royalBlue
+  },
+  buttonTextBig: {
+    fontSize: FontSize.base,
+    color: Colors.white,
+    fontFamily: fonts.WorkSansBold
   },
   textStyle: {
     color: Colors.textBlack,
