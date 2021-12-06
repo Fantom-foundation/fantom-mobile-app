@@ -50,7 +50,8 @@ const WalletSetup = (props: any) => {
       setMylanguage(language.selectedLanguage);
     } else if (language && language.selectedLanguage === "") {
       if (Platform.OS === "ios") {
-        const locale = NativeModules.SettingsManager.settings.AppleLocale;
+        let locale = NativeModules.SettingsManager.settings.AppleLocale;
+        if(!locale) locale = [];
         setLanguage("");
         if (locale.includes("ko")) setMylanguage("ko");
         else if (locale.includes("zh")) setMylanguage("zh-Hans");
