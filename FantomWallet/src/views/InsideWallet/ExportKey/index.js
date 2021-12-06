@@ -22,6 +22,7 @@ import { setDopdownAlert as setDopdownAlertAction } from "~/redux/notification/a
 import crypto from "crypto";
 import keythereum from "keythereum";
 import RNFS from "react-native-fs";
+import { Platform } from 'react-native';
 
 const colorTheme = Colors.royalBlue; // Color theme can be 16 color palette themes
 
@@ -31,7 +32,12 @@ class ExportKey extends React.Component {
         super(props);
         this.state = { inProgress: false };
         this.password = '';
-        this.path = '/sdcard/' + props.currentWallet.name + '.json';
+        
+        if (Platform.OS === 'android') {
+            this.path = '/sdcard/' + props.currentWallet.name + '.json';
+        } else {
+            this.path = RNFS.DocumentDirectoryPath + '/' + props.currentWallet.name + '.json';
+        }
     }
 
     setPassword(password) {
@@ -55,19 +61,21 @@ class ExportKey extends React.Component {
             return;
         }
 
-        try {
+        if (Platform.OS === 'android') {
+          try {
             await PermissionsAndroid.requestMultiple([
                 PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
                 PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
             ]);
-        } catch (e) {
+          } catch (e) {
             Alert.alert(Messages.storagePermission, e.toString());
-        }
-        const readGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
-        const writeGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
-        if(!readGranted || !writeGranted) {
+          }
+          const readGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
+          const writeGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+          if(!readGranted || !writeGranted) {
             Alert.alert(Messages.storagePermission);
             return;
+          }
         }
 
         if (await RNFS.exists(this.path)){
@@ -100,7 +108,9 @@ class ExportKey extends React.Component {
     async exportFinish(keystoreObject) {
         try {
             await RNFS.writeFile(this.path, JSON.stringify(keystoreObject), 'utf8');
-            await RNFS.scanFile(this.path);
+            if (Platform.OS === 'android') {
+                await RNFS.scanFile(this.path); // scan into android Downloads app
+            }
             Alert.alert(Messages.keystoreSaved, this.path);
             NavigationService.pop();
         } catch (e) {
