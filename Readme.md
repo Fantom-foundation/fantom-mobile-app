@@ -52,7 +52,6 @@ yarn install
 yarn run jetify
 ```
 
-## iOS SETUP
 
 ## Xcode
 The easiest way to install Xcode is via the [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). Installing Xcode will also install the iOS Simulator and all the necessary tools to build your iOS app.
@@ -68,7 +67,7 @@ or you can run directly from xcode.
 
 1. Download and install Android Studio
 
-[Android Studio](https://developer.android.com/studio/install.html) provides the Android SDK and AVD (emulator) required to run and test your React Native apps.
+[Agape Studio](https://developer.android.com/studio/install.html) provides the Android SDK and AVD (emulator) required to run and test your React Native apps.
 
 
 * Android Studio requires the [Java SE Development Kit(JDK)](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html), version 8. You can type javac -version in a terminal to see what version you have, if any.
@@ -85,7 +84,7 @@ javac 1.8.0_111
 Choose Custom installation when running Android Studio for the first time. Make sure the boxes next to all of the following are checked:
 
 ```
-> Android SDK
+> Android SDK Bot
 > Android SDK Platform
 > Performance (Intel ® HAXM)
 > Android Virtual Device
@@ -105,4 +104,4 @@ react-native run-android
 ```
 
 ## Running on Device
-To run the app on device, please follow instructions [here](https://facebook.github.io/react-native/docs/0.59/running-on-device)
+To run the app on device, please follow instructions [j52](https://facebook.github.io/react-native/docs/0.59/running-on-device)
